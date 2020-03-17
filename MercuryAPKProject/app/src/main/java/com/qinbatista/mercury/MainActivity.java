@@ -23,82 +23,82 @@ public class MainActivity extends Activity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context=this;
-		Log.w("MercurySDK","[step][2]init activity");
+		Log.w("MercuryDemo","[step][2]init activity");
 		MercurySDK=new MercuryActivity();
-		Log.w("MercurySDK","[step][3]init callback");
+		Log.w("MercuryDemo","[step][3]init callback");
 		appcall = new  APPBaseInterface() {
 			
 			@Override
 			public void onPurchaseSuccessCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK", "onCreate onPurchaseSuccessCallBack strProductId="+strProductId);
+				Log.w("MercuryDemo", "onCreate onPurchaseSuccessCallBack strProductId="+strProductId);
 				Toast.makeText(context, "onPurchaseSuccessCallBack",Toast.LENGTH_SHORT).show();
 			}
 			
 			@Override
 			public void onPurchaseFailedCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK", "onCreate onPurchaseFailedCallBack strProductId="+strProductId);
+				Log.w("MercuryDemo", "onCreate onPurchaseFailedCallBack strProductId="+strProductId);
 			}
 			
 			@Override
 			public void onPurchaseCancelCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK", "onCreate onPurchaseCancelCallBack strProductId="+strProductId);
+				Log.w("MercuryDemo", "onCreate onPurchaseCancelCallBack strProductId="+strProductId);
 			}
 
 			@Override
 			public void onLoginCancelCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+arg0);
+				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+arg0);
 			}
 
 			@Override
 			public void onLoadSuccessfulCallBack(String s) {
-				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onLoadFailedCallBack(String s) {
-				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onSaveSuccessfulCallBack(String s) {
-				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onSaveFailedCallBack(String s) {
-				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onOnVideoCompletedCallBack(String s) {
-				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onOnVideoFailedCallBack(String s) {
-				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onLoginFailedCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK", "onCreate onLoginFailedCallBack arg0="+arg0);
+				Log.w("MercuryDemo", "onCreate onLoginFailedCallBack arg0="+arg0);
 			}
 
 			@Override
 			public void onLoginSuccessCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK", "onCreate onLoginSuccessCallBack arg0="+arg0);
+				Log.w("MercuryDemo", "onCreate onLoginSuccessCallBack arg0="+arg0);
 			}
 
 			@Override
 			public void onFunctionCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK", "onCreate onFunctionCallBack arg0="+arg0);
+				Log.w("MercuryDemo", "onCreate onFunctionCallBack arg0="+arg0);
 				if(arg0.equals("ExitGame"))
 				{
 					//exit game by yourself
@@ -113,7 +113,7 @@ public class MainActivity extends Activity  {
 				}
 			}
 		};
-		Log.w("MercurySDK","[step][4]Init MercurySDK");
+		Log.w("MercuryDemo","[step][4]Init MercurySDK");
 		MercurySDK.InitSDK (context,appcall);
 
 		setContentView(R.layout.activity_main);
@@ -122,7 +122,7 @@ public class MainActivity extends Activity  {
 		btn.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercurySDK","[step][5]->purchaseProduct");
+				Log.w("MercuryDemo","[step][5]->purchaseProduct");
 				MercurySDK.purchaseProduct("production1");
 			}
 		});
@@ -133,7 +133,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK","[step][6]->ExitGame");
+				Log.w("MercuryDemo","[step][6]->ExitGame");
 				MercurySDK.ExitGame();
 			}
 		});
@@ -143,7 +143,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK","[step][7]->repairindentRequest");
+				Log.w("MercuryDemo","[step][7]->repairindentRequest");
 				MercurySDK.repairindentRequest();
 			}
 		});
@@ -153,7 +153,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK","[step][7]->respondCPserver");
+				Log.w("MercuryDemo","[step][7]->respondCPserver");
 				MercurySDK.respondCPserver();
 				
 			}
@@ -163,7 +163,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK","[step][8]->show_insert");
+				Log.w("MercuryDemo","[step][8]->show_insert");
 				MercurySDK.show_insert();
 			}
 		});
@@ -171,7 +171,7 @@ public class MainActivity extends Activity  {
 		btn4.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercurySDK","[step][8]->show_banner");
+				Log.w("MercuryDemo","[step][8]->show_banner");
 				MercurySDK.show_banner();
 			}
 		});
@@ -180,7 +180,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercurySDK","[step][8]->show_video");
+				Log.w("MercuryDemo","[step][8]->show_video");
 				MercurySDK.show_video();
 			}
 		});
@@ -188,7 +188,7 @@ public class MainActivity extends Activity  {
 		btn6.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercurySDK","[step][8]->Exchange");
+				Log.w("MercuryDemo","[step][8]->Exchange");
 				MercurySDK.Exchange();
 			}
 		});

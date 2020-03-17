@@ -13,7 +13,7 @@ public class QinApplication extends Application {
 		super.onCreate();
 
 
-		Log.w("MercurySDK","[step][1]init application");
+		Log.w("MercuryDemo","[step][1]init application");
 		MercuryApplication sdkapp= new MercuryApplication();
 		sdkapp.APPApplicationInit(this);
 	}
