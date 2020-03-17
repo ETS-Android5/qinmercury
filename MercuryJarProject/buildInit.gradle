@@ -1,0 +1,50 @@
+// apply plugin: 'java'
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+dependencies {
+    provided fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+task clearJar(type: Delete){
+    //delete 'build/outputs/jar/e2wwrapper.jar'
+	//delete 'build/intermediates/bundles/debug/e2wwrapper.jar'
+	//delete 'build/intermediates/bundles/default/e2wwrapper.jar'
+	File file1 = new File(rootDir.getAbsolutePath() + '\\build');
+	file1.deleteDir();
+}
+android {
+    lintOptions {
+        abortOnError false
+    }
+}
+// task to export contents as jar
+task makeJar(type: Copy) {
+    from ('build/intermediates/bundles/debug/')
+    into ('build/outputs/jar')
+	exclude('test/', 'BuildConfig.class', 'R.class')
+    exclude{ it.name.startsWith('R$');}
+    include ('classes.jar')
+    rename('classes.jar', 'UnityPlugin.jar')
+}
+
+makeJar.dependsOn(clearJar, build)
