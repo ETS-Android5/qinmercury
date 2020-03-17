@@ -1,11 +1,12 @@
 package com.qinbatista.mercury;
 
-import com.east2west.game.E2WApp;
-import com.east2west.game.QinConst;
-import com.east2west.game.inApp.APPBaseInterface;
+import com.mercury.game.MercuryActivity;
+import com.mercury.game.MercuryConst;
+import com.mercury.game.inApp.APPBaseInterface;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,91 +17,88 @@ import com.AmanitaDesign.Machinarium.E2W.R;
 
 public class MainActivity extends Activity  {
 	public static Context context;
-	public E2WApp e2w;
-	public QinConst qin; 
-	public QinConst qin1; 
+	public MercuryActivity MercurySDK;
 	public static APPBaseInterface appcall=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context=this;
-		Log.e("E2W","2->e2w");
-		e2w=new E2WApp();
-		Log.e("E2W","3->QinConst");
-		qin= new QinConst();
+		Log.w("MercurySDK","[step][2]init activity");
+		MercurySDK=new MercuryActivity();
+		Log.w("MercurySDK","[step][3]init callback");
 		appcall = new  APPBaseInterface() {
 			
 			@Override
 			public void onPurchaseSuccessCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.e("game", "onCreate onPurchaseSuccessCallBack strProductId="+strProductId);	
-				//Toast.makeText(context, "��õ��߳ɹ�",Toast.LENGTH_SHORT).show();
+				Log.w("MercurySDK", "onCreate onPurchaseSuccessCallBack strProductId="+strProductId);
+				Toast.makeText(context, "onPurchaseSuccessCallBack",Toast.LENGTH_SHORT).show();
 			}
 			
 			@Override
 			public void onPurchaseFailedCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.e("game", "onCreate onPurchaseFailedCallBack strProductId="+strProductId);					
+				Log.w("MercurySDK", "onCreate onPurchaseFailedCallBack strProductId="+strProductId);
 			}
 			
 			@Override
 			public void onPurchaseCancelCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.e("game", "onCreate onPurchaseCancelCallBack strProductId="+strProductId);					
+				Log.w("MercurySDK", "onCreate onPurchaseCancelCallBack strProductId="+strProductId);
 			}
 
 			@Override
 			public void onLoginCancelCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.e("game", "onCreate onLoginCancelCallBack arg0="+arg0);		
+				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+arg0);
 			}
 
 			@Override
 			public void onLoadSuccessfulCallBack(String s) {
-				Log.e("game", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onLoadFailedCallBack(String s) {
-				Log.e("game", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onSaveSuccessfulCallBack(String s) {
-				Log.e("game", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onSaveFailedCallBack(String s) {
-				Log.e("game", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onOnVideoCompletedCallBack(String s) {
-				Log.e("game", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onOnVideoFailedCallBack(String s) {
-				Log.e("game", "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w("MercurySDK", "onCreate onLoginCancelCallBack arg0="+s);
 			}
 
 			@Override
 			public void onLoginFailedCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.e("game", "onCreate onLoginFailedCallBack arg0="+arg0);		
+				Log.w("MercurySDK", "onCreate onLoginFailedCallBack arg0="+arg0);
 			}
 
 			@Override
 			public void onLoginSuccessCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.e("game", "onCreate onLoginSuccessCallBack arg0="+arg0);		
+				Log.w("MercurySDK", "onCreate onLoginSuccessCallBack arg0="+arg0);
 			}
 
 			@Override
 			public void onFunctionCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.e("game", "onCreate onFunctionCallBack arg0="+arg0);	
+				Log.w("MercurySDK", "onCreate onFunctionCallBack arg0="+arg0);
 				if(arg0.equals("ExitGame"))
 				{
 					//exit game by yourself
@@ -115,23 +113,17 @@ public class MainActivity extends Activity  {
 				}
 			}
 		};
-		
-		Log.e("E2W","4->InitE2WSDK");
-		e2w.InitE2WSDK (context);
-		Log.e("E2W","5->InitCarriers");
-		e2w.InitCarriers(appcall);
-		Log.e("E2W","6->InitCarriers");
-		e2w.InitChannel(appcall);
-		Log.e("E2W","7->InitAd");
-		e2w.InitAd(appcall);
+		Log.w("MercurySDK","[step][4]Init MercurySDK");
+		MercurySDK.InitSDK (context,appcall);
+
 		setContentView(R.layout.activity_main);
 		Button btn = (Button) findViewById(R.id.pay);
 		// button buy
 		btn.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.e("E2W","7.1->purchaseProduct");
-				e2w.purchaseProduct("production1");
+				Log.w("MercurySDK","[step][5]->purchaseProduct");
+				MercurySDK.purchaseProduct("production1");
 			}
 		});
 
@@ -141,8 +133,8 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.e("E2W","7.2->ExitGame");
-				e2w.ExitGame();
+				Log.w("MercurySDK","[step][6]->ExitGame");
+				MercurySDK.ExitGame();
 			}
 		});
 
@@ -151,8 +143,8 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.e("E2W","8.1->repairindentRequest");
-				e2w.repairindentRequest();
+				Log.w("MercurySDK","[step][7]->repairindentRequest");
+				MercurySDK.repairindentRequest();
 			}
 		});
 		
@@ -161,8 +153,8 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.e("E2W","8.2->respondCPserver");
-				e2w.respondCPserver();
+				Log.w("MercurySDK","[step][7]->respondCPserver");
+				MercurySDK.respondCPserver();
 				
 			}
 		});
@@ -171,16 +163,16 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.e("E2W","8.3->show_insert");
-				e2w.show_insert();
+				Log.w("MercurySDK","[step][8]->show_insert");
+				MercurySDK.show_insert();
 			}
 		});
 		Button btn4 = (Button) findViewById(R.id.button4);
 		btn4.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.e("E2W","8.2->button4");
-				e2w.TencentLogin(0);
+				Log.w("MercurySDK","[step][8]->show_banner");
+				MercurySDK.show_banner();
 			}
 		});
 		Button btn5 = (Button) findViewById(R.id.Button5);
@@ -188,51 +180,64 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.e("E2W","8.2->Button5");
-				e2w.TencentLogin(1);
+				Log.w("MercurySDK","[step][8]->show_video");
+				MercurySDK.show_video();
 			}
 		});
 		Button btn6 = (Button) findViewById(R.id.Button6);
 		btn6.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.e("E2W","8.2->Button6");
-				e2w.TencentLogin(2);
+				Log.w("MercurySDK","[step][8]->Exchange");
+				MercurySDK.Exchange();
 			}
 		});
 	}
-	
+
+
+
 	@Override
-	public void onPause() 
+	public void onPause()
 	{
 		super.onPause();
-		e2w.onPause();
+		MercurySDK.onPause();
 	}
 
 	@Override
-	public void onStop() 
+	public void onStop()
 	{
 		super.onStop();
-		e2w.onStop();
+		MercurySDK.onStop();
 	}
 
 	@Override
-	public void onRestart() 
+	public void onRestart()
 	{
 		super.onRestart();
-		e2w.onRestart();
+		MercurySDK.onRestart();
 	}
 	@Override
-	public void onResume() 
+	public void onResume()
 	{
 		super.onResume();
-		e2w.onResume();
+		MercurySDK.onResume();
 	}
 	@Override
-	public void onDestroy() 
+	public void onDestroy()
 	{
 		super.onDestroy();
-		e2w.onDestroy();
+		MercurySDK.onDestroy();
 	}
-	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode,resultCode,data);
+		MercurySDK.onActivityResult(requestCode,resultCode,data);
+	}
+	@Override
+	public void onNewIntent(Intent intent)
+	{
+		super.onNewIntent(intent);
+		MercurySDK.onNewIntent(intent);
+	}
 }

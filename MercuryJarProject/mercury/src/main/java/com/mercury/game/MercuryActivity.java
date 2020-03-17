@@ -58,7 +58,7 @@ public class MercuryActivity  {
 	public static String SortChannelID="";
 	public static String LongChannelID="";
 	private static ImageView img = null;
-	public void InitE2WSDK(Context ContextForE2wSDK)
+	public void InitSDK(Context ContextForE2wSDK,final APPBaseInterface appcall)
 	{
 		mContext = ContextForE2wSDK;	
 		ChannelSplash();
@@ -66,7 +66,8 @@ public class MercuryActivity  {
 		mInApp = new InAppDefault() ;
 		mInAppExt= new InAppDefault() ;
 		activityforappbase=this;
-		
+		InitChannel(appcall);
+		InitAd(appcall);
 	}
 	public void ChannelSplash()
 	{
@@ -136,6 +137,13 @@ public class MercuryActivity  {
 		LogLocal("[MercuryActivity] Local InitChannel()->"+mInApp);
 		mInApp.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
 	
+	}
+	public void InitAd(final APPBaseInterface appcall)
+	{
+		final Context applicationContext = mContext.getApplicationContext();
+		LogLocal("[MercuryActivity] Local InitChannel()->"+mInApp);
+		mInApp.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
+
 	}
 	public void InitCarriers(final APPBaseInterface appcall)
 	{
