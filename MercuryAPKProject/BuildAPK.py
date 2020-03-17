@@ -12,8 +12,8 @@ def main():
 	if os.path.isfile(PythonLocation()+"/app-release.apk"):
 		os.remove("app-release.apk")
 	os.system("gradle clean assemblerelease")
-	if os.path.isfile("app/build/outputs/apk/release/app-release.apk"):
-		os.rename("app/build/outputs/apk/release/app-release.apk",PythonLocation()+"/app-release.apk")
+	if os.path.isfile(PythonLocation()+"/app/build/outputs/apk/release/app-release.apk"):
+		os.rename(PythonLocation()+"/app/build/outputs/apk/release/app-release.apk",PythonLocation()+"/app-release.apk")
 
 if __name__ == '__main__':
     main()

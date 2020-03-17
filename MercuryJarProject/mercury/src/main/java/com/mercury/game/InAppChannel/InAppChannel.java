@@ -1,6 +1,6 @@
-package com.mercury.game.inApp;
-import com.mercury.game.inApp.APPBaseInterface;
-import com.mercury.game.inApp.InAppBase;
+package com.mercury.game.InAppChannel;
+import com.mercury.game.InAppChannel.APPBaseInterface;
+import com.mercury.game.InAppChannel.InAppBase;
 
 //comment
 import android.app.Activity;
@@ -26,7 +26,7 @@ import java.util.UUID;
 //end
 
 
-public class InAppDefault extends InAppBase {
+public class InAppChannel extends InAppBase {
 	
 	//comment
 	private InAppBase mBaseInApp = null;
@@ -39,11 +39,8 @@ public class InAppDefault extends InAppBase {
 	public void init(Context appContext, Activity context, final String strAppId, final String strAppSecret, APPBaseInterface appinterface)
 	{		
 		super.init(appContext, context, strAppId, strAppSecret,appinterface);
-
 		MercuryActivity.LogLocal("["+Channelname+"] strAppKey="+strAppId);
 		MercuryActivity.LogLocal("["+Channelname+"] strAppSecret="+strAppSecret);
-		
-		mBaseInApp = MercuryActivity.activityforappbase.getBaseInApp();
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -154,14 +151,14 @@ public class InAppDefault extends InAppBase {
 	}
 	public void CarriersPay()
 	{
-		if (mBaseInApp != null&&MercuryApplication.iscarriersneed.equals("open"))
-		{
-			mBaseInApp.purchase(MercuryConst.CarriersID, mProductDescription, mProductPrice);
-		}
-		else
-		{
-			MercuryActivity.LogLocal("["+Channelname+"] MOBILE_SPLASH Closed...Can't Use Carrier's Pay");
-		}
+//		if (mBaseInApp != null&&MercuryApplication.iscarriersneed.equals("open"))
+//		{
+//			mBaseInApp.purchase(MercuryConst.CarriersID, mProductDescription, mProductPrice);
+//		}
+//		else
+//		{
+//			MercuryActivity.LogLocal("["+Channelname+"] MOBILE_SPLASH Closed...Can't Use Carrier's Pay");
+//		}
 	}
 	public void ChannelPay()
 	{

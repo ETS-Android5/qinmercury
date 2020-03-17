@@ -1,4 +1,4 @@
-package com.mercury.game.inApp;
+package com.mercury.game.InAppChannel;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

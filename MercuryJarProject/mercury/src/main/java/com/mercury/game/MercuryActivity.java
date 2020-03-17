@@ -6,9 +6,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
-import com.mercury.game.inApp.APPBaseInterface;
-import com.mercury.game.inApp.InAppBase;
-import com.mercury.game.inApp.InAppDefault;
+import com.mercury.game.InAppChannel.APPBaseInterface;
+import com.mercury.game.InAppChannel.InAppBase;
+import com.mercury.game.InAppChannel.InAppChannel;
+import com.mercury.game.InAppAdvertisement.InAppAD;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -36,10 +37,9 @@ import android.widget.ImageView.ScaleType;
 public class MercuryActivity  {
 
 	public static Context mContext = null;
-	private InAppBase mInApp;
-	public InAppBase mInAppShow;
-	private InAppBase mInAppExt;
-	private InAppBase mInShare;
+	private InAppChannel mInAppChannel;
+	public InAppAD mInAppAD;
+
 
 	public static int mSimOperatorId;
 	private int mChannelId;
@@ -58,20 +58,20 @@ public class MercuryActivity  {
 	public static String SortChannelID="";
 	public static String LongChannelID="";
 	private static ImageView img = null;
-	public void InitSDK(Context ContextForE2wSDK,final APPBaseInterface appcall)
+	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
-		mContext = ContextForE2wSDK;	
+		mContext = ContextFromUsers;
 		ChannelSplash();
 		MercuryConst.GetChannelID("");
-		mInApp = new InAppDefault() ;
-		mInAppExt= new InAppDefault() ;
+		mInAppChannel = new InAppChannel() ;
+		mInAppAD= new InAppAD() ;
 		activityforappbase=this;
 		InitChannel(appcall);
 		InitAd(appcall);
 	}
 	public void ChannelSplash()
 	{
-		MercuryActivity.LogLocal("[inapp] ChannelSplash.png");
+		LogLocal("[inapp] ChannelSplash.png");
 		try {
 			final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -116,7 +116,7 @@ public class MercuryActivity  {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			MercuryActivity.LogLocal("[inapp] init e="+e.toString());
+			LogLocal("[inapp] init e="+e.toString());
 		}
 	}
  	public String SavePidName(){    
@@ -134,15 +134,15 @@ public class MercuryActivity  {
 	public void InitChannel(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();		
-		LogLocal("[MercuryActivity] Local InitChannel()->"+mInApp);
-		mInApp.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
+		LogLocal("[MercuryActivity] Local InitChannel()->"+mInAppChannel);
+		mInAppChannel.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
 	
 	}
 	public void InitAd(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();
-		LogLocal("[MercuryActivity] Local InitChannel()->"+mInApp);
-		mInApp.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
+		LogLocal("[MercuryActivity] Local InitChannel()->"+mInAppAD);
+		mInAppAD.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
 
 	}
 	public void InitCarriers(final APPBaseInterface appcall)
@@ -154,7 +154,7 @@ public class MercuryActivity  {
 	{
 		LogLocal("[MercuryActivity] purchaseProduct: " + pidname);
 		MercuryConst.PayInfo(pidname);
-		mInApp.purchase(MercuryConst.QinPid, MercuryConst.Qindesc, MercuryConst.Qinpricefloat);
+		mInAppChannel.purchase(MercuryConst.QinPid, MercuryConst.Qindesc, MercuryConst.Qinpricefloat);
 	}
 	public void ExitGame()
 	{    		
@@ -162,8 +162,8 @@ public class MercuryActivity  {
 			@Override
 			public void run() 
 			{
-				
-				mInApp.ExitGame();	
+
+				mInAppChannel.ExitGame();
 			}
 			});
 	}
@@ -181,128 +181,97 @@ public class MercuryActivity  {
 
 	public void show_banner()
 	{		
-		if(mInAppShow != null)
+		if(mInAppAD != null)
 		{
-			mInAppShow.show_banner();
+			mInAppAD.show_banner();
 		}
 	}
 	public void swtichuser()
 	{		
-		if(mInAppShow != null)
+		if(mInAppAD != null)
 		{
-			mInAppShow.swtichuser();
+			mInAppAD.swtichuser();
 		}
 	}
 	public void show_insert()
 	{
-		if(mInAppShow != null)
+		if(mInAppAD != null)
 		{
-			mInAppShow.show_insert();
+			mInAppAD.show_insert();
 		}
 	}
 	public void show_push()
 	{
-		if(mInAppShow != null)
+		if(mInAppAD != null)
 		{
-			mInAppShow.show_push();
+			mInAppAD.show_push();
 		}
 	}
 	public void show_out()
 	{
-		if(mInAppShow != null)
+		if(mInAppAD != null)
 		{
-			mInAppShow.show_out();
+			mInAppAD.show_out();
 		}
 	}
 	public void show_video()
 	{
-		if(mInAppShow != null)
+		if(mInAppAD != null)
 		{
-			mInAppShow.show_video();
+			mInAppAD.show_video();
 		}
 	}
 	public void uploadclick() {
 		// TODO Auto-generated method stub
-		if(mInAppShow != null)
+		if(mInAppAD != null)
 		{
-			mInAppShow.uploadclick();
+			mInAppAD.uploadclick();
 		}
 	}
 
 	public void onPause() {
 
-		if(mInApp != null)
+		if(mInAppChannel != null)
 		{
-			mInApp.onPause();
-		}
-		
-		if(mInAppExt != null)
-		{
-			mInAppExt.onPause();
+			mInAppChannel.onPause();
 		}
 	}
 	public void onStop() {
 
-		if(mInApp != null)
+		if(mInAppChannel != null)
 		{
-			mInApp.onStop();
-		}
-		
-		if(mInAppExt != null)
-		{
-			mInAppExt.onStop();
+			mInAppChannel.onStop();
 		}
 	}
 	public void onStart() {
 
-		if(mInApp != null)
+		if(mInAppChannel != null)
 		{
-			mInApp.onStart();
-		}
-		
-		if(mInAppExt != null)
-		{
-			mInAppExt.onStart();
+			mInAppChannel.onStart();
 		}
 	}
 	public void onRestart()
 	{
-		if(mInApp != null)
+		if(mInAppChannel != null)
 		{
-			mInApp.onRestart();
-		}
-		
-		if(mInAppExt != null)
-		{
-			mInAppExt.onRestart();
+			mInAppChannel.onRestart();
 		}
 	}
-	public void onResume() {
-
-
-		if(mInApp != null)
+	public void onResume()
+	{
+		if(mInAppChannel != null)
 		{
-			mInApp.onResume();
-		}
-		
-		if(mInAppExt != null)
-		{
-			mInAppExt.onResume();
+			mInAppChannel.onResume();
 		}
 	}
 
 
-	public void onDestroy() {
-		if(mInApp != null)
+	public void onDestroy()
+	{
+		if(mInAppChannel != null)
 		{
-			mInApp.onDestroy();
+			mInAppChannel.onDestroy();
 		}
-		
-		if(mInAppExt != null)
-		{
-			mInAppExt.onDestroy();
-		}
-		
 	}
 
 	
@@ -318,15 +287,18 @@ public class MercuryActivity  {
 		return mChannelId;
 	}
 	
-	public InAppBase getBaseInApp()
+	public InAppBase getmInAppChannel()
 	{
-		LogLocal("[MercuryActivity] getBaseInApp()->mInApp="+mInApp);
-		InAppBase myapp = new InAppDefault();
-		return myapp;
+		LogLocal("[MercuryActivity] getBaseInApp()->mInApp="+mInAppChannel);
+		return mInAppChannel;
 	}
 
+	public InAppBase getmInAppAD()
+	{
+		LogLocal("[MercuryActivity] getBaseInApp()->mInApp="+mInAppAD);
+		return mInAppAD;
+	}
 
-	
 	public void Exchange()
 	{
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
@@ -348,14 +320,6 @@ public class MercuryActivity  {
 			}
 		});
 	}
-	private void GetmInAppExt()
-	{
-		LogLocal("[MercuryActivity] GetmInAppExt()->"+mExtSDKId);
-		switch(mExtSDKId)
-		{
-			
-		}
-	}
 
 	public void Message(final String news)
 	{	
@@ -370,67 +334,67 @@ public class MercuryActivity  {
 	
 	public void letUserLogin() 
 	{
-		MercuryActivity.LogLocal("[MercuryActivity]->letUserLogin:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
-		{			
-			mInAppExt.letUserLogin();
+		LogLocal("[MercuryActivity]->letUserLogin:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
+		{
+			mInAppChannel.letUserLogin();
 		}
 	}
-	public void stopWaiting() {
-		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("[MercuryActivity]->stopWaiting:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
-		{			
-			mInAppExt.stopWaiting();
+	public void stopWaiting()
+	{
+		LogLocal("[MercuryActivity]->stopWaiting:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
+		{
+			mInAppChannel.stopWaiting();
 		}
 	}
-	public void letUserLogout() {
-		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("[MercuryActivity]->letUserLogout:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
-		{			
-			mInAppExt.letUserLogout();
+	public void letUserLogout()
+	{
+		LogLocal("[MercuryActivity]->letUserLogout:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
+		{
+			mInAppChannel.letUserLogout();
 		}
 	}
 	public void showDiffLogin() 
 	{
-		MercuryActivity.LogLocal("[MercuryActivity]->showDiffLogin:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
+		LogLocal("[MercuryActivity]->showDiffLogin:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
 		{
-			mInAppExt.showDiffLogin();
+			mInAppChannel.showDiffLogin();
 		}
 	}
 
 	public void TencentLogin(int kind)
 	{
-		MercuryActivity.LogLocal("[MercuryActivity]->TencentLogin:mInAppExt="+mInAppExt+" kind="+kind);
-		if(mInAppExt != null)
+		LogLocal("[MercuryActivity]->TencentLogin:mInAppChannel="+mInAppChannel+" kind="+kind);
+		if(mInAppChannel != null)
 		{
-			mInAppExt.login(kind);
+			mInAppChannel.login(kind);
 		}
 	}
 	public void TencentLoginOut()
 	{
-		MercuryActivity.LogLocal("[MercuryActivity]->TencentLoginOut:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
+		LogLocal("[MercuryActivity]->TencentLoginOut:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
 		{
-			mInAppExt.logout();
+			mInAppChannel.logout();
 		}
 	}
 	public void TencentLoginOutOnly()
 	{
-		MercuryActivity.LogLocal("[MercuryActivity]->TencentLoginOutOnly:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
+		LogLocal("[MercuryActivity]->TencentLoginOutOnly:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
 		{
-			mInAppExt.TencentLoginOutOnly();
+			mInAppChannel.TencentLoginOutOnly();
 		}
 	}
 	public void ShowTencentAd()
 	{
-		MercuryActivity.LogLocal("[MercuryActivity]->ShowTencentAd:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
+		LogLocal("[MercuryActivity]->ShowTencentAd:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
 		{
-			mInAppExt.ShowTencentAd();
+			mInAppChannel.ShowTencentAd();
 		}
 	}
 	public void repairindentRequest()
@@ -443,31 +407,31 @@ public class MercuryActivity  {
 	}
 	public void showMessageDialog()
 	{
-		MercuryActivity.LogLocal("[MercuryActivity]->showMessageDialog:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
+		LogLocal("[MercuryActivity]->showMessageDialog:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
 		{
-			mInAppExt.showMessageDialog();
+			mInAppChannel.showMessageDialog();
 		}
 	}
 	public void onActivityResult(int requestCode, int resultCode, Intent data) 
 	{
-		MercuryActivity.LogLocal("[MercuryActivity]->onActivityResult:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
+		LogLocal("[MercuryActivity]->onActivityResult:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
 		{
-			mInAppExt.onActivityResult(requestCode,resultCode,data);
+			mInAppChannel.onActivityResult(requestCode,resultCode,data);
 		}
 	}
 	public void onNewIntent(Intent intent) {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("[MercuryActivity]->onNewIntent:mInAppExt="+mInAppExt);
-		if(mInAppExt != null)
+		LogLocal("[MercuryActivity]->onNewIntent:mInAppChannel="+mInAppChannel);
+		if(mInAppChannel != null)
 		{
-			mInAppExt.onNewIntent(intent);
+			mInAppChannel.onNewIntent(intent);
 		}
 	}
 	public static void LogLocal(final String news)
-	{		
-		Log.e(MercuryConst.TAG,news);
+	{
+		Log.w("MercurySDK",news);
 	}
 
 }

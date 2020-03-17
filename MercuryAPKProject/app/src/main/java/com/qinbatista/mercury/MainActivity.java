@@ -2,7 +2,7 @@ package com.qinbatista.mercury;
 
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.MercuryConst;
-import com.mercury.game.inApp.APPBaseInterface;
+import com.mercury.game.InAppChannel.APPBaseInterface;
 
 import android.app.Activity;
 import android.content.Context;

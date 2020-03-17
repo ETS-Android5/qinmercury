@@ -23,8 +23,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.mercury.game.inApp.InAppBase;
-import com.mercury.game.inApp.InAppDefault;
+import com.mercury.game.InAppChannel.InAppBase;
+import com.mercury.game.InAppChannel.InAppChannel;
 
 
 public class MercuryApplication extends Application{//UnicomApplicationWrapper {
@@ -194,7 +194,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	{		
 
 			Log.e(MercuryConst.TAG, "[MercuryActivity] Default=ApplicationInit");
-	    	mInAppExt = new InAppDefault();
+	    	mInAppExt = new InAppBase();
 	    	mInAppExt.ApplicationInit(Acontext);
 	}
 
