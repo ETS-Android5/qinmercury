@@ -14,6 +14,7 @@ def main():
 		os.remove(PythonLocation()+"/app-release.apk")
 	os.system("python3 ./MercuryAPKProject/BuildAPK.py")
 	os.system("mv ./MercuryAPKProject/app-release.apk ./app-release.apk")
+	os.system("adb install -r  ./app-release.apk")
 
 
 if __name__ == '__main__':

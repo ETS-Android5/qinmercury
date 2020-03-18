@@ -141,7 +141,7 @@ public class MercuryActivity  {
 	public void InitAd(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();
-		LogLocal("[MercuryActivity] Local InitChannel()->"+mInAppAD);
+		LogLocal("[MercuryActivity] Local InitAd()->"+mInAppAD);
 		mInAppAD.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
 
 	}
@@ -177,49 +177,10 @@ public class MercuryActivity  {
 		return LongChannelID;
 	}
 
-
-
-	public void show_banner()
-	{		
-		if(mInAppAD != null)
-		{
-			mInAppAD.show_banner();
-		}
-	}
 	public void swtichuser()
-	{		
-		if(mInAppAD != null)
-		{
-			mInAppAD.swtichuser();
-		}
-	}
-	public void show_insert()
 	{
-		if(mInAppAD != null)
-		{
-			mInAppAD.show_insert();
-		}
-	}
-	public void show_push()
-	{
-		if(mInAppAD != null)
-		{
-			mInAppAD.show_push();
-		}
-	}
-	public void show_out()
-	{
-		if(mInAppAD != null)
-		{
-			mInAppAD.show_out();
-		}
-	}
-	public void show_video()
-	{
-		if(mInAppAD != null)
-		{
-			mInAppAD.show_video();
-		}
+		LogLocal("[MercuryActivity] swtichuser()");
+		mInAppChannel.swtichuser();
 	}
 	public void uploadclick() {
 		// TODO Auto-generated method stub
@@ -228,56 +189,79 @@ public class MercuryActivity  {
 			mInAppAD.uploadclick();
 		}
 	}
+	public void show_banner()
+	{
+		LogLocal("[MercuryActivity] show_banner()->" + mInAppAD);
+		if(mInAppAD != null) { mInAppAD.show_banner(); }
+	}
+
+	public void show_insert()
+	{
+		LogLocal("[MercuryActivity] show_insert()->" + mInAppAD);
+		if(mInAppAD != null) { mInAppAD.show_insert(); }
+	}
+	public void show_push()
+	{
+		LogLocal("[MercuryActivity] show_push()->" + mInAppAD);
+		if(mInAppAD != null) { mInAppAD.show_push(); }
+	}
+	public void show_out()
+	{
+		LogLocal("[MercuryActivity] show_out()->" + mInAppAD);
+		if(mInAppAD != null) { mInAppAD.show_out(); }
+	}
+	public void show_video()
+	{
+		LogLocal("[MercuryActivity] show_video()->" + mInAppAD);
+		if(mInAppAD != null) { mInAppAD.show_video(); }
+	}
+
 
 	public void onPause() {
 
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.onPause();
-		}
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onPause()->" + mInAppChannel);mInAppChannel.onPause();}
+		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onPause()->" + mInAppAD);mInAppAD.onPause();}
 	}
 	public void onStop() {
 
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.onStop();
-		}
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onStop()->" + mInAppChannel);mInAppChannel.onStop();}
+		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onStop()->" + mInAppAD);mInAppAD.onStop();}
 	}
 	public void onStart() {
 
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.onStart();
-		}
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onStart()->" + mInAppChannel);mInAppChannel.onStart();}
+		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onStart()->" + mInAppAD);mInAppAD.onStart();}
+
 	}
 	public void onRestart()
 	{
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.onRestart();
-		}
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onRestart()->" + mInAppChannel);mInAppChannel.onRestart();}
+		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onRestart()->" + mInAppAD);mInAppAD.onRestart();}
 	}
 	public void onResume()
 	{
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.onResume();
-		}
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onResume()->" + mInAppChannel);mInAppChannel.onResume();}
+		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onResume()->" + mInAppAD);mInAppAD.onResume();}
 	}
-
 
 	public void onDestroy()
 	{
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.onDestroy();
-		}
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onDestroy()->" + mInAppChannel);mInAppChannel.onDestroy();}
+		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onDestroy()->" + mInAppAD);mInAppAD.onDestroy();}
 	}
-
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity]->onActivityResult:mInAppChannel="+mInAppChannel);mInAppChannel.onActivityResult(requestCode,resultCode,data); }
+		if(mInAppAD != null) { LogLocal("[MercuryActivity]->onActivityResult:mInAppChannel="+mInAppAD);mInAppAD.onActivityResult(requestCode,resultCode,data); }
+	}
+	public void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity]->onNewIntent:mInAppChannel="+mInAppChannel);mInAppChannel.onNewIntent(intent); }
+		if(mInAppAD != null) { LogLocal("[MercuryActivity]->onNewIntent:mInAppAD="+mInAppAD);mInAppAD.onNewIntent(intent); }
+	}
 	
 	
-	public static Object getInstance() {	
-		Log.e("IAP","Unity Game");
+	public static Object getInstance() {
 		Platform=MercuryConst.Unity;
 		return mContext;
 	}
@@ -298,33 +282,20 @@ public class MercuryActivity  {
 		LogLocal("[MercuryActivity] getBaseInApp()->mInApp="+mInAppAD);
 		return mInAppAD;
 	}
-
 	public void Exchange()
 	{
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
-    		@Override
+			@Override
 			public void run() {
-    			
+				Log.e("IAP","[E2WApp]->Exchange:Android");
+				//Login();
+				InAppBase mInAppFunction= new InAppBase();
+				mInAppFunction.Exchange();
 
 			}
 		});
 	}
-	public void Exchange(final APPBaseInterface appcall)
-	{
-		//Log.d(Const.TAG, "showToast: " + strMessage + ", " + iDuration);
-		new Handler(mContext.getMainLooper()).post(new Runnable() {
-    		@Override
-			public void run() {
-    			InAppBase mInAppFunction= new InAppBase();
-    			//mInAppFunction.Exchange(appcall);
-			}
-		});
-	}
 
-	public void Message(final String news)
-	{	
-		Toast.makeText(mContext, news,Toast.LENGTH_SHORT).show();
-	}
 	public void SharePicture(String imagePath,boolean istimeline,final APPBaseInterface appcall)
 	{
 		
@@ -413,21 +384,10 @@ public class MercuryActivity  {
 			mInAppChannel.showMessageDialog();
 		}
 	}
-	public void onActivityResult(int requestCode, int resultCode, Intent data) 
+
+	public void Message(final String news)
 	{
-		LogLocal("[MercuryActivity]->onActivityResult:mInAppChannel="+mInAppChannel);
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.onActivityResult(requestCode,resultCode,data);
-		}
-	}
-	public void onNewIntent(Intent intent) {
-		// TODO Auto-generated method stub
-		LogLocal("[MercuryActivity]->onNewIntent:mInAppChannel="+mInAppChannel);
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.onNewIntent(intent);
-		}
+		Toast.makeText(mContext, news,Toast.LENGTH_SHORT).show();
 	}
 	public static void LogLocal(final String news)
 	{

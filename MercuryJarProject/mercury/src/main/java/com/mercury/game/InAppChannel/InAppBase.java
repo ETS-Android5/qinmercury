@@ -125,6 +125,7 @@ public class InAppBase{
 	{
 		//qc.FunctionC(number);
 	}
+	public void Exchange() { qc.Exchange(this); }
 	public void FunctionL(String number)
 	{
 		qc.FunctionL(number);
@@ -302,13 +303,5 @@ public class InAppBase{
 	{
 		
 	}
-
-
-
-
-
-
-
-
 
 }

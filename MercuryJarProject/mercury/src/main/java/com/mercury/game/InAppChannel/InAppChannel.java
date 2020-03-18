@@ -30,7 +30,7 @@ public class InAppChannel extends InAppBase {
 	
 	//comment
 	private InAppBase mBaseInApp = null;
-	private String Channelname="InAppDefault";
+	private String Channelname="InAppChannel";
 	private String mUid;
 	private String mSession;
 	private int mAccountType;
@@ -70,8 +70,55 @@ public class InAppChannel extends InAppBase {
 	public void purchase(final String strProductId, final String strProductDescription, final float fPrice)
 	{
 		super.purchase(strProductId, strProductDescription, fPrice);
-		purchaseProduct();
+		Log.e(MercuryConst.TAG,"purchase");
 	}
+	@Override
+	public void ExitGame()
+	{
+
+		((Activity) MercuryActivity.mContext).finish();
+		android.os.Process.killProcess(android.os.Process.myPid());
+
+	}
+	public void CarriersPay()
+	{
+		Log.e(MercuryConst.TAG,"CarriersPay=");
+	}
+	public void ChannelPay()
+	{
+		Log.e(MercuryConst.TAG,"ChannelPay="+mProductId);
+	}
+	public void DoublePay()
+	{
+		try {
+			AlertDialog.Builder builder = new Builder(mContext);
+			builder.setMessage("选择支付方式");
+			builder.setTitle("提示");
+			builder.setPositiveButton("小米支付", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					ChannelPay();
+				}
+			});
+			builder.setNeutralButton("短信支付", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					CarriersPay();
+				}
+			});
+			builder.setNegativeButton("取消", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onPurchaseFailed(Channelname);
+					dialog.dismiss();
+				}
+			});
+			builder.create().show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void onPause()
 	{
@@ -117,83 +164,6 @@ public class InAppChannel extends InAppBase {
 	
 
 
-	@Override
-	public void ExitGame()
-	{
 
-		((Activity) MercuryActivity.mContext).finish();
-		android.os.Process.killProcess(android.os.Process.myPid());
-		
-	}
-
-
-	private void purchaseProduct()
-	{
-		MercuryActivity.LogLocal("["+Channelname+"] CarriersPayLock="+MercuryConst.CarriersPayLock);
-		MercuryActivity.LogLocal("["+Channelname+"] SDKPayLock="+MercuryConst.SDKPayLock);
-		
-		if(MercuryConst.CarriersPayLock.equals("0")&&MercuryConst.SDKPayLock.equals("0"))
-		{
-			
-		}
-		else if(MercuryConst.CarriersPayLock.equals("1")&&MercuryConst.SDKPayLock.equals("0"))
-		{
-			 CarriersPay();
-		}
-		else if(MercuryConst.CarriersPayLock.equals("0")&&MercuryConst.SDKPayLock.equals("1"))
-		{
-			ChannelPay();
-		}
-		else if(MercuryConst.CarriersPayLock.equals("1")&&MercuryConst.SDKPayLock.equals("1"))
-		{
-			DoublePay();
-		}
-	}
-	public void CarriersPay()
-	{
-//		if (mBaseInApp != null&&MercuryApplication.iscarriersneed.equals("open"))
-//		{
-//			mBaseInApp.purchase(MercuryConst.CarriersID, mProductDescription, mProductPrice);
-//		}
-//		else
-//		{
-//			MercuryActivity.LogLocal("["+Channelname+"] MOBILE_SPLASH Closed...Can't Use Carrier's Pay");
-//		}
-	}
-	public void ChannelPay()
-	{
-		Log.e(MercuryConst.TAG,"mProductId="+mProductId);
-	}
-	public void DoublePay()
-	{
-		try {
-			AlertDialog.Builder builder = new Builder(mContext);
-			builder.setMessage("选择支付方式");
-			builder.setTitle("提示");
-			builder.setPositiveButton("小米支付", new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					ChannelPay();
-				}
-			});
-			builder.setNeutralButton("短信支付", new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					CarriersPay();
-				}
-			});
-			builder.setNegativeButton("取消", new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(Channelname);
-					dialog.dismiss();
-				}
-			});
-			builder.create().show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	//end
 }
