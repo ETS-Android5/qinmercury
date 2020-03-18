@@ -33,7 +33,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation files('src/main/libs/UnityPlugin.jar')
+    implementation files('src/main/libs/MercurySDK.jar')
 
 }
 repositories {

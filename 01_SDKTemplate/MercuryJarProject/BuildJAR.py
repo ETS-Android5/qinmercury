@@ -20,7 +20,7 @@ def main():
 	os.system('pwd')
 	if os.path.isfile("./mercury/build/outputs/aar/mercury-release.aar"):
 		os.system("unzip ./mercury/build/outputs/aar/mercury-release.aar")
-		os.rename("./classes.jar","./UnityPlugin.jar")
+		os.rename("./classes.jar","./MercurySDK.jar")
 
 
 if __name__ == '__main__':

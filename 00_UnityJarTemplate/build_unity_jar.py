@@ -8,8 +8,10 @@ def main():
 	#PythonFunction.FuncFunctionList.CleanCache()
 	#PythonFunction.FuncFunctionList.RestSetting()
 	os.chdir(PythonLocation())
-	os.system("python3 ./MercuryJarProject/BuildJAR.py")
-	os.system("mv ./MercuryJarProject/UnityPlugin.jar ./MercuryAPKProject/app/src/main/libs/UnityPlugin.jar")
+	if os.path.isfile("./UnityPlugin.jar"):
+		os.remove("./UnityPlugin.jar")
+	os.system("python3 ./UnityJar/BuildJAR.py")
+	os.system("mv ./UnityJar/UnityPlugin.jar ./UnityPlugin.jar")
 
 
 
