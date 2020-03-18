@@ -45,7 +45,7 @@ public class InAppChannel extends InAppBase {
 	public void ApplicationInit(Application appcontext)
 	{
 		mAppContext=appcontext;
-		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppBase.ApplicationInit="+appcontext);
+		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.ApplicationInit="+appcontext);
 	}
 	public void AnalysisID(String IDString)
 	{
@@ -67,10 +67,12 @@ public class InAppChannel extends InAppBase {
 		return strArray;
 	}
 	@Override
-	public void purchase(final String strProductId, final String strProductDescription, final float fPrice)
+	public void Purchase(final String strProductId)
 	{
-		super.purchase(strProductId, strProductDescription, fPrice);
-		Log.e(MercuryConst.TAG,"purchase");
+		MercuryConst.PayInfo(strProductId);
+		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
+		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
+		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
 	}
 	@Override
 	public void ExitGame()

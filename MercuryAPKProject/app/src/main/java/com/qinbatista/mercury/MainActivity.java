@@ -123,7 +123,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][5]->purchaseProduct");
-				MercurySDK.purchaseProduct("production1");
+				MercurySDK.Purchase("production1");
 			}
 		});
 

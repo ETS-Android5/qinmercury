@@ -74,15 +74,21 @@ public class InAppBase{
 		MercuryActivity.LogLocal("[InAppBase]->init:InAppBase.appinterface="+appcall);
 	}
 	
-
-	public void purchase(String strProductId, String strProductDescription,float fPrice) {
-		// TODO Auto-generated method stub
-		mProductId = strProductId;
-		mProductDescription = strProductDescription;
-		mProductPrice = fPrice;		
-		
+//
+//	public void purchase(String strProductId, String strProductDescription,float fPrice) {
+//		// TODO Auto-generated method stub
+//		mProductId = strProductId;
+//		mProductDescription = strProductDescription;
+//		mProductPrice = fPrice;
+//
+//	}
+	public void Purchase(final String strProductId)
+	{
+		MercuryConst.PayInfo(strProductId);
+		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
+		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
+		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
 	}
-	
 	public void ApplicationInit(Application appcontext)
 	{
 		mAppContext=appcontext;

@@ -289,7 +289,7 @@ public class MercuryConst {
 		  QinPid = strProductId + ","+ChannelPid+"," + SDKPAY;
 		  Qindesc= desc;
 		  Qinpricefloat=pricefloat;
-		MercuryActivity.LogLocal("[MercuryConst PayInfo] QinPid="+QinPid+" Qindesc="+Qindesc+" Qinpricefloat="+Qinpricefloat);
+		MercuryActivity.LogLocal("[MercuryConst][PayInfo] QinPid="+QinPid+" Qindesc="+Qindesc+" Qinpricefloat="+Qinpricefloat);
     }
     
 	public void FunctionL(String number)
@@ -301,79 +301,22 @@ public class MercuryConst {
 		MercuryActivity.LogLocal("[MercuryConst] MercuryApplication.mSimOperatorId="+MercuryApplication.mSimOperatorId);
 		((Activity) MercuryActivity.mContext).finish();
 		android.os.Process.killProcess(android.os.Process.myPid());
-//		if(MercuryApplication.iscarriersneed.equals("open")&&MercuryApplication.mSimOperatorId!=MercuryConst.ChinaMobile)
-//		{
-//			MercuryActivity.LogLocal("[InAppBase] Android Exit With Mobile Code");
-//			// exit
-//			AlertDialog.Builder builder = new Builder(MercuryActivity.mContext);
-//			builder.setMessage("确认退出吗?");
-//			builder.setTitle("提示");
-//			builder.setPositiveButton("确认", new OnClickListener() {
-//				@Override
-//				public void onClick(DialogInterface dialog, int which) {
-//					((Activity) MercuryActivity.mContext).finish();
-//					android.os.Process.killProcess(android.os.Process.myPid());
-//				}
-//			});
-//			builder.setNegativeButton("取消", new OnClickListener() {
-//				@Override
-//				public void onClick(DialogInterface dialog, int which) {
-//					dialog.dismiss();
-//				}
-//			});
-//			builder.create().show();
-//		}
-//		else
-//		{
-//			MercuryActivity.LogLocal("[MercuryConst] Kill Process");
-//			((Activity) MercuryActivity.mContext).finish();
-//			android.os.Process.killProcess(android.os.Process.myPid());
-//		}
 	}
 	
 	public void onPurchaseSuccess(String message,InAppBase inbase,String mProductId) {
-		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback->strProductId="+mProductId+" message->"+message+" inbase->"+inbase+" MercuryApplication.msg="+MercuryApplication.getExtSDKId());
-		if(message!="3"||"exchange"!=message)
-		{
-			
-		}
-		else
-		{
-			MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess");
-		}
-		if(MercuryApplication.getExtSDKId()==MercuryConst.ChinaTencent)
-		{
-			MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess->wxgame:"+message);
-			//UnityPlayer.UnitySendMessage("DontDestroy_Qin", "BuySuccess", message);
-		}
-		else
-			inbase.appinterface.onPurchaseSuccessCallBack(message);
+		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback->strProductId="+mProductId+" message->"+message+" inbase->"+inbase);
+		inbase.appinterface.onPurchaseSuccessCallBack(message);
 	}
 	public void onPurchaseFailed(String strError,InAppBase inbase,String mProductId) {
-		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->strError="+strError+" inbase->"+inbase+" MercuryApplication.msg="+MercuryApplication.getExtSDKId());
-		
-		if(MercuryApplication.getExtSDKId()==MercuryConst.ChinaTencent)
-		{
-			MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed->wxgame:"+strError);
-			//UnityPlayer.UnitySendMessage("DontDestroy_Qin", "BuyFail", strError);
-		}
-		else
-			inbase.appinterface.onPurchaseFailedCallBack(strError);
+		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->strError="+strError+" inbase->"+inbase);
+		inbase.appinterface.onPurchaseFailedCallBack(strError);
 	}
 	public void onPurchaseCanceled(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onPurchaseCanceled callback->strError="+strError+" inbase->"+inbase+" MercuryApplication.msg="+MercuryApplication.getExtSDKId());
-		
-		if(MercuryApplication.getExtSDKId()==MercuryConst.ChinaTencent)
-		{
-			MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed->wxgame:"+strError);
-			//UnityPlayer.UnitySendMessage("DontDestroy_Qin", "BuyFail", strError);
-		}
-		else
-			inbase.appinterface.onPurchaseCancelCallBack(strError);
+		MercuryActivity.LogLocal("[MercuryConst] onPurchaseCanceled callback->strError="+strError+" inbase->"+inbase);
+		inbase.appinterface.onPurchaseCancelCallBack(strError);
 	}
 	public void onLoginSuccess(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onLoginSuccess callback->strError="+strError+" inbase->"+inbase);
-		
 		inbase.appinterface.onLoginSuccessCallBack(strError);	
 	}
 	public void onLoginCancel(String strError,InAppBase inbase) {

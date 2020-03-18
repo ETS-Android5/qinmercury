@@ -49,72 +49,41 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		//find carriers
-		MercuryConst.GetChannelID("");
-		checkSIM();	
-		checkChannel();		
+		checkSIM();
 		checkExtSDK();
 		checkChannelName();
-		checkMobileSplash();
 		checkChannelSplash();
 		checkLoge();
-		JSXML();
-		checkNumber();
-		
-		try 
+		try
 		{
-			 key=getSign(this);
-		} 
-		catch (Exception e) 
+			key=getSign(this);
+		}
+		catch (Exception e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.e("IAP","[SDKApp]SdkName="+msg);		
-		if(iscarriersneed.equals("open"))
-		{				
-			if(!MercuryActivity.SortChannelID.equals("telecom")&&!MercuryActivity.SortChannelID.equals("unicom"))
-				System.loadLibrary("megjb");
-		}
-		
-		
-		
+		Log.e("IAP","[SDKApp]SdkName="+msg);
 	}
 	public void APPApplicationInit(Application context)
 	{
-		Acontext=context;
-		MercuryConst.GetChannelID("");
-		//find carriers
-		checkSIM();	
-		checkChannel();		
+		Acontext = context;
+		checkSIM();
 		checkExtSDK();
 		checkChannelName();
-		checkMobileSplash();
 		checkChannelSplash();
 		checkLoge();
-		JSXML();
-		checkNumber();
-		
 		try 
 		{
-			 key=getSign(Acontext);
+			 key=getSign(context);
 		} 
 		catch (Exception e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		Log.e("IAP","[SDKApp]SdkName="+msg);	
-		
-		if(iscarriersneed!=null)
-		{
-			if(iscarriersneed.equals("open"))
-			{				
-				if(!MercuryActivity.SortChannelID.equals("telecom")&&!MercuryActivity.SortChannelID.equals("unicom"))
-					System.loadLibrary("megjb");
-			}		
-		}
+
 	}
 	
 	
@@ -134,33 +103,6 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		return null;
 	}
 
-	public void getSingInfo() {
-		
-		try {
-			PackageInfo packageInfo = getPackageManager().getPackageInfo(
-					Acontext.getPackageName(),
-					PackageManager.GET_SIGNATURES);
-			Signature[] signs = packageInfo.signatures;
-			Signature sign = signs[0];
-			parseSignature(sign.toByteArray());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void parseSignature(byte[] signature) {
-		try {
-			CertificateFactory certFactory = CertificateFactory
-					.getInstance("X.509");
-			X509Certificate cert = (X509Certificate) certFactory
-					.generateCertificate(new ByteArrayInputStream(signature));
-			String pubKey = cert.getPublicKey().toString();
-			String signNumber = cert.getSerialNumber().toString();
-
-		} catch (CertificateException e) {
-			e.printStackTrace();
-		}
-	}
 	private void checkSIM() {
 
 		mSimOperatorId = MercuryConst.ChinaMobile;
@@ -198,20 +140,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	    	mInAppExt.ApplicationInit(Acontext);
 	}
 
-	private void checkChannel() {
-		try {
-		    ApplicationInfo ai = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(), PackageManager.GET_META_DATA);
-		    Bundle bundle = ai.metaData;
-		    mChannelId = bundle.getInt("EGAME_CHANNEL");
-		} catch (NameNotFoundException e) {
-		    Log.e(MercuryConst.TAG, "checkChannel:Failed to load meta-data, EGAME_CHANNEL NameNotFound: " + e.getMessage());
-		    mChannelId = 0;
-		} catch (NullPointerException e) {
-		    Log.e(MercuryConst.TAG, "checkChannel:Failed to load meta-data, EGAME_CHANNEL NullPointer: " + e.getMessage());
-		    mChannelId = -1;
-		}
-	}
-	
+
 	private void checkChannelName()
 	{
 		ApplicationInfo appInfo = null;
@@ -224,194 +153,6 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			{
 				MercuryActivity.LongChannelID="kupai";
 			}
-			else if(MercuryActivity.SortChannelID.equals("txyysc"))
-			{
-				MercuryActivity.LongChannelID="tengxunyingyongshichang";
-			}
-			else if(MercuryActivity.SortChannelID.equals("txyxzx"))
-			{
-				MercuryActivity.LongChannelID="tengxunyouxizhongxin";
-			}
-			else if(MercuryActivity.SortChannelID.equals("dxx"))
-			{
-				MercuryActivity.LongChannelID="xuancaiweimi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("bf"))
-			{
-				MercuryActivity.LongChannelID="baofengyingyin";
-			}
-			else if(MercuryActivity.SortChannelID.equals("txllq"))
-			{
-				MercuryActivity.LongChannelID="tengxunliulanqi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("al"))
-			{
-				MercuryActivity.LongChannelID="ali";
-			}
-			else if(MercuryActivity.SortChannelID.equals("unicom"))
-			{
-				MercuryActivity.LongChannelID="liantong";
-			}
-			else if(MercuryActivity.SortChannelID.equals("mobile"))
-			{
-				MercuryActivity.LongChannelID="yidong";
-			}
-			else if(MercuryActivity.SortChannelID.equals("qqgj"))
-			{
-				MercuryActivity.LongChannelID="QQguanjia";
-			}
-			else if(MercuryActivity.SortChannelID.equals("none"))
-			{
-				MercuryActivity.LongChannelID="kongxiangmu";
-			}
-			else if(MercuryActivity.SortChannelID.equals("telecom"))
-			{
-				MercuryActivity.LongChannelID="dianxin";
-			}
-			else if(MercuryActivity.SortChannelID.equals("debug"))
-			{
-				MercuryActivity.LongChannelID="ceshi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("yy"))
-			{
-				MercuryActivity.LongChannelID="youyi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("nd"))
-			{
-				MercuryActivity.LongChannelID="Nduo";
-			}
-			else if(MercuryActivity.SortChannelID.equals("yyh"))
-			{
-				MercuryActivity.LongChannelID="yingyonghui";
-			}
-			else if(MercuryActivity.SortChannelID.equals("yk"))
-			{
-				MercuryActivity.LongChannelID="youku";
-			}
-			else if(MercuryActivity.SortChannelID.equals("jf"))
-			{
-				MercuryActivity.LongChannelID="jifeng";
-			}
-			else if(MercuryActivity.SortChannelID.equals("sg"))
-			{
-				MercuryActivity.LongChannelID="sougou";
-			}
-			else if(MercuryActivity.SortChannelID.equals("txyyb"))
-			{
-				MercuryActivity.LongChannelID="tengxunyingyongbao";
-			}
-			else if(MercuryActivity.SortChannelID.equals("kw"))
-			{
-				MercuryActivity.LongChannelID="kuwo";
-			}
-			else if(MercuryActivity.SortChannelID.equals("aqy"))
-			{
-				MercuryActivity.LongChannelID="aiqiyi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("yw"))
-			{
-				MercuryActivity.LongChannelID="yiwan";
-			}
-			else if(MercuryActivity.SortChannelID.equals("taptap"))
-			{
-				MercuryActivity.LongChannelID="TapTap";
-			}
-			else if(MercuryActivity.SortChannelID.equals("mzw"))
-			{
-				MercuryActivity.LongChannelID="muzhiwan";
-			}
-			else if(MercuryActivity.SortChannelID.equals("dl"))
-			{
-				MercuryActivity.LongChannelID="dangle";
-			}
-			else if(MercuryActivity.SortChannelID.equals("meitu"))
-			{
-				MercuryActivity.LongChannelID="meitu";
-			}
-			else if(MercuryActivity.SortChannelID.equals("east2west"))
-			{
-				MercuryActivity.LongChannelID="dongpinxishang";
-			}
-			else if(MercuryActivity.SortChannelID.equals("hw"))
-			{
-				MercuryActivity.LongChannelID="huawei";
-			}
-			else if(MercuryActivity.SortChannelID.equals("lxlsd"))
-			{
-				MercuryActivity.LongChannelID="lianxiangleshangdian";
-			}
-			else if(MercuryActivity.SortChannelID.equals("lxyx"))
-			{
-				MercuryActivity.LongChannelID="lianxiangyouxi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("chel_4399"))
-			{
-				MercuryActivity.LongChannelID="4399";
-			}
-			else if(MercuryActivity.SortChannelID.equals("mz"))
-			{
-				MercuryActivity.LongChannelID="meizu";
-			}
-			else if(MercuryActivity.SortChannelID.equals("wdj"))
-			{
-				MercuryActivity.LongChannelID="wandoujia";
-			}
-			else if(MercuryActivity.SortChannelID.equals("ls"))
-			{
-				MercuryActivity.LongChannelID="leshi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("jinli"))
-			{
-				MercuryActivity.LongChannelID="jinli";
-			}
-			else if(MercuryActivity.SortChannelID.equals("vivo"))
-			{
-				MercuryActivity.LongChannelID="VIVO";
-			}
-			else if(MercuryActivity.SortChannelID.equals("wxgame"))
-			{
-				MercuryActivity.LongChannelID="weixinyouxi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("anzhi"))
-			{
-				MercuryActivity.LongChannelID="anzhi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("baidu_dk"))
-			{
-				MercuryActivity.LongChannelID="baiduduoku";
-			}
-			else if(MercuryActivity.SortChannelID.equals("xm"))
-			{
-				MercuryActivity.LongChannelID="xiaomi";
-			}
-			else if(MercuryActivity.SortChannelID.equals("baidu_sjzs"))
-			{
-				MercuryActivity.LongChannelID="baidushoujizhushou";
-			}
-			else if(MercuryActivity.SortChannelID.equals("oppo"))
-			{
-				MercuryActivity.LongChannelID="OPPO";
-			}
-			else if(MercuryActivity.SortChannelID.equals("baidu_91"))
-			{
-				MercuryActivity.LongChannelID="baidu91";
-			}
-			else if(MercuryActivity.SortChannelID.equals("qihu360"))
-			{
-				MercuryActivity.LongChannelID="qihu360";
-			}
-			else if(MercuryActivity.SortChannelID.equals("baidu_tb"))
-			{
-				MercuryActivity.LongChannelID="baidutieba";
-			}
-			else if(MercuryActivity.SortChannelID.equals("UC"))
-			{
-				MercuryActivity.LongChannelID="UCjiuyou";
-			}
-			else if(MercuryActivity.SortChannelID.equals("e2wwk"))
-			{
-				MercuryActivity.LongChannelID="e2wwk";
-			}
 			
 		} catch (NameNotFoundException e) {
 		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NotFound: " + e.getMessage());
@@ -422,22 +163,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		}
 
 	}
-	private void checkMobileSplash()
-	{
-		ApplicationInfo appInfo = null;
-		try 
-		{
-			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
-			String channelnametmp = appInfo.metaData.getString("MOBILE_SPLASH");
-			iscarriersneed =channelnametmp;
-		} catch (NameNotFoundException e) {
-		    Log.e(MercuryConst.TAG, "checkMobileSplash:Failed to load meta-data MOBILE_SPLASH, NameNotFound: " + e.getMessage());
-		    
-		} catch (NullPointerException e) {
-		    Log.e(MercuryConst.TAG, "checkMobileSplash:Failed to load meta-data MOBILE_SPLASH, NullPointer: " + e.getMessage());
-		}
 
-	}
 	private void checkChannelSplash()
 	{
 		ApplicationInfo appInfo = null;
@@ -460,8 +186,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		try 
 		{
 			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
-			String isLogOpentmp = appInfo.metaData.getString("E2W_LOG");
-			isAntLogOpen =isLogOpentmp;
+			isAntLogOpen = appInfo.metaData.getString("E2W_LOG");
 			if(isAntLogOpen.equals("open"))
 			{
 				Log.e("IAP","Log Verison:"+MercuryConst.LogVERSION);
@@ -474,128 +199,9 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		}
 
 	}
-	private void checkNumber()
-	{
-		ApplicationInfo appInfo = null;
-		try 
-		{
-			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
-			String isLogOpentmp = appInfo.metaData.getString("E2W_NUMBER");
-			e2wnumber =isLogOpentmp;
-			Log.e(MercuryConst.TAG, "E2W_NUMBER="+e2wnumber);
-		} catch (NameNotFoundException e) {
-		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data E2W_NUMBER, NameNotFound: " + e.getMessage());
-		    
-		} catch (NullPointerException e) {
-		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data E2W_NUMBER, NullPointer: " + e.getMessage());
-		}
 
-	}
-	
-	public static int getSimOperatorId()
-	{
-		return mSimOperatorId;
-	}
-	
-	public static int getExtSDKId()
-	{
-		return mExtSDKId;
-	}
-	
-	public static int getChannelId()
-	{
-		return mChannelId;
-	}
-	public static String getChannelname()
-	{
-		return channelname;
-	}
-	public void JSXML()
-	{
-		checkExtJSIDChannel();
-		checkExtJSCHANNELChannel();
-		checkExtJSTJIDChannel();
-	}
-	//JS
-	private void checkExtJSIDChannel() {		
-	try {
-		try {
-			ApplicationInfo appInfo = null;
-			try 
-			{
-				appInfo = this.getPackageManager().getApplicationInfo(getPackageName(),PackageManager.GET_META_DATA);
-			} catch (NameNotFoundException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			jsid = appInfo.metaData.getString("JS_ID");
-	} 
-	catch (NullPointerException e) 
-	{
-	    Log.e("game", "3Failed to load meta-data, NameNotFound: " + e.getMessage());
-	   	    
-	} 
-	}
-		catch (NullPointerException e) 
-	{
-		Log.e("game",  "4Failed to load meta-data, NullPointer: " + e.getMessage());         
-	}
-	
-}
 
-	private void checkExtJSCHANNELChannel() {		
-	try {
-		try {
-			ApplicationInfo appInfo = null;
-			try 
-			{
-				appInfo = this.getPackageManager().getApplicationInfo(getPackageName(),PackageManager.GET_META_DATA);
-			} catch (NameNotFoundException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			jschannel = appInfo.metaData.getString("JS_CHANNEL");
-	} 
-		catch (NullPointerException e) 
-		{
-		    Log.e("game", "3Failed to load meta-data, NameNotFound: " + e.getMessage());
-		   	    
-		} 
-		}
-			catch (NullPointerException e) 
-		{
-			Log.e("game",  "4Failed to load meta-data, NullPointer: " + e.getMessage());         
-		}
-	
-}
-private void checkExtJSTJIDChannel() {		
-	try {
-		try {
-			ApplicationInfo appInfo = null;
-			try 
-			{
-				appInfo = this.getPackageManager().getApplicationInfo(getPackageName(),PackageManager.GET_META_DATA);
-			} catch (NameNotFoundException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			jstjid = appInfo.metaData.getString("JS_TJID");
-	} 
-		catch (NullPointerException e) 
-		{
-		    Log.e("game", "3Failed to load meta-data, NameNotFound: " + e.getMessage());
-		   	    
-		} 
-		}
-			catch (NullPointerException e) 
-		{
-			Log.e("game",  "4Failed to load meta-data, NullPointer: " + e.getMessage());         
-		}
-	
-}
+
 
 
 }

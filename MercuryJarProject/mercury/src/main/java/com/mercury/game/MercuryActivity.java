@@ -71,7 +71,7 @@ public class MercuryActivity  {
 	}
 	public void ChannelSplash()
 	{
-		LogLocal("[inapp] ChannelSplash.png");
+		LogLocal("[MercuryActivity][ChannelSplash] ChannelSplash.png");
 		try {
 			final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -116,7 +116,7 @@ public class MercuryActivity  {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogLocal("[inapp] init e="+e.toString());
+			LogLocal("[MercuryActivity][ChannelSplash] init e="+e.toString());
 		}
 	}
  	public String SavePidName(){    
@@ -134,14 +134,14 @@ public class MercuryActivity  {
 	public void InitChannel(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();		
-		LogLocal("[MercuryActivity] Local InitChannel()->"+mInAppChannel);
+		LogLocal("[MercuryActivity][InitChannel] Local InitChannel()->"+mInAppChannel);
 		mInAppChannel.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
 	
 	}
 	public void InitAd(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();
-		LogLocal("[MercuryActivity] Local InitAd()->"+mInAppAD);
+		LogLocal("[MercuryActivity][InitChannel] Local InitAd()->"+mInAppAD);
 		mInAppAD.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
 
 	}
@@ -150,11 +150,12 @@ public class MercuryActivity  {
 		
 	}
 	
-	public void purchaseProduct(String pidname) 
+	public void Purchase(String pidname)
 	{
-		LogLocal("[MercuryActivity] purchaseProduct: " + pidname);
-		MercuryConst.PayInfo(pidname);
-		mInAppChannel.purchase(MercuryConst.QinPid, MercuryConst.Qindesc, MercuryConst.Qinpricefloat);
+		LogLocal("[MercuryActivity][purchaseProduct] " + pidname);
+		mInAppChannel.Purchase(pidname);
+//		MercuryConst.PayInfo(pidname);
+//		mInAppChannel.purchase(MercuryConst.QinPid, MercuryConst.Qindesc, MercuryConst.Qinpricefloat);
 	}
 	public void ExitGame()
 	{    		
@@ -179,7 +180,7 @@ public class MercuryActivity  {
 
 	public void swtichuser()
 	{
-		LogLocal("[MercuryActivity] swtichuser()");
+		LogLocal("[MercuryActivity][swtichuser]");
 		mInAppChannel.swtichuser();
 	}
 	public void uploadclick() {
@@ -191,28 +192,28 @@ public class MercuryActivity  {
 	}
 	public void show_banner()
 	{
-		LogLocal("[MercuryActivity] show_banner()->" + mInAppAD);
+		LogLocal("[MercuryActivity][show_banner]" + mInAppAD);
 		if(mInAppAD != null) { mInAppAD.show_banner(); }
 	}
 
 	public void show_insert()
 	{
-		LogLocal("[MercuryActivity] show_insert()->" + mInAppAD);
+		LogLocal("[MercuryActivity][show_insert]" + mInAppAD);
 		if(mInAppAD != null) { mInAppAD.show_insert(); }
 	}
 	public void show_push()
 	{
-		LogLocal("[MercuryActivity] show_push()->" + mInAppAD);
+		LogLocal("[MercuryActivity][show_push]" + mInAppAD);
 		if(mInAppAD != null) { mInAppAD.show_push(); }
 	}
 	public void show_out()
 	{
-		LogLocal("[MercuryActivity] show_out()->" + mInAppAD);
+		LogLocal("[MercuryActivity][show_out]" + mInAppAD);
 		if(mInAppAD != null) { mInAppAD.show_out(); }
 	}
 	public void show_video()
 	{
-		LogLocal("[MercuryActivity] show_video()->" + mInAppAD);
+		LogLocal("[MercuryActivity][show_video]" + mInAppAD);
 		if(mInAppAD != null) { mInAppAD.show_video(); }
 	}
 
