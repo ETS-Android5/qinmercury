@@ -1,7 +1,7 @@
 package com.mercury.game.InAppAdvertisement;
 import com.mercury.game.MercuryApplication;
-import com.mercury.game.InAppChannel.APPBaseInterface;
-import com.mercury.game.InAppChannel.InAppBase;
+import com.mercury.game.util.APPBaseInterface;
+import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
 //comment
 import android.app.Activity;
@@ -14,10 +14,10 @@ public class InAppAD extends InAppBase {
 	//comment
 	public static String appShow="InAppAD";
 	public static String MyScence = "";
-	public void init(Context appContext, Activity context, final String strAppId, final String strAppKey,final APPBaseInterface appcall)
+	public void ActivityInit(Activity context,final APPBaseInterface appcall)
 	{
-		super.init(appContext, context, strAppId, strAppKey, appcall);
-		MercuryActivity.LogLocal("["+appShow+"]->init");
+		super.ActivityInit(context, appcall);
+		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit");
 
 	}
 	@Override

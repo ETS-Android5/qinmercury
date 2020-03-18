@@ -1,4 +1,4 @@
-package com.mercury.game.InAppChannel;
+package com.mercury.game.util;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.mercury.game.MercuryActivity;
-import com.mercury.game.MercuryConst;
+import com.mercury.game.util.MercuryConst;
 import com.mercury.game.MercuryApplication;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -46,7 +46,6 @@ public class InAppBase{
 	public static APPBaseInterface appinterface;
 	public static boolean sTestMode = false;
 	public static MercuryConst qc;
-	public static Context forbassonly;
 	public static String OrderID="";
 	public static String key = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBALnMsImln+S8fxJt" +
 		 			    		"f7NDqQhh8EA318buO6ScnyzNbaBkVmu4oL97ggRrgmI7z1YKYkPNs6ymufqjHDAA" +
@@ -63,25 +62,16 @@ public class InAppBase{
 		 			    		"+vdStNq08KV7g+bOZKXElvnYjpUHMdVkO+oeXHPhLf9ltlpBOynA7WA60Jdg0OJa" +
 		 			    		"14ngZcu2loawd+q2";
 
-	public void init(Context appContext, Activity context, String strAppKey,String strAppSecret, APPBaseInterface appcall) {
+	public void ActivityInit(Activity context, final APPBaseInterface appcall) {
 		// TODO Auto-generated method stub
 		mContext = context;
-		mAppContext = appContext;
 		mInstance = this;
 		qc = new MercuryConst();
 		this.appinterface=appcall;
-		forbassonly=context;
 		MercuryActivity.LogLocal("[InAppBase]->init:InAppBase.appinterface="+appcall);
 	}
 	
-//
-//	public void purchase(String strProductId, String strProductDescription,float fPrice) {
-//		// TODO Auto-generated method stub
-//		mProductId = strProductId;
-//		mProductDescription = strProductDescription;
-//		mProductPrice = fPrice;
-//
-//	}
+
 	public void Purchase(final String strProductId)
 	{
 		MercuryConst.PayInfo(strProductId);
@@ -142,13 +132,13 @@ public class InAppBase{
 	}
 	
 	public void onPurchaseSuccess(String message) {
-		qc.onPurchaseSuccess(message,this,mProductId);
+		qc.onPurchaseSuccess(message,this);
 	}	
 	public void onPurchaseFailed(String strError) {	
-		qc.onPurchaseFailed(strError,this,mProductId);
+		qc.onPurchaseFailed(strError,this);
 	}	
 	public void onPurchaseCanceled(String strError) {
-		qc.onPurchaseFailed(strError,this,mProductId);		
+		qc.onPurchaseFailed(strError,this);
 	}
 	public void onLoginSuccess(String strError) {
 		qc.onLoginSuccess(strError,this);

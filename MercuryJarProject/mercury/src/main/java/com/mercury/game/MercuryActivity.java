@@ -6,10 +6,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
-import com.mercury.game.InAppChannel.APPBaseInterface;
-import com.mercury.game.InAppChannel.InAppBase;
+import com.mercury.game.util.APPBaseInterface;
+import com.mercury.game.util.InAppBase;
 import com.mercury.game.InAppChannel.InAppChannel;
 import com.mercury.game.InAppAdvertisement.InAppAD;
+import com.mercury.game.util.MercuryConst;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -62,7 +63,6 @@ public class MercuryActivity  {
 	{
 		mContext = ContextFromUsers;
 		ChannelSplash();
-		MercuryConst.GetChannelID("");
 		mInAppChannel = new InAppChannel() ;
 		mInAppAD= new InAppAD() ;
 		activityforappbase=this;
@@ -135,14 +135,14 @@ public class MercuryActivity  {
 	{
 		final Context applicationContext = mContext.getApplicationContext();		
 		LogLocal("[MercuryActivity][InitChannel] Local InitChannel()->"+mInAppChannel);
-		mInAppChannel.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
+		mInAppChannel.ActivityInit((Activity)mContext, appcall);
 	
 	}
 	public void InitAd(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();
-		LogLocal("[MercuryActivity][InitChannel] Local InitAd()->"+mInAppAD);
-		mInAppAD.init(applicationContext, (Activity)mContext, MercuryConst.APPID, MercuryConst.APPKEY,appcall);
+		LogLocal("[MercuryActivity][InitAd] Local InitAd()->"+mInAppAD);
+		mInAppAD.ActivityInit((Activity)mContext,appcall);
 
 	}
 	public void InitCarriers(final APPBaseInterface appcall)

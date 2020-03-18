@@ -1,4 +1,4 @@
-package com.mercury.game;
+package com.mercury.game.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -22,7 +22,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.mercury.game.InAppChannel.InAppBase;
+import com.mercury.game.util.InAppBase;
+import com.mercury.game.MercuryActivity;
+import com.mercury.game.MercuryApplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -220,76 +222,44 @@ public class MercuryConst {
     		SDKPayLock=strArray[3].toString();
     	}   	
     }
-    public static void GetChannelID(String ChannelName)
-    { 
-    	//AddCodeChannelSettingPython
-		APPID = "155309";
-		APPKEY = "";
-		ADChannel="";
-		SDKPAY="0,1";
-		//end		
-    }
-   
 
 
 
     public static void PayInfo(String SavePid)
     {
-		MercuryConst.CarriersPayLock="0";
-		MercuryConst.SDKPayLock="1";
     	  String  ydpid="";
     	  String  ltpid="";
     	  String  dxpid="";
     	  String  desc="";
-    	  float  pricefloat=10f;
-    	  String  strProductId="";
+    	  float  pricefloat=1f;
 		  switch (SavePid)
 	      {
-	          case "production1":		ydpid = "001"; ltpid = "001"; dxpid = "TOOL1";   desc = "解锁全部关卡"; pricefloat = 20.0f;  ServerPid=ServerPid1;   ServerPrice=ServerPrice1;ServerDes=ServerDes1;break;
-	          case "production2":		ydpid = "002"; ltpid = "002"; dxpid = "TOOL2";   desc = "2200点券";    pricefloat = 35.0f;   ServerPid=ServerPid2;	ServerPrice=ServerPrice2;ServerDes=ServerDes2;break;
-	          case "production3":		ydpid = "003"; ltpid = "003"; dxpid = "TOOL3";   desc = "5000点券";    pricefloat = 65.0f;  ServerPid=ServerPid3;	ServerPrice=ServerPrice3;ServerDes=ServerDes3;break;
-	          case "production4":		ydpid = "004"; ltpid = "004"; dxpid = "TOOL4";   desc = "11000点券";   pricefloat = 130.0f;   ServerPid=ServerPid4;	ServerPrice=ServerPrice4;ServerDes=ServerDes4;break;
-	          case "production5":		ydpid = "005"; ltpid = "005"; dxpid = "TOOL5";   desc = "30000点券";   pricefloat = 330.0f;  ServerPid=ServerPid5;	ServerPrice=ServerPrice5;ServerDes=ServerDes5;break;
-	          case "production6":		ydpid = "006"; ltpid = "006"; dxpid = "TOOL6";   desc = "70000点券";   pricefloat = 660.0f;  ServerPid=ServerPid6;	ServerPrice=ServerPrice6;ServerDes=ServerDes6;break;
-	          case "production7":		ydpid = "007"; ltpid = "007"; dxpid = "TOOL7";   desc = "命运女侠";     pricefloat = 20.0f;  ServerPid=ServerPid7;	ServerPrice=ServerPrice7;ServerDes=ServerDes7;break;
-	          case "production8":		ydpid = "008"; ltpid = "008"; dxpid = "TOOL8";   desc = "风刃";        pricefloat = 20.0f;  ServerPid=ServerPid8;	ServerPrice=ServerPrice8;ServerDes=ServerDes8;break;
-	          case "production9":		ydpid = "009"; ltpid = "009"; dxpid = "TOOL9";   desc = "虚空猎手";     pricefloat = 20.0f;  ServerPid=ServerPid9;	ServerPrice=ServerPrice9;ServerDes=ServerDes9;break;
-	          case "production10":		ydpid = "010"; ltpid = "010"; dxpid = "TOOL10";  desc = "超能博士";     pricefloat = 30.0f;  ServerPid=ServerPid10;	ServerPrice=ServerPrice10;ServerDes=ServerDes10;break;
-	          case "production11":		ydpid = "011"; ltpid = "011"; dxpid = "TOOL11";  desc = "达尔文";       pricefloat = 30.0f;  ServerPid=ServerPid11;	ServerPrice=ServerPrice11;ServerDes=ServerDes11;break;
-	          case "production12":		ydpid = "012"; ltpid = "012"; dxpid = "TOOL12";  desc = "铁甲马克";     pricefloat = 45.0f; ServerPid=ServerPid12;	ServerPrice=ServerPrice12;ServerDes=ServerDes12;break;
-	          case "production13":		ydpid = "013"; ltpid = "013"; dxpid = "TOOL13";  desc = "解锁游戏";     pricefloat = 30.0f; ServerPid=ServerPid13;	ServerPrice=ServerPrice13;ServerDes=ServerDes13;break;
-	          case "production14":		ydpid = "014"; ltpid = "014"; dxpid = "TOOL14";  desc = "桂英";         pricefloat =  18.0f; ServerPid=ServerPid14;	ServerPrice=ServerPrice14;ServerDes=ServerDes14;break;
-	          case "production15":		ydpid = "015"; ltpid = "015"; dxpid = "TOOL15";  desc = "自由猎人";     pricefloat = 30.0f; ServerPid=ServerPid15;	ServerPrice=ServerPrice15;ServerDes=ServerDes15;break;
-	          case "production16":		ydpid = "016"; ltpid = "016"; dxpid = "TOOL16";  desc = "自由猎人";     pricefloat = 30.0f; ServerPid=ServerPid15;	ServerPrice=ServerPrice15;ServerDes=ServerDes15;break;
-	          
+	          case "production1":		desc = "解锁全部关卡"; pricefloat = 20.0f;  ServerPid=ServerPid1;   ServerPrice=ServerPrice1;ServerDes=ServerDes1;break;
+	          case "production2":		desc = "2200点券";    pricefloat = 35.0f;   ServerPid=ServerPid2;	ServerPrice=ServerPrice2;ServerDes=ServerDes2;break;
+	          case "production3":		desc = "5000点券";    pricefloat = 65.0f;  ServerPid=ServerPid3;	ServerPrice=ServerPrice3;ServerDes=ServerDes3;break;
+	          case "production4":		desc = "11000点券";   pricefloat = 130.0f;   ServerPid=ServerPid4;	ServerPrice=ServerPrice4;ServerDes=ServerDes4;break;
+	          case "production5":		desc = "30000点券";   pricefloat = 330.0f;  ServerPid=ServerPid5;	ServerPrice=ServerPrice5;ServerDes=ServerDes5;break;
+	          case "production6":		desc = "70000点券";   pricefloat = 660.0f;  ServerPid=ServerPid6;	ServerPrice=ServerPrice6;ServerDes=ServerDes6;break;
+	          case "production7":		desc = "命运女侠";     pricefloat = 20.0f;  ServerPid=ServerPid7;	ServerPrice=ServerPrice7;ServerDes=ServerDes7;break;
+	          case "production8":		desc = "风刃";        pricefloat = 20.0f;  ServerPid=ServerPid8;	ServerPrice=ServerPrice8;ServerDes=ServerDes8;break;
+	          case "production9":		desc = "虚空猎手";     pricefloat = 20.0f;  ServerPid=ServerPid9;	ServerPrice=ServerPrice9;ServerDes=ServerDes9;break;
+	          case "production10":		desc = "超能博士";     pricefloat = 30.0f;  ServerPid=ServerPid10;	ServerPrice=ServerPrice10;ServerDes=ServerDes10;break;
+	          case "production11":		desc = "达尔文";       pricefloat = 30.0f;  ServerPid=ServerPid11;	ServerPrice=ServerPrice11;ServerDes=ServerDes11;break;
+	          case "production12":		desc = "铁甲马克";     pricefloat = 45.0f; ServerPid=ServerPid12;	ServerPrice=ServerPrice12;ServerDes=ServerDes12;break;
+	          case "production13":		desc = "解锁游戏";     pricefloat = 30.0f; ServerPid=ServerPid13;	ServerPrice=ServerPrice13;ServerDes=ServerDes13;break;
+	          case "production14":		desc = "桂英";         pricefloat =  18.0f; ServerPid=ServerPid14;	ServerPrice=ServerPrice14;ServerDes=ServerDes14;break;
+	          case "production15":		desc = "自由猎人";     pricefloat = 30.0f; ServerPid=ServerPid15;	ServerPrice=ServerPrice15;ServerDes=ServerDes15;break;
+	          case "production16":		desc = "自由猎人";     pricefloat = 30.0f; ServerPid=ServerPid15;	ServerPrice=ServerPrice15;ServerDes=ServerDes15;break;
 	          default:
 	              break;	
 	      }
-
-		  switch (MercuryApplication.mSimOperatorId)
-	      {
-	          case 1: strProductId = ydpid; break;
-	          case 2: strProductId = ltpid; break;
-	          case 3: strProductId = dxpid; break;
-	          default:
-	              strProductId = ydpid;break;
-		  }
-		  if(!ServerPid.equals(""))
-		  {
-			  ChannelPid=ServerPid;
-		  }
-		  if(!ServerPrice.equals(""))
-		  {
-			  pricefloat= Float.parseFloat(ServerPrice);
-		  }
-		  if(!ServerDes.equals(""))
-		  {
-			  desc=ServerDes;
-		  }
-		  QinPid = strProductId + ","+ChannelPid+"," + SDKPAY;
+		  if(!ServerPid.equals("")) { ChannelPid=ServerPid; }
+		  if(!ServerPrice.equals("")) { pricefloat= Float.parseFloat(ServerPrice); }
+		  if(!ServerDes.equals("")) { desc=ServerDes; }
+		  QinPid = SavePid;
 		  Qindesc= desc;
 		  Qinpricefloat=pricefloat;
-		MercuryActivity.LogLocal("[MercuryConst][PayInfo] QinPid="+QinPid+" Qindesc="+Qindesc+" Qinpricefloat="+Qinpricefloat);
+		  MercuryActivity.LogLocal("[MercuryConst][PayInfo] QinPid="+QinPid+" Qindesc="+Qindesc+" Qinpricefloat="+Qinpricefloat);
     }
     
 	public void FunctionL(String number)
@@ -303,11 +273,11 @@ public class MercuryConst {
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 	
-	public void onPurchaseSuccess(String message,InAppBase inbase,String mProductId) {
-		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback->strProductId="+mProductId+" message->"+message+" inbase->"+inbase);
+	public void onPurchaseSuccess(String message,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
 		inbase.appinterface.onPurchaseSuccessCallBack(message);
 	}
-	public void onPurchaseFailed(String strError,InAppBase inbase,String mProductId) {
+	public void onPurchaseFailed(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->strError="+strError+" inbase->"+inbase);
 		inbase.appinterface.onPurchaseFailedCallBack(strError);
 	}

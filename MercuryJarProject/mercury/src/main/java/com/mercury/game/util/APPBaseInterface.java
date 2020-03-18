@@ -1,4 +1,4 @@
-package com.mercury.game.InAppChannel;
+package com.mercury.game.util;
 
 public interface APPBaseInterface {
 	abstract void onPurchaseSuccessCallBack(String strProductId);

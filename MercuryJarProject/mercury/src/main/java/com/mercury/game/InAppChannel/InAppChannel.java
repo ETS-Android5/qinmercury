@@ -1,6 +1,6 @@
 package com.mercury.game.InAppChannel;
-import com.mercury.game.InAppChannel.APPBaseInterface;
-import com.mercury.game.InAppChannel.InAppBase;
+import com.mercury.game.util.APPBaseInterface;
+import com.mercury.game.util.InAppBase;
 
 //comment
 import android.app.Activity;
@@ -15,7 +15,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.mercury.game.MercuryActivity;
-import com.mercury.game.MercuryConst;
+import com.mercury.game.util.MercuryConst;
 import com.mercury.game.MercuryApplication;
 
 import java.text.DateFormat;
@@ -36,31 +36,17 @@ public class InAppChannel extends InAppBase {
 	private int mAccountType;
 	private String demovalue1;
 	@Override
-	public void init(Context appContext, Activity context, final String strAppId, final String strAppSecret, APPBaseInterface appinterface)
+	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
-		super.init(appContext, context, strAppId, strAppSecret,appinterface);
-		MercuryActivity.LogLocal("["+Channelname+"] strAppKey="+strAppId);
-		MercuryActivity.LogLocal("["+Channelname+"] strAppSecret="+strAppSecret);
+		super.ActivityInit(context, appinterface);
+		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
 	}
 	public void ApplicationInit(Application appcontext)
 	{
 		mAppContext=appcontext;
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.ApplicationInit="+appcontext);
 	}
-	public void AnalysisID(String IDString)
-	{
-		try
-		{
-			String[] strArray=null;
-			strArray = convertStrToArray(IDString,",");
-			demovalue1=strArray[0].toString();
-			MercuryActivity.LogLocal("["+Channelname+"] demovalue1="+demovalue1);
-		}
-		catch(Exception E)
-		{
-			MercuryActivity.LogLocal("[AnalysisID]Error="+E);
-		}
-	}
+
 	public static String[] convertStrToArray(String str,String symbol){
 		String[] strArray = null;
 		strArray = str.split(symbol); //拆分字符为symbol 可以是 "," ,然后把结果交给数组strArray
@@ -73,45 +59,60 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
+		TestPay();
+
 	}
 	@Override
 	public void ExitGame()
 	{
+		try {
+			AlertDialog.Builder builder = new Builder(mContext);
+			builder.setMessage("测试退出模式");
+			builder.setTitle("选择结果");
+			builder.setPositiveButton("成功退出", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
 
-		((Activity) MercuryActivity.mContext).finish();
-		android.os.Process.killProcess(android.os.Process.myPid());
+					((Activity) MercuryActivity.mContext).finish();
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
+			});
+
+			builder.setNegativeButton("取消退出", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			builder.create().show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 
 	}
-	public void CarriersPay()
-	{
-		Log.e(MercuryConst.TAG,"CarriersPay=");
-	}
-	public void ChannelPay()
-	{
-		Log.e(MercuryConst.TAG,"ChannelPay="+mProductId);
-	}
-	public void DoublePay()
+	public void TestPay()
 	{
 		try {
 			AlertDialog.Builder builder = new Builder(mContext);
-			builder.setMessage("选择支付方式");
-			builder.setTitle("提示");
-			builder.setPositiveButton("小米支付", new OnClickListener() {
+			builder.setMessage("测试支付模式");
+			builder.setTitle("选择结果");
+			builder.setPositiveButton("成功", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					ChannelPay();
+					onPurchaseSuccess("success message");
 				}
 			});
-			builder.setNeutralButton("短信支付", new OnClickListener() {
+			builder.setNeutralButton("失败", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					CarriersPay();
+					onPurchaseFailed("failed message");
 				}
 			});
 			builder.setNegativeButton("取消", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(Channelname);
+					onPurchaseFailed("failed message");
 					dialog.dismiss();
 				}
 			});

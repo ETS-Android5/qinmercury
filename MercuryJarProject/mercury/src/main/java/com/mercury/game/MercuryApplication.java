@@ -23,7 +23,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.mercury.game.InAppChannel.InAppBase;
+import com.mercury.game.util.InAppBase;
+import com.mercury.game.util.MercuryConst;
 import com.mercury.game.InAppChannel.InAppChannel;
 
 
