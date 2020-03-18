@@ -1,7 +1,7 @@
 import sys
 import os
 import platform
-
+import shutil
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 def main():
@@ -16,6 +16,8 @@ def main():
 		os.remove("./R.txt")
 	if os.path.isfile("./AndroidManifest.xml"):
 		os.remove("./AndroidManifest.xml")
+	if os.path.isdir("./libs"):
+		shutil.rmtree('./libs')
 	os.system("gradle clean makejar")
 	os.system('pwd')
 	if os.path.isfile("./mercury/build/outputs/aar/mercury-release.aar"):
