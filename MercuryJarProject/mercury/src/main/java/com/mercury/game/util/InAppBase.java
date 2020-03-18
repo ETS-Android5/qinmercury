@@ -138,7 +138,7 @@ public class InAppBase{
 		qc.onPurchaseFailed(strError,this);
 	}	
 	public void onPurchaseCanceled(String strError) {
-		qc.onPurchaseFailed(strError,this);
+		qc.onPurchaseCanceled(strError,this);
 	}
 	public void onLoginSuccess(String strError) {
 		qc.onLoginSuccess(strError,this);
@@ -146,10 +146,7 @@ public class InAppBase{
 	public void onLoginCancel(String strError) {
 		qc.onLoginCancel(strError,this);
 	}
-	public void onLoginFailed(String strError) {
-		Log.e("IAP","this="+this);
-		qc.onLoginFailed(strError,this);
-	}
+	public void onLoginFailed(String strError) { qc.onLoginFailed(strError,this); }
 	public void onFunctionCallBack(String strError) {
 		qc.onFunctionCallBack(strError,this);
 	}

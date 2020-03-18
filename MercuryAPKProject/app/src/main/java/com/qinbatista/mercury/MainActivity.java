@@ -38,12 +38,14 @@ public class MainActivity extends Activity  {
 			public void onPurchaseFailedCallBack(String strProductId) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo", "onCreate onPurchaseFailedCallBack strProductId="+strProductId);
+				Toast.makeText(context, "onPurchaseFailedCallBack",Toast.LENGTH_SHORT).show();
 			}
 			
 			@Override
 			public void onPurchaseCancelCallBack(String strProductId) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo", "onCreate onPurchaseCancelCallBack strProductId="+strProductId);
+				Toast.makeText(context, "onPurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -152,7 +154,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][7]->respondCPserver");
+				Log.w("MercuryDemo","[step][8]->respondCPserver");
 				MercurySDK.respondCPserver();
 				
 			}
@@ -162,7 +164,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][8]->show_insert");
+				Log.w("MercuryDemo","[step][9]->show_insert");
 				MercurySDK.show_insert();
 			}
 		});
@@ -170,7 +172,7 @@ public class MainActivity extends Activity  {
 		btn4.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercuryDemo","[step][8]->show_banner");
+				Log.w("MercuryDemo","[step][10]->show_banner");
 				MercurySDK.show_banner();
 			}
 		});
@@ -179,7 +181,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][8]->show_video");
+				Log.w("MercuryDemo","[step][11]->show_video");
 				MercurySDK.show_video();
 			}
 		});
@@ -187,7 +189,7 @@ public class MainActivity extends Activity  {
 		btn6.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercuryDemo","[step][8]->Exchange");
+				Log.w("MercuryDemo","[step][12]->Exchange");
 				MercurySDK.Exchange();
 			}
 		});
