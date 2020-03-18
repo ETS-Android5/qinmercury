@@ -1,7 +1,7 @@
 import sys
 import os
 import platform
-
+import shutil
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 def main():
@@ -21,6 +21,8 @@ def main():
 	if os.path.isfile("./mercury/build/outputs/aar/mercury-release.aar"):
 		os.system("unzip ./mercury/build/outputs/aar/mercury-release.aar")
 		os.rename("./classes.jar","./MercurySDK.jar")
+		os.system("")
+		shutil.copy("./MercurySDK.jar", "./../../00_UnityJar/UnityJarProject/libs/MercurySDK.jar")
 
 
 if __name__ == '__main__':
