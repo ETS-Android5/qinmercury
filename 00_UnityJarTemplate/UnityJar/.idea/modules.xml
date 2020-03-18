@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/02_ChannelPlugin.iml" filepath="$PROJECT_DIR$/02_ChannelPlugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mercury/mercury.iml" filepath="$PROJECT_DIR$/mercury/mercury.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UnityJar.iml" filepath="$PROJECT_DIR$/UnityJar.iml" group="UnityJar" />
+      <module fileurl="file://$PROJECT_DIR$/mercury/mercury.iml" filepath="$PROJECT_DIR$/mercury/mercury.iml" group="UnityJar/mercury" />
     </modules>
   </component>
 </project>
