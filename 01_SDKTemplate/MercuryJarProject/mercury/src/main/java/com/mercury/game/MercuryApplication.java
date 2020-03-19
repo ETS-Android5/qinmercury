@@ -64,7 +64,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.e("IAP","[SDKApp]SdkName="+msg);
+		Log.w("MercurySDK","[SDKApp]SdkName="+msg);
 	}
 	public void APPApplicationInit(Application context)
 	{
@@ -83,7 +83,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.e("IAP","[SDKApp]SdkName="+msg);	
+		Log.w("MercurySDK","[SDKApp]333SdkName="+msg);
 
 	}
 	
@@ -190,7 +190,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			isAntLogOpen = appInfo.metaData.getString("E2W_LOG");
 			if(isAntLogOpen.equals("open"))
 			{
-				Log.e("IAP","Log Verison:"+MercuryConst.LogVERSION);
+				Log.e("MercurySDK","Log Verison:"+MercuryConst.LogVERSION);
 			}
 		} catch (NameNotFoundException e) {
 		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data E2W_LOG, NameNotFound: " + e.getMessage());

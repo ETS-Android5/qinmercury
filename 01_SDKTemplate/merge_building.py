@@ -9,7 +9,7 @@ def main():
 	#PythonFunction.FuncFunctionList.RestSetting()
 	os.chdir(PythonLocation())
 	os.system("python3 ./MercuryJarProject/BuildJAR.py")
-	os.system("mv ./MercuryJarProject/UnityPlugin.jar ./MercuryAPKProject/app/src/main/libs/UnityPlugin.jar")
+	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
 	if os.path.isfile(PythonLocation()+"/app-release.apk"):
 		os.remove(PythonLocation()+"/app-release.apk")
 	os.system("python3 ./MercuryAPKProject/BuildAPK.py")

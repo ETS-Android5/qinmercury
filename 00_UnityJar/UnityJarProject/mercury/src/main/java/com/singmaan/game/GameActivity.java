@@ -124,7 +124,7 @@ public class GameActivity extends UnityPlayerActivity{
 		return mContext;
 	}
 
-	public void PurchaseProduct(final String strProductId)
+	public void Purchase(final String strProductId)
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
 		{
