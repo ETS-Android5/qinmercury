@@ -10,8 +10,8 @@ def main():
 	os.chdir(PythonLocation())
 	if os.path.isfile("./UnityPlugin.jar"):
 		os.remove("./UnityPlugin.jar")
-	os.system("python3 ./UnityJar/BuildJAR.py")
-	os.system("mv ./UnityJar/UnityPlugin.jar ./UnityPlugin.jar")
+	os.system("python3 ./UnityJarProject/BuildJAR.py")
+	os.system("mv ./UnityJarProject/UnityPlugin.jar ./UnityPlugin.jar")
 
 
 

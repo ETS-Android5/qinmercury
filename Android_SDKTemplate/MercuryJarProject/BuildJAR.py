@@ -21,9 +21,9 @@ def main():
 	if os.path.isfile("./mercury/build/outputs/aar/mercury-release.aar"):
 		os.system("unzip ./mercury/build/outputs/aar/mercury-release.aar")
 		os.rename("./classes.jar","./MercurySDK.jar")
-		if os.path.isfile("./../../00_UnityJar/UnityJarProject/libs/MercurySDK.jar"):
-			os.remove("./../../00_UnityJar/UnityJarProject/libs/MercurySDK.jar")
-		shutil.copy("./MercurySDK.jar", "./../../00_UnityJar/UnityJarProject/libs/MercurySDK.jar")
+		if os.path.isfile("./../../Plugin_UnityJar/UnityJarProject/libs/MercurySDK.jar"):
+			os.remove("./../../Plugin_UnityJar/UnityJarProject/libs/MercurySDK.jar")
+		shutil.copy("./MercurySDK.jar", "./../../Plugin_UnityJar/UnityJarProject/libs/MercurySDK.jar")
 
 
 if __name__ == '__main__':

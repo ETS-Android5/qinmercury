@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.AmanitaDesign.Machinarium.E2W.R;
+import com.qinbatista.demo.R;
 
 public class MainActivity extends Activity  {
 	public static Context context;

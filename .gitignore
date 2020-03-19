@@ -1,3 +1,5 @@
 MercuryAPKProject/app/src/main/libs/UnityPlugin.jar
 app-release.apk
 *.apk
+__pycache__
+PythonCode/cache
