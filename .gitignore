@@ -3,3 +3,6 @@ app-release.apk
 *.apk
 __pycache__
 PythonCode/cache
+Android_WanNianLi/MercuryAPKProject/.idea
+Android_SDKTemplate/MercuryJarProject/gradle/.idea
+Android_WanNianLi/MercuryJarProject/.idea
