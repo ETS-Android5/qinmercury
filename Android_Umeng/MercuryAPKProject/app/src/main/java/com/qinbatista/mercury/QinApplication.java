@@ -1,6 +1,5 @@
 package com.qinbatista.mercury;
 import com.mercury.game.MercuryApplication;
-import com.umeng.commonsdk.UMConfigure;
 
 import android.app.Application;
 import android.util.Log;

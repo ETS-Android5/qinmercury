@@ -13,10 +13,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.demo.game.R;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.analytics.game.UMGameAgent;
-import com.umeng.commonsdk.UMConfigure;
-
 public class MainActivity extends Activity  {
 	public static Context context;
 	public MercuryActivity MercurySDK;
@@ -25,7 +21,6 @@ public class MainActivity extends Activity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context=this;
-		UMGameAgent.init(context);
 		Log.w("MercuryDemo","[step][2]init activity");
 		MercurySDK=new MercuryActivity();
 		Log.w("MercuryDemo","[step][3]init callback");
@@ -34,7 +29,6 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onPurchaseSuccessCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				UMGameAgent.pay(10,"magic_bottle",2,50,2);
 				Log.w("MercuryDemo", "onCreate onPurchaseSuccessCallBack strProductId="+strProductId);
 				Toast.makeText(context, "onPurchaseSuccessCallBack",Toast.LENGTH_SHORT).show();
 			}
@@ -208,8 +202,6 @@ public class MainActivity extends Activity  {
 	{
 		super.onPause();
 		MercurySDK.onPause();
-		MobclickAgent.onPause(this);
-		UMGameAgent.onPause(this);
 	}
 
 	@Override
@@ -231,8 +223,6 @@ public class MainActivity extends Activity  {
 	{
 		super.onResume();
 		MercurySDK.onResume();
-		MobclickAgent.onResume(this);
-		UMGameAgent.onResume(this);
 	}
 	@Override
 	public void onDestroy()
