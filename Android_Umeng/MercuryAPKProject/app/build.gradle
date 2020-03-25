@@ -16,7 +16,6 @@ android {
     }
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.demo.game"
         minSdkVersion 19
         versionCode 1
         versionName "1.0"

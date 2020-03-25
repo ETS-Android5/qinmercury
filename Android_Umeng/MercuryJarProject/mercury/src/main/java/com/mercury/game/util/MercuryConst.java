@@ -25,6 +25,8 @@ import org.json.JSONTokener;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.MercuryApplication;
+import com.umeng.analytics.game.UMGameAgent;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -274,6 +276,7 @@ public class MercuryConst {
 	}
 	
 	public void onPurchaseSuccess(String message,InAppBase inbase) {
+		MercuryActivity.umgameaget.pay(Qinpricefloat,QinPid,1,1,1);
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
 		inbase.appinterface.onPurchaseSuccessCallBack(message);
 	}

@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
 import com.mercury.game.InAppChannel.InAppChannel;
+import com.umeng.commonsdk.UMConfigure;
 
 
 public class MercuryApplication extends Application{//UnicomApplicationWrapper {
@@ -46,7 +47,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	public static String jschannel="";
 	public static String jstjid="";
 	private InAppBase mInAppExt;
-
+	public static String channel_name = "";
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -69,6 +70,9 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	public void APPApplicationInit(Application context)
 	{
 		Acontext = context;
+		channel_name = "singmaan";
+		UMConfigure.init(context, "5e7b19e5570df324d7000392", channel_name, 0, "");
+		UMConfigure.setProcessEvent(true);
 		checkSIM();
 		checkExtSDK();
 		checkChannelName();
@@ -83,7 +87,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.w("MercurySDK","[SDKApp]333SdkName="+msg);
+		Log.w("MercurySDK","[SDKApp]SdkName="+msg);
 
 	}
 	
