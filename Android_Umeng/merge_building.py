@@ -190,20 +190,23 @@ class APKBuildManager():
 
 		#merge xml
 		self.__merge_res_xml()
+		pass
 
 	def __merge_res_xml(self):
-		jar_res = self.__all_files_in_folder(f"./{self.__jar_project}/app/src/main/res")
-		apk_res  = self.__all_files_in_folder(f"./{self.__apk_project}/app/src/main/res")
+		self.__copyFileCounts = 0
+		jar_res = self.__all_files_in_folder(f"{self.__jar_project}/mercury/src/main/res")
+		apk_res  = self.__all_files_in_folder(f"{self.__apk_project}/app/src/main/res")
 		for g_res in jar_res:
 			for s_res in apk_res:
-				self._copy_files_dont_overwrite(f"./{self.__sdk_apk_name_only}/res",f"./{self.__game_apk_name}/res")
+				self._copy_files_dont_overwrite(f"{self.__jar_project}/mercury/src/main/res",f"{self.__apk_project}/app/src/main/res")
 				gameresfile = g_res[g_res.rfind("/"):]
 				sdkresfile = s_res[s_res.rfind("/"):]
 				if sdkresfile == gameresfile and ".xml" in sdkresfile:
 					print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_xml]merging {g_res}<-{s_res}")
-					merge_xml(g_res,s_res)
+					merge_xml(s_res,g_res)
 
 	def __merge_lib(self):
+		self.__copyFileCounts = 0
 		print(f"{self.__jar_project}/mercury/src/main/libs/")
 		print(f"{self.__apk_project}/app/src/main/libs/")
 		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
@@ -227,9 +230,10 @@ class APKBuildManager():
 					#print (u"%s %s 复制完毕" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 				else:
 					pass
-					#print (u"%s %s 已存在，不重复复制" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
+					print (u"%s %s 已存在，不重复复制" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 			if os.path.isdir(sourceF):
 				self._copy_files_dont_overwrite(sourceF, targetF)
+
 	def _copy_files_overwrite(self,sourceDir, targetDir):
 		self.__copyFileCounts
 		#print (sourceDir)
@@ -248,11 +252,10 @@ class APKBuildManager():
 					open(targetF, "wb").write(open(sourceF, "rb").read())
 					#print (u"%s %s 复制完毕" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 				else:
-					pass
-					#print (u"%s %s 已存在，不重复复制" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
+					open(targetF, "wb").write(open(sourceF, "rb").read())
+					print (u"%s %s 已存在，覆盖拷贝" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 			if os.path.isdir(sourceF):
 				self._copy_files_dont_overwrite(sourceF, targetF)
-
 
 	def __all_files_in_folder(self,_path):
 		ListMyFolder = []
