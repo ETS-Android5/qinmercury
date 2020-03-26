@@ -202,8 +202,12 @@ class APKBuildManager():
 				gameresfile = g_res[g_res.rfind("/"):]
 				sdkresfile = s_res[s_res.rfind("/"):]
 				if sdkresfile == gameresfile and ".xml" in sdkresfile:
-					print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_xml]merging {g_res}<-{s_res}")
-					merge_xml(s_res,g_res)
+					if gameresfile == "activity_main.xml" and gameresfile == "main.xml":
+						print(f"skip{gameresfile}")
+						continue
+					else:
+						print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_xml]merging {g_res}<-{s_res}")
+						merge_xml(s_res,g_res)
 
 	def __merge_lib(self):
 		self.__copyFileCounts = 0
@@ -230,7 +234,7 @@ class APKBuildManager():
 					#print (u"%s %s 复制完毕" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 				else:
 					pass
-					print (u"%s %s 已存在，不重复复制" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
+					# print (u"%s %s 已存在，不重复复制" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 			if os.path.isdir(sourceF):
 				self._copy_files_dont_overwrite(sourceF, targetF)
 
@@ -253,7 +257,7 @@ class APKBuildManager():
 					#print (u"%s %s 复制完毕" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 				else:
 					open(targetF, "wb").write(open(sourceF, "rb").read())
-					print (u"%s %s 已存在，覆盖拷贝" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
+					# print (u"%s %s 已存在，覆盖拷贝" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 			if os.path.isdir(sourceF):
 				self._copy_files_dont_overwrite(sourceF, targetF)
 

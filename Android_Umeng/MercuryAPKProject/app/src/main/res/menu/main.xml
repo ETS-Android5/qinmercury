@@ -3,6 +3,5 @@
 
     <item ns0:id="@+id/action_settings" ns0:orderInCategory="100" ns0:showAsAction="never" ns0:title="@string/action_settings" />
 
-<item ns0:id="@+id/action_settings" ns0:orderInCategory="100" ns0:showAsAction="never" ns0:title="@string/action_settings" />
 
 </menu>
