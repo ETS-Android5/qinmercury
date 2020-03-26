@@ -155,6 +155,7 @@ class APKBuildManager():
 		self.__jar_project = os.path.dirname(os.path.realpath(__file__))+"/MercuryJarProject"
 		self.__apk_project = os.path.dirname(os.path.realpath(__file__))+"/MercuryAPKProject"
 		self.__cache_position = "/PythonCode/cache/"
+		self.__copyFileCounts = 0
 		# self.__file_path = os.path.dirname(os.path.realpath(__file__))
 		# self.__sdk_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel
 		# self.__sdk_script_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel+"/merge_building.py"
@@ -188,14 +189,14 @@ class APKBuildManager():
 		#merge res
 
 		#merge xml
-		self.__merge_sdk_resource_xml()
+		self.__merge_res_xml()
 
 	def __merge_res_xml(self):
 		jar_res = self.__all_files_in_folder(f"./{self.__jar_project}/app/src/main/res")
 		apk_res  = self.__all_files_in_folder(f"./{self.__apk_project}/app/src/main/res")
 		for g_res in jar_res:
 			for s_res in apk_res:
-				shutil.copy(f"./{self.__sdk_apk_name_only}/res",f"./{self.__game_apk_name}/res")
+				self._copy_files_dont_overwrite(f"./{self.__sdk_apk_name_only}/res",f"./{self.__game_apk_name}/res")
 				gameresfile = g_res[g_res.rfind("/"):]
 				sdkresfile = s_res[s_res.rfind("/"):]
 				if sdkresfile == gameresfile and ".xml" in sdkresfile:
@@ -203,7 +204,55 @@ class APKBuildManager():
 					merge_xml(g_res,s_res)
 
 	def __merge_lib(self):
-		shutil.copytree(f"{self.__jar_project}/app/src/main/libs/",f"{self.__jar_project}/app/src/main/libs/")
+		print(f"{self.__jar_project}/mercury/src/main/libs/")
+		print(f"{self.__apk_project}/app/src/main/libs/")
+		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
+
+	def _copy_files_dont_overwrite(self,sourceDir, targetDir):
+		self.__copyFileCounts
+		#print (sourceDir)
+		#print (u"%s 当前处理文件夹%s已处理%s 个文件" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), sourceDir,copyFileCounts))
+		for f in os.listdir(sourceDir):
+			sourceF = os.path.join(sourceDir, f)
+			targetF = os.path.join(targetDir, f)
+			if os.path.isfile(sourceF):
+				#创建目录
+				if not os.path.exists(targetDir):
+					os.makedirs(targetDir)
+				self.__copyFileCounts += 1
+				#文件不存在，或者存在但是大小不同，覆盖
+				if not os.path.exists(targetF):
+					#2进制文件
+					open(targetF, "wb").write(open(sourceF, "rb").read())
+					#print (u"%s %s 复制完毕" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
+				else:
+					pass
+					#print (u"%s %s 已存在，不重复复制" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
+			if os.path.isdir(sourceF):
+				self._copy_files_dont_overwrite(sourceF, targetF)
+	def _copy_files_overwrite(self,sourceDir, targetDir):
+		self.__copyFileCounts
+		#print (sourceDir)
+		#print (u"%s 当前处理文件夹%s已处理%s 个文件" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), sourceDir,copyFileCounts))
+		for f in os.listdir(sourceDir):
+			sourceF = os.path.join(sourceDir, f)
+			targetF = os.path.join(targetDir, f)
+			if os.path.isfile(sourceF):
+				#创建目录
+				if not os.path.exists(targetDir):
+					os.makedirs(targetDir)
+				self.__copyFileCounts += 1
+				#文件不存在，或者存在但是大小不同，覆盖
+				if not os.path.exists(targetF):
+					#2进制文件
+					open(targetF, "wb").write(open(sourceF, "rb").read())
+					#print (u"%s %s 复制完毕" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
+				else:
+					pass
+					#print (u"%s %s 已存在，不重复复制" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
+			if os.path.isdir(sourceF):
+				self._copy_files_dont_overwrite(sourceF, targetF)
+
 
 	def __all_files_in_folder(self,_path):
 		ListMyFolder = []
