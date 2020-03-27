@@ -36,6 +36,7 @@ def main():
 		if os.path.isfile("./../../../Plugin_UnityJar/UnityJarProject/libs/MercurySDK.jar"):
 			os.remove("./../../../Plugin_UnityJar/UnityJarProject/libs/MercurySDK.jar")
 		shutil.copy("./../MercurySDK.jar", "./../../../Plugin_UnityJar/UnityJarProject/libs/MercurySDK.jar")
+	if os.path.exists("./../cache"):delete_folder("./../cache")
 
 
 if __name__ == '__main__':

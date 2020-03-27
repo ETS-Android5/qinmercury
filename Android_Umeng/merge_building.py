@@ -211,7 +211,7 @@ class APKBuildManager():
 				gameresfile = g_res[g_res.rfind("/"):]
 				sdkresfile = s_res[s_res.rfind("/"):]
 				if sdkresfile == gameresfile and ".xml" in sdkresfile:
-					if gameresfile == "activity_main.xml" and gameresfile == "main.xml":
+					if gameresfile == "/activity_main.xml" and gameresfile == "/main.xml":
 						print(f"skip{gameresfile}")
 						continue
 					else:
