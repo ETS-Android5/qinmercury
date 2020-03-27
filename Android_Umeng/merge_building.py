@@ -17,6 +17,7 @@ import shutil
 
 import xml.etree.ElementTree as ET
 import sys
+import subprocess
 class xml_manager(object):
 	def __init__(self, path):
 		self.path = path
@@ -211,7 +212,7 @@ class APKBuildManager():
 				gameresfile = g_res[g_res.rfind("/"):]
 				sdkresfile = s_res[s_res.rfind("/"):]
 				if sdkresfile == gameresfile and ".xml" in sdkresfile:
-					if gameresfile == "/activity_main.xml" and gameresfile == "/main.xml":
+					if gameresfile == "/activity_main.xml" or gameresfile == "/main.xml":
 						print(f"skip{gameresfile}")
 						continue
 					else:
@@ -278,7 +279,7 @@ def run():
 def main():
 	#PythonFunction.FuncFunctionList.CleanCache()
 	#PythonFunction.FuncFunctionList.RestSetting()
-	run()
+	# run()
 	os.chdir(PythonLocation())
 	os.system("python3 ./MercuryJarProject/BuildJAR.py")
 	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")

@@ -2,6 +2,8 @@ import sys
 import os
 import platform
 import shutil
+import time
+import subprocess
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 
@@ -24,12 +26,18 @@ def delete_folder(src):
 def main():
 	#PythonFunction.FuncFunctionList.CleanCache()
 	#PythonFunction.FuncFunctionList.RestSetting()
-	os.chdir(PythonLocation())
-	os.system("gradle clean makejar")
-	os.system('pwd')
+	_path = PythonLocation()
+	os.chdir(_path)
 	if os.path.exists("./cache"):delete_folder("./cache")
 	os.system("mkdir cache")
-	os.chdir(PythonLocation()+"/cache")
+	os.system('pwd')
+	while os.path.exists(_path+"/../cache")==True:
+		print("waiting cache")
+		os.system('pwd')
+	os.system("gradle clean makejar")
+	# p = subprocess.Popen("gradle clean makejar", stdout=subprocess.PIPE, shell=True)
+	# p.wait()
+	os.chdir(_path+"/cache")
 	if os.path.isfile("./../mercury/build/outputs/aar/mercury-release.aar"):
 		os.system("unzip ./../mercury/build/outputs/aar/mercury-release.aar")
 		os.rename("./classes.jar","./../MercurySDK.jar")
