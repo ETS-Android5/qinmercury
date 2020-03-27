@@ -182,15 +182,24 @@ class APKBuildManager():
 
 	def merge_sdk_resource(self):
 		#merge assets
-
+		self.__merge_assets()
 		#merge lib
 		self.__merge_lib()
-
 		#merge res
-
-		#merge xml
 		self.__merge_res_xml()
-		pass
+		#merge xml
+
+
+
+
+
+	def __merge_lib(self):
+		self.__copyFileCounts = 0
+		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/assets",f"{self.__apk_project}/app/src/main/assets")
+
+	def __merge_assets(self):
+		self.__copyFileCounts = 0
+		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
 
 	def __merge_res_xml(self):
 		self.__copyFileCounts = 0
@@ -208,13 +217,6 @@ class APKBuildManager():
 					else:
 						print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_xml]merging {g_res}<-{s_res}")
 						merge_xml(s_res,g_res)
-
-	def __merge_lib(self):
-		self.__copyFileCounts = 0
-		print(f"{self.__jar_project}/mercury/src/main/libs/")
-		print(f"{self.__apk_project}/app/src/main/libs/")
-		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
-
 	def _copy_files_dont_overwrite(self,sourceDir, targetDir):
 		self.__copyFileCounts
 		#print (sourceDir)
@@ -267,6 +269,7 @@ class APKBuildManager():
 			for filename in filenames:
 				ListMyFolder.append(dirpath+"/"+filename)
 		return ListMyFolder
+
 
 def run():
 	sam = APKBuildManager()
