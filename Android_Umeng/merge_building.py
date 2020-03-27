@@ -187,8 +187,9 @@ class APKBuildManager():
 		#merge lib
 		self.__merge_lib()
 		#merge res
-		self.__merge_res_xml()
+		self.__merge_res()
 		#merge xml
+		self.__merge_xml()
 
 
 
@@ -202,7 +203,7 @@ class APKBuildManager():
 		self.__copyFileCounts = 0
 		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
 
-	def __merge_res_xml(self):
+	def __merge_res(self):
 		self.__copyFileCounts = 0
 		jar_res = self.__all_files_in_folder(f"{self.__jar_project}/mercury/src/main/res")
 		apk_res  = self.__all_files_in_folder(f"{self.__apk_project}/app/src/main/res")
@@ -218,6 +219,10 @@ class APKBuildManager():
 					else:
 						print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_xml]merging {g_res}<-{s_res}")
 						merge_xml(s_res,g_res)
+
+	def __merge_xml(self):
+		pass
+
 	def _copy_files_dont_overwrite(self,sourceDir, targetDir):
 		self.__copyFileCounts
 		#print (sourceDir)
