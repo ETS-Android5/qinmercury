@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
     signingConfigs {
         release {
             keyAlias 'android.keystore'
@@ -26,20 +31,9 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    productFlavors {
-    }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['src/main/libs']
-        }
-    }
-}
-dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+
 }
 
-repositories {
-    flatDir {
-        dirs 'src/main/libs'
-    }
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
 }

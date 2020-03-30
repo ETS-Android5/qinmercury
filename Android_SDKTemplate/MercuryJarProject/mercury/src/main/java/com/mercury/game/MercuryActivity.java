@@ -1,39 +1,29 @@
 package com.mercury.game;
-import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
 
-import com.mercury.game.util.APPBaseInterface;
-import com.mercury.game.util.InAppBase;
-import com.mercury.game.InAppChannel.InAppChannel;
-import com.mercury.game.InAppAdvertisement.InAppAD;
-import com.mercury.game.util.MercuryConst;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.content.Intent;
 import android.os.Handler;
-import android.telephony.TelephonyManager;
-import android.text.InputFilter;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import android.widget.ImageView.ScaleType;
+
+import com.mercury.game.InAppAdvertisement.InAppAD;
+import com.mercury.game.InAppChannel.InAppChannel;
+import com.mercury.game.util.APPBaseInterface;
+import com.mercury.game.util.InAppBase;
+import com.mercury.game.util.MercuryConst;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.analytics.game.UMGameAgent;
+
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MercuryActivity  {
 
@@ -59,8 +49,10 @@ public class MercuryActivity  {
 	public static String SortChannelID="";
 	public static String LongChannelID="";
 	private static ImageView img = null;
+	public static UMGameAgent umgameaget = null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
+		umgameaget.init(ContextFromUsers);
 		mContext = ContextFromUsers;
 		ChannelSplash();
 		mInAppChannel = new InAppChannel() ;
@@ -219,7 +211,8 @@ public class MercuryActivity  {
 
 
 	public void onPause() {
-
+		MobclickAgent.onPause(mContext);
+		UMGameAgent.onPause(mContext);
 		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onPause()->" + mInAppChannel);mInAppChannel.onPause();}
 		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onPause()->" + mInAppAD);mInAppAD.onPause();}
 	}
@@ -241,6 +234,8 @@ public class MercuryActivity  {
 	}
 	public void onResume()
 	{
+		MobclickAgent.onResume(mContext);
+		UMGameAgent.onResume(mContext);
 		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onResume()->" + mInAppChannel);mInAppChannel.onResume();}
 		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onResume()->" + mInAppAD);mInAppAD.onResume();}
 	}

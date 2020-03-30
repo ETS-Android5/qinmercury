@@ -1,31 +1,20 @@
 package com.mercury.game;
-import java.io.ByteArrayInputStream;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
-import java.util.Iterator;
-import java.util.List;
-import android.R;
-import android.app.Activity;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.Signature;
-import android.os.Bundle;
-import android.os.Handler;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
-import com.mercury.game.InAppChannel.InAppChannel;
+import com.umeng.commonsdk.UMConfigure;
+
+import java.util.Iterator;
+import java.util.List;
 
 
 public class MercuryApplication extends Application{//UnicomApplicationWrapper {
@@ -46,7 +35,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	public static String jschannel="";
 	public static String jstjid="";
 	private InAppBase mInAppExt;
-
+	public static String channel_name = "";
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -64,11 +53,15 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.w("MercurySDK","[SDKApp]SdkName="+msg);
+
 	}
 	public void APPApplicationInit(Application context)
 	{
 		Acontext = context;
+		channel_name = "singmaan";
+		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
+		UMConfigure.init(context, "5e7b19e5570df324d7000392", channel_name, 0, "");
+		UMConfigure.setProcessEvent(true);
 		checkSIM();
 		checkExtSDK();
 		checkChannelName();
@@ -83,7 +76,6 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.w("MercurySDK","[SDKApp]333SdkName="+msg);
 
 	}
 	

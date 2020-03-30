@@ -12,8 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.qinbatista.demo.R;
-
+import com.demo.game.R;
 public class MainActivity extends Activity  {
 	public static Context context;
 	public MercuryActivity MercurySDK;
@@ -125,6 +124,7 @@ public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][5]->purchaseProduct");
 				MercurySDK.Purchase("production1");
+
 			}
 		});
 
@@ -216,6 +216,7 @@ public class MainActivity extends Activity  {
 	{
 		super.onRestart();
 		MercurySDK.onRestart();
+
 	}
 	@Override
 	public void onResume()
