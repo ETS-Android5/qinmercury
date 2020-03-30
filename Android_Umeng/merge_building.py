@@ -277,6 +277,7 @@ class APKBuildManager():
 								new_xml.append(sdk_line)
 					is_sdk_part = True
 				elif f.find("<!--sdkxml-->")!=-1:
+					loop_old=True
 					new_xml.append("<!--sdkxml-->\r")
 					loop = False
 					for sdk_line in sdk_part:
