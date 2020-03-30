@@ -1613,12 +1613,8 @@ def CombineChannelXML(De_APKName,_ChannelName):
 		file_object.close( )
 	PointCount = De_APKName.rfind(".")
 	foldername=De_APKName[:PointCount]
-	file_object_read = open(PythonLocation()+"/__pycache__/"+foldername+"/AndroidManifest.xml",'w',encoding="utf8")
-	#print(PythonLocation()+"/__pycache__/"+foldername+"/AndroidManifest.xml")
-	try:
+	with open(PythonLocation()+"/__pycache__/"+foldername+"/AndroidManifest.xml",'w',encoding="utf8") as file_object_read:
 		file_object_read.writelines(JavaCode)
-	finally:
-		file_object_read.close()
 def GetADXml(_ChannelName,sdkorxml):
 	
 	if _ChannelName =="":

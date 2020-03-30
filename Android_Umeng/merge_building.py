@@ -197,11 +197,11 @@ class APKBuildManager():
 
 	def __merge_lib(self):
 		self.__copyFileCounts = 0
-		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/assets",f"{self.__apk_project}/app/src/main/assets")
+		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
 
 	def __merge_assets(self):
 		self.__copyFileCounts = 0
-		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
+		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/assets",f"{self.__apk_project}/app/src/main/assets")
 
 	def __merge_res(self):
 		self.__copyFileCounts = 0
@@ -221,7 +221,40 @@ class APKBuildManager():
 						merge_xml(s_res,g_res)
 
 	def __merge_xml(self):
-		pass
+		#get sdk string
+		if os.path.isfile(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml"):
+			sdk_part = []
+			with open(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml",encoding="utf8") as file_object:
+				is_sdk_part = False
+				all_the_text = file_object.readlines()
+				for i in all_the_text:
+					f = i.replace(" ","")
+					if f.find("<!--sdk-->")!=-1:
+						sdk_part.append("<!--sdk-->\r")
+						is_sdk_part = True
+					elif is_sdk_part == True:
+						if f.find("<!--end-->")==-1:
+							sdk_part.append(i)
+						else:
+							sdk_part.append("<!--end-->\r")
+							is_sdk_part = False
+							continue
+					elif(f.find("<!--sdkxml-->")!=-1):
+						sdk_part.append("<!--sdkxml-->\r")
+						is_sdk_part = True
+					elif is_sdk_part == True:
+						if f.find("<!--end-->")==-1:
+							sdk_part.append(i)
+						else:
+							is_sdk_part = False
+							sdk_part.append("<!--end-->\r")
+							continue
+				print("sdk_part="+str(sdk_part))
+		print(f"{self.__jar_project}/AndroidManifest_sdk.xml")
+		#save string into files
+		with open(f"{self.__jar_project}/AndroidManifest_sdk.xml",mode='w',encoding="utf8") as file_context:
+			file_context.writelines(sdk_part)
+		#merge xml string into APK
 
 	def _copy_files_dont_overwrite(self,sourceDir, targetDir):
 		self.__copyFileCounts
@@ -284,7 +317,7 @@ def run():
 def main():
 	#PythonFunction.FuncFunctionList.CleanCache()
 	#PythonFunction.FuncFunctionList.RestSetting()
-	# run()
+	run()
 	os.chdir(PythonLocation())
 	os.system("python3 ./MercuryJarProject/BuildJAR.py")
 	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")

@@ -1,0 +1,7 @@
+<!--sdk-->        <meta-data android:name="E2W_EXCHANGE" android:value="open"/>
+        <meta-data android:name="E2W_NUMBER" android:value="east2west1"/>
+<!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+<!--end-->
