@@ -254,7 +254,7 @@ class APKBuildManager():
 		with open(f"{self.__jar_project}/AndroidManifest_sdk.xml",mode='w',encoding="utf8") as file_context:
 			file_context.writelines(sdk_part)
 		#merge xml string into APK
-		print(f"{self.__jar_project}/AndroidManifest_sdk.xml")
+		print(f"{self.__apk_project}/app/src/main/AndroidManifest.xml")
 		with open(f"{self.__apk_project}/app/src/main/AndroidManifest.xml",encoding="utf8") as file_object:
 			is_sdk_part = False
 			all_the_text = file_object.readlines()
@@ -262,24 +262,36 @@ class APKBuildManager():
 			for i in all_the_text:
 				f = i.replace(" ","")
 				if f.find("<!--sdk-->")!=-1:
+					new_xml.append("<!--sdk-->\r")
 					loop = False
 					for sdk_line in sdk_part:
 						if loop == False:
-							if sdk_line=="<!--sdk-->":loop = True
+							if sdk_line.find("<!--sdk-->")!=-1:loop = True
 						elif loop==True:
-							if sdk_line=="<!--end-->":
+							if sdk_line.find("<!--end-->")!=-1:
 								loop=False
 								break
 							else:
-								new_xml.append(i)
-					sdk_part.append("<!--sdk-->\r")
+								new_xml.append(sdk_line)
 					is_sdk_part = True
 				elif f.find("<!--sdkxml-->")!=-1:
-					sdk_part.append("<!--sdkxml-->\r")
+					new_xml.append("<!--sdkxml-->\r")
+					loop = False
+					for sdk_line in sdk_part:
+						if loop == False:
+							if sdk_line.find("<!--sdkxml-->")!=-1:loop = True
+						elif loop==True:
+							if sdk_line.find("<!--end-->")!=-1:
+								loop=False
+								break
+							else:
+								new_xml.append(sdk_line)
 					is_sdk_part = True
-				elif is_sdk_part == True:
+				else:
 					new_xml.append(i)
-			print("sdk_part="+str(sdk_part))
+			print("sdk_part="+str(new_xml))
+			with open(f"{self.__apk_project}/app/src/main/AndroidManifest.xml",mode='w',encoding="utf8") as file_context:
+				file_context.writelines(new_xml)
 	def _copy_files_dont_overwrite(self,sourceDir, targetDir):
 		self.__copyFileCounts
 		#print (sourceDir)
