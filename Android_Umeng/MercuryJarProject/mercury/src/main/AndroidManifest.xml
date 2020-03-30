@@ -26,8 +26,7 @@
         </activity>
 
 		<!--sdk-->
-        <meta-data android:name="E2W_EXCHANGE" android:value="open"/>
-        <meta-data android:name="E2W_NUMBER" android:value="east2west1"/>
+        <meta-data android:name="singmaan_id" android:value="s"/>
 		<!--end-->
     </application>
 	<!--sdkxml-->

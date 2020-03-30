@@ -1899,7 +1899,7 @@ def  CombineSystemXML(De_APKName):
 				JavaCode.append(i)
 	finally:
 		file_object.close( )
-	
+
 	file_object_read = open(PythonLocation()+"/__pycache__/"+foldername+"/AndroidManifest.xml",'w',encoding="utf8")
 	#print(PythonLocation()+"/__pycache__/"+foldername+"/AndroidManifest.xml")
 	try:

@@ -250,12 +250,36 @@ class APKBuildManager():
 							sdk_part.append("<!--end-->\r")
 							continue
 				print("sdk_part="+str(sdk_part))
-		print(f"{self.__jar_project}/AndroidManifest_sdk.xml")
 		#save string into files
 		with open(f"{self.__jar_project}/AndroidManifest_sdk.xml",mode='w',encoding="utf8") as file_context:
 			file_context.writelines(sdk_part)
 		#merge xml string into APK
-
+		print(f"{self.__jar_project}/AndroidManifest_sdk.xml")
+		with open(f"{self.__apk_project}/app/src/main/AndroidManifest.xml",encoding="utf8") as file_object:
+			is_sdk_part = False
+			all_the_text = file_object.readlines()
+			new_xml = []
+			for i in all_the_text:
+				f = i.replace(" ","")
+				if f.find("<!--sdk-->")!=-1:
+					loop = False
+					for sdk_line in sdk_part:
+						if loop == False:
+							if sdk_line=="<!--sdk-->":loop = True
+						elif loop==True:
+							if sdk_line=="<!--end-->":
+								loop=False
+								break
+							else:
+								new_xml.append(i)
+					sdk_part.append("<!--sdk-->\r")
+					is_sdk_part = True
+				elif f.find("<!--sdkxml-->")!=-1:
+					sdk_part.append("<!--sdkxml-->\r")
+					is_sdk_part = True
+				elif is_sdk_part == True:
+					new_xml.append(i)
+			print("sdk_part="+str(sdk_part))
 	def _copy_files_dont_overwrite(self,sourceDir, targetDir):
 		self.__copyFileCounts
 		#print (sourceDir)
