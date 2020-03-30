@@ -197,10 +197,14 @@ class APKBuildManager():
 
 	def __merge_lib(self):
 		self.__copyFileCounts = 0
+		if os.path.isdir(f"{self.__jar_project}/mercury/src/main/libs")==False:os.mkdir(f"{self.__jar_project}/mercury/src/main/libs")
+		if os.path.isdir(f"{self.__apk_project}/app/src/main/libs")==False:os.mkdir(f"{self.__apk_project}/app/src/main/libs")
 		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
 
 	def __merge_assets(self):
 		self.__copyFileCounts = 0
+		if os.path.isdir(f"{self.__jar_project}/mercury/src/main/assets")==False:os.mkdir(f"{self.__jar_project}/mercury/src/main/assets")
+		if os.path.isdir(f"{self.__apk_project}/app/src/main/libs")==False:os.mkdir(f"{self.__apk_project}/app/src/main/libs")
 		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/assets",f"{self.__apk_project}/app/src/main/assets")
 
 	def __merge_res(self):
