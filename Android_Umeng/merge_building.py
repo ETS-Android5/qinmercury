@@ -290,10 +290,12 @@ class APKBuildManager():
 								new_xml.append(sdk_line)
 					is_sdk_part = True
 				else:
-					if i.find("<!--end-->")!=-1:
-						loop_old==False
-						new_xml.append("<!--end-->")
-						continue
+					if loop_old==True:
+						if i.find("<!--end-->")!=-1:
+							loop_old=False
+							new_xml.append("<!--end-->\r")
+						else:
+							pass
 					else:
 						new_xml.append(i)
 			# print("sdk_part="+str(new_xml))
