@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="Button5" />
+    <item type="id" name="Button6" />
+    <item type="id" name="action_settings" />
+    <item type="id" name="button1" />
+    <item type="id" name="button2" />
+    <item type="id" name="button3" />
+    <item type="id" name="button4" />
+    <item type="id" name="exit" />
+    <item type="id" name="pay" />
+    <item type="id" name="textView1" />
+</resources>

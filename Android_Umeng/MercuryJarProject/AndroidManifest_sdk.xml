@@ -1,6 +1,0 @@
-<!--sdk-->        <meta-data android:name="singmaan_id" android:value="s"/>
-<!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-<!--end-->
