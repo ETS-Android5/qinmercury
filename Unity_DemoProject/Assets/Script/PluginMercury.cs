@@ -1,22 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 using SimpleJSON;
 
-public class Plugin_Qin : MonoBehaviour
+public class PluginMercury : MonoBehaviour
 {
 
 #if UNITY_ANDROID
     public static AndroidJavaObject _plugin;
 #elif UNITY_IPHONE
 
-#else
+#endif
 
-#endif  
-    public static Plugin_Qin pInstance;
-    public static Plugin_Qin Instance
+    public static PluginMercury pInstance;
+    public static PluginMercury Instance
     {
         get
         {
