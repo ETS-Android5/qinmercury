@@ -16,14 +16,6 @@ public class Plugin_Qin : MonoBehaviour
 
 #endif  
     public static Plugin_Qin pInstance;
-    public bool isShowSplash = true;
-    //-------回调--------
-    public Action<string> OnBuySuccessCallback;//购买成功回调（参数：物品名称）
-    public Action<string> OnBuyFailCallback;//购买失败回调（参数：物品名称）
-    public Action<string> OnExchangeSuccessCallback;//兑换成功回调（参数：物品名称）
-    public Action OnLoginSuccessCallback;//登录成功回调
-    public Action<string> OnRewardVideoRewardedCallback;//激励视频奖励成功回调（参数：奖励名称）
-    //---------------
     public static Plugin_Qin Instance
     {
         get
@@ -54,7 +46,7 @@ public class Plugin_Qin : MonoBehaviour
     print("[UNITY_EDITOR]->GetAndroidInstance");
 #elif UNITY_ANDROID
         //安卓获取实例
-        using (var pluginClass = new AndroidJavaClass("com.east2west.unitygame.MainActivity"))
+        using (var pluginClass = new AndroidJavaClass("com.singmaan.game.GameActivity"))
         {
             _plugin = pluginClass.CallStatic<AndroidJavaObject>("getInstance");
         }
