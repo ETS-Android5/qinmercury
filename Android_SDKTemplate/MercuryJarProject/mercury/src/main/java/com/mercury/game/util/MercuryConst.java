@@ -275,32 +275,26 @@ public class MercuryConst {
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 	
-	public void onPurchaseSuccess(String message,InAppBase inbase) {
+	public void PurchaseSuccess(String message,InAppBase inbase) {
 		MercuryActivity.umgameaget.pay(Qinpricefloat,QinPid,1,1,1);
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
-		inbase.appinterface.onPurchaseSuccessCallBack(message);
+		inbase.appinterface.PurchaseSuccessCallBack(message);
 	}
-	public void onPurchaseFailed(String strError,InAppBase inbase) {
+	public void PurchaseFailed(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->strError="+strError+" inbase->"+inbase);
-		inbase.appinterface.onPurchaseFailedCallBack(strError);
+		inbase.appinterface.PurchaseFailedCallBack(strError);
 	}
-	public void onPurchaseCanceled(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onPurchaseCanceled callback->strError="+strError+" inbase->"+inbase);
-		inbase.appinterface.onPurchaseCancelCallBack(strError);
-	}
-	public void onLoginSuccess(String strError,InAppBase inbase) {
+
+	public void AdLoadSuccess(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onLoginSuccess callback->strError="+strError+" inbase->"+inbase);
-		inbase.appinterface.onLoginSuccessCallBack(strError);	
+		inbase.appinterface.AdLoadSuccessCallBack(strError);
 	}
-	public void onLoginCancel(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginCancel callback->strError="+strError+" inbase->"+inbase);
-		inbase.appinterface.onLoginCancelCallBack(strError);
-	}
-	public void onLoginFailed(String strError,InAppBase inbase) {
+
+	public void AdLoadFailed(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onLoginFailed callback->strError="+strError+" inbase->"+inbase);
-		inbase.appinterface.onLoginFailedCallBack(strError);	
+		inbase.appinterface.AdLoadFailedCallBack(strError);
 	}
-	public void onFunctionCallBack(String strError,InAppBase inbase) {
+	public void FunctionCallBack(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onFunctionCallBack callback->strError="+strError+" inbase->"+inbase);
 		inbase.appinterface.onFunctionCallBack(strError);	
 	}
@@ -401,7 +395,7 @@ public class MercuryConst {
 								{
 									
 									// TODO Auto-generated catch block
-									inbase.appinterface.onPurchaseFailedCallBack("");
+									inbase.appinterface.PurchaseFailedCallBack("");
 									e.printStackTrace();
 								}
 							}

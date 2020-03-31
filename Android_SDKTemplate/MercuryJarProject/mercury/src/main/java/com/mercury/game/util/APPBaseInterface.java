@@ -1,21 +1,13 @@
 package com.mercury.game.util;
 
 public interface APPBaseInterface {
-	abstract void onPurchaseSuccessCallBack(String strProductId);
-	abstract void onPurchaseFailedCallBack(String strProductId);
-	abstract void onPurchaseCancelCallBack(String strProductId);
-	abstract void onLoginSuccessCallBack(String strProductId);
-	abstract void onLoginFailedCallBack(String strProductId);
-	abstract void onLoginCancelCallBack(String strProductId);
-	
-	abstract void onLoadSuccessfulCallBack(String strProductId);
-	abstract void onLoadFailedCallBack(String strProductId);
-	
-	abstract void onSaveSuccessfulCallBack(String strProductId);
-	abstract void onSaveFailedCallBack(String strProductId);
-	
-	abstract void onOnVideoCompletedCallBack(String strProductId);
-	abstract void onOnVideoFailedCallBack(String strProductId);
-	
+	abstract void PurchaseSuccessCallBack(String strProductId);
+	abstract void PurchaseFailedCallBack(String strProductId);
+	abstract void LoginSuccessCallBack(String strProductId);
+	abstract void LoginCancelCallBack(String strProductId);
+	abstract void AdLoadSuccessCallBack(String strProductId);
+	abstract void AdLoadFailedCallBack(String strProductId);
+	abstract void AdShowSuccessCallBack(String strProductId);
+	abstract void AdShowFailedCallBack(String strProductId);
 	abstract void onFunctionCallBack(String strProductId);
 }

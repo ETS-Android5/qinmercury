@@ -28,91 +28,99 @@ public class GameActivity extends UnityPlayerActivity{
 			@Override
 			public void onPurchaseSuccessCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.w(tagname, "onCreate onPurchaseSuccessCallBack strProductId="+strProductId);
-				Toast.makeText(mContext, "onPurchaseSuccessCallBack",Toast.LENGTH_SHORT).show();
-				UnityPlayer.UnitySendMessage(callBackObjectName, "OnPurchaseSuccess", strProductId);
+				Log.w(tagname, "onCreate PurchaseSuccessCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "PurchaseSuccessCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "PurchaseSuccessCallBack", strProductId);
 			}
 
 			@Override
 			public void onPurchaseFailedCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.w(tagname, "onCreate onPurchaseFailedCallBack strProductId="+strProductId);
-				Toast.makeText(mContext, "onPurchaseFailedCallBack",Toast.LENGTH_SHORT).show();
-				UnityPlayer.UnitySendMessage(callBackObjectName, "OnPurchaseSuccess", strProductId);
+				Log.w(tagname, "onCreate PurchaseFailedCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "PurchaseFailedCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "PurchaseFailedCallBack", strProductId);
 			}
 
 			@Override
 			public void onPurchaseCancelCallBack(String strProductId) {
 				// TODO Auto-generated method stub
-				Log.w(tagname, "onCreate onPurchaseCancelCallBack strProductId="+strProductId);
-				Toast.makeText(mContext, "onPurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
-				UnityPlayer.UnitySendMessage(callBackObjectName, "OnPurchaseSuccess", strProductId);
+				Log.w(tagname, "onCreate PurchaseCancelCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "PurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "PurchaseCancelCallBack", strProductId);
 			}
 
 			@Override
 			public void onLoginCancelCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.w(tagname, "onCreate onLoginCancelCallBack arg0="+arg0);
+				Log.w(tagname, "onCreate LoginCancelCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "LoginCancelCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "LoginCancelCallBack", strProductId);
 			}
 
 			@Override
 			public void onLoadSuccessfulCallBack(String s) {
-				Log.w(tagname, "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w(tagname, "onCreate LoadSuccessfulCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "LoadSuccessfulCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "LoadSuccessfulCallBack", strProductId);
 			}
 
 			@Override
 			public void onLoadFailedCallBack(String s) {
-				Log.w(tagname, "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w(tagname, "onCreate LoadFailedCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "LoadFailedCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "LoadFailedCallBack", strProductId);
 			}
 
 			@Override
 			public void onSaveSuccessfulCallBack(String s) {
-				Log.w(tagname, "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w(tagname, "onCreate SaveSuccessfulCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "SaveSuccessfulCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "SaveSuccessfulCallBack", strProductId);
 			}
 
 			@Override
 			public void onSaveFailedCallBack(String s) {
-				Log.w(tagname, "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w(tagname, "onCreate SaveFailedCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "SaveFailedCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "SaveFailedCallBack", strProductId);
 			}
 
 			@Override
 			public void onOnVideoCompletedCallBack(String s) {
-				Log.w(tagname, "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w(tagname, "onCreate PurchaseCancelCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "PurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "PurchaseCancelCallBack", strProductId);
 			}
 
 			@Override
 			public void onOnVideoFailedCallBack(String s) {
-				Log.w(tagname, "onCreate onLoginCancelCallBack arg0="+s);
+				Log.w(tagname, "onCreate PurchaseCancelCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "PurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "PurchaseCancelCallBack", strProductId);
 			}
 
 			@Override
 			public void onLoginFailedCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.w(tagname, "onCreate onLoginFailedCallBack arg0="+arg0);
+				Log.w(tagname, "onCreate PurchaseCancelCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "PurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "PurchaseCancelCallBack", strProductId);
 			}
 
 			@Override
 			public void onLoginSuccessCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.w(tagname, "onCreate onLoginSuccessCallBack arg0="+arg0);
+				Log.w(tagname, "onCreate PurchaseCancelCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "PurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "PurchaseCancelCallBack", strProductId);
 			}
 
 			@Override
 			public void onFunctionCallBack(String arg0) {
 				// TODO Auto-generated method stub
-				Log.w(tagname, "onCreate onFunctionCallBack arg0="+arg0);
-				if(arg0.equals("ExitGame"))
-				{
-					//exit game by yourself
-				}
-				else if(arg0.equals("UnlockGame"))
-				{
-					//unlock game
-				}
-				else if(arg0.equals("SplashEnd"))
-				{
-					//splash finished
-				}
+				Log.w(tagname, "onCreate PurchaseCancelCallBack strProductId="+strProductId);
+				Toast.makeText(mContext, "PurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
+				UnityPlayer.UnitySendMessage(callBackObjectName, "PurchaseCancelCallBack", strProductId);
 			}
 		};
 		Log.w(tagname,"[step][4]Init MercurySDK");

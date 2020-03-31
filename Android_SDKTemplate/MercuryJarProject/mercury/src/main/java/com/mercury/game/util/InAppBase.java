@@ -132,23 +132,15 @@ public class InAppBase{
 	}
 	
 	public void onPurchaseSuccess(String message) {
-		qc.onPurchaseSuccess(message,this);
+		qc.PurchaseSuccess(message,this);
 	}	
 	public void onPurchaseFailed(String strError) {	
-		qc.onPurchaseFailed(strError,this);
-	}	
-	public void onPurchaseCanceled(String strError) {
-		qc.onPurchaseCanceled(strError,this);
+		qc.PurchaseFailed(strError,this);
 	}
-	public void onLoginSuccess(String strError) {
-		qc.onLoginSuccess(strError,this);
-	}
-	public void onLoginCancel(String strError) {
-		qc.onLoginCancel(strError,this);
-	}
-	public void onLoginFailed(String strError) { qc.onLoginFailed(strError,this); }
+	public void onLoginSuccess(String strError) { qc.AdLoadSuccess(strError,this); }
+	public void onLoginFailed(String strError) { qc.AdLoadFailed(strError,this); }
 	public void onFunctionCallBack(String strError) {
-		qc.onFunctionCallBack(strError,this);
+		qc.FunctionCallBack(strError,this);
 	}
 	
 	public void show_cp()

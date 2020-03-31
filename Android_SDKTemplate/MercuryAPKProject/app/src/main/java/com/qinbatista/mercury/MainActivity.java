@@ -25,93 +25,51 @@ public class MainActivity extends Activity  {
 		MercurySDK=new MercuryActivity();
 		Log.w("MercuryDemo","[step][3]init callback");
 		appcall = new  APPBaseInterface() {
-			
+
 			@Override
-			public void onPurchaseSuccessCallBack(String strProductId) {
-				// TODO Auto-generated method stub
-				Log.w("MercuryDemo", "onCreate onPurchaseSuccessCallBack strProductId="+strProductId);
-				Toast.makeText(context, "onPurchaseSuccessCallBack",Toast.LENGTH_SHORT).show();
-			}
-			
-			@Override
-			public void onPurchaseFailedCallBack(String strProductId) {
-				// TODO Auto-generated method stub
-				Log.w("MercuryDemo", "onCreate onPurchaseFailedCallBack strProductId="+strProductId);
-				Toast.makeText(context, "onPurchaseFailedCallBack",Toast.LENGTH_SHORT).show();
-			}
-			
-			@Override
-			public void onPurchaseCancelCallBack(String strProductId) {
-				// TODO Auto-generated method stub
-				Log.w("MercuryDemo", "onCreate onPurchaseCancelCallBack strProductId="+strProductId);
-				Toast.makeText(context, "onPurchaseCancelCallBack",Toast.LENGTH_SHORT).show();
+			public void PurchaseSuccessCallBack(String s) {
+				Toast.makeText(context, "PurchaseSuccessCallBack",Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
-			public void onLoginCancelCallBack(String arg0) {
-				// TODO Auto-generated method stub
-				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+arg0);
+			public void PurchaseFailedCallBack(String s) {
+				Toast.makeText(context, "PurchaseFailedCallBack",Toast.LENGTH_SHORT).show();
+			}
+			@Override
+			public void LoginSuccessCallBack(String s) {
+				Toast.makeText(context, "LoginSuccessCallBack",Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
-			public void onLoadSuccessfulCallBack(String s) {
-				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
+			public void LoginCancelCallBack(String s) {
+				Toast.makeText(context, "LoginCancelCallBack",Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
-			public void onLoadFailedCallBack(String s) {
-				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
+			public void AdLoadSuccessCallBack(String s) {
+				Toast.makeText(context, "AdLoadSuccessCallBack",Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
-			public void onSaveSuccessfulCallBack(String s) {
-				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
+			public void AdLoadFailedCallBack(String s) {
+				Toast.makeText(context, "AdLoadFailedCallBack",Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
-			public void onSaveFailedCallBack(String s) {
-				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
+			public void AdShowSuccessCallBack(String s) {
+				Toast.makeText(context, "AdShowSuccessCallBack",Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
-			public void onOnVideoCompletedCallBack(String s) {
-				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
+			public void AdShowFailedCallBack(String s) {
+				Toast.makeText(context, "AdShowFailedCallBack",Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
-			public void onOnVideoFailedCallBack(String s) {
-				Log.w("MercuryDemo", "onCreate onLoginCancelCallBack arg0="+s);
+			public void onFunctionCallBack(String s) {
+				Toast.makeText(context, "onFunctionCallBack",Toast.LENGTH_SHORT).show();
 			}
 
-			@Override
-			public void onLoginFailedCallBack(String arg0) {
-				// TODO Auto-generated method stub
-				Log.w("MercuryDemo", "onCreate onLoginFailedCallBack arg0="+arg0);
-			}
-
-			@Override
-			public void onLoginSuccessCallBack(String arg0) {
-				// TODO Auto-generated method stub
-				Log.w("MercuryDemo", "onCreate onLoginSuccessCallBack arg0="+arg0);
-			}
-
-			@Override
-			public void onFunctionCallBack(String arg0) {
-				// TODO Auto-generated method stub
-				Log.w("MercuryDemo", "onCreate onFunctionCallBack arg0="+arg0);
-				if(arg0.equals("ExitGame"))
-				{
-					//exit game by yourself
-				}
-				else if(arg0.equals("UnlockGame"))
-				{
-					//unlock game
-				}
-				else if(arg0.equals("SplashEnd"))
-				{
-					//splash finished
-				}
-			}
 		};
 		Log.w("MercuryDemo","[step][4]Init MercurySDK");
 		MercurySDK.InitSDK (context,appcall);
