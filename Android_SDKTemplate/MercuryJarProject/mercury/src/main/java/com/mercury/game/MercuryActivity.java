@@ -137,10 +137,6 @@ public class MercuryActivity  {
 		mInAppAD.ActivityInit((Activity)mContext,appcall);
 
 	}
-	public void InitCarriers(final APPBaseInterface appcall)
-	{
-		
-	}
 	
 	public void Purchase(String pidname)
 	{
