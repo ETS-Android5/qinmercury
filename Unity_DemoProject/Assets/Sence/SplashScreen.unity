@@ -551,10 +551,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1934137084}
-  - component: {fileID: 1934137085}
   - component: {fileID: 1934137086}
   m_Layer: 0
-  m_Name: DontDestroy_Qin
+  m_Name: PluginMercury
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,7 +573,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1934137085
+--- !u!114 &1934137086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,23 +586,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isShowSplash: 1
-  isTrialVersion: 1
-  appid: UnityDemo
-  sku: 6801
-  isLogin: 0
-  trailStartTime: 2018-12-13 0:0:0
-  trailDays: 3
-  callBackObjectName: DontDestroy_Qin
-  exchangeScene: DemoMenu
---- !u!114 &1934137086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934137083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db11ac0e4187aaa4fb1296d151b5f569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
