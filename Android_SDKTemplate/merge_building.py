@@ -350,7 +350,7 @@ class APKBuildManager():
 					open(targetF, "wb").write(open(sourceF, "rb").read())
 					# print (u"%s %s 已存在，覆盖拷贝" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 			if os.path.isdir(sourceF):
-				self._copy_files_dont_overwrite(sourceF, targetF)
+				self._copy_files_overwrite(sourceF, targetF)
 
 	def __all_files_in_folder(self,_path):
 		ListMyFolder = []

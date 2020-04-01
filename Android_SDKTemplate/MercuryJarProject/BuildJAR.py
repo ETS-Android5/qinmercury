@@ -44,6 +44,7 @@ def main():
 		if os.path.isfile("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar"):
 			os.remove("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar")
 		shutil.copy("./../MercurySDK.jar", "./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar")
+		shutil.copy("./../MercurySDK.jar", "./../../../Unity_DemoProject/Assets/Plugins/Android/libs/MercurySDK.jar")
 	if os.path.exists("./../cache"):delete_folder("./../cache")
 
 
