@@ -24,7 +24,7 @@
         </activity>
 
 		<!--sdk-->
-        <meta-data android:name="singmaan_id" android:value="s"/>
+        <meta-data android:name="open_umeng" android:value="open"/>
 		<!--end-->
     </application>
 	<!--sdkxml-->

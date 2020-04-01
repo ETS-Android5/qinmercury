@@ -106,7 +106,6 @@ public class PluginMercury : MonoBehaviour
 #if UNITY_EDITOR
         print("ShowAd->show_video");
 #elif UNITY_ANDROID
-        Message("观看激励视频");
         _plugin.Call("show_video",pid);
 #endif
     }

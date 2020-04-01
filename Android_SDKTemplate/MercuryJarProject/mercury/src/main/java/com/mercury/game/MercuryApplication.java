@@ -28,12 +28,8 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	public InAppBase mInApp;
 	public static String iscarriersneed="1";
 	public static String channelSplash="1";
-	public static String isAntLogOpen="";
-	public static String e2wnumber="";
 	public static Application Acontext;
-	public static String jsid="";
-	public static String jschannel="";
-	public static String jstjid="";
+	public static boolean OpenUmeng = false;
 	private InAppBase mInAppExt;
 	public static String channel_name = "";
 	@Override
@@ -43,7 +39,6 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		checkExtSDK();
 		checkChannelName();
 		checkChannelSplash();
-		checkLoge();
 		try
 		{
 			key=getSign(this);
@@ -58,15 +53,18 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	public void APPApplicationInit(Application context)
 	{
 		Acontext = context;
-		channel_name = "singmaan";
-		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
-		UMConfigure.init(context, "5e7b19e5570df324d7000392", channel_name, 0, "");
-		UMConfigure.setProcessEvent(true);
 		checkSIM();
 		checkExtSDK();
 		checkChannelName();
 		checkChannelSplash();
-		checkLoge();
+		OpenUmeng();
+		channel_name = "singmaan";
+		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
+		if (OpenUmeng ==true) {
+			UMConfigure.init(context, "5e7b19e5570df324d7000392", channel_name, 0, "");
+			UMConfigure.setProcessEvent(true);
+		}
+
 		try 
 		{
 			 key=getSign(context);
@@ -173,22 +171,23 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		}
 
 	}
-	private void checkLoge()
+	private void OpenUmeng()
 	{
 		ApplicationInfo appInfo = null;
 		try 
 		{
 			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
-			isAntLogOpen = appInfo.metaData.getString("E2W_LOG");
-			if(isAntLogOpen.equals("open"))
+			String isUmengOpen = appInfo.metaData.getString("open_umeng");
+			if(isUmengOpen.equals("open"))
 			{
-				Log.e("MercurySDK","Log Verison:"+MercuryConst.LogVERSION);
+				OpenUmeng=true;
+				Log.e("MercurySDK","umeng opened");
 			}
 		} catch (NameNotFoundException e) {
-		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data E2W_LOG, NameNotFound: " + e.getMessage());
+		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NameNotFound: " + e.getMessage());
 		    
 		} catch (NullPointerException e) {
-		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data E2W_LOG, NullPointer: " + e.getMessage());
+		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NullPointer: " + e.getMessage());
 		}
 
 	}

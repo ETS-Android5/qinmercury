@@ -37,6 +37,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.mercury.game.MercuryApplication.OpenUmeng;
+
 
 public class MercuryConst {
 	public static String LogVERSION= "1.1";
@@ -276,7 +278,9 @@ public class MercuryConst {
 	}
 	
 	public void PurchaseSuccess(String message,InAppBase inbase) {
-		MercuryActivity.umgameaget.pay(Qinpricefloat,QinPid,1,1,1);
+		if (OpenUmeng ==true) {
+			MercuryActivity.umgameaget.pay(Qinpricefloat, QinPid, 1, 1, 1);
+		}
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
 		inbase.appinterface.PurchaseSuccessCallBack(message);
 	}
