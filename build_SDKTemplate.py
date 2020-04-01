@@ -9,9 +9,10 @@ import requests
 import calendar
 import shutil
 import z_PythonCode.xml_manager as xml_manager
-
+import zipfile
 class SDKAppendManager():
 	def __init__(self, channel, game_apk_path):
+		self.__channel = channel
 		self.__python = "python3"
 		self.__apktool = "apktool"
 		self.__sdk_apk_name = "app-release.apk"
@@ -24,13 +25,18 @@ class SDKAppendManager():
 		self.__sdk_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel+"/"+self.__sdk_apk_name
 		self.__game_apk_path = game_apk_path
 		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
+		self.__keystore = self.__file_path+"/android.keystore"
 		self.__time_tick = str(int(time.time()))
 		if os.path.isdir(self.__file_path+self.__cache_position): shutil.rmtree(self.__file_path+self.__cache_position)
 		self.__create_cache()
 		self.__copyFileCounts = 0
+
 	def _merge_package(self):
 		self._decompile_game_apk()
 		self._decompile_sdk_apk()
+		self._merge_sdk_resource()
+		self._modify_config()
+		self._rebuild_game_apk()
 
 	def _decompile_game_apk(self):
 		os.system(f"{self.__apktool} d {self.__game_apk_path}")
@@ -38,14 +44,8 @@ class SDKAppendManager():
 	def _decompile_sdk_apk(self):
 		if os.path.exists(self.__sdk_apk_path)==False: os.system(f"{self.__python} {self.__sdk_script_path}")
 		os.system(f"{self.__apktool} d {self.__sdk_apk_path}")
-		self.__merge_sdk_resource()
 
-	def __create_cache(self):
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}")==False:os.mkdir(f"{self.__file_path}/{self.__cache_position}")
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")==False:os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
-		os.chdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
-
-	def __merge_sdk_resource(self):
+	def _merge_sdk_resource(self):
 		#merge assets
 		self.__merge_sdk_resource_assets()
 		#merge lib
@@ -56,6 +56,13 @@ class SDKAppendManager():
 		self.__merge_sdk_resource_res()
 		#merge xml
 		self.__merge_sdk_resource_xml()
+
+	def _modify_config(self):
+		self.__modify_yml()
+
+	def _rebuild_game_apk(self):
+		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
+		self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
 
 	def __merge_sdk_resource_assets(self):
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/assets") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets"):
@@ -85,7 +92,6 @@ class SDKAppendManager():
 		#get sdk string
 		with open(f"{self.__sdk_xml_path}",encoding="utf8") as file_object:
 			sdk_xml = file_object.readlines()
-
 		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml","r",encoding="UTF-8") as file_object:
 			is_sdk_part = False
 			loop_old = False
@@ -154,6 +160,11 @@ class SDKAppendManager():
 			if os.path.isdir(sourceF):
 				self.__copy_files_dont_overwrite(sourceF, targetF)
 
+	def __create_cache(self):
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}")==False:os.mkdir(f"{self.__file_path}/{self.__cache_position}")
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")==False:os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
+		os.chdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
+
 	def __copy_files_overwrite(self,sourceDir, targetDir):
 		self.__copyFileCounts
 		#print (sourceDir)
@@ -176,6 +187,33 @@ class SDKAppendManager():
 					# print (u"%s %s 已存在，覆盖拷贝" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 			if os.path.isdir(sourceF):
 				self.__copy_files_overwrite(sourceF, targetF)
+	def __modify_yml(self):
+		pass
+
+	def __delete_signature(self,_path):
+		your_delet_file="META-INF"
+		old_zipfile=_path #旧文件
+		new_zipfile=_path+"temp" #新文件
+		zin = zipfile.ZipFile (old_zipfile, 'r') #读取对象
+		zout = zipfile.ZipFile (new_zipfile, 'w') #被写入对象
+		for item in zin.infolist():
+			buffer = zin.read(item.filename)
+			if ((your_delet_file in item.filename) and (".RSA" in item.filename)) or ((your_delet_file in item.filename)and (".SF" in item.filename)) or ((your_delet_file in item.filename) and (".MF" in item.filename)):pass
+			else:zout.writestr(item, buffer) #把文件写入到新对象中
+		zout.close()
+		zin.close()
+		print("deleted signature")
+		shutil.move(new_zipfile,old_zipfile)
+
+	def __signe_signature(self,_apk_path):
+		self.__delete_signature(_apk_path)
+		file_path = _apk_path[:_apk_path.rfind("/")]
+		file_name = os.path.splitext(_apk_path)[0][os.path.splitext(_apk_path)[0].rfind("/")+1:]
+		file_format = os.path.splitext(_apk_path)[-1]
+		signed_apk_path = self.__file_path+"/"+file_name+"_"+self.__channel+file_format
+		if os.path.isfile(self.__file_path+"/"+file_name+"_"+self.__channel+file_format):os.remove(self.__file_path+"/"+file_name+"_"+self.__channel+file_format)
+		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
+
 def run():
 	sam = SDKAppendManager(channel = "Android_SDKTemplate",game_apk_path = "/Users/batista/MyProject/QinMercury/demo.apk")
 	sam._merge_package()

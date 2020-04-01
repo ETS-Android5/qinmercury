@@ -2106,7 +2106,7 @@ def RebuildAPK(De_APKName,Build_APKname,LocationAPK,_ChannelName,_AD):
 			os.mkdir(get_desktop()+"/GameAPK/")
 
 		MoveAPK(PythonLocation()+"/__pycache__/Signed_"+Build_APKname,get_desktop()+"/GameAPK/"+LocationAPK+"_"+_ChannelName+"_"+time.strftime('%Y%m%d%H%M',time.localtime(time.time()))+add+".apk")
-		
+
 		os.chdir(r''+CallMethodPath)
 def BalanceSmali(_Path):
 	if isMulitDex==False:
@@ -2148,7 +2148,7 @@ def GetPackageName(_APKLocation):
 	dom = xml.dom.minidom.parse(_Path)
 	root = dom.documentElement
 	stringForTem = root.getAttribute("package")
-	return stringForTem
+	return stringForTemf
 def DeleteSignature(_APKLocation):
 	#os.chdir(r''+"C:/MyProject/AgileTools")
 	#APKname = _APKLocation.split("/")[-1]
