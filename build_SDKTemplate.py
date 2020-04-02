@@ -37,6 +37,7 @@ class SDKAppendManager():
 		self._merge_sdk_resource()
 		self._modify_config()
 		self._rebuild_game_apk()
+		self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
 
 	def _decompile_game_apk(self):
 		os.system(f"{self.__apktool} d {self.__game_apk_path}")
@@ -61,32 +62,48 @@ class SDKAppendManager():
 		self.__modify_yml()
 
 	def _rebuild_game_apk(self):
-		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
-		self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
+		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
+		os.system(f"jar xf  {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")#extract resource from sdk
+		os.system(f"cp {self.__game_apk_path} {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}.apk")#copy orginal apk
+		compress_resrouce = ""
+		if os.path.isfile(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/classes.dex"):compress_resrouce += " classes.dex"
+		if os.path.isfile(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/classes2.dex"):compress_resrouce += " classes2.dex"
+		if os.path.isfile(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/resources.arsc"):compress_resrouce += " resources.arsc"
+		if os.path.isfile(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/AndroidManifest.xml"):compress_resrouce += " AndroidManifest.xml"
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/lib"):compress_resrouce += " lib"
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/res"):compress_resrouce += " res"
+		os.system(f"jar uvf {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk {compress_resrouce}")# add resrouce to apk
 
 	def __merge_sdk_resource_assets(self):
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/assets") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets"):
+			print("[__merge_sdk_resource_assets] copy assets apk with sdk to game apk")
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/assets",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets")
 
 	def __merge_sdk_resource_lib(self):
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
+			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
 
 	def __merge_sdk_resource_smali(self):
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali"):
+			print("[__merge_sdk_resource_smali] copy smali apk with sdk to game apk")
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali")
 
 	def __merge_sdk_resource_res(self):
-		game_res = self.__all_files_in_folder(f"{self.__file_path}/{self.__game_apk_name}/res")
-		sdk_res  = self.__all_files_in_folder(f"{self.__file_path}/{self.__sdk_apk_name_only}/res")
+		game_res = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
+		sdk_res  = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/res")
 		for g_res in game_res:
 			for s_res in sdk_res:
-				self.__copy_files_dont_overwrite(f"{self.__file_path}/{self.__sdk_apk_name_only}/res",f"{self.__file_path}/{self.__game_apk_name}/res")
+				self.__copy_files_dont_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/res",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
 				gameresfile = g_res[g_res.rfind("/"):]
 				sdkresfile = s_res[s_res.rfind("/"):]
 				if sdkresfile == gameresfile and ".xml" in sdkresfile:
-					print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_res]merging {g_res}<-{s_res}")
-					xml_manager.merge_xml(g_res,s_res)
+					if gameresfile == "/activity_main.xml" or gameresfile == "/main.xml" or gameresfile=="/public.xml":
+						print(f"skip{gameresfile}")
+						continue
+					else:
+						print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_res]merging {g_res}<-{s_res}")
+						xml_manager.merge_xml(g_res,s_res)
 
 	def __merge_sdk_resource_xml(self):
 		#get sdk string
