@@ -56,59 +56,58 @@ public class PluginMercury : MonoBehaviour
 #if UNITY_EDITOR
         print("[UNITY_EDITOR]->Purchase()->strProductId=" + strProductId);
 #elif UNITY_ANDROID
-        print("[UNITY_ANDROID]->Purchase()->SavePid="+strProductId);
+        print("[UNITY_ANDROID]->Purchase()->strProductId="+strProductId);
         _plugin.Call("Purchase", strProductId );
 #endif
     }
     public void Exchange()
     {
 #if UNITY_EDITOR
-        print("[UNITY_EDITOR]->Exchange()->Exchange");
+        print("[UNITY_EDITOR]->Exchange()");
 #elif UNITY_ANDROID
-        _plugin.Call("Exchange");
+        print("[Android]->Exchange()");_plugin.Call("Exchange");
 #endif
     }
 
     public void ExitGame()
     {
 #if UNITY_EDITOR
-        //ExchangeSuccess("1");
+        print("[UNITY_EDITOR]->ExitGame()");
 #elif UNITY_ANDROID
-        _plugin.Call("ExitGame");
+        print("[Android]->ExitGame()");_plugin.Call("ExitGame");
 #endif
     }
-    public void show_video(string pid)
+    public void show_video()
     {
 #if UNITY_EDITOR
-        print("ShowAd->show_video");
+        print("[UNITY_EDITOR]->show_video()");
 #elif UNITY_ANDROID
-        _plugin.Call("show_video",pid);
+        print("[Android]->show_video()");_plugin.Call("show_video");
 #endif
     }
 
-    public void show_insert(string adId)
+    public void show_insert()
     {
 #if UNITY_EDITOR
-        print("[show_insert]");
+        print("[UNITY_EDITOR]->show_insert()");
 #elif UNITY_ANDROID
-        print("show_insert");
-        _plugin.Call("show_insert",adId);
+        print("[Android]->show_insert()");_plugin.Call("show_insert");
 #endif
     }
-    public void show_banner(string adId)
+    public void show_banner()
     {
 #if UNITY_EDITOR
-        print("[ShowAd->show_banner]");
+        print("[UNITY_EDITOR]->show_banner()");
 #elif UNITY_ANDROID
-        _plugin.Call("show_banner",adId);
+        print("[Android]->show_banner()");_plugin.Call("show_banner");
 #endif
     }
-    public void show_push(string adId)
+    public void show_push()
     {
 #if UNITY_EDITOR
-        print("[ShowAd->show_push]");
+        print("[UNITY_EDITOR]->show_push()");
 #elif UNITY_ANDROID
-        _plugin.Call("show_push",adId);
+        print("[Android]->show_push()");_plugin.Call("show_push");
 #endif
     }
 

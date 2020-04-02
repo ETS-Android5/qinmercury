@@ -38,7 +38,7 @@ public class DemoButtonClick : MonoBehaviour {
         btnShowBanner.onClick.AddListener(BtnShowBannerClick);
         btnShowPush.onClick.AddListener(BtnShowPushClick);
         btnShowVideo.onClick.AddListener(BtnShowVideoClick);
-        btnInterstitial.onClick.AddListener(BtnShowInterstitial);
+        // btnInterstitial.onClick.AddListener(BtnShowInterstitial);
         btnShareFriends.onClick.AddListener(BtnShareToFriends);
         btnShareWechat.onClick.AddListener(BtnShareToWechat);
         // btnShowVideo.gameObject.SetActive(E2WSdk.isADs[3]);
@@ -82,11 +82,12 @@ public class DemoButtonClick : MonoBehaviour {
     {
         logtext.text += "支付按钮点击" + "\n";
         // E2WSdk.Instance.Buy("StrProduct");
+        PluginMercury.Instance.Purchase("pid");
     }
     public void BtExitClick()
     {
         logtext.text += "退出按钮点击" + "\n";
-        // E2WSdk.Instance.Exit();
+        PluginMercury.Instance.ExitGame();
     }
     public void BtCdkeyClick()
     {
@@ -120,7 +121,7 @@ public class DemoButtonClick : MonoBehaviour {
 
     public void BtProductClick(string strProduct)
     {
-        // E2WSdk.Instance.Buy(strProduct);
+        PluginMercury.Instance.Purchase(strProduct);
     }
 
     public void BtScreenClickFlipping(bool isPortrait) {
@@ -132,53 +133,41 @@ public class DemoButtonClick : MonoBehaviour {
             Application.LoadLevel("02");
         }
     }
-
-    public void BtLogout()
-    {
-        // E2WSdk.Instance.Logout();
-    }
     public void BtnShowInsertClick() {
         logtext.text += "显示插屏图片，广告参数=" + "mainmenu\n";
-        // E2WSdk.Instance.show_insert("mainmenu");
+        PluginMercury.Instance.show_insert();
     }
     public void BtnShowBannerClick() {
         logtext.text += "显示横幅广告，广告参数=" + "mainmenu\n";
-        // E2WSdk.Instance.show_banner("mainmenu");
+        PluginMercury.Instance.show_banner();
     }
     public void BtnShowPushClick() {
         logtext.text += "显示推送广告，广告参数=" + "mainmenu\n";
-        // E2WSdk.Instance.show_push("mainmenu");
+        PluginMercury.Instance.show_push();
     }
     public void BtnShowVideoClick() {
         logtext.text += "显示视频广告，广告参数=" + "mainmenu\n";
-        // E2WSdk.Instance.show_video("mainmenu");
+        PluginMercury.Instance.show_video();
     }
     
     public void BtnShowInterstitial()
     {
         logtext.text += "显示插屏视频，广告参数=" + "mainmenu\n";
-        // E2WSdk.Instance.show_interstitial("mainmenu");
     }
     private void BtRateClick()
     {
-        // E2WSdk.Instance.e2WSdkTools.ShowRatePanel();
     }
 
     private void BtnShareToFriends()
     {
         logtext.text += "正在分享到微信好友";
         byte[] bytes = texture.EncodeToPNG();
-        //设置图片路径		
         System.IO.File.WriteAllBytes(Application.persistentDataPath + "/Shot4Share.png", bytes);
-        //E2WSdk.Instance.ShareToFriends(Application.persistentDataPath + "/Shot4Share.png");
     }
     private void BtnShareToWechat()
     {
         logtext.text += "正在分享到微信朋友圈";
         byte[] bytes = texture.EncodeToPNG();
-        //设置图片路径		
         System.IO.File.WriteAllBytes(Application.persistentDataPath + "/Shot4Share.png", bytes);
-        //E2WSdk.Instance.ShareToWechat(Application.persistentDataPath + "/Shot4Share.png");
-
     }
 }
