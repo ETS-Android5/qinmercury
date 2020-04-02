@@ -112,7 +112,54 @@ public class GameActivity extends UnityPlayerActivity{
 			}
 		});
 	}
-
+	public void show_insert()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ShowVideoAd");
+						MercurySDK.show_insert();
+					}
+				});
+			}
+		});
+	}
+	public void show_banner()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ShowVideoAd");
+						MercurySDK.show_banner();
+					}
+				});
+			}
+		});
+	}
+	public void show_push()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ShowVideoAd");
+						MercurySDK.show_push();
+					}
+				});
+			}
+		});
+	}
 	public void Exchange()
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()

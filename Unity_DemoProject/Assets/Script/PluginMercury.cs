@@ -54,20 +54,38 @@ public class PluginMercury : MonoBehaviour
     public void Purchase(string strProductId)
     {
 #if UNITY_EDITOR
-        print("[UNITY_EDITOR]->Buy()->strProductId=" + strProductId);
+        print("[UNITY_EDITOR]->Purchase()->strProductId=" + strProductId);
 #elif UNITY_ANDROID
-        print("[UNITY_ANDROID]->Buy()->SavePid="+strProductId);
-        _plugin.Call("purchaseProduct", strProductId );
+        print("[UNITY_ANDROID]->Purchase()->SavePid="+strProductId);
+        _plugin.Call("Purchase", strProductId );
 #endif
     }
     public void Exchange()
     {
 #if UNITY_EDITOR
-        //ExchangeSuccess("1");
+        print("[UNITY_EDITOR]->Exchange()->Exchange");
 #elif UNITY_ANDROID
         _plugin.Call("Exchange");
 #endif
     }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        //ExchangeSuccess("1");
+#elif UNITY_ANDROID
+        _plugin.Call("ExitGame");
+#endif
+    }
+    public void show_video(string pid)
+    {
+#if UNITY_EDITOR
+        print("ShowAd->show_video");
+#elif UNITY_ANDROID
+        _plugin.Call("show_video",pid);
+#endif
+    }
+
     public void show_insert(string adId)
     {
 #if UNITY_EDITOR
@@ -93,27 +111,7 @@ public class PluginMercury : MonoBehaviour
         _plugin.Call("show_push",adId);
 #endif
     }
-    public void show_out()
-    {
-#if UNITY_EDITOR
-        print("ShowAd->show_out");
-#elif UNITY_ANDROID
-        _plugin.Call("show_out");
-#endif
-    }
-    public void show_video(string pid)
-    {
-#if UNITY_EDITOR
-        print("ShowAd->show_video");
-#elif UNITY_ANDROID
-        _plugin.Call("show_video",pid);
-#endif
-    }
 
-    public void ExchangeSuccess(string pid)
-    {
-
-    }
 
 }
 
