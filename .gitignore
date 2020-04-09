@@ -15,3 +15,8 @@ Assembly-CSharp.csproj
 MercuryUnityDemo.sln
 PluginQin.sln
 z_PythonCode/cache
+Android_Tool_Umeng/MercuryAPKProject/.idea
+Android_Tool_Umeng/MercuryAPKProject/app
+*.
+Android_Tool_Umeng/MercuryJarProject/.idea
+Android_Tool_Umeng/MercuryJarProject/mercury

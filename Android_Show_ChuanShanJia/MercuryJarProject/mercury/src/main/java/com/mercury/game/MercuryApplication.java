@@ -9,6 +9,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.mercury.game.InAppAdvertisement.InAppAD;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
 import com.umeng.commonsdk.UMConfigure;
@@ -60,6 +61,8 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		OpenUmeng();
 		channel_name = "singmaan";
 		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
+		mInAppExt = new InAppAD();
+		mInAppExt.ApplicationInit(Acontext);
 		if (OpenUmeng ==true) {
 			UMConfigure.init(context, "5e7b19e5570df324d7000392", channel_name, 0, "");
 			UMConfigure.setProcessEvent(true);

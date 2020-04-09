@@ -28,6 +28,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/adhost.jar')
+    implementation files('src/main/libs/open_ad_sdk.jar')
 }
 
 task clearJar(type: Delete){

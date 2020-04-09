@@ -25,13 +25,149 @@
 
 		<!--sdk-->
         <meta-data android:name="open_umeng" android:value="open"/>
+         <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService" />
+        <service android:name="com.ss.android.socialbase.downloader.downloader.DownloadService" />
+        <service
+            android:name="com.ss.android.socialbase.downloader.downloader.IndependentProcessDownloadService"
+            android:process=":downloader" >
+            <intent-filter>
+                <action android:name="com.ss.android.socialbase.downloader.remote" />
+            </intent-filter>
+        </service>
+        <service android:name="com.ss.android.socialbase.downloader.impls.DownloadHandleService" />
+
+        <!-- <receiver android:name="com.ss.android.socialbase.downloader.downloader.DownloadReceiver"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+
+        <service
+            android:name="com.ss.android.socialbase.downloader.impls.RetryJobSchedulerService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- 数据库更新service -->
+        <service android:name="com.ss.android.socialbase.downloader.downloader.SqlDownloadCacheService" />
+        <!-- APP DOWNLOADER START -->
+        <service android:name="com.ss.android.socialbase.appdownloader.DownloadHandlerService" /> <!-- <receiver android:name="com.ss.android.socialbase.appdownloader.DownloadReceiver"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED"/> -->
+        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/> -->
+        <!-- <action android:name="android.ss.intent.action.DOWNLOAD_COMPLETE"/> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.PACKAGE_ADDED"/> -->
+        <!-- <action android:name="android.intent.action.PACKAGE_REPLACED"/> -->
+        <!-- <data android:scheme="package"/> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MEDIA_MOUNTED"/> -->
+        <!-- <data android:scheme="file"/> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <activity
+            android:name="com.ss.android.socialbase.appdownloader.view.DownloadTaskDeleteActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.ss.android.socialbase.appdownloader.view.JumpUnknownSourceActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.ss.android.downloadlib.activity.TTDelegateActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <receiver android:name="com.ss.android.downloadlib.core.download.DownloadReceiver" /> <!-- 下面的activity和service必须注册 -->
+        <activity
+            android:name="com.bytedance.sdk.openadsdk.activity.TTLandingPageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.bytedance.sdk.openadsdk.activity.TTPlayableLandingPageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.bytedance.sdk.openadsdk.activity.TTVideoLandingPageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.bytedance.sdk.openadsdk.activity.TTRewardVideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.bytedance.sdk.openadsdk.activity.TTRewardExpressVideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.bytedance.sdk.openadsdk.activity.TTFullScreenVideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.bytedance.sdk.openadsdk.activity.TTFullScreenExpressVideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard" />
+        <activity
+            android:name="com.bytedance.sdk.openadsdk.activity.TTDelegateActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service android:name="com.bytedance.sdk.openadsdk.multipro.aidl.BinderPoolService" />
+
+        <receiver
+            android:name="com.bytedance.embedapplog.collector.Collector"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name="com.bytedance.tea.crash.upload.CrashUploadService"
+            android:process=":npth" />
+
+        <provider
+            android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
+            android:authorities="${applicationId}.TTFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <provider
+            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
+            android:authorities="${applicationId}.TTMultiProvider"
+            android:exported="false" />
 		<!--end-->
     </application>
 	<!--sdkxml-->
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="24" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--可选权限-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+
+    <!--可选，穿山甲提供“获取地理位置权限”和“不给予地理位置权限，开发者传入地理位置参数”两种方式上报用户位置，两种方式均可不选，添加位置权限或参数将帮助投放定位广告-->
+    <!--请注意：无论通过何种方式提供给穿山甲用户地理位置，均需向用户声明地理位置权限将应用于穿山甲广告投放，穿山甲不强制获取地理位置信息-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- 如果有视频相关的广告且使用textureView播放，请务必添加，否则黑屏 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 	<!--end-->
 
 
