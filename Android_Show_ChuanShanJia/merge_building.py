@@ -361,11 +361,11 @@ class APKBuildManager():
 
 
 def run():
-	if os.path.isdir(f"{PythonLocation()}/MercuryAPKProject_pure")
-		os.sysmte(f"rm -rf {PythonLocation()}/MercuryAPKProject")
-		os.system(f"cp {PythonLocation()}/MercuryAPKProject_pure {PythonLocation()}/MercuryAPKProject")
+	if os.path.isdir(f"{PythonLocation()}/MercuryAPKProject_pure"):
+		if os.path.isdir(f"{PythonLocation()}/MercuryAPKProject"):shutil.rmtree(f"{PythonLocation()}/MercuryAPKProject")
+		shutil.copytree(f"{PythonLocation()}/MercuryAPKProject_pure",f"{PythonLocation()}/MercuryAPKProject")
 	else:
-		os.system(f"cp {PythonLocation()}/MercuryAPKProject {PythonLocation()}/MercuryAPKProject_pure")
+		shutil.copytree(f"{PythonLocation()}/MercuryAPKProject",f"{PythonLocation()}/MercuryAPKProject_pure")
 	sam = APKBuildManager()
 	sam.merge_sdk_resource()
 

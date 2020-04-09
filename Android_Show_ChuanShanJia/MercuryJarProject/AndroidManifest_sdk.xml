@@ -112,8 +112,7 @@
             android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
             android:authorities="${applicationId}.TTMultiProvider"
             android:exported="false" />
-<!--end--><!--sdkxml-->    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="24" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
