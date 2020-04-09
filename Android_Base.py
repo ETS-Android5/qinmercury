@@ -85,6 +85,26 @@ class SDKAppendManager():
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
 
 	def __merge_sdk_resource_smali(self):
+		#delete apk's smail
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/demo"):
+			shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/demo")
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/qinbatista"):
+			shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/qinbatista")
+
+		#find all SDKs' smali
+		if os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game"):
+			files = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game")
+			if self.__channel.find("_BASE")!=-1:
+				for file_path in files:
+					if file_path.find("/InAppChannel/")!=-1: os.remove(file_path)
+					if file_path.find("/InAppAdvertisement/")!=-1: os.remove(file_path)
+			if self.__channel.find("_SHOW")!=-1:
+				for file_path in files:
+					if file_path.find("/InAppAdvertisement/")==-1: os.remove(file_path)
+			if self.__channel.find("_IAP")!=-1:
+				for file_path in files:
+					if file_path.find("/InAppChannel/")==-1: os.remove(file_path)
+
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali"):
 			print("[__merge_sdk_resource_smali] copy smali apk with sdk to game apk")
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali")
@@ -227,12 +247,21 @@ class SDKAppendManager():
 		file_path = _apk_path[:_apk_path.rfind("/")]
 		file_name = os.path.splitext(_apk_path)[0][os.path.splitext(_apk_path)[0].rfind("/")+1:]
 		file_format = os.path.splitext(_apk_path)[-1]
-		signed_apk_path = self.__file_path+"/"+file_name+"_"+self.__channel+file_format
-		if os.path.isfile(self.__file_path+"/"+file_name+"_"+self.__channel+file_format):os.remove(self.__file_path+"/"+file_name+"_"+self.__channel+file_format)
+		if os.path.exists(self.__file_path+"/Y_building")==False: os.mkdir(self.__file_path+"/Y_building")
+
+		signed_apk_path = self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format
+		if os.path.isfile(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format):os.remove(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format)
 		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
 
 def run():
-	sam = SDKAppendManager(channel = "Android_A_SDKTemplate",game_apk_path = "/Users/batista/MyProject/QinMercury/demo.apk")
+	folder_name = os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+	game_apk_path = ""
+	for file_name in files:
+		if file_name.find(".apk")!=-1:
+			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
+			break
+	sam = SDKAppendManager(channel = folder_name,game_apk_path = game_apk_path)
 	sam._merge_package()
 
 
