@@ -197,9 +197,37 @@ class APKBuildManager():
 
 	def __merge_lib(self):
 		self.__copyFileCounts = 0
+		#copy lib
 		if os.path.isdir(f"{self.__jar_project}/mercury/src/main/libs")==False:os.mkdir(f"{self.__jar_project}/mercury/src/main/libs")
 		if os.path.isdir(f"{self.__apk_project}/app/src/main/libs")==False:os.mkdir(f"{self.__apk_project}/app/src/main/libs")
 		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
+		#merge remote sdk
+		# def AddRemoteJarToGradle(_DemoGradlePath,_buildGradlePath):
+		with open(f"{self.__jar_project}/mercury/build.gradle",encoding="utf8") as file_object:
+			JavaCode=[]
+			isStart = False
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				f = i.replace(" ","")
+				if f.find("implementation")!=-1:
+					JavaCode.append(i)
+		isFindStart = False
+		with open(f"{self.__apk_project}/app/build.gradle",encoding="utf8") as file_object:
+			JavaCodeGradle=[]
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				f = i.replace(" ","")
+				if(f.find("dependencies")!=-1 and isFindStart==False):
+					isFindStart=True
+					JavaCodeGradle.append(i)
+				elif(f.find("}")!=-1 and isFindStart==True):
+					for code in JavaCode:
+						JavaCodeGradle.append(code)
+					JavaCodeGradle.append("}\n")
+				else:
+					JavaCodeGradle.append(i)
+		with open(f"{self.__apk_project}/app/build.gradle",'w',encoding="utf8") as file_object_read:
+			file_object_read.writelines(JavaCodeGradle)
 
 	def __merge_assets(self):
 		self.__copyFileCounts = 0
@@ -361,6 +389,11 @@ class APKBuildManager():
 
 
 def run():
+	if os.path.isdir(f"{PythonLocation()}/MercuryAPKProject_pure"):
+		if os.path.isdir(f"{PythonLocation()}/MercuryAPKProject"):shutil.rmtree(f"{PythonLocation()}/MercuryAPKProject")
+		shutil.copytree(f"{PythonLocation()}/MercuryAPKProject_pure",f"{PythonLocation()}/MercuryAPKProject")
+	else:
+		shutil.copytree(f"{PythonLocation()}/MercuryAPKProject",f"{PythonLocation()}/MercuryAPKProject_pure")
 	sam = APKBuildManager()
 	sam.merge_sdk_resource()
 
