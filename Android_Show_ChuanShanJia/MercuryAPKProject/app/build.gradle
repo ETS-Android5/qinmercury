@@ -36,4 +36,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/adhost.jar')
+    implementation files('src/main/libs/open_ad_sdk.jar')
+    implementation "com.android.support:support-v4:24.2.0"
 }

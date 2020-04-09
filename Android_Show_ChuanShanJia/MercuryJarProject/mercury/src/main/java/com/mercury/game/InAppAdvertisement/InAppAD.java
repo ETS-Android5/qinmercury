@@ -2,6 +2,7 @@ package com.mercury.game.InAppAdvertisement;
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
+import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
@@ -32,6 +33,11 @@ public class InAppAD extends InAppBase {
 	{
 		super.ActivityInit(context, appcall);
 		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit");
+		TTAdManager ttAdManager = TTAdSdk.getAdManager();
+		//step2:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
+		ttAdManager.requestPermissionIfNecessary(mContext);
+		//step3:创建TTAdNative对象,用于调用广告请求接口
+		mTTAdNative = ttAdManager.createAdNative(mContext.getApplicationContext());
 		loadAd(ad_id,TTAdConstant.HORIZONTAL);
 	}
 	@Override
