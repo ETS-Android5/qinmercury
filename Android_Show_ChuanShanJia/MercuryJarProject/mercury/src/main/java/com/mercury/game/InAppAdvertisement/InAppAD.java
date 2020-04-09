@@ -28,7 +28,7 @@ public class InAppAD extends InAppBase {
 	private boolean mIsExpress = false; //是否请求模板广告
 	private boolean mHasShowDownloadActive = false;
 	private String appid = "945116595";
-	private String ad_id = "901121430";
+	private String video_position_id = "901121430";
 	public void ActivityInit(Activity context,final APPBaseInterface appcall)
 	{
 		super.ActivityInit(context, appcall);
@@ -38,7 +38,7 @@ public class InAppAD extends InAppBase {
 		ttAdManager.requestPermissionIfNecessary(mContext);
 		//step3:创建TTAdNative对象,用于调用广告请求接口
 		mTTAdNative = ttAdManager.createAdNative(mContext.getApplicationContext());
-		loadAd(ad_id,TTAdConstant.HORIZONTAL);
+		loadAd(video_position_id,TTAdConstant.HORIZONTAL);
 	}
 	@Override
 	public void ApplicationInit(Application app)
