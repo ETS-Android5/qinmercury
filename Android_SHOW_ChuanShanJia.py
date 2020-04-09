@@ -10,6 +10,7 @@ import calendar
 import shutil
 import z_PythonCode.xml_manager as xml_manager
 import zipfile
+import xml.dom.minidom
 class SDKAppendManager():
 	def __init__(self, channel, game_apk_path):
 		self.__channel = channel
@@ -165,9 +166,26 @@ class SDKAppendManager():
 					new_xml.append(i)
 				else:
 						new_xml.append(i)
-			# print("sdk_part="+str(new_xml))
 			with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",mode='w',encoding="utf8") as file_context:
 				file_context.writelines(new_xml)
+
+		#modify xml
+		dom = xml.dom.minidom.parse(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml")
+		root = dom.documentElement
+		package_name = root.getAttribute("package")
+		print(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml")
+		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",mode='r',encoding="utf8") as file_object:
+			new_xml=[]
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				f = i.replace(" ","")
+				if f.find("${applicationId}")!=-1:
+					new_xml.append(i.replace("${applicationId}",package_name)+"\r")
+				else:
+					new_xml.append(i)
+			with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",mode='w',encoding="utf8") as file_context:
+				file_context.writelines(new_xml)
+
 	def __all_files_in_folder(self,_path):
 		ListMyFolder = []
 		for dirpath, dirnames, filenames in os.walk(_path):

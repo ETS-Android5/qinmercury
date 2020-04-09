@@ -27,12 +27,12 @@ public class InAppAD extends InAppBase {
 	private TTRewardVideoAd mttRewardVideoAd;
 	private boolean mIsExpress = false; //是否请求模板广告
 	private boolean mHasShowDownloadActive = false;
-	private String appid = "945116595";
-	private String video_position_id = "901121430";
+	private static String  ad_appid = "945116595";
+	private static String video_position_id = "901121430";
 	public void ActivityInit(Activity context,final APPBaseInterface appcall)
 	{
 		super.ActivityInit(context, appcall);
-		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit");
+		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit video_position_id="+video_position_id);
 		TTAdManager ttAdManager = TTAdSdk.getAdManager();
 		//step2:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
 		ttAdManager.requestPermissionIfNecessary(mContext);
@@ -43,10 +43,10 @@ public class InAppAD extends InAppBase {
 	@Override
 	public void ApplicationInit(Application app)
 	{
-		MercuryActivity.LogLocal("["+appShow+"]->ApplicationInit="+app);
+		MercuryActivity.LogLocal("["+appShow+"]->ApplicationInit ad_appid="+ad_appid);
 		TTAdSdk.init(app,
 				new TTAdConfig.Builder()
-						.appId(appid)
+						.appId(ad_appid)
 						.useTextureView(false) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
 						.appName("永不言弃fall")
 						.titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
