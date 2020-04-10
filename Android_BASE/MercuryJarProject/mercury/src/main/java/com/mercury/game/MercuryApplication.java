@@ -61,6 +61,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		OpenUmeng();
 		channel_name = "singmaan";
 		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
+		Log.w("MercurySDK","[SDKApp]InAppAD");
 		mInAppExt = new InAppAD();
 		mInAppExt.ApplicationInit(Acontext);
 		if (OpenUmeng ==true) {
