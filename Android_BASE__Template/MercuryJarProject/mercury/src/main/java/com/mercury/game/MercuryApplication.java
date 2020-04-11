@@ -12,7 +12,6 @@ import android.util.Log;
 import com.mercury.game.InAppAdvertisement.InAppAD;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
-import com.umeng.commonsdk.UMConfigure;
 
 import java.util.Iterator;
 import java.util.List;
@@ -64,10 +63,6 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		Log.w("MercurySDK","[SDKApp]InAppAD");
 		mInAppExt = new InAppAD();
 		mInAppExt.ApplicationInit(Acontext);
-		if (OpenUmeng ==true) {
-			UMConfigure.init(context, "5e7b19e5570df324d7000392", channel_name, 0, "");
-			UMConfigure.setProcessEvent(true);
-		}
 
 		try 
 		{
