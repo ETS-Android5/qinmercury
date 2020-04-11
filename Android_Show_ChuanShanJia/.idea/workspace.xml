@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="23612721-3aa6-445b-8a0d-c97c509fb200" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryAPKProject/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryAPKProject/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/AndroidManifest_sdk.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/AndroidManifest_sdk.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/java/com/mercury/game/util/MercuryConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/java/com/mercury/game/util/MercuryConst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/libs/SecurityEnvSDK-release-1.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/libs/arm64-v8a/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/libs/armeabi-v7a/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/libs/armeabi/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/libs/umeng-common-2.2.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/libs/umeng-game-8.1.6+G.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/libs/utdid4all-1.1.5.3_proguard.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP_WanNianLi/MercuryJarProject/mercury/src/main/libs/x86/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryAPKProject/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP__Template/MercuryAPKProject/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/AndroidManifest_sdk.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/AndroidManifest_sdk.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/util/MercuryConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/util/MercuryConst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/libs/SecurityEnvSDK-release-1.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/libs/arm64-v8a/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/libs/armeabi-v7a/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/libs/armeabi/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/libs/umeng-common-2.2.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/libs/umeng-game-8.1.6+G.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/libs/utdid4all-1.1.5.3_proguard.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_IAP__Template/MercuryJarProject/mercury/src/main/libs/x86/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/util/MercuryConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/util/MercuryConst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/libs/SecurityEnvSDK-release-1.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/libs/arm64-v8a/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/libs/armeabi-v7a/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/libs/armeabi/libsecurityenv.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/libs/umeng-common-2.2.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/libs/umeng-game-8.1.6+G.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/libs/utdid4all-1.1.5.3_proguard.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android_SHOW__Template/MercuryJarProject/mercury/src/main/libs/x86/libsecurityenv.so" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1aO3lOTqvoevIoweI3N0U5vcY87" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="23612721-3aa6-445b-8a0d-c97c509fb200" name="Default Changelist" comment="" />
+      <created>1586592962955</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586592962955</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

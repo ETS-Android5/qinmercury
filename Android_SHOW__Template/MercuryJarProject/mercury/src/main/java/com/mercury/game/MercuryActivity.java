@@ -18,9 +18,6 @@ import com.mercury.game.InAppChannel.InAppChannel;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.analytics.game.UMGameAgent;
-
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,12 +48,8 @@ public class MercuryActivity  {
 	public static String SortChannelID="";
 	public static String LongChannelID="";
 	private static ImageView img = null;
-	public static UMGameAgent umgameaget = null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
-		if (OpenUmeng ==true) {
-			umgameaget.init(ContextFromUsers);
-		}
 		mContext = ContextFromUsers;
 		ChannelSplash();
 		mInAppChannel = new InAppChannel() ;
@@ -211,10 +204,6 @@ public class MercuryActivity  {
 
 
 	public void onPause() {
-		if (OpenUmeng ==true) {
-			MobclickAgent.onPause(mContext);
-			UMGameAgent.onPause(mContext);
-		}
 		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onPause()->" + mInAppChannel);mInAppChannel.onPause();}
 		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onPause()->" + mInAppAD);mInAppAD.onPause();}
 	}
@@ -236,10 +225,6 @@ public class MercuryActivity  {
 	}
 	public void onResume()
 	{
-		if (OpenUmeng ==true) {
-			MobclickAgent.onResume(mContext);
-			UMGameAgent.onResume(mContext);
-		}
 		if(mInAppChannel != null) { LogLocal("[MercuryActivity] mInAppChannel onResume()->" + mInAppChannel);mInAppChannel.onResume();}
 		if(mInAppAD != null) { LogLocal("[MercuryActivity] mInAppAD onResume()->" + mInAppAD);mInAppAD.onResume();}
 	}
