@@ -288,9 +288,18 @@ def run():
 		if file_name.find(".apk")!=-1:
 			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
 			break
-
-	sam = SDKAppendManager(channel = "Android_SHOW_ChuanShanJia",game_apk_path = game_apk_path)
-	print(sam._merge_package())
+	BASE = "Android_BASE_Umeng"
+	SHOW = "Android_IAP_WanNianLi"
+	IAP  = "Android_SHOW_ChuanShanJia"
+	if BASE != "":
+		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path)
+		game_apk_path = sam._merge_package()
+	if SHOW != "":
+		sam = SDKAppendManager(channel = SHOW, game_apk_path = game_apk_path)
+		game_apk_path = sam._merge_package()
+	if IAP != "":
+		sam = SDKAppendManager(channel = IAP, game_apk_path = game_apk_path)
+		game_apk_path = sam._merge_package()
 
 
 if __name__ == '__main__':

@@ -289,7 +289,7 @@ def run():
 			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
 			break
 	BASE = "Android_BASE_Umeng"
-	SHOW = "Android_IAP__Template"
+	SHOW = "Android_IAP_WanNianLi"
 	IAP  = "Android_SHOW_ChuanShanJia"
 	if BASE != "":
 		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path)
