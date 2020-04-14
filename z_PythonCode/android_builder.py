@@ -11,6 +11,8 @@ import shutil
 import z_PythonCode.xml_manager as xml_manager
 import zipfile
 import xml.dom.minidom
+def PythonLocation():
+	return os.path.dirname(os.path.realpath(__file__))
 class SDKAppendManager():
 	def __init__(self, channel, game_apk_path):
 		self.__channel = channel
@@ -38,7 +40,7 @@ class SDKAppendManager():
 		self._merge_sdk_resource()
 		self._modify_config()
 		self._rebuild_game_apk()
-		self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
+		return self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
 
 	def _decompile_game_apk(self):
 		os.system(f"{self.__apktool} d {self.__game_apk_path}")
@@ -270,17 +272,25 @@ class SDKAppendManager():
 		signed_apk_path = self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format
 		if os.path.isfile(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format):os.remove(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format)
 		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
-
+		return self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format
 def run():
+	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
+		os.remove(PythonLocation()+"/"+file_path+".py")
+	if os.path.isfile(PythonLocation()+"/z_PythonCode/"+file_path+".py"):
+		shutil.copy(PythonLocation()+"/z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
+
 	folder_name = os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+
 	files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 	game_apk_path = ""
 	for file_name in files:
 		if file_name.find(".apk")!=-1:
 			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
 			break
-	sam = SDKAppendManager(channel = folder_name,game_apk_path = game_apk_path)
-	sam._merge_package()
+
+	sam = SDKAppendManager(channel = "Android_SHOW_ChuanShanJia",game_apk_path = game_apk_path)
+	print(sam._merge_package())
 
 
 if __name__ == '__main__':
