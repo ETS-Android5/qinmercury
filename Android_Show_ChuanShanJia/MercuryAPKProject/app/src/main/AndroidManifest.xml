@@ -15,7 +15,7 @@
         <activity
             android:name="com.qinbatista.mercury.MainActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

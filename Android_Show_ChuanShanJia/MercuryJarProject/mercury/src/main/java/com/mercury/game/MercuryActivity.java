@@ -99,9 +99,10 @@ public class MercuryActivity  {
 								((Activity) mContext).runOnUiThread(new Runnable() {
 									@Override
 									public void run() {
-										ViewGroup vg = (ViewGroup) image
-												.getParent();
-										vg.removeView(image);
+
+										ViewGroup vg = (ViewGroup) image.getParent();
+										if (vg!=null)
+										{vg.removeView(image);}
 									}
 								});
 							}
@@ -206,7 +207,11 @@ public class MercuryActivity  {
 	public void show_video()
 	{
 		LogLocal("[MercuryActivity][show_video]" + mInAppAD);
-		if(mInAppAD != null) { mInAppAD.show_video(); }
+		if(mInAppAD != null)
+		{
+			LogLocal("[MercuryActivity][show_video] mInAppAD!=null");
+			mInAppAD.show_video();
+		}
 	}
 
 

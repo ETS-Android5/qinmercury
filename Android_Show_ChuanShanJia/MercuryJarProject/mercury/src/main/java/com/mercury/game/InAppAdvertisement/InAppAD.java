@@ -6,6 +6,7 @@ import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.mercury.game.MercuryApplication;
 import com.mercury.game.util.APPBaseInterface;
@@ -16,7 +17,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
+
+import java.util.List;
 //end
 
 public class InAppAD extends InAppBase {
@@ -25,20 +29,28 @@ public class InAppAD extends InAppBase {
 	public static String MyScence = "";
 	private TTAdNative mTTAdNative;
 	private TTRewardVideoAd mttRewardVideoAd;
+
+	private TTNativeExpressAd mTTAd;
+
 	private boolean mIsExpress = false; //是否请求模板广告
 	private boolean mHasShowDownloadActive = false;
-	private static String  ad_appid = "945116595";
-	private static String video_position_id = "901121430";
+	private static String  ad_appid = "5059494";
+	private static String  game_name = "砖块弹弹弹";
+	private static String video_position_id = "945132328";
+	private static String insert_position_id = "";
+	private long startTime = 0;
 	public void ActivityInit(Activity context,final APPBaseInterface appcall)
 	{
 		super.ActivityInit(context, appcall);
-		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit video_position_id="+video_position_id);
+		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit video_position_id 1.2="+video_position_id);
 		TTAdManager ttAdManager = TTAdSdk.getAdManager();
-		//step2:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
 		ttAdManager.requestPermissionIfNecessary(mContext);
-		//step3:创建TTAdNative对象,用于调用广告请求接口
 		mTTAdNative = ttAdManager.createAdNative(mContext.getApplicationContext());
-		loadAd(video_position_id,TTAdConstant.HORIZONTAL);
+
+		if(video_position_id.equals("")==false){
+			loadAd(video_position_id,TTAdConstant.HORIZONTAL);
+		}
+
 	}
 	@Override
 	public void ApplicationInit(Application app)
@@ -48,7 +60,7 @@ public class InAppAD extends InAppBase {
 				new TTAdConfig.Builder()
 						.appId(ad_appid)
 						.useTextureView(false) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
-						.appName("永不言弃fall")
+						.appName(game_name)
 						.titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
 						.allowShowNotify(true) //是否允许sdk展示通知栏提示
 						.allowShowPageWhenScreenLock(true) //是否在锁屏场景支持展示广告落地页
@@ -68,11 +80,12 @@ public class InAppAD extends InAppBase {
 				.setSupportDeepLink(true)
 				.setRewardName("金币") //奖励的名称
 				.setRewardAmount(3)  //奖励的数量
+				//模板广告需要设置期望个性化模板广告的大小,单位dp,激励视频场景，只要设置的值大于0即可
+				.setExpressViewAcceptedSize(500,500)
 				.setUserID("user123")//用户id,必传参数
 				.setMediaExtra("media_extra") //附加参数，可选
 				.setOrientation(orientation) //必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
 				.build();
-		//step5:请求广告
 		mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
 			@Override
 			public void onError(int code, String message) {
@@ -94,6 +107,7 @@ public class InAppAD extends InAppBase {
 
 					@Override
 					public void onAdShow() {
+						loadAd(video_position_id,TTAdConstant.HORIZONTAL);
 						MercuryActivity.LogLocal("rewardVideoAd show");
 					}
 
@@ -168,6 +182,102 @@ public class InAppAD extends InAppBase {
 			}
 		});
 	}
+	private void loadExpressAd(String codeId, int expressViewWidth, int expressViewHeight) {
+		//step4:创建广告请求参数AdSlot,具体参数含义参考文档
+		AdSlot adSlot = new AdSlot.Builder()
+				.setCodeId(codeId) //广告位id
+				.setSupportDeepLink(true)
+				.setAdCount(1) //请求广告数量为1到3条
+				.setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) //期望模板广告view的size,单位dp
+				.build();
+		//step5:请求广告，对请求回调的广告作渲染处理
+		mTTAdNative.loadInteractionExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
+			@Override
+			public void onError(int code, String message) {
+				MercuryActivity.LogLocal("load error");
+			}
+
+			@Override
+			public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
+				if (ads == null || ads.size() == 0) {
+					return;
+				}
+				mTTAd = ads.get(0);
+				bindAdListener(mTTAd);
+				startTime = System.currentTimeMillis();
+				mTTAd.render();
+			}
+		});
+	}
+	private void bindAdListener(TTNativeExpressAd ad) {
+		ad.setExpressInteractionListener(new TTNativeExpressAd.AdInteractionListener() {
+			@Override
+			public void onAdDismiss() {
+				MercuryActivity.LogLocal("广告关闭");
+			}
+
+			@Override
+			public void onAdClicked(View view, int type) {
+				MercuryActivity.LogLocal("广告被点击");
+			}
+
+			@Override
+			public void onAdShow(View view, int type) {
+				MercuryActivity.LogLocal("广告展示");
+			}
+
+			@Override
+			public void onRenderFail(View view, String msg, int code) {
+				MercuryActivity.LogLocal("render fail:" + (System.currentTimeMillis() - startTime));
+			}
+
+			@Override
+			public void onRenderSuccess(View view, float width, float height) {
+				MercuryActivity.LogLocal("render suc:" + (System.currentTimeMillis() - startTime));
+				//返回view的宽高 单位 dp
+				mTTAd.showInteractionExpressAd(mContext);
+
+			}
+		});
+
+		if (ad.getInteractionType() != TTAdConstant.INTERACTION_TYPE_DOWNLOAD) {
+			return;
+		}
+		ad.setDownloadListener(new TTAppDownloadListener() {
+			@Override
+			public void onIdle() {
+				MercuryActivity.LogLocal("点击开始下载");
+			}
+
+			@Override
+			public void onDownloadActive(long totalBytes, long currBytes, String fileName, String appName) {
+				if (!mHasShowDownloadActive) {
+					mHasShowDownloadActive = true;
+					MercuryActivity.LogLocal("下载中，点击暂停");
+				}
+			}
+
+			@Override
+			public void onDownloadPaused(long totalBytes, long currBytes, String fileName, String appName) {
+				MercuryActivity.LogLocal("下载暂停，点击继续");
+			}
+
+			@Override
+			public void onDownloadFailed(long totalBytes, long currBytes, String fileName, String appName) {
+				MercuryActivity.LogLocal("下载失败，点击重新下载");
+			}
+
+			@Override
+			public void onInstalled(String fileName, String appName) {
+				MercuryActivity.LogLocal("安装完成，点击图片打开");
+			}
+
+			@Override
+			public void onDownloadFinished(long totalBytes, String fileName, String appName) {
+				MercuryActivity.LogLocal("点击安装");
+			}
+		});
+	}
 	@Override
 	public void onPause()
 	{
@@ -185,6 +295,9 @@ public class InAppAD extends InAppBase {
 	public void onDestroy()
 	{
 		MercuryActivity.LogLocal("["+appShow+"]->onDestroy");
+		if (mTTAd != null) {
+			mTTAd.destroy();
+		}
 	}
 	@Override
 	public void onStop()
@@ -206,28 +319,33 @@ public class InAppAD extends InAppBase {
 	{
 		super.attachBaseContext(base);
 	}
-	public void show_insert(String Scenes) {
+	public void show_insert() {
 		// TODO Auto-generated method stub
 		MercuryActivity.LogLocal("["+appShow+"] show_insert");
+		if(insert_position_id.equals("")==false){
+			loadExpressAd(insert_position_id,400,400);
+		}
 	}
-	public void show_banner(String Scenes) {
+	public void show_banner() {
 		// TODO Auto-generated method stub
 		MercuryActivity.LogLocal("["+appShow+"] show_banner");
 	}
-	public void show_push(String Scenes) {
+	public void show_push() {
 		// TODO Auto-generated method stub
 		MercuryActivity.LogLocal("["+appShow+"] show_push");
 	}
 
-	public void show_out(String Scenes) {
+	public void show_out() {
 		// TODO Auto-generated method stub
 		MercuryActivity.LogLocal("["+appShow+"] show_out");
 	}
-	public void show_video(String Scenes) {
+	public void show_video() {
 		// TODO Auto-generated method stub
 		MercuryActivity.LogLocal("[" + appShow + "] show_video");
 		if (mttRewardVideoAd != null) {
-			mttRewardVideoAd.showRewardVideoAd(mContext, TTAdConstant.RitScenes.CUSTOMIZE_SCENES, "scenes_test");
+			MercuryActivity.LogLocal("[" + appShow + "] mttRewardVideoAd");
+			mttRewardVideoAd.showRewardVideoAd(mContext);
+//			mttRewardVideoAd.showRewardVideoAd(mContext, TTAdConstant.RitScenes.CUSTOMIZE_SCENES, "scenes_test");
 			mttRewardVideoAd = null;
 		} else {
 			MercuryActivity.LogLocal("请先加载广告");

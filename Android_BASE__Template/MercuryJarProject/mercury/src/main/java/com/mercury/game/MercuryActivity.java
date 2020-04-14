@@ -96,7 +96,8 @@ public class MercuryActivity  {
 									public void run() {
 										ViewGroup vg = (ViewGroup) image
 												.getParent();
-										vg.removeView(image);
+												if (vg!=null)
+												{vg.removeView(image);}
 									}
 								});
 							}
