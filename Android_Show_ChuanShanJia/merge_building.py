@@ -1,10 +1,8 @@
 import sys
 import os
 import platform
-
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
-
 import os
 import sys
 import time
@@ -432,9 +430,12 @@ def run():
 	sam.merge_sdk_resource()
 
 def main():
-	#PythonFunction.FuncFunctionList.CleanCache()
-	#PythonFunction.FuncFunctionList.RestSetting()
-	run()
+	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
+		os.remove(PythonLocation()+"/"+file_path+".py")
+	if os.path.isfile(PythonLocation()+"/../z_PythonCode/"+file_path+".py"):
+		shutil.copy(PythonLocation()+"/../z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
+
 	os.chdir(PythonLocation())
 	os.system("python3 ./MercuryJarProject/BuildJAR.py")
 	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
