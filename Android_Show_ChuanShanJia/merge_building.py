@@ -390,6 +390,7 @@ class APKBuildManager():
 
 def run():
 	if os.path.isdir(f"{PythonLocation()}/MercuryAPKProject_pure"):
+		print(f"{PythonLocation()}/MercuryAPKProject")
 		if os.path.isdir(f"{PythonLocation()}/MercuryAPKProject"):shutil.rmtree(f"{PythonLocation()}/MercuryAPKProject")
 		shutil.copytree(f"{PythonLocation()}/MercuryAPKProject_pure",f"{PythonLocation()}/MercuryAPKProject")
 	else:
