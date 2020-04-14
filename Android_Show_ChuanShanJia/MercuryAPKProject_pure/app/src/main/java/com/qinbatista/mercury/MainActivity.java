@@ -12,8 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.demo.game.R;
-public class MainActivity extends Activity  {
+import com.demo.game.R;public class MainActivity extends Activity  {
 	public static Context context;
 	public MercuryActivity MercurySDK;
 	public static APPBaseInterface appcall=null;
