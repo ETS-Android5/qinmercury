@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdkboxs>
+    <sdkbox id="001">
+    <sdk>http://sdk.singmaan.com</sdk>
+    <box>com.xingman.box</box>
+    </sdkbox>
+</sdkboxs>
