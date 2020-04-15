@@ -11,15 +11,15 @@
 <!--sdk-->        <activity
             android:name="com.zhongtui.sdk.activity.LoginActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name="com.zhongtui.sdk.activity.PayActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name="com.zhongtui.sdk.activity.UserActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="landscape"></activity>
         <service android:name="com.zhongtui.sdk.service.QueryOrderService"></service>
 
 <!--end-->    </application>

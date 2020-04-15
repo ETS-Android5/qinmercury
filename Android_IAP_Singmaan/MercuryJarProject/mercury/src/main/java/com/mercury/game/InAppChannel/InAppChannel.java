@@ -47,19 +47,30 @@ public class InAppChannel extends InAppBase {
 	private int mAccountType;
 	private String demovalue1;
 	private ZhongTuiSdk sdk;
-	private String APPID_KEY = "1000";
-	private String CLICENT_KEY = "5b21ab6109b8f2ea81b46232fefdf802";
+	private String APPID_KEY = "1195";
+	private String CLICENT_KEY = "cff1318bdc1d8f9635b5f1e63e7c9229";
 	@Override
-	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
+	public void ActivityInit(final Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
-		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.sdk="+sdk);
 		try {
 			sdk = (ZhongTuiSdk) ZhongTuiSdkFactory.getSdkProxyInstance();
 			sdk.init(context, APPID_KEY, CLICENT_KEY, new InitCallback() {
 				@Override
 				public void onInitSucceed() {
+					sdk.login(context, new LoginCallback() {
+						@SuppressLint("SetTextI18n")
+						@Override
+						public void onLoginSucceed(final String s, final String s1) {
+							Log.e(Channelname, "登录成功" + "\n" + "uid:" + s + "\n" + "token:" + s1);
+						}
+
+						@Override
+						public void onLoginFailed(String s) {
+							Log.e(Channelname, "登陆失败:" + s);
+						}
+					});
 					sdk.registerSdkLogoutListener(new OnSdkLogoutListener() {
 						@Override
 						public void onSdkLogout() {
@@ -71,7 +82,7 @@ public class InAppChannel extends InAppBase {
 				@Override
 				public void onInitFailed(String s) {
 					//失败
-					Log.e(Channelname, "退出监听");
+					Log.e(Channelname, "初始化失败:"+s);
 				}
 			});
 		}
@@ -80,18 +91,7 @@ public class InAppChannel extends InAppBase {
 
 		}
 
-		sdk.login(context, new LoginCallback() {
-			@SuppressLint("SetTextI18n")
-			@Override
-			public void onLoginSucceed(final String s, final String s1) {
-				Log.e(Channelname, "登录成功" + "\n" + "uid:" + s + "\n" + "token:" + s1);
-			}
 
-			@Override
-			public void onLoginFailed(String s) {
-				Log.e(Channelname, "登陆失败:" + s);
-			}
-		});
 	}
 	public void ApplicationInit(Application appcontext)
 	{
