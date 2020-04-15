@@ -116,10 +116,10 @@ public class InAppChannel extends InAppBase {
 		payParams.setExtension("扩展信息，原样返回游戏服务器");
 		payParams.setProductID(MercuryConst.QinPid);
 		payParams.setProductNAME(MercuryConst.Qindesc);
-		payParams.setRoleID("100001");
-		payParams.setRoleNAME("张无忌");
+		payParams.setRoleID("");
+		payParams.setRoleNAME("游戏玩家");
 		payParams.setServerID(1);
-		payParams.setServerNAME("测试1服");
+		payParams.setServerNAME("默认服务器");
 		//支付参数
 		MercuryActivity.LogLocal("支付参数:"
 				+ payParams.getExtension() + "\n"
