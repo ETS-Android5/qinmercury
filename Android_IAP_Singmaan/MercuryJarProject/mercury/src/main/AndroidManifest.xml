@@ -26,17 +26,18 @@
 		<!--sdk-->
         <activity
             android:name="com.zhongtui.sdk.activity.LoginActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape" />
         <activity
             android:name="com.zhongtui.sdk.activity.PayActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape" />
         <activity
             android:name="com.zhongtui.sdk.activity.UserActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
-        <service android:name="com.zhongtui.sdk.service.QueryOrderService"></service>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape" />
+
+        <service android:name="com.zhongtui.sdk.service.QueryOrderService" />
 
         <!--end-->
     </application>

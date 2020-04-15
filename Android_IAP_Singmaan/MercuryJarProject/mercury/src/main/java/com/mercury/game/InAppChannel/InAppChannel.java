@@ -116,7 +116,7 @@ public class InAppChannel extends InAppBase {
 		payParams.setExtension("扩展信息，原样返回游戏服务器");
 		payParams.setProductID(MercuryConst.QinPid);
 		payParams.setProductNAME(MercuryConst.Qindesc);
-		payParams.setRoleID("");
+		payParams.setRoleID("默认角色");
 		payParams.setRoleNAME("游戏玩家");
 		payParams.setServerID(1);
 		payParams.setServerNAME("默认服务器");
