@@ -435,7 +435,7 @@ def main():
 		os.remove(PythonLocation()+"/"+file_path+".py")
 	if os.path.isfile(PythonLocation()+"/../z_PythonCode/"+file_path+".py"):
 		shutil.copy(PythonLocation()+"/../z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
-
+	run()
 	os.chdir(PythonLocation())
 	os.system("python3 ./MercuryJarProject/BuildJAR.py")
 	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")

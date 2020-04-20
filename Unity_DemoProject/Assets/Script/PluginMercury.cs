@@ -3,14 +3,23 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 using SimpleJSON;
-
+using System.Runtime.InteropServices;
 public class PluginMercury : MonoBehaviour
 {
 
 #if UNITY_ANDROID
     public static AndroidJavaObject _plugin;
 #elif UNITY_IPHONE
-
+    [DllImport ("__Internal")]
+    private static extern void show_video_IOS();
+    [DllImport ("__Internal")]
+    private static extern void show_insert_IOS();
+    [DllImport ("__Internal")]
+    private static extern void show_banner_IOS();
+    [DllImport ("__Internal")]
+    private static extern void show_push_IOS();
+    [DllImport ("__Internal")]
+    private static extern void GameInit();
 #endif
 
     public static PluginMercury pInstance;
@@ -48,6 +57,9 @@ public class PluginMercury : MonoBehaviour
         {
             _plugin = pluginClass.CallStatic<AndroidJavaObject>("getInstance");
         }
+#elif UNITY_IPHONE
+        print("[UNITY_IPHONE]->GameInit()");
+        GameInit();
 #endif
     }
 
@@ -83,6 +95,9 @@ public class PluginMercury : MonoBehaviour
         print("[UNITY_EDITOR]->show_video()");
 #elif UNITY_ANDROID
         print("[Android]->show_video()");_plugin.Call("show_video");
+#elif UNITY_IPHONE
+        print("[UNITY_IPHONE]->show_video()");
+        show_video_IOS();
 #endif
     }
 
@@ -92,6 +107,9 @@ public class PluginMercury : MonoBehaviour
         print("[UNITY_EDITOR]->show_insert()");
 #elif UNITY_ANDROID
         print("[Android]->show_insert()");_plugin.Call("show_insert");
+#elif UNITY_IPHONE
+        print("[UNITY_IPHONE]->show_insert()");
+        show_insert_IOS();
 #endif
     }
     public void show_banner()
@@ -100,6 +118,9 @@ public class PluginMercury : MonoBehaviour
         print("[UNITY_EDITOR]->show_banner()");
 #elif UNITY_ANDROID
         print("[Android]->show_banner()");_plugin.Call("show_banner");
+#elif UNITY_IPHONE
+        print("[UNITY_IPHONE]->show_banner()");
+        show_banner_IOS();
 #endif
     }
     public void show_push()
@@ -108,9 +129,40 @@ public class PluginMercury : MonoBehaviour
         print("[UNITY_EDITOR]->show_push()");
 #elif UNITY_ANDROID
         print("[Android]->show_push()");_plugin.Call("show_push");
+#elif UNITY_IPHONE
+        print("[UNITY_IPHONE]->show_push()");
+        show_push_IOS();
 #endif
     }
 
+    public void PurchaseSuccessCallBack(string msg)
+    {
+        print("[Unity]->PurchaseSuccessCallBack");
+    }
+    public void PurchaseFailedCallBack(string msg)
+    {
+        print("[Unity]->PurchaseFailedCallBack");
+    }
+    public void LoginSuccessCallBack(string msg)
+    {
+        print("[Unity]->LoginSuccessCallBack");
+    }
+    public void LoginCancelCallBack(string msg)
+    {
+        print("[Unity]->LoginCancelCallBack");
+    }
+    public void AdLoadSuccessCallBack(string msg)
+    {
+        print("[Unity]->AdLoadSuccessCallBack");
+    }
+    public void AdLoadFailedCallBack(string msg)
+    {
+        print("[Unity]->AdLoadFailedCallBack");
+    }
+    public void onFunctionCallBack(string msg)
+    {
+        print("[Unity]->onFunctionCallBack");
+    }
 
 }
 

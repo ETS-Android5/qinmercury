@@ -237,22 +237,22 @@ public class MercuryConst {
     	  float  pricefloat=1f;
 		  switch (SavePid)
 	      {
-	          case "production1":		desc = "解锁全部关卡"; pricefloat = 20.0f;  ServerPid=ServerPid1;   ServerPrice=ServerPrice1;ServerDes=ServerDes1;break;
-	          case "production2":		desc = "2200点券";    pricefloat = 35.0f;   ServerPid=ServerPid2;	ServerPrice=ServerPrice2;ServerDes=ServerDes2;break;
-	          case "production3":		desc = "5000点券";    pricefloat = 65.0f;  ServerPid=ServerPid3;	ServerPrice=ServerPrice3;ServerDes=ServerDes3;break;
-	          case "production4":		desc = "11000点券";   pricefloat = 130.0f;   ServerPid=ServerPid4;	ServerPrice=ServerPrice4;ServerDes=ServerDes4;break;
-	          case "production5":		desc = "30000点券";   pricefloat = 330.0f;  ServerPid=ServerPid5;	ServerPrice=ServerPrice5;ServerDes=ServerDes5;break;
-	          case "production6":		desc = "70000点券";   pricefloat = 660.0f;  ServerPid=ServerPid6;	ServerPrice=ServerPrice6;ServerDes=ServerDes6;break;
-	          case "production7":		desc = "命运女侠";     pricefloat = 20.0f;  ServerPid=ServerPid7;	ServerPrice=ServerPrice7;ServerDes=ServerDes7;break;
-	          case "production8":		desc = "风刃";        pricefloat = 20.0f;  ServerPid=ServerPid8;	ServerPrice=ServerPrice8;ServerDes=ServerDes8;break;
-	          case "production9":		desc = "虚空猎手";     pricefloat = 20.0f;  ServerPid=ServerPid9;	ServerPrice=ServerPrice9;ServerDes=ServerDes9;break;
-	          case "production10":		desc = "超能博士";     pricefloat = 30.0f;  ServerPid=ServerPid10;	ServerPrice=ServerPrice10;ServerDes=ServerDes10;break;
-	          case "production11":		desc = "达尔文";       pricefloat = 30.0f;  ServerPid=ServerPid11;	ServerPrice=ServerPrice11;ServerDes=ServerDes11;break;
-	          case "production12":		desc = "铁甲马克";     pricefloat = 45.0f; ServerPid=ServerPid12;	ServerPrice=ServerPrice12;ServerDes=ServerDes12;break;
-	          case "production13":		desc = "解锁游戏";     pricefloat = 30.0f; ServerPid=ServerPid13;	ServerPrice=ServerPrice13;ServerDes=ServerDes13;break;
-	          case "production14":		desc = "桂英";         pricefloat =  18.0f; ServerPid=ServerPid14;	ServerPrice=ServerPrice14;ServerDes=ServerDes14;break;
-	          case "production15":		desc = "自由猎人";     pricefloat = 30.0f; ServerPid=ServerPid15;	ServerPrice=ServerPrice15;ServerDes=ServerDes15;break;
-	          case "production16":		desc = "自由猎人";     pricefloat = 30.0f; ServerPid=ServerPid15;	ServerPrice=ServerPrice15;ServerDes=ServerDes15;break;
+	          case "production1":		desc = "解锁全部关卡"; pricefloat = 1.0f;  ServerPid=ServerPid1;   ServerPrice=ServerPrice1;ServerDes=ServerDes1;break;
+	          case "production2":		desc = "2200点券";    pricefloat = 1.0f;   ServerPid=ServerPid2;	ServerPrice=ServerPrice2;ServerDes=ServerDes2;break;
+	          case "production3":		desc = "5000点券";    pricefloat = 1.0f;  ServerPid=ServerPid3;	ServerPrice=ServerPrice3;ServerDes=ServerDes3;break;
+	          case "production4":		desc = "11000点券";   pricefloat = 1.0f;   ServerPid=ServerPid4;	ServerPrice=ServerPrice4;ServerDes=ServerDes4;break;
+	          case "production5":		desc = "30000点券";   pricefloat = 1.0f;  ServerPid=ServerPid5;	ServerPrice=ServerPrice5;ServerDes=ServerDes5;break;
+	          case "production6":		desc = "70000点券";   pricefloat = 1.0f;  ServerPid=ServerPid6;	ServerPrice=ServerPrice6;ServerDes=ServerDes6;break;
+	          case "production7":		desc = "命运女侠";     pricefloat = 1.0f;  ServerPid=ServerPid7;	ServerPrice=ServerPrice7;ServerDes=ServerDes7;break;
+	          case "production8":		desc = "风刃";        pricefloat = 1.0f;  ServerPid=ServerPid8;	ServerPrice=ServerPrice8;ServerDes=ServerDes8;break;
+	          case "production9":		desc = "虚空猎手";     pricefloat = 1.0f;  ServerPid=ServerPid9;	ServerPrice=ServerPrice9;ServerDes=ServerDes9;break;
+	          case "production10":		desc = "超能博士";     pricefloat = 1.0f;  ServerPid=ServerPid10;	ServerPrice=ServerPrice10;ServerDes=ServerDes10;break;
+	          case "production11":		desc = "达尔文";       pricefloat = 1.0f;  ServerPid=ServerPid11;	ServerPrice=ServerPrice11;ServerDes=ServerDes11;break;
+	          case "production12":		desc = "铁甲马克";     pricefloat = 1.0f; ServerPid=ServerPid12;	ServerPrice=ServerPrice12;ServerDes=ServerDes12;break;
+	          case "production13":		desc = "解锁游戏";     pricefloat = 1.0f; ServerPid=ServerPid13;	ServerPrice=ServerPrice13;ServerDes=ServerDes13;break;
+	          case "production14":		desc = "桂英";         pricefloat = 1.0f; ServerPid=ServerPid14;	ServerPrice=ServerPrice14;ServerDes=ServerDes14;break;
+	          case "production15":		desc = "自由猎人";     pricefloat = 1.0f; ServerPid=ServerPid15;	ServerPrice=ServerPrice15;ServerDes=ServerDes15;break;
+	          case "production16":		desc = "自由猎人";     pricefloat = 1.0f; ServerPid=ServerPid15;	ServerPrice=ServerPrice15;ServerDes=ServerDes15;break;
 	          default:
 	              break;	
 	      }
