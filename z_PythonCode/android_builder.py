@@ -33,6 +33,7 @@ class SDKAppendManager():
 		if os.path.isdir(self.__file_path+self.__cache_position): shutil.rmtree(self.__file_path+self.__cache_position)
 		self.__create_cache()
 		self.__copyFileCounts = 0
+		self.__conflict_list = []
 
 	def _merge_package(self):
 		self._decompile_game_apk()
@@ -115,12 +116,16 @@ class SDKAppendManager():
 	def __merge_sdk_resource_res(self):
 		game_res = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
 		sdk_res  = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/res")
+		conflict_list = self.__copy_files_dont_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/res",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
 		for g_res in game_res:
 			for s_res in sdk_res:
-				self.__copy_files_dont_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/res",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
 				gameresfile = g_res[g_res.rfind("/"):]
 				sdkresfile = s_res[s_res.rfind("/"):]
-				if sdkresfile == gameresfile and ".xml" in sdkresfile:
+				gameresfolder = g_res[g_res.rfind("/res"):]
+				sdkresfolder =  s_res[s_res.rfind("/res"):]
+				if gameresfolder!=sdkresfolder:
+					continue
+				elif sdkresfile == gameresfile and ".xml" in sdkresfile:
 					if gameresfile == "/activity_main.xml" or gameresfile == "/main.xml" or gameresfile=="/public.xml":
 						print(f"skip{gameresfile}")
 						continue
@@ -195,7 +200,6 @@ class SDKAppendManager():
 				ListMyFolder.append(dirpath+"/"+filename)
 		return ListMyFolder
 	def __copy_files_dont_overwrite(self,sourceDir, targetDir):
-		self.__copyFileCounts
 		#print (sourceDir)
 		#print (u"%s 当前处理文件夹%s已处理%s 个文件" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), sourceDir,copyFileCounts))
 		for f in os.listdir(sourceDir):
@@ -212,10 +216,14 @@ class SDKAppendManager():
 					open(targetF, "wb").write(open(sourceF, "rb").read())
 					#print (u"%s %s 复制完毕" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 				else:
+					self.__conflict_list.append(targetF)
 					pass
 					# print (u"%s %s 已存在，不重复复制" %(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), targetF))
 			if os.path.isdir(sourceF):
 				self.__copy_files_dont_overwrite(sourceF, targetF)
+		my_list = self.__conflict_list
+		self.__conflict_list = []
+		return my_list
 
 	def __create_cache(self):
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}")==False:os.mkdir(f"{self.__file_path}/{self.__cache_position}")
@@ -289,7 +297,7 @@ def run():
 			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
 			break
 	BASE = "Android_BASE_Umeng"
-	SHOW = "Android_IAP_WanNianLi"
+	SHOW = "Android_IAP_Singmaan"
 	IAP  = "Android_SHOW_ChuanShanJia"
 	if BASE != "":
 		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path)
