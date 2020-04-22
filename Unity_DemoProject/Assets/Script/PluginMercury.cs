@@ -19,7 +19,7 @@ public class PluginMercury : MonoBehaviour
     [DllImport ("__Internal")]
     private static extern void show_push_IOS();
     [DllImport ("__Internal")]
-    private static extern void GameInit();
+    private static extern void GameInit(string name);
 #endif
 
     public static PluginMercury pInstance;
@@ -59,7 +59,7 @@ public class PluginMercury : MonoBehaviour
         }
 #elif UNITY_IPHONE
         print("[UNITY_IPHONE]->GameInit()");
-        GameInit();
+        GameInit("GameInit");
 #endif
     }
 

@@ -85,7 +85,6 @@ void GameInit()
         [BUAdSDKManager setAppID:@"5043574"];
         [BUAdSDKManager setIsPaidApp:NO];
         [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
-        
         BURewardedVideoModel *model=[[BURewardedVideoModel alloc]init];
         model.userId=@"ming123";
         self.rewardedVideoAd=[[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:@"945009897" rewardedVideoModel:model];

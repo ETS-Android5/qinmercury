@@ -1,21 +1,36 @@
-void show_video_IOS(NSString* name)
-{
-	NSLog(@"%s this is new string ",name);
+
+#import "QinMercury.h"
+
+
+static QinMercury *instance;
+
+@implementation QinMercury
+
++(QinMercury *) getAdInstance{
+    return instance;
 }
-void show_insert_IOS(NSString* name)
+-(void) GameInit
 {
-	NSLog(@"%s this is new string ",name);
-}
-void show_banner_IOS(NSString* name)
-{
-	NSLog(@"%s this is new string ",name);
-}
-void show_push_IOS(NSString* name)
-{
-	NSLog(@"%s this is new string ",name);
-}
-void GameInit(NSString* name)
-{
-	NSLog(@"%s this is new string ",name);
+    NSLog(@"this is GameInit object-c");
     UnitySendMessage("PluginMercury", "onFunctionCallBack", "GameInit success");
 }
+-(void) show_video_IOS
+{
+    NSLog(@"this is show_video_IOS object-c");
+}
+-(void) show_insert_IOS
+{
+    NSLog(@"this is show_insert_IOS object-c");
+}
+-(void) show_banner_IOS
+{
+    NSLog(@"this is show_banner_IOS object-c");
+}
+-(void) show_push_IOS
+{
+    NSLog(@"this is show_push_IOS object-c");
+}
+
+@end
+
+
