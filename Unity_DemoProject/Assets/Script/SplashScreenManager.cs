@@ -24,6 +24,8 @@ public class SplashScreenManager : MonoBehaviour
     public Texture2D blackPixel;
     bool loadingOver = false;
     private AsyncOperation async;
+    //转圈
+    public Transform LoadingCircle;
     //登陆框模块
     public GameObject LoginDialog;
 
@@ -175,9 +177,9 @@ public class SplashScreenManager : MonoBehaviour
     public void LoadMainScene()
     {
 
-            loadingOver = true;
-            // Application.LoadLevel(nextSceneName);
-            NeedToChangeScence();
+        loadingOver = true;
+        // Application.LoadLevel(nextSceneName);
+        NeedToChangeScence();
     }
 
 
@@ -193,15 +195,22 @@ public class SplashScreenManager : MonoBehaviour
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), blackPixel);
         float ratio = splashes[splashIndex].height / (splashes[splashIndex].width + 0.0f);
         float ratioScreen = Screen.height / (Screen.width + 0.0f);
-        // if (ratio > ratioScreen && ratio < 1)
-        // {
-        //     var H = Screen.width * ratio;
-        //     GUI.DrawTexture(new Rect(0, (Screen.height - H) * 0.5f, Screen.width, H), splashes[splashIndex]);
-        // }
-        // else
+        //if (ratio > ratioScreen && ratio < 1)
+        float splashScale = 0.5f;
+
+        Texture2D targetPic = splashes[splashIndex];
+
+        if (ratioScreen > 1) //如果屏幕是竖屏，则固定图片宽度，，推算出高度（这样才能保持图片比例不变，上下留出空余把图放中间）
         {
-            var W = Screen.height / ratio;
-            GUI.DrawTexture(new Rect((Screen.width - W) * 0.5f, 0, W, Screen.height), splashes[splashIndex]);
+            var H = Screen.width * ratio * splashScale;
+            var xPos = (Screen.width - Screen.width * splashScale) * 0.5f;//X的起始坐标
+            GUI.DrawTexture(new Rect(xPos, (Screen.height - H) * 0.5f, Screen.width * splashScale, H), splashes[splashIndex]);
+        }
+        else//如果屏幕是横屏，则固定图片高度，，推算出宽度
+        {
+            var W = Screen.height / ratio * splashScale;
+            var yPos = (Screen.height - Screen.height * splashScale) * 0.5f;//Y的起始坐标
+            GUI.DrawTexture(new Rect((Screen.width - W ) * 0.5f, yPos, W , Screen.height * splashScale), splashes[splashIndex]);
         }
         GUI.color = oldColor;
     }
@@ -290,20 +299,20 @@ public class SplashScreenManager : MonoBehaviour
         SplashScreenManager ssm = GetComponent<SplashScreenManager>();
         foreach (var item in channelSplashsDic)
         {
-  
-                currentSplashes = item.Value;
-                int index = currentSplashes.Length + ssm.splashes.Length;
-                Texture2D[] temp = new Texture2D[index];
-                for (int i = 0; i < currentSplashes.Length; i++)
-                {
-                    temp[i] = currentSplashes[i];
-                }
-                for (int i = currentSplashes.Length; i < index; i++)
-                {
-                    temp[i] = ssm.splashes[i - currentSplashes.Length];
-                }
-                ssm.splashes = temp;
-                break;
+
+            currentSplashes = item.Value;
+            int index = currentSplashes.Length + ssm.splashes.Length;
+            Texture2D[] temp = new Texture2D[index];
+            for (int i = 0; i < currentSplashes.Length; i++)
+            {
+                temp[i] = currentSplashes[i];
+            }
+            for (int i = currentSplashes.Length; i < index; i++)
+            {
+                temp[i] = ssm.splashes[i - currentSplashes.Length];
+            }
+            ssm.splashes = temp;
+            break;
 
         }
     }
