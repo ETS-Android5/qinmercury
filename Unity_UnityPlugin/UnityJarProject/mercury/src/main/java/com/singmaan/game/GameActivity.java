@@ -96,7 +96,39 @@ public class GameActivity extends UnityPlayerActivity{
 		});
 	}
 
-	public void show_video()
+	public void ActiveInterstitial()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ActiveInterstitial");
+						MercurySDK.ActiveInterstitial();
+					}
+				});
+			}
+		});
+	}
+	public void ActiveBanner()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ActiveBanner");
+						MercurySDK.ActiveBanner();
+					}
+				});
+			}
+		});
+	}
+	public void ActiveNative()
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
 		{
@@ -106,13 +138,13 @@ public class GameActivity extends UnityPlayerActivity{
 				mContext.runOnUiThread(new Runnable() {
 					public void run() {
 						Log.e(tagname,"ShowVideoAd");
-						MercurySDK.show_video();
+						MercurySDK.ActiveNative();
 					}
 				});
 			}
 		});
 	}
-	public void show_insert()
+	public void ActiveRewardVideo()
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
 		{
@@ -122,13 +154,13 @@ public class GameActivity extends UnityPlayerActivity{
 				mContext.runOnUiThread(new Runnable() {
 					public void run() {
 						Log.e(tagname,"ShowVideoAd");
-						MercurySDK.show_insert();
+						MercurySDK.ActiveRewardVideo();
 					}
 				});
 			}
 		});
 	}
-	public void show_banner()
+	public void Redeem()
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
 		{
@@ -137,40 +169,8 @@ public class GameActivity extends UnityPlayerActivity{
 			{
 				mContext.runOnUiThread(new Runnable() {
 					public void run() {
-						Log.e(tagname,"ShowVideoAd");
-						MercurySDK.show_banner();
-					}
-				});
-			}
-		});
-	}
-	public void show_push()
-	{
-		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				mContext.runOnUiThread(new Runnable() {
-					public void run() {
-						Log.e(tagname,"ShowVideoAd");
-						MercurySDK.show_push();
-					}
-				});
-			}
-		});
-	}
-	public void Exchange()
-	{
-		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				mContext.runOnUiThread(new Runnable() {
-					public void run() {
-						Log.e(tagname,"Exchange");
-						MercurySDK.Exchange();
+						Log.e(tagname,"Redeem");
+						MercurySDK.Redeem();
 					}
 				});
 			}
@@ -186,14 +186,29 @@ public class GameActivity extends UnityPlayerActivity{
 			{
 				mContext.runOnUiThread(new Runnable() {
 					public void run() {
-						Log.e(tagname,"Exit");
+						Log.e(tagname,"ExitGame");
 						MercurySDK.ExitGame();
 					}
 				});
 			}
 		});
 	}
-
+	public void RestoreProduct()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"RestoreProduct");
+						MercurySDK.RestoreProduct();
+					}
+				});
+			}
+		});
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

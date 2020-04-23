@@ -95,21 +95,21 @@ public class InAppChannel extends InAppBase {
 	{
 		try {
 			AlertDialog.Builder builder = new Builder(mContext);
-			builder.setMessage("测试支付模式");
-			builder.setTitle("选择结果");
-			builder.setPositiveButton("成功", new OnClickListener() {
+			builder.setMessage("Testing Mode");
+			builder.setTitle("Choice Result");
+			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					onPurchaseSuccess("success message");
 				}
 			});
-			builder.setNeutralButton("失败", new OnClickListener() {
+			builder.setNeutralButton("Failed", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					onPurchaseFailed("failed message");
 				}
 			});
-			builder.setNegativeButton("取消", new OnClickListener() {
+			builder.setNegativeButton("Dismiss", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					onPurchaseFailed("failed message");

@@ -69,34 +69,104 @@ public class InAppAD extends InAppBase {
 	public void ActiveInterstitial() {
 		// TODO Auto-generated method stub
 		MercuryActivity.LogLocal("["+appShow+"] ActiveInterstitial");
-	}
-	public void ActiveBanner() {
-		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] ActiveBanner");
-	}
-	public void ActiveNative() {
-		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] ActiveNative");
-	}
-	public void ActiveRewardVideo() {
-		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] ActiveRewardVideo");
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-		builder.setMessage("测试广告模式");
-		builder.setTitle("选择结果");
-		builder.setPositiveButton("成功", new DialogInterface.OnClickListener() {
+		builder.setMessage("Testing Mode");
+		builder.setTitle("Choice Result");
+		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				AdShowSuccessCallBack("Success");
 				AdLoadSuccessCallBack("success");
 			}
 		});
-		builder.setNeutralButton("失败", new DialogInterface.OnClickListener() {
+		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				AdLoadFailedCallBack("failed");
 			}
 		});
-		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+	public void ActiveBanner() {
+		// TODO Auto-generated method stub
+		MercuryActivity.LogLocal("["+appShow+"] ActiveBanner");
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setMessage("Testing Mode");
+		builder.setTitle("Choice Result");
+		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowSuccessCallBack("Success");
+				AdLoadSuccessCallBack("success");
+			}
+		});
+		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdLoadFailedCallBack("failed");
+			}
+		});
+		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+	public void ActiveNative() {
+		// TODO Auto-generated method stub
+		MercuryActivity.LogLocal("["+appShow+"] ActiveNative");
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setMessage("Testing Mode");
+		builder.setTitle("Choice Result");
+		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowSuccessCallBack("Success");
+				AdLoadSuccessCallBack("success");
+			}
+		});
+		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdLoadFailedCallBack("failed");
+			}
+		});
+		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+	public void ActiveRewardVideo() {
+		// TODO Auto-generated method stub
+		MercuryActivity.LogLocal("["+appShow+"] ActiveRewardVideo");
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setMessage("Testing Mode");
+		builder.setTitle("Choice Result");
+		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowSuccessCallBack("Success");
+				AdLoadSuccessCallBack("success");
+			}
+		});
+		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdLoadFailedCallBack("failed");
+			}
+		});
+		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
