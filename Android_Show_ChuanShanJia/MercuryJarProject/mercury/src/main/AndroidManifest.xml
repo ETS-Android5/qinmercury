@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qinmercury.demo123"
+    package="com.youloft.buxiuqishicn"
     android:installLocation="preferExternal"
     android:versionCode="56324"
     android:versionName="1.2" >
@@ -14,16 +14,16 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-			<!--main-->
-           <intent-filter>
+            <!--main-->
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-			<!--end-->
+            <!--end-->
         </activity>
 
-		<!--sdk-->
-         <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService" />
+        <!--sdk-->
+        <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService" />
         <service android:name="com.ss.android.socialbase.downloader.downloader.DownloadService" />
         <service
             android:name="com.ss.android.socialbase.downloader.downloader.IndependentProcessDownloadService"
@@ -136,9 +136,9 @@
             android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
             android:authorities="${applicationId}.TTMultiProvider"
             android:exported="false" />
-		<!--end-->
+        <!--end-->
     </application>
-	<!--sdkxml-->
+    <!--sdkxml-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -165,7 +165,7 @@
 
     <!-- 如果有视频相关的广告且使用textureView播放，请务必添加，否则黑屏 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-	<!--end-->
+    <!--end-->
 
 
     <uses-permission android:name="android.permission.INTERNET" />

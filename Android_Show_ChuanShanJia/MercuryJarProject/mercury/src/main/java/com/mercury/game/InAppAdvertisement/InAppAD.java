@@ -34,9 +34,9 @@ public class InAppAD extends InAppBase {
 
 	private boolean mIsExpress = false; //是否请求模板广告
 	private boolean mHasShowDownloadActive = false;
-	private static String  ad_appid = "5059494";
-	private static String  game_name = "砖块弹弹弹";
-	private static String video_position_id = "945132328";
+	private static String  ad_appid = "5062154";
+	private static String  game_name = "不休骑士";
+	private static String video_position_id = "945148113";
 	private static String insert_position_id = "";
 	private long startTime = 0;
 	public void ActivityInit(Activity context,final APPBaseInterface appcall)
@@ -319,29 +319,25 @@ public class InAppAD extends InAppBase {
 	{
 		super.attachBaseContext(base);
 	}
-	public void show_insert() {
+	public void ActiveInterstitial() {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_insert");
+		MercuryActivity.LogLocal("["+appShow+"] ActiveInterstitial");
 		if(insert_position_id.equals("")==false){
 			loadExpressAd(insert_position_id,400,400);
 		}
 	}
-	public void show_banner() {
+	public void ActiveBanner() {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_banner");
-	}
-	public void show_push() {
-		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_push");
+		MercuryActivity.LogLocal("["+appShow+"] ActiveBanner");
 	}
 
-	public void show_out() {
+	public void ActiveNative() {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_out");
+		MercuryActivity.LogLocal("["+appShow+"] ActiveNative");
 	}
-	public void show_video() {
+	public void ActiveRewardVideo() {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("[" + appShow + "] show_video");
+		MercuryActivity.LogLocal("[" + appShow + "] ActiveRewardVideo");
 		if (mttRewardVideoAd != null) {
 			MercuryActivity.LogLocal("[" + appShow + "] mttRewardVideoAd");
 			mttRewardVideoAd.showRewardVideoAd(mContext);

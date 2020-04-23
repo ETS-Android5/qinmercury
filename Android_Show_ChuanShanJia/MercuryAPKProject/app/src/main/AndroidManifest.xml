@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><manifest android:installLocation="preferExternal" android:versionCode="56324" android:versionName="1.2" package="com.qinmercury.demo123" xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="UTF-8"?><manifest android:installLocation="preferExternal" android:versionCode="56324" android:versionName="1.2" package="com.youloft.buxiuqishicn" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:targetSdkVersion="17"/>
     <uses-feature android:name="android.hardware.type.television" android:required="true"/>
     <application android:icon="@drawable/app_icon" android:label="@string/app_name" android:name="com.qinbatista.mercury.QinApplication">
-        <activity android:configChanges="orientation|screenSize" android:name="com.qinbatista.mercury.MainActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <activity android:configChanges="orientation|screenSize" android:name="com.qinbatista.mercury.MainActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-<!--sdk-->         <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService" />
+<!--sdk-->        <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService" />
         <service android:name="com.ss.android.socialbase.downloader.downloader.DownloadService" />
         <service
             android:name="com.ss.android.socialbase.downloader.downloader.IndependentProcessDownloadService"

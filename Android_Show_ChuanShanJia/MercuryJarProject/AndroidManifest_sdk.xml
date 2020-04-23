@@ -1,4 +1,4 @@
-<!--sdk-->         <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService" />
+<!--sdk-->        <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService" />
         <service android:name="com.ss.android.socialbase.downloader.downloader.DownloadService" />
         <service
             android:name="com.ss.android.socialbase.downloader.downloader.IndependentProcessDownloadService"

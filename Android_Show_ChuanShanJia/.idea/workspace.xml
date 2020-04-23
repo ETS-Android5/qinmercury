@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="23612721-3aa6-445b-8a0d-c97c509fb200" name="Default Changelist" comment="" />
+    <list default="true" id="57c6f4c8-6be2-4e2a-a83a-18a35ec1ce47" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,7 +11,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1aO3lOTqvoevIoweI3N0U5vcY87" />
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aHmTNlSqcQslVsEVASNXXX2peB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -33,11 +40,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="23612721-3aa6-445b-8a0d-c97c509fb200" name="Default Changelist" comment="" />
-      <created>1586592962955</created>
+      <changelist id="57c6f4c8-6be2-4e2a-a83a-18a35ec1ce47" name="Default Changelist" comment="" />
+      <created>1586400900740</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1586592962955</updated>
+      <updated>1586400900740</updated>
     </task>
     <servers />
   </component>

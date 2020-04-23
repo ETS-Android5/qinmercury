@@ -18,8 +18,6 @@ import java.util.List;
 
 
 public class MercuryApplication extends Application{//UnicomApplicationWrapper {
-	
-	public static int mSimOperatorId = MercuryConst.ChinaNull;
 	private static int mExtSDKId = -1;
 	private static int mChannelId = -1;
 	public static String msg = "";
@@ -60,8 +58,10 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		OpenUmeng();
 		channel_name = "singmaan";
 		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
+		Log.w("MercurySDK","[SDKApp]InAppAD");
 		mInAppExt = new InAppAD();
 		mInAppExt.ApplicationInit(Acontext);
+
 		try 
 		{
 			 key=getSign(context);
@@ -93,37 +93,36 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 
 	private void checkSIM() {
 
-		mSimOperatorId = MercuryConst.ChinaMobile;
-
-		try {
-
-			TelephonyManager telManager = (TelephonyManager) Acontext.getSystemService(Context.TELEPHONY_SERVICE);
-
-			String imsi = telManager.getSubscriberId();
-
-			if (imsi != null) {
-				if (imsi.startsWith("46000") || imsi.startsWith("46002")
-						|| imsi.startsWith("46007")) {
-					mSimOperatorId = MercuryConst.ChinaMobile;
-				} else if (imsi.startsWith("46001") || imsi.startsWith("46006")|| imsi.startsWith("46009")) {
-					mSimOperatorId = MercuryConst.ChinaUnicom;
-				} else if (imsi.startsWith("46003") || imsi.startsWith("46005")
-						|| imsi.startsWith("20404")) {// 20404  Vodafone) {
-					mSimOperatorId = MercuryConst.ChinaTelecom;
-				}
-			} else {
-
-			}						
-		} catch (Exception e) {
-			e.printStackTrace();		
-
-		}
+//		mSimOperatorId = MercuryConst.ChinaMobile;
+//
+//		try {
+//
+//			TelephonyManager telManager = (TelephonyManager) Acontext.getSystemService(Context.TELEPHONY_SERVICE);
+//
+//			String imsi = telManager.getSubscriberId();
+//
+//			if (imsi != null) {
+//				if (imsi.startsWith("46000") || imsi.startsWith("46002")
+//						|| imsi.startsWith("46007")) {
+//					mSimOperatorId = MercuryConst.ChinaMobile;
+//				} else if (imsi.startsWith("46001") || imsi.startsWith("46006")|| imsi.startsWith("46009")) {
+//					mSimOperatorId = MercuryConst.ChinaUnicom;
+//				} else if (imsi.startsWith("46003") || imsi.startsWith("46005")
+//						|| imsi.startsWith("20404")) {// 20404  Vodafone) {
+//					mSimOperatorId = MercuryConst.ChinaTelecom;
+//				}
+//			} else {
+//
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//
+//		}
 	}
 	
 	private void checkExtSDK() 
 	{		
 
-			Log.e(MercuryConst.TAG, "[MercuryActivity] Default=ApplicationInit");
 	    	mInAppExt = new InAppBase();
 	    	mInAppExt.ApplicationInit(Acontext);
 	}
@@ -143,10 +142,10 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			}
 			
 		} catch (NameNotFoundException e) {
-		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NotFound: " + e.getMessage());
+//		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NotFound: " + e.getMessage());
 		    mChannelId = 0;
 		} catch (NullPointerException e) {
-		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NullPointer: " + e.getMessage());
+//		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NullPointer: " + e.getMessage());
 		    mChannelId = -1;
 		}
 
@@ -161,10 +160,10 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 			String channelnametmp = appInfo.metaData.getString("CHANNEL_SPLASH");
 			channelSplash =channelnametmp;
 		} catch (NameNotFoundException e) {
-		    Log.e(MercuryConst.TAG, "checkChannelSplash to load meta-data CHANNEL_SPLASH, NameNotFound: " + e.getMessage());
+//		    Log.e(MercuryConst.TAG, "checkChannelSplash to load meta-data CHANNEL_SPLASH, NameNotFound: " + e.getMessage());
 		    
 		} catch (NullPointerException e) {
-		    Log.e(MercuryConst.TAG, "checkChannelSplash to load meta-data CHANNEL_SPLASH, NullPointer: " + e.getMessage());
+//		    Log.e(MercuryConst.TAG, "checkChannelSplash to load meta-data CHANNEL_SPLASH, NullPointer: " + e.getMessage());
 		}
 
 	}
@@ -181,10 +180,10 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 				Log.e("MercurySDK","umeng opened");
 			}
 		} catch (NameNotFoundException e) {
-		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NameNotFound: " + e.getMessage());
+//		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NameNotFound: " + e.getMessage());
 		    
 		} catch (NullPointerException e) {
-		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NullPointer: " + e.getMessage());
+//		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NullPointer: " + e.getMessage());
 		}
 
 	}
