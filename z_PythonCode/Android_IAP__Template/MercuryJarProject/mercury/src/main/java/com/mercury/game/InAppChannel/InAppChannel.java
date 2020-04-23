@@ -29,12 +29,8 @@ import java.util.UUID;
 public class InAppChannel extends InAppBase {
 	
 	//comment
-	private InAppBase mBaseInApp = null;
 	private String Channelname="InAppChannel";
-	private String mUid;
-	private String mSession;
-	private int mAccountType;
-	private String demovalue1;
+	private static String pid;
 	@Override
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
@@ -55,6 +51,7 @@ public class InAppChannel extends InAppBase {
 	@Override
 	public void Purchase(final String strProductId)
 	{
+		pid = strProductId;
 		MercuryConst.PayInfo(strProductId);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
@@ -67,9 +64,9 @@ public class InAppChannel extends InAppBase {
 	{
 		try {
 			AlertDialog.Builder builder = new Builder(mContext);
-			builder.setMessage("测试退出模式");
-			builder.setTitle("选择结果");
-			builder.setPositiveButton("成功退出", new OnClickListener() {
+			builder.setMessage("Testing Mode");
+			builder.setTitle("Choice Result");
+			builder.setPositiveButton("Success", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 
@@ -78,7 +75,7 @@ public class InAppChannel extends InAppBase {
 				}
 			});
 
-			builder.setNegativeButton("取消退出", new OnClickListener() {
+			builder.setNegativeButton("Dismiss", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
@@ -100,19 +97,19 @@ public class InAppChannel extends InAppBase {
 			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseSuccess("success message");
+					onPurchaseSuccess(pid);
 				}
 			});
 			builder.setNeutralButton("Failed", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed("failed message");
+					onPurchaseFailed(pid);
 				}
 			});
 			builder.setNegativeButton("Dismiss", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed("failed message");
+					onPurchaseFailed(pid);
 					dialog.dismiss();
 				}
 			});
