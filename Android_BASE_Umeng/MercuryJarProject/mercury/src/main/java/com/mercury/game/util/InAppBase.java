@@ -106,9 +106,7 @@ public class InAppBase{
 	{
 		
 	}
-	public void ShowTencentAd()
-	{
-	}
+
 	public void FunctionS(String number)
 	{
 		//qc.FunctionS(number);
@@ -131,31 +129,36 @@ public class InAppBase{
 		qc.ExitGame();
 	}
 	
-	public void onPurchaseSuccess(String message) {
-		qc.PurchaseSuccess(message,this);
-	}	
-	public void onPurchaseFailed(String strError) {	
-		qc.PurchaseFailed(strError,this);
-	}
+	public void onPurchaseSuccess(String message) {qc.PurchaseSuccess(message,this);}
+	public void onPurchaseFailed(String strError) {qc.PurchaseFailed(strError,this);}
 	public void onLoginSuccess(String strError) { qc.AdLoadSuccess(strError,this); }
 	public void onLoginFailed(String strError) { qc.AdLoadFailed(strError,this); }
+	public void AdLoadSuccessCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
+	public void AdLoadFailedCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
+	public void AdShowSuccessCallBack(String strError) { qc.AdShowSuccessCallBack(strError,this); }
+	public void AdShowFailedCallBack(String strError) { qc.AdShowFailedCallBack(strError,this); }
+
+
 	public void onFunctionCallBack(String strError) {
 		qc.FunctionCallBack(strError,this);
 	}
 	
-	public void show_cp()
+	public void ActiveBanner()
 	{
 
 	}
-	public void show_tt()
+	public void ActiveInterstitial()
 	{
 		
 	}
-	public void show_wt()
+	public void ActiveNative()
 	{
 
 	}
-	public void show_ts(boolean isopen)
+	public void ActiveRewardVideo()
+	{
+	}
+	public void RestoreProduct()
 	{
 	}
 

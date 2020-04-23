@@ -28,6 +28,10 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/SecurityEnvSDK-release-1.1.0.jar')
+    implementation files('src/main/libs/umeng-common-2.2.5.jar')
+    implementation files('src/main/libs/umeng-game-8.1.6+G.jar')
+    implementation files('src/main/libs/utdid4all-1.1.5.3_proguard.jar')
 }
 
 task clearJar(type: Delete){
