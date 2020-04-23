@@ -66,26 +66,21 @@ public class InAppAD extends InAppBase {
 	{
 		super.attachBaseContext(base);
 	}
-	public void show_insert(String Scenes) {
+	public void ActiveInterstitial() {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_insert");
+		MercuryActivity.LogLocal("["+appShow+"] ActiveInterstitial");
 	}
-	public void show_banner(String Scenes) {
+	public void ActiveBanner() {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_banner");
+		MercuryActivity.LogLocal("["+appShow+"] ActiveBanner");
 	}
-	public void show_push(String Scenes) {
+	public void ActiveNative() {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_push");
+		MercuryActivity.LogLocal("["+appShow+"] ActiveNative");
 	}
-
-	public void show_out(String Scenes) {
+	public void ActiveRewardVideo() {
 		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_out");
-	}
-	public void show_video(String Scenes) {
-		// TODO Auto-generated method stub
-		MercuryActivity.LogLocal("["+appShow+"] show_video");
+		MercuryActivity.LogLocal("["+appShow+"] ActiveRewardVideo");
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 		builder.setMessage("测试广告模式");
 		builder.setTitle("选择结果");
@@ -104,7 +99,6 @@ public class InAppAD extends InAppBase {
 		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				onPurchaseFailed("failed message");
 				dialog.dismiss();
 			}
 		});

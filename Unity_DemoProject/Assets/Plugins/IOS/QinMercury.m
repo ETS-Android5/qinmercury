@@ -14,21 +14,21 @@ static QinMercury *instance;
     NSLog(@"this is GameInit object-c");
     UnitySendMessage("PluginMercury", "onFunctionCallBack", "GameInit success");
 }
--(void) show_video_IOS
+-(void) ActiveRewardVideo_IOS
 {
-    NSLog(@"this is show_video_IOS object-c");
+    NSLog(@"this is ActiveRewardVideo_IOS object-c");
 }
--(void) show_insert_IOS
+-(void) ActiveInterstitial_IOS
 {
-    NSLog(@"this is show_insert_IOS object-c");
+    NSLog(@"this is ActiveInterstitial_IOS object-c");
 }
--(void) show_banner_IOS
+-(void) ActiveBanner_IOS
 {
-    NSLog(@"this is show_banner_IOS object-c");
+    NSLog(@"this is ActiveBanner_IOS object-c");
 }
--(void) show_push_IOS
+-(void) ActiveNative_IOS
 {
-    NSLog(@"this is show_push_IOS object-c");
+    NSLog(@"this is ActiveNative_IOS object-c");
 }
 
 @end

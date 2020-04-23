@@ -2,7 +2,6 @@
 using System.Collections;
 using System;
 using UnityEngine.UI;
-using SimpleJSON;
 using System.Runtime.InteropServices;
 public class PluginMercury : MonoBehaviour
 {
@@ -11,13 +10,13 @@ public class PluginMercury : MonoBehaviour
     public static AndroidJavaObject _plugin;
 #elif UNITY_IPHONE
     [DllImport ("__Internal")]
-    private static extern void show_video_IOS();
+    private static extern void ActiveRewardVideo_IOS();
     [DllImport ("__Internal")]
-    private static extern void show_insert_IOS();
+    private static extern void ActiveInterstitial_IOS();
     [DllImport ("__Internal")]
-    private static extern void show_banner_IOS();
+    private static extern void ActiveBanner_IOS();
     [DllImport ("__Internal")]
-    private static extern void show_push_IOS();
+    private static extern void ActiveNative_IOS();
     [DllImport ("__Internal")]
     private static extern void GameInit(string name);
 #endif
@@ -41,10 +40,6 @@ public class PluginMercury : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         pInstance = this;
         GetAndroidInstance();//得到安卓实例
-    }
-
-    void Update()
-    {
     }
 
     public void GetAndroidInstance()
@@ -72,14 +67,23 @@ public class PluginMercury : MonoBehaviour
         _plugin.Call("Purchase", strProductId );
 #endif
     }
-    public void Exchange()
+    public void Redeem()
     {
 #if UNITY_EDITOR
         print("[UNITY_EDITOR]->Exchange()");
 #elif UNITY_ANDROID
-        print("[Android]->Exchange()");_plugin.Call("Exchange");
+        print("[Android]->Exchange()");_plugin.Call("Redeem");
 #endif
     }
+    public void RestoreProduct()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->Exchange()");
+#elif UNITY_ANDROID
+        print("[Android]->Exchange()");_plugin.Call("RestoreProduct");
+#endif
+    }
+
 
     public void ExitGame()
     {
@@ -89,49 +93,49 @@ public class PluginMercury : MonoBehaviour
         print("[Android]->ExitGame()");_plugin.Call("ExitGame");
 #endif
     }
-    public void show_video()
+    public void ActiveRewardVideo()
     {
 #if UNITY_EDITOR
-        print("[UNITY_EDITOR]->show_video()");
+        print("[UNITY_EDITOR]->ActiveRewardVideo()");
 #elif UNITY_ANDROID
-        print("[Android]->show_video()");_plugin.Call("show_video");
+        print("[Android]->ActiveRewardVideo()");_plugin.Call("ActiveRewardVideo");
 #elif UNITY_IPHONE
-        print("[UNITY_IPHONE]->show_video()");
-        show_video_IOS();
+        print("[UNITY_IPHONE]->ActiveRewardVideo()");
+        ActiveRewardVideo_IOS();
 #endif
     }
 
-    public void show_insert()
+    public void ActiveInterstitial()
     {
 #if UNITY_EDITOR
-        print("[UNITY_EDITOR]->show_insert()");
+        print("[UNITY_EDITOR]->ActiveInterstitial()");
 #elif UNITY_ANDROID
-        print("[Android]->show_insert()");_plugin.Call("show_insert");
+        print("[Android]->ActiveInterstitial()");_plugin.Call("ActiveInterstitial");
 #elif UNITY_IPHONE
-        print("[UNITY_IPHONE]->show_insert()");
-        show_insert_IOS();
+        print("[UNITY_IPHONE]->ActiveInterstitial()");
+        ActiveInterstitial_IOS();
 #endif
     }
-    public void show_banner()
+    public void ActiveBanner()
     {
 #if UNITY_EDITOR
-        print("[UNITY_EDITOR]->show_banner()");
+        print("[UNITY_EDITOR]->ActiveBanner()");
 #elif UNITY_ANDROID
-        print("[Android]->show_banner()");_plugin.Call("show_banner");
+        print("[Android]->ActiveBanner()");_plugin.Call("ActiveBanner");
 #elif UNITY_IPHONE
-        print("[UNITY_IPHONE]->show_banner()");
-        show_banner_IOS();
+        print("[UNITY_IPHONE]->ActiveBanner()");
+        ActiveBanner_IOS();
 #endif
     }
-    public void show_push()
+    public void ActiveNative()
     {
 #if UNITY_EDITOR
-        print("[UNITY_EDITOR]->show_push()");
+        print("[UNITY_EDITOR]->ActiveNative()");
 #elif UNITY_ANDROID
-        print("[Android]->show_push()");_plugin.Call("show_push");
+        print("[Android]->ActiveNative()");_plugin.Call("ActiveNative");
 #elif UNITY_IPHONE
-        print("[UNITY_IPHONE]->show_push()");
-        show_push_IOS();
+        print("[UNITY_IPHONE]->ActiveNative()");
+        ActiveNative_IOS();
 #endif
     }
 

@@ -1,32 +1,36 @@
 #import "QinMercury.h"
 #import "SDKInteraction.h"
 
+QinMercury *inter = nil;
+
 void GameInit()
 {
     NSLog(@"this is GameInit swift");
-    [QinMercury GameInit];
+    inter = [[QinMercury alloc]init];
+    [inter GameInit];
+    
 }
-void show_video_IOS()
+void ActiveRewardVideo_IOS()
 {
     NSLog(@"this is show_video_IOS swift");
-    [QinMercury show_video_IOS];
+    [inter ActiveRewardVideo_IOS];
 }
-void show_insert_IOS()
+void ActiveInterstitial_IOS()
 {
     NSLog(@"this is show_insert_IOS swift");
-    [QinMercury show_insert_IOS];
+    [inter ActiveInterstitial_IOS];
 }
 
-void show_banner_IOS()
+void ActiveBanner_IOS()
 {
     NSLog(@"this is show_banner_IOS swift");
-    [QinMercury show_banner_IOS];
+    [inter ActiveBanner_IOS];
 }
 
-void show_push_IOS()
+void ActiveNative_IOS()
 {
     NSLog(@"this is show_push_IOS swift");
-    [QinMercury show_push_IOS];
+    [inter ActiveNative_IOS];
 }
 
 

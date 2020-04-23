@@ -106,9 +106,7 @@ public class InAppBase{
 	{
 		
 	}
-	public void ShowTencentAd()
-	{
-	}
+
 	public void FunctionS(String number)
 	{
 		//qc.FunctionS(number);
@@ -142,19 +140,22 @@ public class InAppBase{
 		qc.FunctionCallBack(strError,this);
 	}
 	
-	public void show_cp()
+	public void ActiveBanner()
 	{
 
 	}
-	public void show_tt()
+	public void ActiveInterstitial()
 	{
 		
 	}
-	public void show_wt()
+	public void ActiveNative()
 	{
 
 	}
-	public void show_ts(boolean isopen)
+	public void ActiveRewardVideo()
+	{
+	}
+	public void RestoreProduct()
 	{
 	}
 

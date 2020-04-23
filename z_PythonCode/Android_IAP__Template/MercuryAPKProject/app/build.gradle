@@ -36,5 +36,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/MercurySDK.jar')
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
 }

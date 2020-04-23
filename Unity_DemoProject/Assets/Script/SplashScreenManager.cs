@@ -24,8 +24,6 @@ public class SplashScreenManager : MonoBehaviour
     public Texture2D blackPixel;
     bool loadingOver = false;
     private AsyncOperation async;
-    //转圈
-    public Transform LoadingCircle;
     //登陆框模块
     public GameObject LoginDialog;
 
@@ -195,12 +193,12 @@ public class SplashScreenManager : MonoBehaviour
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), blackPixel);
         float ratio = splashes[splashIndex].height / (splashes[splashIndex].width + 0.0f);
         float ratioScreen = Screen.height / (Screen.width + 0.0f);
-        if (ratio > ratioScreen && ratio < 1)
-        {
-            var H = Screen.width * ratio;
-            GUI.DrawTexture(new Rect(0, (Screen.height - H) * 0.5f, Screen.width, H), splashes[splashIndex]);
-        }
-        else
+        // if (ratio > ratioScreen && ratio < 1)
+        // {
+        //     var H = Screen.width * ratio;
+        //     GUI.DrawTexture(new Rect(0, (Screen.height - H) * 0.5f, Screen.width, H), splashes[splashIndex]);
+        // }
+        // else
         {
             var W = Screen.height / ratio;
             GUI.DrawTexture(new Rect((Screen.width - W) * 0.5f, 0, W, Screen.height), splashes[splashIndex]);

@@ -10,27 +10,27 @@ void GameInit()
     [inter GameInit];
     
 }
-void show_video_IOS()
+void ActiveRewardVideo_IOS()
 {
     NSLog(@"this is show_video_IOS swift");
-    [inter show_video_IOS];
+    [inter ActiveRewardVideo_IOS];
 }
-void show_insert_IOS()
+void ActiveInterstitial_IOS()
 {
     NSLog(@"this is show_insert_IOS swift");
-    [inter show_insert_IOS];
+    [inter ActiveInterstitial_IOS];
 }
 
-void show_banner_IOS()
+void ActiveBanner_IOS()
 {
     NSLog(@"this is show_banner_IOS swift");
-    [inter show_banner_IOS];
+    [inter ActiveBanner_IOS];
 }
 
-void show_push_IOS()
+void ActiveNative_IOS()
 {
     NSLog(@"this is show_push_IOS swift");
-    [inter show_push_IOS];
+    [inter ActiveNative_IOS];
 }
 
 
