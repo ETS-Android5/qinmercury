@@ -11,7 +11,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -25,7 +27,6 @@ import org.json.JSONTokener;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.MercuryApplication;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -147,6 +148,13 @@ public class MercuryConst {
 	
 	public void PurchaseSuccess(String message,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
+		if (OpenUmeng ==true) {
+			String id = "";
+			SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String temp = sf.format(new Date());
+			int random = (int) ((Math.random() + 1) * 100000);
+			id = temp + random;
+		}
 		inbase.appinterface.PurchaseSuccessCallBack(message);
 	}
 	public void PurchaseFailed(String strError,InAppBase inbase) {

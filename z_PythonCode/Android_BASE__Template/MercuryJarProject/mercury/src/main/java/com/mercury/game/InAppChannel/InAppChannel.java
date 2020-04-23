@@ -17,7 +17,6 @@ import android.util.Log;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.MercuryConst;
 import com.mercury.game.MercuryApplication;
-
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -69,7 +68,6 @@ public class InAppChannel extends InAppBase {
 			builder.setPositiveButton("Success", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-
 					((Activity) MercuryActivity.mContext).finish();
 					android.os.Process.killProcess(android.os.Process.myPid());
 				}
