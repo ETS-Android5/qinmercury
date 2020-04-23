@@ -11,6 +11,7 @@ import shutil
 import z_PythonCode.xml_manager as xml_manager
 import zipfile
 import xml.dom.minidom
+import configparser
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 class SDKAppendManager():
@@ -193,6 +194,12 @@ class SDKAppendManager():
 			with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",mode='w',encoding="utf8") as file_context:
 				file_context.writelines(new_xml)
 
+		#change package name
+		config=configparser.ConfigParser()
+		config.read(PythonLocation()+"/android_builder_config.ini")
+		PackageName  = config.get("WanNianLi","PackageName")
+		self.__change_package_name(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",PackageName)
+
 	def __all_files_in_folder(self,_path):
 		ListMyFolder = []
 		for dirpath, dirnames, filenames in os.walk(_path):
@@ -281,6 +288,13 @@ class SDKAppendManager():
 		if os.path.isfile(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format):os.remove(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format)
 		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
 		return self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format
+
+	def __change_package_name(self,_APK_path,_package_name):
+		dom = xml.dom.minidom.parse(_APK_path)
+		root = dom.documentElement
+		root.setAttribute("package",_package_name)
+		with open(_APK_path,'w',encoding='UTF-8') as _Path:
+			dom.writexml(_Path,indent='',addindent='',newl='',encoding='UTF-8')
 def run():
 	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/z_PythonCode/"+file_path+".py"):
@@ -296,9 +310,14 @@ def run():
 		if file_name.find(".apk")!=-1:
 			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
 			break
-	BASE = "Android_BASE_Umeng"
-	SHOW = "Android_IAP_Singmaan"
-	IAP  = "Android_SHOW_ChuanShanJia"
+
+	config=configparser.ConfigParser()
+	config.read(PythonLocation()+"/android_builder_config.ini")
+	PackageName  = config.get("WanNianLi","PackageName")
+	BASE		 = config.get("WanNianLi","BASE")
+	SHOW 		 = config.get("WanNianLi","IAP")
+	IAP  		 = config.get("WanNianLi","SHOW")
+
 	if BASE != "":
 		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path)
 		game_apk_path = sam._merge_package()

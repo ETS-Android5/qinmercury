@@ -6,9 +6,9 @@ def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 def main():
 	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
-	if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
-		os.remove(PythonLocation()+"/"+file_path+".py")
 	if os.path.isfile(PythonLocation()+"/../z_PythonCode/"+file_path+".py"):
+		if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
+			os.remove(PythonLocation()+"/"+file_path+".py")
 		shutil.copy(PythonLocation()+"/../z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
 
 	os.chdir(PythonLocation())

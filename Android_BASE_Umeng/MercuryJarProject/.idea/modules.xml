@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Android_BASE_Umeng-MercuryJarProject.iml" filepath="$PROJECT_DIR$/Android_BASE_Umeng-MercuryJarProject.iml" group="MercuryJarProject" />
       <module fileurl="file://$PROJECT_DIR$/Android_BASE__Template-MercuryJarProject.iml" filepath="$PROJECT_DIR$/Android_BASE__Template-MercuryJarProject.iml" group="MercuryJarProject" />
       <module fileurl="file://$PROJECT_DIR$/Android_Umeng-MercuryJarProject.iml" filepath="$PROJECT_DIR$/Android_Umeng-MercuryJarProject.iml" group="MercuryJarProject" />
       <module fileurl="file://$PROJECT_DIR$/MercuryJarProject.iml" filepath="$PROJECT_DIR$/MercuryJarProject.iml" group="MercuryJarProject" />
