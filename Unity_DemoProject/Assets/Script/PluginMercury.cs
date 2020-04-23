@@ -29,7 +29,12 @@ public class PluginMercury : MonoBehaviour
             return pInstance;
         }
     }
-
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitGame();
+        }
+    }
     void Awake()
     {
         if (pInstance != null)
@@ -162,6 +167,15 @@ public class PluginMercury : MonoBehaviour
     public void AdLoadFailedCallBack(string msg)
     {
         print("[Unity]->AdLoadFailedCallBack");
+    }
+    
+    public void AdShowSuccessCallBack(string msg)
+    {
+        print("[Unity]->AdShowSuccessCallBack");
+    }
+    public void AdShowFailedCallBack(string msg)
+    {
+        print("[Unity]->AdShowFailedCallBack");
     }
     public void onFunctionCallBack(string msg)
     {

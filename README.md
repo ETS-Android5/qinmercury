@@ -12,10 +12,10 @@
 * [`Purchase`](##Purchase)
 * [`ExitGame`](##ExitGame)
 
-- [`show_insert`](##show_insert)
-- [`show_banner`](##show_banner)
-- [`show_video`](##show_video)
-- [`show_out`](##show_out)
+- [`ActiveRewardVideo`](##ActiveRewardVideo)
+- [`ActiveInterstitial`](##ActiveInterstitial)
+- [`ActiveBanner`](##ActiveBanner)
+- [`ActiveNative`](##ActiveNative)
 - [`Exchange`](##Exchange)
 
 ## AppApplicationInit
@@ -365,7 +365,7 @@ MercurySDK.ExitGame();
 
 
 
-## show_insert
+## ActiveInterstitial
 
 > 需要时调用
 
@@ -380,18 +380,18 @@ MercurySDK.ExitGame();
 ###代码结构
 
 ```java
-public void show_insert()
+public void ActiveInterstitial()
 ```
 
 ### 代码实例
 
 ```java
-MercurySDK.show_insert();
+MercurySDK.ActiveInterstitial();
 ```
 
 
 
-## show_banner
+## ActiveBanner
 
 > 需要时调用
 
@@ -406,18 +406,18 @@ MercurySDK.show_insert();
 ###代码结构
 
 ```java
-public void show_banner()
+public void ActiveBanner()
 ```
 
 ### 代码实例
 
 ```java
-MercurySDK.show_banner();
+MercurySDK.ActiveBanner();
 ```
 
 
 
-## show_video
+## ActiveRewardVideo
 
 > 需要时调用
 
@@ -432,18 +432,18 @@ MercurySDK.show_banner();
 ###代码结构
 
 ```java
-public void show_video()
+public void ActiveRewardVideo()
 ```
 
 ### 代码实例
 
 ```java
-MercurySDK.show_video();
+MercurySDK.ActiveRewardVideo();
 ```
 
 
 
-## show_out
+## ActiveBanner
 
 > 需要时调用
 
@@ -458,18 +458,18 @@ MercurySDK.show_video();
 ###代码结构
 
 ```java
-public void show_out()
+public void ActiveBanner()
 ```
 
 ### 代码实例
 
 ```java
-MercurySDK.show_out();
+MercurySDK.ActiveBanner();
 ```
 
 
 
-## Exchange
+## Redeem
 
 > (未完成)需要时调用
 
@@ -484,12 +484,12 @@ MercurySDK.show_out();
 ###代码结构
 
 ```java
-public void Exchange()
+public void Redeem()
 ```
 
 ### 代码实例
 
 ```java
-MercurySDK.Exchange();
+MercurySDK.Redeem();
 ```
 
