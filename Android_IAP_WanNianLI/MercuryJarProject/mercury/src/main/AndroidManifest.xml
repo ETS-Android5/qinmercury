@@ -24,6 +24,7 @@
         </activity>
 
 		<!--sdk-->
+        <activity android:name="com.youloft.api.webview.WebViewActivity" />
 		<!--end-->
     </application>
 	<!--sdkxml-->

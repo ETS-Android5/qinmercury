@@ -13,6 +13,7 @@ import com.mercury.game.InAppAdvertisement.InAppAD;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
 
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -56,12 +57,12 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		checkChannelName();
 		checkChannelSplash();
 		OpenUmeng();
+
 		channel_name = "singmaan";
 		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
 		Log.w("MercurySDK","[SDKApp]InAppAD");
 		mInAppExt = new InAppAD();
 		mInAppExt.ApplicationInit(Acontext);
-
 		try 
 		{
 			 key=getSign(context);

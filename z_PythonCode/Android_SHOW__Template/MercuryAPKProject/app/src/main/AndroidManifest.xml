@@ -8,7 +8,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-<!--sdk-->        <meta-data android:name="open_umeng" android:value="open"/>
+<!--sdk-->
 <!--end-->    </application>
     
 <!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

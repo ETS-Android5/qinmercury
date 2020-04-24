@@ -36,7 +36,8 @@ public class InAppChannel extends InAppBase {
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
-		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
+		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context+" " + MercuryActivity.getDeviceId(context));
+
 	}
 	public void ApplicationInit(Application appcontext)
 	{

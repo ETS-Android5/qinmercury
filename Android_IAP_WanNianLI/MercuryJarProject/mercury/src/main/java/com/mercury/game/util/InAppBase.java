@@ -1,40 +1,12 @@
 package com.mercury.game.util;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.security.KeyFactory;
-import java.security.PrivateKey;
-import java.security.Signature;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.params.CoreConnectionPNames;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import com.mercury.game.MercuryActivity;
-import com.mercury.game.util.MercuryConst;
-import com.mercury.game.MercuryApplication;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.InputFilter;
-import android.util.Log;
 import android.view.Menu;
-import android.widget.EditText;
-import android.widget.Toast;
+
+import com.mercury.game.MercuryActivity;
 
 public class InAppBase{
 	protected Activity mContext;
@@ -75,9 +47,9 @@ public class InAppBase{
 	public void Purchase(final String strProductId)
 	{
 		MercuryConst.PayInfo(strProductId);
-		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
-		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
-		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
+		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.QinPid="+ MercuryConst.QinPid);
+		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.Qindesc="+ MercuryConst.Qindesc);
+		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.Qinpricefloat="+ MercuryConst.Qinpricefloat);
 	}
 	public void ApplicationInit(Application appcontext)
 	{

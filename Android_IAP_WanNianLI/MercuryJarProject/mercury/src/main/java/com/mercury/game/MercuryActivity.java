@@ -1,11 +1,15 @@
 package com.mercury.game;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +21,7 @@ import com.mercury.game.InAppAdvertisement.InAppAD;
 import com.mercury.game.InAppChannel.InAppChannel;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
+import com.mercury.game.util.MD5;
 import com.mercury.game.util.MercuryConst;
 
 
@@ -25,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.mercury.game.MercuryApplication.OpenUmeng;
+import static com.mercury.game.util.Function.readFileData;
+import static com.mercury.game.util.Function.writeFileData;
 
 public class MercuryActivity  {
 
@@ -110,6 +117,57 @@ public class MercuryActivity  {
 			e.printStackTrace();
 			LogLocal("[MercuryActivity][ChannelSplash] init e="+e.toString());
 		}
+	}
+	public static String getDeviceId(Activity context) {
+
+		String strUserID = "";
+		String imei = "";
+
+		try {
+			TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+			if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+				// TODO: Consider calling
+				//    ActivityCompat#requestPermissions
+				// here to request the missing permissions, and then overriding
+				//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+				//                                          int[] grantResults)
+				// to handle the case where the user grants the permission. See the documentation
+				// for ActivityCompat#requestPermissions for more details.
+				imei = tm.getDeviceId();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		LogLocal("[getDeviceId] -imei = ["+imei+"]");
+		LogLocal("[getDeviceId] -readFileData(\"UserIMEI\") = ["+readFileData("UserIMEI")+"]");
+		if((imei==null||imei=="")&&(readFileData("UserIMEI")==null||readFileData("UserIMEI")==""))
+		{
+			imei=MercuryApplication.channel_name+java.util.UUID.randomUUID();
+			writeFileData("UserIMEI",imei);
+			strUserID=imei;
+			LogLocal("[getDeviceId] write imei = ["+imei+"]");
+		}
+		else if((imei==null||imei=="")&&(readFileData("UserIMEI")!=null||readFileData("UserIMEI")!=""))
+		{
+			imei=readFileData("UserIMEI");
+			strUserID=imei;
+			LogLocal("[getDeviceId] read imei = ["+imei+"]");
+		}
+		else if((imei!=null||imei!="")&&(readFileData("UserIMEI")!=null||readFileData("UserIMEI")!=""))
+		{
+			strUserID=readFileData("UserIMEI");
+			LogLocal("[getDeviceId] Set imei as local imei = ["+strUserID+"]");
+		}
+		else
+		{
+			strUserID=imei;
+			LogLocal("[getDeviceId] Set imei as phone = ["+imei+"]");
+		}
+		LogLocal("[getDeviceId] strUserID = ["+strUserID+"]");
+		DeviceId= MD5.getMessageDigest(strUserID.getBytes());
+		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
+		return DeviceId;
+
 	}
  	public String GetUniqueID(){
  	    String id="";   

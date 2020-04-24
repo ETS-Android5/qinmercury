@@ -28,9 +28,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
-    implementation files('src/main/libs/kalle-release.jar')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation files('src/main/libs/webviewpaylib-release.aar')
+    implementation files('src/main/libs/kalle-release.jar')
 }
 
 task clearJar(type: Delete){

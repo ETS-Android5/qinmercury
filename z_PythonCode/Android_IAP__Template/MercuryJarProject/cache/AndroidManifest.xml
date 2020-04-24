@@ -57,9 +57,8 @@
         </activity>
 
         <!-- sdk -->
-        <meta-data
-            android:name="open_umeng"
-            android:value="open" />
+
+
         <!-- end -->
     </application>
 

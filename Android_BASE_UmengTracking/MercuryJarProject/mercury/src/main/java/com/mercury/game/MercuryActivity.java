@@ -61,6 +61,7 @@ public class MercuryActivity  {
 	public static UMGameAgent umgameaget = null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
+		LogLocal("[MercuryActivity][InitSDK] 1.0");
 		if (OpenUmeng ==true) {
 			umgameaget.init(ContextFromUsers);
 		}
@@ -71,7 +72,7 @@ public class MercuryActivity  {
 		activityforappbase=this;
 		InitChannel(appcall);
 		InitAd(appcall);
-		getDeviceId(mContext);
+		getDeviceId((Activity) mContext);
 	}
 	public void ChannelSplash()
 	{
@@ -135,7 +136,7 @@ public class MercuryActivity  {
  	    return id;    
  	}
 
-	public static String getDeviceId(Context context) {
+	public static String getDeviceId(Activity context) {
 
 		String strUserID = "";
 		String imei = "";
@@ -184,7 +185,6 @@ public class MercuryActivity  {
 		DeviceId= MD5.getMessageDigest(strUserID.getBytes());
 		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
-
 
 	}
 
