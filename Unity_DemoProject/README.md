@@ -22,7 +22,7 @@ Copy SDK folder or files from this Unity project into your Unity project, please
 public string nextSceneName = "YourGameScene";
 ```
 
-* Set **SplashScreenManager.cs** as first Scenes in **File->Build Setting**
+* Set **SplashScreen.unity** as first Scenes in **File->Build Setting**
 
 ----
 
