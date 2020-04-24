@@ -173,12 +173,12 @@ public class MercuryConst {
 	}
 	public void AdShowSuccessCallBack(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onLoginSuccess callback->strError="+strError+" inbase->"+inbase);
-		inbase.appinterface.AdLoadSuccessCallBack(strError);
+		inbase.appinterface.AdShowSuccessCallBack(strError);
 	}
 
 	public void AdShowFailedCallBack(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onLoginFailed callback->strError="+strError+" inbase->"+inbase);
-		inbase.appinterface.AdLoadFailedCallBack(strError);
+		inbase.appinterface.AdShowFailedCallBack(strError);
 	}
 	public void FunctionCallBack(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onFunctionCallBack callback->strError="+strError+" inbase->"+inbase);

@@ -62,7 +62,7 @@ public class MercuryActivity  {
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
 		getDeviceId((Activity) mContext);
-		LogLocal("[MercuryActivity][InitSDK] 1.0");
+		LogLocal("[MercuryActivity][InitSDK] 2.0");
 		if (OpenUmeng ==true) {
 			umgameaget.init(ContextFromUsers);
 		}
