@@ -59,6 +59,7 @@ public class MercuryActivity  {
 	private static ImageView img = null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
+		getDeviceId(mContext);
 		mContext = ContextFromUsers;
 		ChannelSplash();
 		mInAppChannel = new InAppChannel() ;
@@ -66,7 +67,7 @@ public class MercuryActivity  {
 		activityforappbase=this;
 		InitChannel(appcall);
 		InitAd(appcall);
-		getDeviceId(mContext);
+
 	}
 	public void ChannelSplash()
 	{

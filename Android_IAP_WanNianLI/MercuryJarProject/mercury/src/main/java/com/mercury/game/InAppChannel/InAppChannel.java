@@ -25,10 +25,9 @@ public class InAppChannel extends InAppBase {
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
-		String DeviceId = MercuryActivity.getDeviceId(context);
-		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context+"  MercuryActivity.DeviceId="+DeviceId);
+		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context+"  MercuryActivity.DeviceId="+MercuryActivity.DeviceId);
 		ApiManager.init(context, "80388d1f-8901-414c-b7f8-62d125e60200", "12345678123456781234567812345678", true);
-		ApiManager.userLogin(DeviceId, 0, DeviceId, "", new NetCallBack() {
+		ApiManager.userLogin(MercuryActivity.DeviceId, 0, MercuryActivity.DeviceId, "", new NetCallBack() {
 		@Override
 		public void success(String s) {
 			//返回的数据示例

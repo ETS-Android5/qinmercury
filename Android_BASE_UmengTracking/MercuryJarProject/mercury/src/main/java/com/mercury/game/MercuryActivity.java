@@ -61,6 +61,7 @@ public class MercuryActivity  {
 	public static UMGameAgent umgameaget = null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
+		getDeviceId((Activity) mContext);
 		LogLocal("[MercuryActivity][InitSDK] 1.0");
 		if (OpenUmeng ==true) {
 			umgameaget.init(ContextFromUsers);
@@ -72,7 +73,7 @@ public class MercuryActivity  {
 		activityforappbase=this;
 		InitChannel(appcall);
 		InitAd(appcall);
-		getDeviceId((Activity) mContext);
+
 	}
 	public void ChannelSplash()
 	{
