@@ -323,7 +323,9 @@ def run():
 	BASE		 = config.get("WanNianLi","BASE")
 	SHOW 		 = config.get("WanNianLi","IAP")
 	IAP  		 = config.get("WanNianLi","SHOW")
-
+	APK_PATH	 = config.get("WanNianLi","PATH")
+	if APK_PATH!="":
+		game_apk_path = APK_PATH
 	if BASE != "":
 		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path)
 		game_apk_path = sam._merge_package()
