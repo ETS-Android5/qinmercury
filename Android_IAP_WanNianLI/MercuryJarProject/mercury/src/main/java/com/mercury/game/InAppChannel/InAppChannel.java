@@ -30,16 +30,27 @@ public class InAppChannel extends InAppBase {
 		ApiManager.init(context, "80388d1f-8901-414c-b7f8-62d125e60200", "12345678123456781234567812345678", true);
 		ApiManager.userLogin(MercuryActivity.DeviceId, 0, MercuryActivity.DeviceId, "", new NetCallBack() {
 		@Override
-		public void success(String s) {
-			//返回的数据示例
-			MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.ApplicationInit="+s);
-		}
+			public void success(String s) {
+				//返回的数据示例
+				MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.ApplicationInit="+s);
+			}
 
-		@Override
-		public void failed(String s) {
-			//返回的错误信息
-		}
-	});
+			@Override
+			public void failed(String s) {
+				//返回的错误信息
+			}
+		});
+		ApiManager.channelPayGetAppVersion(0, new NetCallBack() {
+			@Override
+			public void success(String s) {
+
+			}
+
+			@Override
+			public void failed(String s) {
+
+			}
+		});
 	}
 	public void ApplicationInit(Application appcontext)
 	{

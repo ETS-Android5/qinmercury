@@ -148,6 +148,9 @@ public class MercuryConst {
 	public void PurchaseSuccess(String message,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
 		inbase.appinterface.PurchaseSuccessCallBack(message);
+		if (OpenUmeng ==true) {
+			UMGameAgent.pay(Qinpricefloat,Qindesc,1,1,1);
+		};
 	}
 	public void PurchaseFailed(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->strError="+strError+" inbase->"+inbase);

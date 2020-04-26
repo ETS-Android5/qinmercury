@@ -28,6 +28,7 @@ import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.MercuryApplication;
 import com.reyun.tracking.sdk.Tracking;
+import com.umeng.analytics.game.UMGameAgent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -156,6 +157,7 @@ public class MercuryConst {
 			String temp = sf.format(new Date());
 			int random = (int) ((Math.random() + 1) * 100000);
 			id = temp + random;
+			UMGameAgent.pay(Qinpricefloat,Qindesc,1,1,1);
 			Tracking.setPayment(id, "default", "CNY", Qinpricefloat);
 		}
 		inbase.appinterface.PurchaseSuccessCallBack(message);
