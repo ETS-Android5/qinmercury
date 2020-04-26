@@ -9,6 +9,7 @@
             </intent-filter>
         </activity>
 <!--sdk-->        <activity android:name="com.youloft.api.webview.WebViewActivity" />
+        <activity android:name="com.youloft.api.webview.PayActivity"/>
 <!--end-->    </application>
     
 <!--sdkxml-->    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

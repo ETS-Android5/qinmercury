@@ -15,6 +15,7 @@ import com.mercury.game.util.MercuryConst;
 
 import com.youloft.api.ApiManager;
 import com.youloft.api.callback.NetCallBack;
+import com.youloft.api.callback.PayCallBack;
 
 public class InAppChannel extends InAppBase {
 	
@@ -59,14 +60,38 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
+//		ApiManager.userOrder("9066649d-4222-487a-82cf-da1d84582992", new NetCallBack() {
+//			@Override
+//			public void success(String s) {
+//				onPurchaseSuccess(pid);
+//			}
+//
+//			@Override
+//			public void failed(String s) {
+//				onPurchaseFailed(pid);
+//			}
+//		});
+
 		ApiManager.userOrder("9066649d-4222-487a-82cf-da1d84582992", new NetCallBack() {
 			@Override
 			public void success(String s) {
+				MercuryActivity.LogLocal("[InAppChannel][Purchase] success");
+			}
+
+			@Override
+			public void failed(String s) {
+				MercuryActivity.LogLocal("[InAppChannel][Purchase] success");
+			}
+		}, new PayCallBack() {
+			@Override
+			public void success(String s) {
+				MercuryActivity.LogLocal("[InAppChannel][Purchase] success");
 				onPurchaseSuccess(pid);
 			}
 
 			@Override
 			public void failed(String s) {
+				MercuryActivity.LogLocal("[InAppChannel][Purchase] success");
 				onPurchaseFailed(pid);
 			}
 		});

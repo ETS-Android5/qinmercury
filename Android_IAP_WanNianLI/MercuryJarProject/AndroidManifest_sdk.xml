@@ -1,4 +1,5 @@
 <!--sdk-->        <activity android:name="com.youloft.api.webview.WebViewActivity" />
+        <activity android:name="com.youloft.api.webview.PayActivity"/>
 <!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />

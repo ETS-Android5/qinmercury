@@ -25,6 +25,7 @@
 
 		<!--sdk-->
         <activity android:name="com.youloft.api.webview.WebViewActivity" />
+        <activity android:name="com.youloft.api.webview.PayActivity"/>
 		<!--end-->
     </application>
 	<!--sdkxml-->
