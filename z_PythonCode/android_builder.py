@@ -88,6 +88,12 @@ class SDKAppendManager():
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
 			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+		file_list = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+		for filename in os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
+			if "armeabi-v7a" not in filename and "x86" not in filename:
+				if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename):
+					shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
+					print("[__merge_sdk_resource_lib] deleted "+f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
 
 	def __merge_sdk_resource_smali(self):
 		#delete apk's smail
