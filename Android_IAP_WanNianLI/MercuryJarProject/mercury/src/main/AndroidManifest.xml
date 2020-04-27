@@ -26,7 +26,16 @@
 		<!--sdk-->
         <activity android:name="com.youloft.api.webview.WebViewActivity" />
         <activity android:name="com.youloft.api.webview.PayActivity"/>
-		<!--end-->
+        <provider
+            android:name="com.youloft.api.config.InstallProvider"
+            android:authorities="${applicationId}.InstallFileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/install_file_path" />
+        </provider>
+        <!--end-->
     </application>
 	<!--sdkxml-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
