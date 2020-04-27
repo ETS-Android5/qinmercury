@@ -8,14 +8,20 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 
+
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
 
 import com.youloft.api.ApiManager;
+import com.youloft.api.callback.DownloadCallBack;
 import com.youloft.api.callback.NetCallBack;
 import com.youloft.api.callback.PayCallBack;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class InAppChannel extends InAppBase {
 	
@@ -23,7 +29,7 @@ public class InAppChannel extends InAppBase {
 	private String Channelname="InAppWanNianLi";
 	private static String pid;
 	@Override
-	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
+	public void ActivityInit(final Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context+"  MercuryActivity.DeviceId="+MercuryActivity.DeviceId);
@@ -43,12 +49,22 @@ public class InAppChannel extends InAppBase {
 		ApiManager.channelPayGetAppVersion(0, new NetCallBack() {
 			@Override
 			public void success(String s) {
-
+				MercuryActivity.LogLocal("检查更新success"+s);
+				try {
+					JSONObject jsonObject = new JSONObject(s);
+					String data = jsonObject.getString("data");
+					JSONObject jsonObject1 = new JSONObject(data);
+					String linkUrl = jsonObject1.getString("linkurl");
+					String msg = jsonObject1.getString("msg");
+					ApiManager.update(context, msg, linkUrl);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 
 			@Override
 			public void failed(String s) {
-
+				MercuryActivity.LogLocal("检查更新failed"+s);
 			}
 		});
 	}
