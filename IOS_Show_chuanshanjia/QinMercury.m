@@ -2,8 +2,6 @@
 #import "BUAdSDK/BUSplashAdView.h"
 #import <BUAdSDK/BUAdSDK.h>
 #import "QinMercury.h"
-
-#import <BUAdSDK/BUAdSDKManager.h>
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import <BUAdSDK/BUNativeExpressRewardedVideoAd.h>
 @interface QinMercury ()<BUNativeExpressRewardedVideoAdDelegate>
