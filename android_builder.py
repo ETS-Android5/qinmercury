@@ -107,8 +107,12 @@ class SDKAppendManager():
 			files = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game")
 			if self.__channel.find("_BASE")!=-1:
 				for file_path in files:
-					if file_path.find("/InAppChannel/")!=-1: os.remove(file_path)
-					if file_path.find("/InAppAdvertisement/")!=-1: os.remove(file_path)
+					if file_path.find("/InAppChannel/")!=-1:
+						print("[__merge_sdk_resource_smali] Base package need default InAppChannel")
+						# os.remove(file_path)
+					if file_path.find("/InAppAdvertisement/")!=-1:
+						print("[__merge_sdk_resource_smali] Base package need default InAppAdvertisement")
+						# os.remove(file_path)
 			if self.__channel.find("_SHOW")!=-1:
 				for file_path in files:
 					if file_path.find("/InAppAdvertisement/")==-1: os.remove(file_path)
@@ -319,11 +323,28 @@ def run():
 
 	config=configparser.ConfigParser()
 	config.read(PythonLocation()+"/android_builder_config.ini")
-	PackageName  = config.get("WanNianLi","PackageName")
-	BASE		 = config.get("WanNianLi","BASE")
-	SHOW 		 = config.get("WanNianLi","IAP")
-	IAP  		 = config.get("WanNianLi","SHOW")
-	APK_PATH	 = config.get("WanNianLi","PATH")
+	channel = config.sections()
+	print("------Choice your channel------")
+	for index, name in enumerate(channel):
+		print(f"[{index}]:{name}")
+	print("------End------")
+	your_channel=""
+	while True:
+		your_channel=input("[MESSAGE]Input cahannel's numbner:")
+		if your_channel.isnumeric():
+			if int(your_channel)<= len(channel)-1:
+				break
+			else:
+				print('[MESSAGE]You number can not over'+str(len(channel)-1))
+				continue
+		else:
+			print('[MESSAGE]Your input is not number')
+
+	PackageName  = config.get(channel[int(your_channel)],"PackageName")
+	BASE		 = config.get(channel[int(your_channel)],"BASE")
+	SHOW 		 = config.get(channel[int(your_channel)],"IAP")
+	IAP  		 = config.get(channel[int(your_channel)],"SHOW")
+	APK_PATH	 = config.get(channel[int(your_channel)],"PATH")
 	if APK_PATH!="":
 		game_apk_path = APK_PATH
 	if BASE != "":
