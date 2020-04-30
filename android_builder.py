@@ -12,6 +12,7 @@ import z_PythonCode.xml_manager as xml_manager
 import zipfile
 import xml.dom.minidom
 import configparser
+import datetime
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 class SDKAppendManager():
@@ -294,10 +295,10 @@ class SDKAppendManager():
 		file_format = os.path.splitext(_apk_path)[-1]
 		if os.path.exists(self.__file_path+"/Y_building")==False: os.mkdir(self.__file_path+"/Y_building")
 
-		signed_apk_path = self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format
+		signed_apk_path = self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+"_"+str(datetime.date.today())+str(time.strftime("_%H_%M_%S"))+file_format
 		if os.path.isfile(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format):os.remove(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format)
 		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
-		return self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format
+		return signed_apk_path
 
 	def __change_package_name(self,_APK_path,_package_name):
 		dom = xml.dom.minidom.parse(_APK_path)
