@@ -6,9 +6,6 @@
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import <BUAdSDK/BUNativeExpressRewardedVideoAd.h>
 @interface QinMercury ()<BUNativeExpressRewardedVideoAdDelegate>
-@property (nonatomic,strong) BUNativeExpressRewardedVideoAd *rewardedVideoAd;
-@property (nonatomic, assign) BOOL loadVideoSuccess;
-@property (nonatomic, assign) BOOL renderSuccess;
 @end
 static QinMercury *instance;
 
