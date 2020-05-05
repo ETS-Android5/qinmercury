@@ -31,7 +31,7 @@ def __delete_zip_files(_path):
 	zout = zipfile.ZipFile (new_zipfile, 'w') #被写入对象
 	for item in zin.infolist():
 		buffer = zin.read(item.filename)
-		if ("BuildConfig.class" in item.filename):
+		if ("BuildConfig.class" in item.filename) or (".class" not in item.filename):
 			pass
 		else:
 			zout.writestr(item, buffer) #把文件写入到新对象中

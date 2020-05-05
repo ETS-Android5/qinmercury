@@ -25,6 +25,7 @@ import org.json.JSONTokener;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.MercuryApplication;
+import com.umeng.analytics.game.UMGameAgent;
 
 import android.app.Activity;
 import android.app.AlertDialog;

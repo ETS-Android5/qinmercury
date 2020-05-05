@@ -63,7 +63,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		mInAppExt = new InAppAD();
 		mInAppExt.ApplicationInit(Acontext);
 		if (OpenUmeng ==true) {
-			UMConfigure.init(context, "5ea12d7a978eea083f0c8960", channel_name, 0, "");
+			UMConfigure.init(context, "5e7b19e5570df324d7000392", channel_name, 0, "");
 			UMConfigure.setProcessEvent(true);
 		}
 
