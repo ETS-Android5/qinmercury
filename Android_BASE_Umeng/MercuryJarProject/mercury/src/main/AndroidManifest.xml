@@ -24,7 +24,8 @@
         </activity>
 
 		<!--sdk-->
-        <meta-data android:name="open_umeng" android:value="open"/>
+        <meta-data android:name="open_umeng" android:value="5e7b19e5570df324d7000392"/>
+        <meta-data android:name="channel_name" android:value="wo"/>
 		<!--end-->
     </application>
 	<!--sdkxml-->

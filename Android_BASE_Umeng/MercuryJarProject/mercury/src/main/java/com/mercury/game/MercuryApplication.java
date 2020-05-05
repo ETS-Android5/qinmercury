@@ -37,7 +37,6 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		checkSIM();
 		checkExtSDK();
 		checkChannelName();
-		checkChannelSplash();
 		try
 		{
 			key=getSign(this);
@@ -54,16 +53,14 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		Acontext = context;
 		checkSIM();
 		checkExtSDK();
-		checkChannelName();
-		checkChannelSplash();
-		OpenUmeng();
-		channel_name = "singmaan";
-		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
-		Log.w("MercurySDK","[SDKApp]InAppAD");
 		mInAppExt = new InAppAD();
 		mInAppExt.ApplicationInit(Acontext);
+		String umeng_id = OpenUmeng();
+		String channel_name = checkChannelName();
 		if (OpenUmeng ==true) {
-			UMConfigure.init(context, "5e7b19e5570df324d7000392", channel_name, 0, "");
+			Log.e("MercurySDK","[SDKApp]umeng = "+umeng_id);
+			Log.e("MercurySDK","[SDKApp]SdkName="+channel_name);
+			UMConfigure.init(context, umeng_id, channel_name, 0, "");
 			UMConfigure.setProcessEvent(true);
 		}
 
@@ -133,62 +130,45 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	}
 
 
-	private void checkChannelName()
+	private String checkChannelName()
 	{
 		ApplicationInfo appInfo = null;
 		try 
 		{
 			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
-			String channelnametmp = appInfo.metaData.getString("CHANNEL_NAME");
+			String channelnametmp = appInfo.metaData.getString("channel_name");
 			MercuryActivity.SortChannelID=channelname =channelnametmp;
-			if(MercuryActivity.SortChannelID.equals("kp"))
-			{
-				MercuryActivity.LongChannelID="kupai";
-			}
-			
+			return channelnametmp;
 		} catch (NameNotFoundException e) {
 //		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NotFound: " + e.getMessage());
 		    mChannelId = 0;
+			return "";
 		} catch (NullPointerException e) {
 //		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NullPointer: " + e.getMessage());
 		    mChannelId = -1;
+			return "";
 		}
 
 	}
 
-	private void checkChannelSplash()
-	{
-		ApplicationInfo appInfo = null;
-		try 
-		{
-			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
-			String channelnametmp = appInfo.metaData.getString("CHANNEL_SPLASH");
-			channelSplash =channelnametmp;
-		} catch (NameNotFoundException e) {
-//		    Log.e(MercuryConst.TAG, "checkChannelSplash to load meta-data CHANNEL_SPLASH, NameNotFound: " + e.getMessage());
-		    
-		} catch (NullPointerException e) {
-//		    Log.e(MercuryConst.TAG, "checkChannelSplash to load meta-data CHANNEL_SPLASH, NullPointer: " + e.getMessage());
-		}
-
-	}
-	private void OpenUmeng()
+	private String OpenUmeng()
 	{
 		ApplicationInfo appInfo = null;
 		try 
 		{
 			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
 			String isUmengOpen = appInfo.metaData.getString("open_umeng");
-			if(isUmengOpen.equals("open"))
+			if(isUmengOpen.equals("")==false)
 			{
 				OpenUmeng=true;
 				Log.e("MercurySDK","umeng opened");
 			}
+			return isUmengOpen;
 		} catch (NameNotFoundException e) {
-//		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NameNotFound: " + e.getMessage());
+			return "";
 		    
 		} catch (NullPointerException e) {
-//		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NullPointer: " + e.getMessage());
+			return "";
 		}
 
 	}
