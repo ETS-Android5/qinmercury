@@ -16,7 +16,7 @@ import datetime
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 class SDKAppendManager():
-	def __init__(self, channel, game_apk_path):
+	def __init__(self, channel, game_apk_path, channel_name, package_name):
 		self.__channel = channel
 		self.__python = "python3"
 		self.__apktool = "apktool"
@@ -29,6 +29,8 @@ class SDKAppendManager():
 		self.__sdk_script_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel+"/merge_building.py"
 		self.__sdk_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel+"/"+self.__sdk_apk_name
 		self.__game_apk_path = game_apk_path
+		self.__channel_name = channel_name
+		self.__package_name = package_name
 		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
 		self.__keystore = self.__file_path+"/android.keystore"
 		self.__time_tick = str(int(time.time()))
@@ -208,7 +210,7 @@ class SDKAppendManager():
 		#change package name
 		config=configparser.ConfigParser()
 		config.read(PythonLocation()+"/android_builder_config.ini")
-		PackageName  = config.get("WanNianLi","PackageName")
+		PackageName  = self.__package_name
 		self.__change_package_name(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",PackageName)
 
 	def __all_files_in_folder(self,_path):
@@ -325,37 +327,37 @@ def run():
 	config=configparser.ConfigParser()
 	config.read(PythonLocation()+"/android_builder_config.ini")
 	channel = config.sections()
-	print("------Choice your channel------")
+	print("---Choice your channel---")
 	for index, name in enumerate(channel):
-		print(f"[{index}]:{name}")
-	print("------End------")
+		print(f"[{index}]	{name}	")
+	print("-------------------------")
 	your_channel=""
 	while True:
-		your_channel=input("[MESSAGE]Input cahannel's numbner:")
+		your_channel=input("Input channel's numbner:")
 		if your_channel.isnumeric():
 			if int(your_channel)<= len(channel)-1:
 				break
 			else:
-				print('[MESSAGE]You number can not over'+str(len(channel)-1))
+				print('You number can not over'+str(len(channel)-1))
 				continue
 		else:
-			print('[MESSAGE]Your input is not number')
-
-	PackageName  = config.get(channel[int(your_channel)],"PackageName")
-	BASE		 = config.get(channel[int(your_channel)],"BASE")
-	SHOW 		 = config.get(channel[int(your_channel)],"IAP")
-	IAP  		 = config.get(channel[int(your_channel)],"SHOW")
-	APK_PATH	 = config.get(channel[int(your_channel)],"PATH")
+			print('Your input is not number')
+	ChannelName = channel[int(your_channel)]
+	PackageName  = config.get(ChannelName,"PackageName")
+	BASE		 = config.get(ChannelName,"BASE")
+	SHOW 		 = config.get(ChannelName,"IAP")
+	IAP  		 = config.get(ChannelName,"SHOW")
+	APK_PATH	 = config.get(ChannelName,"PATH")
 	if APK_PATH!="":
 		game_apk_path = APK_PATH
 	if BASE != "":
-		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path)
+		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path, channel_name = PackageName, package_name = PackageName)
 		game_apk_path = sam._merge_package()
 	if SHOW != "":
-		sam = SDKAppendManager(channel = SHOW, game_apk_path = game_apk_path)
+		sam = SDKAppendManager(channel = SHOW, game_apk_path = game_apk_path, channel_name = PackageName, package_name = PackageName)
 		game_apk_path = sam._merge_package()
 	if IAP != "":
-		sam = SDKAppendManager(channel = IAP, game_apk_path = game_apk_path)
+		sam = SDKAppendManager(channel = IAP,  game_apk_path = game_apk_path, channel_name = PackageName, package_name = PackageName)
 		game_apk_path = sam._merge_package()
 
 
