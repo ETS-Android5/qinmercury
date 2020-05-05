@@ -212,6 +212,25 @@ class SDKAppendManager():
 		config.read(PythonLocation()+"/android_builder_config.ini")
 		PackageName  = self.__package_name
 		self.__change_package_name(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",PackageName)
+		self.__xml_mete_change(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml","channel_name",self.__channel_name)
+
+	def __xml_mete_change(self,_path, key, value):
+		dom = xml.dom.minidom.parse(_path)
+		root = dom.documentElement
+		name  = root.getElementsByTagName("meta-data")
+		FoundKey=False
+		for node in name:
+			nameofname = node.getAttribute("android:name")
+			if nameofname==key:
+				node.setAttribute("android:value",value)
+				FoundKey=True
+		if FoundKey==False:
+			print("[ERROR] Can't find "+key)
+		try:
+			with open(_path,'w',encoding='UTF-8') as _path:
+				dom.writexml(_path,indent='',addindent='',newl='',encoding='UTF-8')
+		except Exception as err:
+			print("ERROR[{0}".format(err))
 
 	def __all_files_in_folder(self,_path):
 		ListMyFolder = []
@@ -348,17 +367,28 @@ def run():
 	SHOW 		 = config.get(ChannelName,"IAP")
 	IAP  		 = config.get(ChannelName,"SHOW")
 	APK_PATH	 = config.get(ChannelName,"PATH")
+	print("[ChannelName]	"+ChannelName)
+	print("[PackageName]	"+PackageName)
+	print("[BASE]	"+BASE)
+	print("[SHOW]	"+SHOW)
+	print("[IAP]	"+IAP)
+	print("[APK_PATH]	"+APK_PATH)
+	starttime = datetime.datetime.now()
 	if APK_PATH!="":
 		game_apk_path = APK_PATH
 	if BASE != "":
-		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path, channel_name = PackageName, package_name = PackageName)
+		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path, channel_name = ChannelName, package_name = PackageName)
 		game_apk_path = sam._merge_package()
 	if SHOW != "":
-		sam = SDKAppendManager(channel = SHOW, game_apk_path = game_apk_path, channel_name = PackageName, package_name = PackageName)
+		sam = SDKAppendManager(channel = SHOW, game_apk_path = game_apk_path, channel_name = ChannelName, package_name = PackageName)
 		game_apk_path = sam._merge_package()
 	if IAP != "":
-		sam = SDKAppendManager(channel = IAP,  game_apk_path = game_apk_path, channel_name = PackageName, package_name = PackageName)
+		sam = SDKAppendManager(channel = IAP,  game_apk_path = game_apk_path, channel_name = ChannelName, package_name = PackageName)
 		game_apk_path = sam._merge_package()
+	endtime = datetime.datetime.now()
+	print ("————————————————————————————————")
+	print ("	Total Time:"+str((endtime-starttime).seconds)+" s")
+	print ("————————————————————————————————")
 
 
 if __name__ == '__main__':
