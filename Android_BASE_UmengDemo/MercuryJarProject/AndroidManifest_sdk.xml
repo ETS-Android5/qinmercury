@@ -1,5 +1,5 @@
 <!--sdk-->        <meta-data android:name="open_umeng" android:value="5e7b19e5570df324d7000392"/>
-        <meta-data android:name="channel_name" android:value="wo"/>
+        <meta-data android:name="channel_name" android:value="demo"/>
 <!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>

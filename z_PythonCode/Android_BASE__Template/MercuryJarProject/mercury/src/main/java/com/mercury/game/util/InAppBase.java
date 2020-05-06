@@ -131,10 +131,10 @@ public class InAppBase{
 	
 	public void onPurchaseSuccess(String message) {qc.PurchaseSuccess(message,this);}
 	public void onPurchaseFailed(String strError) {qc.PurchaseFailed(strError,this);}
-	public void onLoginSuccess(String strError) { qc.AdLoadSuccess(strError,this); }
-	public void onLoginFailed(String strError) { qc.AdLoadFailed(strError,this); }
+	public void LoginSuccessCallBack(String strError) { qc.LoginSuccess(strError,this); }
+	public void LoginCancelCallBack(String strError) { qc.LoginCancel(strError,this); }
 	public void AdLoadSuccessCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
-	public void AdLoadFailedCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
+	public void AdLoadFailedCallBack(String strError) { qc.AdLoadFailed(strError,this); }
 	public void AdShowSuccessCallBack(String strError) { qc.AdShowSuccessCallBack(strError,this); }
 	public void AdShowFailedCallBack(String strError) { qc.AdShowFailedCallBack(strError,this); }
 

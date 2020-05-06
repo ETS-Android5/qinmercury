@@ -158,30 +158,41 @@ public class MercuryConst {
 		inbase.appinterface.PurchaseSuccessCallBack(message);
 	}
 	public void PurchaseFailed(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.PurchaseFailedCallBack(strError);
 	}
 
 	public void AdLoadSuccess(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginSuccess callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] AdLoadSuccess callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.AdLoadSuccessCallBack(strError);
 	}
 
 	public void AdLoadFailed(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginFailed callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] AdLoadFailed callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.AdLoadFailedCallBack(strError);
 	}
+
+	public void LoginSuccess(String strError,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] LoginSuccess callback->"+strError+" inbase->"+inbase);
+		inbase.appinterface.LoginSuccessCallBack(strError);
+	}
+
+	public void LoginCancel(String strError,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] LoginCancel callback->"+strError+" inbase->"+inbase);
+		inbase.appinterface.LoginCancelCallBack(strError);
+	}
+
 	public void AdShowSuccessCallBack(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginSuccess callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] AdShowSuccessCallBack callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.AdShowSuccessCallBack(strError);
 	}
 
 	public void AdShowFailedCallBack(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginFailed callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] AdShowFailedCallBack callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.AdShowFailedCallBack(strError);
 	}
 	public void FunctionCallBack(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onFunctionCallBack callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] FunctionCallBack callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.onFunctionCallBack(strError);	
 	}
 	public void QinUnityMessage(String ObjectName,String MethodName,String QinMessage)

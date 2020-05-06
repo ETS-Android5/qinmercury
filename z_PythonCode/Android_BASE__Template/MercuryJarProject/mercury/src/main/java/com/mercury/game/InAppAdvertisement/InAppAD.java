@@ -75,14 +75,14 @@ public class InAppAD extends InAppBase {
 		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				AdShowSuccessCallBack("Success");
-				AdLoadSuccessCallBack("success");
+				AdShowSuccessCallBack("ActiveInterstitial");
+				AdLoadSuccessCallBack("ActiveInterstitial");
 			}
 		});
 		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				AdLoadFailedCallBack("failed");
+				AdLoadFailedCallBack("ActiveInterstitial");
 			}
 		});
 		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
@@ -102,14 +102,14 @@ public class InAppAD extends InAppBase {
 		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				AdShowSuccessCallBack("Success");
-				AdLoadSuccessCallBack("success");
+				AdShowSuccessCallBack("ActiveBanner");
+				AdLoadSuccessCallBack("ActiveBanner");
 			}
 		});
 		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				AdLoadFailedCallBack("failed");
+				AdLoadFailedCallBack("ActiveBanner");
 			}
 		});
 		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
@@ -129,14 +129,14 @@ public class InAppAD extends InAppBase {
 		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				AdShowSuccessCallBack("Success");
-				AdLoadSuccessCallBack("success");
+				AdShowSuccessCallBack("ActiveNative");
+				AdLoadSuccessCallBack("ActiveNative");
 			}
 		});
 		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				AdLoadFailedCallBack("failed");
+				AdLoadFailedCallBack("ActiveNative");
 			}
 		});
 		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
@@ -156,14 +156,14 @@ public class InAppAD extends InAppBase {
 		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				AdShowSuccessCallBack("Success");
-				AdLoadSuccessCallBack("success");
+				AdShowSuccessCallBack("ActiveRewardVideo");
+				AdLoadSuccessCallBack("ActiveRewardVideo");
 			}
 		});
 		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				AdLoadFailedCallBack("failed");
+				AdLoadFailedCallBack("ActiveRewardVideo");
 			}
 		});
 		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
