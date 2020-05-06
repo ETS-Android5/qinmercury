@@ -4,7 +4,6 @@ import sys
 import time
 import json
 import random
-import aiomysql
 import requests
 import calendar
 import shutil
