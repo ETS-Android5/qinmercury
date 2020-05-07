@@ -184,18 +184,18 @@ class APKBuildManager():
 	def copy_cache_folder(self):
 		package_name = PathLib(self.__get_package_name(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml"))
 		#change package name
-		self.__change_package_name(PathLib(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml",package_name))
+		self.__change_package_name(str(PathLib(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml")),package_name)
 		# #change name in java file
-		self.__change_java_package_name(PathLib(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java",package_name))
-		if os.path.isdir(PathLib(f"{PythonLocation()}/MercuryAPKProject")):
-			shutil.rmtree(PathLib(f"{PythonLocation()}/MercuryAPKProject"))
-			shutil.copytree(PathLib(f"{PythonLocation()}/MercuryAPKProject_pure",f"{PythonLocation()}/MercuryAPKProject"))
+		self.__change_java_package_name(str(PathLib(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java"),package_name))
+		if os.path.isdir(str(PathLib(f"{PythonLocation()}/MercuryAPKProject"))):
+			shutil.rmtree(str(PathLib(f"{PythonLocation()}/MercuryAPKProject")))
+			shutil.copytree(str(PathLib(f"{PythonLocation()}/MercuryAPKProject_pure")),str(PathLib(f"{PythonLocation()}/MercuryAPKProject")))
 		else:
-			shutil.copytree(PathLib(f"{PythonLocation()}/MercuryAPKProject",f"{PythonLocation()}/MercuryAPKProject_pure"))
+			shutil.copytree(str(PathLib(f"{PythonLocation()}/MercuryAPKProject")),str(PathLib(f"{PythonLocation()}/MercuryAPKProject_pure")))
 		# #change package name
-		self.__change_package_name(PathLib(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml","com.demo.game"))
+		self.__change_package_name(str(PathLib(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml"),"com.demo.game"))
 		# #change name in java file
-		self.__change_java_package_name(PathLib(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java","com.demo.game"))
+		self.__change_java_package_name(str(PathLib(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java"),"com.demo.game"))
 
 	def merge_sdk_resource(self):
 		#merge assets
@@ -431,6 +431,7 @@ def run():
 
 def main():
 	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	ss = PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py")
 	if os.path.isfile(PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py")):
 		if os.path.isfile(PathLib(PythonLocation()+"/"+file_path+".py")):
 			os.remove(PathLib(PythonLocation()+"/"+file_path+".py"))
