@@ -12,11 +12,11 @@ import aiomysql
 import requests
 import calendar
 import shutil
-
 import xml.etree.ElementTree as ET
 import sys
 import subprocess
 import xml.dom.minidom
+from pathlib import Path as PathLib
 class xml_manager(object):
 	def __init__(self, path):
 		self.path = path
@@ -152,10 +152,10 @@ class APKBuildManager():
 		self.__apktool = "apktool"
 		self.__sdk_apk_name = "app-release.apk"
 		self.__sdk_apk_name_only = "app-release"
-		self.__jar_project = os.path.dirname(os.path.realpath(__file__))+"/MercuryJarProject"
-		self.__apk_project = os.path.dirname(os.path.realpath(__file__))+"/MercuryAPKProject"
-		self.__apk_project_clean = os.path.dirname(os.path.realpath(__file__))+"/MercuryAPKProject_pure"
-		self.__cache_position = "/PythonCode/cache/"
+		self.__jar_project = PathLib(os.path.dirname(os.path.realpath(__file__))+"/MercuryJarProject")
+		self.__apk_project = PathLib(os.path.dirname(os.path.realpath(__file__))+"/MercuryAPKProject")
+		self.__apk_project_clean = PathLib(os.path.dirname(os.path.realpath(__file__))+"/MercuryAPKProject_pure")
+		self.__cache_position = PathLib("/PythonCode/cache/")
 		self.__copyFileCounts = 0
 		# self.__file_path = os.path.dirname(os.path.realpath(__file__))
 		# self.__sdk_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel
@@ -182,20 +182,20 @@ class APKBuildManager():
 		os.chdir(self.__file_path+self.__cache_position+self.__time_tick)
 
 	def copy_cache_folder(self):
-		package_name = self.__get_package_name(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml")
+		package_name = PathLib(self.__get_package_name(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml"))
 		#change package name
-		self.__change_package_name(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml",package_name)
+		self.__change_package_name(PathLib(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml",package_name))
 		# #change name in java file
-		self.__change_java_package_name(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java",package_name)
-		if os.path.isdir(f"{PythonLocation()}/MercuryAPKProject"):
-			shutil.rmtree(f"{PythonLocation()}/MercuryAPKProject")
-			shutil.copytree(f"{PythonLocation()}/MercuryAPKProject_pure",f"{PythonLocation()}/MercuryAPKProject")
+		self.__change_java_package_name(PathLib(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java",package_name))
+		if os.path.isdir(PathLib(f"{PythonLocation()}/MercuryAPKProject")):
+			shutil.rmtree(PathLib(f"{PythonLocation()}/MercuryAPKProject"))
+			shutil.copytree(PathLib(f"{PythonLocation()}/MercuryAPKProject_pure",f"{PythonLocation()}/MercuryAPKProject"))
 		else:
-			shutil.copytree(f"{PythonLocation()}/MercuryAPKProject",f"{PythonLocation()}/MercuryAPKProject_pure")
+			shutil.copytree(PathLib(f"{PythonLocation()}/MercuryAPKProject",f"{PythonLocation()}/MercuryAPKProject_pure"))
 		# #change package name
-		self.__change_package_name(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml","com.demo.game")
+		self.__change_package_name(PathLib(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml","com.demo.game"))
 		# #change name in java file
-		self.__change_java_package_name(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java","com.demo.game")
+		self.__change_java_package_name(PathLib(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java","com.demo.game"))
 
 	def merge_sdk_resource(self):
 		#merge assets
@@ -210,12 +210,12 @@ class APKBuildManager():
 	def __merge_lib(self):
 		self.__copyFileCounts = 0
 		#copy lib
-		if os.path.isdir(f"{self.__jar_project}/mercury/src/main/libs")==False:os.mkdir(f"{self.__jar_project}/mercury/src/main/libs")
-		if os.path.isdir(f"{self.__apk_project}/app/src/main/libs")==False:os.mkdir(f"{self.__apk_project}/app/src/main/libs")
-		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/libs",f"{self.__apk_project}/app/src/main/libs")
+		if os.path.isdir(PathLib(f"{self.__jar_project}/mercury/src/main/libs"))==False:os.mkdir(PathLib(f"{self.__jar_project}/mercury/src/main/libs"))
+		if os.path.isdir(PathLib(f"{self.__apk_project}/app/src/main/libs"))==False:os.mkdir(PathLib(f"{self.__apk_project}/app/src/main/libs"))
+		self._copy_files_overwrite(PathLib(f"{self.__jar_project}/mercury/src/main/libs"),PathLib(f"{self.__apk_project}/app/src/main/libs"))
 		#merge remote sdk
 		# def AddRemoteJarToGradle(_DemoGradlePath,_buildGradlePath):
-		with open(f"{self.__jar_project}/mercury/build.gradle",encoding="utf8") as file_object:
+		with open(PathLib(f"{self.__jar_project}/mercury/build.gradle"),encoding="utf8") as file_object:
 			JavaCode=[]
 			isStart = False
 			all_the_text = file_object.readlines()
@@ -224,7 +224,7 @@ class APKBuildManager():
 				if f.find("implementation")!=-1:
 					JavaCode.append(i)
 		isFindStart = False
-		with open(f"{self.__apk_project}/app/build.gradle",encoding="utf8") as file_object:
+		with open(PathLib(f"{self.__apk_project}/app/build.gradle"),encoding="utf8") as file_object:
 			JavaCodeGradle=[]
 			all_the_text = file_object.readlines()
 			for i in all_the_text:
@@ -238,22 +238,22 @@ class APKBuildManager():
 					JavaCodeGradle.append("}\n")
 				else:
 					JavaCodeGradle.append(i)
-		with open(f"{self.__apk_project}/app/build.gradle",'w',encoding="utf8") as file_object_read:
+		with open(PathLib(f"{self.__apk_project}/app/build.gradle",'w',encoding="utf8")) as file_object_read:
 			file_object_read.writelines(JavaCodeGradle)
 
 	def __merge_assets(self):
 		self.__copyFileCounts = 0
-		if os.path.isdir(f"{self.__jar_project}/mercury/src/main/assets")==False:os.mkdir(f"{self.__jar_project}/mercury/src/main/assets")
-		if os.path.isdir(f"{self.__apk_project}/app/src/main/libs")==False:os.mkdir(f"{self.__apk_project}/app/src/main/libs")
-		self._copy_files_overwrite(f"{self.__jar_project}/mercury/src/main/assets",f"{self.__apk_project}/app/src/main/assets")
+		if os.path.isdir(PathLib(f"{self.__jar_project}/mercury/src/main/assets"))==False:os.mkdir(PathLib(f"{self.__jar_project}/mercury/src/main/assets"))
+		if os.path.isdir(PathLib(f"{self.__apk_project}/app/src/main/libs"))==False:os.mkdir(PathLib(f"{self.__apk_project}/app/src/main/libs"))
+		self._copy_files_overwrite(PathLib(f"{self.__jar_project}/mercury/src/main/assets"),PathLib(f"{self.__apk_project}/app/src/main/assets"))
 
 	def __merge_res(self):
 		self.__copyFileCounts = 0
-		jar_res = self.__all_files_in_folder(f"{self.__jar_project}/mercury/src/main/res")
-		apk_res  = self.__all_files_in_folder(f"{self.__apk_project}/app/src/main/res")
+		jar_res = self.__all_files_in_folder(PathLib(f"{self.__jar_project}/mercury/src/main/res"))
+		apk_res  = self.__all_files_in_folder(PathLib(f"{self.__apk_project}/app/src/main/res"))
 		for g_res in jar_res:
 			for s_res in apk_res:
-				self._copy_files_dont_overwrite(f"{self.__jar_project}/mercury/src/main/res",f"{self.__apk_project}/app/src/main/res")
+				self._copy_files_dont_overwrite(PathLib(f"{self.__jar_project}/mercury/src/main/res",f"{self.__apk_project}/app/src/main/res"))
 				gameresfile = g_res[g_res.rfind("/"):]
 				sdkresfile = s_res[s_res.rfind("/"):]
 				if sdkresfile == gameresfile and ".xml" in sdkresfile:
@@ -266,9 +266,9 @@ class APKBuildManager():
 
 	def __merge_xml(self):
 		#get sdk string
-		if os.path.isfile(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml"):
+		if os.path.isfile(PathLib(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml")):
 			sdk_part = []
-			with open(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml",encoding="utf8") as file_object:
+			with open(PathLib(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml"),encoding="utf8") as file_object:
 				is_sdk_part = False
 				all_the_text = file_object.readlines()
 				for i in all_the_text:
@@ -295,11 +295,11 @@ class APKBuildManager():
 							continue
 
 		#save string into files
-		with open(f"{self.__jar_project}/AndroidManifest_sdk.xml",mode='w',encoding="utf8") as file_context:
+		with open(PathLib(f"{self.__jar_project}/AndroidManifest_sdk.xml"),mode='w',encoding="utf8") as file_context:
 			file_context.writelines(sdk_part)
 
 		#merge xml string into APK
-		with open(f"{self.__apk_project}/app/src/main/AndroidManifest.xml",encoding="utf8") as file_object:
+		with open(PathLib(f"{self.__apk_project}/app/src/main/AndroidManifest.xml"),encoding="utf8") as file_object:
 			is_sdk_part = False
 			loop_old = False
 			all_the_text = file_object.readlines()
@@ -344,7 +344,7 @@ class APKBuildManager():
 					else:
 						new_xml.append(i)
 
-			with open(f"{self.__apk_project}/app/src/main/AndroidManifest.xml",mode='w',encoding="utf8") as file_context:
+			with open(PathLib(f"{self.__apk_project}/app/src/main/AndroidManifest.xml"),mode='w',encoding="utf8") as file_context:
 				file_context.writelines(new_xml)
 	def _copy_files_dont_overwrite(self,sourceDir, targetDir):
 		self.__copyFileCounts
@@ -431,16 +431,16 @@ def run():
 
 def main():
 	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
-	if os.path.isfile(PythonLocation()+"/../z_PythonCode/"+file_path+".py"):
-		if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
-			os.remove(PythonLocation()+"/"+file_path+".py")
-		shutil.copy(PythonLocation()+"/../z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
+	if os.path.isfile(PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py")):
+		if os.path.isfile(PathLib(PythonLocation()+"/"+file_path+".py")):
+			os.remove(PathLib(PythonLocation()+"/"+file_path+".py"))
+		shutil.copy(PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py"),PathLib(PythonLocation()+"/"+file_path+".py"))
 	run()
 	os.chdir(PythonLocation())
 	os.system("python3 ./MercuryJarProject/BuildJAR.py")
 	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
-	if os.path.isfile(PythonLocation()+"/app-release.apk"):
-		os.remove(PythonLocation()+"/app-release.apk")
+	if os.path.isfile(PathLib(PythonLocation()+"/app-release.apk")):
+		os.remove(PathLib(PythonLocation()+"/app-release.apk"))
 	os.system("python3 ./MercuryAPKProject/BuildAPK.py")
 	os.system("mv ./MercuryAPKProject/app-release.apk ./app-release.apk")
 	os.system("adb install -r  ./app-release.apk")
