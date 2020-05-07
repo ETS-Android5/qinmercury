@@ -12,11 +12,11 @@ import aiomysql
 import requests
 import calendar
 import shutil
-
 import xml.etree.ElementTree as ET
 import sys
 import subprocess
 import xml.dom.minidom
+from pathlib import Path as PathLib
 class xml_manager(object):
 	def __init__(self, path):
 		self.path = path
@@ -431,16 +431,16 @@ def run():
 
 def main():
 	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
-	if os.path.isfile(PythonLocation()+"/../z_PythonCode/"+file_path+".py"):
-		if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
-			os.remove(PythonLocation()+"/"+file_path+".py")
-		shutil.copy(PythonLocation()+"/../z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
+	if os.path.isfile(PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py")):
+		if os.path.isfile(PathLib(PythonLocation()+"/"+file_path+".py")):
+			os.remove(PathLib(PythonLocation()+"/"+file_path+".py"))
+		shutil.copy(PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py"),PathLib(PythonLocation()+"/"+file_path+".py"))
 	run()
 	os.chdir(PythonLocation())
 	os.system("python3 ./MercuryJarProject/BuildJAR.py")
 	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
-	if os.path.isfile(PythonLocation()+"/app-release.apk"):
-		os.remove(PythonLocation()+"/app-release.apk")
+	if os.path.isfile(PathLib(PythonLocation()+"/app-release.apk")):
+		os.remove(PathLib(PythonLocation()+"/app-release.apk"))
 	os.system("python3 ./MercuryAPKProject/BuildAPK.py")
 	os.system("mv ./MercuryAPKProject/app-release.apk ./app-release.apk")
 	os.system("adb install -r  ./app-release.apk")
