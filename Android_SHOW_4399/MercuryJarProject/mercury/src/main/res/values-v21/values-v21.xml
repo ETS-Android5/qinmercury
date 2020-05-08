@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="m4399ad.Progress" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">#f0ffffff</item>
+    </style>
+	
+	<style name="appdownloader_style_notification_text" parent="@android:style/TextAppearance.Material.Notification"/>
+    <style name="appdownloader_style_notification_title" parent="@android:style/TextAppearance.Material.Notification.Title"/>
+</resources>
