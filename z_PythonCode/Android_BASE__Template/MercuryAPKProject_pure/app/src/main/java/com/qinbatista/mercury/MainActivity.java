@@ -80,7 +80,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][5]->purchaseProduct");
-				MercurySDK.Purchase("production1");
+				MercurySDK.Purchase("uk.fiveaces.nsfcchina.bux_1");
 
 			}
 		});
@@ -146,8 +146,8 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 		btn6.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercuryDemo","[step][12]->Exchange");
-				MercurySDK.RestoreProduct();
+				Log.w("MercuryDemo","[step][12]->GetProductionInfo");
+				MercurySDK.GetProductionInfo();
 			}
 		});
 	}

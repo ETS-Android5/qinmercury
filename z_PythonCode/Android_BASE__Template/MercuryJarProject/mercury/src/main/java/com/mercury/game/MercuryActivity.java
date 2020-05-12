@@ -32,7 +32,7 @@ import java.util.Date;
 import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
-import static com.mercury.game.util.MercuryConst.ProductionJsonList;
+import static com.mercury.game.util.MercuryConst.GetProductionList;
 
 public class MercuryActivity  {
 
@@ -68,9 +68,8 @@ public class MercuryActivity  {
 	}
 	public String GetProductionInfo()
 	{
-		MercuryConst.PayInfo("");
-		LogLocal("[MercuryActivity][GetProductionInfo] ProductionJsonList.toString()="+ProductionJsonList.toString());
-		return ProductionJsonList.toString();
+		LogLocal("[MercuryActivity][GetProductionInfo] GetProductionList="+GetProductionList());
+		return GetProductionList();
 	}
 	public void ChannelSplash()
 	{
