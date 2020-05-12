@@ -105,15 +105,15 @@
         <!-- MobgiAds end -->
 
         <!-- baidu start -->
-<!--        <provider-->
-<!--            android:name="com.baidu.mobads.openad.FileProvider"-->
-<!--            android:authorities="${applicationId}.bd.provider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/bd_provider_paths" />-->
-<!--        </provider>-->
+        <provider
+            android:name="com.baidu.mobads.openad.FileProvider"
+            android:authorities="${applicationId}.bd.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/bd_provider_paths" />
+        </provider>
         <!-- for baidu xadsdk internal web-browser -->
         <!-- 如果使用信息流模板，点击后播放视频，建议删除对theme的设置，否则影响视频播放UI效果 -->
         <activity
@@ -311,16 +311,16 @@
             android:name="com.uniplay.adsdk.NetworkChangeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
         <!-- 应用如需上传到”谷歌市场”请务必将 DownloadService 替换为 gdService -->
-<!--        <service android:name="com.uniplay.adsdk.DownloadService"/>-->
-<!--        <provider-->
-<!--            android:name="com.uniplay.adsdk.UniPlayFileProvider"-->
-<!--            android:authorities="${applicationId}.uniplay.fileprovider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/uniplay_file_path" />-->
-<!--        </provider>-->
+        <service android:name="com.uniplay.adsdk.DownloadService"/>
+        <provider
+            android:name="com.uniplay.adsdk.UniPlayFileProvider"
+            android:authorities="${applicationId}.uniplay.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/uniplay_file_path" />
+        </provider>
         <!-- 6.1.0 新增 -->
         <activity
             android:name="com.joomob.activity.AdVideoActivity"
@@ -402,36 +402,36 @@
         <!-- 插页 -->
 
         <!-- 视频 -->
-<!--        <activity-->
-<!--            android:name="com.mintegral.msdk.reward.player.MTGRewardVideoActivity"-->
-<!--            android:configChanges="orientation|keyboardHidden|screenSize"-->
-<!--            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />-->
-<!--        <provider-->
-<!--            android:name="com.mintegral.msdk.base.utils.MTGFileProvider"-->
-<!--            android:authorities="${applicationId}.mtgFileProvider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/mtg_provider_paths"/>-->
-<!--        </provider>-->
+        <activity
+            android:name="com.mintegral.msdk.reward.player.MTGRewardVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <provider
+            android:name="com.mintegral.msdk.base.utils.MTGFileProvider"
+            android:authorities="${applicationId}.mtgFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/mtg_provider_paths"/>
+        </provider>
         <!-- Mobvista end -->
 
         <!-- toutiao start -->
-<!--        <provider-->
-<!--            android:name="com.bytedance.sdk.openadsdk.TTFileProvider"-->
-<!--            android:authorities="${applicationId}.TTFileProvider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/tt_file_paths" />-->
-<!--        </provider>-->
+        <provider
+            android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
+            android:authorities="${applicationId}.TTFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/tt_file_paths" />
+        </provider>
 
-<!--        <provider-->
-<!--            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"-->
-<!--            android:authorities="${applicationId}.TTMultiProvider"-->
-<!--            android:exported="false" />-->
+        <provider
+            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
+            android:authorities="${applicationId}.TTMultiProvider"
+            android:exported="false" />
         <!-- toutiao end -->
 
 

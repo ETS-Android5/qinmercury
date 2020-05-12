@@ -62,7 +62,7 @@ public class MercuryConst {
 	public static int Cocos2D=1002;
 	public static String exchangeID;
 	public static String Restoreappid = "letscreatepottery";
-    
+	public static JSONObject ProductionJsonList;
     
 	
     public static String[] convertStrToArray(String str,String symbol){   
@@ -103,36 +103,61 @@ public class MercuryConst {
 
     public static void PayInfo(String SavePid)
     {
-    	  String  ydpid="";
-    	  String  ltpid="";
-    	  String  dxpid="";
-    	  String  desc="";
-    	  float  pricefloat=1f;
+    	String  desc="";
+    	float  pricefloat=1f;
+		ProductionJsonList = new JSONObject();
+		try
+		{
 		  switch (SavePid)
 	      {
-	          case "production1":		desc = "解锁全部关卡"; pricefloat = 20.0f;  break;
-	          case "production2":		desc = "2200点券";    pricefloat = 35.0f;  break;
-	          case "production3":		desc = "5000点券";    pricefloat = 65.0f;  break;
-	          case "production4":		desc = "11000点券";   pricefloat = 130.0f; break;
-	          case "production5":		desc = "30000点券";   pricefloat = 330.0f; break;
-	          case "production6":		desc = "70000点券";   pricefloat = 660.0f; break;
-	          case "production7":		desc = "命运女侠";     pricefloat = 20.0f;  break;
-	          case "production8":		desc = "风刃";        pricefloat = 20.0f;  break;
-	          case "production9":		desc = "虚空猎手";     pricefloat = 20.0f;  break;
-	          case "production10":		desc = "超能博士";     pricefloat = 30.0f;  break;
-	          case "production11":		desc = "达尔文";       pricefloat = 30.0f;  break;
-	          case "production12":		desc = "铁甲马克";     pricefloat = 45.0f; break;
-	          case "production13":		desc = "解锁游戏";     pricefloat = 30.0f; break;
-	          case "production14":		desc = "桂英";         pricefloat =  18.0f; break;
-	          case "production15":		desc = "自由猎人";     pricefloat = 30.0f; break;
-	          case "production16":		desc = "自由猎人";     pricefloat = 30.0f; break;
+	          case "uk.fiveaces.nsfcchina.removeads":		    desc = "解锁全部关卡"; pricefloat = 5.0f;  	ProductionJsonList.put("uk.fiveaces.nsfcchina.removeads", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.unlimitededitor":	    desc = "2200点券";    pricefloat = 5.0f;  	ProductionJsonList.put("uk.fiveaces.nsfcchina.unlimitededitor", pricefloat+"¥"); break;
+	          case "uk.fiveaces.nsfcchina.bigstaffboost":		desc = "5000点券";    pricefloat = 3.0f;  	ProductionJsonList.put("uk.fiveaces.nsfcchina.bigstaffboost ", pricefloat+"3¥");break;
+	          case "uk.fiveaces.nsfcchina.betabasicpack":		desc = "11000点券";   pricefloat = 2.0f; 	ProductionJsonList.put("uk.fiveaces.nsfcchina.betabasicpack", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.bux_1":				desc = "30000点券";   pricefloat = 10.0f;	ProductionJsonList.put("uk.fiveaces.nsfcchina.bux_1", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.bux_2":				desc = "70000点券";   pricefloat = 15.0f; 	ProductionJsonList.put("uk.fiveaces.nsfcchina.bux_2", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.bux_3":				desc = "命运女侠";     pricefloat = 20.0f; 	ProductionJsonList.put("uk.fiveaces.nsfcchina.bux_3", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.bux_5":				desc = "风刃";        pricefloat = 50.0f; 	ProductionJsonList.put("uk.fiveaces.nsfcchina.bux_5", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.betamanagementpack":		desc = "虚空猎手";     pricefloat = 2.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.betamanagementpack", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.fitnesscoaches1new":		desc = "超能博士";     pricefloat = 4.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.fitnesscoaches1new", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.fitnesscoaches2new":		desc = "达尔文";       pricefloat = 2.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.fitnesscoaches2new", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.physios1new":				desc = "铁甲马克";     pricefloat = 4.0f;ProductionJsonList.put("uk.fiveaces.nsfcchina.physios1new", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.physios2new":				desc = "解锁游戏";     pricefloat = 2.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.physios2new", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.skillcoaches1new":		desc = "桂英";         pricefloat =  4.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.skillcoaches1new", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.skillcoaches2new":		desc = "自由猎人";     pricefloat = 2.0f;ProductionJsonList.put("uk.fiveaces.nsfcchina.skillcoaches2new", pricefloat+"¥");break;
+	          case "uk.fiveaces.nsfcchina.concernspack":		desc = "自由猎人";     pricefloat = 5.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.concernspack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.contractpack":		desc = "自由猎人";     pricefloat = 5.0f;ProductionJsonList.put("uk.fiveaces.nsfcchina.contractpack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.defensivepack":		desc = "自由猎人";     pricefloat = 6.0f;ProductionJsonList.put("uk.fiveaces.nsfcchina.defensivepack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.chanceplayer":		desc = "自由猎人";     pricefloat = 1.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.chanceplayer", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.dreamteam":			desc = "自由猎人";     pricefloat = 20.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.dreamteam", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.goaliepack":			desc = "自由猎人";     pricefloat = 5.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.goaliepack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.betagoldplayerpack":	desc = "自由猎人";     pricefloat = 2.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.betagoldplayerpack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.betakeeperpack":		desc = "自由猎人";     pricefloat = 1.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.betakeeperpack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.marketingmanager":	desc = "自由猎人";     pricefloat = 4.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.marketingmanager", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.midfieldpack":		desc = "自由猎人";     pricefloat = 6.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.midfieldpack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.betarecoverypack":	desc = "自由猎人";     pricefloat = 1.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.betarecoverypack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.retries":				desc = "自由猎人";     pricefloat = 2.0f;ProductionJsonList.put("uk.fiveaces.nsfcchina.retries", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.betaholidaypack":		desc = "自由猎人";     pricefloat = 6.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.betaholidaypack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.strikerpack":			desc = "自由猎人";     pricefloat = 6.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.strikerpack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.superkeeper":			desc = "自由猎人";     pricefloat = 11.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.superkeeper", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.superstriker":		desc = "自由猎人";     pricefloat = 9.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.superstriker", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.supremeteam":			desc = "自由猎人";     pricefloat = 45.0f;ProductionJsonList.put("uk.fiveaces.nsfcchina.supremeteam", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.spinepack":			desc = "自由猎人";     pricefloat = 8.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.spinepack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.betacoachingpack":	desc = "自由猎人";     pricefloat = 4.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.betacoachingpack", pricefloat+"¥");break;
+			  case "uk.fiveaces.nsfcchina.versatilitypack":		desc = "自由猎人";     pricefloat = 5.0f; ProductionJsonList.put("uk.fiveaces.nsfcchina.versatilitypack", pricefloat+"¥");break;
 	          default:
 	              break;	
 	      }
-		  QinPid = SavePid;
-		  Qindesc= desc;
-		  Qinpricefloat=pricefloat;
-		  MercuryActivity.LogLocal("[MercuryConst][PayInfo] QinPid="+QinPid+" Qindesc="+Qindesc+" Qinpricefloat="+Qinpricefloat);
+
+		}
+		catch (JSONException e)
+		{
+				e.printStackTrace();
+		}
+		QinPid = SavePid;
+		Qindesc= desc;
+		Qinpricefloat=pricefloat;
+		MercuryActivity.LogLocal("[MercuryConst][PayInfo] QinPid="+QinPid+" Qindesc="+Qindesc+" Qinpricefloat="+Qinpricefloat);
     }
     
 	public void FunctionL(String number)

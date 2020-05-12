@@ -32,14 +32,13 @@ import java.util.Date;
 import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
+import static com.mercury.game.util.MercuryConst.ProductionJsonList;
 
 public class MercuryActivity  {
 
 	public static Context mContext = null;
 	private InAppChannel mInAppChannel;
 	public InAppAD mInAppAD;
-
-
 	public static int mSimOperatorId;
 	private int mChannelId;
 	private int mExtSDKId = -1;
@@ -59,15 +58,19 @@ public class MercuryActivity  {
 	private static ImageView img = null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
-		getDeviceId(mContext);
 		mContext = ContextFromUsers;
-		ChannelSplash();
-		mInAppChannel = new InAppChannel() ;
-		mInAppAD= new InAppAD() ;
 		activityforappbase=this;
+		ChannelSplash();
+		getDeviceId(mContext);
 		InitChannel(appcall);
 		InitAd(appcall);
 
+	}
+	public String GetProductionInfo()
+	{
+		MercuryConst.PayInfo("");
+		LogLocal("[MercuryActivity][GetProductionInfo] ProductionJsonList.toString()="+ProductionJsonList.toString());
+		return ProductionJsonList.toString();
 	}
 	public void ChannelSplash()
 	{
@@ -180,20 +183,19 @@ public class MercuryActivity  {
 		DeviceId= MD5.getMessageDigest(strUserID.getBytes());
 		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
-
-
 	}
 
 	public void InitChannel(final APPBaseInterface appcall)
 	{
-		final Context applicationContext = mContext.getApplicationContext();		
+		final Context applicationContext = mContext.getApplicationContext();
+		mInAppChannel = new InAppChannel() ;
 		LogLocal("[MercuryActivity][InitChannel] Local InitChannel()->"+mInAppChannel);
 		mInAppChannel.ActivityInit((Activity)mContext, appcall);
-	
 	}
 	public void InitAd(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();
+		mInAppAD= new InAppAD() ;
 		LogLocal("[MercuryActivity][InitAd] Local InitAd()->"+mInAppAD);
 		mInAppAD.ActivityInit((Activity)mContext,appcall);
 
