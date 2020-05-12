@@ -31,6 +31,11 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    repositories {
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
 
 }
 

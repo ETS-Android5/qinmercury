@@ -6,6 +6,11 @@ android {
             jniLibs.srcDirs = ['src/main/libs']
         }
     }
+    repositories {
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
     signingConfigs {
         release {
             keyAlias 'android.keystore'
