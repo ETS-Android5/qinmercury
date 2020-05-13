@@ -1,11 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['src/main/libs']
-        }
-    }
+
     signingConfigs {
         release {
             keyAlias 'android.keystore'
@@ -29,6 +25,11 @@ android {
         }
         debug {
             signingConfig signingConfigs.release
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
         }
     }
     repositories {
