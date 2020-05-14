@@ -43,11 +43,17 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
     implementation files('src/main/libs/MercurySDK.jar')
-    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     implementation files('src/main/libs/org.apache.http.legacy.jar')
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation files('src/main/libs/animal-sniffer-annotations-1.5.jar')
+    implementation files('src/main/libs/JooMobAdSDK_6.1.8.jar')
+    implementation files('src/main/libs/jsr305-3.0.2.jar')
+    implementation files('src/main/libs/m4399-libudid-1.0.0.jar')
+    implementation files('src/main/libs/volley-1.1.0.jar')
+    implementation files('src/main/libs/au4399-sdk-release.jar')
 }

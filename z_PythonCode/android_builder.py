@@ -12,6 +12,7 @@ import zipfile
 import xml.dom.minidom
 import configparser
 import datetime
+from os.path import join, getsize
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 class SDKAppendManager():
@@ -69,6 +70,7 @@ class SDKAppendManager():
 		self.__modify_yml()
 
 	def _rebuild_game_apk(self):
+		self.__balance_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
 		os.system(f"jar xf  {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")#extract resource from sdk
 		os.system(f"cp {self.__game_apk_path} {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}.apk")#copy orginal apk
@@ -91,11 +93,12 @@ class SDKAppendManager():
 			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
 		file_list = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
-		for filename in os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
-			if "armeabi-v7a" not in filename and "x86" not in filename:
-				if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename):
-					shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
-					print("[__merge_sdk_resource_lib] deleted "+f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")==True:
+			for filename in os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
+				if "armeabi-v7a" not in filename and "x86" not in filename:
+					if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename):
+						shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
+						print("[__merge_sdk_resource_lib] deleted "+f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
 
 	def __merge_sdk_resource_smali(self):
 		#delete apk's smail
@@ -105,22 +108,23 @@ class SDKAppendManager():
 			shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/qinbatista")
 
 		#find all SDKs' smali
-		if os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game"):
-			files = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game")
-			if self.__channel.find("_BASE")!=-1:
-				for file_path in files:
-					if file_path.find("/InAppChannel/")!=-1:
-						print("[__merge_sdk_resource_smali] Base package need default InAppChannel")
-						# os.remove(file_path)
-					if file_path.find("/InAppAdvertisement/")!=-1:
-						print("[__merge_sdk_resource_smali] Base package need default InAppAdvertisement")
-						# os.remove(file_path)
-			if self.__channel.find("_SHOW")!=-1:
-				for file_path in files:
-					if file_path.find("/InAppAdvertisement/")==-1: os.remove(file_path)
-			if self.__channel.find("_IAP")!=-1:
-				for file_path in files:
-					if file_path.find("/InAppChannel/")==-1: os.remove(file_path)
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game"):
+			if os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game"):
+				files = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game")
+				if self.__channel.find("_BASE")!=-1:
+					for file_path in files:
+						if file_path.find("/InAppChannel/")!=-1:
+							print("[__merge_sdk_resource_smali] Base package need default InAppChannel")
+							# os.remove(file_path)
+						if file_path.find("/InAppAdvertisement/")!=-1:
+							print("[__merge_sdk_resource_smali] Base package need default InAppAdvertisement")
+							# os.remove(file_path)
+				if self.__channel.find("_SHOW")!=-1:
+					for file_path in files:
+						if file_path.find("/InAppAdvertisement/")==-1: os.remove(file_path)
+				if self.__channel.find("_IAP")!=-1:
+					for file_path in files:
+						if file_path.find("/InAppChannel/")==-1: os.remove(file_path)
 
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali"):
 			print("[__merge_sdk_resource_smali] copy smali apk with sdk to game apk")
@@ -293,6 +297,29 @@ class SDKAppendManager():
 	def __modify_yml(self):
 		pass
 
+	def __balance_smali(self,_Path):
+		# if(os.path.exists(_Path+"/smali_classes2")==False):
+		# 	os.mkdir(_Path+"/smali_classes2")
+		# List = []
+		# for i in os.listdir(_Path+"/smali"):
+		# 	List.append(i)
+		# SaveSize=0
+		# BigestList = []
+		# for i in List:
+		# 	size = self.__get_dir_size(_Path+"/smali/"+i)
+		# 	if SaveSize<size:
+		# 		SaveSize=size
+		# 		BigestList = i
+		# 		#print("Bigest = "+_Path+"/smali/"+i)
+		# 	#print("i:"+str(size))
+		shutil.move(_Path+"/smali/android",_Path+"/smali_classes3/android")
+
+	def __get_dir_size(self,dir):
+		size = 0
+		for root, dirs, files in os.walk(dir):
+			dirs
+			size += sum([getsize(join(root, name)) for name in files])
+		return size
 	def __delete_signature(self,_path):
 		your_delet_file="META-INF"
 		old_zipfile=_path #旧文件

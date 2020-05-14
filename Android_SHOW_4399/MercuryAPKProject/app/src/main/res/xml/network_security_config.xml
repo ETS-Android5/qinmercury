@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config cleartextTrafficPermitted="true">
+    <debug-overrides>
         <trust-anchors>
-            <certificates src="system" overridePins="true" /> <!--信任系统证书-->
-            <certificates src="user" overridePins="true" /> <!--信任用户证书-->
+            <!-- Trust user added CAs while debuggable only -->
+            <certificates src="user" />
+            <certificates src="system" />
         </trust-anchors>
-    </base-config>
+    </debug-overrides>
+    <base-config cleartextTrafficPermitted="true" />
 </network-security-config>

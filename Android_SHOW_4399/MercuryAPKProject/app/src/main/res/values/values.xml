@@ -1,0 +1,499 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:ns0="urn:oasis:names:tc:xliff:document:1.2" xmlns:ns1="http://schemas.android.com/tools">
+    <declare-styleable name="GifTextureView"><attr format="reference|string" name="gifSource" /><attr format="boolean" name="isOpaque" /></declare-styleable>
+    <declare-styleable name="GifView"><attr format="boolean" name="freezesAnimation" /></declare-styleable>
+<string name="ad">AD</string>
+    <string name="back">back</string>
+    <string name="close">Skip</string>
+    <string name="close_ad_cancel">Cancel</string>
+    <string name="close_ad_message">With _SEC_ seconds left, you\'ll be rewarded!</string>
+    <string name="close_ad_ok">Confirm!</string>
+    <string name="close_ad_title">close video?</string>
+    <string name="close_args">Skip %1$d</string>
+    <string name="skip_ad_args">Skip AD %1$d</string>
+    <string name="skip_args_1">Skip %1$d</string>
+    <string name="skip_args_2">%1$d Skip</string>
+<color name="mintegral_video_common_alertview_bg">#FFFFFFFF</color>
+    <color name="mintegral_video_common_alertview_cancel_button_bg_default">#FF27AE5F</color>
+    <color name="mintegral_video_common_alertview_cancel_button_bg_pressed">#B327AE5F</color>
+    <color name="mintegral_video_common_alertview_cancel_button_textcolor">#FFFFFF</color>
+    <color name="mintegral_video_common_alertview_confirm_button_bg_default">#FFEAEAEA</color>
+    <color name="mintegral_video_common_alertview_confirm_button_bg_pressed">#B3EAEAEA</color>
+    <color name="mintegral_video_common_alertview_confirm_button_textcolor">#38B154</color>
+    <color name="mintegral_video_common_alertview_content_textcolor">#353535 </color>
+    <color name="mintegral_video_common_alertview_title_textcolor">#38B154</color>
+    <dimen name="mintegral_video_common_alertview_bg_padding">30dp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_height">38dp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_margintop">38dp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_radius">50dp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_textsize">18sp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_width">105dp</dimen>
+    <dimen name="mintegral_video_common_alertview_content_margintop">13dp</dimen>
+    <dimen name="mintegral_video_common_alertview_content_size">18sp</dimen>
+    <dimen name="mintegral_video_common_alertview_contentview_maxwidth">240dp</dimen>
+    <dimen name="mintegral_video_common_alertview_contentview_minwidth">240dp</dimen>
+    <dimen name="mintegral_video_common_alertview_title_size">20sp</dimen>
+<array name="m4399sdk_support_error_web_titles">
+        <item>找不到网页</item>
+        <item>Error 405</item>
+        
+    </array>
+    <color name="m4399ad_color_black_50000000">#50000000</color>
+    <color name="m4399ad_color_white_50ffffff">#50ffffff</color>
+    <color name="m4399sdk_support_color_primary">#54ba3d</color>
+    <color name="m4399sdk_support_color_primary_dark">#4ca733</color>
+    <dimen name="m4399ad_ad_label_height">14dp</dimen>
+    <dimen name="m4399ad_ad_label_margin">10dp</dimen>
+    <dimen name="m4399ad_ad_label_width">27dp</dimen>
+    <dimen name="m4399ad_banner_ad_height">50dp</dimen>
+    <dimen name="m4399ad_banner_ad_width">320dp</dimen>
+    <dimen name="m4399ad_close_text_height">24dp</dimen>
+    <dimen name="m4399ad_close_text_long_width">74dp</dimen>
+    <dimen name="m4399ad_close_text_short_width">52dp</dimen>
+    <dimen name="m4399ad_imgBtn_close_size">28dp</dimen>
+    <dimen name="m4399ad_interstitial_ad_height">320dp</dimen>
+    <dimen name="m4399ad_interstitial_ad_width">480dp</dimen>
+    <dimen name="m4399ad_interstitial_image_corner_radius">16dp</dimen>
+    <dimen name="m4399ad_iv_target_label_margin">6dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_h_landscape">104dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_h_portrait">240dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_margin">12dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_w_landscape">173dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_w_portrait">144dp</dimen>
+    <dimen name="m4399ad_roll_image_corner_radius">8dp</dimen>
+    <dimen name="m4399ad_video_dialog_width">304dp</dimen>
+    <dimen name="m4399ad_video_down_app_icon">8dp</dimen>
+    <item name="m4399ad_id_ad_action_container_shared" type="id" />
+    <item name="m4399ad_id_btn_ad_action" type="id" />
+    <item name="m4399ad_id_check_sound_control" type="id" />
+    <item name="m4399ad_id_iv_target_icon" type="id" />
+    <item name="m4399ad_id_tv_ad_label" type="id" />
+    <item name="m4399ad_id_tv_close_ad" type="id" />
+    <item name="m4399ad_id_tv_target_desc" type="id" />
+    <item name="m4399ad_id_tv_target_name" type="id" />
+    <item name="m4399ad_id_view_ad_content" type="id" />
+    <item name="m4399ad_id_view_close_ad" type="id" />
+    <integer name="m4399ad_banner_ad_spec_height">100</integer>
+    <integer name="m4399ad_banner_ad_spec_width">640</integer>
+    <integer name="m4399ad_interstitial_ad_spec_height">640</integer>
+    <integer name="m4399ad_interstitial_ad_spec_width">960</integer>
+    <integer name="m4399ad_test_app_orientation">3</integer>
+    <string name="m4399ad_action_abandon_and_quit">放弃并退出</string>
+    <string name="m4399ad_action_browse">打开</string>
+    <string name="m4399ad_action_cancel">取消</string>
+    <string name="m4399ad_action_cancel_display">取消播放</string>
+    <string name="m4399ad_action_close">关闭</string>
+    <string name="m4399ad_action_close_ad">关闭广告</string>
+    <string name="m4399ad_action_continue_view">继续观看</string>
+    <string name="m4399ad_action_display_ad">继续播放</string>
+    <string name="m4399ad_action_download">下载</string>
+    <string name="m4399ad_action_download_immediately">立即下载</string>
+    <string name="m4399ad_action_play">开始玩</string>
+    <string name="m4399ad_ad_label">广告</string>
+    <string name="m4399ad_default_img_content_desc">TODO</string>
+    <string name="m4399ad_dialog_title_abort_video_play">中途退出可能无法获得奖励，是否放弃？</string>
+    <string name="m4399ad_dialog_title_confirm_download">您当前没有连接WIFI，下载游戏将消耗流量，您确定要下载吗？</string>
+    <string name="m4399ad_dialog_title_confirm_video">您当前没有连接WIFI，播放广告将消耗流量，您确定要播放吗？</string>
+    <string name="m4399ad_error_abnormal_response">网络请求异常</string>
+    <string name="m4399ad_error_ad_not_inited">没有初始化广告</string>
+    <string name="m4399ad_error_ad_unit_null">在加载广告前没有先设置广告位id</string>
+    <string name="m4399ad_error_app_not_found">没有自动启动方式，通过点击桌面图片重试</string>
+    <string name="m4399ad_error_bad_container">控件广告需要合适的容器</string>
+    <string name="m4399ad_error_context_invalid">打开视频失败，请稍候再尝试</string>
+    <string name="m4399ad_error_context_not_inited">AdContext没有初始化，可能被异常销毁</string>
+    <string name="m4399ad_error_corrupted_apk_file">游戏安装文件异常</string>
+    <string name="m4399ad_error_denied_for_non_wifi">用户拒绝非wifi环境下展示广告</string>
+    <string name="m4399ad_error_fill_img_content">加载广告图片失败</string>
+    <string name="m4399ad_error_intent_not_supported">当前版本游戏盒不支持直接打开小游戏，请在游戏盒内打开</string>
+    <string name="m4399ad_error_invalid_context">Context不可用</string>
+    <string name="m4399ad_error_join_args">请求参数错误</string>
+    <string name="m4399ad_error_no_ad_container">缺少展示广告的容器</string>
+    <string name="m4399ad_error_no_ad_material">指定广告位没有数据</string>
+    <string name="m4399ad_error_no_network">无可用网络</string>
+    <string name="m4399ad_error_no_preloaded_ad">没有预加载好的广告</string>
+    <string name="m4399ad_error_not_initialed">MobileAds没有初始化，请先调用`MobileAds.initialize`</string>
+    <string name="m4399ad_error_parse_video_meta">获取视频信息失败</string>
+    <string name="m4399ad_error_play_video">视频播放出错，请尝试重新打开</string>
+    <string name="m4399ad_error_request_not_cool_down">同一广告位连续请求太频繁</string>
+    <string name="m4399ad_error_show_dialog_exception">显示广告对话框异常</string>
+    <string name="m4399ad_error_show_video_player">打开播放器失败</string>
+    <string name="m4399ad_error_start_app">启动应用失败，通过点击桌面图标重试</string>
+    <string name="m4399ad_error_start_minigame">启动小游戏失败，通过点击桌面图标重试</string>
+    <string name="m4399ad_error_video_data">解析视频数据错误，请尝试重新打开</string>
+    <string name="m4399ad_error_video_normal">视频播放出错，请关闭界面重试</string>
+    <string name="m4399ad_error_video_unreachable">当前网络不给力，请检查您的网络</string>
+    <string name="m4399ad_fmt_close_ad_delayed">%02ds</string>
+    <string name="m4399ad_fmt_target_apk_size">大小：%.1fM</string>
+    <string name="m4399ad_fmt_target_download_amount_1">%d下载</string>
+    <string name="m4399ad_fmt_target_download_amount_10k">%.1f万+下载</string>
+    <string name="m4399ad_fmt_target_gallery_indicator">%1$d/%2$d</string>
+    <string name="m4399ad_fmt_video_duration">%02ds</string>
+    <string name="m4399ad_message_download_failed">下载失败</string>
+    <string name="m4399ad_message_downloading">正在下载《%s》</string>
+    <string name="m4399ad_message_exe_action_failed">操作失败</string>
+    <string name="m4399ad_message_start_download">开始下载《%s》</string>
+    <string name="m4399ad_target_desc_title">游戏简介</string>
+    <string name="m4399sdk_support_action_cancel">取消</string>
+    <string name="m4399sdk_support_action_goon">继续</string>
+    <string name="m4399sdk_support_hint_download_dest">下载完成后请到sdcard的Download目录下查找文件</string>
+    <string name="m4399sdk_support_msg_download_start">下载已开始，可在通知栏查看进度</string>
+    <string name="m4399sdk_support_msg_network_abnormal">网络异常，点击刷新点击</string>
+    <string name="m4399sdk_support_msg_network_off">网络断开连接</string>
+    <string name="m4399sdk_support_msg_network_timeout">加载网页超时</string>
+    <string name="m4399sdk_support_msg_ssl_error">当前网页SSL证书异常，是否继续打开？</string>
+    <string name="m4399sdk_support_title_ssl_error">网页SSL证书错误</string>
+    <style name="m4399ad" />
+    <style name="m4399ad.Activity" />
+    <style name="m4399ad.Activity.Transparent" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <style name="m4399ad.Anim.Fade" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/m4399ad_anim_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/m4399ad_anim_fade_out</item>
+        <item name="android:windowShowAnimation">@anim/m4399ad_anim_fade_in</item>
+        <item name="android:windowHideAnimation">@anim/m4399ad_anim_fade_out</item>
+    </style>
+    <style name="m4399ad.Anim.Slide" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/m4399sdk_support_slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/m4399sdk_support_slide_out_right</item>
+    </style>
+    <style name="m4399ad.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style name="m4399ad.Dialog.NoTitleBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@style/m4399ad.Anim.Fade</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+    <style name="m4399ad.Dialog.WithTitleBar" parent="Theme.AppCompat.Light">
+        <item name="android:windowAnimationStyle">@style/m4399ad.Anim.Fade</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+    <style name="m4399ad.Progress" parent="Widget.AppCompat.ProgressBar">
+    </style>
+    <style name="m4399ad.ScrollBar" />
+    <style name="m4399ad.ScrollBar.Horizontal">
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbars">horizontal</item>
+        <item name="android:scrollbarThumbHorizontal">@color/m4399ad_color_white_50ffffff</item>
+    </style>
+    <style name="m4399ad.ScrollBar.Vertical">
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarThumbVertical">@color/m4399ad_color_black_50000000</item>
+    </style>
+    <style name="m4399ad.Text" />
+    <style name="m4399ad.Text.H1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">#e0333333</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="m4399ad.Text.Target_Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/m4399ad_shape_tv_target_label_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/m4399sdk_support_color_primary</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+    <style name="m4399ad.download.sheet" parent="m4399ad">
+        <item name="android:layout_width">336dp</item>
+    </style>
+<color name="appdownloader_detail_download_blue">#2a90d7</color>
+    <color name="appdownloader_detail_download_blue_pressed">#2582c3</color>
+    <color name="appdownloader_detail_download_divider">#dddddd</color>
+    <color name="appdownloader_detail_download_gray">#999999</color>
+    <color name="appdownloader_detail_download_white">#fafafa</color>
+    <color name="appdownloader_detail_download_white_pressed">#ededed</color>
+    <color name="appdownloader_notification_material_background_color">#fffafafa</color>
+    <color name="appdownloader_notification_title_color">#7f0b0198</color>
+    <color name="appdownloader_s1">#333333</color>
+    <color name="appdownloader_s13">#cccccc</color>
+    <color name="appdownloader_s18">#eeeeee</color>
+    <color name="appdownloader_s4">#ff819f</color>
+    <color name="appdownloader_s8">#ffffff</color>
+    <color name="tt_cancle_bg">#FDDCDCDC</color>
+    <color name="tt_divider">#DCDCDC</color>
+    <color name="tt_download_app_name">#333333</color>
+    <color name="tt_download_bar_background">#C21E1E1E</color>
+    <color name="tt_download_bar_background_new">#E4FFFFFF</color>
+    <color name="tt_download_text_background">#4A90E2</color>
+    <color name="tt_draw_btn_back">#D33F57</color>
+    <color name="tt_full_screen_skip_bg">#904A4A4A</color>
+    <color name="tt_header_font">#FF9B9B9B</color>
+    <color name="tt_heise3">#999999</color>
+    <color name="tt_listview">#FDFFFFFF</color>
+    <color name="tt_listview_press">#FDE6E6E6</color>
+    <color name="tt_rating_comment">#999999</color>
+    <color name="tt_rating_comment_vertical">#4A4A4A</color>
+    <color name="tt_rating_star">#F5A623</color>
+    <color name="tt_skip_red">#FFDF112A</color>
+    <color name="tt_ssxinbaise4">@color/tt_white</color>
+    <color name="tt_ssxinbaise4_press">#7fffffff</color>
+    <color name="tt_ssxinheihui3">#999999</color>
+    <color name="tt_ssxinhongse1">#f85959</color>
+    <color name="tt_ssxinmian1">#e0e0e0</color>
+    <color name="tt_ssxinmian11">#e5000000</color>
+    <color name="tt_ssxinmian15">#7f000000</color>
+    <color name="tt_ssxinmian6">@color/tt_ssxinheihui3</color>
+    <color name="tt_ssxinmian7">@color/tt_ssxinhongse1</color>
+    <color name="tt_ssxinmian8">#2a90d7</color>
+    <color name="tt_ssxinxian11">@color/tt_ssxinbaise4</color>
+    <color name="tt_ssxinxian11_selected">@color/tt_ssxinbaise4_press</color>
+    <color name="tt_ssxinxian3">#2a90d7</color>
+    <color name="tt_ssxinxian3_press">#7f2a90d7</color>
+    <color name="tt_ssxinzi12">@color/tt_white</color>
+    <color name="tt_ssxinzi15">@color/tt_ssxinbaise4</color>
+    <color name="tt_ssxinzi4">@color/tt_ssxinhongse1</color>
+    <color name="tt_ssxinzi9">#cacaca</color>
+    <color name="tt_text_font">#FF4A4A4A</color>
+    <color name="tt_titlebar_background_dark">#46000000</color>
+    <color name="tt_titlebar_background_ffffff">#ffffff</color>
+    <color name="tt_titlebar_background_light">#e0e0e0</color>
+    <color name="tt_trans_black">#00000000</color>
+    <color name="tt_trans_half_black">#FF1A1A1A</color>
+    <color name="tt_transparent">#00000000</color>
+    <color name="tt_video_player_text">@color/tt_white</color>
+    <color name="tt_video_player_text_withoutnight">@color/tt_white</color>
+    <color name="tt_video_playerbg_color">#000000</color>
+    <color name="tt_video_shadow_color">#72000000</color>
+    <color name="tt_video_shaoow_color_fullscreen">#B2000000</color>
+    <color name="tt_video_time_color">#ffffff</color>
+    <color name="tt_video_traffic_tip_background_color">#000000</color>
+    <color name="tt_video_transparent">#1E000000</color>
+    <color name="tt_white">#ffffff</color>
+    <dimen name="tt_video_container_maxheight">228dp</dimen>
+    <dimen name="tt_video_container_minheight">160dp</dimen>
+    <dimen name="tt_video_cover_padding_horizon">15dp</dimen>
+    <dimen name="tt_video_cover_padding_vertical">14dp</dimen>
+    <integer name="tt_video_progress_max">100</integer>
+    <string name="appdownloader_button_cancel_download">"取消"</string>
+    <string name="appdownloader_button_queue_for_wifi">"排队"</string>
+    <string name="appdownloader_button_start_now">"立即开始"</string>
+    <string name="appdownloader_download_percent">"<ns0:g id="NUMBER">%1$d</ns0:g><ns0:g id="PERCENT">%%</ns0:g>"</string>
+    <string name="appdownloader_download_remaining">"剩余时间：<ns0:g id="DURATION">%1$s</ns0:g>"</string>
+    <string name="appdownloader_download_unknown_title">"&lt;未命名&gt;"</string>
+    <string name="appdownloader_duration_hours"><ns0:g id="count">%1$d</ns0:g> 小时</string>
+    <string name="appdownloader_duration_minutes"><ns0:g id="count">%1$d</ns0:g> 分钟</string>
+    <string name="appdownloader_duration_seconds"><ns0:g id="count">%1$d</ns0:g> 秒</string>
+    <string name="appdownloader_label_cancel">取消</string>
+    <string name="appdownloader_label_ok">确定</string>
+    <string name="appdownloader_notification_download">"下载"</string>
+    <string name="appdownloader_notification_download_complete_open">"下载完成，点击打开。"</string>
+    <string name="appdownloader_notification_download_complete_with_install">"下载完成，点击安装。"</string>
+    <string name="appdownloader_notification_download_complete_without_install">"下载完成"</string>
+    <string name="appdownloader_notification_download_delete">"确认要删除%1$s的下载任务吗？"</string>
+    <string name="appdownloader_notification_download_failed">"下载失败。"</string>
+    <string name="appdownloader_notification_download_install">"安装"</string>
+    <string name="appdownloader_notification_download_open">"打开"</string>
+    <string name="appdownloader_notification_download_pause">"暂停"</string>
+    <string name="appdownloader_notification_download_restart">"重新下载"</string>
+    <string name="appdownloader_notification_download_resume">"继续"</string>
+    <string name="appdownloader_notification_download_space_failed">"SdCard空间不足, 下载失败。"</string>
+    <string name="appdownloader_notification_downloading">"正在下载"</string>
+    <string name="appdownloader_notification_need_wifi_for_size">"文件过大，需要通过 WLAN 下载。"</string>
+    <string name="appdownloader_notification_paused_in_background">"已在后台暂停。"</string>
+    <string name="appdownloader_notification_prepare">"准备中"</string>
+    <string name="appdownloader_notification_request_btn_no">"立即下载"</string>
+    <string name="appdownloader_notification_request_btn_yes">"去设置"</string>
+    <string name="appdownloader_notification_request_message">"为了您能在方便地在通知栏控制下载任务，请到设置中开启通知，如果不需要可直接下载"</string>
+    <string name="appdownloader_notification_request_title">"设置"</string>
+    <string name="appdownloader_tip">提示</string>
+    <string name="appdownloader_wifi_recommended_body">"立即开始下载此内容 (<ns0:g id="SIZE">%1$s </ns0:g>) 可能会缩短电池的使用时间并/或导致过量使用移动数据连接流量（这可能导致移动运营商向您收费，具体取决于您的流量套餐）。\n\n触摸“<ns0:g id="QUEUE_TEXT">%2$s</ns0:g>”可在下次连接到 WLAN 网络时开始下载此内容。"</string>
+    <string name="appdownloader_wifi_recommended_title">"稍后再加入下载队列吗？"</string>
+    <string name="appdownloader_wifi_required_body">"您必须使用 WLAN 完成此内容 (<ns0:g id="SIZE">%1$s </ns0:g>) 的下载。\n\n触摸“<ns0:g id="QUEUE_TEXT">%2$s </ns0:g>”可在下次连接到 WLAN 网络时开始下载此内容。"</string>
+    <string name="appdownloader_wifi_required_title">"文件太大，不适于通过运营商网络下载"</string>
+    <string name="tt_00_00">00:00</string>
+    <string name="tt_ad">Ad</string>
+    <string name="tt_ad_logo_txt">广告</string>
+    <string name="tt_app_name">tt_open_ad_sdk</string>
+    <string name="tt_auto_play_cancel_text">取消</string>
+    <string name="tt_cancel">取消</string>
+    <string name="tt_comment_num">%1$s个评分</string>
+    <string name="tt_comment_num_backup">(%1$s个评论)</string>
+    <string name="tt_comment_score">评价</string>
+    <string name="tt_confirm_download">"正在使用非Wifi网络，确认要进行下载吗？"</string>
+    <string name="tt_confirm_download_have_app_name">"准备下载%s应用"</string>
+    <string name="tt_dislike_header_tv_back">返回</string>
+    <string name="tt_dislike_header_tv_title">选择</string>
+    <string name="tt_full_screen_skip_tx">5s后可跳过</string>
+    <string name="tt_label_cancel">取消</string>
+    <string name="tt_label_ok">确定</string>
+    <string name="tt_no_network">"无网络，请稍后再试"</string>
+    <string name="tt_permission_denied">您已禁止授权操作，请授权</string>
+    <string name="tt_request_permission_descript_external_storage">存储</string>
+    <string name="tt_request_permission_descript_location">位置信息</string>
+    <string name="tt_request_permission_descript_read_phone_state">拨打电话</string>
+    <string name="tt_reward_feedback">反馈</string>
+    <string name="tt_reward_screen_skip_tx">跳过</string>
+    <string name="tt_splash_skip_tv_text">3s | 跳过</string>
+    <string name="tt_tip">提示</string>
+    <string name="tt_unlike">不感兴趣</string>
+    <string name="tt_video_bytesize">流量</string>
+    <string name="tt_video_bytesize_M">M</string>
+    <string name="tt_video_bytesize_MB">MB</string>
+    <string name="tt_video_continue_play">继续播放</string>
+    <string name="tt_video_dial_phone">立即拨打</string>
+    <string name="tt_video_download_apk">立即下载</string>
+    <string name="tt_video_mobile_go_detail">查看详情</string>
+    <string name="tt_video_retry_des_txt">加载失败，点击重试</string>
+    <string name="tt_video_without_wifi_tips">播放将消耗</string>
+    <string name="tt_web_title_default">广告</string>
+    <string name="tt_will_play">即将播放</string>
+    <style name="Theme.Dialog.TTDownload" parent="@android:style/Theme.DeviceDefault.Light.Dialog">
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+    <style name="Theme.Dialog.TTDownloadOld" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <style name="appdownloader_style_detail_download_progress_bar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/appdownloader_ad_detail_download_progress</item>
+        <item name="android:minHeight">32dp</item>
+        <item name="android:maxHeight">32dp</item>
+    </style>
+    <style name="appdownloader_style_notification_text" parent="android:TextAppearance.StatusBar.EventContent" />
+    <style name="appdownloader_style_notification_title" parent="android:TextAppearance.StatusBar.EventContent.Title" />
+    <style name="appdownloader_style_progress_bar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/appdownloader_download_progress_bar_horizontal</item>
+        <item name="android:minHeight">3dp</item>
+        <item name="android:maxHeight">6dp</item>
+    </style>
+    <style name="tt_Widget_ProgressBar_Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@drawable/tt_ad_download_progress_bar_horizontal</item>
+        <item name="android:minHeight">20dip</item>
+        <item name="android:maxHeight">20dip</item>
+    </style>
+    <style name="tt_back_view">
+        <item name="android:minHeight">44dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:text">"关闭"</item>
+        
+        <item name="android:background">#00000000</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="tt_custom_dialog" parent="android:style/Theme.Dialog">
+        
+        <item name="android:windowBackground">@android:color/transparent</item>
+        
+        <item name="android:windowNoTitle">true</item>
+        
+        <item name="android:windowFrame">@null</item>
+        
+        <item name="android:windowIsFloating">true</item>
+        
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <style name="tt_dislikeDialog" parent="android:style/Theme.Dialog">
+        
+        <item name="android:windowBackground">@android:color/transparent</item>
+        
+        <item name="android:windowNoTitle">true</item>
+        
+        <item name="android:windowFrame">@null</item>
+        
+        <item name="android:windowIsFloating">true</item>
+        
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@style/tt_dislikeDialogAnimation</item>
+    </style>
+    <style name="tt_dislikeDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/tt_dislike_animation_show</item>
+        <item name="android:windowExitAnimation">@anim/tt_dislike_animation_dismiss</item>
+    </style>
+    <style name="tt_ss_popup_toast_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+    <style name="tt_wg_insert_dialog" parent="android:style/Theme.Dialog">
+        
+        <item name="android:windowBackground">@android:color/transparent</item>
+        
+        <item name="android:windowNoTitle">true</item>
+        
+        <item name="android:windowFrame">@null</item>
+        
+        <item name="android:windowIsFloating">true</item>
+        
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <style name="tt_widget_gifView" parent="@android:style/Widget" />
+<color name="mintegral_reward_black">#ff000000</color>
+    <color name="mintegral_reward_cta_bg">@color/mintegral_reward_minicard_bg</color>
+    <color name="mintegral_reward_desc_textcolor">#5f5f5f</color>
+    <color name="mintegral_reward_endcard_hor_bg">#ffffff</color>
+    <color name="mintegral_reward_endcard_land_bg">#f1f1f1</color>
+    <color name="mintegral_reward_endcard_line_bg">#d8d8d8</color>
+    <color name="mintegral_reward_endcard_vast_bg">#aa000000</color>
+    <color name="mintegral_reward_minicard_bg">#7f000000</color>
+    <color name="mintegral_reward_six_black_transparent">#60000000</color>
+    <color name="mintegral_reward_title_textcolor">#282828</color>
+    <color name="mintegral_reward_white">#FFFFFF</color>
+    <string name="mintegral_reward_appdesc">app desc</string>
+    <string name="mintegral_reward_apptitle">app title</string>
+    <string name="mintegral_reward_clickable_cta_btntext">Play Game</string>
+    <string name="mintegral_reward_endcard_ad">AD</string>
+    <string name="mintegral_reward_endcard_vast_notice">Do you want to learn more?</string>
+    <string name="mintegral_reward_install">Install Now</string>
+<color name="mintegral_reward_kiloo_background">#b3000000</color>
+    <style name="mintegral_reward_theme" parent="@android:style/Theme.NoTitleBar.Fullscreen" />
+    <style name="mintegral_transparent_theme" parent="mintegral_reward_theme">
+            <item name="android:windowIsTranslucent">true</item>
+            <item name="android:windowContentOverlay">@null</item>
+            <item name="android:windowTranslucentStatus" ns1:targetApi="kitkat">true</item>
+            <item name="android:windowFullscreen">true</item>
+            <item name="android:statusBarColor" ns1:targetApi="lollipop">@color/mintegral_reward_kiloo_background</item>
+            <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+            <item name="android:backgroundDimEnabled">false</item>
+            <item name="android:windowBackground">@color/mintegral_reward_kiloo_background</item>
+            <item name="android:windowNoTitle">true</item>
+            <item name="android:windowActionBar" ns1:targetApi="honeycomb">false</item>
+        </style>
+<style name="Theme.MainActivity" parent="@android:style/Theme.Holo">
+        <item name="android:actionBarSize">24dp</item>
+    </style>
+    <declare-styleable name="View">
+        <attr format="string" name="unit_id" />
+        <attr format="integer" name="unit_width" />
+        <attr format="integer" name="unit_height" />
+        <attr name="unit_size">
+            <enum name="banner_size" value="0" />
+            <enum name="native_size" value="1" />
+            <enum name="native_2to1_size" value="2" />
+            <enum name="native_3to2_size" value="3" />
+            <enum name="native_16to9_size" value="4" />
+            <enum name="native_4to3_size" value="5" />
+            <enum name="native_1to1_size" value="6" />
+            <enum name="native_11to4_size" value="7" />
+        </attr>
+    </declare-styleable>
+</resources>
