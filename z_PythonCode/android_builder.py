@@ -386,6 +386,14 @@ class SDKAppendManager():
 			if folder_name!= "com":
 				shutil.move(_Path+"/smali/"+folder_name,_Path+"/"+last_name+"/"+folder_name)
 
+		folder_list = self.__list_folder(_Path+"/smali/com")
+		for folder_name in folder_list:
+			if folder_name== "google":
+				folder_index= folder_index+1
+				if os.path.isdir(_Path+"/smali_classes"+str(folder_index))==False:os.mkdir(_Path+"/smali_classes"+str(folder_index))
+				if os.path.isdir(_Path+"/smali_classes"+str(folder_index)+"/com")==False:os.mkdir(_Path+"/smali_classes"+str(folder_index)+"/com")
+				shutil.move(_Path+"/smali/com/"+folder_name, _Path+"/smali_classes"+str(folder_index)+"/com/"+folder_name)
+
 	def __get_dir_size(self,dir):
 		size = 0
 		for root, dirs, files in os.walk(dir):
