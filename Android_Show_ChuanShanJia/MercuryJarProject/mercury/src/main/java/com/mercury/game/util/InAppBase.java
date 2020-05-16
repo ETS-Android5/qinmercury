@@ -135,7 +135,8 @@ public class InAppBase{
 	public void onLoginFailed(String strError) { qc.AdLoadFailed(strError,this); }
 	public void AdLoadSuccessCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
 	public void AdLoadFailedCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
-
+	public void AdShowSuccessCallBack(String strError) { qc.AdShowSuccessCallBack(strError,this); }
+	public void AdShowFailedCallBack(String strError) { qc.AdShowFailedCallBack(strError,this); }
 	public void onFunctionCallBack(String strError) {
 		qc.FunctionCallBack(strError,this);
 	}

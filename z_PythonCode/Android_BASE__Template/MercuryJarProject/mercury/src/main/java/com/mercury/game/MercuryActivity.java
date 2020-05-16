@@ -64,6 +64,7 @@ public class MercuryActivity  {
 		getDeviceId(mContext);
 		InitChannel(appcall);
 		InitAd(appcall);
+		GetProductionInfo();
 
 	}
 	public String GetProductionInfo()

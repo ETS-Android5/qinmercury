@@ -13,8 +13,10 @@ static QinMercury *instance;
 +(void) ActiveRewardVideo_IOS
 {
     NSLog(@"this is ActiveRewardVideo_IOS object-c");
-    UnitySendMessage("PluginMercury", "AdShowSuccessCallBack", "ActiveRewardVideo_IOS");
-    UnitySendMessage("PluginMercury", "AdLoadSuccessCallBack", "ActiveRewardVideo_IOS");
+    if GADRewardBasedVideoAd.sharedInstance().isReady == true {
+    GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
+    }
+}
 }
 +(void) ActiveInterstitial_IOS
 {
