@@ -35,7 +35,11 @@ class SDKAppendManager():
 		self.__channel_name = channel_name
 		self.__package_name = package_name
 		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
-		self.__keystore = self.__file_path+"/android.keystore"
+		files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+		for file_name in files:
+			if file_name.find(".keystore")!=-1:
+				self.__keystore = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
+				break
 		self.__time_tick = str(int(time.time()))
 		if os.path.isdir(self.__file_path+self.__cache_position): shutil.rmtree(self.__file_path+self.__cache_position)
 		self.__create_cache()
@@ -496,7 +500,7 @@ def run():
 	files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 	game_apk_path = ""
 	for file_name in files:
-		if file_name.find(".apk")!=-1:
+		if file_name.find(".keystore")!=-1:
 			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
 			break
 
@@ -524,6 +528,7 @@ def run():
 	SHOW 		 = config.get(ChannelName,"SHOW")
 	IAP  		 = config.get(ChannelName,"IAP")
 	APK_PATH	 = config.get(ChannelName,"PATH")
+	print("[Keystore]	"+game_apk_path)
 	print("[ChannelName]	"+ChannelName)
 	print("[PackageName]	"+PackageName)
 	print("[BASE]	"+BASE)
@@ -532,7 +537,7 @@ def run():
 	print("[APK_PATH]	"+APK_PATH)
 	starttime = datetime.datetime.now()
 
-	sam = SDKAppendManager(channel_base = BASE,channel_show = SHOW, channel_IAP = IAP, game_apk_path = game_apk_path, channel_name = ChannelName, package_name = PackageName)
+	sam = SDKAppendManager(channel_base = BASE,channel_show = SHOW, channel_IAP = IAP, game_apk_path = APK_PATH, channel_name = ChannelName, package_name = PackageName)
 	sam._merge_package()
 
 	endtime = datetime.datetime.now()
