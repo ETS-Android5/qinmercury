@@ -80,6 +80,16 @@ public class PluginMercury : MonoBehaviour
         print("[Android]->Exchange()");_plugin.Call("Redeem");
 #endif
     }
+
+    public void GetProductionInfo()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->Exchange()");
+#elif UNITY_ANDROID
+        print("[Android]->Exchange()");_plugin.Call("Redeem");
+#endif
+    }
+
     public void RestoreProduct()
     {
 #if UNITY_EDITOR

@@ -104,4 +104,10 @@ public class DemoButtonClick : MonoBehaviour {
         logtext.text += "显示插屏视频，广告参数=" + "mainmenu\n";
         PluginMercury.Instance.RestoreProduct();
     }
+
+    public void BtnGetProductionInfo()
+    {
+        logtext.text += "显示插屏视频，广告参数=" + "mainmenu\n";
+        PluginMercury.Instance.GetProductionInfo();
+    }
 }

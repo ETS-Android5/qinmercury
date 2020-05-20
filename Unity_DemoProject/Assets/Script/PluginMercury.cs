@@ -143,6 +143,15 @@ public class PluginMercury : MonoBehaviour
         ActiveNative_IOS();
 #endif
     }
+    public void GetProductionInfo()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->GetProductionInfo()");
+#elif UNITY_ANDROID
+        print("[Android]->GetProductionInfo()");_plugin.Call("GetProductionInfo");
+#endif
+    }
+
 
     public void PurchaseSuccessCallBack(string msg)
     {

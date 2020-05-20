@@ -14,9 +14,9 @@ android {
     signingConfigs {
         release {
             keyAlias 'android.keystore'
-            keyPassword 'hello123456'
+            keyPassword 'singmaan'
             storeFile file('./../grannysmith.keystore')
-            storePassword 'hello123456'
+            storePassword 'singmaan'
         }
     }
     compileSdkVersion 26
