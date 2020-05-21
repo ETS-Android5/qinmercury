@@ -12,26 +12,34 @@ import zipfile
 import xml.dom.minidom
 import configparser
 import datetime
+from os.path import join, getsize
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 class SDKAppendManager():
-	def __init__(self, channel, game_apk_path, channel_name, package_name):
-		self.__channel = channel
+	def __init__(self, channel_base, channel_show, channel_IAP, game_apk_path, channel_name, package_name):
+		self.__channel_base = channel_base
+		self.__channel_show = channel_show
+		self.__channel_IAP = channel_IAP
 		self.__python = "python3"
 		self.__apktool = "apktool"
 		self.__sdk_apk_name = "app-release.apk"
 		self.__sdk_apk_name_only = "app-release"
 		self.__cache_position = "/z_PythonCode/cache/"
+		self.__build_APK_script = "merge_building.py"
 		self.__file_path = os.path.dirname(os.path.realpath(__file__))
-		self.__sdk_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel
-		self.__sdk_xml_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel+"/MercuryJarProject/AndroidManifest_sdk.xml"
-		self.__sdk_script_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel+"/merge_building.py"
-		self.__sdk_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel+"/"+self.__sdk_apk_name
+		self.__sdk_path = os.path.dirname(os.path.realpath(__file__))#+"/"+channel
+		self.__sdk_xml_path = os.path.dirname(os.path.realpath(__file__))#+"/"+channel+"/MercuryJarProject/AndroidManifest_sdk.xml"
+		self.__sdk_script_path = os.path.dirname(os.path.realpath(__file__))#+"/"+channel+"/merge_building.py"
+		self.__sdk_apk_path = os.path.dirname(os.path.realpath(__file__))#+"/"+channel+"/"+self.__sdk_apk_name
 		self.__game_apk_path = game_apk_path
 		self.__channel_name = channel_name
 		self.__package_name = package_name
 		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
-		self.__keystore = self.__file_path+"/android.keystore"
+		files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+		for file_name in files:
+			if file_name.find(".keystore")!=-1:
+				self.__keystore = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
+				break
 		self.__time_tick = str(int(time.time()))
 		if os.path.isdir(self.__file_path+self.__cache_position): shutil.rmtree(self.__file_path+self.__cache_position)
 		self.__create_cache()
@@ -50,8 +58,23 @@ class SDKAppendManager():
 		os.system(f"{self.__apktool} d {self.__game_apk_path}")
 
 	def _decompile_sdk_apk(self):
-		if os.path.exists(self.__sdk_apk_path)==False: os.system(f"{self.__python} {self.__sdk_script_path}")
-		os.system(f"{self.__apktool} d {self.__sdk_apk_path}")
+		if self.__channel_base!="":
+			if os.path.exists(self.__sdk_apk_path+"/"+self.__channel_base+"/"+self.__sdk_apk_name)==False:
+				os.system(f"{self.__python} {self.__sdk_script_path}/{self.__channel_base}/{self.__build_APK_script}")
+			os.system(f"{self.__apktool} d {self.__sdk_apk_path}/{self.__channel_base}/{self.__sdk_apk_name}")
+			shutil.move(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}", f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_base}")
+		if self.__channel_IAP!="":
+			if os.path.exists(self.__sdk_apk_path+"/"+self.__channel_IAP+"/"+self.__sdk_apk_name)==False:
+				os.system(f"{self.__python} {self.__sdk_script_path}/{self.__channel_IAP}/{self.__build_APK_script}")
+			os.system(f"{self.__apktool} d {self.__sdk_apk_path}/{self.__channel_IAP}/{self.__sdk_apk_name}")
+			shutil.move(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}", f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_IAP}")
+		if self.__channel_show!="":
+			if os.path.exists(self.__sdk_apk_path+"/"+self.__channel_show+"/"+self.__sdk_apk_name)==False:
+				os.system(f"{self.__python} {self.__sdk_script_path}/{self.__channel_show}/{self.__build_APK_script}")
+			os.system(f"{self.__apktool} d {self.__sdk_apk_path}/{self.__channel_show}/{self.__sdk_apk_name}")
+			shutil.move(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}", f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_show}")
+
+
 
 	def _merge_sdk_resource(self):
 		#merge assets
@@ -69,6 +92,7 @@ class SDKAppendManager():
 		self.__modify_yml()
 
 	def _rebuild_game_apk(self):
+		self.__balance_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
 		os.system(f"jar xf  {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")#extract resource from sdk
 		os.system(f"cp {self.__game_apk_path} {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}.apk")#copy orginal apk
@@ -82,54 +106,90 @@ class SDKAppendManager():
 		os.system(f"jar uvf {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk {compress_resrouce}")# add resrouce to apk
 
 	def __merge_sdk_resource_assets(self):
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/assets") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets"):
-			print("[__merge_sdk_resource_assets] copy assets apk with sdk to game apk")
-			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/assets",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets")
+		if os.path.exists(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_base}"):
+			if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_base}/assets") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets"):
+				print("[__merge_sdk_resource_assets][__channel_base] copy assets apk with sdk to game apk")
+				self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_base}/assets",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets")
+
+		if os.path.exists(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_IAP}"):
+			if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_IAP}/assets") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets"):
+				print("[__merge_sdk_resource_assets][__channel_IAP] copy assets apk with sdk to game apk")
+				self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_IAP}/assets",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets")
+
+		if os.path.exists(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_show}"):
+			if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_show}/assets") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets"):
+				print("[__merge_sdk_resource_assets][__channel_show] copy assets apk with sdk to game apk")
+				self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_show}/assets",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets")
+
 
 	def __merge_sdk_resource_lib(self):
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_base}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
 			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
-			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_base}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_IAP}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
+			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_IAP}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_show}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
+			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_show}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+
+
 		file_list = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
-		for filename in os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
-			if "armeabi-v7a" not in filename and "x86" not in filename:
-				if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename):
-					shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
-					print("[__merge_sdk_resource_lib] deleted "+f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")==True:
+			for filename in os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
+				if "armeabi-v7a" not in filename and "x86" not in filename:
+					if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename):
+						shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
+						print("[__merge_sdk_resource_lib] deleted "+f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
 
 	def __merge_sdk_resource_smali(self):
+		self.__merge_sdk_resource_smali_execute(f"{self.__sdk_apk_name_only}_{self.__channel_base}")
+		self.__merge_sdk_resource_smali_execute(f"{self.__sdk_apk_name_only}_{self.__channel_IAP}")
+		self.__merge_sdk_resource_smali_execute(f"{self.__sdk_apk_name_only}_{self.__channel_show}")
+
+	def __merge_sdk_resource_smali_execute(self,app_releawse_path):
 		#delete apk's smail
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/demo"):
-			shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/demo")
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/qinbatista"):
-			shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/qinbatista")
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali/com/demo"):
+			shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali/com/demo")
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali/com/qinbatista"):
+			shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali/com/qinbatista")
 
 		#find all SDKs' smali
-		if os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game"):
-			files = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali/com/mercury/game")
-			if self.__channel.find("_BASE")!=-1:
-				for file_path in files:
-					if file_path.find("/InAppChannel/")!=-1:
-						print("[__merge_sdk_resource_smali] Base package need default InAppChannel")
-						# os.remove(file_path)
-					if file_path.find("/InAppAdvertisement/")!=-1:
-						print("[__merge_sdk_resource_smali] Base package need default InAppAdvertisement")
-						# os.remove(file_path)
-			if self.__channel.find("_SHOW")!=-1:
-				for file_path in files:
-					if file_path.find("/InAppAdvertisement/")==-1: os.remove(file_path)
-			if self.__channel.find("_IAP")!=-1:
-				for file_path in files:
-					if file_path.find("/InAppChannel/")==-1: os.remove(file_path)
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali/com/mercury/game"):
+			if os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali/com/mercury/game"):
+				files = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali/com/mercury/game")
+				if app_releawse_path.find("_BASE")!=-1:
+					for file_path in files:
+						if file_path.find("/InAppChannel/")!=-1:
+							print("[__merge_sdk_resource_smali] Base package need default InAppChannel")
+							# os.remove(file_path)
+						if file_path.find("/InAppAdvertisement/")!=-1:
+							print("[__merge_sdk_resource_smali] Base package need default InAppAdvertisement")
+							# os.remove(file_path)
+				if app_releawse_path.find("_SHOW")!=-1:
+					for file_path in files:
+						if file_path.find("/InAppAdvertisement/")==-1: os.remove(file_path)
+				if app_releawse_path.find("_IAP")!=-1:
+					for file_path in files:
+						if file_path.find("/InAppChannel/")==-1: os.remove(file_path)
 
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali"):
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali"):
 			print("[__merge_sdk_resource_smali] copy smali apk with sdk to game apk")
-			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/smali",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali")
 
 	def __merge_sdk_resource_res(self):
+		self.__merge_sdk_resource_res_execute(f"{self.__sdk_apk_name_only}_{self.__channel_base}")
+		self.__merge_sdk_resource_res_execute(f"{self.__sdk_apk_name_only}_{self.__channel_IAP}")
+		self.__merge_sdk_resource_res_execute(f"{self.__sdk_apk_name_only}_{self.__channel_show}")
+
+	def __merge_sdk_resource_res_execute(self,app_releawse_path):
+		if os.path.exists(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/res")==False:
+			return
 		game_res = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
-		sdk_res  = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/res")
-		conflict_list = self.__copy_files_dont_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}/res",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
+		sdk_res  = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/res")
+		conflict_list = self.__copy_files_dont_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/res",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
 		for g_res in game_res:
 			for s_res in sdk_res:
 				gameresfile = g_res[g_res.rfind("/"):]
@@ -143,12 +203,19 @@ class SDKAppendManager():
 						print(f"skip{gameresfile}")
 						continue
 					else:
-						print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_res]merging {g_res}<-{s_res}")
+						print(f"[_decompile_sdk_apk][__merge_sdk_resource]["+app_releawse_path+"]merging {g_res}<-{s_res}")
 						xml_manager.merge_xml(g_res,s_res)
 
 	def __merge_sdk_resource_xml(self):
+		self.__merge_sdk_resource_xml_execute(self.__channel_base)
+		self.__merge_sdk_resource_xml_execute(self.__channel_IAP)
+		self.__merge_sdk_resource_xml_execute(self.__channel_show)
+
+	def __merge_sdk_resource_xml_execute(self,channel):
+		if channel=="":
+			return
 		#get sdk string
-		with open(f"{self.__sdk_xml_path}",encoding="utf8") as file_object:
+		with open(f"{self.__sdk_xml_path}/{channel}/MercuryJarProject/AndroidManifest_sdk.xml",encoding="utf8") as file_object:
 			sdk_xml = file_object.readlines()
 		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml","r",encoding="UTF-8") as file_object:
 			is_sdk_part = False
@@ -189,7 +256,7 @@ class SDKAppendManager():
 			with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",mode='w',encoding="utf8") as file_context:
 				file_context.writelines(new_xml)
 
-		#modify xml
+		#modify applicationId xml
 		dom = xml.dom.minidom.parse(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml")
 		root = dom.documentElement
 		package_name = root.getAttribute("package")
@@ -293,6 +360,50 @@ class SDKAppendManager():
 	def __modify_yml(self):
 		pass
 
+	def __balance_smali(self,_Path):
+		# if(os.path.exists(_Path+"/smali_classes2")==False):
+		# 	os.mkdir(_Path+"/smali_classes2")
+		# List = []
+		# for i in os.listdir(_Path+"/smali"):
+		# 	List.append(i)
+		# SaveSize=0
+		# BigestList = []
+		# for i in List:
+		# 	size = self.__get_dir_size(_Path+"/smali/"+i)
+		# 	if SaveSize<size:
+		# 		SaveSize=size
+		# 		BigestList = i
+		# 		#print("Bigest = "+_Path+"/smali/"+i)
+		# 	#print("i:"+str(size))
+		folder_index = 2
+		last_name = ""
+
+		folder_list = self.__list_folder(_Path)
+		while "smali_classes"+str(folder_index) in folder_list:
+			folder_index=folder_index+1
+		last_name = "smali_classes"+str(folder_index)
+
+		if os.path.isdir(_Path+"/"+last_name)==False:os.mkdir(_Path+"/"+last_name)
+
+		folder_list = self.__list_folder(_Path+"/smali")
+		for folder_name in folder_list:
+			if folder_name!= "com":
+				shutil.move(_Path+"/smali/"+folder_name,_Path+"/"+last_name+"/"+folder_name)
+
+		folder_list = self.__list_folder(_Path+"/smali/com")
+		for folder_name in folder_list:
+			if folder_name== "google":
+				folder_index= folder_index+1
+				if os.path.isdir(_Path+"/smali_classes"+str(folder_index))==False:os.mkdir(_Path+"/smali_classes"+str(folder_index))
+				if os.path.isdir(_Path+"/smali_classes"+str(folder_index)+"/com")==False:os.mkdir(_Path+"/smali_classes"+str(folder_index)+"/com")
+				shutil.move(_Path+"/smali/com/"+folder_name, _Path+"/smali_classes"+str(folder_index)+"/com/"+folder_name)
+
+	def __get_dir_size(self,dir):
+		size = 0
+		for root, dirs, files in os.walk(dir):
+			dirs
+			size += sum([getsize(join(root, name)) for name in files])
+		return size
 	def __delete_signature(self,_path):
 		your_delet_file="META-INF"
 		old_zipfile=_path #旧文件
@@ -315,8 +426,9 @@ class SDKAppendManager():
 		file_format = os.path.splitext(_apk_path)[-1]
 		if os.path.exists(self.__file_path+"/Y_building")==False: os.mkdir(self.__file_path+"/Y_building")
 
-		signed_apk_path = self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+"_"+str(datetime.date.today())+str(time.strftime("_%H_%M_%S"))+file_format
-		if os.path.isfile(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format):os.remove(self.__file_path+"/Y_building/"+file_name+"_"+self.__channel+file_format)
+		signed_apk_path = self.__file_path+"/Y_building/"+file_name+str(datetime.date.today())+str(time.strftime("_%H_%M_%S"))+file_format
+		if os.path.isfile(signed_apk_path):
+			os.remove(signed_apk_path)
 		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
 		return signed_apk_path
 
@@ -326,6 +438,12 @@ class SDKAppendManager():
 		root.setAttribute("package",_package_name)
 		with open(_APK_path,'w',encoding='UTF-8') as _Path:
 			dom.writexml(_Path,indent='',addindent='',newl='',encoding='UTF-8')
+
+	def	__list_folder(self, _path):
+		List = []
+		for i in os.listdir(_path):
+			List.append(i)
+		return List
 def run():
 	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/z_PythonCode/"+file_path+".py"):
@@ -369,21 +487,59 @@ def run():
 	print("[ChannelName]	"+ChannelName)
 	print("[PackageName]	"+PackageName)
 	print("[BASE]	"+BASE)
+
+def run():
+	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	if os.path.isfile(PythonLocation()+"/z_PythonCode/"+file_path+".py"):
+		if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
+			os.remove(PythonLocation()+"/"+file_path+".py")
+		shutil.copy(PythonLocation()+"/z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
+
+	folder_name = os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+
+	files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+	game_apk_path = ""
+	for file_name in files:
+		if file_name.find(".keystore")!=-1:
+			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
+			break
+
+	config=configparser.ConfigParser()
+	config.read(PythonLocation()+"/android_builder_config.ini")
+	channel = config.sections()
+	print("---Choice your channel---")
+	for index, name in enumerate(channel):
+		print(f"[{index}]	{name}	")
+	print("-------------------------")
+	your_channel=""
+	while True:
+		your_channel=input("Input channel's numbner:")
+		if your_channel.isnumeric():
+			if int(your_channel)<= len(channel)-1:
+				break
+			else:
+				print('You number can not over'+str(len(channel)-1))
+				continue
+		else:
+			print('Your input is not number')
+	ChannelName = channel[int(your_channel)]
+	PackageName  = config.get(ChannelName,"PackageName")
+	BASE		 = config.get(ChannelName,"BASE")
+	SHOW 		 = config.get(ChannelName,"SHOW")
+	IAP  		 = config.get(ChannelName,"IAP")
+	APK_PATH	 = config.get(ChannelName,"PATH")
+	print("[Keystore]	"+game_apk_path)
+	print("[ChannelName]	"+ChannelName)
+	print("[PackageName]	"+PackageName)
+	print("[BASE]	"+BASE)
 	print("[SHOW]	"+SHOW)
 	print("[IAP]	"+IAP)
 	print("[APK_PATH]	"+APK_PATH)
 	starttime = datetime.datetime.now()
-	if APK_PATH!="":
-		game_apk_path = APK_PATH
-	if BASE != "":
-		sam = SDKAppendManager(channel = BASE, game_apk_path = game_apk_path, channel_name = ChannelName, package_name = PackageName)
-		game_apk_path = sam._merge_package()
-	if SHOW != "":
-		sam = SDKAppendManager(channel = SHOW, game_apk_path = game_apk_path, channel_name = ChannelName, package_name = PackageName)
-		game_apk_path = sam._merge_package()
-	if IAP != "":
-		sam = SDKAppendManager(channel = IAP,  game_apk_path = game_apk_path, channel_name = ChannelName, package_name = PackageName)
-		game_apk_path = sam._merge_package()
+
+	sam = SDKAppendManager(channel_base = BASE,channel_show = SHOW, channel_IAP = IAP, game_apk_path = APK_PATH, channel_name = ChannelName, package_name = PackageName)
+	sam._merge_package()
+
 	endtime = datetime.datetime.now()
 	print ("————————————————————————————————")
 	print ("	Total Time:"+str((endtime-starttime).seconds)+" s")
