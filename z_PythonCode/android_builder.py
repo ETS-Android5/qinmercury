@@ -41,7 +41,7 @@ class SDKAppendManager():
 				self.__keystore = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
 				break
 		self.__time_tick = str(int(time.time()))
-		if os.path.isdir(self.__file_path+self.__cache_position): shutil.rmtree(self.__file_path+self.__cache_position)
+		# if os.path.isdir(self.__file_path+self.__cache_position): shutil.rmtree(self.__file_path+self.__cache_position)
 		self.__create_cache()
 		self.__copyFileCounts = 0
 		self.__conflict_list = []
@@ -52,7 +52,8 @@ class SDKAppendManager():
 		self._merge_sdk_resource()
 		self._modify_config()
 		self._rebuild_game_apk()
-		return self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
+		self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}"): shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
 
 	def _decompile_game_apk(self):
 		os.system(f"{self.__apktool} d {self.__game_apk_path}")
@@ -123,23 +124,21 @@ class SDKAppendManager():
 
 
 	def __merge_sdk_resource_lib(self):
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_base}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
-			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
-			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_base}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+		self.__merge_sdk_resource_lib_execute(f"{self.__sdk_apk_name_only}_{self.__channel_base}")
+		self.__merge_sdk_resource_lib_execute(f"{self.__sdk_apk_name_only}_{self.__channel_IAP}")
+		self.__merge_sdk_resource_lib_execute(f"{self.__sdk_apk_name_only}_{self.__channel_show}")
 
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_IAP}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
-			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
-			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_IAP}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+	def __merge_sdk_resource_lib_execute(self, app_release_path):
+		#copy lib to project
+		if os.path.exists(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")==False:os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_release_path}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
+			print("[__merge_sdk_resource_lib] copy " + app_release_path + "lib apk with sdk to game apk")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_release_path}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
 
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_show}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
-			print("[__merge_sdk_resource_lib] copy lib apk with sdk to game apk")
-			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__sdk_apk_name_only}_{self.__channel_show}/lib",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
-
-
-		file_list = self.__all_files_in_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
+		#copy delete useless libs to project
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")==True:
 			for filename in os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
-				if "armeabi-v7a" not in filename and "x86" not in filename:
+				if "armeabi-v7a" != filename and "x86" != filename:
 					if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename):
 						shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
 						print("[__merge_sdk_resource_lib] deleted "+f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
@@ -426,7 +425,7 @@ class SDKAppendManager():
 		file_format = os.path.splitext(_apk_path)[-1]
 		if os.path.exists(self.__file_path+"/Y_building")==False: os.mkdir(self.__file_path+"/Y_building")
 
-		signed_apk_path = self.__file_path+"/Y_building/"+file_name+str(datetime.date.today())+str(time.strftime("_%H_%M_%S"))+file_format
+		signed_apk_path = self.__file_path+"/Y_building/"+file_name+"_"+str(datetime.date.today())+str(time.strftime("_%H_%M_%S"))+"_"+self.__channel_name+file_format
 		if os.path.isfile(signed_apk_path):
 			os.remove(signed_apk_path)
 		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
