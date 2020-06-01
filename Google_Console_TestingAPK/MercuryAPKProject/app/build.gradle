@@ -15,7 +15,7 @@ android {
         release {
             keyAlias 'android.keystore'
             keyPassword 'singmaan'
-            storeFile file('./../grannysmith.keystore')
+            storeFile file('./../singmaan.keystore')
             storePassword 'singmaan'
         }
     }

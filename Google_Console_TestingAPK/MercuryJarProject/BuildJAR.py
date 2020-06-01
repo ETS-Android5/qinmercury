@@ -31,7 +31,7 @@ def __delete_zip_files(_path):
 	zout = zipfile.ZipFile (new_zipfile, 'w') #被写入对象
 	for item in zin.infolist():
 		buffer = zin.read(item.filename)
-		if ("BuildConfig.class" in item.filename):
+		if ("BuildConfig.class" in item.filename) or (".class" not in item.filename):
 			pass
 		else:
 			zout.writestr(item, buffer) #把文件写入到新对象中
@@ -45,6 +45,7 @@ def main():
 		if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
 			os.remove(PythonLocation()+"/"+file_path+".py")
 		shutil.copy(PythonLocation()+"/../../z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
+
 
 	_path = PythonLocation()
 	os.chdir(_path)
@@ -64,8 +65,6 @@ def main():
 		__delete_zip_files("./../MercurySDK.jar")
 		if os.path.isfile("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar"):
 			os.remove("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar")
-		shutil.copy("./../MercurySDK.jar", "./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar")
-		shutil.copy("./../MercurySDK.jar", "./../../../Unity_DemoProject/Assets/Plugins/Android/libs/MercurySDK.jar")
 		shutil.copy("./../MercurySDK.jar", "./../../MercuryAPKProject_pure/app/src/main/libs/MercurySDK.jar")
 	if os.path.exists("./../cache"):delete_folder("./../cache")
 
