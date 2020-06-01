@@ -8,7 +8,6 @@ import sys
 import time
 import json
 import random
-import aiomysql
 import requests
 import calendar
 import shutil
@@ -182,6 +181,9 @@ class APKBuildManager():
 		os.chdir(self.__file_path+self.__cache_position+self.__time_tick)
 
 	def copy_cache_folder(self):
+		#revise yml
+		self.__modify_yml()
+
 		package_name = self.__get_package_name(str(PathLib(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml")))
 		#change package name
 		self.__change_package_name(str(PathLib(f"{self.__apk_project_clean}/app/src/main/AndroidManifest.xml")),package_name)
@@ -206,6 +208,7 @@ class APKBuildManager():
 		self.__merge_res()
 		#merge xml
 		self.__merge_xml()
+
 
 	def __merge_lib(self):
 		self.__copyFileCounts = 0
@@ -423,6 +426,21 @@ class APKBuildManager():
 					java_codes.append(line)
 			with open(f"{_java_path}",mode='w',encoding="utf8") as file_context:
 				file_context.writelines(java_codes)
+
+	def __modify_yml(self):
+		with open(str(PathLib(f"{self.__apk_project_clean}/app/build.gradle")),encoding="utf8") as file_object:
+			JavaCodeGradle=[]
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				f = i.replace(" ","")
+				if f.find("versionCode")!=-1:
+					f = f.replace("versionCode","")
+					new_version_code = int(f)+1
+					JavaCodeGradle.append("	versionCode "+str(new_version_code)+"\r")
+				else:
+					JavaCodeGradle.append(i)
+		with open(str(PathLib(f"{self.__apk_project_clean}/app/build.gradle")),'w',encoding="utf8") as file_object_read:
+			file_object_read.writelines(JavaCodeGradle)
 
 def run():
 	sam = APKBuildManager()
