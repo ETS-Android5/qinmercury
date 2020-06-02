@@ -367,7 +367,17 @@ class SDKAppendManager():
 			if os.path.isdir(sourceF):
 				self.__copy_files_overwrite(sourceF, targetF)
 	def __modify_yml(self):
-		pass
+		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/apktool.yml",encoding="utf8") as file_object:
+			JavaCodeGradle=[]
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				f = i.replace(" ","")
+				if f.find("versionCode")!=-1:
+					JavaCodeGradle.append("  versionCode: '"+self.__time_tick+"'\r")
+				else:
+					JavaCodeGradle.append(i)
+		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/apktool.yml",'w',encoding="utf8") as file_object_read:
+			file_object_read.writelines(JavaCodeGradle)
 
 	def __balance_smali(self,_Path):
 		# if(os.path.exists(_Path+"/smali_classes2")==False):
