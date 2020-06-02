@@ -12,6 +12,7 @@ import zipfile
 import xml.dom.minidom
 import configparser
 import datetime
+import subprocess
 from os.path import join, getsize
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
@@ -34,6 +35,7 @@ class SDKAppendManager():
 		self.__game_apk_path = game_apk_path
 		self.__channel_name = channel_name
 		self.__package_name = package_name
+		self.__zipalign_path = ""
 		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
 		files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 		for file_name in files:
@@ -43,8 +45,16 @@ class SDKAppendManager():
 		self.__time_tick = str(int(time.time()))
 		# if os.path.isdir(self.__file_path+self.__cache_position): shutil.rmtree(self.__file_path+self.__cache_position)
 		self.__create_cache()
+		self.__find_zipalign()
 		self.__copyFileCounts = 0
 		self.__conflict_list = []
+
+	def __find_zipalign(self):
+		p = subprocess.Popen('find ~/Library/Android/sdk/build-tools -name "zipalign"',shell=True,stdout=subprocess.PIPE)
+		out,err = p.communicate()
+		for line in out.splitlines():
+			if line!="":
+				self.__zipalign_path = line.decode('UTF-8')
 
 	def _merge_package(self):
 		self._decompile_game_apk()
@@ -429,6 +439,13 @@ class SDKAppendManager():
 		if os.path.isfile(signed_apk_path):
 			os.remove(signed_apk_path)
 		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
+
+		#zipalign
+		if self.__zipalign_path!="":
+			zipalign_apk_path = self.__file_path+"/Y_building/"+file_name+"_"+str(datetime.date.today())+str(time.strftime("_%H_%M_%S"))+"_"+self.__channel_name+"_zipalign"+file_format
+			print("zipalign building.......")
+			os.system(f"{self.__zipalign_path}  -v 4 {signed_apk_path} {zipalign_apk_path}")
+
 		return signed_apk_path
 
 	def __change_package_name(self,_APK_path,_package_name):
