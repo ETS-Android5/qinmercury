@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <root-path name="download" path="" />
+        <!--/storage/emulated/0/joomob/Download/-->
+        <external-path name="joomob" path="." />
+    </paths>
+</resources>

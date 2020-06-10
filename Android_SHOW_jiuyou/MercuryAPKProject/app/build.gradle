@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+
+android {
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
+    signingConfigs {
+        release {
+            keyAlias 'android.keystore'
+            keyPassword 'singmaan'
+            storeFile file('./../singmaan.keystore')
+            storePassword 'singmaan'
+        }
+    }
+    compileSdkVersion 26
+    defaultConfig {
+        minSdkVersion 19
+	versionCode 5
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/MercurySDK.jar')
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/android-support-v4.jar')
+    implementation files('src/main/libs/org.apache.http.legacy.jar')
+    implementation files('src/main/libs/adp-sdk-shell-2.0.0.16.jar')
+    implementation files('src/main/libs/android-query-full.0.26.7.jar')
+    implementation files('src/main/libs/GDTSDK.union.4.150.1020.jar')
+    implementation files('src/main/libs/mediation_gdt-2.6.20.jar')
+    implementation files('src/main/libs/mediation_gdt-release.jar')
+    implementation files('src/main/libs/mediation_mintegral-2.6.20.jar')
+    implementation files('src/main/libs/mediation_mintegral-release.jar')
+    implementation files('src/main/libs/mediation_toutiao-2.6.10.jar')
+    implementation files('src/main/libs/mediation_toutiao-release.jar')
+    implementation files('src/main/libs/mediation_uniplay-release.jar')
+    implementation files('src/main/libs/mintegral_alphab.jar')
+    implementation files('src/main/libs/mintegral_appwall.jar')
+    implementation files('src/main/libs/mintegral_appwallext.jar')
+    implementation files('src/main/libs/mintegral_chinacommon.jar')
+    implementation files('src/main/libs/mintegral_interactiveads.jar')
+    implementation files('src/main/libs/mintegral_interstitial.jar')
+    implementation files('src/main/libs/mintegral_interstitialvideo.jar')
+    implementation files('src/main/libs/mintegral_mtgbanner.jar')
+    implementation files('src/main/libs/mintegral_mtgbid.jar')
+    implementation files('src/main/libs/mintegral_mtgdownloads.jar')
+    implementation files('src/main/libs/mintegral_mtgjscommon.jar')
+    implementation files('src/main/libs/mintegral_mtgnative.jar')
+    implementation files('src/main/libs/mintegral_nativeex.jar')
+    implementation files('src/main/libs/mintegral_offerwall.jar')
+    implementation files('src/main/libs/mintegral_playercommon.jar')
+    implementation files('src/main/libs/mintegral_reward.jar')
+    implementation files('src/main/libs/mintegral_videocommon.jar')
+    implementation files('src/main/libs/mintegral_videofeeds.jar')
+    implementation files('src/main/libs/mintegral_videojs.jar')
+    implementation files('src/main/libs/ngad-sdk-release-2.6.43.jar')
+    implementation files('src/main/libs/r-classes.jar')
+    implementation files('src/main/libs/toutiao_openadsdk_2.5.7.2.jar')
+    implementation files('src/main/libs/toutiao_openadsdk_2.5.7.2_adhost.jar')
+    implementation files('src/main/libs/UniplayAdSDK_6.0.2.jar')
+}

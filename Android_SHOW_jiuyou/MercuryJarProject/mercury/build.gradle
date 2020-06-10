@@ -1,0 +1,86 @@
+// apply plugin: 'java'
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/android-support-v4.jar')
+    implementation files('src/main/libs/org.apache.http.legacy.jar')
+    implementation files('src/main/libs/adp-sdk-shell-2.0.0.16.jar')
+    implementation files('src/main/libs/android-query-full.0.26.7.jar')
+    implementation files('src/main/libs/GDTSDK.union.4.150.1020.jar')
+    implementation files('src/main/libs/mediation_gdt-2.6.20.jar')
+    implementation files('src/main/libs/mediation_gdt-release.jar')
+    implementation files('src/main/libs/mediation_mintegral-2.6.20.jar')
+    implementation files('src/main/libs/mediation_mintegral-release.jar')
+    implementation files('src/main/libs/mediation_toutiao-2.6.10.jar')
+    implementation files('src/main/libs/mediation_toutiao-release.jar')
+    implementation files('src/main/libs/mediation_uniplay-release.jar')
+    implementation files('src/main/libs/mintegral_alphab.jar')
+    implementation files('src/main/libs/mintegral_appwall.jar')
+    implementation files('src/main/libs/mintegral_appwallext.jar')
+    implementation files('src/main/libs/mintegral_chinacommon.jar')
+    implementation files('src/main/libs/mintegral_interactiveads.jar')
+    implementation files('src/main/libs/mintegral_interstitial.jar')
+    implementation files('src/main/libs/mintegral_interstitialvideo.jar')
+    implementation files('src/main/libs/mintegral_mtgbanner.jar')
+    implementation files('src/main/libs/mintegral_mtgbid.jar')
+    implementation files('src/main/libs/mintegral_mtgdownloads.jar')
+    implementation files('src/main/libs/mintegral_mtgjscommon.jar')
+    implementation files('src/main/libs/mintegral_mtgnative.jar')
+    implementation files('src/main/libs/mintegral_nativeex.jar')
+    implementation files('src/main/libs/mintegral_offerwall.jar')
+    implementation files('src/main/libs/mintegral_playercommon.jar')
+    implementation files('src/main/libs/mintegral_reward.jar')
+    implementation files('src/main/libs/mintegral_videocommon.jar')
+    implementation files('src/main/libs/mintegral_videofeeds.jar')
+    implementation files('src/main/libs/mintegral_videojs.jar')
+    implementation files('src/main/libs/ngad-sdk-release-2.6.43.jar')
+    implementation files('src/main/libs/r-classes.jar')
+    implementation files('src/main/libs/toutiao_openadsdk_2.5.7.2.jar')
+    implementation files('src/main/libs/toutiao_openadsdk_2.5.7.2_adhost.jar')
+    implementation files('src/main/libs/UniplayAdSDK_6.0.2.jar')
+}
+
+task clearJar(type: Delete){
+    //delete 'build/outputs/jar/e2wwrapper.jar'
+	//delete 'build/intermediates/bundles/debug/e2wwrapper.jar'
+	//delete 'build/intermediates/bundles/default/e2wwrapper.jar'
+	File file1 = new File(rootDir.getAbsolutePath() + '\\build');
+	file1.deleteDir();
+}
+android {
+    lintOptions {
+        abortOnError false
+    }
+}
+// task to export contents as jar
+task makeJar(type: Copy) {
+
+}
+
+makeJar.dependsOn(clearJar, build)

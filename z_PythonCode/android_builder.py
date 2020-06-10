@@ -533,6 +533,7 @@ def run():
 	config=configparser.ConfigParser()
 	config.read(PythonLocation()+"/android_builder_config.ini")
 	channel = config.sections()
+	print("Version:1")
 	print("---Choice your channel---")
 	for index, name in enumerate(channel):
 		print(f"[{index}]	{name}	")
