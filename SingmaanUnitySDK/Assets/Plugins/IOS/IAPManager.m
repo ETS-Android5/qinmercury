@@ -123,13 +123,14 @@
             NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx%@",productIndentify);
             //如果是消耗品则记录购买数量，非消耗品则记录是否购买过
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            if ([productIdentifier isEqualToString:productIndentify]) {
+            if ([productIdentifier isEqualToString:productIndentify]) 
+            {
                 NSInteger purchasedCount = [defaults integerForKey:productIdentifier];//已购买数量
                 [[NSUserDefaults standardUserDefaults] setInteger:(purchasedCount+1) forKey:productIdentifier];
-                //UnitySendMessage("IOSIAPMgr", "BuyProcuctSucessCallBack",productIdentifier.UTF8String);
+                UnitySendMessage("PluginMercury", "PurchaseSuccessCallBack", productIdentifier.UTF8String);
             }else{
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
-                //UnitySendMessage("IOSIAPMgr", "BuyProcuctSucessCallBack",productIdentifier.UTF8String);
+                UnitySendMessage("PluginMercury", "PurchaseSuccessCallBack", productIdentifier.UTF8String);
             }
         }
     }else{

@@ -160,40 +160,40 @@ public class PluginMercury : MonoBehaviour
 
     public void PurchaseSuccessCallBack(string msg)
     {
-        print("[Unity]->PurchaseSuccessCallBack");
+        print("[Unity]->PurchaseSuccessCallBack"+msg);
     }
     public void PurchaseFailedCallBack(string msg)
     {
-        print("[Unity]->PurchaseFailedCallBack");
+        print("[Unity]->PurchaseFailedCallBack"+msg);
     }
     public void LoginSuccessCallBack(string msg)
     {
-        print("[Unity]->LoginSuccessCallBack");
+        print("[Unity]->LoginSuccessCallBack"+msg);
     }
     public void LoginCancelCallBack(string msg)
     {
-        print("[Unity]->LoginCancelCallBack");
+        print("[Unity]->LoginCancelCallBack"+msg);
     }
     public void AdLoadSuccessCallBack(string msg)
     {
-        print("[Unity]->AdLoadSuccessCallBack");
+        print("[Unity]->AdLoadSuccessCallBack"+msg);
     }
     public void AdLoadFailedCallBack(string msg)
     {
-        print("[Unity]->AdLoadFailedCallBack");
+        print("[Unity]->AdLoadFailedCallBack"+msg);
     }
     
     public void AdShowSuccessCallBack(string msg)
     {
-        print("[Unity]->AdShowSuccessCallBack");
+        print("[Unity]->AdShowSuccessCallBack"+msg);
     }
     public void AdShowFailedCallBack(string msg)
     {
-        print("[Unity]->AdShowFailedCallBack");
+        print("[Unity]->AdShowFailedCallBack"+msg);
     }
     public void onFunctionCallBack(string msg)
     {
-        print("[Unity]->onFunctionCallBack");
+        print("[Unity]->onFunctionCallBack"+msg);
     }
 
 }
