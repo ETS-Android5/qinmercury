@@ -20,7 +20,7 @@ public class SplashScreenManager : MonoBehaviour
     private float splashDisplayTimer = -1.0f;
     private float splashDisplayDuration = 1.0f;
     //[HideInInspector]
-    public bool splashDisplayed = false;
+    public bool DisplaySplash = true;
     public Texture2D blackPixel;
     bool loadingOver = false;
     private AsyncOperation async;
@@ -75,8 +75,16 @@ public class SplashScreenManager : MonoBehaviour
     }
     void Start()
     {
-        nextSplash();
-        StartCoroutine(PreloadingScence(nextSceneName));//预加载
+        if (DisplaySplash==false)
+        {
+            Application.LoadLevel(nextSceneName);
+        }
+        else
+        {
+            nextSplash();
+            StartCoroutine(PreloadingScence(nextSceneName));//预加载
+        }
+
         //LoginDialog.SetActive(E2WSdk.Instance.isShowSplash || E2WSdk.Instance.isLogin);
         // if (!E2WSdk.Instance.isShowSplash && !E2WSdk.Instance.isLogin)
         // {
@@ -247,7 +255,7 @@ public class SplashScreenManager : MonoBehaviour
         {
             splashStartFadeTimer = -1.0f;
             splashDisplayTimer = -1.0f;
-            splashDisplayed = true;
+            DisplaySplash = true;
 
         }
     }

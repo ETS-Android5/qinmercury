@@ -236,8 +236,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splashes:
   - {fileID: 2800000, guid: 739818eb8261b4e27a31bd6af708b971, type: 3}
-  splashDisplayed: 1
+  DisplaySplash: 0
   blackPixel: {fileID: 2800000, guid: ff6b1fb9518f1493ba0816834f46cc4d, type: 3}
+  LoadingCircle: {fileID: 0}
   LoginDialog: {fileID: 1478296187}
   nextSceneName: DemoMenu
   channelSplashs: []
