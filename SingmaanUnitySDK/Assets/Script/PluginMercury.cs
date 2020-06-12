@@ -19,6 +19,8 @@ public class PluginMercury : MonoBehaviour
     private static extern void ActiveNative_IOS();
     [DllImport ("__Internal")]
     private static extern void GameInit(string name);
+    [DllImport("__Internal")]
+    private static extern void BuyProduct(string s);//购买商品(AppStore)
 #endif
 
     public static PluginMercury pInstance;
@@ -70,6 +72,8 @@ public class PluginMercury : MonoBehaviour
 #elif UNITY_ANDROID
         print("[UNITY_ANDROID]->Purchase()->strProductId="+strProductId);
         _plugin.Call("Purchase", strProductId );
+#elif UNITY_IPHONE
+        BuyProduct(strProductId);
 #endif
     }
     public void Redeem()
