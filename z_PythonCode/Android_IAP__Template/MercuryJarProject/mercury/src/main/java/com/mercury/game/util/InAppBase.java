@@ -36,6 +36,8 @@ import android.view.Menu;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.mercury.game.MercuryActivity.LogLocal;
+
 public class InAppBase{
 	protected Activity mContext;
 	protected String mProductId;
@@ -131,8 +133,8 @@ public class InAppBase{
 	
 	public void onPurchaseSuccess(String message) {qc.PurchaseSuccess(message,this);}
 	public void onPurchaseFailed(String strError) {qc.PurchaseFailed(strError,this);}
-	public void onLoginSuccess(String strError) { qc.AdLoadSuccess(strError,this); }
-	public void onLoginFailed(String strError) { qc.AdLoadFailed(strError,this); }
+	public void LoginSuccessCallBack(String strError) { qc.LoginSuccessCallBack(strError,this); }
+	public void LoginCancelCallBack(String strError) { qc.LoginCancelCallBack(strError,this); }
 	public void AdLoadSuccessCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
 	public void AdLoadFailedCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
 	public void AdShowSuccessCallBack(String strError) { qc.AdShowSuccessCallBack(strError,this); }
@@ -142,7 +144,14 @@ public class InAppBase{
 	public void onFunctionCallBack(String strError) {
 		qc.FunctionCallBack(strError,this);
 	}
-	
+	public void SingmaanLogin()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]");
+	}
+	public void SingmaanLogout()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]");
+	}
 	public void ActiveBanner()
 	{
 

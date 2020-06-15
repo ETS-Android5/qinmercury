@@ -80,7 +80,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][5]->purchaseProduct");
-				MercurySDK.Purchase("production1");
+				MercurySDK.Purchase("uk.fiveaces.nsfcchina.bux_1");
 
 			}
 		});
@@ -101,8 +101,8 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][7]->ActiveBanner");
-				MercurySDK.ActiveBanner();
+				Log.w("MercuryDemo","[step][7]->SingmaanLogin");
+				MercurySDK.SingmaanLogin();
 			}
 		});
 		
@@ -121,8 +121,8 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][9]->ActiveNative");
-				MercurySDK.ActiveNative();
+				Log.w("MercuryDemo","[step][9]->SingmaanLogout");
+				MercurySDK.SingmaanLogout();
 			}
 		});
 		Button btn4 = (Button) findViewById(R.id.button4);
@@ -146,8 +146,8 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 		btn6.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercuryDemo","[step][12]->Exchange");
-				MercurySDK.RestoreProduct();
+				Log.w("MercuryDemo","[step][12]->GetProductionInfo");
+				MercurySDK.GetProductionInfo();
 			}
 		});
 	}

@@ -99,7 +99,87 @@ public class MercuryConst {
     	}   	
     }
 
+	public static String GlobalProductionList[][];
+	public static JSONObject ProductionJsonList;
+	public static String GetProductionList()
+	{
+		String ProductionList[][] = {
 
+				{"sku_ww1_remove_ads","去除广告","1.0"},
+				{"sku_ww1_gold_200","200个黄金","1.0"},
+				{"sku_ww1_gold_500","500个黄金","1.0"},
+				{"sku_ww1_gold_1200","1200个黄金","1.0"},
+				{"sku_ww1_gold_2800","2800个黄金","1.0"},
+				{"sku_ww1_premium_mode","无限高级任务","1.0"},
+				{"sku_ww1_bank_withdraw","从超级金库取款","1.0"},
+				{"sku_ww1_plane_all_pack","各国战机","1.0"},
+
+				{"sku_ww1_plane_en_pack","所有协约国西线战机","1.0"},
+				{"sku_ww1_plane_en_01","解锁S.E.5","1.0"},
+				{"sku_ww1_plane_en_02","解锁索普威斯三翼战斗机","1.0"},
+				{"sku_ww1_plane_en_03","解锁Airco DH.4","1.0"},
+				{"sku_ww1_plane_en_04","解锁汉莱帕杰400战机","1.0"},
+
+				{"sku_ww1_plane_ger_pack","购买所有同盟国高级战机","1.0"},
+				{"sku_ww1_plane_ger_01","解锁容克斯D.I型战机","1.0"},
+				{"sku_ww1_plane_ger_02","解锁福克尔Dr.I单座三翼战斗机","1.0"},
+				{"sku_ww1_plane_ger_03","解锁福克尔DVIII型战机","1.0"},
+				{"sku_ww1_plane_ger_04","解锁齐柏林斯塔肯R4型战机","1.0"},
+
+				{"sku_ww1_plane_rus_pack","购买所有三国协约同盟东线高级战机","1.0"},
+				{"sku_ww1_plane_rus_01","解锁索普威斯 狙击式战机","1.0"},
+				{"sku_ww1_plane_rus_02","解锁DH.5","1.0"},
+				{"sku_ww1_plane_rus_03","解锁Airco DH.9","1.0"},
+				{"sku_ww1_plane_rus_04","解锁西科尔斯基·伊利亚·穆罗梅茨","1.0"},
+//			{"uk.fiveaces.nsfcchina.removeads","去除广告","5.0"},
+//			{"uk.fiveaces.nsfcchina.unlimitededitor","无限制编辑","5.0"},
+//			{"uk.fiveaces.nsfcchina.bigstaffboost","幕后提升包","3.0"},
+//			{"uk.fiveaces.nsfcchina.betabasicpack","基础包","2.0"},
+//			{"uk.fiveaces.nsfcchina.bux_1","星币包1","10.0"},
+//			{"uk.fiveaces.nsfcchina.bux_2","星币包2","15.0"},
+//			{"uk.fiveaces.nsfcchina.bux_3","星币包3","20.0"},
+//			{"uk.fiveaces.nsfcchina.bux_5","星币包4","50.0"},
+//			{"uk.fiveaces.nsfcchina.betamanagementpack","俱乐部包","2.0"},
+//			{"uk.fiveaces.nsfcchina.fitnesscoaches1new","优秀的健身教练","4.0"},
+//			{"uk.fiveaces.nsfcchina.fitnesscoaches2new","卓越的健身教练","2.0"},
+//			{"uk.fiveaces.nsfcchina.physios1new","优秀的队医","4.0"},
+//			{"uk.fiveaces.nsfcchina.physios2new","卓越的队医","2.0"},
+//			{"uk.fiveaces.nsfcchina.skillcoaches1new","优秀的技能教练","4.0"},
+//			{"uk.fiveaces.nsfcchina.skillcoaches2new","卓越的技能教练","2.0"},
+//			{"uk.fiveaces.nsfcchina.concernspack","担忧包","5.0"},
+//			{"uk.fiveaces.nsfcchina.contractpack","合约包","5.0"},
+//			{"uk.fiveaces.nsfcchina.defensivepack","后卫包","6.0"},
+//			{"uk.fiveaces.nsfcchina.chanceplayer","发掘包","1.0"},
+//			{"uk.fiveaces.nsfcchina.dreamteam","梦之队","20.0"},
+//			{"uk.fiveaces.nsfcchina.goaliepack","门将包","5.0"},
+//			{"uk.fiveaces.nsfcchina.betagoldplayerpack","黄金球员包","2.0"},
+//			{"uk.fiveaces.nsfcchina.betakeeperpack","技能包","1.0"},
+//			{"uk.fiveaces.nsfcchina.marketingmanager","营销经理","4.0"},
+//			{"uk.fiveaces.nsfcchina.midfieldpack","中锋包","5.0"},
+//			{"uk.fiveaces.nsfcchina.betarecoverypack","恢复包","1.0"},
+//			{"uk.fiveaces.nsfcchina.retries","重试包","2.0"},
+//			{"uk.fiveaces.nsfcchina.betaholidaypack","特别球员包","6.0"},
+//			{"uk.fiveaces.nsfcchina.strikerpack","前锋包","6.0"},
+//			{"uk.fiveaces.nsfcchina.superkeeper","超级门将","11.0"},
+//			{"uk.fiveaces.nsfcchina.superstriker","超级前锋","9.0"},
+//			{"uk.fiveaces.nsfcchina.supremeteam","顶级球队","45.0"},
+//			{"uk.fiveaces.nsfcchina.spinepack","团队精神包","8.0"},
+//			{"uk.fiveaces.nsfcchina.betacoachingpack","训练包","4.0"},
+//			{"uk.fiveaces.nsfcchina.versatilitypack","通才包","5.0"}
+		};
+		GlobalProductionList = ProductionList;
+		ProductionJsonList = new JSONObject();
+		for(int i=0;i<ProductionList.length;i++)
+		{
+			try
+			{
+				ProductionJsonList.put(ProductionList[i][0], ProductionList[i][2]+"¥");
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		return ProductionJsonList.toString();
+	}
 
     public static void PayInfo(String SavePid)
     {
@@ -162,6 +242,14 @@ public class MercuryConst {
 		inbase.appinterface.PurchaseFailedCallBack(strError);
 	}
 
+	public void LoginSuccessCallBack(String strError,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] LoginSuccessCallBack callback->strError="+strError+" inbase->"+inbase);
+		inbase.appinterface.LoginSuccessCallBack(strError);
+	}
+	public void LoginCancelCallBack(String strError,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] LoginCancelCallBack callback->strError="+strError+" inbase->"+inbase);
+		inbase.appinterface.LoginCancelCallBack(strError);
+	}
 	public void AdLoadSuccess(String strError,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onLoginSuccess callback->strError="+strError+" inbase->"+inbase);
 		inbase.appinterface.AdLoadSuccessCallBack(strError);

@@ -101,8 +101,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][7]->ActiveBanner");
-				MercurySDK.ActiveBanner();
+				Log.w("MercuryDemo","[step][7]->SingmaanLogin");
+				MercurySDK.SingmaanLogin();
 			}
 		});
 		
@@ -121,8 +121,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][9]->ActiveNative");
-				MercurySDK.ActiveNative();
+				Log.w("MercuryDemo","[step][9]->SingmaanLogout");
+				MercurySDK.SingmaanLogout();
 			}
 		});
 		Button btn4 = (Button) findViewById(R.id.button4);

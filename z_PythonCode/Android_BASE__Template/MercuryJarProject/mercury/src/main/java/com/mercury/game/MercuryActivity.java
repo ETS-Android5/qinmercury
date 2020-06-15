@@ -241,7 +241,16 @@ public class MercuryActivity  {
 	{
 		return LongChannelID;
 	}
-
+	public void SingmaanLogin()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]" + mInAppChannel);
+		mInAppChannel.SingmaanLogin();
+	}
+	public void SingmaanLogout()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
+		mInAppChannel.SingmaanLogout();
+	}
 	public void ActiveBanner()
 	{
 		LogLocal("[MercuryActivity][ActiveBanner]" + mInAppAD);

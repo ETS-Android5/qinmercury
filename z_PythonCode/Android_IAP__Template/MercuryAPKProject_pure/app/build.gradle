@@ -6,12 +6,17 @@ android {
             jniLibs.srcDirs = ['src/main/libs']
         }
     }
+    repositories {
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
     signingConfigs {
         release {
             keyAlias 'android.keystore'
-            keyPassword 'hello123456'
+            keyPassword 'singmaan'
             storeFile file('./../grannysmith.keystore')
-            storePassword 'hello123456'
+            storePassword 'singmaan'
         }
     }
     compileSdkVersion 26
@@ -29,11 +34,6 @@ android {
         }
         debug {
             signingConfig signingConfigs.release
-        }
-    }
-    repositories {
-        flatDir {
-            dirs 'src/main/libs'
         }
     }
 

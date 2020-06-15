@@ -22,6 +22,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
+
+import static com.mercury.game.MercuryActivity.DeviceId;
+import static com.mercury.game.MercuryActivity.LogLocal;
 //end
 
 
@@ -116,7 +119,16 @@ public class InAppChannel extends InAppBase {
 			e.printStackTrace();
 		}
 	}
-
+	public void SingmaanLogin()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]"+DeviceId);
+		LoginSuccessCallBack("SingmaanLogin"+DeviceId);
+	}
+	public void SingmaanLogout()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
+		LoginCancelCallBack("SingmaanLogout"+DeviceId);
+	}
 	@Override
 	public void onPause()
 	{

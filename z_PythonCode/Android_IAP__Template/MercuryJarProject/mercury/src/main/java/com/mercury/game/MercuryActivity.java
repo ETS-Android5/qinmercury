@@ -32,6 +32,7 @@ import java.util.Date;
 import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
+import static com.mercury.game.util.MercuryConst.GetProductionList;
 
 public class MercuryActivity  {
 
@@ -68,6 +69,11 @@ public class MercuryActivity  {
 		InitChannel(appcall);
 		InitAd(appcall);
 
+	}
+	public String GetProductionInfo()
+	{
+		LogLocal("[MercuryActivity][GetProductionInfo] GetProductionList="+GetProductionList());
+		return GetProductionList();
 	}
 	public void ChannelSplash()
 	{
@@ -239,7 +245,16 @@ public class MercuryActivity  {
 	{
 		return LongChannelID;
 	}
-
+	public void SingmaanLogin()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]" + mInAppChannel);
+		mInAppChannel.SingmaanLogin();
+	}
+	public void SingmaanLogout()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
+		mInAppChannel.SingmaanLogout();
+	}
 	public void ActiveBanner()
 	{
 		LogLocal("[MercuryActivity][ActiveBanner]" + mInAppAD);

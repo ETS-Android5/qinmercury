@@ -233,13 +233,12 @@ public class MercuryConst {
 		inbase.appinterface.AdLoadFailedCallBack(strError);
 	}
 
-	public void LoginSuccess(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] LoginSuccess callback->"+strError+" inbase->"+inbase);
+	public void LoginSuccessCallBack(String strError,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] LoginSuccessCallBack callback->strError="+strError+" inbase->"+inbase);
 		inbase.appinterface.LoginSuccessCallBack(strError);
 	}
-
-	public void LoginCancel(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] LoginCancel callback->"+strError+" inbase->"+inbase);
+	public void LoginCancelCallBack(String strError,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] LoginCancelCallBack callback->strError="+strError+" inbase->"+inbase);
 		inbase.appinterface.LoginCancelCallBack(strError);
 	}
 
