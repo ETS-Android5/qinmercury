@@ -17,7 +17,7 @@ from os.path import join, getsize
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 class SDKAppendManager():
-	def __init__(self, channel_base, channel_show, channel_IAP, game_apk_path, channel_name, package_name):
+	def __init__(self, channel_base, channel_show, channel_IAP, game_apk_path, channel_name, package_name, apk_name):
 		self.__channel_base = channel_base
 		self.__channel_show = channel_show
 		self.__channel_IAP = channel_IAP
@@ -35,6 +35,7 @@ class SDKAppendManager():
 		self.__game_apk_path = game_apk_path
 		self.__channel_name = channel_name
 		self.__package_name = package_name
+		self.__apk_name = apk_name
 		self.__zipalign_path = ""
 		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
 		files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
@@ -102,6 +103,7 @@ class SDKAppendManager():
 	def _modify_config(self):
 		self.__modify_yml()
 		self.__modify_xml()
+		self.__APK_name()
 	def _rebuild_game_apk(self):
 		self.__balance_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
@@ -385,6 +387,21 @@ class SDKAppendManager():
 		if os.path.exists(PythonLocation()+"/AndroidManifest.xml")==True:
 			shutil.copy(PythonLocation()+"/AndroidManifest.xml",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml")
 
+	def __APK_name(self):
+		if self.__apk_name=="":
+			return
+		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res/values/strings.xml",encoding="utf8") as file_object:
+			JavaCodeGradle=[]
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				f = i.replace(" ","")
+				if f.find("app_name")!=-1:
+					JavaCodeGradle.append('    <string name="app_name">'+self.__apk_name+'</string>\r')
+				else:
+					JavaCodeGradle.append(i)
+		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res/values/strings.xml",'w',encoding="utf8") as file_object_read:
+			file_object_read.writelines(JavaCodeGradle)
+
 	def __balance_smali(self,_Path):
 		# if(os.path.exists(_Path+"/smali_classes2")==False):
 		# 	os.mkdir(_Path+"/smali_classes2")
@@ -476,49 +493,7 @@ class SDKAppendManager():
 		for i in os.listdir(_path):
 			List.append(i)
 		return List
-def run():
-	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
-	if os.path.isfile(PythonLocation()+"/z_PythonCode/"+file_path+".py"):
-		if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
-			os.remove(PythonLocation()+"/"+file_path+".py")
-		shutil.copy(PythonLocation()+"/z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
 
-	folder_name = os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
-
-	files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
-	game_apk_path = ""
-	for file_name in files:
-		if file_name.find(".apk")!=-1:
-			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
-			break
-
-	config=configparser.ConfigParser()
-	config.read(PythonLocation()+"/android_builder_config.ini")
-	channel = config.sections()
-	print("---Choice your channel---")
-	for index, name in enumerate(channel):
-		print(f"[{index}]	{name}	")
-	print("-------------------------")
-	your_channel=""
-	while True:
-		your_channel=input("Input channel's numbner:")
-		if your_channel.isnumeric():
-			if int(your_channel)<= len(channel)-1:
-				break
-			else:
-				print('You number can not over'+str(len(channel)-1))
-				continue
-		else:
-			print('Your input is not number')
-	ChannelName = channel[int(your_channel)]
-	PackageName  = config.get(ChannelName,"PackageName")
-	BASE		 = config.get(ChannelName,"BASE")
-	SHOW 		 = config.get(ChannelName,"IAP")
-	IAP  		 = config.get(ChannelName,"SHOW")
-	APK_PATH	 = config.get(ChannelName,"PATH")
-	print("[ChannelName]	"+ChannelName)
-	print("[PackageName]	"+PackageName)
-	print("[BASE]	"+BASE)
 
 def run():
 	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
@@ -560,6 +535,7 @@ def run():
 	SHOW 		 = config.get(ChannelName,"SHOW")
 	IAP  		 = config.get(ChannelName,"IAP")
 	APK_PATH	 = config.get(ChannelName,"PATH")
+	APKName	     = config.get(ChannelName,"APKName")
 	print("[Keystore]	"+game_apk_path)
 	print("[ChannelName]	"+ChannelName)
 	print("[PackageName]	"+PackageName)
@@ -567,9 +543,10 @@ def run():
 	print("[SHOW]	"+SHOW)
 	print("[IAP]	"+IAP)
 	print("[APK_PATH]	"+APK_PATH)
+	print("[APKName]	"+APKName)
 	starttime = datetime.datetime.now()
 
-	sam = SDKAppendManager(channel_base = BASE,channel_show = SHOW, channel_IAP = IAP, game_apk_path = APK_PATH, channel_name = ChannelName, package_name = PackageName)
+	sam = SDKAppendManager(channel_base = BASE,channel_show = SHOW, channel_IAP = IAP, game_apk_path = APK_PATH, channel_name = ChannelName, package_name = PackageName, apk_name = APKName)
 	sam._merge_package()
 
 	endtime = datetime.datetime.now()
