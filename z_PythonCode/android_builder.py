@@ -99,11 +99,14 @@ class SDKAppendManager():
 		self.__merge_sdk_resource_res()
 		#merge xml
 		self.__merge_sdk_resource_xml()
+		#merge ReplaceResouce
+		self.__merge_sdk_replace_resource()
 
 	def _modify_config(self):
 		self.__modify_yml()
 		self.__modify_xml()
 		self.__APK_name()
+
 	def _rebuild_game_apk(self):
 		self.__balance_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
@@ -376,8 +379,10 @@ class SDKAppendManager():
 				f = i.replace(" ","")
 				if f.find("versionCode")!=-1:
 					JavaCodeGradle.append("  versionCode: '"+self.__time_tick+"'\r")
-				if f.find("targetSdkVersion")!=-1:
+				elif f.find("targetSdkVersion")!=-1:
 					JavaCodeGradle.append("  targetSdkVersion: '19'\r")
+				elif f.find("minSdkVersion")!=-1:
+					JavaCodeGradle.append("  minSdkVersion: '19'\r")
 				else:
 					JavaCodeGradle.append(i)
 		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/apktool.yml",'w',encoding="utf8") as file_object_read:
@@ -401,6 +406,10 @@ class SDKAppendManager():
 					JavaCodeGradle.append(i)
 		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res/values/strings.xml",'w',encoding="utf8") as file_object_read:
 			file_object_read.writelines(JavaCodeGradle)
+
+	def __merge_sdk_replace_resource(self):
+		if os.path.isdir(PythonLocation()+"/ReplaceResouce")==True:
+			self.__copy_files_overwrite(PythonLocation()+"/ReplaceResouce",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 
 	def __balance_smali(self,_Path):
 		# if(os.path.exists(_Path+"/smali_classes2")==False):
