@@ -12,6 +12,7 @@ import zipfile
 import xml.dom.minidom
 import configparser
 import datetime
+import subprocess
 from os.path import join, getsize
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
@@ -34,6 +35,7 @@ class SDKAppendManager():
 		self.__game_apk_path = game_apk_path
 		self.__channel_name = channel_name
 		self.__package_name = package_name
+		self.__zipalign_path = ""
 		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
 		files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 		for file_name in files:
@@ -43,14 +45,22 @@ class SDKAppendManager():
 		self.__time_tick = str(int(time.time()))
 		# if os.path.isdir(self.__file_path+self.__cache_position): shutil.rmtree(self.__file_path+self.__cache_position)
 		self.__create_cache()
+		self.__find_zipalign()
 		self.__copyFileCounts = 0
 		self.__conflict_list = []
+
+	def __find_zipalign(self):
+		p = subprocess.Popen('find ~/Library/Android/sdk/build-tools -name "zipalign"',shell=True,stdout=subprocess.PIPE)
+		out,err = p.communicate()
+		for line in out.splitlines():
+			if line!="":
+				self.__zipalign_path = line.decode('UTF-8')
 
 	def _merge_package(self):
 		self._decompile_game_apk()
 		self._decompile_sdk_apk()
-		self._merge_sdk_resource()
 		self._modify_config()
+		self._merge_sdk_resource()
 		self._rebuild_game_apk()
 		self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}"): shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
@@ -91,7 +101,7 @@ class SDKAppendManager():
 
 	def _modify_config(self):
 		self.__modify_yml()
-
+		self.__modify_xml()
 	def _rebuild_game_apk(self):
 		self.__balance_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
@@ -357,7 +367,23 @@ class SDKAppendManager():
 			if os.path.isdir(sourceF):
 				self.__copy_files_overwrite(sourceF, targetF)
 	def __modify_yml(self):
-		pass
+		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/apktool.yml",encoding="utf8") as file_object:
+			JavaCodeGradle=[]
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				f = i.replace(" ","")
+				if f.find("versionCode")!=-1:
+					JavaCodeGradle.append("  versionCode: '"+self.__time_tick+"'\r")
+				if f.find("targetSdkVersion")!=-1:
+					JavaCodeGradle.append("  targetSdkVersion: '19'\r")
+				else:
+					JavaCodeGradle.append(i)
+		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/apktool.yml",'w',encoding="utf8") as file_object_read:
+			file_object_read.writelines(JavaCodeGradle)
+
+	def __modify_xml(self):
+		if os.path.exists(PythonLocation()+"/AndroidManifest.xml")==True:
+			shutil.copy(PythonLocation()+"/AndroidManifest.xml",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml")
 
 	def __balance_smali(self,_Path):
 		# if(os.path.exists(_Path+"/smali_classes2")==False):
@@ -429,6 +455,13 @@ class SDKAppendManager():
 		if os.path.isfile(signed_apk_path):
 			os.remove(signed_apk_path)
 		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + _apk_path + " android.keystore")
+
+		#zipalign
+		if self.__zipalign_path!="":
+			zipalign_apk_path = self.__file_path+"/Y_building/"+file_name+"_"+str(datetime.date.today())+str(time.strftime("_%H_%M_%S"))+"_"+self.__channel_name+"_zipalign"+file_format
+			print("zipalign building.......")
+			os.system(f"{self.__zipalign_path}  -v 4 {signed_apk_path} {zipalign_apk_path}")
+
 		return signed_apk_path
 
 	def __change_package_name(self,_APK_path,_package_name):

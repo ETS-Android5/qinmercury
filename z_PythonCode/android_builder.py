@@ -59,8 +59,8 @@ class SDKAppendManager():
 	def _merge_package(self):
 		self._decompile_game_apk()
 		self._decompile_sdk_apk()
-		self._merge_sdk_resource()
 		self._modify_config()
+		self._merge_sdk_resource()
 		self._rebuild_game_apk()
 		self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}"): shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
@@ -101,7 +101,7 @@ class SDKAppendManager():
 
 	def _modify_config(self):
 		self.__modify_yml()
-
+		self.__modify_xml()
 	def _rebuild_game_apk(self):
 		self.__balance_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
@@ -374,10 +374,16 @@ class SDKAppendManager():
 				f = i.replace(" ","")
 				if f.find("versionCode")!=-1:
 					JavaCodeGradle.append("  versionCode: '"+self.__time_tick+"'\r")
+				if f.find("targetSdkVersion")!=-1:
+					JavaCodeGradle.append("  targetSdkVersion: '19'\r")
 				else:
 					JavaCodeGradle.append(i)
 		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/apktool.yml",'w',encoding="utf8") as file_object_read:
 			file_object_read.writelines(JavaCodeGradle)
+
+	def __modify_xml(self):
+		if os.path.exists(PythonLocation()+"/AndroidManifest.xml")==True:
+			shutil.copy(PythonLocation()+"/AndroidManifest.xml",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml")
 
 	def __balance_smali(self,_Path):
 		# if(os.path.exists(_Path+"/smali_classes2")==False):
@@ -533,7 +539,6 @@ def run():
 	config=configparser.ConfigParser()
 	config.read(PythonLocation()+"/android_builder_config.ini")
 	channel = config.sections()
-	print("Version:1")
 	print("---Choice your channel---")
 	for index, name in enumerate(channel):
 		print(f"[{index}]	{name}	")
