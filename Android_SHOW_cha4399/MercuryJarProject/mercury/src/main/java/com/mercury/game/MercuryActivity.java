@@ -180,7 +180,7 @@ public class MercuryActivity  {
 			LogLocal("[getDeviceId] Set imei as phone = ["+imei+"]");
 		}
 		LogLocal("[getDeviceId] strUserID = ["+strUserID+"]");
-		DeviceId= strUserID;//MD5.getMessageDigest(strUserID.getBytes());
+		DeviceId= MD5.getMessageDigest(strUserID.getBytes());
 		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
 	}
