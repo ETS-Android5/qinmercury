@@ -13,15 +13,17 @@ def main():
 		shutil.copy(PythonLocation()+"/../../z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
 
 	os.chdir(PythonLocation())
-	if os.path.isfile("./app-release.apk"):
-		os.remove("./app-release.apk")
+	if os.path.isfile(PythonLocation()+"/app-release.apk"):
+		os.remove(PythonLocation()+"/app-release.apk")
 	os.system("gradle clean assemblerelease")
 	print("------------")
 	# print(PythonLocation())
-	print("./app/build/outputs/apk/release/app-release.apk")
+	print(PythonLocation()+"/app/build/outputs/apk/release/app-release.apk")
 	os.system("pwd")
-	if os.path.isfile("./app/build/outputs/apk/release/app-release.apk"):
-		os.rename("./app/build/outputs/apk/release/app-release.apk","./app-release.apk")
+	if os.path.isfile(PythonLocation()+"/app-release.apk"):
+		os.remove(PythonLocation()+"/app-release.apk")
+	if os.path.isfile(PythonLocation()+"/app/build/outputs/apk/release/app-release.apk"):
+		os.rename(PythonLocation()+"/app/build/outputs/apk/release/app-release.apk",PythonLocation()+"/app-release.apk")
 
 if __name__ == '__main__':
     main()

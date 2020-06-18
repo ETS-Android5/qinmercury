@@ -461,11 +461,11 @@ def main():
 	else:
 		python_name = "python3"
 	os.system(python_name+" ./MercuryJarProject/BuildJAR.py")
-	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
+	shutil.move(PythonLocation()+"/MercuryJarProject/MercurySDK.jar", PythonLocation()+"/MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
 	if os.path.isfile(PathLib(PythonLocation()+"/app-release.apk")):
 		os.remove(PathLib(PythonLocation()+"/app-release.apk"))
 	os.system(python_name+" ./MercuryAPKProject/BuildAPK.py")
-	os.system("mv ./MercuryAPKProject/app-release.apk ./app-release.apk")
+	shutil.move(PythonLocation()+"/MercuryAPKProject/app-release.apk", PythonLocation()+"/app-release.apk")
 	os.system("adb install -r  ./app-release.apk")
 
 

@@ -35,7 +35,7 @@ class SDKAppendManager():
 		self.__sdk_xml_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")#+"/"+channel+"/MercuryJarProject/AndroidManifest_sdk.xml"
 		self.__sdk_script_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")#+"/"+channel+"/merge_building.py"
 		self.__sdk_apk_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")#+"/"+channel+"/"+self.__sdk_apk_name
-		self.__game_apk_path = game_apk_path
+		self.__game_apk_path = game_apk_path.replace("\\","/")
 		self.__channel_name = channel_name
 		self.__package_name = package_name
 		self.__apk_name = apk_name

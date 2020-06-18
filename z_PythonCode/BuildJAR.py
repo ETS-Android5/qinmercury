@@ -61,6 +61,8 @@ def main():
 	os.chdir(_path+"/cache")
 	if os.path.isfile("./../mercury/build/outputs/aar/mercury-release.aar"):
 		os.system("unzip ./../mercury/build/outputs/aar/mercury-release.aar")
+		if os.path.isfile("./../MercurySDK.jar"):
+			os.remove("./../MercurySDK.jar")
 		os.rename("./classes.jar","./../MercurySDK.jar")
 		__delete_zip_files("./../MercurySDK.jar")
 		if os.path.isfile("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar"):
