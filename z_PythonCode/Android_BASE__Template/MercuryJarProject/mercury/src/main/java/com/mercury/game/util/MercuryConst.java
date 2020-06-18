@@ -185,7 +185,7 @@ public class MercuryConst {
 		Qinpricefloat= 0f;
 		for(int i=0;i<GlobalProductionList.length;i++)
 		{
-			if (GlobalProductionList[i][0]==SavePid)
+			if (GlobalProductionList[i][0].equals(SavePid))
 			{
 				QinPid =	  GlobalProductionList[i][0];
 				Qindesc=	  GlobalProductionList[i][1];
