@@ -139,7 +139,7 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","[step][11]->Redeem");
-				MercurySDK.Redeem();
+				MercurySDK.SingmaanLogin();
 			}
 		});
 		Button btn6 = (Button) findViewById(R.id.Button6);

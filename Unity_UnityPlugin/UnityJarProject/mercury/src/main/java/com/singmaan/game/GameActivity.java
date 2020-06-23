@@ -209,6 +209,72 @@ public class GameActivity extends UnityPlayerActivity{
 			}
 		});
 	}
+
+	public void SingmaanLogin()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ExitGame");
+						MercurySDK.SingmaanLogin();
+					}
+				});
+			}
+		});
+	}
+	public void SingmaanLogout()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"RestoreProduct");
+						MercurySDK.SingmaanLogout();
+					}
+				});
+			}
+		});
+	}
+
+	public void UploadGameData()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ExitGame");
+						MercurySDK.UploadGameData();
+					}
+				});
+			}
+		});
+	}
+	public void DownloadGameData()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"RestoreProduct");
+						MercurySDK.DownloadGameData();
+					}
+				});
+			}
+		});
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

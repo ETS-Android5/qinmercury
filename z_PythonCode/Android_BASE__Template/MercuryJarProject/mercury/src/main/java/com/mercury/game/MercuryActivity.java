@@ -58,6 +58,7 @@ public class MercuryActivity  {
 	private static ImageView img = null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
+		LogLocal("[MercuryActivity][InitSDK]");
 		mContext = ContextFromUsers;
 		activityforappbase=this;
 		ChannelSplash();
@@ -221,6 +222,32 @@ public class MercuryActivity  {
 			}
 			});
 	}
+	public void SingmaanLogin()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin] ");
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.SingmaanLogin();
+			}
+		});
+	}
+	public void SingmaanLogout()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
+		mInAppChannel.SingmaanLogout();
+	}
+	public void UploadGameData()
+	{
+		LogLocal("[MercuryActivity][UploadGameData]" + mInAppChannel);
+		mInAppChannel.UploadGameData();
+	}
+	public void DownloadGameData()
+	{
+		LogLocal("[MercuryActivity][DownloadGameData]" + mInAppChannel);
+		mInAppChannel.DownloadGameData();
+	}
 	public void Redeem()
 	{
 		LogLocal("[MercuryActivity][Redeem] ");
@@ -241,26 +268,8 @@ public class MercuryActivity  {
 	{
 		return LongChannelID;
 	}
-	public void SingmaanLogin()
-	{
-		LogLocal("[MercuryActivity][SingmaanLogin]" + mInAppChannel);
-		mInAppChannel.SingmaanLogin();
-	}
-	public void SingmaanLogout()
-	{
-		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
-		mInAppChannel.SingmaanLogout();
-	}
-	public void SingmaanUploadGameData()
-	{
-		LogLocal("[MercuryActivity][SingmaanLogin]" + mInAppChannel);
-		mInAppChannel.UploadGameData();
-	}
-	public void SingmaanUpDownloadGameData()
-	{
-		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
-		mInAppChannel.DownloadGameData();
-	}
+
+
 	public void ActiveBanner()
 	{
 		LogLocal("[MercuryActivity][ActiveBanner]" + mInAppAD);
