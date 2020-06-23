@@ -251,6 +251,16 @@ public class MercuryActivity  {
 		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
 		mInAppChannel.SingmaanLogout();
 	}
+	public void SingmaanUploadGameData()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]" + mInAppChannel);
+		mInAppChannel.UploadGameData();
+	}
+	public void SingmaanUpDownloadGameData()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
+		mInAppChannel.DownloadGameData();
+	}
 	public void ActiveBanner()
 	{
 		LogLocal("[MercuryActivity][ActiveBanner]" + mInAppAD);

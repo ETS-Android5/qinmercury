@@ -129,6 +129,17 @@ public class InAppChannel extends InAppBase {
 		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
 		LoginCancelCallBack("SingmaanLogout"+DeviceId);
 	}
+
+	public void UploadGameData()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]"+DeviceId);
+		onFunctionCallBack("SingmaanUploadGameData");
+	}
+	public void DownloadGameData()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
+		onFunctionCallBack("SingmaanUpDownloadGameData");
+	}
 	@Override
 	public void onPause()
 	{

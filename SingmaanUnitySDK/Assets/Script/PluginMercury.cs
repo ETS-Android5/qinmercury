@@ -90,7 +90,7 @@ public class PluginMercury : MonoBehaviour
 #if UNITY_EDITOR
         print("[UNITY_EDITOR]->Exchange()");
 #elif UNITY_ANDROID
-        print("[Android]->Exchange()");_plugin.Call("Redeem");
+        print("[Android]->Exchange()");_plugin.Call("GetProductionInfo");
 #endif
     }
 
@@ -112,6 +112,46 @@ public class PluginMercury : MonoBehaviour
         print("[Android]->ExitGame()");_plugin.Call("ExitGame");
 #endif
     }
+
+
+    public void UploadGameData()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->UploadGameData()");
+#elif UNITY_ANDROID
+        print("[Android]->UploadGameData()");_plugin.Call("UploadGameData");
+#endif
+    }
+
+    public void DownloadGameData()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->DownloadGameData()");
+#elif UNITY_ANDROID
+        print("[Android]->DownloadGameData()");_plugin.Call("DownloadGameData");
+#endif
+    }
+
+
+    public void SingmaanLogin()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->SingmaanLogin()");
+#elif UNITY_ANDROID
+        print("[Android]->SingmaanLogin()");_plugin.Call("SingmaanLogin");
+#endif
+    }
+
+    public void SingmaanLogout()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->SingmaanLogout()");
+#elif UNITY_ANDROID
+        print("[Android]->SingmaanLogout()");_plugin.Call("SingmaanLogout");
+#endif
+    }
+
+
     public void ActiveRewardVideo()
     {
 #if UNITY_EDITOR
