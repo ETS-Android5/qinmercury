@@ -60,9 +60,11 @@ public final class Function {
             String local_dialog_message = "检测到新版本";
             String local_dialog_title = "更新游戏体验有更多游戏内容";
             String local_url = "http://www.singmaan.com";
+
             String remote_dialog_message = "";
             String remote_dialog_title = "";
             String remote_url = "";
+
             String display_dialog_message = "";
             String display_dialog_titile = "";
             String display_url = "";
@@ -85,7 +87,6 @@ public final class Function {
                 display_dialog_titile = local_dialog_title;
                 display_url = local_url;
             }
-            String download_link ="";
 
             //get apk version
             try {
@@ -125,11 +126,6 @@ public final class Function {
                 });
                 builder.setCancelable(false);
                 builder.create().show();
-
-            }
-            //have no new version
-            else
-            {
 
             }
         }
