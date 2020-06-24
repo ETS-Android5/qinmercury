@@ -54,11 +54,39 @@ public final class Function {
         }
         public static void verifyGame()
         {
-
+            //default value
             int local_version = 0;
+            int remote_version = 0;
+            String local_dialog_message = "检测到新版本";
+            String local_dialog_title = "更新游戏体验有更多游戏内容";
+            String local_url = "http://www.singmaan.com";
+            String remote_dialog_message = "";
+            String remote_dialog_title = "";
+            String remote_url = "";
+            String display_dialog_message = "";
+            String display_dialog_titile = "";
+            String display_url = "";
+
             //get remote version
-            int remote_version = 14;
+            remote_version = 9999;
+            remote_url = "https://m.3839.com/a/121237.htm";
+            remote_dialog_message ="新版本内容已更新，请前往官方授权渠道好游快爆App下载更新！";
+            remote_dialog_title = "选择";
+            if (remote_dialog_message.equals("")==false)
+            {
+                display_dialog_message = remote_dialog_message;
+                display_dialog_titile = remote_dialog_title;
+                display_url = remote_url;
+
+            }
+            else
+            {
+                display_dialog_message = local_dialog_message;
+                display_dialog_titile = local_dialog_title;
+                display_url = local_url;
+            }
             String download_link ="";
+
             //get apk version
             try {
                 PackageManager manager = MercuryActivity.mContext.getPackageManager();
@@ -72,34 +100,32 @@ public final class Function {
             if (remote_version>=local_version)
             //have new version
             {
-                try {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MercuryActivity.mContext);
-                    builder.setMessage("检测到新版本");
-                    builder.setTitle("说明");
-                    builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent();
-                            intent.setAction("android.intent.action.VIEW");
-                            Uri content_url = Uri.parse("https://m.3839.com/a/121237.htm");//此处填链接
-                            intent.setData(content_url);
-                            MercuryActivity.mContext.startActivity(intent);
-                            ((Activity) MercuryActivity.mContext).finish();
-                            android.os.Process.killProcess(android.os.Process.myPid());
-                        }
-                    });
-                    builder.setNeutralButton("退出游戏", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ((Activity) MercuryActivity.mContext).finish();
-                            android.os.Process.killProcess(android.os.Process.myPid());
-                        }
-                    });
-                    builder.setCancelable(false);
-                    builder.create().show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(MercuryActivity.mContext);
+                builder.setMessage(display_dialog_titile);
+                builder.setTitle(display_dialog_message);
+                final String finalRemote_url = display_url;
+                builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.action.VIEW");
+                        Uri content_url = Uri.parse(finalRemote_url);//此处填链接
+                        intent.setData(content_url);
+                        MercuryActivity.mContext.startActivity(intent);
+                        ((Activity) MercuryActivity.mContext).finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                });
+                builder.setNeutralButton("下次更新,前往游戏", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                            ((Activity) MercuryActivity.mContext).finish();
+//                            android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                });
+                builder.setCancelable(false);
+                builder.create().show();
+
             }
             //have no new version
             else
