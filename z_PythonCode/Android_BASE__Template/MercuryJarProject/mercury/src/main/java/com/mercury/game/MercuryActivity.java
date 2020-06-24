@@ -250,12 +250,12 @@ public class MercuryActivity  {
 	}
 	public void Redeem()
 	{
-		LogLocal("[MercuryActivity][Redeem] ");
+		LogLocal("[MercuryActivity][Redeem]");
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run()
 			{
-
+				mInAppChannel.Redeem();
 			}
 		});
 	}

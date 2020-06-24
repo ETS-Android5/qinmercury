@@ -112,7 +112,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","[step][8]->ActiveInterstitial");
-				MercurySDK.ActiveInterstitial();
+				MercurySDK.Redeem();
 				
 			}
 		});

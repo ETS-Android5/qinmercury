@@ -25,6 +25,7 @@ import java.util.UUID;
 
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 //end
 
 
@@ -139,6 +140,14 @@ public class InAppChannel extends InAppBase {
 	{
 		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
 		onFunctionCallBack("SingmaanUpDownloadGameData");
+	}
+	public void Redeem()
+	{
+		int max=GlobalProductionList.length;
+		int min=0;
+		Random random = new Random();
+		int s = random.nextInt(max)%(max-min+1) + min;
+		onPurchaseSuccess(GlobalProductionList[s][0]);
 	}
 	@Override
 	public void onPause()
