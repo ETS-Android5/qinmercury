@@ -31,6 +31,7 @@ import java.util.Date;
 
 import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
+import static com.mercury.game.util.Function.verifyGame;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.MercuryConst.GetProductionList;
 
@@ -66,6 +67,7 @@ public class MercuryActivity  {
 		InitChannel(appcall);
 		InitAd(appcall);
 		GetProductionInfo();
+		verifyGame();
 
 	}
 	public String GetProductionInfo()
