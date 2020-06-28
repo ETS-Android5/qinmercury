@@ -15,6 +15,7 @@
     SKProduct *proUpgradeProduct;
     SKProductsRequest *productsRequest;
     NSString *productIndentify;
+    NSString *lossIndentify;
 }
 
 -(void)attachObserver;

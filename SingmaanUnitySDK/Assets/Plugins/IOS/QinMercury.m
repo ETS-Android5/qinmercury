@@ -46,8 +46,8 @@ extern "C"
     void BuyProduct(char *p){
         if(nil == iapManager){//初始化
             iapManager = [[IAPManager alloc] init];
-            [iapManager attachObserver];
         }
+        [iapManager attachObserver];
         NSString *pid = [NSString stringWithUTF8String:p];
         NSLog(@"商品编码:%@",pid);
         //pid = [NSString stringWithFormat:@"com.singmaan.sdk.6"];

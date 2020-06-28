@@ -66,11 +66,34 @@
 //          }
 //      }
 //    }
+    //[[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [self checkedLossOrders];
+
     productIndentify = productIdentifier;
     SKPayment *payment = [SKPayment paymentWithProductIdentifier:productIdentifier];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
+-(void)checkedLossOrders{
 
+    NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
+    if (transactions.count > 0) {
+//        //检测是否有未完成的交易
+//        for (SKPaymentTransaction *transaction in transactions) {
+//            if (transaction.transactionState == SKPaymentTransactionStatePurchased) {
+//                [self verifyPurchaseWithPaymentTransaction];// 发送到苹果服务器验证凭证
+//                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+//            }
+//
+//        }
+        SKPaymentTransaction* transaction = [transactions firstObject];
+        if (transaction.transactionState == SKPaymentTransactionStatePurchased) {
+            lossIndentify = transaction.payment.productIdentifier;
+            [self verifyPurchaseWithPaymentTransaction];// 发送到苹果服务器验证凭证
+            [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+            return;
+        }
+    }
+}
 -(NSString *)productInfo:(SKProduct *)product{
     NSArray *info = [NSArray arrayWithObjects:product.localizedTitle,product.localizedDescription,product.price,product.productIdentifier, nil];
     
@@ -94,21 +117,24 @@
     NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
     
     
-    //测试的时候填写沙盒路径，上APPStore的时候填写正式环境路径
-    NSURL *url=[NSURL URLWithString:SANDBOX];
-    NSMutableURLRequest *requestM=[NSMutableURLRequest requestWithURL:url];
-    requestM.HTTPBody=bodyData;
-    requestM.HTTPMethod=@"POST";
-    //创建连接并发送同步请求
-    NSError *error = nil;
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:requestM returningResponse:nil error:&error];
-    if (error) {
-        NSLog(@"验证购买过程中发生错误，错误信息：%@",error.localizedDescription);
-        return;
-    }
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+//    //测试的时候填写沙盒路径，上APPStore的时候填写正式环境路径
+//    NSURL *url=[NSURL URLWithString:AppStore];
+//    NSMutableURLRequest *requestM=[NSMutableURLRequest requestWithURL:url];
+//    requestM.HTTPBody=bodyData;
+//    requestM.HTTPMethod=@"POST";
+//    //创建连接并发送同步请求
+//    NSError *error = nil;
+//    NSData *responseData = [NSURLConnection sendSynchronousRequest:requestM returningResponse:nil error:&error];
+//    if (error) {
+//        NSLog(@"验证购买过程中发生错误，错误信息：%@",error.localizedDescription);
+//        return;
+//    }
+//    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+    NSDictionary* dic = [self verifyPurchaseInfo:[NSURL URLWithString:AppStore] body:bodyData];
     NSLog(@"%@",dic);
-    
+    if([dic[@"status"] intValue] == 21007){
+        dic = [self verifyPurchaseInfo:[NSURL URLWithString:SANDBOX] body:bodyData];
+    }
     if([dic[@"status"] intValue] == 0){
         NSLog(@"购买成功！");
         NSDictionary *dicReceipt = dic[@"receipt"];
@@ -120,10 +146,11 @@
             // NSLog(@"+++++++++++%@",dicInApp);
             NSString *productIdentifier = tmp[@"product_id"];//读取产品标识
             NSLog(@"+++++++++++++++++++++++++++++++++++++%@",productIdentifier);
-            NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx%@",productIndentify);
+            //NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx%@",productIndentify);
             //如果是消耗品则记录购买数量，非消耗品则记录是否购买过
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            if ([productIdentifier isEqualToString:productIndentify]) 
+            if ([productIdentifier isEqualToString:productIndentify] ||
+                [productIdentifier isEqualToString:lossIndentify])
             {
                 NSInteger purchasedCount = [defaults integerForKey:productIdentifier];//已购买数量
                 [[NSUserDefaults standardUserDefaults] setInteger:(purchasedCount+1) forKey:productIdentifier];
@@ -137,6 +164,21 @@
         NSLog(@"购买失败，未通过验证！");
     }
 }
+- (NSDictionary*)verifyPurchaseInfo:(NSURL *)url body:(NSData* )bodyData{
+    NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:url];
+    requestM.HTTPBody = bodyData;
+    requestM.HTTPMethod=@"POST";
+    //创建连接并发送同步请求
+    NSError *error = nil;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:requestM returningResponse:nil error:&error];
+    if (error) {
+        NSLog(@"验证购买过程中发生错误，错误信息：%@",error.localizedDescription);
+        return nil;
+    }
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:nil];
+    return dic;
+}
+
 //监听购买结果
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transaction{
     for(SKPaymentTransaction *tran in transaction){
