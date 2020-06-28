@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.net.Uri;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -148,6 +149,33 @@ public class InAppChannel extends InAppBase {
 		Random random = new Random();
 		int s = random.nextInt(max)%(max-min+1) + min;
 		onPurchaseSuccess(GlobalProductionList[s][0]);
+	}
+	public void RateGame()
+	{
+		LogLocal("[InAppChannel][RateGame]");
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri content_url = Uri.parse("https://m.3839.com/a/121237.htm");//此处填链接
+		intent.setData(content_url);
+		MercuryActivity.mContext.startActivity(intent);
+	}
+	public void ShareGame()
+	{
+		LogLocal("[InAppChannel][ShareGame]");
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri content_url = Uri.parse("https://bbs.3839.com/forum-15108.htm");//此处填链接
+		intent.setData(content_url);
+		MercuryActivity.mContext.startActivity(intent);
+	}
+	public void OpenGameCommunity()
+	{
+		LogLocal("[InAppChannel][OpenGameCommunity]");
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri content_url = Uri.parse("https://m.3839.com/a/121237.htm");//此处填链接
+		intent.setData(content_url);
+		MercuryActivity.mContext.startActivity(intent);
 	}
 	@Override
 	public void onPause()

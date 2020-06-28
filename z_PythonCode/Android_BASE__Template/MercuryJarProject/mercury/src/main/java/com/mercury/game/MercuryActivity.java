@@ -252,12 +252,45 @@ public class MercuryActivity  {
 	}
 	public void Redeem()
 	{
-		LogLocal("[MercuryActivity][Redeem]");
+		LogLocal("[MercuryActivity][Redeem] mInAppChannel="+mInAppChannel);
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run()
 			{
 				mInAppChannel.Redeem();
+			}
+		});
+	}
+	public void RateGame()
+	{
+		LogLocal("[MercuryActivity][RateGame]mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.RateGame();
+			}
+		});
+	}
+	public void ShareGame()
+	{
+		LogLocal("[MercuryActivity][ShareGame] mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.ShareGame();
+			}
+		});
+	}
+	public void OpenGameCommunity()
+	{
+		LogLocal("[MercuryActivity][OpenGameCommunity] mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.OpenGameCommunity();
 			}
 		});
 	}

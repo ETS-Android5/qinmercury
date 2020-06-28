@@ -101,8 +101,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][7]->SingmaanLogin");
-				MercurySDK.SingmaanLogin();
+				Log.w("MercuryDemo","[step][7]->ShareGame");
+				MercurySDK.ShareGame();
 			}
 		});
 		
@@ -111,8 +111,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][8]->ActiveInterstitial");
-				MercurySDK.Redeem();
+				Log.w("MercuryDemo","[step][8]->ShareGame");
+				MercurySDK.RateGame();
 				
 			}
 		});
@@ -121,8 +121,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][9]->SingmaanLogout");
-				MercurySDK.SingmaanLogout();
+				Log.w("MercuryDemo","[step][9]->OpenGameCommunity");
+				MercurySDK.OpenGameCommunity();
 			}
 		});
 		Button btn4 = (Button) findViewById(R.id.button4);
