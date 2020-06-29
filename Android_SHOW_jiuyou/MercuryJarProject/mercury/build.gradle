@@ -23,15 +23,20 @@ android {
             jniLibs.srcDirs = ['src/main/libs']
         }
     }
+    repositories {
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
 }
 
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
-    implementation files('src/main/libs/android-support-v4.jar')
-    implementation files('src/main/libs/org.apache.http.legacy.jar')
+    implementation files('src/main/libs/toutiao_openadsdk_threadpool.jar')
     implementation files('src/main/libs/adp-sdk-shell-2.0.0.16.jar')
     implementation files('src/main/libs/android-query-full.0.26.7.jar')
+    implementation files('src/main/libs/android-support-v4.jar')
     implementation files('src/main/libs/GDTSDK.union.4.150.1020.jar')
     implementation files('src/main/libs/mediation_gdt-2.6.20.jar')
     implementation files('src/main/libs/mediation_gdt-release.jar')
@@ -59,11 +64,13 @@ dependencies {
     implementation files('src/main/libs/mintegral_videocommon.jar')
     implementation files('src/main/libs/mintegral_videofeeds.jar')
     implementation files('src/main/libs/mintegral_videojs.jar')
-    implementation files('src/main/libs/ngad-sdk-release-2.6.43.jar')
+    implementation files('src/main/libs/org.apache.http.legacy.jar')
     implementation files('src/main/libs/r-classes.jar')
     implementation files('src/main/libs/toutiao_openadsdk_2.5.7.2.jar')
     implementation files('src/main/libs/toutiao_openadsdk_2.5.7.2_adhost.jar')
-    implementation files('src/main/libs/UniplayAdSDK_6.0.2.jar')
+    implementation files('src/main/libs/classes.jar')
+
+
 }
 
 task clearJar(type: Delete){

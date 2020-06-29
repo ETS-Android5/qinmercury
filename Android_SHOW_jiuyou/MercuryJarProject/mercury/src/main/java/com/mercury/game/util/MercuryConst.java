@@ -62,7 +62,7 @@ public class MercuryConst {
 	public static int Cocos2D=1002;
 	public static String exchangeID;
 	public static String Restoreappid = "letscreatepottery";
-    
+	public static JSONObject ProductionJsonList;
     
 	
     public static String[] convertStrToArray(String str,String symbol){   
@@ -98,43 +98,104 @@ public class MercuryConst {
     		SDKPayLock=strArray[3].toString();
     	}   	
     }
+	public static String GlobalProductionList[][];
+	public static String GetProductionList()
+	{
+		String ProductionList[][] = {
 
+			{"sku_ww1_remove_ads","去除广告","1.0"},
+			{"sku_ww1_gold_200","200个黄金","1.0"},
+			{"sku_ww1_gold_500","500个黄金","1.0"},
+			{"sku_ww1_gold_1200","1200个黄金","1.0"},
+			{"sku_ww1_gold_2800","2800个黄金","1.0"},
+			{"sku_ww1_premium_mode","无限高级任务","1.0"},
+			{"sku_ww1_bank_withdraw","从超级金库取款","1.0"},
+			{"sku_ww1_plane_all_pack","各国战机","1.0"},
 
+			{"sku_ww1_plane_en_pack","所有协约国西线战机","1.0"},
+			{"sku_ww1_plane_en_01","解锁S.E.5","1.0"},
+			{"sku_ww1_plane_en_02","解锁索普威斯三翼战斗机","1.0"},
+			{"sku_ww1_plane_en_03","解锁Airco DH.4","1.0"},
+			{"sku_ww1_plane_en_04","解锁汉莱帕杰400战机","1.0"},
 
-    public static void PayInfo(String SavePid)
-    {
-    	  String  ydpid="";
-    	  String  ltpid="";
-    	  String  dxpid="";
-    	  String  desc="";
-    	  float  pricefloat=1f;
-		  switch (SavePid)
-	      {
-	          case "production1":		desc = "解锁全部关卡"; pricefloat = 20.0f;  break;
-	          case "production2":		desc = "2200点券";    pricefloat = 35.0f;  break;
-	          case "production3":		desc = "5000点券";    pricefloat = 65.0f;  break;
-	          case "production4":		desc = "11000点券";   pricefloat = 130.0f; break;
-	          case "production5":		desc = "30000点券";   pricefloat = 330.0f; break;
-	          case "production6":		desc = "70000点券";   pricefloat = 660.0f; break;
-	          case "production7":		desc = "命运女侠";     pricefloat = 20.0f;  break;
-	          case "production8":		desc = "风刃";        pricefloat = 20.0f;  break;
-	          case "production9":		desc = "虚空猎手";     pricefloat = 20.0f;  break;
-	          case "production10":		desc = "超能博士";     pricefloat = 30.0f;  break;
-	          case "production11":		desc = "达尔文";       pricefloat = 30.0f;  break;
-	          case "production12":		desc = "铁甲马克";     pricefloat = 45.0f; break;
-	          case "production13":		desc = "解锁游戏";     pricefloat = 30.0f; break;
-	          case "production14":		desc = "桂英";         pricefloat =  18.0f; break;
-	          case "production15":		desc = "自由猎人";     pricefloat = 30.0f; break;
-	          case "production16":		desc = "自由猎人";     pricefloat = 30.0f; break;
-	          default:
-	              break;	
-	      }
-		  QinPid = SavePid;
-		  Qindesc= desc;
-		  Qinpricefloat=pricefloat;
-		  MercuryActivity.LogLocal("[MercuryConst][PayInfo] QinPid="+QinPid+" Qindesc="+Qindesc+" Qinpricefloat="+Qinpricefloat);
-    }
-    
+			{"sku_ww1_plane_ger_pack","购买所有同盟国高级战机","1.0"},
+			{"sku_ww1_plane_ger_01","解锁容克斯D.I型战机","1.0"},
+			{"sku_ww1_plane_ger_02","解锁福克尔Dr.I单座三翼战斗机","1.0"},
+			{"sku_ww1_plane_ger_03","解锁福克尔DVIII型战机","1.0"},
+			{"sku_ww1_plane_ger_04","解锁齐柏林斯塔肯R4型战机","1.0"},
+
+			{"sku_ww1_plane_rus_pack","购买所有三国协约同盟东线高级战机","1.0"},
+			{"sku_ww1_plane_rus_01","解锁索普威斯 狙击式战机","1.0"},
+			{"sku_ww1_plane_rus_02","解锁DH.5","1.0"},
+			{"sku_ww1_plane_rus_03","解锁Airco DH.9","1.0"},
+			{"sku_ww1_plane_rus_04","解锁西科尔斯基·伊利亚·穆罗梅茨","1.0"},
+//			{"uk.fiveaces.nsfcchina.removeads","去除广告","5.0"},
+//			{"uk.fiveaces.nsfcchina.unlimitededitor","无限制编辑","5.0"},
+//			{"uk.fiveaces.nsfcchina.bigstaffboost","幕后提升包","3.0"},
+//			{"uk.fiveaces.nsfcchina.betabasicpack","基础包","2.0"},
+//			{"uk.fiveaces.nsfcchina.bux_1","星币包1","10.0"},
+//			{"uk.fiveaces.nsfcchina.bux_2","星币包2","15.0"},
+//			{"uk.fiveaces.nsfcchina.bux_3","星币包3","20.0"},
+//			{"uk.fiveaces.nsfcchina.bux_5","星币包4","50.0"},
+//			{"uk.fiveaces.nsfcchina.betamanagementpack","俱乐部包","2.0"},
+//			{"uk.fiveaces.nsfcchina.fitnesscoaches1new","优秀的健身教练","4.0"},
+//			{"uk.fiveaces.nsfcchina.fitnesscoaches2new","卓越的健身教练","2.0"},
+//			{"uk.fiveaces.nsfcchina.physios1new","优秀的队医","4.0"},
+//			{"uk.fiveaces.nsfcchina.physios2new","卓越的队医","2.0"},
+//			{"uk.fiveaces.nsfcchina.skillcoaches1new","优秀的技能教练","4.0"},
+//			{"uk.fiveaces.nsfcchina.skillcoaches2new","卓越的技能教练","2.0"},
+//			{"uk.fiveaces.nsfcchina.concernspack","担忧包","5.0"},
+//			{"uk.fiveaces.nsfcchina.contractpack","合约包","5.0"},
+//			{"uk.fiveaces.nsfcchina.defensivepack","后卫包","6.0"},
+//			{"uk.fiveaces.nsfcchina.chanceplayer","发掘包","1.0"},
+//			{"uk.fiveaces.nsfcchina.dreamteam","梦之队","20.0"},
+//			{"uk.fiveaces.nsfcchina.goaliepack","门将包","5.0"},
+//			{"uk.fiveaces.nsfcchina.betagoldplayerpack","黄金球员包","2.0"},
+//			{"uk.fiveaces.nsfcchina.betakeeperpack","技能包","1.0"},
+//			{"uk.fiveaces.nsfcchina.marketingmanager","营销经理","4.0"},
+//			{"uk.fiveaces.nsfcchina.midfieldpack","中锋包","5.0"},
+//			{"uk.fiveaces.nsfcchina.betarecoverypack","恢复包","1.0"},
+//			{"uk.fiveaces.nsfcchina.retries","重试包","2.0"},
+//			{"uk.fiveaces.nsfcchina.betaholidaypack","特别球员包","6.0"},
+//			{"uk.fiveaces.nsfcchina.strikerpack","前锋包","6.0"},
+//			{"uk.fiveaces.nsfcchina.superkeeper","超级门将","11.0"},
+//			{"uk.fiveaces.nsfcchina.superstriker","超级前锋","9.0"},
+//			{"uk.fiveaces.nsfcchina.supremeteam","顶级球队","45.0"},
+//			{"uk.fiveaces.nsfcchina.spinepack","团队精神包","8.0"},
+//			{"uk.fiveaces.nsfcchina.betacoachingpack","训练包","4.0"},
+//			{"uk.fiveaces.nsfcchina.versatilitypack","通才包","5.0"}
+		};
+		GlobalProductionList = ProductionList;
+		ProductionJsonList = new JSONObject();
+		for(int i=0;i<ProductionList.length;i++)
+		{
+			try
+			{
+				ProductionJsonList.put(ProductionList[i][0], ProductionList[i][2]+"¥");
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		return ProductionJsonList.toString();
+	}
+	public static void PayInfo(String SavePid)
+	{
+		QinPid = "";
+		Qindesc= "";
+		Qinpricefloat= 0f;
+		for(int i=0;i<GlobalProductionList.length;i++)
+		{
+			if (GlobalProductionList[i][0].equals(SavePid))
+			{
+				QinPid =	  GlobalProductionList[i][0];
+				Qindesc=	  GlobalProductionList[i][1];
+				Qinpricefloat = Float.parseFloat(GlobalProductionList[i][2]);
+				MercuryActivity.LogLocal("[MercuryConst][PayInfo] QinPid="+QinPid+" Qindesc="+Qindesc+" Qinpricefloat="+Qinpricefloat);
+				break;
+			}
+		}
+	}
+
 	public void FunctionL(String number)
 	{
 		MercuryActivity.isLogOpen=number;
@@ -145,7 +206,7 @@ public class MercuryConst {
 		((Activity) MercuryActivity.mContext).finish();
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
-	
+
 	public void PurchaseSuccess(String message,InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
 		if (OpenUmeng ==true) {
@@ -158,30 +219,40 @@ public class MercuryConst {
 		inbase.appinterface.PurchaseSuccessCallBack(message);
 	}
 	public void PurchaseFailed(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] onPurchaseFailed callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.PurchaseFailedCallBack(strError);
 	}
 
 	public void AdLoadSuccess(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginSuccess callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] AdLoadSuccess callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.AdLoadSuccessCallBack(strError);
 	}
 
 	public void AdLoadFailed(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginFailed callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] AdLoadFailed callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.AdLoadFailedCallBack(strError);
 	}
+
+	public void LoginSuccessCallBack(String strError,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] LoginSuccessCallBack callback->strError="+strError+" inbase->"+inbase);
+		inbase.appinterface.LoginSuccessCallBack(strError);
+	}
+	public void LoginCancelCallBack(String strError,InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] LoginCancelCallBack callback->strError="+strError+" inbase->"+inbase);
+		inbase.appinterface.LoginCancelCallBack(strError);
+	}
+
 	public void AdShowSuccessCallBack(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginSuccess callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] AdShowSuccessCallBack callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.AdShowSuccessCallBack(strError);
 	}
 
 	public void AdShowFailedCallBack(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onLoginFailed callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] AdShowFailedCallBack callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.AdShowFailedCallBack(strError);
 	}
 	public void FunctionCallBack(String strError,InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] onFunctionCallBack callback->strError="+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] FunctionCallBack callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.onFunctionCallBack(strError);	
 	}
 	public void QinUnityMessage(String ObjectName,String MethodName,String QinMessage)

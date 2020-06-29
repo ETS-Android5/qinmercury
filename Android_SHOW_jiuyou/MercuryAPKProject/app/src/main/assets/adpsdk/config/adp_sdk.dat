@@ -1,4 +1,4 @@
-version=2.6.43
+version=2.7.30
 product=adpsdk
 sdkChannel=9game
 dependent_sdks=nga,gdt,mintegral,uniplay,toutiao

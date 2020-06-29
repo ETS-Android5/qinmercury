@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.qinbatista.demo.R;public class MainActivity extends Activity  {
+import com.singmaan.giveitupstack.uc.R;public class MainActivity extends Activity  {
 	public static Context context;
 	public MercuryActivity MercurySDK;
 	public static APPBaseInterface appcall=null;
@@ -80,7 +80,7 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][5]->purchaseProduct");
-				MercurySDK.Purchase("production1");
+				MercurySDK.Purchase("uk.fiveaces.nsfcchina.bux_1");
 
 			}
 		});
@@ -101,8 +101,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][7]->ActiveBanner");
-				MercurySDK.ActiveBanner();
+				Log.w("MercuryDemo","[step][7]->ShareGame");
+				MercurySDK.ShareGame();
 			}
 		});
 		
@@ -111,8 +111,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][8]->ActiveInterstitial");
-				MercurySDK.ActiveInterstitial();
+				Log.w("MercuryDemo","[step][8]->ShareGame");
+				MercurySDK.RateGame();
 				
 			}
 		});
@@ -121,8 +121,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][9]->ActiveNative");
-				MercurySDK.ActiveNative();
+				Log.w("MercuryDemo","[step][9]->OpenGameCommunity");
+				MercurySDK.OpenGameCommunity();
 			}
 		});
 		Button btn4 = (Button) findViewById(R.id.button4);
@@ -139,15 +139,15 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","[step][11]->Redeem");
-				MercurySDK.Redeem();
+				MercurySDK.ActiveBanner();
 			}
 		});
 		Button btn6 = (Button) findViewById(R.id.Button6);
 		btn6.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercuryDemo","[step][12]->Exchange");
-				MercurySDK.RestoreProduct();
+				Log.w("MercuryDemo","[step][12]->GetProductionInfo");
+				MercurySDK.GetProductionInfo();
 			}
 		});
 	}

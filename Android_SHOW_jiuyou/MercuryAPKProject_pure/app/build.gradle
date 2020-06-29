@@ -6,18 +6,23 @@ android {
             jniLibs.srcDirs = ['src/main/libs']
         }
     }
+    repositories {
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
     signingConfigs {
         release {
             keyAlias 'android.keystore'
             keyPassword 'singmaan'
-            storeFile file('./../singmaan.keystore')
+            storeFile file('./../grannysmith.keystore')
             storePassword 'singmaan'
         }
     }
     compileSdkVersion 26
     defaultConfig {
         minSdkVersion 19
-	versionCode 5        versionName "1.0"
+	versionCode 54        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,15 +35,12 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    repositories {
-        flatDir {
-            dirs 'src/main/libs'
-        }
-    }
 
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/MercurySDK.jar')
+    implementation files('src/main/libs/MercurySDK.jar')
     implementation files('src/main/libs/MercurySDK.jar')
 }

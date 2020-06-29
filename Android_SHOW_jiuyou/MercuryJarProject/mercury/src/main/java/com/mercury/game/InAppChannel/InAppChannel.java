@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.net.Uri;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -22,6 +23,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
+
+import static com.mercury.game.MercuryActivity.DeviceId;
+import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 //end
 
 
@@ -116,7 +121,62 @@ public class InAppChannel extends InAppBase {
 			e.printStackTrace();
 		}
 	}
+	public void SingmaanLogin()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]"+DeviceId);
+		LoginSuccessCallBack("SingmaanLogin"+DeviceId);
+	}
+	public void SingmaanLogout()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
+		LoginCancelCallBack("SingmaanLogout"+DeviceId);
+	}
 
+	public void UploadGameData()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]"+DeviceId);
+		onFunctionCallBack("SingmaanUploadGameData");
+	}
+	public void DownloadGameData()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
+		onFunctionCallBack("SingmaanUpDownloadGameData");
+	}
+	public void Redeem()
+	{
+		int max=GlobalProductionList.length;
+		int min=0;
+		Random random = new Random();
+		int s = random.nextInt(max)%(max-min+1) + min;
+		onPurchaseSuccess(GlobalProductionList[s][0]);
+	}
+	public void RateGame()
+	{
+		LogLocal("[InAppChannel][RateGame]");
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri content_url = Uri.parse("https://m.3839.com/a/121237.htm");//此处填链接
+		intent.setData(content_url);
+		MercuryActivity.mContext.startActivity(intent);
+	}
+	public void ShareGame()
+	{
+		LogLocal("[InAppChannel][ShareGame]");
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri content_url = Uri.parse("https://bbs.3839.com/forum-15108.htm");//此处填链接
+		intent.setData(content_url);
+		MercuryActivity.mContext.startActivity(intent);
+	}
+	public void OpenGameCommunity()
+	{
+		LogLocal("[InAppChannel][OpenGameCommunity]");
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri content_url = Uri.parse("https://m.3839.com/a/121237.htm");//此处填链接
+		intent.setData(content_url);
+		MercuryActivity.mContext.startActivity(intent);
+	}
 	@Override
 	public void onPause()
 	{

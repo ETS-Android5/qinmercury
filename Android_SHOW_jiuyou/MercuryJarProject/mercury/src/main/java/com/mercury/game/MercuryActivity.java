@@ -31,15 +31,15 @@ import java.util.Date;
 
 import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
+import static com.mercury.game.util.Function.verifyGame;
 import static com.mercury.game.util.Function.writeFileData;
+import static com.mercury.game.util.MercuryConst.GetProductionList;
 
 public class MercuryActivity  {
 
 	public static Context mContext = null;
 	private InAppChannel mInAppChannel;
 	public InAppAD mInAppAD;
-
-
 	public static int mSimOperatorId;
 	private int mChannelId;
 	private int mExtSDKId = -1;
@@ -59,15 +59,21 @@ public class MercuryActivity  {
 	private static ImageView img = null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
-		getDeviceId(mContext);
+		LogLocal("[MercuryActivity][InitSDK]");
 		mContext = ContextFromUsers;
-		ChannelSplash();
-		mInAppChannel = new InAppChannel() ;
-		mInAppAD= new InAppAD() ;
 		activityforappbase=this;
+		ChannelSplash();
+		getDeviceId(mContext);
 		InitChannel(appcall);
 		InitAd(appcall);
+		GetProductionInfo();
+		verifyGame();
 
+	}
+	public String GetProductionInfo()
+	{
+		LogLocal("[MercuryActivity][GetProductionInfo] GetProductionList="+GetProductionList());
+		return GetProductionList();
 	}
 	public void ChannelSplash()
 	{
@@ -177,23 +183,22 @@ public class MercuryActivity  {
 			LogLocal("[getDeviceId] Set imei as phone = ["+imei+"]");
 		}
 		LogLocal("[getDeviceId] strUserID = ["+strUserID+"]");
-		DeviceId= MD5.getMessageDigest(strUserID.getBytes());
+		DeviceId= strUserID;//MD5.getMessageDigest(strUserID.getBytes());
 		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
-
-
 	}
 
 	public void InitChannel(final APPBaseInterface appcall)
 	{
-		final Context applicationContext = mContext.getApplicationContext();		
+		final Context applicationContext = mContext.getApplicationContext();
+		mInAppChannel = new InAppChannel() ;
 		LogLocal("[MercuryActivity][InitChannel] Local InitChannel()->"+mInAppChannel);
 		mInAppChannel.ActivityInit((Activity)mContext, appcall);
-	
 	}
 	public void InitAd(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();
+		mInAppAD= new InAppAD() ;
 		LogLocal("[MercuryActivity][InitAd] Local InitAd()->"+mInAppAD);
 		mInAppAD.ActivityInit((Activity)mContext,appcall);
 
@@ -219,14 +224,73 @@ public class MercuryActivity  {
 			}
 			});
 	}
-	public void Redeem()
+	public void SingmaanLogin()
 	{
-		LogLocal("[MercuryActivity][Redeem] ");
+		LogLocal("[MercuryActivity][SingmaanLogin] ");
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run()
 			{
-
+				mInAppChannel.SingmaanLogin();
+			}
+		});
+	}
+	public void SingmaanLogout()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
+		mInAppChannel.SingmaanLogout();
+	}
+	public void UploadGameData()
+	{
+		LogLocal("[MercuryActivity][UploadGameData]" + mInAppChannel);
+		mInAppChannel.UploadGameData();
+	}
+	public void DownloadGameData()
+	{
+		LogLocal("[MercuryActivity][DownloadGameData]" + mInAppChannel);
+		mInAppChannel.DownloadGameData();
+	}
+	public void Redeem()
+	{
+		LogLocal("[MercuryActivity][Redeem] mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.Redeem();
+			}
+		});
+	}
+	public void RateGame()
+	{
+		LogLocal("[MercuryActivity][RateGame]mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.RateGame();
+			}
+		});
+	}
+	public void ShareGame()
+	{
+		LogLocal("[MercuryActivity][ShareGame] mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.ShareGame();
+			}
+		});
+	}
+	public void OpenGameCommunity()
+	{
+		LogLocal("[MercuryActivity][OpenGameCommunity] mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.OpenGameCommunity();
 			}
 		});
 	}
@@ -239,6 +303,7 @@ public class MercuryActivity  {
 	{
 		return LongChannelID;
 	}
+
 
 	public void ActiveBanner()
 	{

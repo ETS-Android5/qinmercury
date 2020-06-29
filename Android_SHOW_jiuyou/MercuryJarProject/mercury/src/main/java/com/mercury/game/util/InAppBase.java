@@ -36,6 +36,8 @@ import android.view.Menu;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.mercury.game.MercuryActivity.LogLocal;
+
 public class InAppBase{
 	protected Activity mContext;
 	protected String mProductId;
@@ -68,21 +70,21 @@ public class InAppBase{
 		mInstance = this;
 		qc = new MercuryConst();
 		this.appinterface=appcall;
-		MercuryActivity.LogLocal("[InAppBase]->init:InAppBase.appinterface="+appcall);
+		LogLocal("[InAppBase]->init:InAppBase.appinterface="+appcall);
 	}
 	
 
 	public void Purchase(final String strProductId)
 	{
 		MercuryConst.PayInfo(strProductId);
-		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
-		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
-		MercuryActivity.LogLocal("[InAppBase][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
+		LogLocal("[InAppBase][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
+		LogLocal("[InAppBase][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
+		LogLocal("[InAppBase][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
 	}
 	public void ApplicationInit(Application appcontext)
 	{
 		mAppContext=appcontext;
-		MercuryActivity.LogLocal("[InAppBase]->init:InAppBase.ApplicationInit="+appcontext);
+		LogLocal("[InAppBase]->init:InAppBase.ApplicationInit="+appcontext);
 	}
 	public boolean isPurchase()
 	{
@@ -131,10 +133,10 @@ public class InAppBase{
 	
 	public void onPurchaseSuccess(String message) {qc.PurchaseSuccess(message,this);}
 	public void onPurchaseFailed(String strError) {qc.PurchaseFailed(strError,this);}
-	public void onLoginSuccess(String strError) { qc.AdLoadSuccess(strError,this); }
-	public void onLoginFailed(String strError) { qc.AdLoadFailed(strError,this); }
+	public void LoginSuccessCallBack(String strError) { qc.LoginSuccessCallBack(strError,this); }
+	public void LoginCancelCallBack(String strError) { qc.LoginCancelCallBack(strError,this); }
 	public void AdLoadSuccessCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
-	public void AdLoadFailedCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
+	public void AdLoadFailedCallBack(String strError) { qc.AdLoadFailed(strError,this); }
 	public void AdShowSuccessCallBack(String strError) { qc.AdShowSuccessCallBack(strError,this); }
 	public void AdShowFailedCallBack(String strError) { qc.AdShowFailedCallBack(strError,this); }
 
@@ -142,24 +144,34 @@ public class InAppBase{
 	public void onFunctionCallBack(String strError) {
 		qc.FunctionCallBack(strError,this);
 	}
-	
+
+	public void SingmaanLogin()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogin]");
+	}
+	public void SingmaanLogout()
+	{
+		LogLocal("[MercuryActivity][SingmaanLogout]");
+	}
 	public void ActiveBanner()
 	{
-
+		LogLocal("[MercuryActivity][ActiveBanner]");
 	}
 	public void ActiveInterstitial()
 	{
-		
+		LogLocal("[MercuryActivity][ActiveInterstitial]");
 	}
 	public void ActiveNative()
 	{
-
+		LogLocal("[MercuryActivity][ActiveNative]");
 	}
 	public void ActiveRewardVideo()
 	{
+		LogLocal("[MercuryActivity][ActiveRewardVideo]");
 	}
 	public void RestoreProduct()
 	{
+		LogLocal("[MercuryActivity][RestoreProduct]");
 	}
 
 	public void attachBaseContext(Context base) {
