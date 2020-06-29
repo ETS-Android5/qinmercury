@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:paddingBottom="15dp"
+    tools:ignore="SpUsage,HardcodedText">
+
+    <TextView
+        android:id="@+id/ksad_bottom_author_name"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#FFFEFFFE"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        tools:text="\@木木游戏" />
+
+    <TextView
+        android:id="@+id/ksad_bottom_content_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center|left"
+        android:maxLines="4"
+        android:textColor="#FFFEFFFE"
+        android:textSize="14dp"
+        tools:text="广告描述广告描述广告描述广告描述广告描述广告描述广告描述广告描述广告描述广告描述" />
+
+    <com.kwad.sdk.contentalliance.detail.photo.newui.MarqueeView
+        android:id="@+id/ksad_bottom_marquee_tip"
+        android:layout_width="192dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="来着xxx的原声"
+        android:textColor="#FFFEFFFE"
+        android:textSize="14dp" />
+
+    <FrameLayout
+        android:id="@+id/ksad_progress_container"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:paddingTop="9dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <com.kwad.sdk.core.view.AdDownloadProgressBar
+            android:id="@+id/ksad_translate_progress"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            tools:background="#4D36384B"
+            tools:visibility="visible" />
+
+        <com.kwad.sdk.core.view.AdDownloadProgressBar
+            android:id="@+id/ksad_light_progress"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            tools:background="#FF2386CD"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+</LinearLayout>

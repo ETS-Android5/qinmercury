@@ -1,0 +1,4 @@
+<paths>
+    <!-- 这个下载路径不可以修改，必须是SIGTDOWNLOAD -->
+    <external-path name="sigmob_download_path" path="SIGTDOWNLOAD" />
+</paths>

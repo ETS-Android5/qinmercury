@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--入口组件样式4-->
+<com.kwad.sdk.entry.view.EntryTyp4View xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="11dp"
+  android:orientation="vertical">
+
+  <TextView
+    android:id="@+id/ksad_entryitem4_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="18dp"
+    android:layout_marginBottom="8dp"
+    android:textColor="#020202"
+    android:maxLines="2"
+    android:ellipsize="end"
+    />
+
+
+  <com.kwad.sdk.feed.widget.base.RatioFrameLayout
+    android:id="@+id/ksad_entryitem4_container"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
+    <ImageView
+      android:id="@+id/ksad_entryitem4_thumb"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop" />
+    <ImageView
+      android:layout_width="55dp"
+      android:layout_height="55dp"
+      android:layout_gravity="center"
+      android:src="@drawable/ksad_entryitem4_play"/>
+    <TextView
+      android:id="@+id/ksad_entryitem4_duration"
+      android:layout_width="40dp"
+      android:layout_height="15dp"
+      android:layout_gravity="bottom|right"
+      android:gravity="center"
+      android:layout_margin="8dp"
+      android:textSize="10dp"
+      android:textColor="#ffffff"
+      android:text="00:20"
+      android:background="@drawable/ksad_duration_bg"
+      />
+  </com.kwad.sdk.feed.widget.base.RatioFrameLayout>
+
+</com.kwad.sdk.entry.view.EntryTyp4View>

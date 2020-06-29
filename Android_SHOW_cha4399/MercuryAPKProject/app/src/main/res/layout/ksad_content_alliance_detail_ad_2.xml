@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kwad.sdk.core.view.AdBaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ksad_root_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <!--播放器等公共模块-->
+    <include layout="@layout/ksad_content_alliance_detail_photo_common" />
+
+    <!-- 广告播放页底部区域-->
+    <RelativeLayout
+        android:id="@+id/ksad_video_bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        tools:layout_height="400dp">
+
+        <!--bottom区域蒙板-->
+        <View
+            android:id="@+id/ksad_bottom_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ksad_draw_bottom_bg" />
+
+        <!--底部描述信息-->
+        <include
+            android:id="@+id/ksad_bottom_content_container"
+            layout="@layout/ksad_content_alliance_detail_ad_bottom_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="93dp" />
+
+        <!--播放页动态卡片-->
+        <FrameLayout
+            android:id="@+id/ksad_web_card_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@id/ksad_bottom_shadow"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="93dp"
+            android:paddingBottom="15dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <WebView
+                android:id="@+id/ksad_actionbar_web_card"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_gravity="bottom"
+                android:background="@android:color/transparent"
+                android:scrollbarStyle="insideOverlay"
+                android:visibility="visible"
+                tools:visibility="invisible" />
+        </FrameLayout>
+
+        <!--右侧按钮栏-->
+        <LinearLayout
+            android:id="@+id/ksad_photo_detail_bottom_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="2dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="72dp" />
+
+        <!--右侧音乐转盘-->
+        <com.kwad.sdk.contentalliance.detail.photo.newui.toolbar.SoundtrackFuncButton
+            android:id="@+id/ksad_photo_detail_bottom_soundstack"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="8dp" />
+    </RelativeLayout>
+
+    <!--喜欢-->
+    <RelativeLayout
+        android:id="@+id/ksad_slide_play_like_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!--结束页动态卡片-->
+    <WebView
+        android:id="@+id/ksad_play_end_web_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:scrollbarStyle="insideOverlay"
+        android:visibility="gone"
+        tools:visibility="invisible" />
+
+    <include
+        layout="@layout/ksad_content_alliance_loading_detail"
+        tools:visibility="gone" />
+
+</com.kwad.sdk.core.view.AdBaseFrameLayout>

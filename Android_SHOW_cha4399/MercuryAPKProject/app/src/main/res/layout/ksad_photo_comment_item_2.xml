@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ksad_photo_comment_frame"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="18dp"
+    android:longClickable="true"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp">
+
+    <ImageView
+        android:id="@+id/ksad_photo_comment_item_avatar"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginRight="12dp"
+        android:background="@null"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:id="@+id/ksad_photo_comment_item_content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="6dp"
+        android:layout_toLeftOf="@+id/ksad_photo_comment_item_like_frame"
+        android:layout_toRightOf="@+id/ksad_photo_comment_item_avatar"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ksad_photo_comment_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:maxWidth="160dp"
+            android:singleLine="true"
+            android:textColor="#888B91"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ksad_photo_comment_item_self_img"
+            android:layout_width="26dp"
+            android:layout_height="13dp"
+            android:layout_alignBottom="@+id/ksad_photo_comment_item_name"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/ksad_photo_comment_item_name"
+            android:background="@drawable/ksad_photo_comment_item_self"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/ksad_photo_comment_item_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:autoLink="none"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:lineSpacingExtra="0dp"
+            android:linksClickable="true"
+            android:longClickable="false"
+            android:maxLines="4"
+            android:textColor="#131924"
+            android:textSize="16dp"
+            android:layout_below="@+id/ksad_photo_comment_item_name"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/ksad_photo_comment_item_created_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#888B90"
+            android:textSize="13dp"
+            android:layout_below="@+id/ksad_photo_comment_item_comment"
+            />
+
+    </RelativeLayout>
+
+    <com.kwad.sdk.contentalliance.detail.photo.comment.CommentLikeButton
+        android:id="@+id/ksad_photo_comment_item_like_frame"
+        android:layout_width="51dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

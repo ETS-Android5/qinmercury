@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kwad.sdk.entry.view.EntryScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical" android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingTop="11dp"
+  android:paddingLeft="11dp">
+  <com.kwad.sdk.entry.view.EntryViewPager
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:id="@+id/ksad_entry_viewpager">
+  </com.kwad.sdk.entry.view.EntryViewPager>
+</com.kwad.sdk.entry.view.EntryScrollView>

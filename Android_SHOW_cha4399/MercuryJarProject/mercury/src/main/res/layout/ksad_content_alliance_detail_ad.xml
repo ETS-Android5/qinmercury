@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kwad.sdk.core.view.AdBaseFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ksad_root_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <!--播放器-->
+    <com.kwad.sdk.contentalliance.detail.video.DetailVideoView
+        android:id="@+id/ksad_video_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--视频封面-->
+    <ImageView
+        android:id="@+id/ksad_video_first_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="fitXY" />
+
+    <!--广告底部转化区域-->
+    <com.kwad.sdk.contentalliance.detail.ad.view.AdBottomView
+        android:id="@+id/ksad_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.kwad.sdk.draw.view.playend.DrawVideoTailFrame
+        android:id="@+id/ksad_video_tail_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/ksad_play_end_web_card_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <include layout="@layout/ksad_content_alliance_loading_detail" />
+
+</com.kwad.sdk.core.view.AdBaseFrameLayout>
