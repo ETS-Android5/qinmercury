@@ -35,6 +35,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
     implementation files('src/main/libs/android-support-v4.jar')
     implementation files('src/main/libs/org.apache.http.legacy.jar')
+
+
 }
 
 task clearJar(type: Delete){
