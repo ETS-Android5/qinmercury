@@ -50,7 +50,7 @@ public class InAppAD extends InAppBase {
 	public void ActivityInit(Activity context,final APPBaseInterface appcall)
 	{
 		super.ActivityInit(context, appcall);
-		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit");
+		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit11");
 		initSdk(mContext, new NGASDK.InitCallback() {
 			@Override
 			public void success() {
@@ -111,6 +111,7 @@ public class InAppAD extends InAppBase {
 			mVideoController = (NGAVideoController) controller;
 			MercuryActivity.LogLocal( "["+appShow+"]onReadyAd");
 			AdLoadSuccessCallBack("ActiveRewardVideo");
+			mVideoController.showAd();
 		}
 
 		@Override
@@ -320,11 +321,15 @@ public class InAppAD extends InAppBase {
 	}
 	public void ActiveRewardVideo() {
 		MercuryActivity.LogLocal("["+appShow+"] ActiveRewardVideo mVideoController="+mVideoController);
-		boolean hasCacheAd = mVideoController.hasCacheAd();
-		if (hasCacheAd==false)
+		if(mVideoController==null)
 		{
 			loadAdVideo(mContext);
 		}
+//		boolean hasCacheAd = mVideoController.hasCacheAd();
+//		if (hasCacheAd==false)
+//		{
+//			loadAdVideo(mContext);
+//		}
 		else
 		{
 			mVideoController.showAd();
