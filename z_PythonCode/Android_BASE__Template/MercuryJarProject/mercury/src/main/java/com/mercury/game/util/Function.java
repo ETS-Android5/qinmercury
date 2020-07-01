@@ -12,9 +12,23 @@ import android.util.Log;
 import com.mercury.game.MercuryActivity;
 
 import org.apache.http.util.EncodingUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import static com.mercury.game.MercuryActivity.LogLocal;
 
 public final class Function {
         public  static void writeFileData(String fileName,String message)
@@ -52,28 +66,83 @@ public final class Function {
             }
             return res;
         }
-        public static void verifyGame()
+        public static void verifyGame(final String gamename)
         {
-            //default value
-            int local_version = 0;
-            int remote_version = 0;
-            String local_dialog_message = "检测到新版本";
-            String local_dialog_title = "更新游戏体验有更多游戏内容";
-            String local_url = "http://www.singmaan.com";
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
 
+                        //1.创建OkHttpClient对象
+                        OkHttpClient client = new OkHttpClient();
+                        //2.创建RequestBody对象
+                        RequestBody requestBody = new FormBody.Builder()
+                                .add("username", "tom")
+                                .add("password", "123")
+                                .build();
+                        //3.创建Request对象
+                        Request request = new Request.Builder()
+                                .post(requestBody)
+                                .url("http://office.singmaan.com:9988/get_update_verify?gamename="+gamename)
+                                .build();
+                        //4. 同步请求
+                        // Response response = client.newCall(request).execute();
+                        //5.异步请求
+                        client.newCall(request).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                LogLocal("[MercuryActivity][GetProductionInfo] failed=");
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                String s = response.body().string();
+                                if (s != null) {
+                                    writeFileData("verifyGame",s);
+                                    LogLocal("[MercuryActivity][verifyGame] success="+s);
+                                }
+                            }
+                        });
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+
+                    }
+                }
+            }).start();
+            int remote_version = 0;
             String remote_dialog_message = "";
             String remote_dialog_title = "";
             String remote_url = "";
+
+            //get remote version
+            String remote_config = readFileData("verifyGame");
+            LogLocal("[MercuryActivity][verifyGame] remote_config="+remote_config);
+            try {
+                JSONObject json= (JSONObject) new JSONTokener(remote_config).nextValue();
+                JSONObject json_data = json.getJSONObject("data");
+                JSONObject json_result = json_data.getJSONObject("result");
+                remote_version = Integer.parseInt((String) json_result.get("version"));
+                remote_url = (String) json_result.get("url");
+                remote_dialog_message = (String) json_result.get("message");
+                remote_dialog_title = (String) json_result.get("titile");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            //default value
+            int local_version = 0;
+            String local_dialog_message = "检测到新版本";
+            String local_dialog_title = "更新游戏体验有更多游戏内容";
+            String local_url = "http://www.singmaan.com";
 
             String display_dialog_message = "";
             String display_dialog_titile = "";
             String display_url = "";
 
-            //get remote version
-            remote_version = 0;
-            remote_url = "https://m.3839.com/a/121237.htm";
-            remote_dialog_message ="新版本内容已更新，请前往官方授权渠道好游快爆App下载更新！";
-            remote_dialog_title = "选择";
             if (remote_dialog_message.equals("")==false)
             {
                 display_dialog_message = remote_dialog_message;
@@ -98,7 +167,7 @@ public final class Function {
                 e.printStackTrace();
             }
 
-            if (remote_version>=local_version)
+            if (remote_version>local_version)
             //have new version
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MercuryActivity.mContext);

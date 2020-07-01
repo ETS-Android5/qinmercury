@@ -28,6 +28,7 @@ import java.util.UUID;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryApplication.channelname;
+import static com.mercury.game.util.Function.verifyGame;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 //end
 
@@ -41,6 +42,7 @@ public class InAppChannel extends InAppBase {
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
+		verifyGame("ww2");
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
 		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
 	}

@@ -67,7 +67,7 @@ public class MercuryActivity  {
 		InitChannel(appcall);
 		InitAd(appcall);
 		GetProductionInfo();
-		verifyGame();
+
 
 	}
 	public String GetProductionInfo()
