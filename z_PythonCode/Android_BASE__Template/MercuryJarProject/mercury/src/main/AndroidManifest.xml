@@ -24,7 +24,7 @@
         </activity>
 
 		<!--sdk-->
-
+        <meta-data android:name="channel_name" android:value="demo"/>
 		<!--end-->
     </application>
 	<!--sdkxml-->

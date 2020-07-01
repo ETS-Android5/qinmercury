@@ -33,7 +33,6 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	public static Application Acontext;
 	public static boolean OpenUmeng = false;
 	private InAppBase mInAppExt;
-	public static String channel_name = "";
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -57,12 +56,14 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		Acontext = context;
 		checkSIM();
 		checkExtSDK();
+		mInAppExt = new InAppAD();
+		mInAppExt.ApplicationInit(Acontext);
+		String umeng_id = OpenUmeng();
+		channelname = checkChannelName();
 		checkChannelName();
 		checkChannelSplash();
-		OpenUmeng();
 
-		channel_name = "singmaan";
-		Log.w("MercurySDK","[SDKApp]SdkName="+channel_name);
+		Log.w("MercurySDK","[SDKApp]SdkName="+channelname);
 		Log.w("MercurySDK","[SDKApp]InAppAD");
 		mInAppExt = new InAppAD();
 		mInAppExt.ApplicationInit(Acontext);
@@ -174,25 +175,23 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	}
 
 
-	private void checkChannelName()
+	private String checkChannelName()
 	{
 		ApplicationInfo appInfo = null;
-		try 
+		try
 		{
 			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
-			String channelnametmp = appInfo.metaData.getString("CHANNEL_NAME");
+			String channelnametmp = appInfo.metaData.getString("channel_name");
 			MercuryActivity.SortChannelID=channelname =channelnametmp;
-			if(MercuryActivity.SortChannelID.equals("kp"))
-			{
-				MercuryActivity.LongChannelID="kupai";
-			}
-			
+			return channelnametmp;
 		} catch (NameNotFoundException e) {
 //		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NotFound: " + e.getMessage());
-		    mChannelId = 0;
+			mChannelId = 0;
+			return "";
 		} catch (NullPointerException e) {
 //		    Log.e(MercuryConst.TAG, "checkChannelName:Failed to load meta-data, CHANNEL_NAME NullPointer: " + e.getMessage());
-		    mChannelId = -1;
+			mChannelId = -1;
+			return "";
 		}
 
 	}
@@ -213,26 +212,29 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		}
 
 	}
-	private void OpenUmeng()
+
+	private String OpenUmeng()
 	{
 		ApplicationInfo appInfo = null;
-		try 
+		try
 		{
 			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
 			String isUmengOpen = appInfo.metaData.getString("open_umeng");
-			if(isUmengOpen.equals("open"))
+			if(isUmengOpen.equals("")==false)
 			{
 				OpenUmeng=true;
 				Log.e("MercurySDK","umeng opened");
 			}
+			return isUmengOpen;
 		} catch (NameNotFoundException e) {
-//		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NameNotFound: " + e.getMessage());
-		    
+			return "";
+
 		} catch (NullPointerException e) {
-//		    Log.e(MercuryConst.TAG, "checkLoge:Failed to load meta-data open_umeng, NullPointer: " + e.getMessage());
+			return "";
 		}
 
 	}
+
 
 
 

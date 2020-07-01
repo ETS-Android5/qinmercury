@@ -70,7 +70,7 @@ public final class Function {
             String display_url = "";
 
             //get remote version
-            remote_version = 9999;
+            remote_version = 0;
             remote_url = "https://m.3839.com/a/121237.htm";
             remote_dialog_message ="新版本内容已更新，请前往官方授权渠道好游快爆App下载更新！";
             remote_dialog_title = "选择";

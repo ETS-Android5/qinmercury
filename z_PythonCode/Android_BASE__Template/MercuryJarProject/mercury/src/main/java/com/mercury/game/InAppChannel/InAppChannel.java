@@ -14,6 +14,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.MercuryConst;
@@ -26,6 +27,7 @@ import java.util.UUID;
 
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 //end
 
@@ -40,6 +42,7 @@ public class InAppChannel extends InAppBase {
 	{		
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
+		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -100,13 +103,13 @@ public class InAppChannel extends InAppBase {
 			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseSuccess(pid);
+					onPurchaseSuccess(MercuryConst.QinPid);
 				}
 			});
 			builder.setNeutralButton("Failed", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(pid);
+					onPurchaseFailed(MercuryConst.QinPid);
 				}
 			});
 			builder.setNegativeButton("Dismiss", new OnClickListener() {
