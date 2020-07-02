@@ -1,5 +1,9 @@
 ## Get Started
 
+SingmaanSDK is not a really SDK which is only a simulator to ensure game logic works. really SDK will be intergtrated by tools which depends APK only or XCode projects only.
+
+
+
 ###Import Singmaan SDK
 
 Copy SDK folder or files from this Unity project into your Unity project, please check if scripts missing inside `SplashScreen.unity` after copying into game project, **SplashScreenManager.cs** is on `Main Camera` and **PluginMercury.cs** is on `PluginMercury`
@@ -85,43 +89,65 @@ public void ActiveNative()
 if developers have to use these methods for correcting game logic, here is all we supported menthods. but if game logic will not bother too much without these methods, we recommend don't use these methods. 
 
 ```java
-MercurySDK.SingmaanLogin();
+public void SingmaanLogin()
 ```
 
 * if developer logins successfully,  `LoginSuccessCallBack` in `APPBaseInterface` will return unique id(default unique id created by us, if you want your own unique id just igonre our unique id) for developer to identify user. Because singmaan will intergrate different channels' login SDK into singmaan's SDK(MercurySDK), it is impossible to support the account and the possword for developers to save in database all the time, in this case, please developers make sure all message between server and game client are encrpt as we use unique id to identify users. if users know other users unique id which means users can login other users account by the same unique id.
 
 ```java
-MercurySDK.SingmaanLogout();
+public void SingmaanLogout()
 ```
 
 * if developer logins successfully,  `LoginCancelCallBack` in `APPBaseInterface` will return same unique id as login in for developer to manager database, game logic and so on. If this method executed successfully, users should have a new account when restart game.
 
 ```java
-MercurySDK.Redeem();
+public void Redeem()
 ```
 
 * Singmaan will create really Redeem system in release version, make sure when game recived production id from `PurchaseSuccessCallBack` which could give users correct production, current version just return simple log without any functions.
 
+
+
 ```java
-MercurySDK.RestoreProduct();
+public void RestoreProduct()
 ```
 
 * Singmaan will create really RestoreProduct system in release version, make sure  game recived production id from `PurchaseSuccessCallBack` which could give users correct production, current version just return simple log without any functions.
 
+
+
 ```java
-MercurySDK.GetProductionInfo();
+public void GetProductionInfo()
 ```
 
 * Singmaan will return all productions' prices, description and production id, such as 
 
   ```json
   {
-     {"com.singmaan.game.removeAd","去除广告","6.0"},
-     {"com.singmaan.game.gold200","200个黄金","6.0"},
+     {"com.singmaan.game.removeAd","6.0¥"},
+     {"com.singmaan.game.gold200","6.0¥"},
   }
   ```
 
-Developers have to provide us all games' productions id, then developers could get correct production, Chinese prices and Chinese descriptions from `GetProductionInfo()`. please make currency in game is "¥" or "元", don't display "$" in Chinese version.
+Developers have to provide us all games' productions id, then developers could get correct production prices to displaying in games.
+
+```java
+public void RateGame()
+```
+
+* Displaying Rate dialog for game, usually displaying channels websites.
+
+```java
+public void ShareGame()
+```
+
+* users could share picture or link to social media.
+
+```java
+public void OpenGameCommunity()
+```
+
+* open a website which are related community
 
 
 
