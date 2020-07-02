@@ -137,6 +137,7 @@ public class PluginMercury : MonoBehaviour
     {
 #if UNITY_EDITOR
         print("[UNITY_EDITOR]->SingmaanLogin()");
+        LoginSuccessCallBack("useridasfas1");
 #elif UNITY_ANDROID
         print("[Android]->SingmaanLogin()");_plugin.Call("SingmaanLogin");
 #endif
