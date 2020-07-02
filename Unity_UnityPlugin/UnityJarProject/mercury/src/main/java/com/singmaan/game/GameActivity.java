@@ -275,6 +275,75 @@ public class GameActivity extends UnityPlayerActivity{
 			}
 		});
 	}
+
+	public void GetProductionInfo()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"GetProductionInfo");
+						MercurySDK.GetProductionInfo();
+					}
+				});
+			}
+		});
+	}
+
+
+	public void RateGame()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"RateGame");
+						MercurySDK.RateGame();
+					}
+				});
+			}
+		});
+	}
+	public void ShareGame()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ShareGame");
+						MercurySDK.ShareGame();
+					}
+				});
+			}
+		});
+	}
+	public void OpenGameCommunity()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"OpenGameCommunity");
+						MercurySDK.OpenGameCommunity();
+					}
+				});
+			}
+		});
+	}
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

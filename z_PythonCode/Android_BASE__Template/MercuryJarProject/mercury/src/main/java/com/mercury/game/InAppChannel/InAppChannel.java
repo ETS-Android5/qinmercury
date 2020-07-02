@@ -160,7 +160,7 @@ public class InAppChannel extends InAppBase {
 		LogLocal("[InAppChannel][RateGame]");
 		Intent intent = new Intent();
 		intent.setAction("android.intent.action.VIEW");
-		Uri content_url = Uri.parse("https://m.3839.com/a/121237.htm");//此处填链接
+		Uri content_url = Uri.parse("http://www.singmaan.com");//此处填链接
 		intent.setData(content_url);
 		MercuryActivity.mContext.startActivity(intent);
 	}
@@ -169,7 +169,7 @@ public class InAppChannel extends InAppBase {
 		LogLocal("[InAppChannel][ShareGame]");
 		Intent intent = new Intent();
 		intent.setAction("android.intent.action.VIEW");
-		Uri content_url = Uri.parse("https://bbs.3839.com/forum-15108.htm");//此处填链接
+		Uri content_url = Uri.parse("http://www.singmaan.com");//此处填链接
 		intent.setData(content_url);
 		MercuryActivity.mContext.startActivity(intent);
 	}
@@ -178,7 +178,7 @@ public class InAppChannel extends InAppBase {
 		LogLocal("[InAppChannel][OpenGameCommunity]");
 		Intent intent = new Intent();
 		intent.setAction("android.intent.action.VIEW");
-		Uri content_url = Uri.parse("https://m.3839.com/a/121237.htm");//此处填链接
+		Uri content_url = Uri.parse("http://www.singmaan.com");//此处填链接
 		intent.setData(content_url);
 		MercuryActivity.mContext.startActivity(intent);
 	}

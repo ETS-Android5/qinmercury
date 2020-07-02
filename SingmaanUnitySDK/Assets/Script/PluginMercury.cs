@@ -78,28 +78,28 @@ public class PluginMercury : MonoBehaviour
     }
     public void Redeem()
     {
-#if UNITY_EDITOR
-        print("[UNITY_EDITOR]->Exchange()");
+#if UNITY_EDITORRedeem
+        print("[UNITY_EDITOR]->Redeem()");
 #elif UNITY_ANDROID
-        print("[Android]->Exchange()");_plugin.Call("Redeem");
+        print("[Android]->Redeem()");_plugin.Call("Redeem");
 #endif
     }
 
     public void GetProductionInfo()
     {
 #if UNITY_EDITOR
-        print("[UNITY_EDITOR]->Exchange()");
+        print("[UNITY_EDITOR]->GetProductionInfo()");
 #elif UNITY_ANDROID
-        print("[Android]->Exchange()");_plugin.Call("GetProductionInfo");
+        print("[Android]->GetProductionInfo()");_plugin.Call("GetProductionInfo");
 #endif
     }
 
     public void RestoreProduct()
     {
 #if UNITY_EDITOR
-        print("[UNITY_EDITOR]->Exchange()");
+        print("[UNITY_EDITOR]->RestoreProduct()");
 #elif UNITY_ANDROID
-        print("[Android]->Exchange()");_plugin.Call("RestoreProduct");
+        print("[Android]->RestoreProduct()");_plugin.Call("RestoreProduct");
 #endif
     }
 
@@ -183,7 +183,6 @@ public class PluginMercury : MonoBehaviour
         print("[Android]->ActiveBanner()");_plugin.Call("ActiveBanner");
 #elif UNITY_IPHONE
         print("[UNITY_IPHONE]->ActiveBanner()");
-        ActiveBanner_IOS();
 #endif
     }
     public void ActiveNative()
@@ -194,7 +193,41 @@ public class PluginMercury : MonoBehaviour
         print("[Android]->ActiveNative()");_plugin.Call("ActiveNative");
 #elif UNITY_IPHONE
         print("[UNITY_IPHONE]->ActiveNative()");
-        ActiveNative_IOS();
+#endif
+    }
+
+    public void RateGame()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->RateGame()");
+#elif UNITY_ANDROID
+        print("[Android]->RateGame()");_plugin.Call("RateGame");
+#elif UNITY_IPHONE
+        print("[UNITY_IPHONE]->RateGame()");
+#endif
+    }
+
+
+    public void ShareGame()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->ShareGame()");
+#elif UNITY_ANDROID
+        print("[Android]->ShareGame()");_plugin.Call("ShareGame");
+#elif UNITY_IPHONE
+        print("[UNITY_IPHONE]->ShareGame()");
+#endif
+    }
+
+
+    public void OpenGameCommunity()
+    {
+#if UNITY_EDITOR
+        print("[UNITY_EDITOR]->OpenGameCommunity()");
+#elif UNITY_ANDROID
+        print("[Android]->OpenGameCommunity()");_plugin.Call("OpenGameCommunity");
+#elif UNITY_IPHONE
+        print("[UNITY_IPHONE]->OpenGameCommunity()");
 #endif
     }
 

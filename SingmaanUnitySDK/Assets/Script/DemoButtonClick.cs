@@ -128,4 +128,29 @@ public class DemoButtonClick : MonoBehaviour {
         logtext.text += "显示插屏视频，广告参数=" + "mainmenu\n";
         PluginMercury.Instance.DownloadGameData();
     }
+
+
+    public void RateGame()
+    {
+        logtext.text += "显示插屏视频，广告参数=" + "mainmenu\n";
+        PluginMercury.Instance.RateGame();
+    }
+
+    public void ShareGame()
+    {
+        logtext.text += "显示插屏视频，广告参数=" + "mainmenu\n";
+        PluginMercury.Instance.ShareGame();
+    }
+
+    public void OpenGameCommunity()
+    {
+        logtext.text += "显示插屏视频，广告参数=" + "mainmenu\n";
+        PluginMercury.Instance.OpenGameCommunity();
+    }
+
+    public void GetProductionInfo()
+    {
+        logtext.text += "显示插屏视频，广告参数=" + "mainmenu\n";
+        PluginMercury.Instance.GetProductionInfo();
+    }
 }
