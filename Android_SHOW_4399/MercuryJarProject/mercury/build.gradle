@@ -1,0 +1,88 @@
+// apply plugin: 'java'
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/android-support-v4.jar')
+    implementation files('src/main/libs/org.apache.http.legacy.jar')
+    implementation files('src/main/libs/adhost_tt_open_ad_sdk_2956.jar')
+    implementation files('src/main/libs/admob-1.4.5.jar')
+    implementation files('src/main/libs/animal-sniffer-annotations-1.5.jar')
+    implementation files('src/main/libs/au4399-sdk-release.jar')
+    implementation files('src/main/libs/Baidu_MobAds_SDK-release-2019-05-05.jar')
+    implementation files('src/main/libs/Baidu_MobAds_SDK_Baidu_MobAds_SDK-release-2019-05-05.jar')
+    implementation files('src/main/libs/classes_mintegral_chinacommon.jar')
+    implementation files('src/main/libs/classes_mintegral_interstitialvideo.jar')
+    implementation files('src/main/libs/classes_mintegral_mtgdownloads.jar')
+    implementation files('src/main/libs/classes_mintegral_mtgjscommon.jar')
+    implementation files('src/main/libs/classes_mintegral_playercommon.jar')
+    implementation files('src/main/libs/classes_mintegral_reward.jar')
+    implementation files('src/main/libs/classes_mintegral_videocommon.jar')
+    implementation files('src/main/libs/classes_mintegral_videojs.jar')
+    implementation files('src/main/libs/GDTSDK.unionNormal.4.211.1081.jar')
+    implementation files('src/main/libs/JooMobAdSDK_6.1.8.jar')
+    implementation files('src/main/libs/jsr305-3.0.2.jar')
+    implementation files('src/main/libs/m4399-libudid-1.0.0.jar')
+    implementation files('src/main/libs/mintegral_chinacommon.jar')
+    implementation files('src/main/libs/mintegral_interstitialvideo.jar')
+    implementation files('src/main/libs/mintegral_mtgdownloads.jar')
+    implementation files('src/main/libs/mintegral_mtgjscommon.jar')
+    implementation files('src/main/libs/mintegral_playercommon.jar')
+    implementation files('src/main/libs/mintegral_reward.jar')
+    implementation files('src/main/libs/mintegral_videocommon.jar')
+    implementation files('src/main/libs/mintegral_videojs.jar')
+    implementation files('src/main/libs/mobgiads-v4.9.0.0-alliance-release.jar')
+    implementation files('src/main/libs/oneway-plugin-v2.4.0-release.jar')
+    implementation files('src/main/libs/oneway-plugin-v2.4.0-release_oneway-plugin-v2.4.0-release.jar')
+    implementation files('src/main/libs/tt_open_ad_sdk_2956.jar')
+    implementation files('src/main/libs/volley-1.1.0.jar')
+    implementation files('src/main/libs/windAd-2.15.0.jar')
+    implementation files('src/main/libs/xinyi-2.2.0.jar')
+
+    implementation ('com.android.support:appcompat-v7:26.0.0'){ exclude group:'com.android.support' exclude module:'support-v4' }
+}
+
+task clearJar(type: Delete){
+    //delete 'build/outputs/jar/e2wwrapper.jar'
+    //delete 'build/intermediates/bundles/debug/e2wwrapper.jar'
+    //delete 'build/intermediates/bundles/default/e2wwrapper.jar'
+    File file1 = new File(rootDir.getAbsolutePath() + '\\build');
+    file1.deleteDir();
+}
+android {
+    lintOptions {
+        abortOnError false
+    }
+}
+// task to export contents as jar
+task makeJar(type: Copy) {
+
+}
+
+makeJar.dependsOn(clearJar, build)
