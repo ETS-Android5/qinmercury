@@ -72,9 +72,9 @@ public class InAppChannel extends InAppBase {
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
-		verifyGame("ww2");
+//		verifyGame("ww2");
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
-		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
 
 		mVersion = getAppVersionName(mContext);
 //        Boolean isBool = isPlatformInstalled("com.qinbatista.demo");
