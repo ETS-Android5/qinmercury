@@ -33,9 +33,9 @@ public class InAppAD extends InAppBase {
 	//comment
 	public static String appShow="InAppAD";
 	public static String MyScence = "";
-	public static String reward_video_id = "ca-app-pub-3940256099942544/5224354917";
-	public static String banner_id = "ca-app-pub-3940256099942544/6300978111";
-	public static String InterstitialAd_id = "ca-app-pub-3940256099942544/1033173712";
+	public static String reward_video_id = "ca-app-pub-6116228052981506/5932495799";
+	public static String banner_id = "ca-app-pub-6116228052981506/3497904141";
+	public static String InterstitialAd_id = "ca-app-pub-6116228052981506/3278412299";
 	private RewardedAd rewardedAd;
 	private AdView mAdView;
 	private InterstitialAd mInterstitialAd;

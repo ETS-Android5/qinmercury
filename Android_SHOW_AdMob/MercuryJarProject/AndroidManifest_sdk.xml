@@ -1,4 +1,4 @@
-<!--sdk-->        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713"/>
+<!--sdk-->        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-6116228052981506~7440733171"/>
         <meta-data android:name="channel_name" android:value="demo"/>
 <!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
