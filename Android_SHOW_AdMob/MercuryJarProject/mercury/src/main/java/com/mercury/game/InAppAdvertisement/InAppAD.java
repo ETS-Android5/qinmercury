@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -32,9 +33,9 @@ public class InAppAD extends InAppBase {
 	//comment
 	public static String appShow="InAppAD";
 	public static String MyScence = "";
-	public static String reward_video_id = "ca-app-pub-6116228052981506/5023465158";
-	public static String banner_id = "ca-app-pub-6116228052981506/3497904141";
-	public static String InterstitialAd_id = "ca-app-pub-6116228052981506/3278412299";
+	public static String reward_video_id = "ca-app-pub-3940256099942544/5224354917";
+	public static String banner_id = "ca-app-pub-3940256099942544/6300978111";
+	public static String InterstitialAd_id = "ca-app-pub-3940256099942544/1033173712";
 	private RewardedAd rewardedAd;
 	private AdView mAdView;
 	private InterstitialAd mInterstitialAd;
@@ -62,10 +63,7 @@ public class InAppAD extends InAppBase {
 		};
 		rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
 
-		AdView adView = new AdView(mContext);
-		adView.setAdSize(AdSize.BANNER);
-		adView.setAdUnitId(banner_id);
-		AdSize adSize = new AdSize(300, 50);
+
 
 		mInterstitialAd = new InterstitialAd(mContext);
 		mInterstitialAd.setAdUnitId(InterstitialAd_id);
@@ -164,6 +162,24 @@ public class InAppAD extends InAppBase {
 	}
 	public void ActiveBanner() {
 		// TODO Auto-generated method stub
+
+		MercuryActivity.LogLocal("["+appShow+"]->ActiveBanner");
+		RelativeLayout  test = new RelativeLayout(mContext);
+		((Activity)mContext).addContentView(test,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+		RelativeLayout.LayoutParams relayout = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		relayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		relayout.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
+		AdView adView = new AdView(mContext);
+		AdSize adSize = new AdSize(300, 50);
+		adView.setAdSize(adSize);
+		adView.setAdUnitId(banner_id);
+
+		test.addView(adView,relayout);
+
+		AdRequest adRequest = new AdRequest.Builder().build();
+		MercuryActivity.LogLocal("["+appShow+"]->adRequest="+adRequest);
+		adView.loadAd(adRequest);
 //		mAdView = mContext.findViewById(R.id.);
 //		AdRequest adRequest = new AdRequest.Builder().build();
 //		mAdView.loadAd(adRequest);

@@ -22,7 +22,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 16
-	versionCode 41        versionName "1.0"
+	versionCode 51        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
