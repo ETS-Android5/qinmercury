@@ -8,9 +8,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
+import android.os.Looper;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
@@ -31,6 +33,7 @@ import java.util.Date;
 
 import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
+import static com.mercury.game.util.Function.redeemCode;
 import static com.mercury.game.util.Function.verifyGame;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.MercuryConst.GetProductionList;
@@ -57,6 +60,7 @@ public class MercuryActivity  {
 	public static String SortChannelID="";
 	public static String LongChannelID="";
 	private static ImageView img = null;
+	public static String GameName="ww1";
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
 		LogLocal("[MercuryActivity][InitSDK]");
@@ -67,6 +71,7 @@ public class MercuryActivity  {
 		InitChannel(appcall);
 		InitAd(appcall);
 		GetProductionInfo();
+		verifyGame(GameName);
 
 
 	}
@@ -252,15 +257,15 @@ public class MercuryActivity  {
 	}
 	public void Redeem()
 	{
-		LogLocal("[MercuryActivity][Redeem] mInAppChannel="+mInAppChannel);
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run()
 			{
-				mInAppChannel.Redeem();
+				redeemCode();
 			}
 		});
 	}
+
 	public void RateGame()
 	{
 		LogLocal("[MercuryActivity][RateGame]mInAppChannel="+mInAppChannel);

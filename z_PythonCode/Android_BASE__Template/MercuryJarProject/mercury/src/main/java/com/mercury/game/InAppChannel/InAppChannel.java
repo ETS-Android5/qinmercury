@@ -37,12 +37,13 @@ public class InAppChannel extends InAppBase {
 	
 	//comment
 	private String Channelname="InAppChannel";
+
 	private static String pid;
 	@Override
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
-		verifyGame("ww2");
+
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
 		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
 	}

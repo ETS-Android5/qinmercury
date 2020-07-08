@@ -61,9 +61,8 @@ public class MercuryConst {
 	public static int Unity=1001;
 	public static int Cocos2D=1002;
 	public static String exchangeID;
-	public static String Restoreappid = "letscreatepottery";
 	public static JSONObject ProductionJsonList;
-    
+    public static InAppBase ConstInstance;
 	
     public static String[] convertStrToArray(String str,String symbol){   
         String[] strArray = null;   

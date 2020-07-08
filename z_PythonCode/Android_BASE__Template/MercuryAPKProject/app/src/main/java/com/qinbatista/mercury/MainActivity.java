@@ -66,7 +66,7 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 
 			@Override
 			public void onFunctionCallBack(String s) {
-				Toast.makeText(context, "onFunctionCallBack",Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "onFunctionCallBack"+s,Toast.LENGTH_SHORT).show();
 			}
 
 		};
@@ -112,7 +112,7 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","[step][8]->ShareGame");
-				MercurySDK.RateGame();
+				MercurySDK.Redeem();
 				
 			}
 		});
