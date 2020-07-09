@@ -21,18 +21,21 @@ class SDKAppendManager():
 		self.__channel_base = channel_base
 		self.__channel_show = channel_show
 		self.__channel_IAP = channel_IAP
-		self.__python = "python3"
+		if sys.platform=="win32":
+			self.__python = "python.exe"
+		else:
+			self.__python = "python3"
 		self.__apktool = "apktool"
 		self.__sdk_apk_name = "app-release.apk"
 		self.__sdk_apk_name_only = "app-release"
 		self.__cache_position = "/z_PythonCode/cache/"
 		self.__build_APK_script = "merge_building.py"
-		self.__file_path = os.path.dirname(os.path.realpath(__file__))
-		self.__sdk_path = os.path.dirname(os.path.realpath(__file__))#+"/"+channel
-		self.__sdk_xml_path = os.path.dirname(os.path.realpath(__file__))#+"/"+channel+"/MercuryJarProject/AndroidManifest_sdk.xml"
-		self.__sdk_script_path = os.path.dirname(os.path.realpath(__file__))#+"/"+channel+"/merge_building.py"
-		self.__sdk_apk_path = os.path.dirname(os.path.realpath(__file__))#+"/"+channel+"/"+self.__sdk_apk_name
-		self.__game_apk_path = game_apk_path
+		self.__file_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")
+		self.__sdk_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")#+"/"+channel
+		self.__sdk_xml_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")#+"/"+channel+"/MercuryJarProject/AndroidManifest_sdk.xml"
+		self.__sdk_script_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")#+"/"+channel+"/merge_building.py"
+		self.__sdk_apk_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")#+"/"+channel+"/"+self.__sdk_apk_name
+		self.__game_apk_path = game_apk_path.replace("\\","/")
 		self.__channel_name = channel_name
 		self.__package_name = package_name
 		self.__apk_name = apk_name
@@ -286,7 +289,7 @@ class SDKAppendManager():
 
 		#change package name
 		config=configparser.ConfigParser()
-		config.read(PythonLocation()+"/android_builder_config.ini")
+		config.read(PythonLocation()+"/android_builder_config.ini",encoding="UTF-8")
 		PackageName  = self.__package_name
 		self.__change_package_name(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml",PackageName)
 		self.__xml_mete_change(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/AndroidManifest.xml","channel_name",self.__channel_name)
@@ -313,7 +316,7 @@ class SDKAppendManager():
 		ListMyFolder = []
 		for dirpath, dirnames, filenames in os.walk(_path):
 			for filename in filenames:
-				ListMyFolder.append(dirpath+"/"+filename)
+				ListMyFolder.append((dirpath+"/"+filename).replace("\\","/"))
 		return ListMyFolder
 	def __copy_files_dont_overwrite(self,sourceDir, targetDir):
 		#print (sourceDir)
@@ -496,23 +499,23 @@ class SDKAppendManager():
 
 
 def run():
-	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/z_PythonCode/"+file_path+".py"):
 		if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
 			os.remove(PythonLocation()+"/"+file_path+".py")
 		shutil.copy(PythonLocation()+"/z_PythonCode/"+file_path+".py",PythonLocation()+"/"+file_path+".py")
 
-	folder_name = os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	folder_name = os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 
-	files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
+	files = os.listdir(os.path.dirname(os.path.realpath(__file__.replace("\\","/"))))
 	game_apk_path = ""
 	for file_name in files:
 		if file_name.find(".keystore")!=-1:
-			game_apk_path = os.path.dirname(os.path.realpath(__file__))+"/"+file_name
+			game_apk_path = os.path.dirname(os.path.realpath(__file__.replace("\\","/"))).replace("\\","/")+"/"+file_name
 			break
 
 	config=configparser.ConfigParser()
-	config.read(PythonLocation()+"/android_builder_config.ini")
+	config.read(PythonLocation()+"/android_builder_config.ini",encoding="UTF-8")
 	channel = config.sections()
 	print("---Choice your channel---")
 	for index, name in enumerate(channel):
@@ -536,6 +539,16 @@ def run():
 	IAP  		 = config.get(ChannelName,"IAP")
 	APK_PATH	 = config.get(ChannelName,"PATH")
 	APKName	     = config.get(ChannelName,"APKName")
+
+	config_path=configparser.ConfigParser()
+	if os.path.isfile(PythonLocation()+"/android_builder_path.ini"):
+		config_path.read(PythonLocation()+"/android_builder_path.ini",encoding="UTF-8")
+		if config_path.has_section(ChannelName):
+			APK_PATH	 = config_path.get(ChannelName,"PATH")
+			print("[News]	Using new path from android_builder_path.ini")
+	else:
+		shutil.copy(PythonLocation()+"/z_PythonCode/android_builder_path.ini", PythonLocation()+"/android_builder_path.ini")
+
 	print("[Keystore]	"+game_apk_path)
 	print("[ChannelName]	"+ChannelName)
 	print("[PackageName]	"+PackageName)

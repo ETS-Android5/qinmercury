@@ -539,6 +539,16 @@ def run():
 	IAP  		 = config.get(ChannelName,"IAP")
 	APK_PATH	 = config.get(ChannelName,"PATH")
 	APKName	     = config.get(ChannelName,"APKName")
+
+	config_path=configparser.ConfigParser()
+	if os.path.isfile(PythonLocation()+"/android_builder_path.ini"):
+		config_path.read(PythonLocation()+"/android_builder_path.ini",encoding="UTF-8")
+		if config_path.has_section(ChannelName):
+			APK_PATH	 = config_path.get(ChannelName,"PATH")
+			print("[News]	Using new path from android_builder_path.ini")
+	else:
+		shutil.copy(PythonLocation()+"/z_PythonCode/android_builder_path.ini", PythonLocation()+"/android_builder_path.ini")
+
 	print("[Keystore]	"+game_apk_path)
 	print("[ChannelName]	"+ChannelName)
 	print("[PackageName]	"+PackageName)
