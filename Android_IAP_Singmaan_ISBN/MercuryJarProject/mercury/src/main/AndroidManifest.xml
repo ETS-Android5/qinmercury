@@ -36,9 +36,7 @@
             android:name="com.zhongtui.sdk.activity.UserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
-
         <service android:name="com.zhongtui.sdk.service.QueryOrderService" />
-
         <!--end-->
     </application>
 	<!--sdkxml-->

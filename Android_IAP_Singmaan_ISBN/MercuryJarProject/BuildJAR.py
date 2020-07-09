@@ -40,7 +40,7 @@ def __delete_zip_files(_path):
 	print("deleted signature")
 	shutil.move(new_zipfile,old_zipfile)
 def main():
-	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/../../z_PythonCode/"+file_path+".py"):
 		if os.path.isfile(PythonLocation()+"/"+file_path+".py"):
 			os.remove(PythonLocation()+"/"+file_path+".py")
@@ -61,10 +61,13 @@ def main():
 	os.chdir(_path+"/cache")
 	if os.path.isfile("./../mercury/build/outputs/aar/mercury-release.aar"):
 		os.system("unzip ./../mercury/build/outputs/aar/mercury-release.aar")
+		if os.path.isfile("./../MercurySDK.jar"):
+			os.remove("./../MercurySDK.jar")
 		os.rename("./classes.jar","./../MercurySDK.jar")
 		__delete_zip_files("./../MercurySDK.jar")
 		if os.path.isfile("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar"):
 			os.remove("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar")
+		if os.path.isdir("./../../MercuryAPKProject_pure/app/src/main/libs")==False:os.mkdir("./../../MercuryAPKProject_pure/app/src/main/libs")
 		shutil.copy("./../MercurySDK.jar", "./../../MercuryAPKProject_pure/app/src/main/libs/MercurySDK.jar")
 	if os.path.exists("./../cache"):delete_folder("./../cache")
 

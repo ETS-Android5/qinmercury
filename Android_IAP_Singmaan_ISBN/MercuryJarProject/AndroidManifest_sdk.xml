@@ -10,9 +10,7 @@
             android:name="com.zhongtui.sdk.activity.UserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
-
         <service android:name="com.zhongtui.sdk.service.QueryOrderService" />
-
 <!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
