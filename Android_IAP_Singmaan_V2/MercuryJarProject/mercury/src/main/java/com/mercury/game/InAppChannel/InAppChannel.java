@@ -49,8 +49,8 @@ public class InAppChannel extends InAppBase {
 	//comment
 	private String Channelname="InAppSingmaan";
 	private ZhongTuiSdk sdk;
-	private String APPID_KEY = "1214";
-	private String CLICENT_KEY = "1c1b4fe2f3b7ebb2333a3766bba124f7";
+	private String APPID_KEY = "1217";
+	private String CLICENT_KEY = "9143c9c360c24c4116a9f5042204ef95";
 	private static String pid;
 	@Override
 	public void ActivityInit(final Activity context, final APPBaseInterface appinterface)
@@ -58,7 +58,7 @@ public class InAppChannel extends InAppBase {
 		super.ActivityInit(context, appinterface);
 
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
-		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -76,6 +76,7 @@ public class InAppChannel extends InAppBase {
 								@Override
 								public void onLoginSucceed(final String s, final String s1) {
 									MercuryActivity.LogLocal("登录成功" + "\n" + "uid:" + s + "\n" + "token:" + s1);
+									LoginSuccessCallBack(s1);
 								}
 
 								@Override
@@ -122,6 +123,7 @@ public class InAppChannel extends InAppBase {
 								@Override
 								public void onLoginSucceed(final String s, final String s1) {
 									MercuryActivity.LogLocal("登录成功" + "\n" + "uid:" + s + "\n" + "token:" + s1);
+									LoginSuccessCallBack(s1);
 								}
 
 								@Override
