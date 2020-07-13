@@ -56,6 +56,10 @@ public class InAppAD extends InAppBase {
 	{
 		MercuryActivity.LogLocal("["+appShow+"]->onStart");
 	}
+	public void onTerminate()
+	{
+
+	}
 	public void onActivityResult(int reqCode, int resCode, Intent data) {
 		MercuryActivity.LogLocal("["+appShow+"]->onActivityResult");
 		super.onActivityResult(reqCode, resCode, data);

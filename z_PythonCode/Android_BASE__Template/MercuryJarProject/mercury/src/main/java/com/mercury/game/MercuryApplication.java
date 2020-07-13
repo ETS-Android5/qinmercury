@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.mercury.game.InAppAdvertisement.InAppAD;
+import com.mercury.game.InAppChannel.InAppChannel;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
 
@@ -33,6 +34,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	public static Application Acontext;
 	public static boolean OpenUmeng = false;
 	private InAppBase mInAppExt;
+	private InAppBase mInAppChannel;
 	String isUmengOpen = "";
 	@Override
 	public void onCreate() {
@@ -59,25 +61,28 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		checkExtSDK();
 		mInAppExt = new InAppAD();
 		mInAppExt.ApplicationInit(Acontext);
+
+		mInAppChannel = new InAppChannel();
+		mInAppChannel.ApplicationInit(Acontext);
 		String umeng_id = OpenUmeng();
 		channelname = checkChannelName();
 		checkChannelName();
 		checkChannelSplash();
 		Log.w("MercurySDK","[SDKApp]SdkName="+channelname);
 		Log.w("MercurySDK","[SDKApp]InAppAD");
-		try 
+		try
 		{
 			key=getSign(context);
 			SignatureVerify(key);
-		} 
-		catch (Exception e) 
+		}
+		catch (Exception e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public void SignatureVerify(String key)
 	{
 		if (isUmengOpen.equals(""))
@@ -130,7 +135,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		while (iter.hasNext()) {
 			PackageInfo packageinfo = iter.next();
 			String packageName = packageinfo.packageName;
-			if (packageName.equals(Acontext.getPackageName())) {				
+			if (packageName.equals(Acontext.getPackageName())) {
 				return packageinfo.signatures[0].toCharsString();
 
 			}
@@ -166,12 +171,12 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 //
 //		}
 	}
-	
-	private void checkExtSDK() 
-	{		
 
-	    	mInAppExt = new InAppBase();
-	    	mInAppExt.ApplicationInit(Acontext);
+	private void checkExtSDK()
+	{
+
+		mInAppExt = new InAppBase();
+		mInAppExt.ApplicationInit(Acontext);
 	}
 
 
@@ -199,14 +204,14 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 	private void checkChannelSplash()
 	{
 		ApplicationInfo appInfo = null;
-		try 
+		try
 		{
 			appInfo = Acontext.getPackageManager().getApplicationInfo(Acontext.getPackageName(),PackageManager.GET_META_DATA);
 			String channelnametmp = appInfo.metaData.getString("CHANNEL_SPLASH");
 			channelSplash =channelnametmp;
 		} catch (NameNotFoundException e) {
 //		    Log.e(MercuryConst.TAG, "checkChannelSplash to load meta-data CHANNEL_SPLASH, NameNotFound: " + e.getMessage());
-		    
+
 		} catch (NullPointerException e) {
 //		    Log.e(MercuryConst.TAG, "checkChannelSplash to load meta-data CHANNEL_SPLASH, NullPointer: " + e.getMessage());
 		}
@@ -235,9 +240,10 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 
 	}
 
-
-
-
-
-
+	@Override
+	public void onTerminate() {
+		super.onTerminate();
+		mInAppChannel.onTerminate();
+		mInAppExt.onTerminate();
+	}
 }

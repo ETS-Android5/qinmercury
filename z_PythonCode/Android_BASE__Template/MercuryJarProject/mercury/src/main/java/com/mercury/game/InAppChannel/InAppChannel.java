@@ -97,6 +97,7 @@ public class InAppChannel extends InAppBase {
 
 
 	}
+
 	public void TestPay()
 	{
 		try {
@@ -214,6 +215,10 @@ public class InAppChannel extends InAppBase {
 	{
 		MercuryActivity.LogLocal("["+Channelname+"] onRestart");
 		
+	}
+	public void onTerminate()
+	{
+
 	}
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) 

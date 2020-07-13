@@ -108,7 +108,10 @@ public class InAppBase{
 	{
 		
 	}
+	public void onTerminate()
+	{
 
+	}
 	public void FunctionS(String number)
 	{
 		//qc.FunctionS(number);
