@@ -497,6 +497,15 @@ class SDKAppendManager():
 			List.append(i)
 		return List
 
+def clean_project():
+	if os.path.isdir(PythonLocation()+"/z_PythonCode/cache"):
+		print("[CACHE]deleting "+PythonLocation()+"/z_PythonCode/cache")
+		shutil.rmtree(PythonLocation()+"/z_PythonCode/cache")
+		print("[CACHE]deleted "+PythonLocation()+"/z_PythonCode/cache")
+	if os.path.isdir(PythonLocation()+"/y_building"):
+		print("[CACHE]deleting "+PythonLocation()+"/y_building")
+		shutil.rmtree(PythonLocation()+"/y_building")
+		print("[CACHE]deleted "+PythonLocation()+"/y_building")
 
 def run():
 	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
@@ -520,10 +529,13 @@ def run():
 	print("---Choice your channel---")
 	for index, name in enumerate(channel):
 		print(f"[{index}]	{name}	")
+	print(f"[99]	Clean Project	")
 	print("-------------------------")
 	your_channel=""
 	while True:
 		your_channel=input("Input channel's numbner:")
+		if your_channel=="99":
+			clean_project()
 		if your_channel.isnumeric():
 			if int(your_channel)<= len(channel)-1:
 				break
@@ -532,6 +544,7 @@ def run():
 				continue
 		else:
 			print('Your input is not number')
+
 	ChannelName = channel[int(your_channel)]
 	PackageName  = config.get(ChannelName,"PackageName")
 	BASE		 = config.get(ChannelName,"BASE")
