@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 边框颜色值-->
+    <item>
+        <shape>
+            <!--圆角 -->
+            <corners android:radius="@dimen/mgsdk_button_radius"></corners>
+            <!--边框颜色-->
+            <solid android:color="#33B4FF"></solid>
+        </shape>
+    </item>
+    <!-- 主题背景颜色值-->
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp"><!--设置四个边框（根据需要选择对应边框）-->
+        <shape>
+            <gradient
+                android:centerX="0.5"
+                android:centerY="0.5" /><!--与底层的垂直距离（阴影的效果）-->
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <!-- 圆角 -->
+            <corners android:radius="@dimen/mgsdk_button_radius" />
+            <solid android:color="#33B4FF" /><!--设置button的边框里内容的背景色-->
+        </shape>
+    </item>
+</layer-list>

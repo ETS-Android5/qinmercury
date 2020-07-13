@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@android:color/white"
+    android:padding="16.6dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="@string/mgsdk_text_alipay_remind_title"
+        android:textColor="#E5000000"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_iknow"
+        android:layout_below="@id/tv_title">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MgsdkDotStyle"
+                    android:text="・" />
+
+                <TextView
+                    android:id="@+id/tv_remind_1"
+                    style="@style/MgsdkAliRemindText"
+                    android:text="@string/mgsdk_text_alipay_remind_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MgsdkDotStyle"
+                    android:text="・" />
+
+                <TextView
+                    android:id="@+id/tv_remind_2"
+                    style="@style/MgsdkAliRemindText"
+                    android:text="@string/mgsdk_text_alipay_remind_2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MgsdkDotStyle"
+                    android:text="・" />
+
+                <TextView
+                    style="@style/MgsdkAliRemindText"
+                    android:text="@string/mgsdk_text_alipay_remind_3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MgsdkDotStyle"
+                    android:text="・" />
+
+                <TextView
+                    style="@style/MgsdkAliRemindText"
+                    android:text="@string/mgsdk_text_alipay_remind_4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MgsdkDotStyle"
+                    android:text="・" />
+
+                <TextView
+                    style="@style/MgsdkAliRemindText"
+                    android:text="@string/mgsdk_text_alipay_remind_5" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@id/btn_iknow"
+        style="@style/MgsdkAliButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16.6dp"
+        android:text="@string/mgsdk_text_iknown" />
+
+</RelativeLayout>

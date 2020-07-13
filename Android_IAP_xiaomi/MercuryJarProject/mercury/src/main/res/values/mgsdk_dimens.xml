@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mgsdk_dialog_margin">30dp</dimen>
+    <dimen name="mgsdk_button_radius">4dp</dimen>
+    <dimen name="mgsdk_min_height">352dp</dimen>
+    <dimen name="mgsdk_min_width">300dp</dimen>
+    <dimen name="mgsdk_dialog_heigth">400dp</dimen>
+    <dimen name="mgsdk_dialog_width">340dp</dimen>
+
+    <dimen name="float_new_msg_window_height">27.3dip</dimen>
+    <dimen name="float_new_msg_window_horn_width">12dip</dimen>
+    <dimen name="float_new_msg_window_horn_height">10.3dip</dimen>
+    <dimen name="float_new_msg_window_colse_width">8.6dip</dimen>
+    <dimen name="float_new_msg_window_colse_height">8.6dip</dimen>
+    <dimen name="float_new_msg_window_line_height">17.3dip</dimen>
+    <dimen name="float_new_msg_window_arrow_width">5dip</dimen>
+    <dimen name="float_new_msg_window_arrow_height">9dip</dimen>
+
+    <dimen name="float_new_msg_window_width_v">278dip</dimen>
+    <dimen name="float_new_msg_window_width_h">301.6dip</dimen>
+
+    <dimen name="float_new_msg_window_padding_top">33.3dip</dimen>
+    <dimen name="float_new_msg_window_padding">50dip</dimen>
+
+    <dimen name="float_new_msg_window_icon_padding">10dip</dimen>
+    <dimen name="float_new_msg_window_icon_padding1">11.6dip</dimen>
+
+    <dimen name="float_new_msg_window_closebtn_root_width">46.2dip</dimen>
+
+</resources>

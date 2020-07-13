@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="MercurySDK" />
+        <option name="name" value="MercurySDK" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="MercuryDemo" />
+        <option name="name" value="MercuryDemo" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="IAP" />
+        <option name="name" value="IAP" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="AndroidRuntime" />
+        <option name="name" value="AndroidRuntime" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="Unity" />
+        <option name="name" value="Unity" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="MercurySDK" />
+    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="685ac036-64e1-4c3f-ad23-55455d586e0a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.idea/caches/gradle_models.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/BuildAPK.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/BuildAPK.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/assets/ChannelSplash.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/java/com/qinbatista/mercury/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/java/com/qinbatista/mercury/QinApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/libs/MercurySDK.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/libs/android-support-v4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/libs/okhttp-3.9.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/libs/okio-1.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/libs/org.apache.http.legacy.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/res/drawable-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/res/drawable/app_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/res/menu/main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/grannysmith.keystore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.idea/caches/gradle_models.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/BuildAPK.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/BuildAPK.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/java/com/qinbatista/mercury/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/java/com/qinbatista/mercury/QinApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/libs/MercurySDK.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/res/drawable-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/res/drawable/app_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/res/menu/main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/grannysmith.keystore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MercuryAPKProject_pure/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AndroidManifest_sdk.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BuildJAR.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/R.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/assets/ChannelSplash.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/InAppAdvertisement/InAppAD.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/InAppChannel/InAppChannel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/MercuryActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/MercuryApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/util/APPBaseInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/util/Function.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/util/InAppBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/util/MD5.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/util/MercuryConst.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/libs/android-support-v4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/libs/okhttp-3.9.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/libs/okio-1.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury/src/main/libs/org.apache.http.legacy.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merge_building.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1ZIaLxONugnkKPqbKvk7Yi7PqOc" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/mercury/src/main/libs" />
+    <property name="project.structure.last.edited" value="Suggestions" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="show.do.not.copy.http.proxy.settings.to.gradle" value="false" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/util" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mercury/src/main/libs" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="685ac036-64e1-4c3f-ad23-55455d586e0a" name="Default Changelist" comment="" />
+      <created>1575948599381</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575948599381</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="440" y="196" width="800" height="699" key="#Intentions" timestamp="1594373096060">
+      <screen x="0" y="23" width="1680" height="954" />
+    </state>
+    <state x="440" y="190" width="800" height="717" key="#Intentions/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1592994216376" />
+    <state x="440" y="196" width="800" height="699" key="#Intentions/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1594373096060" />
+    <state width="1037" height="184" key="GridCell.Tab.0.bottom" timestamp="1594200336714">
+      <screen x="0" y="23" width="1680" height="956" />
+    </state>
+    <state width="1638" height="230" key="GridCell.Tab.0.bottom/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1593586695949" />
+    <state width="1406" height="151" key="GridCell.Tab.0.bottom/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1594198286126" />
+    <state width="1037" height="184" key="GridCell.Tab.0.bottom/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1594200336714" />
+    <state width="1037" height="184" key="GridCell.Tab.0.center" timestamp="1594200336714">
+      <screen x="0" y="23" width="1680" height="956" />
+    </state>
+    <state width="1638" height="230" key="GridCell.Tab.0.center/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1593586695948" />
+    <state width="1406" height="151" key="GridCell.Tab.0.center/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1594198286125" />
+    <state width="1037" height="184" key="GridCell.Tab.0.center/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1594200336714" />
+    <state width="1037" height="184" key="GridCell.Tab.0.left" timestamp="1594200336713">
+      <screen x="0" y="23" width="1680" height="956" />
+    </state>
+    <state width="1638" height="230" key="GridCell.Tab.0.left/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1593586695947" />
+    <state width="1406" height="151" key="GridCell.Tab.0.left/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1594198286125" />
+    <state width="1037" height="184" key="GridCell.Tab.0.left/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1594200336713" />
+    <state width="1037" height="184" key="GridCell.Tab.0.right" timestamp="1594200336714">
+      <screen x="0" y="23" width="1680" height="956" />
+    </state>
+    <state width="1638" height="230" key="GridCell.Tab.0.right/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1593586695948" />
+    <state width="1406" height="151" key="GridCell.Tab.0.right/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1594198286126" />
+    <state width="1037" height="184" key="GridCell.Tab.0.right/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1594200336714" />
+    <state x="80" y="331" width="917" height="513" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1594260033028">
+      <screen x="0" y="23" width="1680" height="956" />
+    </state>
+    <state x="160" y="152" width="1480" height="752" key="com.android.tools.idea.avdmanager.AvdListDialog/-1194.239.1194.811/0.23.1680.952@0.23.1680.952" timestamp="1592982660661" />
+    <state x="75" y="106" width="1480" height="752" key="com.android.tools.idea.avdmanager.AvdListDialog/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1594205128120" />
+    <state x="80" y="331" width="917" height="513" key="com.android.tools.idea.avdmanager.AvdListDialog/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1594260033028" />
+    <state x="587" y="372" key="edit.logcat.filter.dialog.dimensions" timestamp="1592470818836">
+      <screen x="0" y="23" width="1680" height="952" />
+    </state>
+    <state x="587" y="372" key="edit.logcat.filter.dialog.dimensions/-1194.239.1194.811/0.23.1680.952@0.23.1680.952" timestamp="1592470818836" />
+    <state x="193" y="256" width="742" height="488" key="find.popup" timestamp="1594200336649">
+      <screen x="0" y="23" width="1680" height="956" />
+    </state>
+    <state x="193" y="256" width="742" height="488" key="find.popup/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1594200336649" />
+    <state x="662" y="232" width="670" height="676" key="search.everywhere.popup" timestamp="1594366513417">
+      <screen x="0" y="23" width="1680" height="954" />
+    </state>
+    <state x="662" y="232" width="670" height="676" key="search.everywhere.popup/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1594366513417" />
+  </component>
+</project>

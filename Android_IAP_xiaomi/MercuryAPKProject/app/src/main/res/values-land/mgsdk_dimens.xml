@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mgsdk_dialog_margin">30dp</dimen>
+    <dimen name="mgsdk_button_radius">4dp</dimen>
+    <dimen name="mgsdk_min_height">308dp</dimen>
+    <dimen name="mgsdk_dialog_heigth">308dp</dimen>
+    <dimen name="mgsdk_dialog_width">500dp</dimen>
+</resources>

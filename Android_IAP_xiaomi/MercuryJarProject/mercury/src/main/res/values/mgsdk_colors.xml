@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="black_20_percent">#33000000</color>
+    <color name="color_light_gray">#FF030303</color>
+    <color name="color_dialog_cancel_blue_nor">#33b4ff</color>
+    <color name="color_dialog_cancel_white_press">#FFD6F0FF</color>
+    <color name="color_dialog_cancel_blue_press">#FF2890CC</color>
+
+</resources>

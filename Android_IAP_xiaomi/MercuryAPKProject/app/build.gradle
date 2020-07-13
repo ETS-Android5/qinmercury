@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+android {
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
+    signingConfigs {
+        release {
+            keyAlias 'android.keystore'
+            keyPassword 'singmaan'
+            storeFile file('./../grannysmith.keystore')
+            storePassword 'singmaan'
+        }
+    }
+    compileSdkVersion 26
+    defaultConfig {
+        minSdkVersion 19
+	versionCode 79
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/MercurySDK.jar')
+    implementation files('src/main/libs/MercurySDK.jar')
+    implementation files('src/main/libs/MercurySDK.jar')
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    implementation files('src/main/libs/org.apache.http.legacy.jar')
+    implementation files('src/main/libs/okhttp-3.9.0.jar')
+    implementation files('src/main/libs/okio-1.13.0.jar')
+    implementation files('src/main/libs/android.arch.core-common-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.core-runtime-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.lifecycle-common-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.lifecycle-livedata-core-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.lifecycle-runtime-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.lifecycle-viewmodel-1.1.0.jar')
+    implementation files('src/main/libs/okhttp-3.9.0.jar')
+    implementation files('src/main/libs/okio-1.13.0.jar')
+    implementation files('src/main/libs/org.apache.http.legacy.jar')
+    implementation files('src/main/libs/support-annotations-27.1.1.jar')
+    implementation files('src/main/libs/support-compat-27.1.1.jar')
+    implementation files('src/main/libs/support-core-ui-27.1.1.jar')
+    implementation files('src/main/libs/support-core-utils-27.1.1.jar')
+    implementation files('src/main/libs/support-fragment-27.1.1.jar')
+    implementation files('src/main/libs/alipaySdk-20180601.jar')
+    implementation files('src/main/libs/android.arch.core-common-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.core-runtime-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.lifecycle-common-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.lifecycle-livedata-core-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.lifecycle-runtime-1.1.0.jar')
+    implementation files('src/main/libs/android.arch.lifecycle-viewmodel-1.1.0.jar')
+    implementation files('src/main/libs/datasdk-1.2.2.jar')
+    implementation files('src/main/libs/DeviceId.jar')
+    implementation files('src/main/libs/eventbus-3.0.0.jar')
+    implementation files('src/main/libs/glide-4.0.0.jar')
+    implementation files('src/main/libs/MiChannelPackage_release_1.1.jar')
+    implementation files('src/main/libs/migamepluginstat_31.jar')
+    implementation files('src/main/libs/migamesdk-base-lib-1.2.1.jar')
+    implementation files('src/main/libs/migamesdk-offline-3.4.1.jar')
+    implementation files('src/main/libs/milinksdk-3.3.0.jar')
+    implementation files('src/main/libs/okhttp-3.9.0.jar')
+    implementation files('src/main/libs/okio-1.13.0.jar')
+    implementation files('src/main/libs/org.apache.http.legacy.jar')
+    implementation files('src/main/libs/payecoplugin_standard_simple_3-2.2.3.jar')
+    implementation files('src/main/libs/protobuf-java-2.6.1.jar')
+    implementation files('src/main/libs/reporter-1.0.4.jar')
+    implementation files('src/main/libs/support-annotations-27.1.1.jar')
+    implementation files('src/main/libs/support-compat-27.1.1.jar')
+    implementation files('src/main/libs/support-core-ui-27.1.1.jar')
+    implementation files('src/main/libs/support-core-utils-27.1.1.jar')
+    implementation files('src/main/libs/support-fragment-27.1.1.jar')
+    implementation files('src/main/libs/zxing-3.1.0.jar')
+}

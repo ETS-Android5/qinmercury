@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_container"
+        style="@style/MgsdkFragmentAlipayContainer"
+        android:background="#90000000"
+        android:visibility="gone">
+
+
+        <LinearLayout
+            android:id="@+id/popup_anima"
+            style="@style/MgsdkFragmentAlipayPopup"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="23.3dp"
+                android:gravity="center"
+                android:text="开通支付宝免密支付"
+                android:textColor="#E5000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_scri"
+                style="@style/MgsdkAliRemindText"
+                android:layout_marginTop="20dp"
+                android:text="支付宝免密支付是支付宝推出的更便捷的支付方式，不用频繁输入密码。" />
+
+            <Button
+                android:id="@+id/btn_nopass"
+                style="@style/MgsdkAliButton"
+                android:layout_marginTop="30dp"
+                android:text="支付宝免密支付" />
+
+            <Button
+                android:id="@+id/btn_pass"
+                style="@style/MgsdkAliButton"
+                android:layout_marginTop="16.7dp"
+                android:background="@drawable/mgsdk_btn_ali_white_selector"
+                android:text="支付宝支付"
+                android:textColor="#33B4FF" />
+
+            <Button
+                android:id="@+id/btn_iknow"
+                style="@style/MgsdkAliButton"
+                android:layout_marginTop="16.7dp"
+                android:text="我知道了"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_sure"
+                style="@style/MgsdkAliButton"
+                android:layout_marginTop="16.7dp"
+                android:text="确定"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_go_sign"
+                style="@style/MgsdkAliButton"
+                android:layout_marginTop="16.7dp"
+                android:text="确定"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_cancel_sign"
+                style="@style/MgsdkAliButton"
+                android:layout_marginTop="16.7dp"
+                android:text="确定"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/popup_anima"
+            android:layout_alignRight="@id/popup_anima"
+            android:layout_marginTop="6.7dp"
+            android:layout_marginRight="6.7dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/misdk_question" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

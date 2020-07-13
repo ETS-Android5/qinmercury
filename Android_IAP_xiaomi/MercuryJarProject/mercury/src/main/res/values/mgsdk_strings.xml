@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="mgsdk_text_alipay_remind_title">免密支付说明</string>
+    <string name="mgsdk_text_alipay_remind_1">单笔扣款限额%1$.2f元，每日累计限额%2$.2f元</string>
+    <string name="mgsdk_text_alipay_remind_2">单笔金额高于%1$.2f元或者当日累计支付满%2$.2f元时，需要你输入支付密码确认才会扣款</string>
+    <string name="mgsdk_text_alipay_remind_3">扣款渠道：支付宝余额、信用卡、储蓄卡、余额宝、花呗等</string>
+    <string name="mgsdk_text_alipay_remind_4">扣款顺序：请查看“支付宝—我的—头像—设置—支付设置—默认付款方式”</string>
+    <string name="mgsdk_text_alipay_remind_5">如需关闭免密支付，请使用已签约免密的支付宝账号登录支付宝客户端进行解约，操作步骤“支付宝—我的—设置—支付设置—免密支付/自动扣款”</string>
+    <string name="mgsdk_text_iknown">我知道了</string>
+    <string name="mgsdk_ok">确定</string>
+    <string name="mgsdk_cancel">取消</string>
+    <string name="mgsdk_prompt">提示</string>
+    <string name="mgsdk_sign_interrupt_remind">您尚未完成免密支付签约，是否继续？</string>
+    <string name="verify_now">立即注册</string>
+    <string name="verify_pay_fail">支付失败</string>
+
+    <string name="anti_addiction_quit">退出游戏</string>
+
+    <string name="anti_addiction_rest">休息一下</string>
+
+    <string name="anti_addiction_realname_detail">我的实名信息</string>
+
+    <string name="anti_addiction_ok">确定</string>
+    <string name="anti_addiction_please_rest">请您休息一下，注意保护眼睛哦</string>
+    <string name="anti_addiction_no_time_left">您今天游戏时长已超过%1$d分钟，根据国家相关规定，今天您将无法登录游戏，请注意休息，明天再来哦</string>
+    <string name="anti_addiction_have_a_rest">休息一下</string>
+    <string name="anti_addiction_tired">累了吧，请合理安排游戏时间</string>
+    <string name="anti_addiction_today_time_left">您今天已经玩了%1$s分钟，根据国家相关规定，%2$d分钟后您将无法继续游戏，请注意休息</string>
+    <string name="anti_addiction_night_late">夜深了，请合理安排游戏时间</string>
+    <string name="anti_addiction_daily_time_left">每天的%1$s~次日%2$s为休息时间，根据国家相关规定，%3$d分钟后您将无法继续游戏，请注意休息</string>
+    <string name="anti_addiction_grown_healthy">好好休息，才能健康成长哦</string>
+    <string name="anti_addiction_cannot_play">每天的%1$s~次日%2$s为休息时间，根据国家相关规定，该时间段内无法登录游戏，请注意休息哦</string>
+    <string name="anti_addiction_time_left">今日游戏时长剩余%d分钟，请注意休息</string>
+
+    <string name="btn_ok">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="ask_download_service">您需要安装新版本的游戏服务，才能使用%s功能，是否安装游戏服务？</string>
+    <string name="mifloat_account_error">此功能您需要重新登录后使用。</string>
+    <string name="install_gameservice">安装游戏服务</string>
+    <string name="ask_download_gamecenter_title">安装游戏中心</string>
+    <string name="ask_download_gamecenter">您需要安装新版本的游戏中心，才能使用%s功能，是否安装游戏中心？</string>
+
+</resources>
