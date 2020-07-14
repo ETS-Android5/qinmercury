@@ -522,13 +522,14 @@ def run():
 		if file_name.find(".keystore")!=-1:
 			game_apk_path = os.path.dirname(os.path.realpath(__file__.replace("\\","/"))).replace("\\","/")+"/"+file_name
 			break
-
+	build_all = False
 	config=configparser.ConfigParser()
 	config.read(PythonLocation()+"/android_builder_config.ini",encoding="UTF-8")
 	channel = config.sections()
 	print("---Choice your channel---")
 	for index, name in enumerate(channel):
 		print(f"[{index}]	{name}	")
+	print(f"[98]	Build All Project	")
 	print(f"[99]	Clean Project	")
 	print("-------------------------")
 	your_channel=""
@@ -536,50 +537,89 @@ def run():
 		your_channel=input("Input channel's numbner:")
 		if your_channel=="99":
 			clean_project()
+		if your_channel=="98":
+			build_all = True
+			break
 		if your_channel.isnumeric():
-			if int(your_channel)<= len(channel)-1:
+			if int(your_channel)<= len(channel):
 				break
 			else:
 				print('You number can not over'+str(len(channel)-1))
 				continue
 		else:
 			print('Your input is not number')
+	if build_all==True:
+		for i in range(len(channel)):
+			your_channel = i
+			ChannelName = channel[int(your_channel)]
+			PackageName  = config.get(ChannelName,"PackageName")
+			BASE		 = config.get(ChannelName,"BASE")
+			SHOW 		 = config.get(ChannelName,"SHOW")
+			IAP  		 = config.get(ChannelName,"IAP")
+			APK_PATH	 = config.get(ChannelName,"PATH")
+			APKName	     = config.get(ChannelName,"APKName")
 
-	ChannelName = channel[int(your_channel)]
-	PackageName  = config.get(ChannelName,"PackageName")
-	BASE		 = config.get(ChannelName,"BASE")
-	SHOW 		 = config.get(ChannelName,"SHOW")
-	IAP  		 = config.get(ChannelName,"IAP")
-	APK_PATH	 = config.get(ChannelName,"PATH")
-	APKName	     = config.get(ChannelName,"APKName")
+			config_path=configparser.ConfigParser()
+			if os.path.isfile(PythonLocation()+"/android_builder_path.ini"):
+				config_path.read(PythonLocation()+"/android_builder_path.ini",encoding="UTF-8")
+				if config_path.has_section(ChannelName):
+					APK_PATH	 = config_path.get(ChannelName,"PATH")
+					print("[News]	Using new path from android_builder_path.ini")
+			else:
+				shutil.copy(PythonLocation()+"/z_PythonCode/android_builder_path.ini", PythonLocation()+"/android_builder_path.ini")
 
-	config_path=configparser.ConfigParser()
-	if os.path.isfile(PythonLocation()+"/android_builder_path.ini"):
-		config_path.read(PythonLocation()+"/android_builder_path.ini",encoding="UTF-8")
-		if config_path.has_section(ChannelName):
-			APK_PATH	 = config_path.get(ChannelName,"PATH")
-			print("[News]	Using new path from android_builder_path.ini")
+			print("[Keystore]	"+game_apk_path)
+			print("[ChannelName]	"+ChannelName)
+			print("[PackageName]	"+PackageName)
+			print("[BASE]	"+BASE)
+			print("[SHOW]	"+SHOW)
+			print("[IAP]	"+IAP)
+			print("[APK_PATH]	"+APK_PATH)
+			print("[APKName]	"+APKName)
+			starttime = datetime.datetime.now()
+
+			sam = SDKAppendManager(channel_base = BASE,channel_show = SHOW, channel_IAP = IAP, game_apk_path = APK_PATH, channel_name = ChannelName, package_name = PackageName, apk_name = APKName)
+			sam._merge_package()
+
+			endtime = datetime.datetime.now()
+			print ("————————————————————————————————")
+			print ("	Total Time:"+str((endtime-starttime).seconds)+" s")
+			print ("————————————————————————————————")
 	else:
-		shutil.copy(PythonLocation()+"/z_PythonCode/android_builder_path.ini", PythonLocation()+"/android_builder_path.ini")
+		ChannelName = channel[int(your_channel)]
+		PackageName  = config.get(ChannelName,"PackageName")
+		BASE		 = config.get(ChannelName,"BASE")
+		SHOW 		 = config.get(ChannelName,"SHOW")
+		IAP  		 = config.get(ChannelName,"IAP")
+		APK_PATH	 = config.get(ChannelName,"PATH")
+		APKName	     = config.get(ChannelName,"APKName")
 
-	print("[Keystore]	"+game_apk_path)
-	print("[ChannelName]	"+ChannelName)
-	print("[PackageName]	"+PackageName)
-	print("[BASE]	"+BASE)
-	print("[SHOW]	"+SHOW)
-	print("[IAP]	"+IAP)
-	print("[APK_PATH]	"+APK_PATH)
-	print("[APKName]	"+APKName)
-	starttime = datetime.datetime.now()
+		config_path=configparser.ConfigParser()
+		if os.path.isfile(PythonLocation()+"/android_builder_path.ini"):
+			config_path.read(PythonLocation()+"/android_builder_path.ini",encoding="UTF-8")
+			if config_path.has_section(ChannelName):
+				APK_PATH	 = config_path.get(ChannelName,"PATH")
+				print("[News]	Using new path from android_builder_path.ini")
+		else:
+			shutil.copy(PythonLocation()+"/z_PythonCode/android_builder_path.ini", PythonLocation()+"/android_builder_path.ini")
 
-	sam = SDKAppendManager(channel_base = BASE,channel_show = SHOW, channel_IAP = IAP, game_apk_path = APK_PATH, channel_name = ChannelName, package_name = PackageName, apk_name = APKName)
-	sam._merge_package()
+		print("[Keystore]	"+game_apk_path)
+		print("[ChannelName]	"+ChannelName)
+		print("[PackageName]	"+PackageName)
+		print("[BASE]	"+BASE)
+		print("[SHOW]	"+SHOW)
+		print("[IAP]	"+IAP)
+		print("[APK_PATH]	"+APK_PATH)
+		print("[APKName]	"+APKName)
+		starttime = datetime.datetime.now()
 
-	endtime = datetime.datetime.now()
-	print ("————————————————————————————————")
-	print ("	Total Time:"+str((endtime-starttime).seconds)+" s")
-	print ("————————————————————————————————")
+		sam = SDKAppendManager(channel_base = BASE,channel_show = SHOW, channel_IAP = IAP, game_apk_path = APK_PATH, channel_name = ChannelName, package_name = PackageName, apk_name = APKName)
+		sam._merge_package()
 
+		endtime = datetime.datetime.now()
+		print ("————————————————————————————————")
+		print ("	Total Time:"+str((endtime-starttime).seconds)+" s")
+		print ("————————————————————————————————")
 
 if __name__ == '__main__':
 	run()
