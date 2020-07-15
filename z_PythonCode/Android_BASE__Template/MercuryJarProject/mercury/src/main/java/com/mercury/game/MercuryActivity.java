@@ -231,7 +231,7 @@ public class MercuryActivity  {
 		LogLocal("[getDeviceId] -readFileData(\"UserIMEI\") = ["+readFileData("UserIMEI")+"]");
 		if((imei==null||imei=="")&&(readFileData("UserIMEI")==null||readFileData("UserIMEI")==""))
 		{
-			imei=MercuryApplication.channelname+java.util.UUID.randomUUID();
+			imei= ""+java.util.UUID.randomUUID();
 			writeFileData("UserIMEI",imei);
 			strUserID=imei;
 			LogLocal("[getDeviceId] write imei = ["+imei+"]");
