@@ -25,6 +25,7 @@
 
 		<!--sdk-->
         <meta-data android:name="channel_name" android:value="demo"/>
+        <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
 		<!--end-->
     </application>
 	<!--sdkxml-->
