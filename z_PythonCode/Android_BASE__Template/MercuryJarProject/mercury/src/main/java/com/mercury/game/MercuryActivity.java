@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,6 +33,9 @@ import com.mercury.game.util.Function;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MD5;
 import com.mercury.game.util.MercuryConst;
+import com.mercury.game.util.PermissionConstants;
+import com.mercury.game.util.PermissionUtils;
+import com.mercury.game.util.PhoneUtils;
 
 
 import java.io.File;
@@ -40,6 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
@@ -71,13 +76,14 @@ public class MercuryActivity  {
 	public static String LongChannelID="";
 	private static ImageView img = null;
 	public static String GameName="ww1";
+	public static String deviceId = "";
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
 		LogLocal("[MercuryActivity][InitSDK]123");
 		mContext = ContextFromUsers;
 		activityforappbase=this;
 		ChannelSplash();
-		PlayVideo();
+//		PlayVideo();
 		getDeviceId(mContext);
 		InitChannel(appcall);
 		InitAd(appcall);
@@ -206,43 +212,48 @@ public class MercuryActivity  {
  	    id=temp+random;    
  	    return id;    
  	}
-
-	public static String getDeviceId(Context context) {
+	public String UserDeviceID()
+	{
+		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
+			@Override
+			public void onGranted(List<String> permissionsGranted) {
+				deviceId = PhoneUtils.getUnicodeId(mContext);
+			}
+			@Override
+			public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
+				//用户拒绝权限
+				deviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+			}
+		}).rationale(new PermissionUtils.OnRationaleListener() {
+			@Override
+			public void rationale(ShouldRequest shouldRequest) {
+				shouldRequest.again(true);
+			}
+		}).request();
+		return deviceId;
+	}
+	public String getDeviceId(Context context) {
 
 		String strUserID = "";
 		String imei = "";
 
-		try {
-			TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-			if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-				// TODO: Consider calling
-				//    ActivityCompat#requestPermissions
-				// here to request the missing permissions, and then overriding
-				//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-				//                                          int[] grantResults)
-				// to handle the case where the user grants the permission. See the documentation
-				// for ActivityCompat#requestPermissions for more details.
-				imei = tm.getDeviceId();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		imei = UserDeviceID();
 		LogLocal("[getDeviceId] -imei = ["+imei+"]");
 		LogLocal("[getDeviceId] -readFileData(\"UserIMEI\") = ["+readFileData("UserIMEI")+"]");
-		if((imei==null||imei=="")&&(readFileData("UserIMEI")==null||readFileData("UserIMEI")==""))
+		if((imei==null&&imei=="")&&(readFileData("UserIMEI")==null&&readFileData("UserIMEI")==""))
 		{
 			imei= ""+java.util.UUID.randomUUID();
 			writeFileData("UserIMEI",imei);
 			strUserID=imei;
 			LogLocal("[getDeviceId] write imei = ["+imei+"]");
 		}
-		else if((imei==null||imei=="")&&(readFileData("UserIMEI")!=null||readFileData("UserIMEI")!=""))
+		else if((imei==null&&imei=="")&&(readFileData("UserIMEI")!=null&&readFileData("UserIMEI")!=""))
 		{
 			imei=readFileData("UserIMEI");
 			strUserID=imei;
 			LogLocal("[getDeviceId] read imei = ["+imei+"]");
 		}
-		else if((imei!=null||imei!="")&&(readFileData("UserIMEI")!=null||readFileData("UserIMEI")!=""))
+		else if((imei!=null&&imei!="")&&(readFileData("UserIMEI")!=null&&readFileData("UserIMEI")!=""))
 		{
 			strUserID=readFileData("UserIMEI");
 			LogLocal("[getDeviceId] Set imei as local imei = ["+strUserID+"]");
@@ -257,6 +268,7 @@ public class MercuryActivity  {
 		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
 	}
+
 
 	public void InitChannel(final APPBaseInterface appcall)
 	{
