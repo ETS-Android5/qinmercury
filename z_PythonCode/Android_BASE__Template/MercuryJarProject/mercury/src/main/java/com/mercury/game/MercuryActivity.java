@@ -83,7 +83,7 @@ public class MercuryActivity  {
 		InitAd(appcall);
 		GetProductionInfo();
 //		verifyGame(GameName);
-
+		SingmaanLogin();
 
 
 	}

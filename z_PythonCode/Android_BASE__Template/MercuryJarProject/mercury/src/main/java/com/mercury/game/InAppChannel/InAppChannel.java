@@ -131,12 +131,12 @@ public class InAppChannel extends InAppBase {
 	public void SingmaanLogin()
 	{
 		LogLocal("[MercuryActivity][SingmaanLogin]"+DeviceId);
-		LoginSuccessCallBack("SingmaanLogin"+DeviceId);
+		LoginSuccessCallBack(DeviceId);
 	}
 	public void SingmaanLogout()
 	{
 		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
-		LoginCancelCallBack("SingmaanLogout"+DeviceId);
+		LoginCancelCallBack(DeviceId);
 	}
 
 	public void UploadGameData()
