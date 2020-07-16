@@ -19,7 +19,7 @@ android {
             storePassword 'singmaan'
         }
     }
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
 	versionCode 37
