@@ -83,7 +83,7 @@ public class MercuryActivity  {
 		mContext = ContextFromUsers;
 		activityforappbase=this;
 		ChannelSplash();
-//		PlayVideo();
+		PlayVideo();
 		getDeviceId(mContext);
 		InitChannel(appcall);
 		InitAd(appcall);
@@ -124,7 +124,7 @@ public class MercuryActivity  {
 							public void run() {
 								// TODO Auto-generated method stub
 								try {
-									Thread.sleep(1000);
+									Thread.sleep(3000);
 								} catch (InterruptedException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -212,17 +212,39 @@ public class MercuryActivity  {
  	    id=temp+random;    
  	    return id;    
  	}
+
 	public String UserDeviceID()
 	{
+		LogLocal("[MercuryActivity][UserDeviceID] get in");
 		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
 			@Override
 			public void onGranted(List<String> permissionsGranted) {
-				deviceId = PhoneUtils.getUnicodeId(mContext);
+				//用户同意权限
+				writeFileData("UserIMEI","");
+				DeviceId = PhoneUtils.getUnicodeId(mContext);
+				getDeviceId(mContext);
+				LogLocal("[MercuryActivity][UserDeviceID] permission");
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						//调用登录接口
+						Toast.makeText(mContext, "您已通过权限，账户已与您的手机绑定，请放心游戏", Toast.LENGTH_LONG).show();
+					}
+				},3000);
 			}
 			@Override
 			public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
 				//用户拒绝权限
-				deviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+				DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+				LogLocal("[MercuryActivity][UserDeviceID] User denied");
+				getDeviceId(mContext);
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						//调用登录接口
+						Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重现赋予权限", Toast.LENGTH_LONG).show();
+					}
+				},3000);
 			}
 		}).rationale(new PermissionUtils.OnRationaleListener() {
 			@Override
@@ -230,14 +252,13 @@ public class MercuryActivity  {
 				shouldRequest.again(true);
 			}
 		}).request();
-		return deviceId;
+		return DeviceId;
 	}
 	public String getDeviceId(Context context) {
-
+		LogLocal("[getDeviceId] sssssss");
 		String strUserID = "";
 		String imei = "";
-
-		imei = UserDeviceID();
+		imei = DeviceId;
 		LogLocal("[getDeviceId] -imei = ["+imei+"]");
 		LogLocal("[getDeviceId] -readFileData(\"UserIMEI\") = ["+readFileData("UserIMEI")+"]");
 		if((imei==null&&imei=="")&&(readFileData("UserIMEI")==null&&readFileData("UserIMEI")==""))
@@ -253,9 +274,10 @@ public class MercuryActivity  {
 			strUserID=imei;
 			LogLocal("[getDeviceId] read imei = ["+imei+"]");
 		}
-		else if((imei!=null&&imei!="")&&(readFileData("UserIMEI")!=null&&readFileData("UserIMEI")!=""))
+		else if((imei!=null&&imei!="")&&(readFileData("UserIMEI")==null&&readFileData("UserIMEI")==""))
 		{
-			strUserID=readFileData("UserIMEI");
+			writeFileData("UserIMEI",imei);
+			strUserID=imei;
 			LogLocal("[getDeviceId] Set imei as local imei = ["+strUserID+"]");
 		}
 		else
@@ -268,6 +290,7 @@ public class MercuryActivity  {
 		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
 	}
+
 
 
 	public void InitChannel(final APPBaseInterface appcall)
