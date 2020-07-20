@@ -56,6 +56,7 @@ import static com.mercury.game.util.MercuryConst.GetProductionList;
 public class MercuryActivity  {
 
 	public static Context mContext = null;
+	public static Activity mActivity = null;
 	private InAppChannel mInAppChannel;
 	public InAppAD mInAppAD;
 	public static int mSimOperatorId;
@@ -77,16 +78,17 @@ public class MercuryActivity  {
 	private static ImageView img = null;
 	public static String GameName="ww1";
 	public static String deviceId = "";
+	public  static APPBaseInterface mappcall= null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
 		LogLocal("[MercuryActivity][InitSDK]123");
-		mContext = ContextFromUsers;
+		mappcall = appcall;
+		mContext =  ContextFromUsers;
+		mActivity = (Activity)ContextFromUsers;
 		activityforappbase=this;
+		LogLocal("[SDKApp]UserDeviceID()="+UserDeviceID());
 		ChannelSplash();
 		PlayVideo();
-		getDeviceId(mContext);
-		InitChannel(appcall);
-		InitAd(appcall);
 		GetProductionInfo();
 //		verifyGame(GameName);
 		SingmaanLogin();
@@ -173,8 +175,12 @@ public class MercuryActivity  {
 		videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
 			@Override
 			public void onCompletion(MediaPlayer mp) {
-
 				LogLocal("[MercuryActivity][PlayVideo] end");
+				((ViewGroup) videoView.getParent()).removeView(videoView);
+				LogLocal("[MercuryActivity][PlayVideo] UserDeviceID");
+				InitChannel(mappcall);
+				InitAd(mappcall);
+				UserDeviceID();
 			}
 		});
 	}
@@ -336,7 +342,9 @@ public class MercuryActivity  {
 			@Override
 			public void run()
 			{
-				mInAppChannel.SingmaanLogin();
+				if(mInAppChannel != null) {
+					mInAppChannel.SingmaanLogin();
+				}
 			}
 		});
 	}
