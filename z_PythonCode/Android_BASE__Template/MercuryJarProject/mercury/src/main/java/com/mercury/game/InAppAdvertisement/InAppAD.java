@@ -92,6 +92,7 @@ public class InAppAD extends InAppBase {
 		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				AdShowFailedCallBack("ActiveInterstitial");
 				dialog.dismiss();
 			}
 		});
@@ -119,6 +120,7 @@ public class InAppAD extends InAppBase {
 		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				AdShowFailedCallBack("ActiveInterstitial");
 				dialog.dismiss();
 			}
 		});
@@ -146,6 +148,7 @@ public class InAppAD extends InAppBase {
 		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				AdShowFailedCallBack("ActiveInterstitial");
 				dialog.dismiss();
 			}
 		});
@@ -173,6 +176,7 @@ public class InAppAD extends InAppBase {
 		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				AdShowFailedCallBack("ActiveInterstitial");
 				dialog.dismiss();
 			}
 		});
