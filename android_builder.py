@@ -29,6 +29,7 @@ class SDKAppendManager():
 		self.__sdk_apk_name = "app-release.apk"
 		self.__sdk_apk_name_only = "app-release"
 		self.__cache_position = "/z_PythonCode/cache/"
+		self.__replace_resouce = "ReplaceResouce"
 		self.__build_APK_script = "merge_building.py"
 		self.__file_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")
 		self.__sdk_path = os.path.dirname(os.path.realpath(__file__)).replace("\\","/")#+"/"+channel
@@ -108,6 +109,10 @@ class SDKAppendManager():
 		self.__modify_xml()
 		self.__APK_name()
 	def _rebuild_game_apk(self):
+		if os.path.isdir(f"{self.__file_path}/{self.__replace_resouce}"):
+			print("[_rebuild_game_apk][copy ReplaceResouce]")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__replace_resouce}",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
+
 		self.__balance_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
 		os.system(f"jar xf  {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")#extract resource from sdk
