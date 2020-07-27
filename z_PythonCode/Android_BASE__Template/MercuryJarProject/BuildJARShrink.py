@@ -158,6 +158,7 @@ class APKBuildManager():
 		#merge xml string into APK
 		print(f"{self.__apk_project}/mercury/src/main/java")
 		java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/java/com")
+		isCommenting = True
 		for java_file in java_files:
 			with open(java_file,encoding="utf8") as file_object:
 				if java_file.find(".DS_Store")!=-1:
@@ -174,7 +175,7 @@ class APKBuildManager():
 							comment_loop=False
 							new_xml.append(line)
 						else:
-							if line.find("//")!=-1:
+							if isCommenting == False:
 								new_xml.append(line.replace("//",""))
 							else:
 								new_xml.append("//"+line)

@@ -27,6 +27,7 @@ import java.util.Set;
  * Create Time:2020/1/14
  */
 public class PermissionUtils {
+    //shrinkpartstart
     private static final List<String> PERMISSIONS = getPermissions();
 
     private static PermissionUtils sInstance;
@@ -350,4 +351,5 @@ public class PermissionUtils {
     public interface ThemeCallback {
         void onActivityCreate(Activity activity);
     }
+    //shrinkpartend
 }
