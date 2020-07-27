@@ -23,7 +23,9 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+//shrinkpartstart
 import android.support.v4.app.ActivityCompat;
+//shrinkpartend
 import android.widget.VideoView;
 
 import com.mercury.game.InAppAdvertisement.InAppAD;
