@@ -28,7 +28,6 @@ import java.util.UUID;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryApplication.channelname;
-import static com.mercury.game.util.Function.verifyGame;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 //end
 

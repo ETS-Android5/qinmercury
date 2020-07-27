@@ -278,7 +278,7 @@ public final class Function {
         }).start();
         return result_json;
     }
-
+    //shrinkpartend
     public static void redeemCode() {
         // TODO Auto-generated method stub
         final EditText inputServer = new EditText(((Activity) MercuryActivity.mContext));
@@ -304,5 +304,5 @@ public final class Function {
         });
         builder.show();
     }
-    //shrinkpartend
+
 }
