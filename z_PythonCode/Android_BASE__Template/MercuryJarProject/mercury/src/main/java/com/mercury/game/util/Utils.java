@@ -1,5 +1,5 @@
 package com.mercury.game.util;
-
+//shrinkpartstart
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
+//shrinkpartend
 /**
  * <pre>
  *     author:
@@ -38,7 +38,7 @@ import java.util.Map;
  * </pre>
  */
 public final class Utils {
-
+    //shrinkpartstart
     @SuppressLint("StaticFieldLeak")
     private static Application sApplication;
 
@@ -353,4 +353,5 @@ public final class Utils {
 
         void onBackground();
     }
+    //shrinkpartend
 }
