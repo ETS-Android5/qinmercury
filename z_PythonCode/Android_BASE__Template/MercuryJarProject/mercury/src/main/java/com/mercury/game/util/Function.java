@@ -237,7 +237,9 @@ public final class Function {
                                         JSONObject json_data = json.getJSONObject("data");
                                         //shrinkpartend
                                         String redeem_code_result = redeem_code;
+                                        //shrinkpartstart
                                         redeem_code_result = (String) json_data.get("result");
+                                        //shrinkpartend
                                         LogLocal("[MercuryActivity][post_redeem_code] redeem_code_result=" + redeem_code_result);
                                         InAppBase.appinterface.onFunctionCallBack(redeem_code_result);
                                         //shrinkpartstart
