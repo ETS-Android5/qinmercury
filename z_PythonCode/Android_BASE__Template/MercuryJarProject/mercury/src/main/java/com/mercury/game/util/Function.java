@@ -194,13 +194,13 @@ public final class Function {
 
         }
     }
-
+    //shrinkpartend
     public static String post_redeem_code(final String redeem_code) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-
+//shrinkpartstart
                     //1.创建OkHttpClient对象
                     OkHttpClient client = new OkHttpClient();
                     //2.创建RequestBody对象
@@ -234,9 +234,12 @@ public final class Function {
                                     if (return_value==200)
                                     {
                                         JSONObject json_data = json.getJSONObject("data");
+                                        //shrinkpartend
+                                        redeem_code_result = redeem_code;
                                         String redeem_code_result = (String) json_data.get("result");
                                         LogLocal("[MercuryActivity][post_redeem_code] redeem_code_result=" + redeem_code_result);
                                         InAppBase.appinterface.onFunctionCallBack(redeem_code_result);
+                                        //shrinkpartstart
                                     }
                                     else if(return_value==201)
                                     {
@@ -257,10 +260,15 @@ public final class Function {
                             Looper.loop();
                         }
                     });
-                } catch (Exception e) {
+                    //shrinkpartend
+                }
+                catch (Exception e)
+                {
                     LogLocal("[MercuryActivity][post_redeem_code] failed=e="+e.toString());
                     e.printStackTrace();
-                } finally {
+                }
+                finally
+                {
                 }
 
             }
