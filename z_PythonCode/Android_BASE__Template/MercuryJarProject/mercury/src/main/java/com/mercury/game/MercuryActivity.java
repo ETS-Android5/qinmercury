@@ -23,11 +23,11 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import static com.mercury.game.util.Function.redeemCode;
 //shrinkpartstart
 import android.support.v4.app.ActivityCompat;
 import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
-import static com.mercury.game.util.Function.redeemCode;
 import static com.mercury.game.util.Function.verifyGame;
 import static com.mercury.game.util.Function.writeFileData;
 //shrinkpartend
