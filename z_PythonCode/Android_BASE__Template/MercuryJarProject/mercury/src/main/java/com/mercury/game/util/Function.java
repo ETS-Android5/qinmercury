@@ -13,16 +13,14 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.mercury.game.MercuryActivity;
-
-import org.apache.http.util.EncodingUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+//shrinkpartstart
+import org.apache.http.util.EncodingUtils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -30,11 +28,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
+//shrinkpartend
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 
 public final class Function {
+    //shrinkpartstart
     private static String result_json;
 
     public static void writeFileData(String fileName, String message) {
@@ -294,4 +293,5 @@ public final class Function {
         });
         builder.show();
     }
+    //shrinkpartend
 }

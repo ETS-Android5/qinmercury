@@ -1,8 +1,9 @@
 package com.mercury.game.util;
 
 import android.Manifest;
+//shrinkpartstart
 import android.support.annotation.StringDef;
-
+//shrinkpartend
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -11,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  * Create Time:2020/1/14
  */
 public class PermissionConstants {
-
+    //shrinkpartstart
     public static final String CALENDAR   = Manifest.permission_group.CALENDAR;
     public static final String CAMERA     = Manifest.permission_group.CAMERA;
     public static final String CONTACTS   = Manifest.permission_group.CONTACTS;
@@ -81,4 +82,5 @@ public class PermissionConstants {
         }
         return new String[]{permission};
     }
+    //shrinkpartend
 }

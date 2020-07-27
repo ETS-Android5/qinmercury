@@ -1,5 +1,5 @@
 package com.mercury.game.util;
-
+//shrinkpartstart
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
+//shrinkpartend
 /**
  * @Author: Risemy
  * Create Time:2020/1/14

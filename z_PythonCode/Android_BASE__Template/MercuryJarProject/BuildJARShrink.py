@@ -159,7 +159,7 @@ class APKBuildManager():
 		print(f"{self.__apk_project}/mercury/src/main/java")
 		java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/java/com")
 		for java_file in java_files:
-			with open("/Users/batista/QinProject/QinMercury/z_PythonCode/Android_BASE__Template/MercuryJarProject/mercury/src/main/java/com/mercury/game/MercuryActivity.java",encoding="utf8") as file_object:
+			with open(java_file,encoding="utf8") as file_object:
 				if java_file.find(".DS_Store")!=-1:
 					continue
 				all_the_text = file_object.readlines()

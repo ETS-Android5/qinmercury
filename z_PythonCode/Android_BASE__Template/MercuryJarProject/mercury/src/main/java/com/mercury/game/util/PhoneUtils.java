@@ -10,7 +10,9 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
+//shrinkpartstart
 import android.support.annotation.RequiresPermission;
+//shrinkpartend
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,7 +40,7 @@ import static android.content.Context.ACTIVITY_SERVICE;
  * </pre>
  */
 public final class PhoneUtils {
-
+    //shrinkpartstart
     private PhoneUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
@@ -371,6 +373,6 @@ public final class PhoneUtils {
         Log.d("Utils", "没有获取到MAC");
         return null;
     }
-
+//shrinkpartend
 }
 
