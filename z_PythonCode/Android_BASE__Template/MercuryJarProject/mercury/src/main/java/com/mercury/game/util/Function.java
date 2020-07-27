@@ -33,8 +33,9 @@ import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 
 public final class Function {
-    //shrinkpartstart
     private static String result_json;
+    //shrinkpartstart
+
 
     public static void writeFileData(String fileName, String message) {
         try {
@@ -235,8 +236,8 @@ public final class Function {
                                     {
                                         JSONObject json_data = json.getJSONObject("data");
                                         //shrinkpartend
-                                        redeem_code_result = redeem_code;
-                                        String redeem_code_result = (String) json_data.get("result");
+                                        String redeem_code_result = redeem_code;
+                                        redeem_code_result = (String) json_data.get("result");
                                         LogLocal("[MercuryActivity][post_redeem_code] redeem_code_result=" + redeem_code_result);
                                         InAppBase.appinterface.onFunctionCallBack(redeem_code_result);
                                         //shrinkpartstart
