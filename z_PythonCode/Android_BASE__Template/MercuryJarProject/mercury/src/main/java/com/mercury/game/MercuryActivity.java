@@ -94,9 +94,9 @@ public class MercuryActivity  {
 		PlayVideo();
 		GetProductionInfo();
 //		verifyGame(GameName);
-		SingmaanLogin();
-
-
+		InitChannel(mappcall);
+		InitAd(mappcall);
+		UserDeviceID();
 	}
 	public String GetProductionInfo()
 	{
@@ -181,9 +181,7 @@ public class MercuryActivity  {
 				LogLocal("[MercuryActivity][PlayVideo] end");
 				((ViewGroup) videoView.getParent()).removeView(videoView);
 				LogLocal("[MercuryActivity][PlayVideo] UserDeviceID");
-				InitChannel(mappcall);
-				InitAd(mappcall);
-				UserDeviceID();
+
 			}
 		});
 	}
