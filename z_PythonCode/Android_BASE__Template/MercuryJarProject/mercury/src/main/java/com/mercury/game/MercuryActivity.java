@@ -25,6 +25,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 //shrinkpartstart
 import android.support.v4.app.ActivityCompat;
+import static com.mercury.game.MercuryApplication.OpenUmeng;
+import static com.mercury.game.util.Function.readFileData;
+import static com.mercury.game.util.Function.redeemCode;
+import static com.mercury.game.util.Function.verifyGame;
+import static com.mercury.game.util.Function.writeFileData;
 //shrinkpartend
 import android.widget.VideoView;
 
@@ -48,11 +53,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static com.mercury.game.MercuryApplication.OpenUmeng;
-import static com.mercury.game.util.Function.readFileData;
-import static com.mercury.game.util.Function.redeemCode;
-import static com.mercury.game.util.Function.verifyGame;
-import static com.mercury.game.util.Function.writeFileData;
+
 import static com.mercury.game.util.MercuryConst.GetProductionList;
 
 public class MercuryActivity  {
@@ -223,6 +224,7 @@ public class MercuryActivity  {
 
 	public String UserDeviceID()
 	{
+		//shrinkpartstart
 		LogLocal("[MercuryActivity][UserDeviceID] get in");
 		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
 			@Override
@@ -296,6 +298,7 @@ public class MercuryActivity  {
 		LogLocal("[getDeviceId] strUserID = ["+strUserID+"]");
 		DeviceId= strUserID;//MD5.getMessageDigest(strUserID.getBytes());
 		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
+		//shrinkpartend
 		return DeviceId;
 	}
 
