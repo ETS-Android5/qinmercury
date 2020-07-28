@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,8 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -155,38 +158,72 @@ public class MercuryActivity  {
 		}
 	}
 
-	public void PlayVideo()
-	{
-		LogLocal("[MercuryActivity][PlayVideo] ChannelSplash.mp4");
-		RelativeLayout.LayoutParams relayout = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.MATCH_PARENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-		relayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		relayout.addRule(RelativeLayout.CENTER_HORIZONTAL);
+	public void PlayVideo() {
 
-		final VideoView videoView = new VideoView(mContext);
-		FrameLayout.LayoutParams videoViewp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT);
-		videoViewp.gravity = Gravity.CENTER;
-		((Activity)mContext).addContentView(videoView,videoViewp);
-
-		String path = "file:///android_asset/ChannelSplash.mp4";
-		videoView.setVideoPath(getAssetsCacheFile(mContext, "ChannelSplash.mp4"));
-		LogLocal("[MercuryActivity][PlayVideo] start");
-
-		videoView.start();
-		LogLocal("[MercuryActivity][PlayVideo] started");
-		videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+		final SurfaceView svStart = new SurfaceView(mActivity);
+		final MediaPlayer mediaPlayer = new MediaPlayer();
+		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+		final SurfaceHolder holder = svStart.getHolder();
+		holder.addCallback(new SurfaceHolder.Callback() {
 			@Override
-			public void onCompletion(MediaPlayer mp) {
-				LogLocal("[MercuryActivity][PlayVideo] end");
-				((ViewGroup) videoView.getParent()).removeView(videoView);
-				LogLocal("[MercuryActivity][PlayVideo] UserDeviceID");
+			public void surfaceCreated(SurfaceHolder surfaceHolder) {
+				Log.e("SurfaceView", "surfaceCreated");
+			}
+
+			@Override
+			public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+				mediaPlayer.setDisplay(holder);
+				Log.e("SurfaceView", "surfaceChanged");
+			}
+
+			@Override
+			public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+				Log.e("SurfaceView", "surfaceDestroyed");
 
 			}
 		});
+		holder.setKeepScreenOn(true);
+		mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+			@Override
+			public void onPrepared(MediaPlayer mp) {
+				FrameLayout.LayoutParams videoViewp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+				videoViewp.gravity = Gravity.CENTER;
+				mActivity.addContentView(svStart, videoViewp);
+				if (!mediaPlayer.isPlaying()) {
+					mediaPlayer.start();
+				}
+			}
+		});
+		mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+			@Override
+			public void onCompletion(MediaPlayer mediaPlayer) {
+				if (mediaPlayer.isPlaying()) {
+					mediaPlayer.stop();
+				}
+				mediaPlayer.release();
+				//播放完成  做你的其他操作
+				((ViewGroup) svStart.getParent()).removeView(svStart);
+				InitAd(mappcall);
+			}
+		});
+
+		try {
+			String path = getAssetsCacheFile(mActivity, "ChannelSplash.mp4");
+
+//            AssetFileDescriptor afd = activity.getResources().getAssets().openFd("ChannelSplash.mp4");
+			mediaPlayer.setDataSource(path);
+//            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+			mediaPlayer.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+			mediaPlayer.setLooping(false);
+			mediaPlayer.prepare();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			Log.e("IOException", ioe.getMessage());
+		}
+
 	}
 
-	public String getAssetsCacheFile(Context context, String fileName)   {
+	public static String getAssetsCacheFile(Context context, String fileName) {
 		File cacheFile = new File(context.getCacheDir(), fileName);
 		try {
 			InputStream inputStream = context.getAssets().open(fileName);
@@ -209,6 +246,7 @@ public class MercuryActivity  {
 		}
 		return cacheFile.getAbsolutePath();
 	}
+
  	public String GetUniqueID(){
  	    String id="";   
  	    //获取当前时间戳         
