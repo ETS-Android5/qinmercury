@@ -146,6 +146,7 @@ class APKBuildManager():
 		self.__sdk_apk_name_only = "app-release"
 		self.__apk_project = PathLib(os.path.dirname(os.path.realpath(__file__)))
 		self.__copyFileCounts = 0
+		self.__isCommenting = True
 
 	def __all_files_in_folder(self,_path):
 		ListMyFolder = []
@@ -158,7 +159,7 @@ class APKBuildManager():
 		#merge xml string into APK
 		print(f"{self.__apk_project}/mercury/src/main/java")
 		java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/java/com")
-		isCommenting = True
+		java_files.append(f"{self.__apk_project}/mercury/build.gradle")
 		for java_file in java_files:
 			with open(java_file,encoding="utf8") as file_object:
 				if java_file.find(".DS_Store")!=-1:
@@ -175,7 +176,7 @@ class APKBuildManager():
 							comment_loop=False
 							new_xml.append(line)
 						else:
-							if isCommenting == False:
+							if self.__isCommenting == False:
 								new_xml.append(line.replace("//",""))
 							else:
 								new_xml.append("//"+line)
@@ -218,8 +219,6 @@ def __delete_zip_files(_path):
 def main():
 	apk = APKBuildManager()
 	apk._java_comment()
-
-
 
 	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/../../z_PythonCode/"+file_path+".py"):
