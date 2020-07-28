@@ -157,7 +157,7 @@ class APKBuildManager():
 
 	def _java_comment(self):
 		#merge xml string into APK
-		print("self.__isCommenting="+self.__isCommenting)
+		print("self.__isCommenting="+str(self.__isCommenting))
 		print(f"{self.__apk_project}/mercury/src/main/java")
 		java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/java/com")
 		java_files.append(f"{self.__apk_project}/mercury/build.gradle")
@@ -187,7 +187,7 @@ class APKBuildManager():
 				file_context.writelines(new_xml)
 
 	def _delete_file(self):
-		print("self.__isCommenting="+self.__isCommenting)
+		print("self.__isCommenting="+str(self.__isCommenting))
 		if self.__isCommenting == True:
 			java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/libs")
 			for java_file in java_files:
@@ -195,12 +195,14 @@ class APKBuildManager():
 					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
 					shutil.move(java_file,PythonLocation()+"/"+file_name)
 		else:
-			java_files = self.__all_files_in_folder(PythonLocation()+"/"+file_name)
+			java_files = self.__all_files_in_folder(PythonLocation())
 			for java_file in java_files:
 				if java_file.find(".jar")!=-1:
 					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
 					shutil.move(java_file,f"{self.__apk_project}/mercury/src/main/libs")
 
+	def _set_building(self):
+		self.__isCommenting = False
 
 
 def delete_folder(src):
@@ -240,7 +242,7 @@ def main():
 	apk = APKBuildManager()
 	apk._java_comment()
 	apk._delete_file()
-	apk.__isCommenting=False
+	apk._set_building()
 	apk._java_comment()
 	apk._delete_file()
 
