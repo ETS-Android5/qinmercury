@@ -238,6 +238,9 @@ def main():
 	apk = APKBuildManager()
 	apk._java_comment()
 	apk._delete_file()
+	apk.__isCommenting=False
+	apk._java_comment()
+	apk._delete_file()
 
 	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/../../z_PythonCode/"+file_path+".py"):
