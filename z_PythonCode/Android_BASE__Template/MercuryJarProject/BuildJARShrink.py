@@ -157,6 +157,7 @@ class APKBuildManager():
 
 	def _java_comment(self):
 		#merge xml string into APK
+		print("self.__isCommenting="+self.__isCommenting)
 		print(f"{self.__apk_project}/mercury/src/main/java")
 		java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/java/com")
 		java_files.append(f"{self.__apk_project}/mercury/build.gradle")
@@ -186,6 +187,7 @@ class APKBuildManager():
 				file_context.writelines(new_xml)
 
 	def _delete_file(self):
+		print("self.__isCommenting="+self.__isCommenting)
 		if self.__isCommenting == True:
 			java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/libs")
 			for java_file in java_files:
