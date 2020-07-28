@@ -189,13 +189,14 @@ class APKBuildManager():
 	def _delete_file(self):
 		print("self.__isCommenting="+str(self.__isCommenting))
 		if self.__isCommenting == True:
-			java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/libs")
+			java_files = self.__list_folder(f"{self.__apk_project}/mercury/src/main/libs")
 			for java_file in java_files:
 				if java_file.find(".jar")!=-1:
+					java_file = f"{self.__apk_project}/mercury/src/main/libs/{java_file}"
 					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
 					shutil.move(java_file,PythonLocation()+"/"+file_name)
 		else:
-			java_files = self.__all_files_in_folder(PythonLocation())
+			java_files = self.__list_folder(PythonLocation())
 			for java_file in java_files:
 				if java_file.find(".jar")!=-1:
 					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
@@ -204,6 +205,11 @@ class APKBuildManager():
 	def _set_building(self):
 		self.__isCommenting = False
 
+	def	__list_folder(self, _path):
+		List = []
+		for i in os.listdir(_path):
+			List.append(i)
+		return List
 
 def delete_folder(src):
 	'''delete files and folders'''
@@ -215,7 +221,7 @@ def delete_folder(src):
 	elif os.path.isdir(src):
 		for item in os.listdir(src):
 			itemsrc=os.path.join(src,item)
-			delete_folder(itemsrc) 
+			delete_folder(itemsrc)
 		try:
 			os.rmdir(src)
 		except:
