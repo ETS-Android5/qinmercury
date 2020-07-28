@@ -198,6 +198,8 @@ class APKBuildManager():
 		else:
 			java_files = self.__list_folder(PythonLocation())
 			for java_file in java_files:
+				if java_file.find("MercurySDK.jar")!=-1:
+					continue
 				if java_file.find(".jar")!=-1:
 					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
 					shutil.move(java_file,f"{self.__apk_project}/mercury/src/main/libs")
