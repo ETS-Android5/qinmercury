@@ -185,6 +185,22 @@ class APKBuildManager():
 			with open(java_file,mode='w',encoding="utf8") as file_context:
 				file_context.writelines(new_xml)
 
+	def _delete_file(self):
+		if self.__isCommenting == True:
+			java_files = self.__all_files_in_folder(f"{self.__apk_project}/mercury/src/main/libs")
+			for java_file in java_files:
+				if java_file.find(".jar")!=-1:
+					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
+					shutil.move(java_file,PythonLocation()+"/"+file_name)
+		else:
+			java_files = self.__all_files_in_folder(PythonLocation()+"/"+file_name)
+			for java_file in java_files:
+				if java_file.find(".jar")!=-1:
+					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
+					shutil.move(java_file,f"{self.__apk_project}/mercury/src/main/libs")
+
+
+
 def delete_folder(src):
 	'''delete files and folders'''
 	if os.path.isfile(src):
@@ -200,6 +216,7 @@ def delete_folder(src):
 			os.rmdir(src)
 		except:
 			pass
+
 def __delete_zip_files(_path):
 	your_delet_file="qinmercury"
 	old_zipfile=_path #旧文件
@@ -216,9 +233,11 @@ def __delete_zip_files(_path):
 	zin.close()
 	print("deleted signature")
 	shutil.move(new_zipfile,old_zipfile)
+
 def main():
 	apk = APKBuildManager()
 	apk._java_comment()
+	apk._delete_file()
 
 	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/../../z_PythonCode/"+file_path+".py"):
