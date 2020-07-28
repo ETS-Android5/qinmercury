@@ -178,7 +178,7 @@ class APKBuildManager():
 							new_xml.append(line)
 						else:
 							if self.__isCommenting == False:
-								new_xml.append(line.replace("//",""))
+								new_xml.append(line[2:])
 							else:
 								new_xml.append("//"+line)
 					else:
@@ -194,7 +194,7 @@ class APKBuildManager():
 				if java_file.find(".jar")!=-1:
 					java_file = f"{self.__apk_project}/mercury/src/main/libs/{java_file}"
 					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
-					shutil.move(java_file,PythonLocation()+"/"+file_name)
+					shutil.move(java_file,PythonLocation()+"/"+file_name+".jar")
 		else:
 			java_files = self.__list_folder(PythonLocation())
 			for java_file in java_files:
