@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.miui.zeus.mimo.sdk.view.EventRecordFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.miui.zeus.mimo.sdk.video.VideoAdView
+        android:id="@+id/video_ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:layout_gravity="bottom"
+        android:background="#e6ffffff">
+
+        <ViewFlipper
+            android:id="@+id/view_flipper"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="21dp"
+            android:inAnimation="@anim/anim_in"
+            android:outAnimation="@anim/anim_out">
+
+        </ViewFlipper>
+
+        <TextView
+            android:id="@+id/download_btn"
+            android:layout_width="73dp"
+            android:layout_height="27dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="31dp"
+            android:background="@drawable/reward_banner_btn_bg"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+
+        <RelativeLayout
+            android:id="@+id/info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="21dp"
+            android:layout_marginRight="29dp"
+            android:layout_toLeftOf="@id/download_btn"
+            android:layout_toRightOf="@id/view_flipper"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="1"
+                android:textColor="#4d4d4d"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="1"
+                android:textColor="#b3b3b3"
+                android:textSize="10sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_end_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</com.miui.zeus.mimo.sdk.view.EventRecordFrameLayout>

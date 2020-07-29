@@ -54,6 +54,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		}
 
 	}
+
 	public void APPApplicationInit(Application context)
 	{
 		Acontext = context;

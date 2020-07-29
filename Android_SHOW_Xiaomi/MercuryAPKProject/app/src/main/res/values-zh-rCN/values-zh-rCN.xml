@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reward_video_press_back_msg">视频结束才能领取奖励</string>
+</resources>

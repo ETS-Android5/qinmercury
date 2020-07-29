@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.miui.zeus.mimo.sdk.view.EventRecordFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="13.3dp"
+        android:layout_marginRight="13.3dp"
+        android:background="@drawable/skip_background"
+        android:text=" 跳过 "
+        android:textColor="#ffffff"
+        android:textSize="16sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_adMark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:layout_marginLeft="13.3dp"
+        android:layout_marginTop="13.3dp"
+        android:background="@drawable/skip_background"
+        android:textColor="#FFFFFF" />
+
+    <RelativeLayout
+        android:id="@+id/custom_area"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_gravity="bottom">
+
+        <FrameLayout
+            android:id="@+id/custom_background"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:alpha="0.4"
+            android:background="#000000" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="13.3dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.6"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/next"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="13.3dp"
+                android:background="@drawable/right_arrow" />
+        </RelativeLayout>
+    </RelativeLayout>
+</com.miui.zeus.mimo.sdk.view.EventRecordFrameLayout>

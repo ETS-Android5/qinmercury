@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <com.miui.zeus.mimo.sdk.view.EventRecordRelativeLayout
+        android:id="@+id/ad_image_layout"
+        android:layout_width="427dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <com.miui.zeus.mimo.sdk.view.FlexibleImageView
+            android:id="@+id/ad_picture_view"
+            android:layout_width="427dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/tv_adMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ad_picture_view"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="13dp"
+            android:layout_marginBottom="13dp"
+            android:background="@drawable/skip_background"
+            android:gravity="center"
+            android:padding="3dp"
+            android:textColor="#ffffff"
+            android:textSize="9dp" />
+
+        <ImageView
+            android:id="@+id/close_img"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/close_v2_bg" />
+
+    </com.miui.zeus.mimo.sdk.view.EventRecordRelativeLayout>
+</RelativeLayout>

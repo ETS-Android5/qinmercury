@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1a1a1a">
+
+    <com.miui.zeus.mimo.sdk.view.FlexibleImageView
+        android:id="@+id/flv_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter" />
+
+    <ImageView
+        android:id="@+id/close_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/reward_video_close_black" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/flv_video">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="88dp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="16dp"
+            android:maxLines="1"
+            android:textColor="#ffffff"
+            android:textSize="20sp"></TextView>
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textColor="#808080"
+            android:textSize="14sp"></TextView>
+
+        <TextView
+            android:id="@+id/jump_btn"
+            android:layout_width="225dp"
+            android:layout_height="47dp"
+            android:layout_below="@id/summary"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/reward_round_btn_small"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="#ffffff"
+            android:textSize="16sp"></TextView>
+
+        <TextView
+            android:id="@+id/dsp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="7dp"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/banner_dsp_background"
+            android:paddingLeft="4dp"
+            android:paddingTop="2dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="2dp"
+            android:textColor="#787878"
+            android:textSize="9sp" />
+    </RelativeLayout>
+</RelativeLayout>
