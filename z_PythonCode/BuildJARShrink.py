@@ -147,6 +147,7 @@ class APKBuildManager():
 		self.__apk_project = PathLib(os.path.dirname(os.path.realpath(__file__)))
 		self.__copyFileCounts = 0
 		self.__isCommenting = True
+		self.__PythonLocation = os.path.dirname(os.path.realpath(__file__))
 
 	def __all_files_in_folder(self,_path):
 		ListMyFolder = []
@@ -194,16 +195,17 @@ class APKBuildManager():
 				if java_file.find(".jar")!=-1:
 					java_file = f"{self.__apk_project}/mercury/src/main/libs/{java_file}"
 					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
-					shutil.move(java_file,PythonLocation()+"/"+file_name+".jar")
+					shutil.move(java_file,self.__PythonLocation+"/"+file_name+".jar")
 		else:
-			java_files = self.__list_folder(PythonLocation())
+			print("1:"+self.__PythonLocation)
+			java_files = self.__list_folder(self.__PythonLocation)
 			print("java_files="+str(java_files))
 			for java_file in java_files:
 				if java_file.find("MercurySDK.jar")!=-1:
 					continue
 				if java_file.find(".jar")!=-1:
 					file_name = os.path.splitext(java_file)[0][os.path.splitext(java_file)[0].rfind("/")+1:]
-					shutil.move(PythonLocation()+"/"+java_file,f"{self.__apk_project}/mercury/src/main/libs")
+					shutil.move(self.__PythonLocation+"/"+java_file,f"{self.__apk_project}/mercury/src/main/libs")
 
 	def _set_building(self):
 		self.__isCommenting = False
