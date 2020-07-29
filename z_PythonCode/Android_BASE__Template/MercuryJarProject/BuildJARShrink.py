@@ -251,9 +251,6 @@ def main():
 	apk = APKBuildManager()
 	apk._java_comment()
 	apk._delete_file()
-	apk._set_building()
-	apk._java_comment()
-	apk._delete_file()
 
 	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/../../z_PythonCode/"+file_path+".py"):
@@ -283,7 +280,9 @@ def main():
 		if os.path.isdir("./../../MercuryAPKProject_pure/app/src/main/libs")==False:os.mkdir("./../../MercuryAPKProject_pure/app/src/main/libs")
 		shutil.copy("./../MercurySDK.jar", "./../../MercuryAPKProject_pure/app/src/main/libs/MercurySDK.jar")
 	if os.path.exists("./../cache"):delete_folder("./../cache")
-
+	apk._set_building()
+	apk._java_comment()
+	apk._delete_file()
 
 if __name__ == '__main__':
     main()
