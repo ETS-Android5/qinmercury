@@ -67,7 +67,7 @@ class SDKAppendManager():
 		self._modify_config()
 		self._merge_sdk_resource()
 		self._rebuild_game_apk()
-		self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
+		os.system("adb install -r "+ self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk"))
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}"): shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
 
 	def _decompile_game_apk(self):
@@ -384,8 +384,8 @@ class SDKAppendManager():
 				f = i.replace(" ","")
 				if f.find("versionCode")!=-1:
 					JavaCodeGradle.append("  versionCode: '"+self.__time_tick+"'\r")
-				if f.find("targetSdkVersion")!=-1:
-					JavaCodeGradle.append("  targetSdkVersion: '19'\r")
+				elif f.find("targetSdkVersion")!=-1:
+					JavaCodeGradle.append("  targetSdkVersion: '29'\r")
 				else:
 					JavaCodeGradle.append(i)
 		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/apktool.yml",'w',encoding="utf8") as file_object_read:
@@ -439,7 +439,6 @@ class SDKAppendManager():
 		for folder_name in folder_list:
 			if folder_name!= "com":
 				shutil.move(_Path+"/smali/"+folder_name,_Path+"/"+last_name+"/"+folder_name)
-
 		folder_list = self.__list_folder(_Path+"/smali/com")
 		for folder_name in folder_list:
 			if folder_name== "google":
@@ -447,6 +446,10 @@ class SDKAppendManager():
 				if os.path.isdir(_Path+"/smali_classes"+str(folder_index))==False:os.mkdir(_Path+"/smali_classes"+str(folder_index))
 				if os.path.isdir(_Path+"/smali_classes"+str(folder_index)+"/com")==False:os.mkdir(_Path+"/smali_classes"+str(folder_index)+"/com")
 				shutil.move(_Path+"/smali/com/"+folder_name, _Path+"/smali_classes"+str(folder_index)+"/com/"+folder_name)
+		name = _Path+"/smali_classes2/com/ktplay"
+		if os.path.isdir(name):shutil.rmtree(name)
+		name = _Path+"/smali/com/google/android/gms"
+		if os.path.isdir(name):shutil.rmtree(name)
 
 	def __get_dir_size(self,dir):
 		size = 0
