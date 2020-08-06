@@ -68,7 +68,11 @@ class SDKAppendManager():
 		self._merge_sdk_resource()
 		self._rebuild_game_apk()
 		os.system("adb install -r "+ self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk"))
-		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}"): shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}"):
+			try:
+				shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
+			except Exception  as identifier:
+				print("delete file failed:"+str(identifier))
 
 	def _decompile_game_apk(self):
 		os.system(f"{self.__apktool} d {self.__game_apk_path}")
