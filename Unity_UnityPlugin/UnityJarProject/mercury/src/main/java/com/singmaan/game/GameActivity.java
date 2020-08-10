@@ -342,7 +342,22 @@ public class GameActivity extends UnityPlayerActivity{
 			}
 		});
 	}
-
+	public void onEvent(final String eventID)
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"eventID");
+						MercurySDK.onEvent(eventID);
+					}
+				});
+			}
+		});
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

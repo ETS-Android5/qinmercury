@@ -448,7 +448,10 @@ public class MercuryActivity  {
 			}
 		});
 	}
-
+	public void onEvent(String eventID)
+	{
+		LogLocal("[MercuryActivity][onEvent] " + eventID);
+	}
 	public String ShortChannelID()
 	{
 		return SortChannelID;
