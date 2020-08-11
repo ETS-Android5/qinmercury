@@ -94,6 +94,15 @@ public class MercuryConst {
 	public static String GetProductionList()
 	{
 		String ProductionList[][] = {
+				{"com.koplagames.cn.1","bundle","1.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
+				{"com.koplagames.cn.3","bundle","3.0","9141b0b3-fa3a-4fda-9f88-a394d3c5a83c"},
+				{"com.koplagames.cn.8","bundle","8.0","9141b0cc-4a23-482c-9833-40c89aed6d1c"},
+				{"com.koplagames.cn.16","bundle","16.0","9141b0df-598e-4825-9235-1436f0d9b747"},
+				{"com.koplagames.cn.36","bundle","36.0","9141b0fc-75d6-49d5-b79b-517efcc6fc92"},
+				{"com.koplagames.cn.86","bundle","86.0","9141b10f-f5ad-43cf-824b-80f1edb2da65"},
+				{"com.koplagames.cn.188","bundle","188.0","9141b124-a680-4265-9129-324b82bcacb8"},
+				{"com.koplagames.cn.256","bundle","256.0","9141b136-bfd8-4c73-bec7-fe958e447c6e"},
+
 				{"com.koplagames.kopla02.test.099","Gem","6.0"},
 				{"com.koplagames.kopla02.test.1999","Gem","120.0"},
 				{"com.koplagames.kopla02.test.299","Gem","18.0"},
