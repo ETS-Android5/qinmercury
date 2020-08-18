@@ -20,7 +20,7 @@ android {
     }
     sourceSets {
         main {
-            jniLibs.srcDirs = ['src/main/libs']
+            jniLibs.srcDirs = ['src/main/jniLibs']
         }
     }
     repositories {
@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    //implementation(name: 'aarname', ext: 'aar')
     //shrinkpartstart
     implementation 'com.android.support:support-v4:28.0.0'
     //shrinkpartend
