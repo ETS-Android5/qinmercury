@@ -342,7 +342,7 @@ public class GameActivity extends UnityPlayerActivity{
 			}
 		});
 	}
-	public void onEvent(final String eventID)
+	public void Data_Event(final String eventID)
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
 		{
@@ -351,14 +351,64 @@ public class GameActivity extends UnityPlayerActivity{
 			{
 				mContext.runOnUiThread(new Runnable() {
 					public void run() {
-						Log.e(tagname,"eventID");
-						MercurySDK.onEvent(eventID);
+						Log.e(tagname,"Data_Event");
+						MercurySDK.Data_Event(eventID);
 					}
 				});
 			}
 		});
 	}
 
+	public void Data_UseItem(final String quantity, final String item)
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"Data_Event");
+						MercurySDK.Data_UseItem(quantity,item);
+					}
+				});
+			}
+		});
+	}
+
+	public void Data_LevelBegin(final String eventID)
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"Data_Event");
+						MercurySDK.Data_LevelBegin(eventID);
+					}
+				});
+			}
+		});
+	}
+
+	public void Data_LevelCompleted(final String eventID)
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"Data_Event");
+						MercurySDK.Data_LevelCompleted(eventID);
+					}
+				});
+			}
+		});
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

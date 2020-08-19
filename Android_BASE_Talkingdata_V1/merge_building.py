@@ -215,7 +215,9 @@ class APKBuildManager():
 		#copy lib
 		if os.path.isdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")))==False:os.mkdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")))
 		if os.path.isdir(str(PathLib(f"{self.__apk_project}/app/src/main/libs")))==False:os.mkdir(str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
+		if os.path.isdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")))==False:os.mkdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")))
 		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")),str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
+		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")),str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
 		#merge remote sdk
 		# def AddRemoteJarToGradle(_DemoGradlePath,_buildGradlePath):
 		with open(str(PathLib(f"{self.__jar_project}/mercury/build.gradle")),encoding="utf8") as file_object:

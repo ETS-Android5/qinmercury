@@ -7,9 +7,13 @@ import android.content.Intent;
 import android.view.Menu;
 
 import com.mercury.game.MercuryActivity;
+import com.tendcloud.tenddata.TDGAAccount;
+import com.tendcloud.tenddata.TDGAVirtualCurrency;
+import com.tendcloud.tenddata.TalkingDataGA;
 
 
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.order_id;
 
 public class InAppBase{
 	protected Activity mContext;
@@ -108,14 +112,39 @@ public class InAppBase{
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 	
-	public void onPurchaseSuccess(String message) {qc.PurchaseSuccess(message,this);}
-	public void onPurchaseFailed(String strError) {qc.PurchaseFailed(strError,this);}
-	public void LoginSuccessCallBack(String strError) { qc.LoginSuccessCallBack(strError,this); }
-	public void LoginCancelCallBack(String strError) { qc.LoginCancelCallBack(strError,this); }
-	public void AdLoadSuccessCallBack(String strError) { qc.AdLoadSuccess(strError,this); }
-	public void AdLoadFailedCallBack(String strError) { qc.AdLoadFailed(strError,this); }
-	public void AdShowSuccessCallBack(String strError) { qc.AdShowSuccessCallBack(strError,this); }
-	public void AdShowFailedCallBack(String strError) { qc.AdShowFailedCallBack(strError,this); }
+	public void onPurchaseSuccess(String message)
+	{
+		TDGAVirtualCurrency.onChargeSuccess(order_id);
+		qc.PurchaseSuccess(message,this);
+	}
+	public void onPurchaseFailed(String strError)
+	{
+		qc.PurchaseFailed(strError,this);
+	}
+	public void LoginSuccessCallBack(String strError)
+	{
+		qc.LoginSuccessCallBack(strError,this);
+	}
+	public void LoginCancelCallBack(String strError)
+	{
+		qc.LoginCancelCallBack(strError,this);
+	}
+	public void AdLoadSuccessCallBack(String strError)
+	{
+		qc.AdLoadSuccess(strError,this);
+	}
+	public void AdLoadFailedCallBack(String strError)
+	{
+		qc.AdLoadFailed(strError,this);
+	}
+	public void AdShowSuccessCallBack(String strError)
+	{
+		qc.AdShowSuccessCallBack(strError,this);
+	}
+	public void AdShowFailedCallBack(String strError)
+	{
+		qc.AdShowFailedCallBack(strError,this);
+	}
 
 
 	public void onFunctionCallBack(String strError) {

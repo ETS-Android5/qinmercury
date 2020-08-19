@@ -26,10 +26,11 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.redeemCode;
 //shrinkpartstart
 import android.support.v4.app.ActivityCompat;
-import static com.mercury.game.MercuryApplication.OpenUmeng;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.verifyGame;
 import static com.mercury.game.util.Function.writeFileData;
@@ -46,6 +47,10 @@ import com.mercury.game.util.MercuryConst;
 import com.mercury.game.util.PermissionConstants;
 import com.mercury.game.util.PermissionUtils;
 import com.mercury.game.util.PhoneUtils;
+import com.tendcloud.tenddata.TDGAAccount;
+import com.tendcloud.tenddata.TDGAMission;
+import com.tendcloud.tenddata.TDGAVirtualCurrency;
+import com.tendcloud.tenddata.TalkingDataGA;
 
 
 import java.io.File;
@@ -54,7 +59,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 import static com.mercury.game.util.MercuryConst.GetProductionList;
@@ -84,15 +91,15 @@ public class MercuryActivity  {
 	private static ImageView img = null;
 	public static String GameName="ww1";
 	public static String deviceId = "";
+	public static String order_id = "";
 	public  static APPBaseInterface mappcall= null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
-		LogLocal("[MercuryActivity][InitSDK]123");
+		LogLocal("[MercuryActivity][InitSDK]1");
 		mappcall = appcall;
 		mContext =  ContextFromUsers;
 		mActivity = (Activity)ContextFromUsers;
 		activityforappbase=this;
-		LogLocal("[SDKApp]UserDeviceID()="+UserDeviceID());
 		ChannelSplash();
 		PlayVideo();
 		GetProductionInfo();
@@ -100,6 +107,9 @@ public class MercuryActivity  {
 		InitChannel(mappcall);
 		InitAd(mappcall);
 		UserDeviceID();
+		//login
+		TDGAAccount account = TDGAAccount.setAccount(TalkingDataGA.getDeviceId(mContext));
+		account.setAccountType(TDGAAccount.AccountType.ANONYMOUS);
 	}
 	public String GetProductionInfo()
 	{
@@ -209,10 +219,7 @@ public class MercuryActivity  {
 
 		try {
 			String path = getAssetsCacheFile(mActivity, "ChannelSplash.mp4");
-
-//            AssetFileDescriptor afd = activity.getResources().getAssets().openFd("ChannelSplash.mp4");
 			mediaPlayer.setDataSource(path);
-//            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 			mediaPlayer.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
 			mediaPlayer.setLooping(false);
 			mediaPlayer.prepare();
@@ -298,6 +305,7 @@ public class MercuryActivity  {
 				shouldRequest.again(true);
 			}
 		}).request();
+		LogLocal("[MercuryActivity][UserDeviceID] DeviceId="+DeviceId);
 		return DeviceId;
 	}
 	public String getDeviceId(Context context) {
@@ -347,24 +355,32 @@ public class MercuryActivity  {
 		LogLocal("[MercuryActivity][InitChannel] Local InitChannel()->"+mInAppChannel);
 		mInAppChannel.ActivityInit((Activity)mContext, appcall);
 	}
+
 	public void InitAd(final APPBaseInterface appcall)
 	{
 		final Context applicationContext = mContext.getApplicationContext();
 		mInAppAD= new InAppAD() ;
 		LogLocal("[MercuryActivity][InitAd] Local InitAd()->"+mInAppAD);
 		mInAppAD.ActivityInit((Activity)mContext,appcall);
-
 	}
+
 	public void Purchase(String pidname)
 	{
 		LogLocal("[MercuryActivity][Purchase] " + pidname);
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String temp = sf.format(new Date());
+		int random = (int) ((Math.random() + 1) * 100000);
+		order_id = temp + random;
 		mInAppChannel.Purchase(pidname);
+		TDGAVirtualCurrency.onChargeRequest(order_id, pidname,  MercuryConst.Qinpricefloat, "CNY", 1, channelname);
 	}
+
 	public void RestoreProduct()
 	{
 		LogLocal("[MercuryActivity][RestoreProduct] ");
 		mInAppChannel.RestoreProduct();
 	}
+
 	public void ExitGame()
 	{
 		LogLocal("[MercuryActivity][ExitGame] ");
@@ -376,6 +392,7 @@ public class MercuryActivity  {
 			}
 			});
 	}
+
 	public void SingmaanLogin()
 	{
 		LogLocal("[MercuryActivity][SingmaanLogin] ");
@@ -389,21 +406,25 @@ public class MercuryActivity  {
 			}
 		});
 	}
+
 	public void SingmaanLogout()
 	{
 		LogLocal("[MercuryActivity][SingmaanLogout]" + mInAppChannel);
 		mInAppChannel.SingmaanLogout();
 	}
+
 	public void UploadGameData()
 	{
 		LogLocal("[MercuryActivity][UploadGameData]" + mInAppChannel);
 		mInAppChannel.UploadGameData();
 	}
+
 	public void DownloadGameData()
 	{
 		LogLocal("[MercuryActivity][DownloadGameData]" + mInAppChannel);
 		mInAppChannel.DownloadGameData();
 	}
+
 	public void Redeem()
 	{
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
@@ -426,6 +447,7 @@ public class MercuryActivity  {
 			}
 		});
 	}
+
 	public void ShareGame()
 	{
 		LogLocal("[MercuryActivity][ShareGame] mInAppChannel="+mInAppChannel);
@@ -437,6 +459,7 @@ public class MercuryActivity  {
 			}
 		});
 	}
+
 	public void OpenGameCommunity()
 	{
 		LogLocal("[MercuryActivity][OpenGameCommunity] mInAppChannel="+mInAppChannel);
@@ -448,6 +471,7 @@ public class MercuryActivity  {
 			}
 		});
 	}
+
 	public void onEvent(String eventID)
 	{
 		LogLocal("[MercuryActivity][onEvent] " + eventID);
@@ -499,6 +523,26 @@ public class MercuryActivity  {
 	{
 		LogLocal("[MercuryActivity] getBaseInApp()->mInApp="+mInAppAD);
 		return mInAppAD;
+	}
+	public void Data_UseItem(String quantity, String item)
+	{
+		int myint =  Integer.parseInt(quantity);
+		TDGAVirtualCurrency.onReward(myint, item);
+	}
+
+	public void Data_LevelBegin(String key)
+	{
+		TDGAMission.onBegin(key);
+	}
+	public void Data_LevelCompleted(String key)
+	{
+		TDGAMission.onCompleted(key);
+	}
+	public void Data_Event(String key)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("key", key);// 在注册环节的每一步完成时，以步骤名作为value传送数据
+		TalkingDataGA.onEvent("Event", map);
 	}
 	public void showMessageDialog()
 	{
