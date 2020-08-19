@@ -30,9 +30,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 
-import static com.mercury.game.MercuryApplication.OpenUmeng;
-
-
 public class MercuryConst {
 	public static String LogVERSION= "1.1";
 	public static String APPChineseName = "投影寻真";
@@ -465,6 +462,12 @@ public class MercuryConst {
 				break;
 			}
 		}
+		if(QinPid.equals("")==true)
+		{
+			QinPid = "TestPid";
+			Qindesc= "测试计费点";
+			Qinpricefloat= 1f;
+		}
 	}
 
 	public void FunctionL(String number)
@@ -480,13 +483,7 @@ public class MercuryConst {
 
 	public void PurchaseSuccess(String message, InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
-		if (OpenUmeng ==true) {
-			String id = "";
-			SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String temp = sf.format(new Date());
-			int random = (int) ((Math.random() + 1) * 100000);
-			id = temp + random;
-		}
+
 		inbase.appinterface.PurchaseSuccessCallBack(message);
 	}
 	public void PurchaseFailed(String strError, InAppBase inbase) {

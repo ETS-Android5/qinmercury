@@ -102,7 +102,7 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","[step][7]->ShareGame");
-				MercurySDK.ShareGame();
+				MercurySDK.SingmaanLogin();
 			}
 		});
 		
@@ -121,16 +121,16 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][9]->OpenGameCommunity");
-				MercurySDK.OpenGameCommunity();
+				Log.w("MercuryDemo","[step][9]->Data_LevelBegin");
+				MercurySDK.Data_LevelBegin("level1");
 			}
 		});
 		Button btn4 = (Button) findViewById(R.id.button4);
 		btn4.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercuryDemo","[step][10]->ActiveRewardVideo");
-				MercurySDK.ActiveRewardVideo();
+				Log.w("MercuryDemo","[step][10]->Data_LevelCompleted");
+				MercurySDK.Data_LevelCompleted("level1");
 			}
 		});
 		Button btn5 = (Button) findViewById(R.id.Button5);
@@ -138,8 +138,8 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][11]->Redeem");
-				MercurySDK.SingmaanLogin();
+				Log.w("MercuryDemo","[step][11]->Data_Event");
+				MercurySDK.Data_Event("button5");
 			}
 		});
 		Button btn6 = (Button) findViewById(R.id.Button6);
