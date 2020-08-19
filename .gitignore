@@ -42,3 +42,9 @@ Android_BASE_Umeng_V3/MercuryAPKProject_pure/.idea
 Android_BASE_Umeng_V3/MercuryAPKProject_pure/gradle
 Android_BASE_Umeng_V3/MercuryJarProject/.idea
 Android_BASE_Umeng_V3/MercuryJarProject/gradle
+*.
+Android_BASE_Talkingdata_V1/MercuryAPKProject/gradle
+Android_BASE_Talkingdata_V1/MercuryAPKProject_pure/.idea
+Android_BASE_Talkingdata_V1/MercuryAPKProject_pure/gradle
+Android_BASE_Talkingdata_V1/MercuryJarProject/.idea
+Android_BASE_Talkingdata_V1/MercuryJarProject/gradle
