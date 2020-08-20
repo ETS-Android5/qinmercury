@@ -372,7 +372,7 @@ public class MercuryActivity  {
 		int random = (int) ((Math.random() + 1) * 100000);
 		order_id = temp + random;
 		mInAppChannel.Purchase(pidname);
-		TDGAVirtualCurrency.onChargeRequest(order_id, pidname,  MercuryConst.Qinpricefloat, "CNY", 1, channelname);
+		TDGAVirtualCurrency.onChargeRequest(order_id, MercuryConst.Qindesc,  MercuryConst.Qinpricefloat, "CNY", 1, channelname);
 	}
 
 	public void RestoreProduct()
@@ -526,20 +526,24 @@ public class MercuryActivity  {
 	}
 	public void Data_UseItem(String quantity, String item)
 	{
+		LogLocal("[MercuryActivity] Data_UseItem()->mInApp="+mInAppAD);
 		int myint =  Integer.parseInt(quantity);
 		TDGAVirtualCurrency.onReward(myint, item);
 	}
 
 	public void Data_LevelBegin(String key)
 	{
+		LogLocal("[MercuryActivity] Data_LevelBegin()->mInApp="+mInAppAD);
 		TDGAMission.onBegin(key);
 	}
 	public void Data_LevelCompleted(String key)
 	{
+		LogLocal("[MercuryActivity] Data_LevelCompleted()->mInApp="+mInAppAD);
 		TDGAMission.onCompleted(key);
 	}
 	public void Data_Event(String key)
 	{
+		LogLocal("[MercuryActivity] Data_Event()->mInApp="+mInAppAD);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("key", key);// 在注册环节的每一步完成时，以步骤名作为value传送数据
 		TalkingDataGA.onEvent("Event", map);
