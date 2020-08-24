@@ -58,7 +58,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://localhost:10001/get_iap?gamename=" + GameName)
+                            .url("http://192.168.10.7:10001/get_iap?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -105,7 +105,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://office.singmaan.com:9988/get_update_verify?gamename=" + GameName)
+                            .url("http://office.singmaan.com:10001/get_update_verify?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();

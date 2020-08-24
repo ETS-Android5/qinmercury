@@ -35,8 +35,9 @@ import static com.mercury.game.MercuryActivity.LogLocal;
 public final class Function {
     private static String result_json;
     private static String iap_result_json;
-    //shrinkpartstart
+
     public static void writeFileData(String fileName, String message) {
+        //shrinkpartstart
         try {
             //E2WApp.LogLocal("[E2WApp]->writeFileData fileName="+fileName+",message="+message+"-"+E2WApp.mContext);
             FileOutputStream fout = MercuryActivity.mContext.openFileOutput(fileName, MercuryActivity.mContext.MODE_PRIVATE);
@@ -47,10 +48,12 @@ public final class Function {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //shrinkpartend
     }
     public static String readFileData(String fileName) {
-
         String res = "";
+//shrinkpartstart
+
         try {
             //E2WApp.LogLocal("[E2WApp]->readFileData:"+fileName+"-"+E2WApp.mContext);
             FileInputStream fin = MercuryActivity.mContext.openFileInput(fileName);
@@ -63,9 +66,12 @@ public final class Function {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //shrinkpartend
         return res;
     }
     public static void VerifyGame(final String gamename) {
+        //shrinkpartstart
         int remote_version = 0;
         String remote_dialog_message = "";
         String remote_dialog_title = "";
@@ -140,8 +146,9 @@ public final class Function {
             builder.setCancelable(false);
             builder.create().show();
         }
+        //shrinkpartend
     }
-    //shrinkpartend
+
 
 
 
@@ -227,7 +234,7 @@ public final class Function {
         }).start();
         return result_json;
     }
-    //shrinkpartend
+
     public static void redeemCode() {
         // TODO Auto-generated method stub
         final EditText inputServer = new EditText(((Activity) MercuryActivity.mContext));
