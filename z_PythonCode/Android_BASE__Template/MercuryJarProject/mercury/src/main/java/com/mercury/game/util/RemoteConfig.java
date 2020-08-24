@@ -37,6 +37,7 @@ import static com.mercury.game.util.Function.writeFileData;
 public final class RemoteConfig {
     private static String updating_result_json="";
     private static String iap_result_json="";
+    private static String ip_address = "192.168.10.7";
     public static void GetAllConfig()
     {
         get_remote_iap();
@@ -58,7 +59,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://192.168.10.7:10001/get_iap?gamename=" + GameName)
+                            .url("http://"+ip_address+":10001/get_iap?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -105,7 +106,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://office.singmaan.com:10001/get_update_verify?gamename=" + GameName)
+                            .url("http://"+ip_address+":10001/get_update_verify?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();

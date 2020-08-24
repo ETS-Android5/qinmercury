@@ -88,6 +88,7 @@ public final class Function {
             remote_dialog_message = (String) json_result.get("message");
             remote_dialog_title = (String) json_result.get("titile");
         } catch (JSONException e) {
+            LogLocal("[Function][post_redeem_code] error="+e.toString());
             e.printStackTrace();
         }
         //default value
@@ -112,7 +113,7 @@ public final class Function {
             PackageManager manager = MercuryActivity.mContext.getPackageManager();
             PackageInfo info = manager.getPackageInfo(MercuryActivity.mContext.getPackageName(), 0);
             local_version = info.versionCode;
-            Log.d("MercurySDK", "version:" + local_version);
+            LogLocal("[Function][post_redeem_code] local_version="+local_version+"｜remote_version="+remote_version);
         } catch (Exception e) {
             e.printStackTrace();
         }
