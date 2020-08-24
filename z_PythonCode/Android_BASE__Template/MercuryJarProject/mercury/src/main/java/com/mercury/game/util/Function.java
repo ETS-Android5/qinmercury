@@ -121,6 +121,7 @@ public final class Function {
         if (remote_version > local_version)
         //have new version
         {
+            LogLocal("[Function][post_redeem_code] displaying updating pop");
             AlertDialog.Builder builder = new AlertDialog.Builder(MercuryActivity.mContext);
             builder.setMessage(display_dialog_titile);
             builder.setTitle(display_dialog_message);

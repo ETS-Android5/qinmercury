@@ -99,6 +99,7 @@ public class MercuryActivity  {
 		mContext =  ContextFromUsers;
 		mActivity = (Activity)ContextFromUsers;
 		activityforappbase=this;
+		UserDeviceID();//get device id as unique id for game
 		ChannelSplash();//display picture which named ChannelSplash.png
 		PlayVideo();//play video which named ChannelSplash.mp4
 		GetAllConfig();//get all remote config
@@ -106,7 +107,7 @@ public class MercuryActivity  {
 		VerifyGame(GameName);//inqure users to update game or not
 		InitChannel(mappcall);//init channel sdk
 		InitAd(mappcall);//init AD sdk
-		UserDeviceID();//get device id as unique id for game
+
 	}
 	public String GetProductionInfo()
 	{

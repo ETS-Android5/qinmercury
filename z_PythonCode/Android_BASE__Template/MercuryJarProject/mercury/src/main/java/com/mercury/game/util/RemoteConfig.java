@@ -30,6 +30,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 //shrinkpartend
 
+import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.util.Function.writeFileData;
@@ -37,9 +38,15 @@ import static com.mercury.game.util.Function.writeFileData;
 public final class RemoteConfig {
     private static String updating_result_json="";
     private static String iap_result_json="";
-    private static String ip_address = "192.168.10.7";
+    private static String ip_address = "office.singmaan.com";
     public static void GetAllConfig()
     {
+        LogLocal("[RemoteConfig][GetAllConfig] DeviceId="+DeviceId);
+        if (DeviceId.equals("863845032203667"))
+        {
+            LogLocal("[RemoteConfig][GetAllConfig] testing mode");
+            ip_address = "192.168.10.7";
+        }
         get_remote_iap();
         get_update_config();
     }
