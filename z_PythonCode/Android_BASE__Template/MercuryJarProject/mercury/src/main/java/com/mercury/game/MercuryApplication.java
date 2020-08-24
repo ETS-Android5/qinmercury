@@ -62,7 +62,6 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		checkChannelSplash();
 		Log.w("MercurySDK","[SDKApp]SdkName="+channelname);
 		Log.w("MercurySDK","[SDKApp]InAppAD");
-
 		try
 		{
 			key=getSign(context);

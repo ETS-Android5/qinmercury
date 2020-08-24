@@ -34,9 +34,8 @@ import static com.mercury.game.MercuryActivity.LogLocal;
 
 public final class Function {
     private static String result_json;
+    private static String iap_result_json;
     //shrinkpartstart
-
-
     public static void writeFileData(String fileName, String message) {
         try {
             //E2WApp.LogLocal("[E2WApp]->writeFileData fileName="+fileName+",message="+message+"-"+E2WApp.mContext);
@@ -49,7 +48,6 @@ public final class Function {
             e.printStackTrace();
         }
     }
-
     public static String readFileData(String fileName) {
 
         String res = "";
@@ -67,56 +65,11 @@ public final class Function {
         }
         return res;
     }
-
-    public static void verifyGame(final String gamename) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //1.创建OkHttpClient对象
-                    OkHttpClient client = new OkHttpClient();
-                    //2.创建RequestBody对象
-                    RequestBody requestBody = new FormBody.Builder()
-                            .add("username", "tom")
-                            .add("password", "123")
-                            .build();
-                    //3.创建Request对象
-                    Request request = new Request.Builder()
-                            .post(requestBody)
-                            .url("http://office.singmaan.com:9988/get_update_verify?gamename=" + gamename)
-                            .build();
-                    //4. 同步请求
-                    // Response response = client.newCall(request).execute();
-                    //5.异步请求
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            LogLocal("[MercuryActivity][GetProductionInfo] failed=");
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            String s = response.body().string();
-                            if (s != null) {
-                                writeFileData("verifyGame", s);
-                                LogLocal("[MercuryActivity][verifyGame] success=" + s);
-                            }
-                        }
-                    });
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-
-                }
-            }
-        }).start();
+    public static void VerifyGame(final String gamename) {
         int remote_version = 0;
         String remote_dialog_message = "";
         String remote_dialog_title = "";
         String remote_url = "";
-
         //get remote version
         String remote_config = readFileData("verifyGame");
         LogLocal("[MercuryActivity][verifyGame] remote_config=" + remote_config);
@@ -131,29 +84,23 @@ public final class Function {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         //default value
         int local_version = 0;
         String local_dialog_message = "检测到新版本";
         String local_dialog_title = "更新游戏体验有更多游戏内容";
         String local_url = "http://www.singmaan.com";
-
         String display_dialog_message = "";
         String display_dialog_titile = "";
         String display_url = "";
-
         if (remote_dialog_message.equals("") == false) {
             display_dialog_message = remote_dialog_message;
             display_dialog_titile = remote_dialog_title;
             display_url = remote_url;
-
         } else {
             display_dialog_message = local_dialog_message;
             display_dialog_titile = local_dialog_title;
             display_url = local_url;
         }
-
         //get apk version
         try {
             PackageManager manager = MercuryActivity.mContext.getPackageManager();
@@ -192,16 +139,18 @@ public final class Function {
             });
             builder.setCancelable(false);
             builder.create().show();
-
         }
     }
     //shrinkpartend
+
+
+
     public static String post_redeem_code(final String redeem_code) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-//shrinkpartstart
+                    //shrinkpartstart
                     //1.创建OkHttpClient对象
                     OkHttpClient client = new OkHttpClient();
                     //2.创建RequestBody对象
@@ -220,14 +169,14 @@ public final class Function {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[MercuryActivity][post_redeem_code] failed e="+e.toString());
+                            LogLocal("[Function][post_redeem_code] failed e="+e.toString());
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             Looper.prepare();
                             result_json = response.body().string();
                             if (result_json != null) {
-                                LogLocal("[MercuryActivity][post_redeem_code] success=" + result_json);
+                                LogLocal("[Function][post_redeem_code] success=" + result_json);
                                 JSONObject json = null;
                                 try {
                                     json = (JSONObject) new JSONTokener(result_json).nextValue();
@@ -240,7 +189,7 @@ public final class Function {
                                         //shrinkpartstart
                                         redeem_code_result = (String) json_data.get("result");
                                         //shrinkpartend
-                                        LogLocal("[MercuryActivity][post_redeem_code] redeem_code_result=" + redeem_code_result);
+                                        LogLocal("[Function][post_redeem_code] redeem_code_result=" + redeem_code_result);
                                         InAppBase.appinterface.onFunctionCallBack(redeem_code_result);
                                         //shrinkpartstart
                                     }
@@ -267,7 +216,7 @@ public final class Function {
                 }
                 catch (Exception e)
                 {
-                    LogLocal("[MercuryActivity][post_redeem_code] failed=e="+e.toString());
+                    LogLocal("[Function][post_redeem_code] failed=e="+e.toString());
                     e.printStackTrace();
                 }
                 finally

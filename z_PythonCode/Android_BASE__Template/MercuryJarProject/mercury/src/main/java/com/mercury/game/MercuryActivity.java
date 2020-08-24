@@ -28,11 +28,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import static com.mercury.game.MercuryApplication.channelname;
+import static com.mercury.game.util.Function.VerifyGame;
 import static com.mercury.game.util.Function.redeemCode;
 //shrinkpartstart
 import android.support.v4.app.ActivityCompat;
 import static com.mercury.game.util.Function.readFileData;
-import static com.mercury.game.util.Function.verifyGame;
 import static com.mercury.game.util.Function.writeFileData;
 //shrinkpartend
 import android.widget.VideoView;
@@ -62,6 +62,8 @@ import java.util.Map;
 
 
 import static com.mercury.game.util.MercuryConst.GetProductionList;
+import static com.mercury.game.util.RemoteConfig.GetAllConfig;
+
 
 public class MercuryActivity  {
 
@@ -97,15 +99,14 @@ public class MercuryActivity  {
 		mContext =  ContextFromUsers;
 		mActivity = (Activity)ContextFromUsers;
 		activityforappbase=this;
-		ChannelSplash();
-		PlayVideo();
-		GetProductionInfo();
-//		verifyGame(GameName);
-		InitChannel(mappcall);
-		InitAd(mappcall);
-		UserDeviceID();
-		//login
-
+		ChannelSplash();//display picture which named ChannelSplash.png
+		PlayVideo();//play video which named ChannelSplash.mp4
+		GetAllConfig();//get all remote config
+		GetProductionInfo();//set ProductionInfo
+		VerifyGame(GameName);//inqure users to update game or not
+		InitChannel(mappcall);//init channel sdk
+		InitAd(mappcall);//init AD sdk
+		UserDeviceID();//get device id as unique id for game
 	}
 	public String GetProductionInfo()
 	{
