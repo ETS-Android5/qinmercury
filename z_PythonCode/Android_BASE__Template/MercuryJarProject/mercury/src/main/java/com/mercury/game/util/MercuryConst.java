@@ -446,7 +446,6 @@ public class MercuryConst {
 			int index = 0;
 			while (myKeys.hasNext()) {
 				String iap_name = myKeys.next();
-				Log.e("MercurySDK","iap_name="+iap_name);
 				JSONObject json_result1 = json_result.getJSONObject(iap_name);
 				String remote_des = (String) json_result1.get("des");
 				String remote_price = (String) json_result1.get("price");
@@ -456,7 +455,6 @@ public class MercuryConst {
 				ProductionList[index][2]=remote_price;
 				ProductionList[index][3]=remote_guid;
 				index++;
-				Log.e("MercurySDK","ProductionList="+ProductionList);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

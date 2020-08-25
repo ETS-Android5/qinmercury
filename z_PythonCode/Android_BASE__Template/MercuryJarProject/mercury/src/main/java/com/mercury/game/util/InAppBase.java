@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 
+import com.mercury.game.InAppDialog.IDCardVerifyDialog;
 import com.mercury.game.MercuryActivity;
 
 
@@ -46,6 +47,7 @@ public class InAppBase{
 		qc = new MercuryConst();
 		this.appinterface=appcall;
 		LogLocal("[InAppBase]->init:InAppBase.appinterface="+appcall);
+
 	}
 	
 

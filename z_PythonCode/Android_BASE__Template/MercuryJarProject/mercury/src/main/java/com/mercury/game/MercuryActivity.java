@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import static com.mercury.game.InAppRemote.RemoteConfig.GetAllConfig;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.VerifyGame;
 import static com.mercury.game.util.Function.redeemCode;
@@ -62,7 +63,7 @@ import java.util.Map;
 
 
 import static com.mercury.game.util.MercuryConst.GetProductionList;
-import static com.mercury.game.util.RemoteConfig.GetAllConfig;
+
 
 
 public class MercuryActivity  {

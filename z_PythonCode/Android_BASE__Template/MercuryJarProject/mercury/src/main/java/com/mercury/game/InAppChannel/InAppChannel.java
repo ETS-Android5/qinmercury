@@ -1,4 +1,6 @@
 package com.mercury.game.InAppChannel;
+import com.mercury.game.InAppDialog.IDCardVerifyDialog;
+import com.mercury.game.InAppDialog.LoginDialog;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 
@@ -7,23 +9,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Application;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
-import android.os.RemoteException;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
+import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MercuryConst;
-import com.mercury.game.MercuryApplication;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.util.Random;
-import java.util.UUID;
 
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
@@ -42,9 +42,18 @@ public class InAppChannel extends InAppBase {
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
-
 		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
 		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+//		new IDCardVerifyDialog(mContext, new LoginCallBack() {
+//			@Override
+//			public void success(String msg) {
+//				LogLocal("[MercuryActivity][SingmaanLogin]Success");
+//			}
+//			@Override
+//			public void fail(String msg) {
+//				LogLocal("[MercuryActivity][SingmaanLogin]failed");
+//			}
+//		});
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -67,6 +76,7 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
 		TestPay();
 
+
 	}
 	@Override
 	public void ExitGame()
@@ -82,7 +92,6 @@ public class InAppChannel extends InAppBase {
 					android.os.Process.killProcess(android.os.Process.myPid());
 				}
 			});
-
 			builder.setNegativeButton("Dismiss", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -93,8 +102,6 @@ public class InAppChannel extends InAppBase {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 	public void TestPay()
@@ -129,8 +136,29 @@ public class InAppChannel extends InAppBase {
 	}
 	public void SingmaanLogin()
 	{
-		LogLocal("[MercuryActivity][SingmaanLogin]"+DeviceId);
-		LoginSuccessCallBack(DeviceId);
+		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
+		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
+			@Override
+			public void success(final String phone) {
+				LogLocal("[InAppChannel][SingmaanLogin] Success");
+				LoginSuccessCallBack(DeviceId);
+				new IDCardVerifyDialog(mContext, new LoginCallBack() {
+					@Override
+					public void success(String msg) {
+
+						LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
+					}
+					@Override
+					public void fail(String msg) {
+						LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
+					}
+				});
+			}
+			@Override
+			public void fail(String msg) {
+				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
+			}
+		});
 	}
 	public void SingmaanLogout()
 	{
