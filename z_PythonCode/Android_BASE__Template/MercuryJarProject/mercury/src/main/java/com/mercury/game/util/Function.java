@@ -52,8 +52,7 @@ public final class Function {
     }
     public static String readFileData(String fileName) {
         String res = "";
-//shrinkpartstart
-
+        //shrinkpartstart
         try {
             //E2WApp.LogLocal("[E2WApp]->readFileData:"+fileName+"-"+E2WApp.mContext);
             FileInputStream fin = MercuryActivity.mContext.openFileInput(fileName);
@@ -66,7 +65,6 @@ public final class Function {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         //shrinkpartend
         return res;
     }
@@ -138,7 +136,7 @@ public final class Function {
                     android.os.Process.killProcess(android.os.Process.myPid());
                 }
             });
-            builder.setNeutralButton("下次更新,前往游戏", new DialogInterface.OnClickListener() {
+            builder.setNeutralButton("下次更新,继续游戏", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 //                            ((Activity) MercuryActivity.mContext).finish();

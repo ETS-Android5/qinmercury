@@ -30,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 
+import static com.mercury.game.util.Function.readFileData;
+
 public class MercuryConst {
 	public static String LogVERSION= "1.1";
 	public static String APPChineseName = "投影寻真";
@@ -91,6 +93,14 @@ public class MercuryConst {
 	public static String GetProductionList()
 	{
 		String ProductionList[][] = {
+				{"com.koplagames.kopla02.test.099","Gem","6.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
+				{"com.koplagames.kopla02.test.1999","Gem","120.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
+				{"com.koplagames.kopla02.test.299","Gem","18.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
+				{"com.koplagames.kopla02.test.499","Gem","30.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
+				{"com.koplagames.kopla02.test.4999","Gem","300.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
+				{"com.koplagames.kopla02.test.999","Gem","60.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
+				{"com.koplagames.kopla02.test.9999","Gem","600.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
+
 				{"com.koplagames.cn.1","bundle","1.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
 				{"com.koplagames.cn.3","bundle","3.0","9141b0b3-fa3a-4fda-9f88-a394d3c5a83c"},
 				{"com.koplagames.cn.8","bundle","8.0","9141b0cc-4a23-482c-9833-40c89aed6d1c"},
@@ -100,13 +110,6 @@ public class MercuryConst {
 				{"com.koplagames.cn.188","bundle","188.0","9141b124-a680-4265-9129-324b82bcacb8"},
 				{"com.koplagames.cn.256","bundle","256.0","9141b136-bfd8-4c73-bec7-fe958e447c6e"},
 
-				{"com.koplagames.kopla02.test.099","Gem","6.0"},
-				{"com.koplagames.kopla02.test.1999","Gem","120.0"},
-				{"com.koplagames.kopla02.test.299","Gem","18.0"},
-				{"com.koplagames.kopla02.test.499","Gem","30.0"},
-				{"com.koplagames.kopla02.test.4999","Gem","300.0"},
-				{"com.koplagames.kopla02.test.999","Gem","60.0"},
-				{"com.koplagames.kopla02.test.9999","Gem","600.0"},
 				{"com.koplagames.nsk2.carnivalrewardpass.10","CarnivalRewardPass","60.0"},
 				{"com.koplagames.nsk2.carnivalrewardpass.15","CarnivalRewardPass","90.0"},
 				{"com.koplagames.nsk2.carnivalrewardpass.20","CarnivalRewardPass","120.0"},
@@ -433,6 +436,31 @@ public class MercuryConst {
 				{"com.koplagames.nsk2.tour.1.01.1999","Chest: Megapack, Chest: Luxury, Gems: 3500","120.0"},
 				{"com.koplagames.nsk2.tour.1.01.999","MegaPacks: 2","60.0"}
 		};
+
+		String remote_config = readFileData("get_remote_iap");
+		try {
+			JSONObject json = (JSONObject) new JSONTokener(remote_config).nextValue();
+			JSONObject json_data = json.getJSONObject("data");
+			JSONObject json_result = json_data.getJSONObject("result");
+			Iterator<String>  myKeys = json_result.keys();
+			int index = 0;
+			while (myKeys.hasNext()) {
+				String iap_name = myKeys.next();
+				Log.e("MercurySDK","iap_name="+iap_name);
+				JSONObject json_result1 = json_result.getJSONObject(iap_name);
+				String remote_des = (String) json_result1.get("des");
+				String remote_price = (String) json_result1.get("price");
+				String remote_guid = (String) json_result1.get("guid");
+				ProductionList[index][0]=iap_name;
+				ProductionList[index][1]=remote_des;
+				ProductionList[index][2]=remote_price;
+				ProductionList[index][3]=remote_guid;
+				index++;
+				Log.e("MercurySDK","ProductionList="+ProductionList);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		GlobalProductionList = ProductionList;
 		ProductionJsonList = new JSONObject();
 		for(int i=0;i<ProductionList.length;i++)

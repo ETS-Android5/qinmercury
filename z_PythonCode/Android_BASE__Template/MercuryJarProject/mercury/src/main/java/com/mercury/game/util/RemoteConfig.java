@@ -1,26 +1,8 @@
 package com.mercury.game.util;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Looper;
-import android.text.InputFilter;
-import android.util.Log;
-import android.widget.EditText;
 
-import com.mercury.game.MercuryActivity;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 //shrinkpartstart
-import org.apache.http.util.EncodingUtils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -76,7 +58,6 @@ public final class RemoteConfig {
                         public void onFailure(Call call, IOException e) {
                             LogLocal("[RemoteConfig][get_remote_iap] failed");
                         }
-
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
@@ -90,7 +71,6 @@ public final class RemoteConfig {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-
                 }
             }
         }).start();

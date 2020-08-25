@@ -111,7 +111,6 @@ public class MercuryActivity  {
 	}
 	public String GetProductionInfo()
 	{
-		LogLocal("[MercuryActivity][GetProductionInfo] GetProductionList="+GetProductionList());
 		return GetProductionList();
 	}
 	public void ChannelSplash()
