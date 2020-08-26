@@ -122,7 +122,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","[step][9]->Data_LevelBegin");
-				MercurySDK.Data_LevelBegin("level1");
+				MercurySDK.ActiveRewardVideo();
 			}
 		});
 		Button btn4 = (Button) findViewById(R.id.button4);
@@ -130,7 +130,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][10]->Data_LevelCompleted");
-				MercurySDK.Data_LevelCompleted("level1");
+				MercurySDK.ActiveBanner();
 			}
 		});
 		Button btn5 = (Button) findViewById(R.id.Button5);
