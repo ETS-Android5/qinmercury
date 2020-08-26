@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="332dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/youlfot_shape_corner"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/youlfot_shape_corner_up"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:text="绑定手机"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingLeft="21dp"
+        android:paddingRight="21dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <EditText
+        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:id="@+id/youloft_username"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/youloft_login_phone"
+        android:gravity="center_vertical"
+        android:hint="要绑定的手机号"
+        android:inputType="phone"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        />
+    <LinearLayout
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+    <EditText
+        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:id="@+id/youloft_password"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="48dp"
+        android:layout_marginRight="4dp"
+        android:gravity="center_vertical"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:background="@drawable/youloft_login_code"
+        android:hint="短信验证码"
+        android:selectAllOnFocus="true" />
+        <Button
+            android:id="@+id/youloft_btn_code"
+            android:layout_marginLeft="4dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:text="获取验证码"
+            android:background="@drawable/youloft_btn_shape"
+            android:layout_width="100dp"
+            android:layout_height="48dp"/>
+</LinearLayout>
+
+
+        <FrameLayout
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="43dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/youloft_login"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="43dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:background="@drawable/youloft_btn_shape"
+                    android:text="绑定" />
+                <Button
+                    android:id="@+id/youloft_cancel"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="43dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18sp"
+                    android:background="@drawable/youloft_btn_shape"
+                    android:text="跳过" />
+            </LinearLayout>
+            <ProgressBar
+                android:id="@+id/youloft_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="1dp"
+                android:visibility="gone"
+                />
+        </FrameLayout>
+
+        <TextView
+            android:layout_margin="24dp"
+            android:gravity="center_horizontal"
+            android:textSize="12sp"
+            android:textColor="#604A98"
+            android:text="绑定后可手机号登录，更安全."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>
