@@ -211,7 +211,6 @@ public class MercuryActivity  {
 				mediaPlayer.release();
 				//播放完成  做你的其他操作
 				((ViewGroup) svStart.getParent()).removeView(svStart);
-				InitAd(mappcall);
 			}
 		});
 
