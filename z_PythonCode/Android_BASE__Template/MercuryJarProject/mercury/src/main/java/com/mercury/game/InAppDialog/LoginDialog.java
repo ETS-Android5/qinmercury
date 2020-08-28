@@ -52,7 +52,7 @@ public class LoginDialog {
         oldId = id;
         mLoginCallBack = callBack;
 //
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"youlfot_dialog_style","style"));
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"singmaan_dialog_style","style"));
         dialog = builder.create();
         dialog.setCancelable(false);
         Window dialogWindow = dialog.getWindow();
@@ -92,14 +92,14 @@ public class LoginDialog {
     }
 
     public void initAlertDialog(final AlertDialog dialog) {
-        int mainLayout = getResId(mContext, "youloft_dialog_login", "layout");
+        int mainLayout = getResId(mContext, "singmaan_dialog_login", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
-        int nameId = getResId(mContext, "youloft_username", "id");
-        int passId = getResId(mContext, "youloft_password", "id");
-        int codeId = getResId(mContext, "youloft_btn_code", "id");
-        int loginId = getResId(mContext, "youloft_login", "id");
-        int loadingId = getResId(mContext, "youloft_loading", "id");
-        int cancelId=getResId(mContext,"youloft_cancel","id");
+        int nameId = getResId(mContext, "singmaan_username", "id");
+        int passId = getResId(mContext, "singmaan_password", "id");
+        int codeId = getResId(mContext, "singmaan_btn_code", "id");
+        int loginId = getResId(mContext, "singmaan_login", "id");
+        int loadingId = getResId(mContext, "singmaan_loading", "id");
+        int cancelId=getResId(mContext,"singmaan_cancel","id");
 
         final EditText usernameEditText = myLayout.findViewById(nameId);
         final EditText passwordEditText = myLayout.findViewById(passId);

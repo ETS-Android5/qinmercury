@@ -37,7 +37,7 @@ public class IDCardVerifyDialog {
 
         mContext = context;
         mLoginCallBack = callBack;
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"youlfot_dialog_style","style"));
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"singmaan_dialog_style","style"));
         dialog = builder.create();
         dialog.setCancelable(false);
         Window dialogWindow = dialog.getWindow();
@@ -72,14 +72,14 @@ public class IDCardVerifyDialog {
     }
 
     public void initAlertDialog(final AlertDialog dialog) {
-        int mainLayout = getResId(mContext, "youloft_dialog_verify", "layout");
+        int mainLayout = getResId(mContext, "singmaan_dialog_verify", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
-        int cardId = getResId(mContext, "youloft_username", "id");
-        int name = getResId(mContext, "youloft_password", "id");
-        int mgsId = getResId(mContext, "youloft_verifymgs", "id");
-        int loginId = getResId(mContext, "youloft_login", "id");
-        int loadingId = getResId(mContext, "youloft_loading", "id");
-        int cancelId=getResId(mContext,"youloft_cancel","id");
+        int cardId = getResId(mContext, "singmaan_username", "id");
+        int name = getResId(mContext, "singmaan_password", "id");
+        int mgsId = getResId(mContext, "singmaan_verifymgs", "id");
+        int loginId = getResId(mContext, "singmaan_login", "id");
+        int loadingId = getResId(mContext, "singmaan_loading", "id");
+        int cancelId=getResId(mContext,"singmaan_cancel","id");
 
 
         final EditText cardIdEditText = myLayout.findViewById(cardId);
