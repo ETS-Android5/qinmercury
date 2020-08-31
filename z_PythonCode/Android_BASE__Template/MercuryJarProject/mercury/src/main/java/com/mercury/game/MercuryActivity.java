@@ -104,15 +104,16 @@ public class MercuryActivity  {
 		ChannelSplash();//display picture which named ChannelSplash.png
 		PlayVideo();//play video which named ChannelSplash.mp4
 		GetAllConfig();//get all remote config
-		GetProductionInfo();//set ProductionInfo
 		VerifyGame(GameName);//inqure users to update game or not
 		InitChannel(mappcall);//init channel sdk
 		InitAd(mappcall);//init AD sdk
-
+		GetProductionInfo();//set ProductionInfo
 	}
 	public String GetProductionInfo()
 	{
-		return GetProductionList();
+		String iap_list = GetProductionList();
+		mInAppChannel.ProductionIDCallBack(iap_list);
+		return iap_list;
 	}
 	public void ChannelSplash()
 	{

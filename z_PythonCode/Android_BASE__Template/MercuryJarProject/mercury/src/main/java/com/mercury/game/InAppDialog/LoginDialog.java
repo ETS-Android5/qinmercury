@@ -25,9 +25,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//shrinkpartstart
 import androidx.annotation.NonNull;
-
+//shrinkpartend
 
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MD5Util;
@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
 
 
 public class LoginDialog {
+    //shrinkpartstart
     String oldId;
     int time;
     Activity mContext;
@@ -281,4 +282,5 @@ public class LoginDialog {
     private void showLoginFailed(String errorString) {
         Toast.makeText(mContext, errorString, Toast.LENGTH_SHORT).show();
     }
+    //shrinkpartend
 }

@@ -4,8 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+//shrinkpartstart
 import androidx.annotation.NonNull;
-
+//shrinkpartend
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,10 +15,11 @@ import java.util.Set;
 import static com.mercury.game.MercuryActivity.mActivity;
 
 
-
+//shrinkpartstart
 @SuppressLint("ApplySharedPref")
+//shrinkpartend
 public final class SPUtils {
-
+    //shrinkpartstart
     private static final Map<String, SPUtils> SP_UTILS_MAP = new HashMap<>();
     private SharedPreferences sp;
 
@@ -439,4 +441,5 @@ public final class SPUtils {
         }
         return true;
     }
+    //shrinkpartend
 }

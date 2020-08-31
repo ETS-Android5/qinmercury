@@ -144,8 +144,10 @@ public class InAppBase{
 	{
 		qc.AdShowFailedCallBack(strError,this);
 	}
-
-
+	public void ProductionIDCallBack(String strError)
+	{
+		qc.ProductionIDCallBack(strError,this);
+	}
 	public void onFunctionCallBack(String strError) {
 		qc.FunctionCallBack(strError,this);
 	}

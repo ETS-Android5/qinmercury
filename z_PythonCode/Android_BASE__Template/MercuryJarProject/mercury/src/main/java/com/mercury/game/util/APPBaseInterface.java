@@ -10,4 +10,5 @@ public interface APPBaseInterface {
 	abstract void AdShowSuccessCallBack(String strProductId);
 	abstract void AdShowFailedCallBack(String strProductId);
 	abstract void onFunctionCallBack(String strProductId);
+	abstract void ProductionIDCallBack(String strProductId);
 }

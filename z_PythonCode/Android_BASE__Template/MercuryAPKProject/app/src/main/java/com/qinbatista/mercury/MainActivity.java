@@ -69,6 +69,11 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 				Toast.makeText(context, "onFunctionCallBack"+s,Toast.LENGTH_SHORT).show();
 			}
 
+			@Override
+			public void ProductionIDCallBack(String s) {
+				Toast.makeText(context, "ProductionIDCallBack"+s,Toast.LENGTH_SHORT).show();
+			}
+
 		};
 		Log.w("MercuryDemo","[step][4]Init MercurySDK");
 		MercurySDK.InitSDK (context,appcall);

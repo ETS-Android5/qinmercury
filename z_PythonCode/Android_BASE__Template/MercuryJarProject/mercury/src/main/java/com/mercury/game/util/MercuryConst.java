@@ -438,26 +438,28 @@ public class MercuryConst {
 		};
 
 		String remote_config = readFileData("get_remote_iap");
-		try {
-			JSONObject json = (JSONObject) new JSONTokener(remote_config).nextValue();
-			JSONObject json_data = json.getJSONObject("data");
-			JSONObject json_result = json_data.getJSONObject("result");
-			Iterator<String>  myKeys = json_result.keys();
-			int index = 0;
-			while (myKeys.hasNext()) {
-				String iap_name = myKeys.next();
-				JSONObject json_result1 = json_result.getJSONObject(iap_name);
-				String remote_des = (String) json_result1.get("des");
-				String remote_price = (String) json_result1.get("price");
-				String remote_guid = (String) json_result1.get("guid");
-				ProductionList[index][0]=iap_name;
-				ProductionList[index][1]=remote_des;
-				ProductionList[index][2]=remote_price;
-				ProductionList[index][3]=remote_guid;
-				index++;
+		if(remote_config.equals("")==false) {
+			try {
+				JSONObject json = (JSONObject) new JSONTokener(remote_config).nextValue();
+				JSONObject json_data = json.getJSONObject("data");
+				JSONObject json_result = json_data.getJSONObject("result");
+				Iterator<String> myKeys = json_result.keys();
+				int index = 0;
+				while (myKeys.hasNext()) {
+					String iap_name = myKeys.next();
+					JSONObject json_result1 = json_result.getJSONObject(iap_name);
+					String remote_des = (String) json_result1.get("des");
+					String remote_price = (String) json_result1.get("price");
+					String remote_guid = (String) json_result1.get("guid");
+					ProductionList[index][0] = iap_name;
+					ProductionList[index][1] = remote_des;
+					ProductionList[index][2] = remote_price;
+					ProductionList[index][3] = remote_guid;
+					index++;
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 		GlobalProductionList = ProductionList;
 		ProductionJsonList = new JSONObject();
@@ -470,6 +472,7 @@ public class MercuryConst {
 				e.printStackTrace();
 			}
 		}
+		MercuryActivity.LogLocal("[MercuryConst] ProductionJsonList.toString()="+ProductionJsonList.toString());
 		return ProductionJsonList.toString();
 	}
 	public static void PayInfo(String SavePid)
@@ -549,6 +552,11 @@ public class MercuryConst {
 		MercuryActivity.LogLocal("[MercuryConst] FunctionCallBack callback->"+strError+" inbase->"+inbase);
 		inbase.appinterface.onFunctionCallBack(strError);	
 	}
+	public void ProductionIDCallBack(String strError, InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] ProductionIDCallBack callback->"+strError+" inbase->"+inbase);
+		inbase.appinterface.ProductionIDCallBack(strError);
+	}
+
 	public void QinUnityMessage(String ObjectName, String MethodName, String QinMessage)
 	{
 		if(MercuryActivity.Platform== MercuryConst.Unity)

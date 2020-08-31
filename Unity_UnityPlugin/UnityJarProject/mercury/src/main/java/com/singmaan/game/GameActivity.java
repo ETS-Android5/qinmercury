@@ -69,6 +69,12 @@ public class GameActivity extends UnityPlayerActivity{
 				Log.w(tagname, "[GameActivity]onFunctionCallBack message="+message);
 				UnityPlayer.UnitySendMessage(callBackObjectName, "onFunctionCallBack", message);
 			}
+
+			@Override
+			public void ProductionIDCallBack(String s) {
+				Log.w(tagname, "[GameActivity]onFunctionCallBack message="+s);
+				UnityPlayer.UnitySendMessage(callBackObjectName, "onFunctionCallBack", s);
+			}
 		};
 		Log.w(tagname,"[step][4]Init MercurySDK");
 		MercurySDK.InitSDK (mContext,appcall);

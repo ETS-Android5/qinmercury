@@ -16,9 +16,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//shrinkpartstart
 import androidx.annotation.NonNull;
-
+//shrinkpartend
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 
 
 public class IDCardVerifyDialog {
+    //shrinkpartstart
     Activity mContext;
     LoginCallBack mLoginCallBack;
     final AlertDialog dialog;
@@ -175,4 +176,5 @@ public class IDCardVerifyDialog {
     private void showLoginFailed(String errorString) {
         Toast.makeText(mContext, errorString, Toast.LENGTH_SHORT).show();
     }
+    //shrinkpartend
 }
