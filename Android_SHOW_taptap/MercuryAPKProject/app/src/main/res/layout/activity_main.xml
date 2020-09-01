@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<RelativeLayout xmlns:ns0="http://schemas.android.com/apk/res/android" xmlns:ns1="http://schemas.android.com/tools" ns0:layout_height="match_parent" ns0:layout_width="match_parent" ns0:paddingBottom="@dimen/activity_vertical_margin" ns0:paddingLeft="@dimen/activity_horizontal_margin" ns0:paddingRight="@dimen/activity_horizontal_margin" ns0:paddingTop="@dimen/activity_vertical_margin" ns1:context=".MainActivityEast2WestPure">
+
+    <TextView ns0:id="@+id/textView1" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="@string/hello_world" />
+
+    <Button ns0:id="@+id/button1" ns0:layout_alignBaseline="@+id/button4" ns0:layout_alignBottom="@+id/button4" ns0:layout_alignParentLeft="true" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="button1" />
+
+    <Button ns0:id="@+id/button3" ns0:layout_alignBaseline="@+id/button4" ns0:layout_alignBottom="@+id/button4" ns0:layout_centerHorizontal="true" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="button3" />
+
+    <Button ns0:id="@+id/exit" ns0:layout_alignBaseline="@+id/pay" ns0:layout_alignBottom="@+id/pay" ns0:layout_alignLeft="@+id/textView1" ns0:layout_alignRight="@+id/button1" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="exit" />
+
+    <Button ns0:id="@+id/button4" ns0:layout_centerVertical="true" ns0:layout_height="wrap_content" ns0:layout_marginLeft="14dp" ns0:layout_toRightOf="@+id/button3" ns0:layout_width="wrap_content" ns0:text="button4" />
+
+    <Button ns0:id="@+id/button2" ns0:layout_alignBaseline="@+id/button1" ns0:layout_alignBottom="@+id/button1" ns0:layout_height="wrap_content" ns0:layout_marginLeft="18dp" ns0:layout_toRightOf="@+id/button1" ns0:layout_width="wrap_content" ns0:text="button2" />
+
+    <Button ns0:id="@+id/pay" ns0:layout_alignLeft="@+id/button2" ns0:layout_alignRight="@+id/button2" ns0:layout_below="@+id/textView1" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="pay" />
+
+    <Button ns0:id="@+id/Button6" ns0:layout_alignBaseline="@+id/Button5" ns0:layout_alignBottom="@+id/Button5" ns0:layout_alignLeft="@+id/button2" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="button6" />
+
+    <Button ns0:id="@+id/Button5" ns0:layout_below="@+id/button1" ns0:layout_height="wrap_content" ns0:layout_toLeftOf="@+id/button2" ns0:layout_width="wrap_content" ns0:text="button5" />
+
+
+</RelativeLayout>
