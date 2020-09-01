@@ -144,16 +144,19 @@ public class InAppChannel extends InAppBase {
 			@Override
 			public void onSuccess(LoginResponse loginResult) {
 				// TODO:登录成功
+				LoginSuccessCallBack("");
 			}
 
 			@Override
 			public void onCancel() {
 				// TODO:用户取消
+				LoginCancelCallBack("");
 			}
 
 			@Override
 			public void onError(Throwable throwable) {
 				// TODO:登录失败
+				LoginCancelCallBack("");
 			}
 		});
 		LoginManager.getInstance().logInWithReadPermissions(mContext, TapTapSdk.SCOPE_PUIBLIC_PROFILE);
