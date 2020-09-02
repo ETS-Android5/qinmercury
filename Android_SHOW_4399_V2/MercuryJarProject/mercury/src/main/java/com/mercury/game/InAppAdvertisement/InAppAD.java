@@ -4,6 +4,7 @@ import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
 import com.mob4399.adunion.AdUnionBanner;
+import com.mob4399.adunion.AdUnionParams;
 import com.mob4399.adunion.AdUnionSDK;
 import com.mob4399.adunion.AdUnionVideo;
 import com.mob4399.adunion.listener.OnAuBannerAdListener;
@@ -39,8 +40,8 @@ public class InAppAD extends InAppBase {
 		MercuryActivity.LogLocal("["+appShow+"]->appId="+appId);
 		MercuryActivity.LogLocal("["+appShow+"]->videoPosId="+videoPosId);
 		MercuryActivity.LogLocal("["+appShow+"]->BANNER_POS_ID="+BANNER_POS_ID);
-
-		AdUnionSDK.init(mContext,appId, onAuInitListener);
+		AdUnionParams params = new AdUnionParams.Builder(appId).setDebug(true).build();
+		AdUnionSDK.init(mContext,params, onAuInitListener);
 
 	}
 	private OnAuInitListener onAuInitListener = new OnAuInitListener() {
