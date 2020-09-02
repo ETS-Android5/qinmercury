@@ -23,7 +23,7 @@ android {
     defaultConfig {
         multiDexEnabled true
         minSdkVersion 19
-	versionCode 227
+	versionCode 233
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -48,7 +48,6 @@ dependencies {
     implementation files('src/main/libs/MercurySDK.jar')
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
     implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
-    //implementation(name: 'aarname', ext: 'aar')
     implementation(name: 'au4399-sdk-release', ext: 'aar')
     implementation(name: 'mintegral_alphab', ext: 'aar')
     implementation(name: 'mintegral_chinacommon', ext: 'aar')

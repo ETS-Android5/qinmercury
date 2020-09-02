@@ -6,7 +6,9 @@ android:compileSdkVersionCodename="6.0-2438415"
 android:installLocation="preferExternal"
 package="com.singmaan.demo" 
 platformBuildVersionCode="29" 
-platformBuildVersionName="10">
+platformBuildVersionName="10"
+android:networkSecurityConfig="@xml/network_security_config"
+>
     <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
