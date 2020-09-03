@@ -36,7 +36,7 @@ public class InAppAD extends InAppBase {
 	public void ActivityInit(Activity context,final APPBaseInterface appcall)
 	{
 		super.ActivityInit(context, appcall);
-		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit");
+		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit 2.0");
 		MercuryActivity.LogLocal("["+appShow+"]->appId="+appId);
 		MercuryActivity.LogLocal("["+appShow+"]->videoPosId="+videoPosId);
 		MercuryActivity.LogLocal("["+appShow+"]->BANNER_POS_ID="+BANNER_POS_ID);

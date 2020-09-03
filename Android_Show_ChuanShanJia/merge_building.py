@@ -2,7 +2,7 @@ import sys
 import os
 import platform
 def PythonLocation():
-	return os.path.dirname(os.path.realpath(__file__))
+	return os.path.dirname(os.path.realpath(__file__)).replace("\\","/")
 import os
 import sys
 import time
@@ -215,7 +215,9 @@ class APKBuildManager():
 		#copy lib
 		if os.path.isdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")))==False:os.mkdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")))
 		if os.path.isdir(str(PathLib(f"{self.__apk_project}/app/src/main/libs")))==False:os.mkdir(str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
+		if os.path.isdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")))==False:os.mkdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")))
 		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")),str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
+		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")),str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
 		#merge remote sdk
 		# def AddRemoteJarToGradle(_DemoGradlePath,_buildGradlePath):
 		with open(str(PathLib(f"{self.__jar_project}/mercury/build.gradle")),encoding="utf8") as file_object:
@@ -448,7 +450,7 @@ def run():
 	sam.merge_sdk_resource()
 
 def main():
-	file_path =  os.path.splitext(__file__)[0][os.path.splitext(__file__)[0].rfind("/")+1:]
+	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 	ss = PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py")
 	if os.path.isfile(PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py")):
 		if os.path.isfile(PathLib(PythonLocation()+"/"+file_path+".py")):
@@ -456,12 +458,16 @@ def main():
 		shutil.copy(PathLib(PythonLocation()+"/../z_PythonCode/"+file_path+".py"),PathLib(PythonLocation()+"/"+file_path+".py"))
 	run()
 	os.chdir(PythonLocation())
-	os.system("python3 ./MercuryJarProject/BuildJAR.py")
-	os.system("mv ./MercuryJarProject/MercurySDK.jar ./MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
+	if sys.platform=="win32":
+		python_name = "python.exe"
+	else:
+		python_name = "python3"
+	os.system(python_name+" ./MercuryJarProject/BuildJAR.py")
+	shutil.move(PythonLocation()+"/MercuryJarProject/MercurySDK.jar", PythonLocation()+"/MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
 	if os.path.isfile(PathLib(PythonLocation()+"/app-release.apk")):
 		os.remove(PathLib(PythonLocation()+"/app-release.apk"))
-	os.system("python3 ./MercuryAPKProject/BuildAPK.py")
-	os.system("mv ./MercuryAPKProject/app-release.apk ./app-release.apk")
+	os.system(python_name+" ./MercuryAPKProject/BuildAPK.py")
+	shutil.move(PythonLocation()+"/MercuryAPKProject/app-release.apk", PythonLocation()+"/app-release.apk")
 	os.system("adb install -r  ./app-release.apk")
 
 

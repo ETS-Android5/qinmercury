@@ -12,7 +12,6 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
-import com.singmaan.giveitupstack.R;
 //comment
 import android.app.Activity;
 import android.app.Application;
@@ -43,9 +42,9 @@ public class InAppAD extends InAppBase {
 
 	private boolean mIsExpress = false; //是否请求模板广告
 	private boolean mHasShowDownloadActive = false;
-	private static String  ad_appid = "5063602";
-	private static String  game_name = "永不言弃：登峰";
-	private static String video_position_id = "945159577";
+	private static String  ad_appid = "5099839";
+	private static String  game_name = "飞跃星球";
+	private static String video_position_id = "945420976";
 	private static String insert_position_id = "";
 	private static String banner_position_id = "945162610";
 	private Handler mHandler;
