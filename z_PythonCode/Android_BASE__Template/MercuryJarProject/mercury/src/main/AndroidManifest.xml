@@ -9,7 +9,7 @@
         android:name="android.hardware.type.television"
         android:required="true" />
     <application
-        android:name="com.mercury.game.MercuryApplication">
+        android:name="com.mercury.game.MercuryApplication" android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name="com.mercury.game.MercuryActivity"
             android:configChanges="orientation|screenSize"
