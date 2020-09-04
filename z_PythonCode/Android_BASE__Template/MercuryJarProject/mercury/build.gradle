@@ -5,7 +5,9 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
     buildToolsVersion "26.0.1"
-
+    defaultConfig {
+        multiDexEnabled true
+    }
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
@@ -14,6 +16,7 @@ android {
     }
     lintOptions {
         abortOnError false
+        checkReleaseBuilds false
     }
     buildTypes {
         release {

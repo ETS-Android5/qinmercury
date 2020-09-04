@@ -6,6 +6,9 @@ android {
             jniLibs.srcDirs = ['src/main/libs']
         }
     }
+    defaultConfig {
+        multiDexEnabled true
+    }
     repositories {
         flatDir {
             dirs 'src/main/libs'
@@ -13,6 +16,7 @@ android {
     }
     lintOptions {
         abortOnError false
+        checkReleaseBuilds false
     }
     signingConfigs {
         release {
@@ -25,7 +29,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
-	versionCode 201
+	versionCode 213
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

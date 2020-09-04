@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    defaultConfig {
+        multiDexEnabled true
+    }
     sourceSets {
         main {
             jniLibs.srcDirs = ['src/main/libs']
@@ -13,6 +16,7 @@ android {
     }
     lintOptions {
         abortOnError false
+        checkReleaseBuilds false
     }
 
     signingConfigs {

@@ -1,4 +1,9 @@
 package com.mercury.game.InAppAdvertisement;
+import com.anythink.core.api.ATAdInfo;
+import com.anythink.core.api.ATSDK;
+import com.anythink.core.api.AdError;
+import com.anythink.rewardvideo.api.ATRewardVideoAd;
+import com.anythink.rewardvideo.api.ATRewardVideoListener;
 import com.mercury.game.MercuryApplication;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
@@ -16,11 +21,18 @@ public class InAppAD extends InAppBase {
 	//comment
 	public static String appShow="InAppAD";
 	public static String MyScence = "";
+	public String appid = "a5f50b6668457b";
+	public String appKey = "8cd3e6589494074cc2d8bc1be31656e2";
+	public String videoid = "b5f50b79556b76";
+	ATRewardVideoAd mRewardVideoAd = null;
 	public void ActivityInit(Activity context,final APPBaseInterface appcall)
 	{
 		super.ActivityInit(context, appcall);
-		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit");
-
+		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit appid="+appid+" appKey="+appKey+" videoid="+videoid);
+		ATSDK.init(mContext, appid, appKey);
+		mRewardVideoAd = new ATRewardVideoAd(mContext,videoid);
+		videoADLoad();
+		mRewardVideoAd.load();
 	}
 	@Override
 	public void ApplicationInit(Application app)
@@ -154,33 +166,63 @@ public class InAppAD extends InAppBase {
 		});
 		builder.create().show();
 	}
+	public void videoADLoad()
+	{
+		mRewardVideoAd.setAdListener(new ATRewardVideoListener() {
+			@Override
+			public void onRewardedVideoAdLoaded() {
+				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdLoaded");
+				AdLoadSuccessCallBack("ActiveRewardVideo");
+			}
+
+			@Override
+			public void onRewardedVideoAdFailed(AdError errorCode) {
+				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdFailed："+errorCode.toString());
+			}
+
+			@Override
+			public void onRewardedVideoAdPlayStart(ATAdInfo entity) {
+				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdPlayStart");
+				mRewardVideoAd.load();
+			}
+
+			@Override
+			public void onRewardedVideoAdPlayEnd(ATAdInfo entity) {
+				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdPlayEnd");
+			}
+
+			@Override
+			public void onRewardedVideoAdPlayFailed(AdError errorCode, ATAdInfo entity) {
+				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdPlayFailed");
+			}
+
+			@Override
+			public void onRewardedVideoAdClosed(ATAdInfo entity) {
+				//建议在此回调中调用load进行广告的加载，方便下一次广告的展示
+				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdClosed");
+			}
+
+			@Override
+			public void onReward(ATAdInfo entity) {
+				AdShowSuccessCallBack("ActiveRewardVideo");
+
+			}
+			@Override
+			public void onRewardedVideoAdPlayClicked(ATAdInfo entity) {
+				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdPlayClicked");
+			}
+		});
+	}
 	public void ActiveRewardVideo() {
 		// TODO Auto-generated method stub
 		MercuryActivity.LogLocal("["+appShow+"] ActiveRewardVideo");
-		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-		builder.setMessage("Testing Mode");
-		builder.setTitle("Choice Result");
-		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowSuccessCallBack("ActiveRewardVideo");
-				AdLoadSuccessCallBack("ActiveRewardVideo");
-			}
-		});
-		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowFailedCallBack("ActiveRewardVideo");
-			}
-		});
-		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowFailedCallBack("ActiveInterstitial");
-				dialog.dismiss();
-			}
-		});
-		builder.create().show();
+		if(mRewardVideoAd.isAdReady()){
+			MercuryActivity.LogLocal("["+appShow+"] isAdReady");
+			mRewardVideoAd.show(mContext);
+		} else {
+			MercuryActivity.LogLocal("["+appShow+"] loading");
+			mRewardVideoAd.load();
+		}
 	}
 	//end
 }
