@@ -138,7 +138,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 				MercurySDK.Data_LevelCompleted("level1");
 			}
 		});
-		Button btn5 = (Button) findViewById(R.id.Button5);
+		Button btn5 = (Button) findViewById(R.id.button5);
 		btn5.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -147,7 +147,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 				MercurySDK.Data_Event("button5");
 			}
 		});
-		Button btn6 = (Button) findViewById(R.id.Button6);
+		Button btn6 = (Button) findViewById(R.id.button6);
 		btn6.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

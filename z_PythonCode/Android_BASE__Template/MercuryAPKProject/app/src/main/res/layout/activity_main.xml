@@ -3,21 +3,172 @@
 
     <TextView ns0:id="@+id/textView1" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="@string/hello_world" />
 
-    <Button ns0:id="@+id/button1" ns0:layout_alignBaseline="@+id/button4" ns0:layout_alignBottom="@+id/button4" ns0:layout_alignParentLeft="true" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="button1" />
-
-    <Button ns0:id="@+id/button3" ns0:layout_alignBaseline="@+id/button4" ns0:layout_alignBottom="@+id/button4" ns0:layout_centerHorizontal="true" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="button3" />
+    <Button ns0:id="@+id/pay" ns0:layout_alignLeft="@+id/button2" ns0:layout_alignRight="@+id/button2" ns0:layout_below="@+id/textView1" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="pay" />
 
     <Button ns0:id="@+id/exit" ns0:layout_alignBaseline="@+id/pay" ns0:layout_alignBottom="@+id/pay" ns0:layout_alignLeft="@+id/textView1" ns0:layout_alignRight="@+id/button1" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="exit" />
 
-    <Button ns0:id="@+id/button4" ns0:layout_centerVertical="true" ns0:layout_height="wrap_content" ns0:layout_marginLeft="14dp" ns0:layout_toRightOf="@+id/button3" ns0:layout_width="wrap_content" ns0:text="button4" />
+    <Button
+        ns0:id="@+id/button1"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_marginLeft="24dp"
+        ns0:layout_marginTop="129dp"
+        ns0:text="button1" />
 
-    <Button ns0:id="@+id/button2" ns0:layout_alignBaseline="@+id/button1" ns0:layout_alignBottom="@+id/button1" ns0:layout_height="wrap_content" ns0:layout_marginLeft="18dp" ns0:layout_toRightOf="@+id/button1" ns0:layout_width="wrap_content" ns0:text="button2" />
+    <Button
+        ns0:id="@+id/button2"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_marginLeft="94dp"
+        ns0:layout_marginTop="129dp"
+        ns0:text="button2" />
 
-    <Button ns0:id="@+id/pay" ns0:layout_alignLeft="@+id/button2" ns0:layout_alignRight="@+id/button2" ns0:layout_below="@+id/textView1" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="pay" />
+    <Button
+        ns0:id="@+id/button3"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="164dp"
+        ns0:layout_marginTop="129dp"
+        ns0:text="button3" />
 
-    <Button ns0:id="@+id/Button6" ns0:layout_alignBaseline="@+id/Button5" ns0:layout_alignBottom="@+id/Button5" ns0:layout_alignLeft="@+id/button2" ns0:layout_height="wrap_content" ns0:layout_width="wrap_content" ns0:text="button6" />
+    <Button
+        ns0:id="@+id/button4"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="234dp"
+        ns0:layout_marginTop="129dp"
+        ns0:text="button4" />
 
-    <Button ns0:id="@+id/Button5" ns0:layout_below="@+id/button1" ns0:layout_height="wrap_content" ns0:layout_toLeftOf="@+id/button2" ns0:layout_width="wrap_content" ns0:text="button5" />
+    <Button
+        ns0:id="@+id/button5"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="304dp"
+        ns0:layout_marginTop="129dp"
+        ns0:text="button5" />
+
+
+
+
+    <Button
+        ns0:id="@+id/button6"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_marginLeft="24dp"
+        ns0:layout_marginTop="199dp"
+        ns0:text="button6" />
+
+    <Button
+        ns0:id="@+id/button7"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_marginLeft="94dp"
+        ns0:layout_marginTop="199dp"
+        ns0:text="button7" />
+
+    <Button
+        ns0:id="@+id/button8"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="164dp"
+        ns0:layout_marginTop="199dp"
+        ns0:text="button8" />
+
+    <Button
+        ns0:id="@+id/button9"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="234dp"
+        ns0:layout_marginTop="199dp"
+        ns0:text="button9" />
+
+    <Button
+        ns0:id="@+id/button10"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="304dp"
+        ns0:layout_marginTop="199dp"
+        ns0:text="button10" />
+
+
+    <Button
+        ns0:id="@+id/button11"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_marginLeft="24dp"
+        ns0:layout_marginTop="269dp"
+        ns0:text="button11" />
+
+    <Button
+        ns0:id="@+id/button12"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_marginLeft="94dp"
+        ns0:layout_marginTop="269dp"
+        ns0:text="button12" />
+
+    <Button
+        ns0:id="@+id/button13"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="164dp"
+        ns0:layout_marginTop="269dp"
+        ns0:text="button13" />
+
+    <Button
+        ns0:id="@+id/button14"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="234dp"
+        ns0:layout_marginTop="269dp"
+        ns0:text="button14" />
+
+    <Button
+        ns0:id="@+id/button15"
+        ns0:layout_width="wrap_content"
+        ns0:layout_height="wrap_content"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_centerHorizontal="true"
+        ns0:layout_marginLeft="304dp"
+        ns0:layout_marginTop="269dp"
+        ns0:text="button15" />
 
 
 </RelativeLayout>
