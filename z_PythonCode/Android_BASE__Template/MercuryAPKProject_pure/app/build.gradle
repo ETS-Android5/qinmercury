@@ -11,6 +11,10 @@ android {
             dirs 'src/main/libs'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
+
     signingConfigs {
         release {
             keyAlias 'android.keystore'
@@ -22,7 +26,8 @@ android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
-	versionCode 193        versionName "1.0"
+	versionCode 193
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
