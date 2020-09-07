@@ -12,7 +12,6 @@
         <meta-data android:name="open_umeng" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
         <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
 <!--end-->    </application>
-    
 <!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
