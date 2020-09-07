@@ -566,8 +566,8 @@ def run():
 			ChannelName = channel[int(your_channel)]
 			PackageName  = config.get(ChannelName,"PackageName")
 			BASE		 = config.get(ChannelName,"BASE")
-			SHOW 		 = config.get(ChannelName,"SHOW")
 			IAP  		 = config.get(ChannelName,"IAP")
+			SHOW 		 = config.get(ChannelName,"SHOW")
 			APK_PATH	 = config.get(ChannelName,"PATH")
 			APKName	     = config.get(ChannelName,"APKName")
 
@@ -584,8 +584,8 @@ def run():
 			print("[ChannelName]	"+ChannelName)
 			print("[PackageName]	"+PackageName)
 			print("[BASE]	"+BASE)
-			print("[SHOW]	"+SHOW)
 			print("[IAP]	"+IAP)
+			print("[SHOW]	"+SHOW)
 			print("[APK_PATH]	"+APK_PATH)
 			print("[APKName]	"+APKName)
 			starttime = datetime.datetime.now()
@@ -601,8 +601,8 @@ def run():
 		ChannelName = channel[int(your_channel)]
 		PackageName  = config.get(ChannelName,"PackageName")
 		BASE		 = config.get(ChannelName,"BASE")
-		SHOW 		 = config.get(ChannelName,"SHOW")
 		IAP  		 = config.get(ChannelName,"IAP")
+		SHOW 		 = config.get(ChannelName,"SHOW")
 		APK_PATH	 = config.get(ChannelName,"PATH")
 		APKName	     = config.get(ChannelName,"APKName")
 
@@ -619,8 +619,8 @@ def run():
 		print("[ChannelName]	"+ChannelName)
 		print("[PackageName]	"+PackageName)
 		print("[BASE]	"+BASE)
-		print("[SHOW]	"+SHOW)
 		print("[IAP]	"+IAP)
+		print("[SHOW]	"+SHOW)
 		print("[APK_PATH]	"+APK_PATH)
 		print("[APKName]	"+APKName)
 		starttime = datetime.datetime.now()
