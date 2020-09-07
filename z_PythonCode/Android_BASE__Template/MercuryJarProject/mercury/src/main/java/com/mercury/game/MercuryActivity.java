@@ -261,7 +261,6 @@ public class MercuryActivity  {
 	{
 		//shrinkpartstart
 		DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-		LogLocal("[MercuryActivity][UserDeviceID] User denied");
 		getDeviceId();
 		GetAllConfig();//get all remote config
 		new Handler().postDelayed(new Runnable() {
@@ -309,10 +308,13 @@ public class MercuryActivity  {
 //				shouldRequest.again(true);
 //			}
 //		}).request();
-//		LogLocal("[MercuryActivity][UserDeviceID] DeviceId="+DeviceId);
+
+		//shrinkpartend
+		LogLocal("[MercuryActivity][UserDeviceID] DeviceId="+DeviceId);
 		return DeviceId;
 	}
 	public String getDeviceId() {
+		//shrinkpartstart
 		String strUserID = "";
 		String imei = "";
 		imei = DeviceId;
@@ -342,8 +344,8 @@ public class MercuryActivity  {
 //			LogLocal("[MercuryActivity][getDeviceId] Set imei as phone = ["+imei+"]");
 		}
 		DeviceId= strUserID;//MD5.getMessageDigest(strUserID.getBytes());
-		LogLocal("[MercuryActivity][getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		//shrinkpartend
+		LogLocal("[MercuryActivity][getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
 	}
 

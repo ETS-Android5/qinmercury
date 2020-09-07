@@ -180,7 +180,9 @@ public final class Function {
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
+                            //shrinkpartend
                             Looper.prepare();
+                            //shrinkpartstart
                             result_json = response.body().string();
                             if (result_json != null) {
                                 LogLocal("[Function][post_redeem_code] success=" + result_json);
@@ -216,7 +218,9 @@ public final class Function {
                                     e.printStackTrace();
                                 }
                             }
+                            //shrinkpartend
                             Looper.loop();
+                            //shrinkpartstart
                         }
                     });
                     //shrinkpartend
