@@ -106,8 +106,8 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][7]->ShareGame");
-				MercurySDK.SingmaanLogin();
+				Log.w("MercuryDemo","[step][7]->Reedem");
+				MercurySDK.Redeem();
 			}
 		});
 		
@@ -116,8 +116,8 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","[step][8]->ShareGame");
-				MercurySDK.Redeem();
+				Log.w("MercuryDemo","[step][8]->RestorePruchase");
+				MercurySDK.RestorePruchase();
 				
 			}
 		});
@@ -127,7 +127,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","[step][9]->Data_LevelBegin");
-				MercurySDK.Data_LevelBegin("level1");
+				MercurySDK.ActiveInterstitial();
 			}
 		});
 		Button btn4 = (Button) findViewById(R.id.button4);
@@ -135,7 +135,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][10]->Data_LevelCompleted");
-				MercurySDK.Data_LevelCompleted("level1");
+				MercurySDK.ActiveRewardVideo();
 			}
 		});
 		Button btn5 = (Button) findViewById(R.id.button5);
@@ -144,7 +144,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","[step][11]->Data_Event");
-				MercurySDK.Data_Event("button5");
+				MercurySDK.ActiveBanner();
 			}
 		});
 		Button btn6 = (Button) findViewById(R.id.button6);
@@ -152,7 +152,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][12]->GetProductionInfo");
-				MercurySDK.GetProductionInfo();
+				MercurySDK.ActiveNative();
 			}
 		});
 	}

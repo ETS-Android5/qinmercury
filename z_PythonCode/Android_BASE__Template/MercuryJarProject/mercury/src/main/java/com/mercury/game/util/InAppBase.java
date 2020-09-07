@@ -176,7 +176,7 @@ public class InAppBase{
 	{
 		LogLocal("[MercuryActivity][ActiveRewardVideo]");
 	}
-	public void RestoreProduct()
+	public void RestorePruchase()
 	{
 		LogLocal("[MercuryActivity][RestoreProduct]");
 	}

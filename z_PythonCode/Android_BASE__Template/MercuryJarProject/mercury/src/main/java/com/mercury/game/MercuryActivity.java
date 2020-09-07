@@ -373,10 +373,10 @@ public class MercuryActivity  {
 
 	}
 
-	public void RestoreProduct()
+	public void RestorePruchase()
 	{
 		LogLocal("[MercuryActivity][RestoreProduct] ");
-		mInAppChannel.RestoreProduct();
+		mInAppChannel.RestorePruchase();
 	}
 
 	public void ExitGame()
