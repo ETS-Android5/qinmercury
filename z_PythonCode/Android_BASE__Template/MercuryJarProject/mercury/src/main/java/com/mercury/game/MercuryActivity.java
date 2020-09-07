@@ -95,7 +95,7 @@ public class MercuryActivity  {
 	public  static APPBaseInterface mappcall= null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
-		LogLocal("[MercuryActivity][InitSDK]1");
+		LogLocal("[MercuryActivity][InitSDK]Version 1.0");
 		mappcall = appcall;
 		mContext =  ContextFromUsers;
 		mActivity = (Activity)ContextFromUsers;
@@ -261,15 +261,13 @@ public class MercuryActivity  {
 	public String UserDeviceID()
 	{
 		//shrinkpartstart
-		LogLocal("[MercuryActivity][UserDeviceID] get in");
 		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
 			@Override
 			public void onGranted(List<String> permissionsGranted) {
 				//用户同意权限
-				writeFileData("UserIMEI","");
+				writeFileData("UserIMEI",DeviceId);
 				DeviceId = PhoneUtils.getUnicodeId(mContext);
 				getDeviceId(mContext);
-				LogLocal("[MercuryActivity][UserDeviceID] permission");
 				new Handler().postDelayed(new Runnable() {
 					@Override
 					public void run() {
@@ -298,43 +296,40 @@ public class MercuryActivity  {
 				shouldRequest.again(true);
 			}
 		}).request();
-		LogLocal("[MercuryActivity][UserDeviceID] DeviceId="+DeviceId);
+//		LogLocal("[MercuryActivity][UserDeviceID] DeviceId="+DeviceId);
 		return DeviceId;
 	}
 	public String getDeviceId(Context context) {
-		LogLocal("[getDeviceId] sssssss");
 		String strUserID = "";
 		String imei = "";
 		imei = DeviceId;
-		LogLocal("[getDeviceId] -imei = ["+imei+"]");
-		LogLocal("[getDeviceId] -readFileData(\"UserIMEI\") = ["+readFileData("UserIMEI")+"]");
+//		LogLocal("[MercuryActivity][getDeviceId] -readFileData(\"UserIMEI\") = ["+readFileData("UserIMEI")+"]");
 		if((imei==null&&imei=="")&&(readFileData("UserIMEI")==null&&readFileData("UserIMEI")==""))
 		{
 			imei= ""+java.util.UUID.randomUUID();
 			writeFileData("UserIMEI",imei);
 			strUserID=imei;
-			LogLocal("[getDeviceId] write imei = ["+imei+"]");
+//			LogLocal("[MercuryActivity][getDeviceId] write imei = ["+imei+"]");
 		}
 		else if((imei==null&&imei=="")&&(readFileData("UserIMEI")!=null&&readFileData("UserIMEI")!=""))
 		{
 			imei=readFileData("UserIMEI");
 			strUserID=imei;
-			LogLocal("[getDeviceId] read imei = ["+imei+"]");
+//			LogLocal("[MercuryActivity][getDeviceId] read imei = ["+imei+"]");
 		}
 		else if((imei!=null&&imei!="")&&(readFileData("UserIMEI")==null&&readFileData("UserIMEI")==""))
 		{
 			writeFileData("UserIMEI",imei);
 			strUserID=imei;
-			LogLocal("[getDeviceId] Set imei as local imei = ["+strUserID+"]");
+//			LogLocal("[MercuryActivity][getDeviceId] Set imei as local imei = ["+strUserID+"]");
 		}
 		else
 		{
 			strUserID=imei;
-			LogLocal("[getDeviceId] Set imei as phone = ["+imei+"]");
+//			LogLocal("[MercuryActivity][getDeviceId] Set imei as phone = ["+imei+"]");
 		}
-		LogLocal("[getDeviceId] strUserID = ["+strUserID+"]");
 		DeviceId= strUserID;//MD5.getMessageDigest(strUserID.getBytes());
-		LogLocal("[getDeviceId] Get DeviceId = ["+DeviceId+"]");
+		LogLocal("[MercuryActivity][getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		//shrinkpartend
 		return DeviceId;
 	}
@@ -353,7 +348,6 @@ public class MercuryActivity  {
 	{
 		final Context applicationContext = mContext.getApplicationContext();
 		mInAppAD= new InAppAD() ;
-		LogLocal("[MercuryActivity][InitAd] Local InitAd()->"+mInAppAD);
 		mInAppAD.ActivityInit((Activity)mContext,appcall);
 	}
 

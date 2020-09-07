@@ -76,7 +76,7 @@ public final class Function {
         String remote_url = "";
         //get remote version
         String remote_config = readFileData("verifyGame");
-        LogLocal("[MercuryActivity][verifyGame] remote_config=" + remote_config);
+        LogLocal("[MercuryActivity][verifyGame] read remote_config from local =" + remote_config);
         try {
             JSONObject json = (JSONObject) new JSONTokener(remote_config).nextValue();
             JSONObject json_data = json.getJSONObject("data");
@@ -86,7 +86,7 @@ public final class Function {
             remote_dialog_message = (String) json_result.get("message");
             remote_dialog_title = (String) json_result.get("titile");
         } catch (JSONException e) {
-            LogLocal("[Function][post_redeem_code] error="+e.toString());
+            LogLocal("[Function][VerifyGame] error="+e.toString());
             e.printStackTrace();
         }
         //default value
@@ -111,7 +111,7 @@ public final class Function {
             PackageManager manager = MercuryActivity.mContext.getPackageManager();
             PackageInfo info = manager.getPackageInfo(MercuryActivity.mContext.getPackageName(), 0);
             local_version = info.versionCode;
-            LogLocal("[Function][post_redeem_code] local_version="+local_version+"｜remote_version="+remote_version);
+            LogLocal("[Function][VerifyGame] local_version="+local_version+"｜remote_version="+remote_version);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,7 +119,7 @@ public final class Function {
         if (remote_version > local_version)
         //have new version
         {
-            LogLocal("[Function][post_redeem_code] displaying updating pop");
+            LogLocal("[Function][VerifyGame] displaying updating pop");
             AlertDialog.Builder builder = new AlertDialog.Builder(MercuryActivity.mContext);
             builder.setMessage(display_dialog_titile);
             builder.setTitle(display_dialog_message);

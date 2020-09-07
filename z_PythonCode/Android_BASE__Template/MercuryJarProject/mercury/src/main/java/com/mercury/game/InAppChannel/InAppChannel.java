@@ -42,23 +42,13 @@ public class InAppChannel extends InAppBase {
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
-		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.init="+context);
+		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
 		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
-//		new IDCardVerifyDialog(mContext, new LoginCallBack() {
-//			@Override
-//			public void success(String msg) {
-//				LogLocal("[MercuryActivity][SingmaanLogin]Success");
-//			}
-//			@Override
-//			public void fail(String msg) {
-//				LogLocal("[MercuryActivity][SingmaanLogin]failed");
-//			}
-//		});
 	}
 	public void ApplicationInit(Application appcontext)
 	{
 		mAppContext=appcontext;
-		MercuryActivity.LogLocal("["+Channelname+"]->init:InAppChannel.ApplicationInit="+appcontext);
+		MercuryActivity.LogLocal("[InAppChannel][ApplicationInit]="+Channelname);
 	}
 
 	public static String[] convertStrToArray(String str,String symbol){
@@ -98,6 +88,7 @@ public class InAppChannel extends InAppBase {
 					dialog.dismiss();
 				}
 			});
+			builder.setCancelable(false);
 			builder.create().show();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,6 +113,7 @@ public class InAppChannel extends InAppBase {
 					onPurchaseFailed(MercuryConst.QinPid);
 				}
 			});
+			builder.setCancelable(false);
 			builder.create().show();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,8 +133,8 @@ public class InAppChannel extends InAppBase {
 				new IDCardVerifyDialog(mContext, new LoginCallBack() {
 					@Override
 					public void success(String msg) {
-
 						LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
+						onFunctionCallBack("IDCardVerifyDialog");
 					}
 					@Override
 					public void fail(String msg) {
@@ -211,34 +203,33 @@ public class InAppChannel extends InAppBase {
 	@Override
 	public void onPause()
 	{
-		MercuryActivity.LogLocal("["+Channelname+"] onPause");
+		MercuryActivity.LogLocal("["+Channelname+"][onPause]");
 	}
 	
 	@Override
 	public void onResume()
 	{
-		MercuryActivity.LogLocal("["+Channelname+"] onResume");
+		MercuryActivity.LogLocal("["+Channelname+"][onResume]");
 	}
 	@Override
 	public void onDestroy()
 	{
-		MercuryActivity.LogLocal("["+Channelname+"] onDestroy");
+		MercuryActivity.LogLocal("["+Channelname+"][onDestroy]");
 	}
 	@Override
 	public void onStop() 
 	{
-		MercuryActivity.LogLocal("["+Channelname+"] onStop");
+		MercuryActivity.LogLocal("["+Channelname+"][onStop]");
 	}
 	@Override
 	public void onStart() 
 	{
-		MercuryActivity.LogLocal("["+Channelname+"] onStart");
+		MercuryActivity.LogLocal("["+Channelname+"][onStart]");
 	}
 	@Override
 	public void onRestart()
 	{
-		MercuryActivity.LogLocal("["+Channelname+"] onRestart");
-		
+		MercuryActivity.LogLocal("["+Channelname+"][onRestart]");
 	}
 	public void onTerminate()
 	{

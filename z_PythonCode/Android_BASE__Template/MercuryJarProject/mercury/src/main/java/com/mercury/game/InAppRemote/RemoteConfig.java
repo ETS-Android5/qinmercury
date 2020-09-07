@@ -25,11 +25,11 @@ public final class RemoteConfig {
     private static String ip_address = "office.singmaan.com";
     public static void GetAllConfig()
     {
-        LogLocal("[RemoteConfig][GetAllConfig] DeviceId="+DeviceId);
+//        LogLocal("[RemoteConfig][GetAllConfig] DeviceId="+DeviceId);
         if (DeviceId.equals("863845032203667"))
         {
-            LogLocal("[RemoteConfig][GetAllConfig] testing mode");
             ip_address = "192.168.10.7";
+            LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP="+ip_address);
         }
         get_remote_iap();
         get_update_config();
@@ -58,7 +58,7 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][get_remote_iap] failed");
+                            LogLocal("[RemoteConfig][get_remote_iap] failed="+e.toString());
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
@@ -103,7 +103,7 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][RemoteConfig] failed");
+                            LogLocal("[RemoteConfig][RemoteConfig] failed="+e.toString());
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {

@@ -46,8 +46,7 @@ public class InAppBase{
 		mInstance = this;
 		qc = new MercuryConst();
 		this.appinterface=appcall;
-		LogLocal("[InAppBase]->init:InAppBase.appinterface="+appcall);
-
+		MercuryActivity.LogLocal("[InAppBase][ActivityInit]");
 	}
 	
 
@@ -61,7 +60,7 @@ public class InAppBase{
 	public void ApplicationInit(Application appcontext)
 	{
 		mAppContext=appcontext;
-		LogLocal("[InAppBase]->init:InAppBase.ApplicationInit="+appcontext);
+		MercuryActivity.LogLocal("[InAppBase][ApplicationInit]");
 	}
 	public boolean isPurchase()
 	{

@@ -222,14 +222,10 @@ public class LoginDialog {
                                 passwordEditText.setError("Failed");
                                 loginButton.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.INVISIBLE);
+                                dialog.dismiss();
                             }
                         });
-                        builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
+                        builder.setCancelable(false);
                         builder.create().show();
                     } catch (Exception e) {
                         e.printStackTrace();

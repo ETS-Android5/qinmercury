@@ -19,42 +19,41 @@ public class InAppAD extends InAppBase {
 	public void ActivityInit(Activity context,final APPBaseInterface appcall)
 	{
 		super.ActivityInit(context, appcall);
-		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit");
-
+		MercuryActivity.LogLocal("[InAppAD][ActivityInit]="+appShow);
 	}
 	@Override
 	public void ApplicationInit(Application app)
 	{
-		MercuryActivity.LogLocal("["+appShow+"]->ApplicationInit="+app);
+		MercuryActivity.LogLocal("[InAppAD][ApplicationInit]="+appShow);
 	}
 
 	@Override
 	public void onPause()
 	{
-		MercuryActivity.LogLocal("["+appShow+"]->onPause");
+		MercuryActivity.LogLocal("["+appShow+"][onPause]");
 	}
 
 
 	@Override
 	public void onResume()
 	{
-		MercuryActivity.LogLocal("["+appShow+"]->onResume");
+		MercuryActivity.LogLocal("["+appShow+"][onResume]");
 	}
 
 	@Override
 	public void onDestroy()
 	{
-		MercuryActivity.LogLocal("["+appShow+"]->onDestroy");
+		MercuryActivity.LogLocal("["+appShow+"][onDestroy]");
 	}
 	@Override
 	public void onStop()
 	{
-		MercuryActivity.LogLocal("["+appShow+"]->onStop");
+		MercuryActivity.LogLocal("["+appShow+"][onStop]");
 	}
 	@Override
 	public void onStart()
 	{
-		MercuryActivity.LogLocal("["+appShow+"]->onStart");
+		MercuryActivity.LogLocal("["+appShow+"][onStart]");
 	}
 	public void onTerminate()
 	{
@@ -89,6 +88,7 @@ public class InAppAD extends InAppBase {
 				AdShowFailedCallBack("ActiveInterstitial");
 			}
 		});
+		builder.setCancelable(false);
 		builder.create().show();
 	}
 	public void ActiveBanner() {
@@ -110,6 +110,7 @@ public class InAppAD extends InAppBase {
 				AdShowFailedCallBack("ActiveBanner");
 			}
 		});
+		builder.setCancelable(false);
 		builder.create().show();
 	}
 	public void ActiveNative() {
@@ -131,6 +132,7 @@ public class InAppAD extends InAppBase {
 				AdShowFailedCallBack("ActiveNative");
 			}
 		});
+		builder.setCancelable(false);
 		builder.create().show();
 	}
 	public void ActiveRewardVideo() {
@@ -152,6 +154,7 @@ public class InAppAD extends InAppBase {
 				AdShowFailedCallBack("ActiveRewardVideo");
 			}
 		});
+		builder.setCancelable(false);
 		builder.create().show();
 	}
 	//end

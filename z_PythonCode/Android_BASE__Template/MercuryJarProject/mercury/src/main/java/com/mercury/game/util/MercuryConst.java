@@ -472,7 +472,6 @@ public class MercuryConst {
 				e.printStackTrace();
 			}
 		}
-		MercuryActivity.LogLocal("[MercuryConst] ProductionJsonList.toString()="+ProductionJsonList.toString());
 		return ProductionJsonList.toString();
 	}
 	public static void PayInfo(String SavePid)
