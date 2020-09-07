@@ -267,7 +267,7 @@ public class MercuryActivity  {
 			@Override
 			public void run() {
 				//调用登录接口
-				Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重现赋予权限", Toast.LENGTH_LONG).show();
+//				Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重现赋予权限", Toast.LENGTH_LONG).show();
 			}
 		},3000);
 
