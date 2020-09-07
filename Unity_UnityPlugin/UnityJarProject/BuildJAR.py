@@ -23,6 +23,8 @@ def main():
 	if os.path.isfile("./mercury/build/outputs/aar/mercury-release.aar"):
 		os.system("unzip ./mercury/build/outputs/aar/mercury-release.aar")
 		os.rename("./classes.jar","./UnityPlugin.jar")
+	if os.path.isdir("./libs"):
+		shutil.rmtree('./libs')
 
 
 if __name__ == '__main__':
