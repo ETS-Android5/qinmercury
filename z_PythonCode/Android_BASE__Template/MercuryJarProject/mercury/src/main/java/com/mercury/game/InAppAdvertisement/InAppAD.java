@@ -89,13 +89,6 @@ public class InAppAD extends InAppBase {
 				AdShowFailedCallBack("ActiveInterstitial");
 			}
 		});
-		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowFailedCallBack("ActiveInterstitial");
-				dialog.dismiss();
-			}
-		});
 		builder.create().show();
 	}
 	public void ActiveBanner() {
@@ -115,13 +108,6 @@ public class InAppAD extends InAppBase {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				AdShowFailedCallBack("ActiveBanner");
-			}
-		});
-		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowFailedCallBack("ActiveInterstitial");
-				dialog.dismiss();
 			}
 		});
 		builder.create().show();
@@ -145,13 +131,6 @@ public class InAppAD extends InAppBase {
 				AdShowFailedCallBack("ActiveNative");
 			}
 		});
-		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowFailedCallBack("ActiveInterstitial");
-				dialog.dismiss();
-			}
-		});
 		builder.create().show();
 	}
 	public void ActiveRewardVideo() {
@@ -171,13 +150,6 @@ public class InAppAD extends InAppBase {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				AdShowFailedCallBack("ActiveRewardVideo");
-			}
-		});
-		builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowFailedCallBack("ActiveInterstitial");
-				dialog.dismiss();
 			}
 		});
 		builder.create().show();

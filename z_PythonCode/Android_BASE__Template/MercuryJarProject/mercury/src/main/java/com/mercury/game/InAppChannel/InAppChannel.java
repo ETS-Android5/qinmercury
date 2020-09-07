@@ -122,13 +122,6 @@ public class InAppChannel extends InAppBase {
 					onPurchaseFailed(MercuryConst.QinPid);
 				}
 			});
-			builder.setNegativeButton("Dismiss", new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(pid);
-					dialog.dismiss();
-				}
-			});
 			builder.create().show();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -178,7 +171,7 @@ public class InAppChannel extends InAppBase {
 	public void DownloadGameData()
 	{
 		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
-		onFunctionCallBack("SingmaanUpDownloadGameData");
+		onFunctionCallBack("SingmaanDownloadGameData");
 	}
 	public void Redeem()
 	{

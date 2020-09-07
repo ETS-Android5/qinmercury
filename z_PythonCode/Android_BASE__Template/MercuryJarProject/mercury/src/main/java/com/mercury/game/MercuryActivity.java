@@ -168,7 +168,6 @@ public class MercuryActivity  {
 	}
 
 	public void PlayVideo() {
-
 		final SurfaceView svStart = new SurfaceView(mActivity);
 		final MediaPlayer mediaPlayer = new MediaPlayer();
 		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -178,17 +177,14 @@ public class MercuryActivity  {
 			public void surfaceCreated(SurfaceHolder surfaceHolder) {
 				Log.e("SurfaceView", "surfaceCreated");
 			}
-
 			@Override
 			public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
 				mediaPlayer.setDisplay(holder);
 				Log.e("SurfaceView", "surfaceChanged");
 			}
-
 			@Override
 			public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
 				Log.e("SurfaceView", "surfaceDestroyed");
-
 			}
 		});
 		holder.setKeepScreenOn(true);
@@ -225,7 +221,6 @@ public class MercuryActivity  {
 			ioe.printStackTrace();
 			Log.e("IOException", ioe.getMessage());
 		}
-
 	}
 
 	public static String getAssetsCacheFile(Context context, String fileName) {
