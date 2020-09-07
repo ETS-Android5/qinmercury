@@ -12,8 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.demo.game.R;
-public class MainActivity extends Activity  {
+import com.demo.game.R;public class MainActivity extends Activity  {
 	public static Context context;
 	public MercuryActivity MercurySDK;
 	public static APPBaseInterface appcall=null;
@@ -224,7 +223,7 @@ public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","GetDeviceId"+MercurySDK.UserDeviceID());
+				Log.w("MercuryDemo","GetDeviceId"+MercurySDK.getDeviceId());
 			}
 		});
 		Button btn16 = (Button) findViewById(R.id.button16);

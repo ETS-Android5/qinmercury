@@ -1,6 +1,8 @@
 package com.mercury.game.InAppRemote;
 
 
+import android.util.Log;
+
 import java.io.IOException;
 //shrinkpartstart
 import okhttp3.Call;
@@ -25,8 +27,7 @@ public final class RemoteConfig {
     private static String ip_address = "office.singmaan.com";
     public static void GetAllConfig()
     {
-//        LogLocal("[RemoteConfig][GetAllConfig] DeviceId="+DeviceId);
-        if (DeviceId.equals("863845032203667"))
+        if (DeviceId.equals("9836ae60d6cc3666"))
         {
             ip_address = "192.168.10.7";
             LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP="+ip_address);

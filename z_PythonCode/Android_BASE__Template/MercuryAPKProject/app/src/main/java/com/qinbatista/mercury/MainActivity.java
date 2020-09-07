@@ -223,7 +223,7 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.w("MercuryDemo","GetDeviceId"+MercurySDK.UserDeviceID());
+				Log.w("MercuryDemo","GetDeviceId"+MercurySDK.getDeviceId());
 			}
 		});
 		Button btn16 = (Button) findViewById(R.id.button16);

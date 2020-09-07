@@ -103,7 +103,6 @@ public class MercuryActivity  {
 		UserDeviceID();//get device id as unique id for game
 		ChannelSplash();//display picture which named ChannelSplash.png
 		PlayVideo();//play video which named ChannelSplash.mp4
-		GetAllConfig();//get all remote config
 		VerifyGame(GameName);//inqure users to update game or not
 		InitChannel(mappcall);//init channel sdk
 		InitAd(mappcall);//init AD sdk
@@ -261,45 +260,59 @@ public class MercuryActivity  {
 	public String UserDeviceID()
 	{
 		//shrinkpartstart
-		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
+		DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+		LogLocal("[MercuryActivity][UserDeviceID] User denied");
+		getDeviceId();
+		GetAllConfig();//get all remote config
+		new Handler().postDelayed(new Runnable() {
 			@Override
-			public void onGranted(List<String> permissionsGranted) {
-				//用户同意权限
-				writeFileData("UserIMEI",DeviceId);
-				DeviceId = PhoneUtils.getUnicodeId(mContext);
-				getDeviceId(mContext);
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						//调用登录接口
-						Toast.makeText(mContext, "您已通过权限，账户已与您的手机绑定，请放心游戏", Toast.LENGTH_LONG).show();
-					}
-				},3000);
+			public void run() {
+				//调用登录接口
+				Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重现赋予权限", Toast.LENGTH_LONG).show();
 			}
-			@Override
-			public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
-				//用户拒绝权限
-				DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-				LogLocal("[MercuryActivity][UserDeviceID] User denied");
-				getDeviceId(mContext);
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						//调用登录接口
-						Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重现赋予权限", Toast.LENGTH_LONG).show();
-					}
-				},3000);
-			}
-		}).rationale(new PermissionUtils.OnRationaleListener() {
-			@Override
-			public void rationale(ShouldRequest shouldRequest) {
-				shouldRequest.again(true);
-			}
-		}).request();
+		},3000);
+
+//		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
+//			@Override
+//			public void onGranted(List<String> permissionsGranted) {
+//				//用户同意权限
+//				DeviceId = PhoneUtils.getUnicodeId(mContext);
+//				writeFileData("UserIMEI",DeviceId);
+//				getDeviceId(mContext);
+//				GetAllConfig();//get all remote config
+//				new Handler().postDelayed(new Runnable() {
+//					@Override
+//					public void run() {
+//						//调用登录接口
+//						Toast.makeText(mContext, "您已通过权限，账户已与您的手机绑定，请放心游戏", Toast.LENGTH_LONG).show();
+//					}
+//				},3000);
+//			}
+//			@Override
+//			public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
+//				//用户拒绝权限
+//				DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+//				LogLocal("[MercuryActivity][UserDeviceID] User denied");
+//				getDeviceId(mContext);
+//				GetAllConfig();//get all remote config
+//				new Handler().postDelayed(new Runnable() {
+//					@Override
+//					public void run() {
+//						//调用登录接口
+//						Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重现赋予权限", Toast.LENGTH_LONG).show();
+//					}
+//				},3000);
+//			}
+//		}).rationale(new PermissionUtils.OnRationaleListener() {
+//			@Override
+//			public void rationale(ShouldRequest shouldRequest) {
+//				shouldRequest.again(true);
+//			}
+//		}).request();
 //		LogLocal("[MercuryActivity][UserDeviceID] DeviceId="+DeviceId);
 		return DeviceId;
 	}
-	public String getDeviceId(Context context) {
+	public String getDeviceId() {
 		String strUserID = "";
 		String imei = "";
 		imei = DeviceId;

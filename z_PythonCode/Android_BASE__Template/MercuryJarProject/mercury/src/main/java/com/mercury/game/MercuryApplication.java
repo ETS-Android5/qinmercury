@@ -64,7 +64,9 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		try
 		{
 			key=getSign(context);
+			//shrinkpartstart
 			SignatureVerify(key);
+			//shrinkpartend
 		}
 		catch (Exception e)
 		{
