@@ -198,7 +198,7 @@ public class GameActivity extends UnityPlayerActivity{
 			}
 		});
 	}
-	public void RestoreProduct()
+	public void RestorePruchase()
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
 		{
