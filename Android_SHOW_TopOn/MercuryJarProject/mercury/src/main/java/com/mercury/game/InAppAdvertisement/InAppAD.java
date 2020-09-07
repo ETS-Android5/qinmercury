@@ -30,9 +30,8 @@ public class InAppAD extends InAppBase {
 		super.ActivityInit(context, appcall);
 		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit appid="+appid+" appKey="+appKey+" videoid="+videoid);
 		ATSDK.init(mContext, appid, appKey);
-		mRewardVideoAd = new ATRewardVideoAd(mContext,videoid);
 		videoADLoad();
-		mRewardVideoAd.load();
+
 	}
 	@Override
 	public void ApplicationInit(Application app)
@@ -168,6 +167,7 @@ public class InAppAD extends InAppBase {
 	}
 	public void videoADLoad()
 	{
+		mRewardVideoAd = new ATRewardVideoAd(mContext,videoid);
 		mRewardVideoAd.setAdListener(new ATRewardVideoListener() {
 			@Override
 			public void onRewardedVideoAdLoaded() {
@@ -212,6 +212,7 @@ public class InAppAD extends InAppBase {
 				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdPlayClicked");
 			}
 		});
+		mRewardVideoAd.load();
 	}
 	public void ActiveRewardVideo() {
 		// TODO Auto-generated method stub
