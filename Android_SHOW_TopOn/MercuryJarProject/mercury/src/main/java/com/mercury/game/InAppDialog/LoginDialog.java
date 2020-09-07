@@ -26,7 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 //shrinkpartstart
-import androidx.annotation.NonNull;
+
 //shrinkpartend
 
 import com.mercury.game.util.LoginCallBack;
@@ -109,7 +109,6 @@ public class LoginDialog {
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
         final Button  cancelButton = myLayout.findViewById(cancelId);
         usernameEditText.setKeyListener(new NumberKeyListener() {
-            @NonNull
             @Override
             protected char[] getAcceptedChars() {
                 char[] c = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -129,7 +128,6 @@ public class LoginDialog {
         });
 
         passwordEditText.setKeyListener(new NumberKeyListener() {
-            @NonNull
             @Override
             protected char[] getAcceptedChars() {
                 char[] c = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',

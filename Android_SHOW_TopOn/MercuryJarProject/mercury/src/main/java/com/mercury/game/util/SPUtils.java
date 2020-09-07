@@ -3,9 +3,10 @@ package com.mercury.game.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 //shrinkpartstart
-import androidx.annotation.NonNull;
+
 //shrinkpartend
 import java.util.Collections;
 import java.util.HashMap;

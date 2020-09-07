@@ -29,7 +29,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
-	versionCode 227
+	versionCode 232
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -58,8 +58,6 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.browser:browser:1.0.0'
     implementation files('src/main/libs/android-query-full.0.26.7.jar')
     implementation files('src/main/libs/windAd-2.19.2.jar')
     implementation(name: 'anythink_banner', ext: 'aar')
