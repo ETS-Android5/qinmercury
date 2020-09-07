@@ -277,8 +277,6 @@ def main():
 			os.remove("./../MercurySDK.jar")
 		os.rename("./classes.jar","./../MercurySDK.jar")
 		__delete_zip_files("./../MercurySDK.jar")
-		if os.path.isfile("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar"):
-			os.remove("./../../../Unity_UnityPlugin/UnityJarProject/mercury/src/main/libs/MercurySDK.jar")
 		if os.path.isdir("./../../MercuryAPKProject_pure/app/src/main/libs")==False:os.mkdir("./../../MercuryAPKProject_pure/app/src/main/libs")
 		shutil.copy("./../MercurySDK.jar", "./../../MercuryAPKProject_pure/app/src/main/libs/MercurySDK.jar")
 	if os.path.exists("./../cache"):delete_folder("./../cache")
