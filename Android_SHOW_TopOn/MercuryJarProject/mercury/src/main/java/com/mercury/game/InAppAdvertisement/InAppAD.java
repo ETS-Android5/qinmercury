@@ -183,12 +183,11 @@ public class InAppAD extends InAppBase {
 			@Override
 			public void onRewardedVideoAdPlayStart(ATAdInfo entity) {
 				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdPlayStart");
-				mRewardVideoAd.load();
 			}
-
 			@Override
 			public void onRewardedVideoAdPlayEnd(ATAdInfo entity) {
 				MercuryActivity.LogLocal("["+appShow+"] onRewardedVideoAdPlayEnd");
+				mRewardVideoAd.load();
 			}
 
 			@Override

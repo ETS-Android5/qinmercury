@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.qinbatista.demo.R;public class MainActivity extends Activity  {
+import com.singmaan.ww1.hykb.R;public class MainActivity extends Activity  {
 	public static Context context;
 	public MercuryActivity MercurySDK;
 	public static APPBaseInterface appcall=null;
