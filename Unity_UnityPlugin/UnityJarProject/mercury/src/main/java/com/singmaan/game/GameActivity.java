@@ -207,8 +207,8 @@ public class GameActivity extends UnityPlayerActivity{
 			{
 				mContext.runOnUiThread(new Runnable() {
 					public void run() {
-						Log.e(tagname,"RestoreProduct");
-						MercurySDK.RestoreProduct();
+						Log.e(tagname,"RestorePruchase");
+						MercurySDK.RestorePruchase();
 					}
 				});
 			}
