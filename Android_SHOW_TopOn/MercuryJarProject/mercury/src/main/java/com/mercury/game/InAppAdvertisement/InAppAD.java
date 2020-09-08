@@ -29,8 +29,9 @@ public class InAppAD extends InAppBase {
 	{
 		super.ActivityInit(context, appcall);
 		MercuryActivity.LogLocal("["+appShow+"]->ActivityInit appid="+appid+" appKey="+appKey+" videoid="+videoid+", ATSDK.getSDKVersionName()="+ATSDK.getSDKVersionName());
+		ATSDK.setNetworkLogDebug(true);
 		ATSDK.init(mContext, appid, appKey);
-
+		ATSDK.getSDKVersionName();
 		videoADLoad();
 
 	}
