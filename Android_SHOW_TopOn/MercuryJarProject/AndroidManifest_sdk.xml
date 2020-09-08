@@ -1,107 +1,112 @@
-<!--sdk-->        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <!-- network type: china/network_sdk/pangle/AndroidManifest.xml-->
-        <provider
-            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
-            android:authorities="${applicationId}.TTMultiProvider"
-            android:exported="false" />
-        <provider
-            android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
-            android:authorities="${applicationId}.TTFileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/anythink_bk_tt_file_path" />
-        </provider>
-        <!-- network type: china/network_sdk/gdt/AndroidManifest.xml-->
-        <service
-            android:name="com.qq.e.comm.DownloadService"
-            android:exported="false" />
-
-        <activity
-            android:name="com.qq.e.ads.ADActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
-
-        <activity
-            android:name="com.qq.e.ads.PortraitADActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.qq.e.ads.LandscapeADActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape" />
-
-        <provider
-            android:name="com.anythink.network.gdt.GDTATFileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/anythink_bk_gdt_file_path" />
-        </provider>
-        <!-- network type: china/network_sdk/mintegral/AndroidManifest.xml-->
-        <activity
-            android:name="com.mintegral.msdk.activity.MTGCommonActivity"
-            android:configChanges="keyboard|orientation"
-            android:screenOrientation="portrait"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
-        </activity>
-
-        <receiver android:name="com.mintegral.msdk.click.AppReceiver" >
+<!--sdk-->        <activity android:configChanges="orientation|screenSize" android:name="com.qinbatista.mercury.MainActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" />
+            </intent-filter>
+        </activity>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <provider android:authorities="com.singmaan.ww1.hykb.TTMultiProvider" android:exported="false" android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"/>
+        <provider android:authorities="com.singmaan.ww1.hykb.TTFileProvider" android:exported="false" android:grantUriPermissions="true" android:name="com.bytedance.sdk.openadsdk.TTFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/anythink_bk_tt_file_path"/>
+        </provider>
+        <service android:exported="false" android:multiprocess="true" android:name="com.qq.e.comm.DownloadService"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:multiprocess="true" android:name="com.qq.e.ads.ADActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:multiprocess="true" android:name="com.qq.e.ads.PortraitADActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:multiprocess="true" android:name="com.qq.e.ads.LandscapeADActivity" android:screenOrientation="landscape"/>
+        <provider android:authorities="com.singmaan.ww1.hykb.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.anythink.network.gdt.GDTATFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/anythink_bk_gdt_file_path"/>
+        </provider>
+        <activity android:configChanges="keyboard|orientation" android:exported="false" android:name="com.mintegral.msdk.activity.MTGCommonActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:name="com.mintegral.msdk.click.AppReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <data android:scheme="package"/>
             </intent-filter>
         </receiver>
-
-        <service android:name="com.mintegral.msdk.shell.MTGService" >
+        <service android:exported="false" android:name="com.mintegral.msdk.shell.MTGService">
             <intent-filter>
-                <action android:name="com.mintegral.msdk.download.action" />
+                <action android:name="com.mintegral.msdk.download.action"/>
             </intent-filter>
         </service>
-
-        <provider
-            android:name="com.mintegral.msdk.base.utils.MTGFileProvider"
-            android:authorities="${applicationId}.mtgFileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            tools:ignore="Instantiatable">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/anythink_bk_mtg_file_path"/>
+        <provider android:authorities="com.singmaan.ww1.hykb.mtgFileProvider" android:exported="false" android:grantUriPermissions="true" android:name="com.mintegral.msdk.base.utils.MTGFileProvider"> tools:ignore="Instantiatable"&gt; <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/anythink_bk_mtg_file_path"/>
         </provider>
-        <!-- network type: china/network_sdk/sigmob/AndroidManifest.xml-->
-
-        <!-- targetSDKVersion >= 24时才需要添加这个provider。
-        provider的authorities属性的值为${applicationId}.sigprovider -->
-        <provider
-            android:name="com.sigmob.sdk.SigmobFileProvider"
-            android:authorities="${applicationId}.sigprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/anythink_bk_sigmob_file_path"/>
+        <provider android:authorities="com.singmaan.ww1.hykb.sigprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.sigmob.sdk.SigmobFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/anythink_bk_sigmob_file_path"/>
         </provider>
-
-        <!--广告展示Activity -->
-        <activity android:name="com.sigmob.sdk.base.common.AdActivity"
-            android:theme="@android:style/Theme.DeviceDefault"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.sigmob.sdk.base.common.AdActivity" android:theme="@android:style/Theme.DeviceDefault"/>
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
-<!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity"/>
+        <activity android:name="com.anythink.china.activity.TransparentActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+        <provider android:authorities="com.singmaan.ww1.hykb.fileProvider" android:exported="false" android:grantUriPermissions="true" android:name="com.anythink.china.common.ApkFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/anythink_file_paths"/>
+        </provider>
+        <receiver android:name="com.anythink.china.common.NotificationBroadcaseReceiver">
+            <intent-filter>
+                <action android:name="action_notification_click"/>
+                <action android:name="action_notification_cancel"/>
+            </intent-filter>
+        </receiver>
+        <service android:name="com.anythink.china.common.service.ApkDownloadService"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:launchMode="singleTask" android:name="com.anythink.core.activity.AnyThinkGdprAuthActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="com.anythink.myoffer.ui.MyOfferLandscapeActivity" android:screenOrientation="sensorLandscape"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="com.anythink.myoffer.ui.MyOfferPortraitActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:name="com.anythink.myoffer.ui.ApkConfirmDialogActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:multiprocess="true" android:name="com.qq.e.ads.RewardvideoPortraitADActivity" android:theme="@android:style/Theme.Translucent">
+            <meta-data android:name="android.notch_support" android:value="true"/>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:multiprocess="true" android:name="com.qq.e.ads.RewardvideoLandscapeADActivity" android:theme="@android:style/Theme.Translucent">
+            <meta-data android:name="android.notch_support" android:value="true"/>
+        </activity>
+        <receiver android:enabled="true" android:exported="true" android:name="com.alphab.receiver.AlphabReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="orientation|screenSize" android:name="com.mintegral.msdk.interstitial.view.MTGInterstitialActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.mintegral.msdk.mtgjscommon.authority.activity.MTGAuthorityActivity"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.mintegral.msdk.reward.player.MTGRewardVideoActivity" android:theme="@style/mintegral_transparent_theme"/>
+        <service android:name="com.ss.android.socialbase.downloader.notification.DownloadNotificationService"/>
+        <service android:name="com.ss.android.socialbase.downloader.downloader.DownloadService"/>
+        <service android:exported="false" android:name="com.ss.android.socialbase.downloader.downloader.IndependentProcessDownloadService" android:process=":downloader">
+            <intent-filter>
+                <action android:name="com.ss.android.socialbase.downloader.remote"/>
+            </intent-filter>
+        </service>
+        <service android:name="com.ss.android.socialbase.downloader.impls.DownloadHandleService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.ss.android.socialbase.downloader.impls.RetryJobSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name="com.ss.android.socialbase.downloader.downloader.SqlDownloadCacheService"/>
+        <service android:name="com.ss.android.socialbase.appdownloader.DownloadHandlerService"/>
+        <activity android:launchMode="singleTask" android:name="com.ss.android.socialbase.appdownloader.view.DownloadTaskDeleteActivity" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:launchMode="singleTask" android:name="com.ss.android.socialbase.appdownloader.view.JumpUnknownSourceActivity" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:launchMode="singleTask" android:name="com.ss.android.downloadlib.activity.TTDelegateActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:launchMode="singleTask" android:name="com.ss.android.downloadlib.guide.install.InstallGuideActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:name="com.ss.android.downloadlib.core.download.DownloadReceiver"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:launchMode="standard" android:name="com.bytedance.sdk.openadsdk.activity.base.TTWebPageActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:launchMode="standard" android:name="com.bytedance.sdk.openadsdk.activity.base.TTPlayableWebPageActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:launchMode="standard" android:name="com.bytedance.sdk.openadsdk.activity.base.TTVideoWebPageActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:launchMode="singleTask" android:name="com.bytedance.sdk.openadsdk.activity.base.TTDelegateActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:launchMode="standard" android:name="com.bytedance.sdk.openadsdk.activity.base.TTRewardVideoActivity"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:launchMode="standard" android:name="com.bytedance.sdk.openadsdk.activity.base.TTRewardExpressVideoActivity"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:launchMode="standard" android:name="com.bytedance.sdk.openadsdk.activity.base.TTFullScreenVideoActivity"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:launchMode="standard" android:name="com.bytedance.sdk.openadsdk.activity.base.TTFullScreenExpressVideoActivity"/>
+        <service android:name="com.bytedance.sdk.openadsdk.multipro.aidl.BinderPoolService"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.bytedance.embedapplog.collector.Collector"/>
+        <service android:name="com.bytedance.tea.crash.upload.CrashUploadService" android:process=":npth"/>
+        <provider android:authorities="com.singmaan.ww1.hykb.initprovider" android:exported="false" android:initOrder="100" android:name="com.tramini.plugin.api.TraminiContentProvider"/>
+<!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS"/>
 <!--end-->
