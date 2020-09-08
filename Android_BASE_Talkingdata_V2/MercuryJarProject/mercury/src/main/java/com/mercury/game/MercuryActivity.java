@@ -48,7 +48,10 @@ import com.mercury.game.util.MercuryConst;
 import com.mercury.game.util.PermissionConstants;
 import com.mercury.game.util.PermissionUtils;
 import com.mercury.game.util.PhoneUtils;
-
+import com.tendcloud.tenddata.TDGAAccount;
+import com.tendcloud.tenddata.TalkingDataGA;
+import com.tendcloud.tenddata.TDGAMission;
+import com.tendcloud.tenddata.TDGAVirtualCurrency;
 
 
 import java.io.File;
@@ -107,6 +110,8 @@ public class MercuryActivity  {
 		InitChannel(mappcall);//init channel sdk
 		InitAd(mappcall);//init AD sdk
 		GetProductionInfo();//set ProductionInfo
+		TDGAAccount account = TDGAAccount.setAccount(TalkingDataGA.getDeviceId(mContext));
+		account.setAccountType(TDGAAccount.AccountType.ANONYMOUS);
 	}
 	public String GetProductionInfo()
 	{
@@ -374,6 +379,7 @@ public class MercuryActivity  {
 		int random = (int) ((Math.random() + 1) * 100000);
 		order_id = temp + random;
 		mInAppChannel.Purchase(pidname);
+		TDGAVirtualCurrency.onChargeRequest(order_id, MercuryConst.Qindesc,  MercuryConst.Qinpricefloat, "CNY", 1, channelname);
 
 	}
 
@@ -530,18 +536,24 @@ public class MercuryActivity  {
 	{
 		LogLocal("[MercuryActivity] Data_UseItem()");
 		int myint =  Integer.parseInt(quantity);
+		TDGAVirtualCurrency.onReward(myint, item);
 	}
 	public void Data_LevelBegin(String key)
 	{
 		LogLocal("[MercuryActivity] Data_LevelBegin()");
+		TDGAMission.onBegin(key);
 	}
 	public void Data_LevelCompleted(String key)
 	{
 		LogLocal("[MercuryActivity] Data_LevelCompleted()");
+		TDGAMission.onCompleted(key);
 	}
 	public void Data_Event(String key)
 	{
 		LogLocal("[MercuryActivity] Data_Event()");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("key", key);// 在注册环节的每一步完成时，以步骤名作为value传送数据
+		TalkingDataGA.onEvent("Event", map);
 	}
 	public void showMessageDialog()
 	{

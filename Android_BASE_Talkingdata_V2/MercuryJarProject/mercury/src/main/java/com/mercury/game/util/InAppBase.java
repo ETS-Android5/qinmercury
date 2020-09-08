@@ -8,7 +8,9 @@ import android.view.Menu;
 
 import com.mercury.game.InAppDialog.IDCardVerifyDialog;
 import com.mercury.game.MercuryActivity;
-
+import com.tendcloud.tenddata.TDGAAccount;
+import com.tendcloud.tenddata.TDGAVirtualCurrency;
+import com.tendcloud.tenddata.TalkingDataGA;
 
 
 import static com.mercury.game.MercuryActivity.LogLocal;
@@ -113,6 +115,7 @@ public class InAppBase{
 	
 	public void onPurchaseSuccess(String message)
 	{
+		TDGAVirtualCurrency.onChargeSuccess(order_id);
 		qc.PurchaseSuccess(message,this);
 	}
 	public void onPurchaseFailed(String strError)

@@ -16,7 +16,7 @@ import com.mercury.game.InAppAdvertisement.InAppAD;
 import com.mercury.game.InAppChannel.InAppChannel;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
-
+import com.tendcloud.tenddata.TalkingDataGA;
 
 
 import java.util.Iterator;
@@ -61,6 +61,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 		checkChannelName();
 		checkChannelSplash();
 		Log.w("MercurySDK","[MercuryApplication][AppInitCode]channelname="+channelname+",umeng_id="+umeng_id+",talkingdata="+talkingdata_id);
+		TalkingDataGA.init(context, talkingdata_id, channelname);
 		try
 		{
 			key=getSign(context);
