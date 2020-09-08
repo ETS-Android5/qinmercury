@@ -197,11 +197,18 @@ class SDKAppendManager():
 				if app_releawse_path.find("_IAP")!=-1:
 					for file_path in files:
 						if file_path.find("/InAppChannel/")==-1: os.remove(file_path)
-
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali"):
 			print("[__merge_sdk_resource_smali] copy smali apk with sdk to game apk")
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali")
-
+		smali_class_index = 2
+		print(str(os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index))))
+		while os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index)):
+			print("aaa="+str(smali_class_index))
+		# 	if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index))==False:
+		# 		print("don't exit "+app_releawse_path)
+			if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index)): os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index),f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))
+			smali_class_index = smali_class_index+1
 	def __merge_sdk_resource_res(self):
 		self.__merge_sdk_resource_res_execute(f"{self.__sdk_apk_name_only}_{self.__channel_base}")
 		self.__merge_sdk_resource_res_execute(f"{self.__sdk_apk_name_only}_{self.__channel_IAP}")
@@ -415,20 +422,6 @@ class SDKAppendManager():
 			file_object_read.writelines(JavaCodeGradle)
 
 	def __balance_smali(self,_Path):
-		# if(os.path.exists(_Path+"/smali_classes2")==False):
-		# 	os.mkdir(_Path+"/smali_classes2")
-		# List = []
-		# for i in os.listdir(_Path+"/smali"):
-		# 	List.append(i)
-		# SaveSize=0
-		# BigestList = []
-		# for i in List:
-		# 	size = self.__get_dir_size(_Path+"/smali/"+i)
-		# 	if SaveSize<size:
-		# 		SaveSize=size
-		# 		BigestList = i
-		# 		#print("Bigest = "+_Path+"/smali/"+i)
-		# 	#print("i:"+str(size))
 		folder_index = 2
 		last_name = ""
 
