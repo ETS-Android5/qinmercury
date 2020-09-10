@@ -248,7 +248,7 @@ public class GameActivity extends UnityPlayerActivity{
 		});
 	}
 
-	public void UploadGameData()
+	public void UploadGameData(final String data)
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
 		{
@@ -258,7 +258,7 @@ public class GameActivity extends UnityPlayerActivity{
 				mContext.runOnUiThread(new Runnable() {
 					public void run() {
 						Log.e(tagname,"ExitGame");
-						MercurySDK.UploadGameData();
+						MercurySDK.UploadGameData(data);
 					}
 				});
 			}

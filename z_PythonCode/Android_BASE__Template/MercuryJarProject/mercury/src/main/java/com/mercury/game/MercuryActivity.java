@@ -28,6 +28,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.GetAllConfig;
+import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
+import static com.mercury.game.InAppRemote.RemoteConfig.upload_game_data;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.VerifyGame;
 import static com.mercury.game.util.Function.redeemCode;
@@ -70,6 +72,7 @@ public class MercuryActivity  {
 
 	public static Context mContext = null;
 	public static Activity mActivity = null;
+	public static InAppBase mInAppBase;
 	private InAppChannel mInAppChannel;
 	public InAppAD mInAppAD;
 	public static int mSimOperatorId;
@@ -100,6 +103,7 @@ public class MercuryActivity  {
 		mContext =  ContextFromUsers;
 		mActivity = (Activity)ContextFromUsers;
 		activityforappbase=this;
+		mInAppBase = new InAppBase();
 		UserDeviceID();//get device id as unique id for game
 		ChannelSplash();//display picture which named ChannelSplash.png
 		PlayVideo();//play video which named ChannelSplash.mp4
@@ -415,16 +419,17 @@ public class MercuryActivity  {
 		mInAppChannel.SingmaanLogout();
 	}
 
-	public void UploadGameData()
+	public void UploadGameData(String data)
 	{
-		LogLocal("[MercuryActivity][UploadGameData]" + mInAppChannel);
-		mInAppChannel.UploadGameData();
+		LogLocal("[MercuryActivity][UploadGameData]");
+		upload_game_data(data);
+
 	}
 
 	public void DownloadGameData()
 	{
-		LogLocal("[MercuryActivity][DownloadGameData]" + mInAppChannel);
-		mInAppChannel.DownloadGameData();
+		LogLocal("[MercuryActivity][DownloadGameData]");
+		download_game_data();
 	}
 
 	public void Redeem()

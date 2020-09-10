@@ -412,7 +412,7 @@ public class MercuryActivity  {
 		mInAppChannel.SingmaanLogout();
 	}
 
-	public void UploadGameData()
+	public void UploadGameData(String data)
 	{
 		LogLocal("[MercuryActivity][UploadGameData]" + mInAppChannel);
 		mInAppChannel.UploadGameData();

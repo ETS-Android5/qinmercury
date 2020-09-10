@@ -173,7 +173,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.w("MercuryDemo","UploadGameData");
-				MercurySDK.UploadGameData();
+				MercurySDK.UploadGameData("this is testing uploaded data");
 			}
 		});
 		Button btn10 = (Button) findViewById(R.id.button10);
