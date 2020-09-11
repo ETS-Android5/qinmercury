@@ -1,6 +1,4 @@
-package com.mercury.game.InAppChannel;
-
-import android.app.Activity;
+package com.mercury.game.InAppChannel;import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
