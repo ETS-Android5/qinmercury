@@ -11,29 +11,52 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Xml;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
+import com.mercury.game.util.MD5;
 import com.mercury.game.util.MercuryConst;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.xmlpull.v1.XmlPullParser;
 
+import java.io.StringReader;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import static com.mercury.game.InAppChannel.Util.httpPost;
 import static com.mercury.game.MercuryActivity.DeviceId;
+import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.order_id;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 //end
@@ -50,15 +73,22 @@ public class InAppChannel extends InAppBase {
 	public static final String APPID = "2021001191645565";
 	public static final String RSA2_PRIVATE = "";
 	public static final String RSA_PRIVATE = "MIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQDsq+XGiE9vqz6mq83RdK56cuqU8YKZbPeu98ljKbmpx3bffdPCrAWWiK0qZfsZHW5um4kB8jNbclKnsadlo0Ok2ufBeKUJdpVom5O/xtQCnprxLhAuEGTITiiCMEHpw2m9tnzcHAhZQuD7FiWMmMfqeoaN2ixPSv08QMDDzAL0Gs2cQcMNJkuc6x9nEuEg/oDatm0JWME2FUWtx/95C9aJyaS6gzrgPFIaH6jp2xbcoWG2O/EVEiERBsTfAXHKVv7zhRR0ZNeE7jGZM6Ewt87k+KCHomNJlz09K/KJbopGjJ8nNdm5Dtw3qmr6pf7Y3gy2BHRwAzhcN0+zp2gRlib/AgMBAAECggEBAN9DSf9/l3BAm1mfuQleiTn6LlFTg2A4626jUde6BOukvv8WNC3xGVRomvLkQXvvx72P/C9ZzBj4QADyFnhLDAT4fKiGpynGNCv6l+bSKi5OcNwUGC9cR7auBIjL/WIIdjgBbsg1qaqK7LHwsntvpSgNbeFjb2ld1IaCj1YlnqOm1N89MtVUo8fm844sO8XRsD9YYmzrnesIvp91oJJvFxc3XvYuRZAO/TtLuRMc6lnc0AX1ybI++DtutAd3vMcMBQtIGyuL7eUx2YTBxJXtPv91PQeeWQn1HGHv+SpDjkK+d6zHfbgtzOMhk0ckRUz4q1LhhLUtVnfDh8w1TIuFkAECgYEA+RE83iJ+2oz5bdeUnVt79BYxqlNb3jvjkVZsnfRg6ruRmuKvI6TQxtO82Io0XCH1v/9CW8FKlfuXouA4PiIjtkXo0wuTXbAdL/f64E2va2mdl1c/LLnaTaCO9vD1Igjnv79S5txmdK7pABwzsPuvPtOg1WAv4hY1HdTgomWW2FECgYEA80JU2j1ObTvkMmaMzJMaLUsbrTkcHOu5N56xgliccEjb2wM8QefbUsj/v4zggx19WLFiukNQHNzTYAxioA0iAhbD2QvnGfWL2A/iDm/P2tEArpGIccHEMpBfH4dDHGv32BJKqCFhXFVqiKWBF9ztHRMZDkWuL/VWeEw83UEfhk8CgYEA9GSQuFta5DLecYTPJBTnrRu2Ai6nf4p+g1ctX1SzYMFKX5O9TRllbyPHMydxt1HvZUUgpQ4mlML6CO1A4t728dzpV2UNZinwiegneL9huOE6rI0ExWtcpT0961uG/a2FUaZ3v2ZW9nnG0b/ajPh5/gkE0Tr/4TXvSuVewpsyh/ECgYEAjDV5TujzIUbZ+qrdELTg66ZU53z5VToQ4ZwYWDbWxGlaP1wYCSyoX4j2z+NVLH181/g2HYHa1Sf6tWuuFO484dNZQur3YyECX6CX/RY5SbgZmoTLjjXO7g4EpdmCtwkMK4Avg8TppxyccPJj++scyBtP38gN5BqWonPeyPBWSUUCgYEAqLlTT0e6pbtLvvoa96+vJDcaR8c9ks/tDfRe9sKSK4H0kn2U5t7XcXSKUaSCSHUE+UNtUeJw9L7emoglTbKY/cCOi1/AoxXNTq8GP/WW1bb2moCX9wpVmTCc0sfmEQbdcMHXl3f8SrZUoJlHJ79VyyerdqTmO7yzNdoTS54zvvk=";
-
+	public static final String WX_APP_ID = "wxb745727a544b480c";
+	public static final String WX_MCH_ID = "";
+	public static final String WX_API_KEY="";
+	public static final String WXShareID="";
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
+	public PayReq req;
+	private IWXAPI msgApi;
+	public  Map<String,String> resultunifiedorder;
+	public  StringBuffer sb;
 	@Override
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
-		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -79,7 +109,46 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
-		AliPay();
+		final String price= String.valueOf((int)mProductPrice);
+		try {
+			AlertDialog.Builder builder = new Builder(mContext);
+			builder.setMessage("选择支付方式");
+			builder.setTitle("提示");
+			builder.setPositiveButton("微信支付", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					WechatPay();
+				}
+			});
+			builder.setNeutralButton("支付宝支付", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					AliPay();
+				}
+			});
+			builder.setNegativeButton("取消", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onPurchaseFailed(Channelname);
+					dialog.dismiss();
+				}
+			});
+			AlertDialog alertDialog;
+			alertDialog = builder.create();// AlertDialog.Builder.create();
+			alertDialog.setCancelable(false);
+			alertDialog.setCanceledOnTouchOutside(false);
+			alertDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+					WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+			alertDialog.show();
+
+			alertDialog.getWindow().getDecorView()
+					.setSystemUiVisibility((mContext).getWindow()
+							.getDecorView().getSystemUiVisibility());
+			alertDialog.getWindow()
+					.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 
 	}
@@ -187,6 +256,177 @@ public class InAppChannel extends InAppBase {
 		Thread payThread = new Thread(payRunnable);
 		payThread.start();
 	}
+	public void WechatPay()
+	{
+		if(isNetworkAvailable(mContext))
+		{
+			GetPrepayIdTask getPrepayId = new GetPrepayIdTask();
+			getPrepayId.execute();
+		}
+		else {
+			Toast.makeText(mContext, "没有可用网络，微信无法支付！", Toast.LENGTH_SHORT).show();
+		}
+	}
+	public   boolean isNetworkAvailable(Context context) {
+		ConnectivityManager connectivity = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivity != null) {
+			NetworkInfo info = connectivity.getActiveNetworkInfo();
+			if (info != null && info.isConnected())
+			{
+				// 当前网络是连接的
+				if (info.getState() == NetworkInfo.State.CONNECTED)
+				{
+					// 当前所连接的网络可用
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	private  class GetPrepayIdTask extends AsyncTask<Void, Void, Map<String,String>> {
+
+		private ProgressDialog dialog;
+
+
+		@Override
+		protected void onPreExecute() {
+			dialog = ProgressDialog.show(mContext,"正在生成订单", "请稍后！");
+		}
+
+		@Override
+		protected void onPostExecute(Map<String,String> result) {
+			if (dialog != null) {
+				dialog.dismiss();
+			}
+			sb.append("prepay_id\n"+result.get("prepay_id")+"\n\n");
+
+			resultunifiedorder=result;
+			WXSendReq();
+
+		}
+
+		@Override
+		protected void onCancelled() {
+			super.onCancelled();
+		}
+
+		@Override
+		protected Map<String,String>  doInBackground(Void... params) {
+
+			String url = String.format("https://api.mch.weixin.qq.com/pay/unifiedorder");
+			String entity = genProductArgs();
+			MercuryActivity.LogLocal("[InAppChannel][GetPrepayIdTask]entity = "+entity);
+
+			byte[] buf = httpPost(url, entity);
+			String content = new String(buf);
+			MercuryActivity.LogLocal("[InAppChannel][GetPrepayIdTask]entity = "+entity);
+			Map<String,String> xml=decodeXml(content);
+
+			return xml;
+		}
+	}
+	public  Map<String,String> decodeXml(String content) {
+
+		try {
+			Map<String, String> xml = new HashMap<String, String>();
+			XmlPullParser parser = Xml.newPullParser();
+			parser.setInput(new StringReader(content));
+			int event = parser.getEventType();
+			while (event != XmlPullParser.END_DOCUMENT) {
+
+				String nodeName=parser.getName();
+				switch (event) {
+					case XmlPullParser.START_DOCUMENT:
+
+						break;
+					case XmlPullParser.START_TAG:
+
+						if("xml".equals(nodeName)==false){
+							//实例化student对象
+							xml.put(nodeName,parser.nextText());
+						}
+						break;
+					case XmlPullParser.END_TAG:
+						break;
+				}
+				event = parser.next();
+			}
+
+			return xml;
+		} catch (Exception e) {
+			MercuryActivity.LogLocal("[InAppChannel][genProductArgs] decodeXml = " + e.toString());
+		}
+		return null;
+
+	}
+	private  String genProductArgs() {
+		StringBuffer xml = new StringBuffer();
+		int nPrice = (int)(mProductPrice*100);
+		String strPriceString = String.valueOf(nPrice);
+		try {
+			String  nonceStr = genNonceStr();
+			xml.append("</xml>");
+			List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
+			packageParams.add(new BasicNameValuePair("appid", WX_APP_ID));
+			packageParams.add(new BasicNameValuePair("attach", DeviceId+","+MercuryConst.QinPid+","+channelname+"_"+GameName+"_"+order_id));
+
+			packageParams.add(new BasicNameValuePair("body", mProductDescription));
+			packageParams.add(new BasicNameValuePair("mch_id", WX_MCH_ID));
+			packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
+			packageParams.add(new BasicNameValuePair("notify_url","http://pay.east2west.cn/cdkey/index.php/Callback/weixinCPS"));
+
+			packageParams.add(new BasicNameValuePair("out_trade_no",channelname+"_"+GameName+"_"+order_id));
+			packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));
+			packageParams.add(new BasicNameValuePair("total_fee", strPriceString));
+			packageParams.add(new BasicNameValuePair("trade_type", "APP"));
+			String sign = genPackageSign(packageParams);
+			packageParams.add(new BasicNameValuePair("sign", sign));
+			String xmlstring =toXml(packageParams);
+
+			return new String(xmlstring.toString().getBytes(), "ISO8859-1");
+
+		} catch (Exception e) {
+			MercuryActivity.LogLocal("[InAppChannel][genProductArgs] ex = " + e.getMessage());
+			return null;
+		}
+	}
+	private  String genPackageSign(List<NameValuePair> params) {
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < params.size(); i++) {
+			sb.append(params.get(i).getName());
+			sb.append('=');
+			sb.append(params.get(i).getValue());
+			sb.append('&');
+		}
+		sb.append("key=");
+		sb.append(WX_API_KEY);
+
+
+		String packageSign = MD5.getMessageDigest(sb.toString().getBytes()).toUpperCase();
+		return packageSign;
+	}
+
+	private  String toXml(List<NameValuePair> params) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<xml>");
+		for (int i = 0; i < params.size(); i++) {
+			sb.append("<"+params.get(i).getName()+">");
+
+
+			sb.append(params.get(i).getValue());
+			sb.append("</"+params.get(i).getName()+">");
+		}
+		sb.append("</xml>");
+		return sb.toString();
+	}
+	private static String genNonceStr() {
+		Random random = new Random();
+		DateFormat format = new java.text.SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.US);
+		String requestId = format.format(new Date());
+		return MD5.getMessageDigest((String.valueOf(random.nextInt(10000))+requestId).getBytes());
+	}
 	public void SingmaanLogin()
 	{
 		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
@@ -216,6 +456,52 @@ public class InAppChannel extends InAppBase {
 			}
 		});
 		//shrinkpartend
+	}
+	public  void WXSendReq()
+	{
+		genPayReq();
+		msgApi.registerApp(WX_APP_ID);
+		msgApi.sendReq(req);
+	}
+	private  void genPayReq() {
+
+		req.appId = WX_APP_ID;
+		req.partnerId = WX_MCH_ID;
+		req.prepayId = resultunifiedorder.get("prepay_id");
+		req.packageValue = "prepay_id="+resultunifiedorder.get("prepay_id");
+		req.nonceStr = genNonceStr();
+		req.timeStamp = String.valueOf(genTimeStamp());
+		List<NameValuePair> signParams = new LinkedList<NameValuePair>();
+		signParams.add(new BasicNameValuePair("appid", req.appId));
+		signParams.add(new BasicNameValuePair("noncestr", req.nonceStr));
+		signParams.add(new BasicNameValuePair("package", req.packageValue));
+		signParams.add(new BasicNameValuePair("partnerid", req.partnerId));
+		signParams.add(new BasicNameValuePair("prepayid", req.prepayId));
+		signParams.add(new BasicNameValuePair("timestamp", req.timeStamp));
+		req.sign = genAppSign(signParams);
+		sb.append("sign\n"+req.sign+"\n\n");
+		LogLocal("[InAppChannel][SingmaanLogin] signParams.toString()="+signParams.toString());
+
+	}
+	private  String genAppSign(List<NameValuePair> params) {
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < params.size(); i++) {
+			sb.append(params.get(i).getName());
+			sb.append('=');
+			sb.append(params.get(i).getValue());
+			sb.append('&');
+		}
+		sb.append("key=");
+		sb.append(WX_API_KEY);
+
+		this.sb.append("sign str\n"+sb.toString()+"\n\n");
+		String appSign = MD5.getMessageDigest(sb.toString().getBytes());
+		LogLocal("[InAppChannel][genAppSign]"+appSign);
+		return appSign;
+	}
+	private  long genTimeStamp() {
+		return System.currentTimeMillis() / 1000;
 	}
 	public void SingmaanLogout()
 	{
