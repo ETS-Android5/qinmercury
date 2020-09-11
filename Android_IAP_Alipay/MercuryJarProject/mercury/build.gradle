@@ -1,0 +1,64 @@
+// apply plugin: 'java'
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        multiDexEnabled true
+    }
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
+    //implementation(name: 'aarname', ext: 'aar')
+    //shrinkpartstart
+    implementation(name: 'alipaySdk-15.7.9-20200727142846', ext: 'aar')
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    //shrinkpartend
+}
+
+task clearJar(type: Delete){
+	File file1 = new File(rootDir.getAbsolutePath() + '\\build');
+	file1.deleteDir();
+}
+android {
+    lintOptions {
+        abortOnError false
+    }
+}
+// task to export contents as jar
+task makeJar(type: Copy) {
+
+}
+
+makeJar.dependsOn(clearJar, build)
