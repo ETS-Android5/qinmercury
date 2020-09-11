@@ -129,7 +129,7 @@ def main():
 		if os.path.isdir("./../../MercuryAPKProject_pure/app/src/main/libs")==False:os.mkdir("./../../MercuryAPKProject_pure/app/src/main/libs")
 		shutil.copy("./../MercurySDK.jar", "./../../MercuryAPKProject_pure/app/src/main/libs/MercurySDK.jar")
 	if os.path.exists("./../cache"):delete_folder("./../cache")
-	os.chdir(_path)
+	os.chdir(_path+"/../")
 	__move_back_weixin_plugin()
 
 

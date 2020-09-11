@@ -34,6 +34,7 @@ import com.mercury.game.util.MD5;
 import com.mercury.game.util.MercuryConst;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -89,6 +90,9 @@ public class InAppChannel extends InAppBase {
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
 //		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+		req = new PayReq();
+		sb=new StringBuffer();
+		msgApi = WXAPIFactory.createWXAPI(mContext,WX_APP_ID);
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -124,13 +128,6 @@ public class InAppChannel extends InAppBase {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					AliPay();
-				}
-			});
-			builder.setNegativeButton("取消", new OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(Channelname);
-					dialog.dismiss();
 				}
 			});
 			AlertDialog alertDialog;
