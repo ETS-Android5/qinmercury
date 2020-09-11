@@ -1,20 +1,8 @@
 package com.mercury.game.InAppChannel;
 
-//import com.east2west.game.E2WApp;
-//import com.east2west.game.inApp.InAppBase;
-//import com.east2west.game.inApp.InAppEAST2WEST;
-//import com.tencent.mm.sdk.constants.ConstantsAPI;
-//import com.tencent.mm.sdk.modelbase.BaseReq;
-//import com.tencent.mm.sdk.modelbase.BaseResp;
-//import com.tencent.mm.sdk.openapi.IWXAPI;
-//import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
-//import com.tencent.mm.sdk.openapi.WXAPIFactory;
-//import com.unity3d.player.UnityPlayer;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
@@ -28,6 +16,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import static com.mercury.game.InAppChannel.InAppChannel.WX_APP_ID;
 import static com.mercury.game.MercuryActivity.mInAppBase;
+
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	private static final String TAG = "WXPayEntryActivity";

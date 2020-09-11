@@ -1,37 +1,20 @@
 package com.mercury.game.InAppChannel;
-//import com.east2west.game.E2WApp;
-//import com.east2west.game.QinConst;
-//import com.east2west.game.inApp.InAppEAST2WEST;
-//import com.tencent.mm.sdk.constants.ConstantsAPI;
-//import com.tencent.mm.sdk.modelbase.BaseReq;
-//import com.tencent.mm.sdk.modelbase.BaseResp;
-//import com.tencent.mm.sdk.modelmsg.ShowMessageFromWX;
-//import com.tencent.mm.sdk.openapi.IWXAPI;
-//import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
-//
-//import com.tencent.mm.sdk.openapi.WXAPIFactory;
-//import com.unity3d.player.UnityPlayer;
-//import com.unity3d.player.UnityPlayerActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
-import com.tencent.mm.opensdk.modelmsg.ShowMessageFromWX;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import static com.mercury.game.InAppChannel.InAppChannel.WXShareID;
 import static com.mercury.game.MercuryActivity.mInAppBase;
+
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 	private IWXAPI api;
