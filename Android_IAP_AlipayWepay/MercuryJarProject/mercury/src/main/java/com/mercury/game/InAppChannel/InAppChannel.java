@@ -75,8 +75,8 @@ public class InAppChannel extends InAppBase {
 	public static final String RSA2_PRIVATE = "";
 	public static final String RSA_PRIVATE = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCi/IHCOaXwpMBBEAa8iuflO5r12l7swMsOFMib7vGuHNGL1qTHOz9vH39Cv954UGvzD1rvd+ou6Bo+xav7NEiAh5nVvCM33ffP+a41G6OKHAmfazksz30zbT7V0uR3UHQSlu6pj7teNx7FRRlXx05gKHvQ2VxD9YeaBzgJbZqV0IMR7mB4lAc+8Vow0HoGcxUeFgO+x4BV+rNLNctPpnw9UrfxJsoDsSerAq98Bxf0JiIoU1vQ6c1YGqThM4AClEdZWMUNXFXRNvzA9Thbd46t05FMNRlHKqH03LSwzWj53XR3eoG/5R+OYyGFXCmwlCJYQTC572/CJO8vVkFza08xAgMBAAECggEAHWDQbtb/TzoTIWcnH7MWC57L1sbu11QFBdu/MURHse+l4cPl3beTPo952+lDy4ILgztgU8vUnXHe0TPGRThuXSSUGQ+ZdYeAFK/Xs+DwgIN/RIoKO0aHNc7aRaaG4e7RjUxBZrTuvBPJaxuCbu0Q9oo1jzaux90o/R2R/zkPZTNv1364RT+i3DtNs+0bUEhkEdvbRJisuBIAL1u6WKUmqrXVOx1mtWKnesxjzijK9EoKrD6veXKTd3bEzs8yFfR/YTexwXRUr58qkUz7ljZvBZJts7D1Llmp6UBxdHNS5NfaVuU4ysePAG+L4zJ4RatZz3MLKohrQJAvpCxPmIoGAQKBgQDPDrt26q6Iav2S53tosBtmnNKMYhqWhuY53g9h5AMI0vP1LmEeuxR9ZrRXWUG9znrKBah/NzLRo74mWJH+/+Sp9zDKSk5q4R0fIr23B5FD9TMF0R2q4mw0rOcEpLaFvw2qqy3DbLvNyuSExIGeTq425e+F8q3n9yXsZZeL/mMs0QKBgQDJgvsXwfPLw1O3szMPh7ctpL2Z+4aBYbZZ+VH6HCNpXPd0yiBo2Eh53ZaPjvYhlX3xu8mIRopMpR8YJa5KyUnXHwoS9xs4f+Q/WCR1cqDwgSlC8fx5p+JUg08b115Z6xxvTiP3H+bb6qn4FKXaHDvg2o9UXQiVZxrVAtPX1KcUYQKBgCgW8SMAI1TUak5UNWe6mUOP35BAumckrVTM8uuAKzo9JfD1zuYVUM1K4mX7KShn3wxYdhxTgqpmar2f7nyR7SMfcjnokzBMb8gEgPj8JRskUYGx0G2ys0Krq3sRrSlOKYY+6HhrCB27R+2Q4ovVLhQBBxRHPXapOpV/wgzf7zHRAoGAdkcGIJy7/3bHtcReDRiIwSa4DyCeg2SaBtebcWWAt4BU0t0tBr0kVTtl+x9bgrzfLrsdgHp/BJvK036Sfd0GFVlnrVgTRydyDmgrBjDhHCmD0YJ9wd5zr01faqUQAVFJ4F8KJyw3cg+b8jwUWSBHWSSQCmGM/zyEeFDvjPiJlSECgYEAxKZWL/bZgTxLWxQeFsFRGtTLUCjPc8YJgdj7mMsOi2rTcCzu9zeON39+Ou74FCGDOL12Rzeu64Qpm2j2ZF/tVSPAE1PHuEL2wY+mwcdNcpaa8u8tGbYEmnAIUG0O6e0cdsFEDF4vgGmpYgXr4BuNS6RJP3RmEopIq6vlbYdIr90=";
 	public static final String WX_APP_ID = "wxb745727a544b480c";
-	public static final String WX_MCH_ID = "6938589979530b5b1b8220988e7c0180";
-	public static final String WX_API_KEY="6938589979530b5b1b8220988e7c0180";
+	public static final String WX_MCH_ID = "1571964901";
+	public static final String WX_API_KEY="75d99d3175225b6a907caf6734e21c4d";
 	public static final String WXShareID="6938589979530b5b1b8220988e7c0180";
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
@@ -359,7 +359,7 @@ public class InAppChannel extends InAppBase {
 	}
 	private  String genProductArgs() {
 		StringBuffer xml = new StringBuffer();
-		int nPrice = (int)(mProductPrice*100);
+		int nPrice = (int)(MercuryConst.Qinpricefloat*100);
 		String strPriceString = String.valueOf(nPrice);
 		try {
 			String  nonceStr = genNonceStr();
@@ -373,8 +373,9 @@ public class InAppChannel extends InAppBase {
 			packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
 			packageParams.add(new BasicNameValuePair("notify_url","weixinCPS"));
 
-			packageParams.add(new BasicNameValuePair("out_trade_no",channelname+"_"+GameName+"_"+order_id));
+			packageParams.add(new BasicNameValuePair("out_trade_no",order_id));
 			packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));
+			MercuryActivity.LogLocal("[InAppChannel][genProductArgs] strPriceString = " + strPriceString);
 			packageParams.add(new BasicNameValuePair("total_fee", strPriceString));
 			packageParams.add(new BasicNameValuePair("trade_type", "APP"));
 			String sign = genPackageSign(packageParams);
