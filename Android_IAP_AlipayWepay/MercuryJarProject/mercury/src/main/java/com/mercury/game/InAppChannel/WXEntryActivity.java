@@ -16,7 +16,6 @@ import static com.mercury.game.MercuryActivity.mInAppBase;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 	private IWXAPI api;
-	private static final String APP_ID = "wxc09894676cfb0f15";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

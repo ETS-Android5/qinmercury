@@ -1,5 +1,7 @@
 package com.mercury.game.InAppChannel;
 
+import com.mercury.game.MercuryActivity;
+
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -35,6 +37,7 @@ public class SignUtils {
 
 			return Base64.encode(signed);
 		} catch (Exception e) {
+			MercuryActivity.LogLocal("[SignUtils][sign]e = "+e.toString());
 			e.printStackTrace();
 		}
 

@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android_BASE__Template-MercuryJarProject.iml" filepath="$PROJECT_DIR$/Android_BASE__Template-MercuryJarProject.iml" group="MercuryJarProject" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Android_IAP_Alipay-MercuryJarProject.iml" filepath="$PROJECT_DIR$/.idea/modules/Android_IAP_Alipay-MercuryJarProject.iml" group="MercuryJarProject" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Android_IAP_AlipayWepay-MercuryJarProject.iml" filepath="$PROJECT_DIR$/.idea/modules/Android_IAP_AlipayWepay-MercuryJarProject.iml" group="MercuryJarProject" />
       <module fileurl="file://$PROJECT_DIR$/Android_Umeng-MercuryJarProject.iml" filepath="$PROJECT_DIR$/Android_Umeng-MercuryJarProject.iml" group="MercuryJarProject" />
       <module fileurl="file://$PROJECT_DIR$/MercuryJarProject.iml" filepath="$PROJECT_DIR$/MercuryJarProject.iml" group="MercuryJarProject" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mercury/MercuryJarProject-mercury.iml" filepath="$PROJECT_DIR$/.idea/modules/mercury/MercuryJarProject-mercury.iml" group="MercuryJarProject/mercury" />

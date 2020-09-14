@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.mercury.game.InAppChannel.SignUtils;
+import com.mercury.game.MercuryActivity;
 
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.order_id;
@@ -162,8 +163,11 @@ public class OrderInfoUtil2_0 {
 		String tailKey = keys.get(keys.size() - 1);
 		String tailValue = map.get(tailKey);
 		authInfo.append(buildKeyValue(tailKey, tailValue, false));
-
+		MercuryActivity.LogLocal("[OrderInfoUtil2_0][getSign]rsaKey = "+rsaKey);
+		MercuryActivity.LogLocal("[OrderInfoUtil2_0][getSign]rsa2 = "+rsa2);
+		MercuryActivity.LogLocal("[OrderInfoUtil2_0][getSign]authInfo.toString() = "+authInfo.toString());
 		String oriSign = SignUtils.sign(authInfo.toString(), rsaKey, rsa2);
+		MercuryActivity.LogLocal("[OrderInfoUtil2_0][getSign]oriSign = "+oriSign);
 		String encodedSign = "";
 
 		try {
