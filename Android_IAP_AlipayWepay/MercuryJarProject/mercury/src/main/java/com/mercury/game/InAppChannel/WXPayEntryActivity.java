@@ -1,4 +1,5 @@
-package com.mercury.game.InAppChannel;import android.app.Activity;
+package com.mercury.game.InAppChannel;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -41,14 +42,12 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 		if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			if (baseResp.errCode == 0) {
 				//支付成功
-				Toast.makeText(this, "支付成功", Toast.LENGTH_LONG).show();
 				mInAppBase.onPurchaseSuccess(MercuryConst.QinPid);
 				finish();
 			}
 			else 
 			{
 				//支付失败
-				Toast.makeText(this, "支付失败", Toast.LENGTH_LONG).show();
 				mInAppBase.onPurchaseFailed(MercuryConst.QinPid);
 				finish();
 			}
