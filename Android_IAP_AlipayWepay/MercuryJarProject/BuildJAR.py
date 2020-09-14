@@ -75,7 +75,7 @@ def __change_java_package_name(_java_path,_package_name):
 		all_the_text = file_object.readlines()
 		for line in all_the_text:
 			if line.find("package com.mercury.game.InAppChannel;")!=-1:
-				java_codes.append("package "+_package_name+";\r")
+				java_codes.append("package "+_package_name+".wxapi;\r")
 			else:
 				java_codes.append(line)
 		with open(f"{_java_path}",mode='w',encoding="utf8") as file_context:
@@ -87,7 +87,7 @@ def __change_back_java_package_name(_java_path,_package_name):
 		java_codes = []
 		all_the_text = file_object.readlines()
 		for line in all_the_text:
-			if line.find("package "+_package_name+";")!=-1:
+			if line.find("package "+_package_name+".wxapi;")!=-1:
 				java_codes.append("package com.mercury.game.InAppChannel;\r")
 			else:
 				java_codes.append(line)

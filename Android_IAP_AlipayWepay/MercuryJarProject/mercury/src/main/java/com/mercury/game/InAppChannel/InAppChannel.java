@@ -297,7 +297,7 @@ public class InAppChannel extends InAppBase {
 				dialog.dismiss();
 			}
 			sb.append("prepay_id\n"+result.get("prepay_id")+"\n\n");
-
+			MercuryActivity.LogLocal("[InAppChannel][onPostExecute]result = "+result);
 			resultunifiedorder=result;
 			WXSendReq();
 
