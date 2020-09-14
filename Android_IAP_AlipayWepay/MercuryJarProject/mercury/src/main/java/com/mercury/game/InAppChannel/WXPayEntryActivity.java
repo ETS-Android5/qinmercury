@@ -49,7 +49,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 			{
 				//支付失败
 				Toast.makeText(this, "支付失败", Toast.LENGTH_LONG).show();
-				mInAppBase.onPurchaseFailed(channelname);
+				mInAppBase.onPurchaseFailed(MercuryConst.QinPid);
 				finish();
 			}
 		}

@@ -366,16 +366,16 @@ public class InAppChannel extends InAppBase {
 			xml.append("</xml>");
 			List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
 			packageParams.add(new BasicNameValuePair("appid", WX_APP_ID));
+			MercuryActivity.LogLocal("[InAppChannel][genProductArgs] order_id = " + order_id);
 			packageParams.add(new BasicNameValuePair("attach", DeviceId+","+MercuryConst.QinPid+","+channelname+"_"+GameName+"_"+order_id));
-
-			packageParams.add(new BasicNameValuePair("body", mProductDescription));
+			packageParams.add(new BasicNameValuePair("body", MercuryConst.Qindesc));
 			packageParams.add(new BasicNameValuePair("mch_id", WX_MCH_ID));
 			packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
 			packageParams.add(new BasicNameValuePair("notify_url","weixinCPS"));
 
 			packageParams.add(new BasicNameValuePair("out_trade_no",order_id));
 			packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));
-			MercuryActivity.LogLocal("[InAppChannel][genProductArgs] strPriceString = " + strPriceString);
+
 			packageParams.add(new BasicNameValuePair("total_fee", strPriceString));
 			packageParams.add(new BasicNameValuePair("trade_type", "APP"));
 			String sign = genPackageSign(packageParams);
