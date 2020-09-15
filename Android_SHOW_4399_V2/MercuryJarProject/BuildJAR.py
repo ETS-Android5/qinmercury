@@ -46,26 +46,26 @@ def __move_weixin_plugin():
 	path_package_name = package_name.replace(".","/")
 	print(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java")
 	if os.path.exists(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java")==True:
-		if os.path.isdir(PythonLocation()+"/mercury/src/main/java/"+path_package_name)==False:
-			os.makedirs(PythonLocation()+"/mercury/src/main/java/"+path_package_name)
-		shutil.move(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java",PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/WXEntryActivity.java")
-		__change_java_package_name(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/WXEntryActivity.java",package_name)
+		if os.path.isdir(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi")==False:
+			os.makedirs(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi")
+		shutil.move(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java",PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXEntryActivity.java")
+		__change_java_package_name(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXEntryActivity.java",package_name)
 
 	if os.path.exists(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java")==True:
 		if os.path.isdir(PythonLocation()+"/mercury/src/main/java/"+path_package_name)==False:
 			os.makedirs(PythonLocation()+"/mercury/src/main/java/"+path_package_name)
-		shutil.move(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java",PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/WXPayEntryActivity.java")
-		__change_java_package_name(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/WXPayEntryActivity.java",package_name)
+		shutil.move(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java",PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXPayEntryActivity.java")
+		__change_java_package_name(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXPayEntryActivity.java",package_name)
 
 
 def __move_back_weixin_plugin():
 	package_name = __get_package_name(PythonLocation()+"/mercury/src/main/AndroidManifest.xml")
 	path_package_name = package_name.replace(".","/")
 
-	shutil.move(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/WXEntryActivity.java", PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java")
+	shutil.move(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXEntryActivity.java", PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java")
 	__change_back_java_package_name(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java",package_name)
 
-	shutil.move(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/WXPayEntryActivity.java", PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java")
+	shutil.move(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXPayEntryActivity.java", PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java")
 	__change_back_java_package_name(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java",package_name)
 
 
@@ -75,7 +75,7 @@ def __change_java_package_name(_java_path,_package_name):
 		all_the_text = file_object.readlines()
 		for line in all_the_text:
 			if line.find("package com.mercury.game.InAppChannel;")!=-1:
-				java_codes.append("package "+_package_name+";\r")
+				java_codes.append("package "+_package_name+".wxapi;\r")
 			else:
 				java_codes.append(line)
 		with open(f"{_java_path}",mode='w',encoding="utf8") as file_context:
@@ -87,7 +87,7 @@ def __change_back_java_package_name(_java_path,_package_name):
 		java_codes = []
 		all_the_text = file_object.readlines()
 		for line in all_the_text:
-			if line.find("package "+_package_name+";")!=-1:
+			if line.find("package "+_package_name+".wxapi;")!=-1:
 				java_codes.append("package com.mercury.game.InAppChannel;\r")
 			else:
 				java_codes.append(line)
