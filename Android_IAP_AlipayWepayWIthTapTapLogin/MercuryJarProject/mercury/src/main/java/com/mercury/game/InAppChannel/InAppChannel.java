@@ -32,6 +32,11 @@ import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MD5;
 import com.mercury.game.util.MercuryConst;
+import com.taptap.sdk.CallBackManager;
+import com.taptap.sdk.LoginManager;
+import com.taptap.sdk.LoginResponse;
+import com.taptap.sdk.TapTapLoginCallback;
+import com.taptap.sdk.TapTapSdk;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -71,6 +76,8 @@ public class InAppChannel extends InAppBase {
 	/**
 	 * 用于支付宝支付业务的入参 app_id。
 	 */
+	public String app_id = "0yFB9JbE7tFGGfSnlw";//taptap的id
+	public CallBackManager callBackManager = null;
 	public static final String APPID = "2021001193697300";
 	public static final String RSA2_PRIVATE = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCgLjeGu1WoskYfyOxt9CA58MrO/LxpfZNGbNkhII5iO5t9dWPPUD8Zugt32dVPuNTHkJeZc9X8EvL9DDKaRzGC4EqT3BaOuUblblKZ5ItzEOyBLKKqGUR83n99F2oFaohqbbNMDUkwPQUPv4Sjkl2cuNXR5OPmpinOUKDVVdQ8bldlgWlxxT6iy9c4LfqDTmOro5yzMXA0ET34eC1Uvj1rB+KafkKbAWSOgbR6F6rgKkdn7BWU66e7nEhATI6xutessw7kYT8feywT+Os0Za4szXEWUFwU2losfH2GqgoWcwBZ4GL4Hb7S+GYXdA7XFFwf1WmC1o1BEhmGY0fN4g6JAgMBAAECggEAf06cNQn4953Q2/w95NnNLx+woLgAKztx7Nwf6hNM9sf3Ocwt6pwVuqXB7ZyEy9rTylSiGIUXAkQxOWsTYMjKkgEfZMrcZszciwaWwdcB+g7uWXAXTGfOpgvUeaA9VFaqWyQbB4vbqmok9rI5giOXITNKRYrMkwlnWqF8YnHXv7qOAo4RCuh+1cKb4Ckqxeok2fWEIaBdS1xO4+WcHXac1J/aX4eZgR1iG3nlvor9ZQOZn+30QxO9wEJ69+4OLevQfBTAb9pcLXrFkkvPHbUFdOSgZKlcHjoCdzNotDdKliGQW4OGmcuCP/ERVN5fpBc/WvMBe78PDdT1p03Uc0BkzQKBgQD5PtARWzSMFM1DsC37Q/P6EfvmyupF5u3Stps2uYPSlLkenJFO8zYHnF3MaU9g9MKn9nwImMuMIDlkE5NVFcATbvePKqPJsVWCFMCXuUVlQ21TFQO1xc3aYdhEQHvxEh/laFmazWGCYw9ork2DAY/jKjLDz9pxhcHN1zDmRHUjJwKBgQCkhX/58vvkRuiiHWB+4YOneQnQxrE+MCwSovQggA4oWk10DglfzGLSslXp//XLsj15jUmOgD3ZNRFWiBDkCC9dA9WTGNBiuuNNrlCS7yF37rUplUMmevonTvR0SyYlfl6ahdo5yXXAfz9w2eTTw/yapRvNG5C4QW4clsSBd92OzwKBgCTvmgX4biEUNBcD1MyXlWBJqfrZtz4Eqtm/FeFWPKLIR2ax7Ra2FBusoHnaYVkM7IvXiyn6+q8ZV2ftPrgtMPmwSB9/QiZxkSplyOSzIAWRqHHXe2VEmuzx8wqqQ7PF69QjUqQOK5UW+QGaUwJHCPuxFTTPaJ/KIp5OdYCqRHGhAoGBAJregIXNUYilpz9T4A4QQ1pW+gJpx1b/Cb3RX3VolesudlKVFAX14+Dqty07ISnKc0wE0AUwewgIiHWoSB4gBlXM0jNR3HfT7TympnpqWFsJfcfTFg8XHHv8OuluBE6vEmbrMW3MUugN4K5erqUZjKQWYIFHPYf1L64BzqEBMLLJAoGBAIGKzyusYCrhh3SG0J5wVmnY3NjVQibTg5BmPODlNduujHGWGdfJcRzwwQVap5LrF60rvxOn+9qre+wgCjrTukivNuyFYJgHPKsEloiWknvul73MDKMf0LDIIu7s4NUpvoVKtvY1PxwwLcH9TjP4Cull+cyCtta3CLJs+HzdXf9l";
 	public static final String RSA_PRIVATE = "";
@@ -93,6 +100,9 @@ public class InAppChannel extends InAppBase {
 		req = new PayReq();
 		sb=new StringBuffer();
 		msgApi = WXAPIFactory.createWXAPI(mContext,WX_APP_ID);
+		TapTapSdk.LoginSdkConfig config = new TapTapSdk.LoginSdkConfig();
+		config.roundCorner = false; TapTapSdk.sdkInitialize(mContext, app_id, config);
+		callBackManager = CallBackManager.Factory.create();
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -429,30 +439,26 @@ public class InAppChannel extends InAppBase {
 	{
 		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
 		//shrinkpartstart
-		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
+		LoginManager.getInstance().registerCallback(callBackManager, new TapTapLoginCallback<LoginResponse>() {
 			@Override
-			public void success(final String phone) {
-				LogLocal("[InAppChannel][SingmaanLogin] Success");
-				//shrinkpartend
-				LoginSuccessCallBack(DeviceId);
-				//shrinkpartstart
-				new IDCardVerifyDialog(mContext, new LoginCallBack() {
-					@Override
-					public void success(String msg) {
-						LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
-						onFunctionCallBack("IDCardVerifyDialog");
-					}
-					@Override
-					public void fail(String msg) {
-						LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
-					}
-				});
+			public void onSuccess(LoginResponse loginResult) {
+				// TODO:登录成功
+				LoginSuccessCallBack("");
 			}
+
 			@Override
-			public void fail(String msg) {
-				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
+			public void onCancel() {
+				// TODO:用户取消
+				LoginCancelCallBack("");
+			}
+
+			@Override
+			public void onError(Throwable throwable) {
+				// TODO:登录失败
+				LoginCancelCallBack("");
 			}
 		});
+		LoginManager.getInstance().logInWithReadPermissions(mContext, TapTapSdk.SCOPE_PUIBLIC_PROFILE);
 		//shrinkpartend
 	}
 	public  void WXSendReq()
