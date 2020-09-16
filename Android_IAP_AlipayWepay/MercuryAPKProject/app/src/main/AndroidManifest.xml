@@ -9,7 +9,7 @@
         </activity>
 <!--sdk-->        <meta-data android:name="channel_name" android:value="demo"/>
         <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
-        
+
 
         <activity
             android:name="com.singmaan.guanbao.wxapi.WXPayEntryActivity"
