@@ -39,6 +39,7 @@ import com.taptap.sdk.LoginResponse;
 import com.taptap.sdk.Profile;
 import com.taptap.sdk.TapTapLoginCallback;
 import com.taptap.sdk.TapTapSdk;
+import com.taptap.sdk.net.Api;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -426,7 +427,17 @@ public class InAppChannel extends InAppBase {
 				// TODO:登录成功
 				LogLocal("[InAppChannel][SingmaanLogin]Profile.getCurrentProfile()=" + Profile.getCurrentProfile());
 				LogLocal("[InAppChannel][SingmaanLogin]AccessToken.getCurrentAccessToken()=" + AccessToken.getCurrentAccessToken());
-
+				Profile.fetchProfileForCurrentAccessToken(new Api.ApiCallback()
+				{
+					@Override
+					public void onSuccess(Object o) {
+						LogLocal("[InAppChannel][SingmaanLogin]o=" + o.toString());
+					}
+					@Override
+					public void onError(Throwable error) {
+						LogLocal("[InAppChannel][SingmaanLogin]error=" + error.toString());
+					}
+				});
 				LoginSuccessCallBack(loginResult.toString());
 			}
 			@Override
