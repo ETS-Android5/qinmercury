@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mercury.game.MercuryActivity;
+import com.mercury.game.util.InAppBase;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -16,6 +17,7 @@ import static com.mercury.game.MercuryActivity.mInAppBase;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 	private IWXAPI api;
+	public InAppBase mInAppBase;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,6 +26,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 		api.registerApp(WXShareID);
 		api.handleIntent(getIntent(), this);
 		MercuryActivity.LogLocal("[WXPayEntryActivity] onCreate->"+WXShareID);
+
 		//finish();
 	}
 	@Override
@@ -47,6 +50,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
 	public void onResp(BaseResp resp) {
 		int result = 0;
+		mInAppBase = new InAppBase();
 		switch (resp.errCode) {
 			case BaseResp.ErrCode.ERR_OK:
 				mInAppBase.onFunctionCallBack("Share:0");

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
+import com.mercury.game.util.InAppBase;
 import com.mercury.game.util.MercuryConst;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -13,12 +14,13 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import static com.mercury.game.InAppChannel.InAppChannel.WX_APP_ID;
-import static com.mercury.game.MercuryActivity.mInAppBase;
+
 
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	private static final String TAG = "WXPayEntryActivity";
     private IWXAPI api;
+	InAppBase mInAppBase;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);      
@@ -40,12 +42,14 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 		if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			if (baseResp.errCode == 0) {
 				//支付成功
+				mInAppBase = new InAppBase();
 				mInAppBase.onPurchaseSuccess(MercuryConst.QinPid);
 				finish();
 			}
 			else 
 			{
 				//支付失败
+				mInAppBase = new InAppBase();
 				mInAppBase.onPurchaseFailed(MercuryConst.QinPid);
 				finish();
 			}
