@@ -427,15 +427,19 @@ public class InAppChannel extends InAppBase {
 				// TODO:登录成功
 				LogLocal("[InAppChannel][SingmaanLogin]Profile.getCurrentProfile()=" + Profile.getCurrentProfile());
 				LogLocal("[InAppChannel][SingmaanLogin]AccessToken.getCurrentAccessToken()=" + AccessToken.getCurrentAccessToken());
+				LogLocal("[InAppChannel][SingmaanLogin]Profile.getCurrentProfile().openid:" + Profile.getCurrentProfile().getOpenid() );
+
 				Profile.fetchProfileForCurrentAccessToken(new Api.ApiCallback()
 				{
 					@Override
 					public void onSuccess(Object o) {
 						LogLocal("[InAppChannel][SingmaanLogin]o=" + o.toString());
+						LoginSuccessCallBack(Profile.getCurrentProfile().getOpenid());
 					}
 					@Override
 					public void onError(Throwable error) {
 						LogLocal("[InAppChannel][SingmaanLogin]error=" + error.toString());
+						LoginCancelCallBack(Profile.getCurrentProfile().getOpenid());
 					}
 				});
 				LoginSuccessCallBack(loginResult.toString());
