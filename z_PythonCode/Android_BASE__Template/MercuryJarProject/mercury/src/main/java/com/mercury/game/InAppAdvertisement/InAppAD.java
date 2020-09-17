@@ -74,7 +74,7 @@ public class InAppAD extends InAppBase {
 		MercuryActivity.LogLocal("["+appShow+"] ActiveInterstitial");
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 		builder.setMessage("Testing Mode");
-		builder.setTitle("Choice Result");
+		builder.setTitle("ActiveInterstitial");
 		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -96,7 +96,7 @@ public class InAppAD extends InAppBase {
 		MercuryActivity.LogLocal("["+appShow+"] ActiveBanner");
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 		builder.setMessage("Testing Mode");
-		builder.setTitle("Choice Result");
+		builder.setTitle("ActiveBanner");
 		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -118,7 +118,7 @@ public class InAppAD extends InAppBase {
 		MercuryActivity.LogLocal("["+appShow+"] ActiveNative");
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 		builder.setMessage("Testing Mode");
-		builder.setTitle("Choice Result");
+		builder.setTitle("ActiveNative");
 		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -140,7 +140,7 @@ public class InAppAD extends InAppBase {
 		MercuryActivity.LogLocal("["+appShow+"] ActiveRewardVideo");
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 		builder.setMessage("Testing Mode");
-		builder.setTitle("Choice Result");
+		builder.setTitle("ActiveRewardVideo");
 		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
