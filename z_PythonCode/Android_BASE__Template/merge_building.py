@@ -470,6 +470,47 @@ def main():
 	shutil.move(PythonLocation()+"/MercuryAPKProject/app-release.apk", PythonLocation()+"/app-release.apk")
 	os.system("adb install -r  ./app-release.apk")
 
+	if os.path.isdir(PythonLocation()+"/app-release"):shutil.rmtree(PythonLocation()+"/app-release")
+	os.system("apktool d "+PythonLocation()+"/app-release.apk")
+	#get application_xml
+	application_xml = []
+	with open(PythonLocation()+"/app-release/AndroidManifest.xml",encoding="utf8") as file_object:
+		is_sdk_part = False
+		is_start_insert = False
+		all_the_text = file_object.readlines()
+		for i in all_the_text:
+			f = i.replace(" ","")
+			if is_start_insert==False:
+				if f.find("<application")!=-1 and is_sdk_part == False:
+					is_sdk_part = True
+					application_xml.append("<!--sdk-->\r")
+				if is_sdk_part == True and f.find(">")==-1:
+					continue
+				elif is_sdk_part == True and f.find(">")!=-1:
+					is_start_insert = True
+			else:
+				if f.find("</application")==-1:
+					if f.find("android.intent.action.MAIN")!=-1 or f.find("android.intent.category.LAUNCHER")!=-1:
+						continue
+					application_xml.append(i)
+				else:
+					application_xml.append("<!--end-->\r")
+					is_sdk_part = False
+					break
+	#get permission_xml
+	permission_xml = []
+	with open(PythonLocation()+"/app-release/AndroidManifest.xml",encoding="utf8") as file_object:
+		is_sdk_part = False
+		all_the_text = file_object.readlines()
+		permission_xml.append("<!--sdkxml-->\r")
+		for i in all_the_text:
+			if i.find("<uses-permission")!=-1:
+				permission_xml.append(i)
+		permission_xml.append("<!--end-->\r")
+	with open(PythonLocation()+"/MercuryJarProject/AndroidManifest_sdk.xml",mode='w',encoding="utf8") as file_context:
+		file_context.writelines(application_xml)
+		file_context.writelines(permission_xml)
+	shutil.rmtree(PythonLocation()+"/app-release")
 
 if __name__ == '__main__':
     main()
