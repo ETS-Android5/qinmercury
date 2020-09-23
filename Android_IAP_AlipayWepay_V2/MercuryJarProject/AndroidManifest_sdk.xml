@@ -3,9 +3,6 @@
             </intent-filter>
         </activity>
         <meta-data android:name="channel_name" android:value="demo"/>
-        <meta-data android:name="open_talkingdata" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
-        <meta-data android:name="open_umeng" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
-        <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity"/>
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <activity android:configChanges="keyboardHidden|navigation|orientation|screenSize" android:exported="false" android:name="com.alipay.sdk.app.H5PayActivity"/>
         <activity android:configChanges="keyboardHidden|navigation|orientation|screenSize" android:exported="false" android:name="com.alipay.sdk.app.H5AuthActivity"/>

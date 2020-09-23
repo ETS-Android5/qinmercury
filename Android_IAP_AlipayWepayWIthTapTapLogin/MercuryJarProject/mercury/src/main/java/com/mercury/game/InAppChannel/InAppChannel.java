@@ -32,6 +32,7 @@ import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MD5;
 import com.mercury.game.util.MercuryConst;
+
 import com.taptap.sdk.AccessToken;
 import com.taptap.sdk.CallBackManager;
 import com.taptap.sdk.LoginManager;
@@ -40,6 +41,7 @@ import com.taptap.sdk.Profile;
 import com.taptap.sdk.TapTapLoginCallback;
 import com.taptap.sdk.TapTapSdk;
 import com.taptap.sdk.net.Api;
+
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -419,44 +421,6 @@ public class InAppChannel extends InAppBase {
 	}
 	public void SingmaanLogin()
 	{
-		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
-		//shrinkpartstart
-		LoginManager.getInstance().registerCallback(callBackManager, new TapTapLoginCallback<LoginResponse>() {
-			@Override
-			public void onSuccess(LoginResponse loginResult) {
-				// TODO:登录成功
-				LogLocal("[InAppChannel][SingmaanLogin]Profile.getCurrentProfile()=" + Profile.getCurrentProfile());
-				LogLocal("[InAppChannel][SingmaanLogin]AccessToken.getCurrentAccessToken()=" + AccessToken.getCurrentAccessToken());
-				LogLocal("[InAppChannel][SingmaanLogin]Profile.getCurrentProfile().openid:" + Profile.getCurrentProfile().getOpenid() );
-
-				Profile.fetchProfileForCurrentAccessToken(new Api.ApiCallback()
-				{
-					@Override
-					public void onSuccess(Object o) {
-						LogLocal("[InAppChannel][SingmaanLogin]o=" + o.toString());
-						LoginSuccessCallBack(Profile.getCurrentProfile().getOpenid());
-					}
-					@Override
-					public void onError(Throwable error) {
-						LogLocal("[InAppChannel][SingmaanLogin]error=" + error.toString());
-						LoginCancelCallBack(Profile.getCurrentProfile().getOpenid());
-					}
-				});
-				LoginSuccessCallBack(loginResult.toString());
-			}
-			@Override
-			public void onCancel() {
-				// TODO:用户取消
-				LoginCancelCallBack("");
-			}
-			@Override
-			public void onError(Throwable throwable) {
-				// TODO:登录失败
-				LoginCancelCallBack("");
-			}
-		});
-		LoginManager.getInstance().logInWithReadPermissions(mContext, TapTapSdk.SCOPE_PUIBLIC_PROFILE);
-
 
 		//shrinkpartend
 	}
