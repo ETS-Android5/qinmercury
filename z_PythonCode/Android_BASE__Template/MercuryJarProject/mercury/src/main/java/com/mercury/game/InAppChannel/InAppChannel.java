@@ -1,6 +1,7 @@
 package com.mercury.game.InAppChannel;
 import com.mercury.game.InAppDialog.IDCardVerifyDialog;
 import com.mercury.game.InAppDialog.LoginDialog;
+import com.mercury.game.InAppDialog.PaymentDialog;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MercuryConst;
+import com.mercury.game.util.PayMethodCallBack;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,8 +66,19 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
-		TestPay();
+		new PaymentDialog(mContext, new PayMethodCallBack() {
+			@Override
+			public void Alipay(String msg) {
+				MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
+				TestPay();
+			}
 
+			@Override
+			public void WechatPay(String msg) {
+				MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
+				TestPay();
+			}
+		});
 
 	}
 	@Override
