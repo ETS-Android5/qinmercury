@@ -139,7 +139,7 @@ public class InAppChannel extends InAppBase {
 		try {
 			AlertDialog.Builder builder = new Builder(mContext);
 			builder.setMessage("Testing Mode");
-			builder.setTitle("Choice Result");
+			builder.setTitle("ExitGame");
 			builder.setPositiveButton("Success", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

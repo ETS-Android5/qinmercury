@@ -53,6 +53,16 @@ class SDKAppendManager():
 		self.__find_zipalign()
 		self.__copyFileCounts = 0
 		self.__conflict_list = []
+		self.__dont_merge_list = [
+			"activity_main.xml",
+			"main.xml",
+			"public.xml",
+			"singmaan_dialog_login.xml",
+			"singmaan_dialog_pay.xml",
+			"singmaan_dialog_verify.xml",
+		]
+		self.__targetSdkVersion = "29"
+		self.__versionName = ""
 
 	def __find_zipalign(self):
 		p = subprocess.Popen('find ~/Library/Android/sdk/build-tools -name "zipalign"',shell=True,stdout=subprocess.PIPE)
@@ -222,14 +232,14 @@ class SDKAppendManager():
 		conflict_list = self.__copy_files_dont_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/res",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
 		for g_res in game_res:
 			for s_res in sdk_res:
-				gameresfile = g_res[g_res.rfind("/"):]
-				sdkresfile = s_res[s_res.rfind("/"):]
-				gameresfolder = g_res[g_res.rfind("/res"):]
-				sdkresfolder =  s_res[s_res.rfind("/res"):]
+				gameresfile = g_res[g_res.rfind("/")+1:]
+				sdkresfile = s_res[s_res.rfind("/")+1:]
+				gameresfolder = g_res[g_res.rfind("/res")+1:]
+				sdkresfolder =  s_res[s_res.rfind("/res")+1:]
 				if gameresfolder!=sdkresfolder:
 					continue
 				elif sdkresfile == gameresfile and ".xml" in sdkresfile:
-					if gameresfile == "/activity_main.xml" or gameresfile == "/main.xml" or gameresfile=="/public.xml":
+					if gameresfile in self.__dont_merge_list:
 						print(f"skip{gameresfile}")
 						continue
 					else:
@@ -396,7 +406,9 @@ class SDKAppendManager():
 				if f.find("versionCode")!=-1:
 					JavaCodeGradle.append("  versionCode: '"+self.__time_tick+"'\r")
 				elif f.find("targetSdkVersion")!=-1:
-					JavaCodeGradle.append("  targetSdkVersion: '29'\r")
+					JavaCodeGradle.append("  targetSdkVersion: '"+self.__targetSdkVersion+"'\r")
+				elif f.find("versionName")!=-1 and self.__versionName!="":
+					JavaCodeGradle.append("  versionName: '"+self.__versionName+"'\r")
 				else:
 					JavaCodeGradle.append(i)
 		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/apktool.yml",'w',encoding="utf8") as file_object_read:
