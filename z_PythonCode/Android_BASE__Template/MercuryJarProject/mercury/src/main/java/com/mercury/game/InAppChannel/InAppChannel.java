@@ -66,11 +66,14 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
+		//shrinkpartstart
 		new PaymentDialog(mContext, new PayMethodCallBack() {
 			@Override
 			public void Alipay(String msg) {
 				MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
+				//shrinkpartend
 				TestPay();
+				//shrinkpartstart
 			}
 
 			@Override
@@ -79,6 +82,7 @@ public class InAppChannel extends InAppBase {
 				TestPay();
 			}
 		});
+		//shrinkpartend
 
 	}
 	@Override
