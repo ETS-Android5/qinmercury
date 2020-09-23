@@ -40,7 +40,7 @@ public class PaymentDialog {
         mLoginCallBack = callBack;
         AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"singmaan_dialog_style","style"));
         dialog = builder.create();
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         Window dialogWindow = dialog.getWindow();
         dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);
         initAlertDialog(dialog);
