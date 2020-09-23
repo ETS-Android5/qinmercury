@@ -61,12 +61,12 @@ def __move_weixin_plugin():
 def __move_back_weixin_plugin():
 	package_name = __get_package_name(PythonLocation()+"/mercury/src/main/AndroidManifest.xml")
 	path_package_name = package_name.replace(".","/")
-
-	shutil.move(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXEntryActivity.java", PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java")
-	__change_back_java_package_name(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java",package_name)
-
-	shutil.move(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXPayEntryActivity.java", PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java")
-	__change_back_java_package_name(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java",package_name)
+	if os.path.exists(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXEntryActivity.java")==True:
+		shutil.move(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXEntryActivity.java", PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java")
+		__change_back_java_package_name(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXEntryActivity.java",package_name)
+	if os.path.exists(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXPayEntryActivity.java")==True:
+		shutil.move(PythonLocation()+"/mercury/src/main/java/"+path_package_name+"/wxapi/WXPayEntryActivity.java", PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java")
+		__change_back_java_package_name(PythonLocation()+"/mercury/src/main/java/com/mercury/game/InAppChannel/WXPayEntryActivity.java",package_name)
 
 
 def __change_java_package_name(_java_path,_package_name):
