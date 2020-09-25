@@ -1,0 +1,4 @@
+#Fri Sep 18 17:10:30 CST 2020
+base.0=/Users/batista/QinProject/QinMercury/z_PythonCode/Android_BASE__Template/MercuryAPKProject_pure/app/build/intermediates/dex/release/mergeDexRelease/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/MercuryAPKProject_pure.iml" filepath="$PROJECT_DIR$/.idea/MercuryAPKProject_pure.iml" group="MercuryAPKProject_pure" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="MercuryAPKProject_pure/app" />
+    </modules>
+  </component>
+</project>

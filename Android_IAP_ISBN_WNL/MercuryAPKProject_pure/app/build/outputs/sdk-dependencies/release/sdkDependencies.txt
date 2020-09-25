@@ -1,0 +1,28 @@
+# List of SDK dependencies of this app, this information is also included in an encrypted form in the APK.
+# For more information visit: https://d.android.com/r/tools/dependency-metadata
+
+library {
+  maven_library {
+    groupId: "androidx.multidex"
+    artifactId: "multidex"
+    version: "2.0.0"
+  }
+  digests {
+    sha256: "\300\027\000\t\020r\340\377]\216\302\320\016\254k\217\226\352\030d`\200B^\234\343\306\247\265\366n3"
+  }
+}
+library {
+  digests {
+    sha256: "\247\201\b\214@\356\361\331\326\356\210\331q\024g\204M\272n2\253\367\312\020\335\252vf\233Y\2266"
+  }
+}
+library_dependencies {
+}
+library_dependencies {
+  library_index: 1
+}
+module_dependencies {
+  module_name: "base"
+  dependency_index: 0
+  dependency_index: 1
+}

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/z_PythonCode/Android_BASE__Template/MercuryAPKProject_pure/app/build/intermediates/res/merged/release/xml_network_security_config.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/z_PythonCode/Android_BASE__Template/MercuryAPKProject_pure/app/src/main/res/xml/network_security_config.xml"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/z_PythonCode/Android_BASE__Template/MercuryAPKProject_pure/app/build/intermediates/res/merged/release/drawable_app_icon.png.flat",
+        "source": "/Users/batista/QinProject/QinMercury/z_PythonCode/Android_BASE__Template/MercuryAPKProject_pure/app/src/main/res/drawable/app_icon.png"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/z_PythonCode/Android_BASE__Template/MercuryAPKProject_pure/app/build/intermediates/res/merged/release/layout_activity_main.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/z_PythonCode/Android_BASE__Template/MercuryAPKProject_pure/app/src/main/res/layout/activity_main.xml"
+    }
+]

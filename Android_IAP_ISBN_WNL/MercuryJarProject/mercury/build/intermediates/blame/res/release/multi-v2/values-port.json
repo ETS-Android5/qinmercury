@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/batista/.gradle/caches/transforms-2/files-2.1/dc1b1298ed651ed2015da6fcf519fde1/appcompat-1.1.0/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/build/intermediates/res/merged/release/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/batista/.gradle/caches/transforms-2/files-2.1/dc1b1298ed651ed2015da6fcf519fde1/appcompat-1.1.0/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

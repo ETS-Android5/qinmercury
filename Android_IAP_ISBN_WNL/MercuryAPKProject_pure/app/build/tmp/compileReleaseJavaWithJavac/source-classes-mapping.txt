@@ -1,0 +1,29 @@
+com/qinbatista/mercury/QinApplication.java
+ com.qinbatista.mercury.QinApplication
+com/qinbatista/mercury/MainActivity.java
+ com.qinbatista.mercury.MainActivity
+ com.qinbatista.mercury.MainActivity$1
+ com.qinbatista.mercury.MainActivity$10
+ com.qinbatista.mercury.MainActivity$11
+ com.qinbatista.mercury.MainActivity$12
+ com.qinbatista.mercury.MainActivity$13
+ com.qinbatista.mercury.MainActivity$14
+ com.qinbatista.mercury.MainActivity$15
+ com.qinbatista.mercury.MainActivity$16
+ com.qinbatista.mercury.MainActivity$17
+ com.qinbatista.mercury.MainActivity$18
+ com.qinbatista.mercury.MainActivity$19
+ com.qinbatista.mercury.MainActivity$2
+ com.qinbatista.mercury.MainActivity$20
+ com.qinbatista.mercury.MainActivity$21
+ com.qinbatista.mercury.MainActivity$22
+ com.qinbatista.mercury.MainActivity$23
+ com.qinbatista.mercury.MainActivity$3
+ com.qinbatista.mercury.MainActivity$4
+ com.qinbatista.mercury.MainActivity$5
+ com.qinbatista.mercury.MainActivity$6
+ com.qinbatista.mercury.MainActivity$7
+ com.qinbatista.mercury.MainActivity$8
+ com.qinbatista.mercury.MainActivity$9
+com/demo/game/BuildConfig.java
+ com.demo.game.BuildConfig

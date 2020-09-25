@@ -1,0 +1,128 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.qinbatista.demo"
+4    android:installLocation="preferExternal"
+5    android:versionCode="298"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="19"
+9-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml
+10        android:targetSdkVersion="28" />
+10-->[androidx.appcompat:appcompat:1.1.0] /Users/batista/.gradle/caches/transforms-2/files-2.1/9e241ade4feea143d6efde1061ddefb1/appcompat-1.1.0/AndroidManifest.xml:22:9-38
+11
+12    <uses-feature
+12-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:2:5-92
+13        android:name="android.hardware.type.television"
+13-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:2:19-66
+14        android:required="true" />
+14-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:2:67-90
+15    <!-- sdkxml -->
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:18:19-77
+16-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:18:36-90
+17    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+17-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:19:5-75
+17-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:19:22-73
+18    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+18-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:20:5-74
+18-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:20:22-72
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:21:5-66
+19-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:21:22-64
+20    <!-- end -->
+21
+22    <uses-feature android:glEsVersion="0x00020000" />
+22-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:24:5-53
+22-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:24:19-51
+23    <uses-feature
+23-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:25:5-89
+24        android:name="android.hardware.touchscreen"
+24-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:25:19-62
+25        android:required="false" />
+25-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:25:63-87
+26    <uses-feature
+26-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:26:5-100
+27        android:name="android.hardware.touchscreen.multitouch"
+27-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:26:19-73
+28        android:required="false" />
+28-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:26:74-98
+29    <uses-feature
+29-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:27:5-109
+30        android:name="android.hardware.touchscreen.multitouch.distinct"
+30-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:27:19-82
+31        android:required="false" />
+31-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:27:83-107
+32
+33    <application
+33-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:3:5-16:18
+34        android:name="com.qinbatista.mercury.QinApplication"
+34-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:3:85-137
+35        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+35-->[androidx.core:core:1.1.0] /Users/batista/.gradle/caches/transforms-2/files-2.1/8ac23c26c7dcc5d486fed317d2b53c3d/core-1.1.0/AndroidManifest.xml:24:18-86
+36        android:icon="@drawable/app_icon"
+36-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:3:18-51
+37        android:label="@string/app_name"
+37-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:3:52-84
+38        android:networkSecurityConfig="@xml/network_security_config"
+38-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:3:138-198
+39        android:usesCleartextTraffic="true" >
+39-->[:login1-release:] /Users/batista/.gradle/caches/transforms-2/files-2.1/25aa6073e1fdb41121dcf4b7390a2325/jetified-login1-release/AndroidManifest.xml:14:18-53
+40        <activity
+40-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:4:9-9:20
+41            android:name="com.qinbatista.mercury.MainActivity"
+41-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:4:66-116
+42            android:configChanges="orientation|screenSize"
+42-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:4:19-65
+43            android:screenOrientation="landscape"
+43-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:4:117-154
+44            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+44-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:4:155-213
+45            <intent-filter>
+45-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:5:13-8:29
+46                <action android:name="android.intent.action.MAIN" />
+46-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:6:17-68
+46-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:6:25-66
+47
+48                <category android:name="android.intent.category.LAUNCHER" />
+48-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:7:17-76
+48-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:7:27-74
+49            </intent-filter>
+50        </activity>
+51        <!-- sdk -->
+52        <meta-data
+52-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:11:20-69
+53            android:name="channel_name"
+53-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:11:31-58
+54            android:value="demo" />
+54-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:11:59-79
+55        <meta-data
+55-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:12:9-102
+56            android:name="open_talkingdata"
+56-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:12:20-51
+57            android:value="AC063F0630464D24824F5BEEE71CC7DF" />
+57-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:12:52-100
+58        <meta-data
+58-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:13:9-96
+59            android:name="open_umeng"
+59-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:13:20-45
+60            android:value="AC063F0630464D24824F5BEEE71CC7DF" />
+60-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:13:46-94
+61
+62        <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
+62-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:14:9-93
+62-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/AndroidManifest.xml:14:19-90
+63        <!-- end -->
+64        <uses-library
+64-->[:login1-release:] /Users/batista/.gradle/caches/transforms-2/files-2.1/25aa6073e1fdb41121dcf4b7390a2325/jetified-login1-release/AndroidManifest.xml:15:9-17:40
+65            android:name="org.apache.http.legacy"
+65-->[:login1-release:] /Users/batista/.gradle/caches/transforms-2/files-2.1/25aa6073e1fdb41121dcf4b7390a2325/jetified-login1-release/AndroidManifest.xml:16:13-50
+66            android:required="false" />
+66-->[:login1-release:] /Users/batista/.gradle/caches/transforms-2/files-2.1/25aa6073e1fdb41121dcf4b7390a2325/jetified-login1-release/AndroidManifest.xml:17:13-37
+67
+68        <activity android:name="com.youloft.login.apiLib.WebViewActivity" />
+68-->[:login1-release:] /Users/batista/.gradle/caches/transforms-2/files-2.1/25aa6073e1fdb41121dcf4b7390a2325/jetified-login1-release/AndroidManifest.xml:19:9-77
+68-->[:login1-release:] /Users/batista/.gradle/caches/transforms-2/files-2.1/25aa6073e1fdb41121dcf4b7390a2325/jetified-login1-release/AndroidManifest.xml:19:19-74
+69    </application>
+70
+71</manifest>

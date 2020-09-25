@@ -1,0 +1,22 @@
+R_DEF: Internal format may change without notice
+local
+drawable singmaan_btn_shape
+drawable singmaan_login_btn
+drawable singmaan_login_code
+drawable singmaan_login_pass
+drawable singmaan_login_phone
+drawable singmaan_shape_corner
+drawable singmaan_shape_corner_up
+id container
+id singmaan_btn_code
+id singmaan_cancel
+id singmaan_loading
+id singmaan_login
+id singmaan_password
+id singmaan_username
+id singmaan_verifymgs
+layout singmaan_dialog_login
+layout singmaan_dialog_pay
+layout singmaan_dialog_verify
+style singmaan_dialog_style
+xml network_security_config

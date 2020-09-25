@@ -1,0 +1,139 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.qinbatista.demo"
+4    android:installLocation="preferExternal"
+5    android:versionCode="1"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="16"
+9-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml
+10        android:targetSdkVersion="28" />
+10-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml
+11
+12    <uses-feature
+12-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:7:5-9:35
+13        android:name="android.hardware.type.television"
+13-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:8:9-56
+14        android:required="true" />
+14-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:9:9-32
+15    <!-- sdkxml -->
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:31:5-78
+16-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:31:22-76
+17    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+17-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:32:5-75
+17-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:32:22-73
+18    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+18-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:33:5-74
+18-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:33:22-72
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:34:5-66
+19-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:34:22-64
+20    <!-- end -->
+21
+22    <uses-permission android:name="android.permission.INTERNET" />
+22-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:34:5-66
+22-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:34:22-64
+23    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+23-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:31:5-78
+23-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:31:22-76
+24    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+24-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:40:5-81
+24-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:40:22-78
+25    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+25-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:33:5-74
+25-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:33:22-72
+26    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+26-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:32:5-75
+26-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:32:22-73
+27    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+27-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:43:5-76
+27-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:43:22-73
+28    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+28-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:44:5-75
+28-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:44:22-72
+29    <uses-permission android:name="android.permission.GET_TASKS" />
+29-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:45:5-68
+29-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:45:22-65
+30    <uses-permission android:name="android.permission.READ_SMS" />
+30-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:46:5-67
+30-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:46:22-64
+31
+32    <uses-feature android:glEsVersion="0x00020000" />
+32-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:48:5-54
+32-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:48:19-51
+33    <uses-feature
+33-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:49:5-51:36
+34        android:name="android.hardware.touchscreen"
+34-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:50:9-52
+35        android:required="false" />
+35-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:51:9-33
+36    <uses-feature
+36-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:52:5-54:36
+37        android:name="android.hardware.touchscreen.multitouch"
+37-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:53:9-63
+38        android:required="false" />
+38-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:54:9-33
+39    <uses-feature
+39-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:55:5-57:36
+40        android:name="android.hardware.touchscreen.multitouch.distinct"
+40-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:56:9-72
+41        android:required="false" />
+41-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:57:9-33
+42
+43    <application
+43-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:10:5-29:19
+44        android:name="com.mercury.game.MercuryApplication"
+44-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:11:9-59
+45        android:networkSecurityConfig="@xml/network_security_config" >
+45-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:11:60-120
+46        <activity
+46-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:12:9-21:20
+47            android:name="com.mercury.game.MercuryActivity"
+47-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:13:13-60
+48            android:configChanges="orientation|screenSize"
+48-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:14:13-59
+49            android:screenOrientation="landscape"
+49-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:15:13-50
+50            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+50-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:16:13-71
+51            <intent-filter>
+51-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:17:13-20:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:18:17-69
+52-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:18:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:19:17-77
+54-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:19:27-74
+55            </intent-filter>
+56        </activity>
+57
+58        <!-- sdk -->
+59        <meta-data
+59-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:24:9-70
+60            android:name="channel_name"
+60-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:24:20-47
+61            android:value="demo" />
+61-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:24:48-68
+62        <meta-data
+62-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:25:9-102
+63            android:name="open_talkingdata"
+63-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:25:20-51
+64            android:value="AC063F0630464D24824F5BEEE71CC7DF" />
+64-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:25:52-100
+65        <meta-data
+65-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:26:9-96
+66            android:name="open_umeng"
+66-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:26:20-45
+67            android:value="AC063F0630464D24824F5BEEE71CC7DF" />
+67-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:26:46-94
+68
+69        <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
+69-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:27:9-93
+69-->/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryJarProject/mercury/src/main/AndroidManifest.xml:27:19-90
+70        <!-- end -->
+71    </application>
+72
+73</manifest>

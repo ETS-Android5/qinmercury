@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "com.qinbatista.demo",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "INSTANT_APP_MANIFEST"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 298,
+        "versionName": "1.0",
+        "outputFile": "app-release.apk",
+        "fullName": "release",
+        "baseName": "release",
+        "dirName": ""
+      },
+      "path": "AndroidManifest.xml",
+      "properties": {
+        "packageId": "com.qinbatista.demo",
+        "split": "",
+        "minSdkVersion": "19"
+      }
+    }
+  ]
+}

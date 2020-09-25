@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="MercurySDK" />
+        <option name="name" value="MercurySDK" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="AndroidRuntime" />
+        <option name="name" value="AndroidRuntime" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="Unity" />
+        <option name="name" value="Unity" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="MercuryDemo" />
+        <option name="name" value="MercuryDemo" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="MercurySDK" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="27d93209-8d36-47ce-b780-4c750d3319be" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="MercuryJarProject" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1ei6xZhMtkPy9nskcsIbAltj4PF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/mercury/src/main/libs" />
+    <property name="project.structure.last.edited" value="Dependencies" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="show.do.not.copy.http.proxy.settings.to.gradle" value="false" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="MODULE_TAB" value="Signing Configs" />
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mercury/src/main/libs" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mercury.game.util" />
+      <recent name="com.mercury.game.InAppDialog" />
+      <recent name="com.mercury.game.InAppInternet" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mercury/src/main/libs" />
+      <recent name="$PROJECT_DIR$/mercury/src/main/res" />
+      <recent name="$PROJECT_DIR$/mercury/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/util" />
+      <recent name="$PROJECT_DIR$/mercury/src/main/res/values" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="27d93209-8d36-47ce-b780-4c750d3319be" name="Default Changelist" comment="" />
+      <created>1594792314445</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1594792314445</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="730" y="207" key="#PSD" timestamp="1596707388323">
+      <screen x="0" y="23" width="1680" height="954" />
+    </state>
+    <state x="730" y="207" key="#PSD/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1596707388323" />
+    <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598587546627">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1595838656108" />
+    <state x="238" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1598587546627" />
+    <state x="375" y="309" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595232200121">
+      <screen x="0" y="23" width="1680" height="954" />
+    </state>
+    <state x="375" y="309" key="#com.intellij.fileTypes.FileTypeChooser/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1595232200121" />
+    <state x="653" y="242" key="#com.intellij.ide.util.MemberChooser" timestamp="1601002869891">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state x="653" y="240" key="#com.intellij.ide.util.MemberChooser/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1600842192723" />
+    <state x="653" y="242" key="#com.intellij.ide.util.MemberChooser/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1601002869891" />
+    <state x="716" y="244" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1598325563184">
+      <screen x="0" y="23" width="1680" height="960" />
+    </state>
+    <state x="716" y="243" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1596790114261" />
+    <state x="716" y="244" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1194.239.1194.811/0.23.1680.960@0.23.1680.960" timestamp="1598325563184" />
+    <state x="609" y="254" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598334720094">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="609" y="254" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1598334720094" />
+    <state x="609" y="254" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1595322652930" />
+    <state x="160" y="263" key="AndroidCreateResourceDirectoryDialog" timestamp="1598334593803">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="160" y="263" key="AndroidCreateResourceDirectoryDialog/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1598334593803" />
+    <state x="160" y="262" key="AndroidCreateResourceDirectoryDialog/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1596700495895" />
+    <state x="428" y="371" key="AndroidCreateXmlResourceDialog" timestamp="1596706467601">
+      <screen x="0" y="23" width="1680" height="954" />
+    </state>
+    <state x="428" y="371" key="AndroidCreateXmlResourceDialog/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1596706467601" />
+    <state width="961" height="153" key="GridCell.Tab.0.bottom" timestamp="1600943775763">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state width="1638" height="274" key="GridCell.Tab.0.bottom/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1600842596858" />
+    <state width="1103" height="149" key="GridCell.Tab.0.bottom/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1596700379538" />
+    <state width="961" height="153" key="GridCell.Tab.0.bottom/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1600943775763" />
+    <state width="961" height="153" key="GridCell.Tab.0.center" timestamp="1600943775763">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state width="1638" height="274" key="GridCell.Tab.0.center/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1600842596856" />
+    <state width="1103" height="149" key="GridCell.Tab.0.center/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1596700379537" />
+    <state width="961" height="153" key="GridCell.Tab.0.center/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1600943775763" />
+    <state width="961" height="153" key="GridCell.Tab.0.left" timestamp="1600943775762">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state width="1638" height="274" key="GridCell.Tab.0.left/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1600842596855" />
+    <state width="1103" height="149" key="GridCell.Tab.0.left/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1596700379537" />
+    <state width="961" height="153" key="GridCell.Tab.0.left/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1600943775762" />
+    <state width="961" height="153" key="GridCell.Tab.0.right" timestamp="1600943775763">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state width="1638" height="274" key="GridCell.Tab.0.right/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1600842596857" />
+    <state width="1103" height="149" key="GridCell.Tab.0.right/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1596700379537" />
+    <state width="961" height="153" key="GridCell.Tab.0.right/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1600943775763" />
+    <state x="101" y="241" key="Vcs.Push.Dialog.v2" timestamp="1600943729242">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state x="101" y="241" key="Vcs.Push.Dialog.v2/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1600943729242" />
+    <state x="100" y="123" width="1278" height="753" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1597144889013">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state x="100" y="123" width="1278" height="753" key="com.android.tools.idea.avdmanager.AvdListDialog/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1595233808167" />
+    <state x="100" y="123" width="1278" height="752" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1680.954@0.23.1680.954" timestamp="1595330527214" />
+    <state x="100" y="123" width="1278" height="753" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1680.958@0.23.1680.958" timestamp="1597144889013" />
+    <state x="587" y="370" key="edit.logcat.filter.dialog.dimensions" timestamp="1599463338222">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state x="587" y="380" key="edit.logcat.filter.dialog.dimensions/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1594793071188" />
+    <state x="587" y="368" key="edit.logcat.filter.dialog.dimensions/-1194.239.1194.811/0.23.1680.954@0.23.1680.954" timestamp="1595322835460" />
+    <state x="587" y="369" key="edit.logcat.filter.dialog.dimensions/-1194.239.1194.811/0.23.1680.956@0.23.1680.956" timestamp="1597838536271" />
+    <state x="587" y="370" key="edit.logcat.filter.dialog.dimensions/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1599463338222" />
+    <state x="493" y="281" width="693" height="488" key="find.popup" timestamp="1599468389871">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state x="493" y="281" width="693" height="488" key="find.popup/-1194.216.1194.834/0.0.1680.1050@0.0.1680.1050" timestamp="1598335812439" />
+    <state x="493" y="281" width="693" height="488" key="find.popup/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1599468389871" />
+    <state x="231" y="420" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1601002830622">
+      <screen x="0" y="23" width="1680" height="958" />
+    </state>
+    <state x="231" y="420" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/-1194.239.1194.811/0.23.1680.958@0.23.1680.958" timestamp="1601002830622" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/MercuryActivity.java</url>
+          <line>298</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/mercury/src/main/java/com/mercury/game/MercuryActivity.java</url>
+          <line>378</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

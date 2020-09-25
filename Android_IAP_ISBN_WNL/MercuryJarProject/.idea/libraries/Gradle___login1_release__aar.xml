@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: :login1-release:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/40ea4f3f38c086051a130f1da7b2fdeb/login1-release/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/40ea4f3f38c086051a130f1da7b2fdeb/login1-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/40ea4f3f38c086051a130f1da7b2fdeb/login1-release/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/40ea4f3f38c086051a130f1da7b2fdeb/login1-release/jars/libs/fastjson-1.1.70.android_login-release.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/40ea4f3f38c086051a130f1da7b2fdeb/login1-release/jars/libs/kalle-release_login-release.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

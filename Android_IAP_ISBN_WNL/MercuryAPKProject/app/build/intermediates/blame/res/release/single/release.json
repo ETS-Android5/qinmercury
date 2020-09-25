@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/drawable_singmaan_shape_corner_up.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/drawable/singmaan_shape_corner_up.xml"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/xml_network_security_config.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/xml/network_security_config.xml"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/drawable-xhdpi_singmaan_login_btn.png.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/drawable-xhdpi/singmaan_login_btn.png"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/drawable_singmaan_shape_corner.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/drawable/singmaan_shape_corner.xml"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/layout_activity_main.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/layout_singmaan_dialog_verify.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/layout/singmaan_dialog_verify.xml"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/layout_singmaan_dialog_pay.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/layout/singmaan_dialog_pay.xml"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/drawable-xhdpi_singmaan_login_code.png.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/drawable-xhdpi/singmaan_login_code.png"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/drawable_singmaan_btn_shape.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/drawable/singmaan_btn_shape.xml"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/drawable_app_icon.png.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/drawable/app_icon.png"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/drawable-xhdpi_singmaan_login_phone.png.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/drawable-xhdpi/singmaan_login_phone.png"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/drawable-xhdpi_singmaan_login_pass.png.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/drawable-xhdpi/singmaan_login_pass.png"
+    },
+    {
+        "merged": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/build/intermediates/res/merged/release/layout_singmaan_dialog_login.xml.flat",
+        "source": "/Users/batista/QinProject/QinMercury/Android_IAP_ISBN_WNL/MercuryAPKProject/app/src/main/res/layout/singmaan_dialog_login.xml"
+    }
+]

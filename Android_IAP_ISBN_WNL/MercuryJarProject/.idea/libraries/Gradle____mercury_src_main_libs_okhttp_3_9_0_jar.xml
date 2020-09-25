@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: ./mercury/src/main/libs/okhttp-3.9.0.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mercury/src/main/libs/okhttp-3.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
