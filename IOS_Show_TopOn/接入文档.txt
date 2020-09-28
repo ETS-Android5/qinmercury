@@ -1,0 +1,8 @@
+1.删除 Libraries -> Plugins -> IOS -> QinMercury.m
+2.放入压缩包里的QinMercury.m. 位置同上
+3.放入release_folder_20200917154753 里的文件 放入位置位：Frameworks 文件下
+4.在Info.plist中 点击Information Property List 的+号 添加 GADApplicationldentifier string类型 Value值为 ca-app-pub-9488501426181082/7319780494
+5.同4点击加号 添加 GADIsAdManagerApp 类型为 booleam Value 值为 YES
+6.在Build Settings 中搜索 Other Linker Flags 添加 -ObjC
+7.在 Build Phases -> Link Binary With Librariesz中引入文件  libbz2.tbd libresolv.9.tbd libxml2.tbd VideoToolbox.framework
+8.build settings -> bitcode 改为no
