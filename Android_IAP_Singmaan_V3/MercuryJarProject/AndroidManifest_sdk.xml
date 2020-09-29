@@ -1,0 +1,25 @@
+<!--sdk-->        <activity android:configChanges="orientation|screenSize" android:name="com.qinbatista.mercury.MainActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        <meta-data android:name="channel_name" android:value="demo"/>
+        <meta-data android:name="open_talkingdata" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
+        <meta-data android:name="open_umeng" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
+        <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity"/>
+        <activity android:configChanges="orientation|screenSize" android:name="com.zhongtui.sdk.activity.LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="orientation|screenSize" android:name="com.zhongtui.sdk.activity.PayActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="orientation|screenSize" android:name="com.zhongtui.sdk.activity.UserActivity" android:screenOrientation="portrait"/>
+        <service android:name="com.zhongtui.sdk.service.QueryOrderService"/>
+<!--end--><!--sdkxml-->    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+<!--end-->
