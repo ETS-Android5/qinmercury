@@ -31,6 +31,7 @@ public final class RemoteConfig {
     private static String updating_result_json="";
     private static String game_data_result="";
     private static String iap_result_json="";
+    private static String id_verify_result="";
     private static String ip_address = "office.singmaan.com";
     public static void GetAllConfig()
     {
@@ -247,5 +248,66 @@ public final class RemoteConfig {
         }).start();
         //shrinkpartend
         return game_data_result;
+    }
+
+    public static String verify_chinese_id(final String my_id, final String my_chinese_name) {
+        //shrinkpartstart
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                try {
+                    //1.创建OkHttpClient对象
+                    OkHttpClient client = new OkHttpClient();
+                    //2.创建RequestBody对象
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("id", my_id)
+                            .add("chinese_name", my_chinese_name)
+                            .build();
+                    //3.创建Request对象
+                    Request request = new Request.Builder()
+                            .post(requestBody)
+                            .url("http://"+ip_address+":10011/verify_chinese_id")
+                            .build();
+                    //4. 同步请求
+                    // Response response = client.newCall(request).execute();
+                    //5.异步请求
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            LogLocal("[RemoteConfig][download_game_data] failed="+e.toString());
+                        }
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String s = response.body().string();
+                            if (s != null) {
+                                JSONObject json = null;
+                                try {
+                                    json = (JSONObject) new JSONTokener(s).nextValue();
+                                    id_verify_result = (String) json.getString("status");
+//                                    id_verify_result = (String) json_result.get("result");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                LogLocal("[RemoteConfig][download_game_data] data=" + id_verify_result);
+                                LogLocal("[RemoteConfig][download_game_data] remote result=" + s);
+
+                                Looper.prepare();
+                                //shrinkpartend
+//                                mInAppBase.onFunctionCallBack("VerifyChineseID:"+id_verify_result);
+                                //shrinkpartstart
+                                Looper.loop();
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                }
+                Looper.loop();
+            }
+        }).start();
+        //shrinkpartend
+        return id_verify_result;
     }
 }

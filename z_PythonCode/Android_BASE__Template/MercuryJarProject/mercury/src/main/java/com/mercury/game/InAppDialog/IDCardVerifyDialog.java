@@ -1,11 +1,14 @@
 package com.mercury.game.InAppDialog;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.text.method.NumberKeyListener;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,6 +22,7 @@ import android.widget.Toast;
 //shrinkpartstart
 import androidx.annotation.NonNull;
 //shrinkpartend
+import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
@@ -26,6 +30,8 @@ import com.mercury.game.util.UIUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
 
 
 public class IDCardVerifyDialog {
@@ -150,16 +156,26 @@ public class IDCardVerifyDialog {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String id = cardIdEditText.getText().toString();
-                if (isIDNum(id)) {
-                    loginButton.setVisibility(View.INVISIBLE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                } else {
-                    showLoginFailed("请输入正确的身份证号");
-                    cardIdEditText.setError("请输入正确的身份证号");
-                }
+                final String card_id = cardIdEditText.getText().toString();
+                final String name_id = nameEditText.getText().toString();
+                final String id_verify_result = verify_chinese_id(card_id, name_id);
+                progressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        if (id_verify_result.equals("-"))
+                        {
+                            Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                        else
+                        {
+                            showLoginFailed("请输入正确的身份证号和名字");
+                            cardIdEditText.setError("请输入正确的身份证号和名字");
+                        }
+                    }
+                },3000); // 延时1秒
             }
         });
 
