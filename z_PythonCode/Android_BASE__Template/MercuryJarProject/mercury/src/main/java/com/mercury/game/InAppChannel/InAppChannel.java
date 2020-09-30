@@ -46,17 +46,17 @@ public class InAppChannel extends InAppBase {
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
 		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
-		new IDCardVerifyDialog(mContext, new LoginCallBack() {
-			@Override
-			public void success(String msg) {
-				LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
-				onFunctionCallBack("IDCardVerifyDialog");
-			}
-			@Override
-			public void fail(String msg) {
-				LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
-			}
-		});
+//		new IDCardVerifyDialog(mContext, new LoginCallBack() {
+//			@Override
+//			public void success(String msg) {
+//				LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
+//				onFunctionCallBack("IDCardVerifyDialog");
+//			}
+//			@Override
+//			public void fail(String msg) {
+//				LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
+//			}
+//		});
 	}
 	public void ApplicationInit(Application appcontext)
 	{
