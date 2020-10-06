@@ -310,4 +310,9 @@ public class InAppBase{
 		
 	}
 
+	public void VIPPanel() {
+	}
+
+	public void DailyCheckInPanel() {
+	}
 }

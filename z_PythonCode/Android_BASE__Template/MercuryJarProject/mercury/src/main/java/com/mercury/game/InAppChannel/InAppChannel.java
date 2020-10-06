@@ -218,6 +218,66 @@ public class InAppChannel extends InAppBase {
 		intent.setData(content_url);
 		MercuryActivity.mContext.startActivity(intent);
 	}
+	public void VIPPanel() {
+		try {
+			AlertDialog.Builder builder = new Builder(mContext);
+			builder.setMessage("Testing Mode");
+			builder.setTitle("VIPPanel");
+			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onPurchaseSuccess(MercuryConst.QinPid);
+				}
+			});
+			builder.setNeutralButton("Failed", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onPurchaseFailed(MercuryConst.QinPid);
+				}
+			});
+			builder.setNegativeButton("Dismiss", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onPurchaseFailed(pid);
+					dialog.dismiss();
+				}
+			});
+			builder.create().show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void DailyCheckInPanel() {
+		try {
+			AlertDialog.Builder builder = new Builder(mContext);
+			builder.setMessage("Testing Mode");
+			builder.setTitle("DailyCheckInPanel");
+			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onPurchaseSuccess(MercuryConst.QinPid);
+				}
+			});
+			builder.setNeutralButton("Failed", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onPurchaseFailed(MercuryConst.QinPid);
+				}
+			});
+			builder.setNegativeButton("Dismiss", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					onPurchaseFailed(pid);
+					dialog.dismiss();
+				}
+			});
+			builder.create().show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void onPause()
 	{

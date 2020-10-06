@@ -455,6 +455,30 @@ public class MercuryActivity  {
 		});
 	}
 
+	public void VIPPanel()
+	{
+		LogLocal("[MercuryActivity][RateGame]mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.VIPPanel();
+			}
+		});
+	}
+
+	public void DailyCheckInPanel()
+	{
+		LogLocal("[MercuryActivity][RateGame]mInAppChannel="+mInAppChannel);
+		new Handler(mContext.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run()
+			{
+				mInAppChannel.DailyCheckInPanel();
+			}
+		});
+	}
+
 	public void ShareGame()
 	{
 		LogLocal("[MercuryActivity][ShareGame] mInAppChannel="+mInAppChannel);

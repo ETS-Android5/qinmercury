@@ -347,6 +347,39 @@ public class GameActivity extends UnityPlayerActivity{
 			}
 		});
 	}
+	public void VIPPanel()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ShareGame");
+						MercurySDK.VIPPanel();
+					}
+				});
+			}
+		});
+	}
+	public void DailyCheckInPanel()
+	{
+		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				mContext.runOnUiThread(new Runnable() {
+					public void run() {
+						Log.e(tagname,"ShareGame");
+						MercurySDK.DailyCheckInPanel();
+					}
+				});
+			}
+		});
+	}
+
 	public void Data_Event(final String eventID)
 	{
 		UnityPlayer.currentActivity.runOnUiThread(new Runnable()
