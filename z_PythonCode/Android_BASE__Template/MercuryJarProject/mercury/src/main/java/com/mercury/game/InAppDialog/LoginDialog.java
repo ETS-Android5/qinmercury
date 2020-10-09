@@ -53,7 +53,7 @@ public class LoginDialog {
         oldId = id;
         mLoginCallBack = callBack;
 //
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"singmaan_dialog_style","style"));
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"mercury_dialog_style","style"));
         dialog = builder.create();
         dialog.setCancelable(false);
         Window dialogWindow = dialog.getWindow();
@@ -93,14 +93,14 @@ public class LoginDialog {
     }
 
     public void initAlertDialog(final AlertDialog dialog) {
-        int mainLayout = getResId(mContext, "singmaan_dialog_login", "layout");
+        int mainLayout = getResId(mContext, "mercury_dialog_login", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
-        int nameId = getResId(mContext, "singmaan_username", "id");
-        int passId = getResId(mContext, "singmaan_password", "id");
-        int codeId = getResId(mContext, "singmaan_btn_code", "id");
-        int loginId = getResId(mContext, "singmaan_login", "id");
-        int loadingId = getResId(mContext, "singmaan_loading", "id");
-        int cancelId=getResId(mContext,"singmaan_cancel","id");
+        int nameId = getResId(mContext, "mercury_username", "id");
+        int passId = getResId(mContext, "mercury_password", "id");
+        int codeId = getResId(mContext, "mercury_btn_code", "id");
+        int loginId = getResId(mContext, "mercury_login", "id");
+        int loadingId = getResId(mContext, "mercury_loading", "id");
+        int cancelId=getResId(mContext,"mercury_cancel","id");
 
         final EditText usernameEditText = myLayout.findViewById(nameId);
         final EditText passwordEditText = myLayout.findViewById(passId);

@@ -243,6 +243,6 @@
         ns0:layout_centerHorizontal="true"
         ns0:layout_marginLeft="424dp"
         ns0:layout_marginTop="319dp"
-        ns0:text="PlayVideo" />
+        ns0:text="MercuryIDVerify" />
 
 </RelativeLayout>

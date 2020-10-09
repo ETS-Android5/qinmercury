@@ -2,6 +2,7 @@ package com.mercury.game.InAppChannel;
 import com.mercury.game.InAppDialog.IDCardVerifyDialog;
 import com.mercury.game.InAppDialog.LoginDialog;
 import com.mercury.game.InAppDialog.PaymentDialog;
+import com.mercury.game.InAppDialog.SigneInDialog;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 
@@ -46,17 +47,7 @@ public class InAppChannel extends InAppBase {
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
 		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
-//		new IDCardVerifyDialog(mContext, new LoginCallBack() {
-//			@Override
-//			public void success(String msg) {
-//				LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
-//				onFunctionCallBack("IDCardVerifyDialog");
-//			}
-//			@Override
-//			public void fail(String msg) {
-//				LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
-//			}
-//		});
+
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -172,7 +163,34 @@ public class InAppChannel extends InAppBase {
 		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
 		LoginCancelCallBack(DeviceId);
 	}
+	public void MercuryIDVerify()
+	{
 
+		new SigneInDialog(mContext, new LoginCallBack() {
+			@Override
+			public void success(String msg) {
+				LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
+				onFunctionCallBack("IDCardVerifyDialog");
+			}
+			@Override
+			public void fail(String msg) {
+				LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
+			}
+		});
+
+
+//		new IDCardVerifyDialog(mContext, new LoginCallBack() {
+//			@Override
+//			public void success(String msg) {
+//				LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
+//				onFunctionCallBack("IDCardVerifyDialog");
+//			}
+//			@Override
+//			public void fail(String msg) {
+//				LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
+//			}
+//		});
+	}
 	public void UploadGameData()
 	{
 		LogLocal("[MercuryActivity][SingmaanLogin]"+DeviceId);

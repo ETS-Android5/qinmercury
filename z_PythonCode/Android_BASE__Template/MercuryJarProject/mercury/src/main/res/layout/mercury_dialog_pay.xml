@@ -6,14 +6,14 @@
     android:id="@+id/container"
     android:layout_width="332dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/singmaan_shape_corner"
+    android:background="@drawable/mercury_shape_corner"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:background="@drawable/singmaan_shape_corner_up"
+        android:background="@drawable/mercury_shape_corner_up"
         android:gravity="center"
         android:text="支付方式"
         android:textColor="#FFFFFF"
@@ -31,28 +31,28 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/singmaan_login"
+                    android:id="@+id/mercury_login"
                     android:layout_width="0dp"
                     android:layout_height="43dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/singmaan_btn_shape"
+                    android:background="@drawable/mercury_btn_shape"
                     android:text="微信"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/singmaan_cancel"
+                    android:id="@+id/mercury_cancel"
                     android:layout_width="0dp"
                     android:layout_height="43dp"
                     android:layout_weight="1"
-                    android:background="@drawable/singmaan_btn_shape"
+                    android:background="@drawable/mercury_btn_shape"
                     android:text="支付宝"
                     android:textColor="@android:color/background_light"
                     android:textSize="18sp" />
             </LinearLayout>
             <ProgressBar
-                android:id="@+id/singmaan_loading"
+                android:id="@+id/mercury_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

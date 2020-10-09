@@ -380,7 +380,11 @@ public class MercuryActivity  {
 		mInAppChannel.Purchase(pidname);
 
 	}
-
+	public void MercuryIDVerify()
+	{
+		LogLocal("[MercuryActivity][DownloadGameData]");
+		mInAppChannel.MercuryIDVerify();
+	}
 	public void RestorePruchase()
 	{
 		LogLocal("[MercuryActivity][RestoreProduct] ");
@@ -431,6 +435,7 @@ public class MercuryActivity  {
 		LogLocal("[MercuryActivity][DownloadGameData]");
 		download_game_data();
 	}
+
 
 	public void Redeem()
 	{

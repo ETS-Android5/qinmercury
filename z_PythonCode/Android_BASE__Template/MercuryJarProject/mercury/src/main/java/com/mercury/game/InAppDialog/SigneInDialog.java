@@ -34,13 +34,13 @@ import java.util.regex.Pattern;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
 
 
-public class IDCardVerifyDialog {
+public class SigneInDialog {
     //shrinkpartstart
     Activity mContext;
     LoginCallBack mLoginCallBack;
     final AlertDialog dialog;
 
-    public IDCardVerifyDialog(Activity context, LoginCallBack callBack) {
+    public SigneInDialog(Activity context, LoginCallBack callBack) {
 
         mContext = context;
         mLoginCallBack = callBack;
@@ -79,7 +79,7 @@ public class IDCardVerifyDialog {
     }
 
     public void initAlertDialog(final AlertDialog dialog) {
-        int mainLayout = getResId(mContext, "mercury_dialog_verify", "layout");
+        int mainLayout = getResId(mContext, "mercury_dialog_signein", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
         int cardId = getResId(mContext, "mercury_username", "id");
         int name = getResId(mContext, "mercury_password", "id");

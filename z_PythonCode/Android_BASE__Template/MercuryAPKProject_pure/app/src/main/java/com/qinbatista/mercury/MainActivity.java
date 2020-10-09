@@ -264,8 +264,8 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 		btn20.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.w("MercuryDemo","PlayVideo");
-				MercurySDK.PlayVideo();
+				Log.w("MercuryDemo","MercuryIDVerify");
+				MercurySDK.MercuryIDVerify();
 			}
 		});
 

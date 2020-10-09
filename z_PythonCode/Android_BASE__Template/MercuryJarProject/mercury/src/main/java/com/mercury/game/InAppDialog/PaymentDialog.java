@@ -38,7 +38,7 @@ public class PaymentDialog {
 
         mContext = context;
         mLoginCallBack = callBack;
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"singmaan_dialog_style","style"));
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"mercury_dialog_style","style"));
         dialog = builder.create();
         dialog.setCancelable(true);
         Window dialogWindow = dialog.getWindow();
@@ -73,11 +73,11 @@ public class PaymentDialog {
     }
 
     public void initAlertDialog(final AlertDialog dialog) {
-        int mainLayout = getResId(mContext, "singmaan_dialog_pay", "layout");
+        int mainLayout = getResId(mContext, "mercury_dialog_pay", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
-        int loginId = getResId(mContext, "singmaan_login", "id");
-        int loadingId = getResId(mContext, "singmaan_loading", "id");
-        int cancelId=getResId(mContext,"singmaan_cancel","id");
+        int loginId = getResId(mContext, "mercury_login", "id");
+        int loadingId = getResId(mContext, "mercury_loading", "id");
+        int cancelId=getResId(mContext,"mercury_cancel","id");
         final Button WechatPayButton = myLayout.findViewById(loginId);
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
         final Button  AliypayButton = myLayout.findViewById(cancelId);
