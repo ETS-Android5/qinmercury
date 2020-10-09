@@ -31,7 +31,9 @@ import com.mercury.game.util.UIUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
+import static com.mercury.game.InAppRemote.RemoteConfig.verify_signe_in;
+import static com.mercury.game.MercuryActivity.LogLocal;
 
 
 public class SigneInDialog {
@@ -81,20 +83,22 @@ public class SigneInDialog {
     public void initAlertDialog(final AlertDialog dialog) {
         int mainLayout = getResId(mContext, "mercury_dialog_signein", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
-        int cardId = getResId(mContext, "mercury_username", "id");
-        int name = getResId(mContext, "mercury_password", "id");
+        int user_name = getResId(mContext, "mercury_username", "id");
+        int password = getResId(mContext, "mercury_password", "id");
+        final int password_again = getResId(mContext, "mercury_password_again", "id");
         int mgsId = getResId(mContext, "mercury_verifymgs", "id");
         int loginId = getResId(mContext, "mercury_login", "id");
         int loadingId = getResId(mContext, "mercury_loading", "id");
-        int cancelId=getResId(mContext,"mercury_cancel","id");
+//        int cancelId=getResId(mContext,"mercury_cancel","id");
 
 
-        final EditText cardIdEditText = myLayout.findViewById(cardId);
-        final EditText nameEditText = myLayout.findViewById(name);
+        final EditText cardIdEditText = myLayout.findViewById(user_name);
+        final EditText nameEditText = myLayout.findViewById(password);
+        final EditText passwordagainEditText = myLayout.findViewById(password_again);
         final Button loginButton = myLayout.findViewById(loginId);
         final TextView mgsTextView = myLayout.findViewById(mgsId);
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
-        final Button  cancelButton = myLayout.findViewById(cancelId);
+//        final Button  cancelButton = myLayout.findViewById(cancelId);
 
         cardIdEditText.setKeyListener(new NumberKeyListener() {
             @NonNull
@@ -132,47 +136,42 @@ public class SigneInDialog {
                 return false;
             }
         });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelButton.setVisibility(View.GONE);
-                cardIdEditText.setVisibility(View.GONE);
-                nameEditText.setVisibility(View.GONE);
-                mgsTextView.setVisibility(View.VISIBLE);
-                loginButton.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.INVISIBLE);
-                mgsTextView.setText("实名制认证未完成，为了你的账号安全，请尽快完成实名制认证！");
-                loginButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mLoginCallBack != null) {
-                            mLoginCallBack.success("实名制认证未完成，为了你的账号安全，请尽快完成实名制认证！");
-                        }
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String card_id = cardIdEditText.getText().toString();
-                final String name_id = nameEditText.getText().toString();
-                final String id_verify_result = verify_chinese_id(card_id, name_id);
+                final String user_name = cardIdEditText.getText().toString();
+                final String password = nameEditText.getText().toString();
+                final String password_again = passwordagainEditText.getText().toString();
+                verify_signe_in(user_name, password);
                 progressBar.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.INVISIBLE);
-                        if (id_verify_result.equals("-"))
+                        LogLocal("[RemoteConfig][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
+                        if(!password.equals(password_again))
                         {
-                            Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
+                            cardIdEditText.setError("两次密码不匹配");
+                            Toast.makeText(mContext, "两次密码不匹配", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(user_name.equals("")||password.equals("")||password_again.equals(""))
+                        {
+                            cardIdEditText.setError("输入不能为空");
+                            Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (id_signe_in_result.equals(""))
+                        {
+                            Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (id_signe_in_result.equals("-200"))
+                        {
+                            Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
-                            showLoginFailed("请输入正确的身份证号和名字");
-                            cardIdEditText.setError("请输入正确的身份证号和名字");
+                            Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }
                     }
                 },3000); // 延时1秒

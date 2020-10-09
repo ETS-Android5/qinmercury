@@ -164,7 +164,7 @@ public class IDCardVerifyDialog {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.INVISIBLE);
-                        if (id_verify_result.equals("-"))
+                        if (!id_verify_result.equals("-"))
                         {
                             Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
