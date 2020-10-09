@@ -166,17 +166,7 @@ public class InAppChannel extends InAppBase {
 	public void MercuryIDVerify()
 	{
 
-		new SigneInDialog(mContext, new LoginCallBack() {
-			@Override
-			public void success(String msg) {
-				LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
-				onFunctionCallBack("IDCardVerifyDialog");
-			}
-			@Override
-			public void fail(String msg) {
-				LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
-			}
-		});
+
 
 
 //		new IDCardVerifyDialog(mContext, new LoginCallBack() {
@@ -341,8 +331,21 @@ public class InAppChannel extends InAppBase {
 	{
 		MercuryActivity.LogLocal("["+Channelname+"] onNewIntent(Intent intent) ");
 	}
-	
 
+	public void MercurySigneIn() {
+		new SigneInDialog(mContext, new LoginCallBack() {
+			@Override
+			public void success(String msg) {
+				LogLocal("[InAppChannel][MercurySigneIn] ID card Success");
+				LoginSuccessCallBack(msg);
+			}
+			@Override
+			public void fail(String msg) {
+				LogLocal("[InAppChannel][MercurySigneIn] ID card failed");
+				LoginCancelCallBack(msg);
+			}
+		});
+	}
 
 
 	//end

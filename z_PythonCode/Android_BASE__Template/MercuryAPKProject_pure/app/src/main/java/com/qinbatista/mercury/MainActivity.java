@@ -265,7 +265,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","MercuryIDVerify");
-				MercurySDK.MercuryIDVerify();
+				MercurySDK.MercurySigneIn();
 			}
 		});
 

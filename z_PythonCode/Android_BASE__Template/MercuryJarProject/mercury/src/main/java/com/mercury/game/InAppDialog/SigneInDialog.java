@@ -139,42 +139,44 @@ public class SigneInDialog {
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 final String user_name = cardIdEditText.getText().toString();
                 final String password = nameEditText.getText().toString();
                 final String password_again = passwordagainEditText.getText().toString();
-                verify_signe_in(user_name, password);
-                progressBar.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        LogLocal("[RemoteConfig][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
-                        if(!password.equals(password_again))
-                        {
-                            cardIdEditText.setError("两次密码不匹配");
-                            Toast.makeText(mContext, "两次密码不匹配", Toast.LENGTH_SHORT).show();
+                if (!password.equals(password_again))
+                {
+                    cardIdEditText.setError("两次密码不匹配");
+                    Toast.makeText(mContext, "两次密码不匹配", Toast.LENGTH_SHORT).show();
+                }
+                else if (user_name.equals("") || password.equals("") || password_again.equals(""))
+                {
+                    cardIdEditText.setError("输入不能为空");
+                    Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    {
+                    verify_signe_in(user_name, password);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            LogLocal("[RemoteConfig][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
+                            if (id_signe_in_result.equals("")) {
+                                Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
+                            } else if (id_signe_in_result.equals("-200")) {
+                                Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
+                                if (mLoginCallBack != null) {
+                                    mLoginCallBack.success(user_name);
+                                }
+                                dialog.dismiss();
+                            }
                         }
-                        else if(user_name.equals("")||password.equals("")||password_again.equals(""))
-                        {
-                            cardIdEditText.setError("输入不能为空");
-                            Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
-                        }
-                        else if (id_signe_in_result.equals(""))
-                        {
-                            Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
-                        }
-                        else if (id_signe_in_result.equals("-200"))
-                        {
-                            Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    }
-                },3000); // 延时1秒
+                    }, 3000); // 延时1秒
+                }
             }
         });
 

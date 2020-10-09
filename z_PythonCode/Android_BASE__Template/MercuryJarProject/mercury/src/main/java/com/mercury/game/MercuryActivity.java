@@ -380,10 +380,10 @@ public class MercuryActivity  {
 		mInAppChannel.Purchase(pidname);
 
 	}
-	public void MercuryIDVerify()
+	public void MercurySigneIn()
 	{
 		LogLocal("[MercuryActivity][DownloadGameData]");
-		mInAppChannel.MercuryIDVerify();
+		mInAppChannel.MercurySigneIn();
 	}
 	public void RestorePruchase()
 	{

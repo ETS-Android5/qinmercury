@@ -309,6 +309,8 @@ public class InAppBase{
 	{
 		
 	}
+	public void MercurySigneIn() {
+	}
 
 	public void VIPPanel() {
 	}
