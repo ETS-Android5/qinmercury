@@ -168,7 +168,7 @@ public class SigneInDialog {
                             } else if (id_signe_in_result.equals("-200")) {
                                 Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
                                 if (mLoginCallBack != null) {
                                     mLoginCallBack.success(user_name);
                                 }

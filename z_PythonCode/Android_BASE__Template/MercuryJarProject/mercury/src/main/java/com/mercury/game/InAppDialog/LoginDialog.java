@@ -8,6 +8,7 @@ import android.content.Context;
 
 import android.content.DialogInterface;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Editable;
 
 import android.text.TextUtils;
@@ -38,6 +39,11 @@ import com.mercury.game.util.UIUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
+import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
+import static com.mercury.game.InAppRemote.RemoteConfig.login_in_result;
+import static com.mercury.game.MercuryActivity.LogLocal;
 
 
 public class LoginDialog {
@@ -97,7 +103,6 @@ public class LoginDialog {
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
         int nameId = getResId(mContext, "mercury_username", "id");
         int passId = getResId(mContext, "mercury_password", "id");
-        int codeId = getResId(mContext, "mercury_btn_code", "id");
         int loginId = getResId(mContext, "mercury_login", "id");
         int loadingId = getResId(mContext, "mercury_loading", "id");
         int cancelId=getResId(mContext,"mercury_cancel","id");
@@ -105,7 +110,6 @@ public class LoginDialog {
         final EditText usernameEditText = myLayout.findViewById(nameId);
         final EditText passwordEditText = myLayout.findViewById(passId);
         final Button loginButton = myLayout.findViewById(loginId);
-        final Button codeButton = myLayout.findViewById(codeId);
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
         final Button  cancelButton = myLayout.findViewById(cancelId);
         usernameEditText.setKeyListener(new NumberKeyListener() {
@@ -183,11 +187,38 @@ public class LoginDialog {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mLoginCallBack != null) {
-                    mLoginCallBack.success(oldId);
+                final String user_name = usernameEditText.getText().toString();
+                final String password = passwordEditText.getText().toString();
+                if (user_name.equals("") || password.equals(""))
+                {
+                    Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
                 }
-                showLoginFailed("为保障您的游戏体验，建议下次游戏绑定手机号！");
-                dialog.dismiss();
+                else
+                {
+                    login_in(user_name, password);
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            LogLocal("[RemoteConfig][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
+                            if (login_in_result.equals("")) {
+                                Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
+                            } else if (login_in_result.equals("-200")) {
+                                Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (login_in_result.equals("-201")) {
+                                Toast.makeText(mContext, "账号不存在", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+                                if (mLoginCallBack != null) {
+                                    mLoginCallBack.success(user_name);
+                                }
+                                dialog.dismiss();
+                            }
+                        }
+                    }, 3000); // 延时1秒
+                }
 
             }
         });
@@ -195,76 +226,22 @@ public class LoginDialog {
             @Override
             public void onClick(View v) {
                 final String phone = usernameEditText.getText().toString();
-                if (isPhoneNum(phone)) {
-                    loginButton.setVisibility(View.INVISIBLE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    try {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                        builder.setMessage("Testing Mode");
-                        builder.setTitle("Choice Result");
-                        builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                showLoginFailed("登录成功");
-                                SPUtils.getInstance().put(SpConfig.USER_PHONE, phone);
-                                SPUtils.getInstance().put("USER_PHONE_MD5", MD5Util.getMD5String(phone));
-                                loginButton.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.INVISIBLE);
-                                if (mLoginCallBack != null) {
-                                    mLoginCallBack.success(phone);
-                                }
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                passwordEditText.setError("Failed");
-                                loginButton.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.INVISIBLE);
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.setCancelable(false);
-                        builder.create().show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    showLoginFailed("请输入正确的手机号");
-                    usernameEditText.setError("请输入正确的手机号");
+                    dialog.dismiss();
+                    new SigneInDialog(mContext, new LoginCallBack() {
+                        @Override
+                        public void success(String msg) {
+                            LogLocal("[InAppChannel][MercurySigneIn] ID card Success");
+                            mLoginCallBack.success(msg);
+                        }
+                        @Override
+                        public void fail(String msg) {
+                            LogLocal("[InAppChannel][MercurySigneIn] ID card failed");
+                            mLoginCallBack.success(msg);
+                        }
+                    });
                 }
-            }
         });
 
-        final CountDownTimer countDownTimer = new CountDownTimer(60 * 1000, 1000) {
-            @Override
-            public void onTick(long l) {
-                time = (int) (l / 1000);
-                codeButton.setText(String.valueOf(time));
-            }
-
-            @Override
-            public void onFinish() {
-                codeButton.setText("获取验证码");
-            }
-        };
-        codeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isPhoneNum(usernameEditText.getText().toString())) {
-                    if (time == 0) {
-                        countDownTimer.start();
-                        Toast.makeText(mContext, "验证码已发送", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    showLoginFailed("请输入正确的手机号");
-                    usernameEditText.setError("请输入正确的手机号");
-                }
-
-
-            }
-        });
     }
 
 
