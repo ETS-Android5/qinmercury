@@ -88,15 +88,6 @@
                 android:textSize="18sp"
                 android:background="@drawable/mercury_btn_shape"
                 android:text="确定" />
-                <Button
-                    android:id="@+id/mercury_cancel"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="43dp"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp"
-                    android:background="@drawable/mercury_btn_shape"
-                    android:text="跳过" />
             </LinearLayout>
             <ProgressBar
                 android:id="@+id/mercury_loading"

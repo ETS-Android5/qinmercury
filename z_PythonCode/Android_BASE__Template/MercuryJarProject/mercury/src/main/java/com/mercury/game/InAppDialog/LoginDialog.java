@@ -40,6 +40,8 @@ import com.mercury.game.util.UIUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in_result;
@@ -189,6 +191,7 @@ public class LoginDialog {
             public void onClick(View v) {
                 final String user_name = usernameEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
+                account_id = user_name;
                 if (user_name.equals("") || password.equals(""))
                 {
                     Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
@@ -212,7 +215,24 @@ public class LoginDialog {
                             }else {
                                 Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
                                 if (mLoginCallBack != null) {
-                                    mLoginCallBack.success(user_name);
+                                    if (chinese_id.equals("")) {
+                                        new IDCardVerifyDialog(mContext, new LoginCallBack() {
+                                            @Override
+                                            public void success(String msg) {
+                                                LogLocal("[InAppDialog][SigneInDialog] ID card Success");
+                                                mLoginCallBack.success(user_name);
+                                            }
+                                            @Override
+                                            public void fail(String msg) {
+                                                LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+                                            }
+                                        });
+                                    }
+                                    else
+                                    {
+                                        //age verify
+                                        LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+                                    }
                                 }
                                 dialog.dismiss();
                             }

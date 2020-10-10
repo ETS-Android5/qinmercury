@@ -167,19 +167,6 @@ public class InAppChannel extends InAppBase {
 	{
 
 
-
-
-//		new IDCardVerifyDialog(mContext, new LoginCallBack() {
-//			@Override
-//			public void success(String msg) {
-//				LogLocal("[InAppChannel][SingmaanLogin] ID card Success");
-//				onFunctionCallBack("IDCardVerifyDialog");
-//			}
-//			@Override
-//			public void fail(String msg) {
-//				LogLocal("[InAppChannel][SingmaanLogin] ID card failed");
-//			}
-//		});
 	}
 	public void UploadGameData()
 	{
@@ -333,16 +320,14 @@ public class InAppChannel extends InAppBase {
 	}
 
 	public void MercurySigneIn() {
-		new SigneInDialog(mContext, new LoginCallBack() {
+		new IDCardVerifyDialog(mContext, new LoginCallBack() {
 			@Override
 			public void success(String msg) {
-				LogLocal("[InAppChannel][MercurySigneIn] ID card Success");
-				LoginSuccessCallBack(msg);
+				LogLocal("[InAppDialog][SigneInDialog] ID card Success");
 			}
 			@Override
 			public void fail(String msg) {
-				LogLocal("[InAppChannel][MercurySigneIn] ID card failed");
-				LoginCancelCallBack(msg);
+				LogLocal("[InAppDialog][SigneInDialog] ID card failed");
 			}
 		});
 	}

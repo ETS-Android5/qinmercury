@@ -34,6 +34,9 @@ public final class RemoteConfig {
     public static String id_verify_result="";
     public static String id_signe_in_result="";
     public static String login_in_result="";
+    public static String chinese_id_update_result="";
+    public static String chinese_id="";
+    public static String account_id="";
     private static String ip_address = "office.singmaan.com";
     public static void GetAllConfig()
     {
@@ -252,7 +255,7 @@ public final class RemoteConfig {
         return game_data_result;
     }
 
-    public static String verify_chinese_id(final String my_id, final String my_chinese_name) {
+    public static String verify_chinese_id(final String account_id, final String my_id, final String my_chinese_name) {
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -263,7 +266,8 @@ public final class RemoteConfig {
                     OkHttpClient client = new OkHttpClient();
                     //2.创建RequestBody对象
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("id", my_id)
+                            .add("account_id", account_id)
+                            .add("chinese_id", my_id)
                             .add("chinese_name", my_chinese_name)
                             .build();
                     //3.创建Request对象
@@ -408,7 +412,18 @@ public final class RemoteConfig {
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
                                     login_in_result = (String) json.getString("status");
-//                                    id_verify_result = (String) json_result.get("result");
+
+                                    json = (JSONObject) new JSONTokener(s).nextValue();
+                                    String json_result = (String)json.getString("data");
+
+                                    json = (JSONObject) new JSONTokener(json_result).nextValue();
+                                    String json_result1 = (String)json.getString("result");
+
+                                    json = (JSONObject) new JSONTokener(json_result1).nextValue();
+                                    String json_result2 = (String)json.getString("chineseid");
+
+                                    chinese_id = json_result2;
+                                    LogLocal("[RemoteConfig][lgoin_in] chineseid=" + chinese_id);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -432,4 +447,77 @@ public final class RemoteConfig {
         //shrinkpartend
         return login_in_result;
     }
+
+    public static String update_chinese_id(final String account, final String chinese_id) {
+        //shrinkpartstart
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                try {
+                    //1.创建OkHttpClient对象
+                    OkHttpClient client = new OkHttpClient();
+                    //2.创建RequestBody对象
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("account", account)
+                            .add("chinese_id", chinese_id)
+                            .build();
+                    //3.创建Request对象
+                    Request request = new Request.Builder()
+                            .post(requestBody)
+                            .url("http://"+ip_address+":10012/updatechineseid")
+                            .build();
+                    //4. 同步请求
+                    // Response response = client.newCall(request).execute();
+                    //5.异步请求
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            LogLocal("[RemoteConfig][lgoin_in] failed="+e.toString());
+                        }
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String s = response.body().string();
+                            if (s != null) {
+                                JSONObject json = null;
+                                try {
+                                    json = (JSONObject) new JSONTokener(s).nextValue();
+                                    chinese_id_update_result = (String) json.getString("status");
+
+//                                    json = (JSONObject) new JSONTokener(s).nextValue();
+//                                    String json_result = (String)json.getString("data");
+//
+//                                    json = (JSONObject) new JSONTokener(json_result).nextValue();
+//                                    String json_result1 = (String)json.getString("result");
+//
+//                                    json = (JSONObject) new JSONTokener(json_result1).nextValue();
+//                                    String json_result2 = (String)json.getString("chineseid");
+//
+//                                    chinese_id = json_result2;
+//                                    LogLocal("[RemoteConfig][lgoin_in] chineseid=" + chinese_id);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                LogLocal("[RemoteConfig][lgoin_in] data=" + chinese_id_update_result);
+                                LogLocal("[RemoteConfig][lgoin_in] remote result=" + s);
+                                Looper.prepare();
+                                //shrinkpartend
+//                                mInAppBase.onFunctionCallBack("VerifyChineseID:"+id_verify_result);
+                                //shrinkpartstart
+                                Looper.loop();
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                }
+                Looper.loop();
+            }
+        }).start();
+        //shrinkpartend
+        return chinese_id_update_result;
+    }
+
+
 }

@@ -31,6 +31,8 @@ import com.mercury.game.util.UIUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_signe_in;
 import static com.mercury.game.MercuryActivity.LogLocal;
@@ -144,6 +146,7 @@ public class SigneInDialog {
                 final String user_name = cardIdEditText.getText().toString();
                 final String password = nameEditText.getText().toString();
                 final String password_again = passwordagainEditText.getText().toString();
+                account_id = user_name;
                 if (!password.equals(password_again))
                 {
                     cardIdEditText.setError("两次密码不匹配");
@@ -162,7 +165,7 @@ public class SigneInDialog {
                         @Override
                         public void run() {
                             progressBar.setVisibility(View.INVISIBLE);
-                            LogLocal("[RemoteConfig][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
+                            LogLocal("[InAppDialog][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
                             if (id_signe_in_result.equals("")) {
                                 Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
                             } else if (id_signe_in_result.equals("-200")) {
@@ -170,7 +173,25 @@ public class SigneInDialog {
                             } else {
                                 Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
                                 if (mLoginCallBack != null) {
-                                    mLoginCallBack.success(user_name);
+                                    if (chinese_id.equals("")) {
+                                        new IDCardVerifyDialog(mContext, new LoginCallBack() {
+                                            @Override
+                                            public void success(String msg) {
+                                                LogLocal("[InAppDialog][SigneInDialog] ID card Success");
+                                                mLoginCallBack.success(user_name);
+                                            }
+
+                                            @Override
+                                            public void fail(String msg) {
+                                                LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+                                            }
+                                        });
+                                    }
+                                    else
+                                    {
+                                        //age verify
+                                        LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+                                    }
                                 }
                                 dialog.dismiss();
                             }

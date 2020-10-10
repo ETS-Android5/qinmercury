@@ -31,6 +31,7 @@ import com.mercury.game.util.UIUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
 
 
@@ -94,7 +95,7 @@ public class IDCardVerifyDialog {
         final Button loginButton = myLayout.findViewById(loginId);
         final TextView mgsTextView = myLayout.findViewById(mgsId);
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
-        final Button  cancelButton = myLayout.findViewById(cancelId);
+//        final Button  cancelButton = myLayout.findViewById(cancelId);
 
         cardIdEditText.setKeyListener(new NumberKeyListener() {
             @NonNull
@@ -132,39 +133,39 @@ public class IDCardVerifyDialog {
                 return false;
             }
         });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelButton.setVisibility(View.GONE);
-                cardIdEditText.setVisibility(View.GONE);
-                nameEditText.setVisibility(View.GONE);
-                mgsTextView.setVisibility(View.VISIBLE);
-                loginButton.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.INVISIBLE);
-                mgsTextView.setText("实名制认证未完成，为了你的账号安全，请尽快完成实名制认证！");
-                loginButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mLoginCallBack != null) {
-                            mLoginCallBack.success("实名制认证未完成，为了你的账号安全，请尽快完成实名制认证！");
-                        }
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
+//        cancelButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                cancelButton.setVisibility(View.GONE);
+//                cardIdEditText.setVisibility(View.GONE);
+//                nameEditText.setVisibility(View.GONE);
+//                mgsTextView.setVisibility(View.VISIBLE);
+//                loginButton.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.INVISIBLE);
+//                mgsTextView.setText("实名制认证未完成，为了你的账号安全，请尽快完成实名制认证！");
+//                loginButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (mLoginCallBack != null) {
+//                            mLoginCallBack.success("实名制认证未完成，为了你的账号安全，请尽快完成实名制认证！");
+//                        }
+//                        dialog.dismiss();
+//                    }
+//                });
+//            }
+//        });
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String card_id = cardIdEditText.getText().toString();
                 final String name_id = nameEditText.getText().toString();
-                final String id_verify_result = verify_chinese_id(card_id, name_id);
+                final String id_verify_result = verify_chinese_id(account_id, card_id, name_id);
                 progressBar.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.INVISIBLE);
-                        if (!id_verify_result.equals("-"))
+                        if (id_verify_result.equals("200"))
                         {
                             Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
