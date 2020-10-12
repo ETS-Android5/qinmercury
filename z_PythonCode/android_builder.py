@@ -60,6 +60,16 @@ class SDKAppendManager():
 			"singmaan_dialog_login.xml",
 			"singmaan_dialog_pay.xml",
 			"singmaan_dialog_verify.xml",
+
+			"mercury_dialog_bind_phone.xml",
+			"mercury_dialog_login.xml",
+			"mercury_dialog_pay.xml",
+			"mercury_dialog_signein.xml",
+			"mercury_dialog_verify.xml",
+
+			"mercury_btn_shape.xml",
+			"mercury_shape_corner_up.xml",
+			"mercury_shape_corner.xml",
 		]
 		self.__targetSdkVersion = "29"
 		self.__versionName = ""
