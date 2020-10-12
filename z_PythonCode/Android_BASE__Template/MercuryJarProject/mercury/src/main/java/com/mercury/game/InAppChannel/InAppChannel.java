@@ -164,12 +164,14 @@ public class InAppChannel extends InAppBase {
 	}
 	public void SingmaanLogin()
 	{
+		String phone = "";
 		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
 		//shrinkpartstart
 		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
 			@Override
 			public void success(final String phone) {
 				LogLocal("[InAppChannel][SingmaanLogin] Success");
+
 				//shrinkpartend
 				LoginSuccessCallBack(phone);
 				//shrinkpartstart
@@ -346,6 +348,7 @@ public class InAppChannel extends InAppBase {
 	}
 
 	public void MercurySigneIn() {
+		//shrinkpartstart
 		new IDCardVerifyDialog(mContext, new LoginCallBack() {
 			@Override
 			public void success(String msg) {
@@ -356,8 +359,6 @@ public class InAppChannel extends InAppBase {
 				LogLocal("[InAppDialog][SigneInDialog] ID card failed");
 			}
 		});
+		//shrinkpartend
 	}
-
-
-	//end
 }

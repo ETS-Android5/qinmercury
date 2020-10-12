@@ -56,6 +56,7 @@ import static com.mercury.game.util.Function.writeFileData;
 
 
 public class LoginDialog {
+    public static int local_age = 0;
     //shrinkpartstart
     String oldId;
     int time;
@@ -63,14 +64,12 @@ public class LoginDialog {
     LoginCallBack mLoginCallBack;
     final AlertDialog dialog;
     private static final int invalidAge = -1; // 非法的年龄，用于处理异常。
-    public static int local_age = 0;
     public static String local_account = "";
     public static String local_chinese_id = "";
     public LoginDialog(Activity context, String id, LoginCallBack callBack) {
         mContext = context;
         oldId = id;
         mLoginCallBack = callBack;
-//
         AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"mercury_dialog_style","style"));
         dialog = builder.create();
         dialog.setCancelable(false);
@@ -289,7 +288,7 @@ public class LoginDialog {
     public void age_difference()
     {
         local_age = getAgeByIDNumber(readFileData("chineseid"));
-        if(local_age<18)
+        if(local_age<18 &&local_age==0)
         {
             timer.start();
             Toast.makeText(mContext, "未成年人一天只能体验1小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
