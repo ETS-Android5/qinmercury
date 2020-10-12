@@ -245,6 +245,7 @@ public class LoginDialog {
                                             });
                                         } else {
                                             //age verify
+                                            writeFileData("chineseid",chinese_id);
                                             mLoginCallBack.success(user_name);
                                             age_difference();
                                             LogLocal("[InAppDialog][LoginDialog] ID card got");
