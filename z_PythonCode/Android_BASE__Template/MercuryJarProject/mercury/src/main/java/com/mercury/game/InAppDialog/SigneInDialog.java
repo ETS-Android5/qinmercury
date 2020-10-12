@@ -50,7 +50,7 @@ public class SigneInDialog {
         mLoginCallBack = callBack;
         AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"mercury_dialog_style","style"));
         dialog = builder.create();
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         Window dialogWindow = dialog.getWindow();
         dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);
         initAlertDialog(dialog);
@@ -171,28 +171,7 @@ public class SigneInDialog {
                             } else if (id_signe_in_result.equals("-200")) {
                                 Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
-                                if (mLoginCallBack != null) {
-                                    if (chinese_id.equals("")) {
-                                        new IDCardVerifyDialog(mContext, new LoginCallBack() {
-                                            @Override
-                                            public void success(String msg) {
-                                                LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-                                                mLoginCallBack.success(user_name);
-                                            }
-
-                                            @Override
-                                            public void fail(String msg) {
-                                                LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-                                            }
-                                        });
-                                    }
-                                    else
-                                    {
-                                        //age verify
-                                        LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-                                    }
-                                }
+                                Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
                         }

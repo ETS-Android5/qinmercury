@@ -32,6 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
 
 
@@ -159,7 +160,7 @@ public class IDCardVerifyDialog {
             public void onClick(View v) {
                 final String card_id = cardIdEditText.getText().toString();
                 final String name_id = nameEditText.getText().toString();
-                final String id_verify_result = verify_chinese_id(account_id, card_id, name_id);
+                verify_chinese_id(account_id, card_id, name_id);
                 progressBar.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
                     @Override

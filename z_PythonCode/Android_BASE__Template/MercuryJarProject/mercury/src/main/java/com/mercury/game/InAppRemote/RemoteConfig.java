@@ -49,6 +49,7 @@ public final class RemoteConfig {
         get_update_config();
     }
     public static String get_remote_iap() {
+        iap_result_json="";
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -94,6 +95,7 @@ public final class RemoteConfig {
         return iap_result_json;
     }
     public static String get_update_config() {
+        updating_result_json="";
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -195,6 +197,7 @@ public final class RemoteConfig {
     }
 
     public static String download_game_data() {
+        game_data_result="";
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -256,6 +259,7 @@ public final class RemoteConfig {
     }
 
     public static String verify_chinese_id(final String account_id, final String my_id, final String my_chinese_name) {
+        id_verify_result="";
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -402,7 +406,7 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][lgoin_in] failed="+e.toString());
+                            LogLocal("[RemoteConfig][login_in] failed="+e.toString());
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
@@ -423,12 +427,12 @@ public final class RemoteConfig {
                                     String json_result2 = (String)json.getString("chineseid");
 
                                     chinese_id = json_result2;
-                                    LogLocal("[RemoteConfig][lgoin_in] chineseid=" + chinese_id);
+                                    LogLocal("[RemoteConfig][login_in] chineseid=" + chinese_id);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                LogLocal("[RemoteConfig][lgoin_in] data=" + login_in_result);
-                                LogLocal("[RemoteConfig][lgoin_in] remote result=" + s);
+                                LogLocal("[RemoteConfig][login_in] data=" + login_in_result);
+                                LogLocal("[RemoteConfig][login_in] remote result=" + s);
                                 Looper.prepare();
                                 //shrinkpartend
 //                                mInAppBase.onFunctionCallBack("VerifyChineseID:"+id_verify_result);

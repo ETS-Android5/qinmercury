@@ -28,9 +28,12 @@ import org.json.JSONTokener;
 
 import java.util.Random;
 
+import static com.mercury.game.InAppDialog.LoginDialog.local_age;
+import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryApplication.channelname;
+import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 //end
 
@@ -68,23 +71,44 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
-		//shrinkpartstart
-		new PaymentDialog(mContext, new PayMethodCallBack() {
-			@Override
-			public void Alipay(String msg) {
-				MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
-				//shrinkpartend
-				TestPay();
-				//shrinkpartstart
+		if(local_age<8 && local_age!=0 )
+		{
+			try {
+				AlertDialog.Builder builder = new Builder(mContext);
+				builder.setMessage("提示");
+				builder.setTitle("未成年人无法充值");
+				builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+//						onPurchaseSuccess(MercuryConst.QinPid);
+					}
+				});
+				builder.create().show();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+		}
+		else
+		{
+			//shrinkpartstart
+			new PaymentDialog(mContext, new PayMethodCallBack() {
+				@Override
+				public void Alipay(String msg) {
+					MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
+					//shrinkpartend
+					TestPay();
+					//shrinkpartstart
+				}
 
-			@Override
-			public void WechatPay(String msg) {
-				MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
-				TestPay();
-			}
-		});
-		//shrinkpartend
+				@Override
+				public void WechatPay(String msg) {
+					MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
+					TestPay();
+				}
+			});
+			//shrinkpartend
+		}
+
 
 	}
 	@Override
@@ -147,13 +171,13 @@ public class InAppChannel extends InAppBase {
 			public void success(final String phone) {
 				LogLocal("[InAppChannel][SingmaanLogin] Success");
 				//shrinkpartend
-				LoginSuccessCallBack(DeviceId);
+				LoginSuccessCallBack(phone);
 				//shrinkpartstart
-
 			}
 			@Override
 			public void fail(String msg) {
 				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
+				LoginCancelCallBack(msg);
 			}
 		});
 		//shrinkpartend
@@ -161,6 +185,8 @@ public class InAppChannel extends InAppBase {
 	public void SingmaanLogout()
 	{
 		LogLocal("[MercuryActivity][SingmaanLogout]"+DeviceId);
+		writeFileData("chineseid","");
+		writeFileData("account","");
 		LoginCancelCallBack(DeviceId);
 	}
 	public void MercuryIDVerify()

@@ -30,6 +30,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 //shrinkpartend
 
+import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MD5Util;
 import com.mercury.game.util.MercuryConst;
@@ -37,6 +38,10 @@ import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 import com.mercury.game.util.UIUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,6 +51,8 @@ import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in_result;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.util.Function.readFileData;
+import static com.mercury.game.util.Function.writeFileData;
 
 
 public class LoginDialog {
@@ -55,7 +62,10 @@ public class LoginDialog {
     Activity mContext;
     LoginCallBack mLoginCallBack;
     final AlertDialog dialog;
-
+    private static final int invalidAge = -1; // 非法的年龄，用于处理异常。
+    public static int local_age = 0;
+    public static String local_account = "";
+    public static String local_chinese_id = "";
     public LoginDialog(Activity context, String id, LoginCallBack callBack) {
         mContext = context;
         oldId = id;
@@ -189,79 +199,183 @@ public class LoginDialog {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String user_name = usernameEditText.getText().toString();
-                final String password = passwordEditText.getText().toString();
-                account_id = user_name;
-                if (user_name.equals("") || password.equals(""))
+                local_account = readFileData("account");
+                local_chinese_id =  readFileData("chineseid");
+                LogLocal("[InAppChannel][LoginDialog] local_account="+local_account);
+                LogLocal("[InAppChannel][LoginDialog] local_chinese_id="+local_chinese_id);
+
+                if (local_account.equals("")||local_chinese_id.equals(""))
                 {
-                    Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
+                    final String user_name = usernameEditText.getText().toString();
+                    final String password = passwordEditText.getText().toString();
+                    account_id = user_name;
+                    if (user_name.equals("") || password.equals("")) {
+                        Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
+                    } else {
+                        login_in(user_name, password);
+                        progressBar.setVisibility(View.VISIBLE);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.INVISIBLE);
+                                LogLocal("[RemoteConfig][LoginDialog] id_signe_in_result=" + id_signe_in_result);
+                                if (login_in_result.equals("")) {
+                                    Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
+                                } else if (login_in_result.equals("-200")) {
+                                    Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
+                                } else if (login_in_result.equals("-201")) {
+                                    Toast.makeText(mContext, "账号不存在", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+                                    writeFileData("account",user_name);
+                                    if (mLoginCallBack != null) {
+                                        if (chinese_id.equals("")) {
+                                            new IDCardVerifyDialog(mContext, new LoginCallBack() {
+                                                @Override
+                                                public void success(String msg) {
+                                                    LogLocal("[InAppDialog][LoginDialog] ID card Success");
+                                                    writeFileData("chineseid",chinese_id);
+                                                    age_difference();
+                                                    mLoginCallBack.success(user_name);
+
+                                                }
+                                                @Override
+                                                public void fail(String msg) {
+                                                    LogLocal("[InAppDialog][LoginDialog] ID card failed");
+                                                }
+                                            });
+                                        } else {
+                                            //age verify
+                                            mLoginCallBack.success(user_name);
+                                            age_difference();
+                                            LogLocal("[InAppDialog][LoginDialog] ID card got");
+                                        }
+                                    }
+                                    dialog.dismiss();
+                                }
+                            }
+                        }, 3000); // 延时1秒
+                    }
                 }
                 else
                 {
-                    login_in(user_name, password);
-                    progressBar.setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBar.setVisibility(View.INVISIBLE);
-                            LogLocal("[RemoteConfig][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
-                            if (login_in_result.equals("")) {
-                                Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
-                            } else if (login_in_result.equals("-200")) {
-                                Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (login_in_result.equals("-201")) {
-                                Toast.makeText(mContext, "账号不存在", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
-                                if (mLoginCallBack != null) {
-                                    if (chinese_id.equals("")) {
-                                        new IDCardVerifyDialog(mContext, new LoginCallBack() {
-                                            @Override
-                                            public void success(String msg) {
-                                                LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-                                                mLoginCallBack.success(user_name);
-                                            }
-                                            @Override
-                                            public void fail(String msg) {
-                                                LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-                                            }
-                                        });
-                                    }
-                                    else
-                                    {
-                                        //age verify
-                                        LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-                                    }
-                                }
-                                dialog.dismiss();
-                            }
-                        }
-                    }, 3000); // 延时1秒
+                    LogLocal("[InAppDialog][LoginDialog] local_account="+local_account);
+                    age_difference();
+                    mLoginCallBack.success(local_account);
+                    dialog.dismiss();
                 }
-
             }
         });
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String phone = usernameEditText.getText().toString();
-                    dialog.dismiss();
                     new SigneInDialog(mContext, new LoginCallBack() {
                         @Override
                         public void success(String msg) {
-                            LogLocal("[InAppChannel][MercurySigneIn] ID card Success");
+                            LogLocal("[InAppDialog][LoginDialog] ID card Success");
                             mLoginCallBack.success(msg);
                         }
                         @Override
                         public void fail(String msg) {
-                            LogLocal("[InAppChannel][MercurySigneIn] ID card failed");
+                            LogLocal("[InAppDialog][LoginDialog] ID card failed");
                             mLoginCallBack.success(msg);
                         }
                     });
                 }
         });
 
+    }
+    public void age_difference()
+    {
+        local_age = getAgeByIDNumber(readFileData("chineseid"));
+        if(local_age<18)
+        {
+            timer.start();
+            Toast.makeText(mContext, "未成年人一天只能体验1小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    private CountDownTimer timer = new CountDownTimer(1000*60, 1000) {
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            LogLocal("(" + (millisUntilFinished / 1000) + ")");
+        }
+
+        @Override
+        public void onFinish() {
+            try {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setMessage("确认后强制退出");
+                builder.setTitle("未成年人一天只能体验1小时游戏，请合理安排时间");
+                builder.setCancelable(false);
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((Activity) MercuryActivity.mContext).finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                });
+                builder.create().show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+    public static int getAgeByIDNumber(String idNumber) {
+        String dateStr;
+        if (idNumber.length() == 15) {
+            dateStr = "19" + idNumber.substring(6, 12);
+        } else if (idNumber.length() == 18) {
+            dateStr = idNumber.substring(6, 14);
+        } else {//默认是合法身份证号，但不排除有意外发生
+            return invalidAge;
+        }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        try {
+            Date birthday = simpleDateFormat.parse(dateStr);
+            return getAgeByDate(birthday);
+        } catch (ParseException e) {
+            return invalidAge;
+        }
+
+    }
+    public static int getAgeByDate(Date birthday) {
+        Calendar calendar = Calendar.getInstance();
+
+        // calendar.before()有的点bug
+//    if (calendar.before(birthday)) {
+//      return invalidAge;
+//    }
+        if (calendar.getTimeInMillis() - birthday.getTime() < 0L) {
+            return invalidAge;
+        }
+
+        int yearNow = calendar.get(Calendar.YEAR);
+        int monthNow = calendar.get(Calendar.MONTH);
+        int dayOfMonthNow = calendar.get(Calendar.DAY_OF_MONTH);
+
+        calendar.setTime(birthday);
+
+        int yearBirthday = calendar.get(Calendar.YEAR);
+        int monthBirthday = calendar.get(Calendar.MONTH);
+        int dayOfMonthBirthday = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int age = yearNow - yearBirthday;
+
+        if (monthNow <= monthBirthday) {
+            if (monthNow == monthBirthday) {
+                if (dayOfMonthNow < dayOfMonthBirthday) {
+                    age--;
+                }
+            } else {
+                age--;
+            }
+        }
+
+        return age;
     }
 
 
