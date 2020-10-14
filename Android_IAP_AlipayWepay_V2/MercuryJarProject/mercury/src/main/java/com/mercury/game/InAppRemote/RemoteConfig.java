@@ -36,7 +36,7 @@ public final class RemoteConfig {
     {
         if (DeviceId.equals("9836ae60d6cc3666"))
         {
-            ip_address = "192.168.10.7";
+            ip_address = "219.152.31.119";
             LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP="+ip_address);
         }
         get_remote_iap();

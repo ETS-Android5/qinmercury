@@ -42,7 +42,7 @@ public final class RemoteConfig {
     {
         if (DeviceId.equals("9836ae60d6cc3666"))
         {
-            ip_address = "192.168.10.39";
+            ip_address = "office.singmaan.com";
 //            ip_address = "qinbatista.com";
             LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP="+ip_address);
         }

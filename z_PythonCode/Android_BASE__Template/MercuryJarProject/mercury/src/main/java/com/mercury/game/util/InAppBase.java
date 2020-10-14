@@ -151,6 +151,10 @@ public class InAppBase{
 	public void onFunctionCallBack(String strError) {
 		qc.FunctionCallBack(strError,this);
 	}
+	public void OnClaimReward(String strError) {
+		qc.OnClaimReward(strError,this);
+	}
+
 
 	public void SingmaanLogin()
 	{

@@ -568,6 +568,13 @@ public class MercuryConst {
 		inbase.appinterface.ProductionIDCallBack(strError);
 	}
 
+	public void OnClaimReward(String strError, InAppBase inbase) {
+		MercuryActivity.LogLocal("[MercuryConst] OnClaimReward callback->"+strError+" inbase->"+inbase);
+		inbase.appinterface.OnClaimReward(strError);
+	}
+
+
+
 	public void QinUnityMessage(String ObjectName, String MethodName, String QinMessage)
 	{
 		if(MercuryActivity.Platform== MercuryConst.Unity)

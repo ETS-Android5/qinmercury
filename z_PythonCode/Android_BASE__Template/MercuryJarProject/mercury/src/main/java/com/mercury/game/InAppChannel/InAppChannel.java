@@ -249,19 +249,19 @@ public class InAppChannel extends InAppBase {
 			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseSuccess(MercuryConst.QinPid);
+					OnClaimReward("testpid");
 				}
 			});
 			builder.setNeutralButton("Failed", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(MercuryConst.QinPid);
+
 				}
 			});
 			builder.setNegativeButton("Dismiss", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(pid);
+
 					dialog.dismiss();
 				}
 			});
@@ -279,19 +279,19 @@ public class InAppChannel extends InAppBase {
 			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseSuccess(MercuryConst.QinPid);
+					OnClaimReward("testpid");
 				}
 			});
 			builder.setNeutralButton("Failed", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(MercuryConst.QinPid);
+
 				}
 			});
 			builder.setNegativeButton("Dismiss", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					onPurchaseFailed(pid);
+
 					dialog.dismiss();
 				}
 			});

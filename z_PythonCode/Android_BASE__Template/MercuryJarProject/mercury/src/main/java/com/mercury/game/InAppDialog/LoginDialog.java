@@ -198,13 +198,11 @@ public class LoginDialog {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                local_account = readFileData("account");
-                local_chinese_id =  readFileData("chineseid");
-                LogLocal("[InAppChannel][LoginDialog] local_account="+local_account);
-                LogLocal("[InAppChannel][LoginDialog] local_chinese_id="+local_chinese_id);
+//                local_account = readFileData("account");
+//                local_chinese_id =  readFileData("chineseid");
+//                LogLocal("[InAppChannel][LoginDialog] local_account="+local_account);
+//                LogLocal("[InAppChannel][LoginDialog] local_chinese_id="+local_chinese_id);
 
-                if (local_account.equals("")||local_chinese_id.equals(""))
-                {
                     final String user_name = usernameEditText.getText().toString();
                     final String password = passwordEditText.getText().toString();
                     account_id = user_name;
@@ -256,14 +254,6 @@ public class LoginDialog {
                             }
                         }, 3000); // 延时1秒
                     }
-                }
-                else
-                {
-                    LogLocal("[InAppDialog][LoginDialog] local_account="+local_account);
-                    age_difference();
-                    mLoginCallBack.success(local_account);
-                    dialog.dismiss();
-                }
             }
         });
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -288,7 +278,7 @@ public class LoginDialog {
     }
     public void age_difference()
     {
-        local_age = getAgeByIDNumber(readFileData("chineseid"));
+        local_age = getAgeByIDNumber(chinese_id);
         if(local_age<18 &&local_age==0)
         {
             timer.start();
