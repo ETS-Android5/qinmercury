@@ -271,7 +271,7 @@ public class LoginDialog {
     public void age_difference()
     {
         local_age = getAgeByIDNumber(chinese_id);
-        if(local_age<18 &&local_age==0)
+        if(local_age<18 &&local_age>=0)
         {
             timer.start();
             Toast.makeText(mContext, "未成年人一天只能体验1小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
