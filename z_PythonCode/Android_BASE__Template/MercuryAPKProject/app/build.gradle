@@ -30,7 +30,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
-	versionCode 425
+	versionCode 439
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -51,9 +51,6 @@ dependencies {
 
 
 implementation files('src/main/libs/MercurySDK.jar')
-    implementation files('src/main/libs/MercurySDK.jar')
-    implementation files('src/main/libs/MercurySDK.jar')
-    implementation files('src/main/libs/MercurySDK.jar')
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
     //implementation(name: 'aarname', ext: 'aar')
     implementation 'com.android.support:support-v4:28.0.0'

@@ -450,7 +450,7 @@ public class MercuryActivity  {
 
 	public void RateGame()
 	{
-		LogLocal("[MercuryActivity][RateGame]mInAppChannel="+mInAppChannel);
+		LogLocal("[MercuryActivity][RateGame]RateGame="+mInAppChannel);
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run()
@@ -462,7 +462,7 @@ public class MercuryActivity  {
 
 	public void VIPPanel()
 	{
-		LogLocal("[MercuryActivity][RateGame]mInAppChannel="+mInAppChannel);
+		LogLocal("[MercuryActivity][RateGame]VIPPanel="+mInAppChannel);
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run()
@@ -474,7 +474,7 @@ public class MercuryActivity  {
 
 	public void DailyCheckInPanel()
 	{
-		LogLocal("[MercuryActivity][RateGame]mInAppChannel="+mInAppChannel);
+		LogLocal("[MercuryActivity][RateGame]DailyCheckInPanel="+mInAppChannel);
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run()

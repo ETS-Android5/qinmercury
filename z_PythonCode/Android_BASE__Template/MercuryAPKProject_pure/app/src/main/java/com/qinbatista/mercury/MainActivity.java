@@ -74,6 +74,11 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 				Toast.makeText(context, "ProductionIDCallBack"+s,Toast.LENGTH_SHORT).show();
 			}
 
+			@Override
+			public void OnClaimReward(String s) {
+				Toast.makeText(context, "OnClaimReward"+s,Toast.LENGTH_SHORT).show();
+			}
+
 		};
 		Log.w("MercuryDemo","[step][4]Init MercurySDK");
 		MercurySDK.InitSDK (context,appcall);
@@ -97,6 +102,28 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 				MercurySDK.ExitGame();
 			}
 		});
+
+		Button VIPPanel = (Button) findViewById(R.id.VIPPanel);
+		VIPPanel.setOnClickListener(new android.view.View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Log.w("MercuryDemo","VIPPanel");
+				MercurySDK.VIPPanel();
+			}
+		});
+
+		Button DailyCheckIn = (Button) findViewById(R.id.DailyCheckIn);
+		DailyCheckIn.setOnClickListener(new android.view.View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Log.w("MercuryDemo","DailyCheckIn");
+				MercurySDK.DailyCheckInPanel();
+			}
+		});
+
+
 		Button btn1 = (Button) findViewById(R.id.button1);
 		btn1.setOnClickListener(new android.view.View.OnClickListener() {
 			@Override

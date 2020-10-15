@@ -22,10 +22,13 @@ import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MercuryConst;
 import com.mercury.game.util.PayMethodCallBack;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static com.mercury.game.InAppDialog.LoginDialog.local_age;
@@ -91,21 +94,21 @@ public class InAppChannel extends InAppBase {
 		else
 		{
 			//shrinkpartstart
-			new PaymentDialog(mContext, new PayMethodCallBack() {
-				@Override
-				public void Alipay(String msg) {
-					MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
+////			new PaymentDialog(mContext, new PayMethodCallBack() {
+////				@Override
+////				public void Alipay(String msg) {
+////					MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
 					//shrinkpartend
 					TestPay();
 					//shrinkpartstart
-				}
-
-				@Override
-				public void WechatPay(String msg) {
-					MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
-					TestPay();
-				}
-			});
+////				}
+////
+////				@Override
+////				public void WechatPay(String msg) {
+////					MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
+////					TestPay();
+////				}
+////			});
 			//shrinkpartend
 		}
 
@@ -167,21 +170,21 @@ public class InAppChannel extends InAppBase {
 		String phone = "";
 		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
 		//shrinkpartstart
-		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
-			@Override
-			public void success(final String phone) {
-				LogLocal("[InAppChannel][SingmaanLogin] Success");
-
+////		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
+////			@Override
+////			public void success(final String phone) {
+////				LogLocal("[InAppChannel][SingmaanLogin] Success");
+////
 				//shrinkpartend
 				LoginSuccessCallBack(phone);
 				//shrinkpartstart
-			}
-			@Override
-			public void fail(String msg) {
-				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
-				LoginCancelCallBack(msg);
-			}
-		});
+////			}
+////			@Override
+////			public void fail(String msg) {
+////				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
+////				LoginCancelCallBack(msg);
+////			}
+////		});
 		//shrinkpartend
 	}
 	public void SingmaanLogout()
@@ -249,7 +252,27 @@ public class InAppChannel extends InAppBase {
 			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					OnClaimReward("testpid");
+					try
+					{
+						String[][] item_list = {{"coin", "1000"},{"token", "15"}};
+						int[] ages = {18, 20};
+						JSONArray reward_list = new JSONArray();
+						for (int i = 0; i < item_list.length; i++) {
+							JSONObject student = new JSONObject();
+							student.put("ResourceId", item_list[i][0]);
+							student.put("Amount", Integer.parseInt(item_list[i][1]));
+							reward_list.put(student);
+						}
+						JSONObject jsonObject = new JSONObject();
+						jsonObject.put("OnClaimReward", reward_list);
+						MercuryActivity.LogLocal("[VIPPanel]OnClaimReward="+reward_list.toString());
+						OnClaimReward(reward_list.toString());
+					}
+					catch (JSONException e)
+					{
+						e.printStackTrace();
+					}
+
 				}
 			});
 			builder.setNeutralButton("Failed", new OnClickListener() {
@@ -279,7 +302,26 @@ public class InAppChannel extends InAppBase {
 			builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					OnClaimReward("testpid");
+					try
+					{
+						String[][] item_list = {{"coin", "1000"},{"token", "15"}};
+						int[] ages = {18, 20};
+						JSONArray reward_list = new JSONArray();
+						for (int i = 0; i < item_list.length; i++) {
+							JSONObject student = new JSONObject();
+							student.put("ResourceId", item_list[i][0]);
+							student.put("Amount", Integer.parseInt(item_list[i][1]));
+							reward_list.put(student);
+						}
+						JSONObject jsonObject = new JSONObject();
+						jsonObject.put("OnClaimReward", reward_list);
+						MercuryActivity.LogLocal("[DailyCheckInPanel]OnClaimReward="+reward_list.toString());
+						OnClaimReward(reward_list.toString());
+					}
+					catch (JSONException e)
+					{
+						e.printStackTrace();
+					}
 				}
 			});
 			builder.setNeutralButton("Failed", new OnClickListener() {
@@ -306,7 +348,7 @@ public class InAppChannel extends InAppBase {
 	{
 		MercuryActivity.LogLocal("["+Channelname+"][onPause]");
 	}
-	
+
 	@Override
 	public void onResume()
 	{
@@ -318,12 +360,12 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("["+Channelname+"][onDestroy]");
 	}
 	@Override
-	public void onStop() 
+	public void onStop()
 	{
 		MercuryActivity.LogLocal("["+Channelname+"][onStop]");
 	}
 	@Override
-	public void onStart() 
+	public void onStart()
 	{
 		MercuryActivity.LogLocal("["+Channelname+"][onStart]");
 	}
@@ -337,28 +379,28 @@ public class InAppChannel extends InAppBase {
 
 	}
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) 
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		MercuryActivity.LogLocal("["+Channelname+"] onActivityResult(int requestCode, int resultCode, Intent data)");
 	}
 	@Override
-	public void onNewIntent(Intent intent) 
+	public void onNewIntent(Intent intent)
 	{
 		MercuryActivity.LogLocal("["+Channelname+"] onNewIntent(Intent intent) ");
 	}
 
 	public void MercurySigneIn() {
 		//shrinkpartstart
-		new IDCardVerifyDialog(mContext, new LoginCallBack() {
-			@Override
-			public void success(String msg) {
-				LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-			}
-			@Override
-			public void fail(String msg) {
-				LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-			}
-		});
+////		new IDCardVerifyDialog(mContext, new LoginCallBack() {
+////			@Override
+////			public void success(String msg) {
+////				LogLocal("[InAppDialog][SigneInDialog] ID card Success");
+////			}
+////			@Override
+////			public void fail(String msg) {
+////				LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+////			}
+////		});
 		//shrinkpartend
 	}
 }

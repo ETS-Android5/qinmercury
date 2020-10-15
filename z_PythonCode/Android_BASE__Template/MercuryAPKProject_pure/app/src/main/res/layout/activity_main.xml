@@ -28,6 +28,24 @@
         ns0:layout_marginTop="39dp"
         ns0:text="*ExitGame" />
 
+    <Button ns0:id="@+id/VIPPanel"
+        ns0:layout_width="100dp"
+        ns0:layout_height="50dp"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_marginLeft="224dp"
+        ns0:layout_marginTop="39dp"
+        ns0:text="VIPPanel" />
+
+    <Button ns0:id="@+id/DailyCheckIn"
+        ns0:layout_width="100dp"
+        ns0:layout_height="50dp"
+        ns0:layout_alignParentLeft="true"
+        ns0:layout_alignParentTop="true"
+        ns0:layout_marginLeft="324dp"
+        ns0:layout_marginTop="39dp"
+        ns0:text="DailyCheckIn" />
+
     <Button
         ns0:id="@+id/button1"
         ns0:layout_width="100dp"
