@@ -253,7 +253,7 @@ public class InAppChannel extends InAppBase {
 				public void onClick(DialogInterface dialog, int which) {
 					try
 					{
-						String[][] item_list = {{"coin", "1000"},{"token", "15"}};
+						String[][] item_list = {{"Coin", "1000"},{"Token", "15"}};
 						int[] ages = {18, 20};
 						JSONArray reward_list = new JSONArray();
 						for (int i = 0; i < item_list.length; i++) {
@@ -303,7 +303,7 @@ public class InAppChannel extends InAppBase {
 				public void onClick(DialogInterface dialog, int which) {
 					try
 					{
-						String[][] item_list = {{"coin", "1000"},{"token", "15"}};
+						String[][] item_list = {{"Coin", "1000"},{"Token", "15"}};
 						int[] ages = {18, 20};
 						JSONArray reward_list = new JSONArray();
 						for (int i = 0; i < item_list.length; i++) {

@@ -68,28 +68,22 @@ public class LoginDialog {
     public static String local_chinese_id = "";
     public LoginDialog(Activity context, String id, LoginCallBack callBack) {
         mContext = context;
-        oldId = id;
         mLoginCallBack = callBack;
         AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"mercury_dialog_style","style"));
         dialog = builder.create();
         dialog.setCancelable(false);
         Window dialogWindow = dialog.getWindow();
         dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);
-
         initAlertDialog(dialog);
         Show();
     }
 
     public void Show() {
-        String mPhone = SPUtils.getInstance().getString(SpConfig.USER_PHONE);
-        String m5 = SPUtils.getInstance().getString("USER_PHONE_MD5");
+        String mCardId = SPUtils.getInstance().getString(SpConfig.USER_CARD_ID);
 
-
-        if (!TextUtils.isEmpty(mPhone) && TextUtils.equals(m5, MD5Util.getMD5String(mPhone))) {
-            Log.e("mPhone", mPhone);
+        if (!TextUtils.isEmpty(mCardId)) {
             if (mLoginCallBack != null) {
-
-                mLoginCallBack.success(mPhone);
+                mLoginCallBack.success(mCardId);
             }
             return;
         }
@@ -103,12 +97,9 @@ public class LoginDialog {
 
 
     }
-
     public int getResId(Context context, String name, String type) {
         return context.getResources().getIdentifier(name, type, context.getPackageName());
-
     }
-
     public void initAlertDialog(final AlertDialog dialog) {
         int mainLayout = getResId(mContext, "mercury_dialog_login", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
@@ -123,25 +114,25 @@ public class LoginDialog {
         final Button loginButton = myLayout.findViewById(loginId);
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
         final Button  cancelButton = myLayout.findViewById(cancelId);
-        usernameEditText.setKeyListener(new NumberKeyListener() {
-            @NonNull
-            @Override
-            protected char[] getAcceptedChars() {
-                char[] c = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-                        'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-                        'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
-                        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-                        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-                return c;
-
-            }
-
-            @Override
-            public int getInputType() {
-                return 3;
-            }
-        });
+//        usernameEditText.setKeyListener(new NumberKeyListener() {
+//            @NonNull
+//            @Override
+//            protected char[] getAcceptedChars() {
+//                char[] c = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+//                        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+//                        'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+//                        'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
+//                        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+//                        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+//                return c;
+//
+//            }
+//
+//            @Override
+//            public int getInputType() {
+//                return 3;
+//            }
+//        });
 
         passwordEditText.setKeyListener(new NumberKeyListener() {
             @NonNull
@@ -164,6 +155,7 @@ public class LoginDialog {
 
 
         progressBar.setVisibility(View.INVISIBLE);
+
 
         //设置显示父容器
 

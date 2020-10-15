@@ -38,7 +38,7 @@
             android:background="@drawable/mercury_login_phone"
             android:gravity="center_vertical"
             android:hint="账号"
-            android:inputType="date|textUri|textShortMessage|textLongMessage|textAutoCorrect|none|text|textEmailSubject"
+            android:inputType="date|text"
             android:paddingLeft="10dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
