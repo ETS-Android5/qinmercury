@@ -94,21 +94,21 @@ public class InAppChannel extends InAppBase {
 		else
 		{
 			//shrinkpartstart
-////			new PaymentDialog(mContext, new PayMethodCallBack() {
-////				@Override
-////				public void Alipay(String msg) {
-////					MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
+			new PaymentDialog(mContext, new PayMethodCallBack() {
+				@Override
+				public void Alipay(String msg) {
+					MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
 					//shrinkpartend
 					TestPay();
 					//shrinkpartstart
-////				}
-////
-////				@Override
-////				public void WechatPay(String msg) {
-////					MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
-////					TestPay();
-////				}
-////			});
+				}
+
+				@Override
+				public void WechatPay(String msg) {
+					MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
+					TestPay();
+				}
+			});
 			//shrinkpartend
 		}
 
@@ -170,21 +170,20 @@ public class InAppChannel extends InAppBase {
 		String phone = "";
 		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
 		//shrinkpartstart
-////		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
-////			@Override
-////			public void success(final String phone) {
-////				LogLocal("[InAppChannel][SingmaanLogin] Success");
-////
+		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
+			@Override
+			public void success(final String phone) {
+				LogLocal("[InAppChannel][SingmaanLogin] Success");
 				//shrinkpartend
 				LoginSuccessCallBack(phone);
 				//shrinkpartstart
-////			}
-////			@Override
-////			public void fail(String msg) {
-////				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
-////				LoginCancelCallBack(msg);
-////			}
-////		});
+			}
+			@Override
+			public void fail(String msg) {
+				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
+				LoginCancelCallBack(msg);
+			}
+		});
 		//shrinkpartend
 	}
 	public void SingmaanLogout()
@@ -391,16 +390,16 @@ public class InAppChannel extends InAppBase {
 
 	public void MercurySigneIn() {
 		//shrinkpartstart
-////		new IDCardVerifyDialog(mContext, new LoginCallBack() {
-////			@Override
-////			public void success(String msg) {
-////				LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-////			}
-////			@Override
-////			public void fail(String msg) {
-////				LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-////			}
-////		});
+		new IDCardVerifyDialog(mContext, new LoginCallBack() {
+			@Override
+			public void success(String msg) {
+				LogLocal("[InAppDialog][SigneInDialog] ID card Success");
+			}
+			@Override
+			public void fail(String msg) {
+				LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+			}
+		});
 		//shrinkpartend
 	}
 }
