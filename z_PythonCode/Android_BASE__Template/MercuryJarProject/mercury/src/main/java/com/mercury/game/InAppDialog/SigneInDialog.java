@@ -102,25 +102,25 @@ public class SigneInDialog {
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
 //        final Button  cancelButton = myLayout.findViewById(cancelId);
 
-        cardIdEditText.setKeyListener(new NumberKeyListener() {
-            @NonNull
-            @Override
-            protected char[] getAcceptedChars() {
-                char[] c = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-                        'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-                        'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
-                        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-                        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-                return c;
-
-            }
-
-            @Override
-            public int getInputType() {
-                return 3;
-            }
-        });
+//        cardIdEditText.setKeyListener(new NumberKeyListener() {
+//            @NonNull
+//            @Override
+//            protected char[] getAcceptedChars() {
+//                char[] c = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+//                        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+//                        'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+//                        'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
+//                        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+//                        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+//                return c;
+//
+//            }
+//
+//            @Override
+//            public int getInputType() {
+//                return 3;
+//            }
+//        });
 
 
         progressBar.setVisibility(View.INVISIBLE);
@@ -149,12 +149,12 @@ public class SigneInDialog {
                 account_id = user_name;
                 if (!password.equals(password_again))
                 {
-                    cardIdEditText.setError("两次密码不匹配");
+//                    cardIdEditText.setError("两次密码不匹配");
                     Toast.makeText(mContext, "两次密码不匹配", Toast.LENGTH_SHORT).show();
                 }
                 else if (user_name.equals("") || password.equals("") || password_again.equals(""))
                 {
-                    cardIdEditText.setError("输入不能为空");
+//                    cardIdEditText.setError("输入不能为空");
                     Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
                 }
                 else
