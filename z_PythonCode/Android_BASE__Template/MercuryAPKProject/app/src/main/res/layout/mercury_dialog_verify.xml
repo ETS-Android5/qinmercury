@@ -28,20 +28,22 @@
         android:paddingRight="21dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <EditText
-        android:textSize="14sp"
-        android:paddingLeft="10dp"
-        android:id="@+id/mercury_username"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/mercury_login_phone"
-        android:gravity="center_vertical"
-        android:hint="请输入身份证号"
-        android:inputType="phone"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        />
+
+        <EditText
+            android:id="@+id/mercury_username"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/mercury_login_code"
+            android:gravity="center_vertical"
+            android:hint="请输入身份证号"
+            android:paddingLeft="10dp"
+            android:selectAllOnFocus="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textSize="14sp" />
+
     <EditText
         android:layout_marginTop="14dp"
         android:textSize="14sp"
@@ -56,6 +58,8 @@
         android:background="@drawable/mercury_login_code"
         android:hint="请输入姓名"
         android:selectAllOnFocus="true" />
+
+
     </LinearLayout>
     <TextView
         android:id="@+id/mercury_verifymgs"
