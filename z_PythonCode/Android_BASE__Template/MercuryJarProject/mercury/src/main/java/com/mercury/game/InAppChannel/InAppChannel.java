@@ -172,10 +172,11 @@ public class InAppChannel extends InAppBase {
 		//shrinkpartstart
 		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
 			@Override
-			public void success(final String phone) {
+			public void success(String phone) {
 				LogLocal("[InAppChannel][SingmaanLogin] Success");
+				DeviceId = phone;
 				//shrinkpartend
-				LoginSuccessCallBack(phone);
+				LoginSuccessCallBack(DeviceId);
 				//shrinkpartstart
 			}
 			@Override
