@@ -41,6 +41,7 @@ class SDKAppendManager():
 		self.__package_name = package_name
 		self.__apk_name = apk_name
 		self.__zipalign_path = ""
+		self.__lib_folder_list = []
 		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
 		files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 		for file_name in files:
@@ -173,6 +174,8 @@ class SDKAppendManager():
 		self.__merge_sdk_resource_lib_execute(f"{self.__sdk_apk_name_only}_{self.__channel_show}")
 
 	def __merge_sdk_resource_lib_execute(self, app_release_path):
+		self.__lib_folder_list = self.__list_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/")
+
 		#copy lib to project
 		if os.path.exists(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")==False:os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_release_path}/lib") and os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
@@ -182,7 +185,7 @@ class SDKAppendManager():
 		#copy delete useless libs to project
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib")==True:
 			for filename in os.listdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib"):
-				if "armeabi-v7a" != filename and "x86" != filename:
+				if filename not in self.__lib_folder_list:
 					if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename):
 						shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)
 						print("[__merge_sdk_resource_lib] deleted "+f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/"+filename)

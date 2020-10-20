@@ -293,7 +293,7 @@ public class LoginDialog {
         if(local_age<18 &&local_age>=0)
         {
             long current_time = System.currentTimeMillis();
-            String local_time =  readFileData("time");
+            String local_time =  readFileData("time"+chinese_id);
             LogLocal("current_time:" + current_time);
             LogLocal("local_time:" + local_time);
             Calendar c = Calendar.getInstance();
@@ -335,7 +335,7 @@ public class LoginDialog {
                 }
                 else
                     {
-                    writeFileData("time", Long.toString(current_time));
+                    writeFileData("time"+chinese_id, Long.toString(current_time));
                     timer_delay.start();
                     Toast.makeText(mContext, "未成年人一天只能体验1小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
                 }
