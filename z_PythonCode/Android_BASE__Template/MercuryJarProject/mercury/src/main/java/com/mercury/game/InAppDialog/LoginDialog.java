@@ -268,29 +268,142 @@ public class LoginDialog {
         });
 
     }
+    /*
+     * 将时间转换为时间戳
+     */
+    public String dateToStamp(String time) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = simpleDateFormat.parse(time);
+        long ts = date.getTime();
+        return String.valueOf(ts);
+    }
+
+    /*
+     * 将时间戳转换为时间
+     */
+    public String stampToDate(long timeMillis){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(timeMillis);
+        return simpleDateFormat.format(date);
+    }
+    public int remaing_minutes=0;
     public void age_difference()
     {
         local_age = getAgeByIDNumber(chinese_id);
         if(local_age<18 &&local_age>=0)
         {
-            timer.start();
-            Toast.makeText(mContext, "未成年人一天只能体验1小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
-        }
+            long current_time = System.currentTimeMillis();
+            String local_time =  readFileData("time");
+            LogLocal("current_time:" + current_time);
+            LogLocal("local_time:" + local_time);
+            Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
 
+            if(hour>=22 && hour<=8)
+            {
+                timer_quit.start();
+            }
+            else
+                {
+                if (local_time != "")
+                {
+                    remaing_minutes = (int) ((current_time - Long.parseLong(local_time)) / (1000 * 60));
+                    LogLocal("remaing_minutes:" + remaing_minutes);
+                    if (remaing_minutes < 60)
+                    {
+                        timer_delay_param.start();
+                    }
+                    else
+                        {
+                        try {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setMessage("确认后强制退出");
+                            builder.setTitle("未成年人一天只能体验1小时游戏，请合理安排时间");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((Activity) MercuryActivity.mContext).finish();
+                                    android.os.Process.killProcess(android.os.Process.myPid());
+                                }
+                            });
+                            builder.create().show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                else
+                    {
+                    writeFileData("time", Long.toString(current_time));
+                    timer_delay.start();
+                    Toast.makeText(mContext, "未成年人一天只能体验1小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
-    private CountDownTimer timer = new CountDownTimer(1000*60*60, 1000) {
+    private CountDownTimer timer_delay_param = new CountDownTimer(1000*60*(60-remaing_minutes), 1000) {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            LogLocal("(" + (millisUntilFinished / 1000) + ")");
+            LogLocal("remaing_minutes=(" + (millisUntilFinished / 1000) + ")");
         }
-
         @Override
         public void onFinish() {
             try {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setMessage("确认后强制退出");
                 builder.setTitle("未成年人一天只能体验1小时游戏，请合理安排时间");
+                builder.setCancelable(false);
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((Activity) MercuryActivity.mContext).finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                });
+                builder.create().show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+    private CountDownTimer timer_delay = new CountDownTimer(1000*60*60, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            LogLocal("(" + (millisUntilFinished / 1000) + ")");
+        }
+        @Override
+        public void onFinish() {
+            try {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setMessage("确认后强制退出");
+                builder.setTitle("未成年人一天只能体验1小时游戏，请合理安排时间");
+                builder.setCancelable(false);
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((Activity) MercuryActivity.mContext).finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                });
+                builder.create().show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+    private CountDownTimer timer_quit = new CountDownTimer(2, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            LogLocal("(" + (millisUntilFinished / 1000) + ")");
+        }
+        @Override
+        public void onFinish() {
+            try {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setMessage("确认后强制退出");
+                builder.setTitle("未成年人无法在晚上10点到第二天早上8点进入游戏");
                 builder.setCancelable(false);
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
