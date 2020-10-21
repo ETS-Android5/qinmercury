@@ -492,6 +492,10 @@ def main():
 				if f.find("</application")==-1:
 					if f.find("android.intent.action.MAIN")!=-1 or f.find("android.intent.category.LAUNCHER")!=-1:
 						continue
+					if f.find("android:configChanges")!=-1 or f.find("</activity>")!=-1:
+						continue
+					if f.find("intent-filter")!=-1:
+						continue
 					application_xml.append(i)
 				else:
 					application_xml.append("<!--end-->\r")
