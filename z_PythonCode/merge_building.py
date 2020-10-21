@@ -492,15 +492,22 @@ def main():
 				if f.find("</application")==-1:
 					if f.find("android.intent.action.MAIN")!=-1 or f.find("android.intent.category.LAUNCHER")!=-1:
 						continue
-					if f.find("android:configChanges")!=-1 or f.find("</activity>")!=-1:
-						continue
-					if f.find("intent-filter")!=-1:
-						continue
 					application_xml.append(i)
 				else:
 					application_xml.append("<!--end-->\r")
 					is_sdk_part = False
 					break
+
+	activity_start_postion = 0
+	activity_stop_postion = 0 
+	for index,application in enumerate(application_xml):
+		if 'com.qinbatista.mercury.MainActivity' in application and '<activity' in application.strip():
+			activity_start_postion = index
+		if '</activity>' == application.strip():
+			activity_stop_postion = index
+			break
+	if activity_start_postion and activity_stop_postion:
+		del application_xml[activity_start_postion:activity_stop_postion+1]
 	#get permission_xml
 	permission_xml = []
 	with open(PythonLocation()+"/app-release/AndroidManifest.xml",encoding="utf8") as file_object:
