@@ -23,7 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 //shrinkpartend
 import com.mercury.game.MercuryActivity;
-import com.mercury.game.util.CardIdUtils;
+import com.mercury.game.InAppDialog.CardIdUtils;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
