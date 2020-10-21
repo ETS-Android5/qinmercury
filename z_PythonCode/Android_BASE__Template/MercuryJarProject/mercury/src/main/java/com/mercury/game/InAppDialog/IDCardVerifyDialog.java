@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 //shrinkpartend
 import com.mercury.game.MercuryActivity;
+import com.mercury.game.util.CardIdUtils;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
@@ -34,6 +35,7 @@ import java.util.regex.Pattern;
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
+import static com.mercury.game.MercuryActivity.LogLocal;
 
 
 public class IDCardVerifyDialog {
@@ -155,10 +157,14 @@ public class IDCardVerifyDialog {
 //                });
 //            }
 //        });
+
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String card_id = cardIdEditText.getText().toString();
+                String card_id = CardIdUtils.UpperCardId(cardIdEditText.getText().toString());
+                LogLocal("card_id=:" + card_id);
                 final String name_id = nameEditText.getText().toString();
                 verify_chinese_id(account_id, card_id, name_id);
                 progressBar.setVisibility(View.VISIBLE);
