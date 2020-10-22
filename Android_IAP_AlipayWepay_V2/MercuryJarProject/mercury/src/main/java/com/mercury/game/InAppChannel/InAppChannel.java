@@ -82,6 +82,7 @@ public class InAppChannel extends InAppBase {
 	public static final String WXShareID="6938589979530b5b1b8220988e7c0180";
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
+	private static final String WX_NOTIFY_URL = "http://139.155.205.133:10013/wxpay/client_success_callback";
 	public PayReq req;
 	private IWXAPI msgApi;
 	public  Map<String,String> resultunifiedorder;
@@ -355,7 +356,7 @@ public class InAppChannel extends InAppBase {
 			packageParams.add(new BasicNameValuePair("body", MercuryConst.Qindesc));
 			packageParams.add(new BasicNameValuePair("mch_id", WX_MCH_ID));
 			packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
-			packageParams.add(new BasicNameValuePair("notify_url","weixinCPS"));
+			packageParams.add(new BasicNameValuePair("notify_url",WX_NOTIFY_URL));
 
 			packageParams.add(new BasicNameValuePair("out_trade_no",order_id));
 			packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));

@@ -33,6 +33,7 @@ public class OrderInfoUtil2_0 {
 	 * @param target_id
 	 * @return
 	 */
+	private static final String ALIPAY_NOTIFY_URL = "http://139.155.205.133:10013/alipay/client_success_callback";
 	public static Map<String, String> buildAuthInfoMap(String pid, String app_id, String target_id, boolean rsa2) {
 		Map<String, String> keyValues = new HashMap<String, String>();
 
@@ -88,6 +89,7 @@ public class OrderInfoUtil2_0 {
 		keyValues.put("sign_type", rsa2 ? "RSA2" : "RSA");
 		keyValues.put("timestamp", sdf.format(date));
 		keyValues.put("version", "1.0");
+		keyValues.put("notify_url",ALIPAY_NOTIFY_URL);
 		return keyValues;
 	}
 	/**
