@@ -82,7 +82,7 @@ public class InAppChannel extends InAppBase {
 	public static final String WXShareID="6938589979530b5b1b8220988e7c0180";
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
-	private static final String WX_NOTIFY_URL = "http://139.155.205.133:10013/wxpay/client_success_callback";
+	private static final String WX_NOTIFY_URL = "http://gamesupport.singmaan.com:10013//wxpay/client_success_callback";
 	public PayReq req;
 	private IWXAPI msgApi;
 	public  Map<String,String> resultunifiedorder;
