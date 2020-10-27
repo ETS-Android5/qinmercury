@@ -375,7 +375,7 @@ public class MercuryActivity  {
 		LogLocal("[MercuryActivity][Purchase] " + pidname);
 		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String temp = sf.format(new Date());
-		int random = (int) ((Math.random() + 1) * 100000);
+		int random = (int) ((Math.random() + 1) * 1000);
 		order_id = temp + random;
 		mInAppChannel.Purchase(pidname);
 

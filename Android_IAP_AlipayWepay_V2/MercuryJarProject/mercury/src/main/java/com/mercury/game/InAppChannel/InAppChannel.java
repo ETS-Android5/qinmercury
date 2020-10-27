@@ -82,7 +82,8 @@ public class InAppChannel extends InAppBase {
 	public static final String WXShareID="6938589979530b5b1b8220988e7c0180";
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
-	private static final String WX_NOTIFY_URL = "http://gamesupport.singmaan.com:10013//wxpay/client_success_callback";
+	public static final String ALIPAY_NOTIFY_URL = String.format("http://139.155.205.133:10013/%s/%s/client_success_callback",GameName,"alipay");
+	public static final String WX_NOTIFY_URL = String.format("http://139.155.205.133:10013/%s/%s/client_success_callback",GameName,"wxpay");
 	public PayReq req;
 	private IWXAPI msgApi;
 	public  Map<String,String> resultunifiedorder;
@@ -351,8 +352,10 @@ public class InAppChannel extends InAppBase {
 			xml.append("</xml>");
 			List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
 			packageParams.add(new BasicNameValuePair("appid", WX_APP_ID));
+			order_id = channelname+"_"+GameName+"_"+order_id;
 			MercuryActivity.LogLocal("[InAppChannel][genProductArgs] order_id = " + order_id);
-			packageParams.add(new BasicNameValuePair("attach", DeviceId+","+MercuryConst.QinPid+","+channelname+"_"+GameName+"_"+order_id));
+			packageParams.add(new BasicNameValuePair("attach",MercuryConst.Qindesc+","+DeviceId+","+MercuryConst.QinPid+","+channelname+"_"+GameName+"_"+order_id));
+
 			packageParams.add(new BasicNameValuePair("body", MercuryConst.Qindesc));
 			packageParams.add(new BasicNameValuePair("mch_id", WX_MCH_ID));
 			packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));

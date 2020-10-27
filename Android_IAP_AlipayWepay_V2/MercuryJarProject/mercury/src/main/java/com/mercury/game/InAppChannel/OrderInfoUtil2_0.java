@@ -14,6 +14,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import static com.mercury.game.InAppChannel.InAppChannel.ALIPAY_NOTIFY_URL;
+import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.order_id;
 import static com.mercury.game.MercuryApplication.channelname;
@@ -33,7 +35,7 @@ public class OrderInfoUtil2_0 {
 	 * @param target_id
 	 * @return
 	 */
-	private static final String ALIPAY_NOTIFY_URL = "http://gamesupport.singmaan.com:10013/alipay/client_success_callback";
+
 	public static Map<String, String> buildAuthInfoMap(String pid, String app_id, String target_id, boolean rsa2) {
 		Map<String, String> keyValues = new HashMap<String, String>();
 
@@ -78,6 +80,7 @@ public class OrderInfoUtil2_0 {
 	 */
 	public static Map<String, String> buildOrderParamMap(String app_id, boolean rsa2, String pid, String des, float price) {
 		SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
+		des = channelname+"|"+des+"|"+DeviceId;
 		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");// a为am/pm的标记
 		Date date = new Date();// 获取当前时间
 		MercuryActivity.LogLocal("[InAppChannel][Map]=sdf.format(date)="+sdf.format(date));
