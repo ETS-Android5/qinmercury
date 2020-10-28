@@ -40,11 +40,13 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.xmlpull.v1.XmlPullParser;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.text.DateFormat;
 import java.util.Date;
@@ -54,6 +56,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static com.mercury.game.InAppChannel.Util.httpPost;
 import static com.mercury.game.MercuryActivity.DeviceId;
@@ -84,6 +94,8 @@ public class InAppChannel extends InAppBase {
 	private static final int SDK_AUTH_FLAG = 2;
 	public static final String ALIPAY_NOTIFY_URL = String.format("http://139.155.205.133:10013/%s/%s/client_success_callback",GameName,"alipay");
 	public static final String WX_NOTIFY_URL = String.format("http://139.155.205.133:10013/%s/%s/client_success_callback",GameName,"wxpay");
+	private static String RESTORE_URL = "http://139.155.205.133:10013/restore?user_id=%s";
+	private static String UPDATE_ORDER_SUCCESS_URL = "http://139.155.205.133:10013/update_order_success";
 	public PayReq req;
 	private IWXAPI msgApi;
 	public  Map<String,String> resultunifiedorder;
@@ -97,6 +109,7 @@ public class InAppChannel extends InAppBase {
 		req = new PayReq();
 		sb=new StringBuffer();
 		msgApi = WXAPIFactory.createWXAPI(mContext,WX_APP_ID);
+		Restore();
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -135,6 +148,64 @@ public class InAppChannel extends InAppBase {
 		});
 
 	}
+	public void Restore(){
+		final String url = String.format(RESTORE_URL,DeviceId);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpClient client= new OkHttpClient();
+				Request request = new  Request.Builder().url(url).build();
+				client.newCall(request).enqueue(new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+						LogLocal("[InAppChannel][restore] error:"+e.getMessage());
+					}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						String s = response.body().string();
+						if (s!=null){
+							try {
+								JSONObject jsonObject = new JSONObject(s);
+								JSONArray array = jsonObject.getJSONArray("data");
+								for (int i = 0; i < array.length(); i++) {
+									JSONObject order = array.getJSONObject(i);
+									String userId = order.getString("user_id");
+									String orderId = order.getString("order_id");
+									if ((userId!=null && orderId!=null)||(userId!="" && orderId!="")){
+										onPurchaseSuccess(orderId);
+										UpdateOrderSuccess(userId,orderId);
+									}
+								}
+							} catch (Exception e) {
+								LogLocal("[InAppChannel][restore] update error:"+e.getMessage());
+							}
+						}
+						LogLocal("[InAppChannel][restore] update success");
+					}
+				});
+			}
+		}).start();
+	}
+
+	public void UpdateOrderSuccess(final String userId, final String orderId){
+		OkHttpClient client= new OkHttpClient();
+		RequestBody formBody=new FormBody.Builder().
+				add("user_id",userId).
+				add("order_id",orderId).build();
+		Request request=new  Request.Builder().url(UPDATE_ORDER_SUCCESS_URL).post(formBody).build();
+		client.newCall(request).enqueue(new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
+				LogLocal("[InAppChannel][updateOrderStatus] result error:"+e.getMessage());
+			}
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				String s = response.body().string();
+				LogLocal("[InAppChannel][updateOrderStatus] result:"+s);
+			}
+		});
+	}
+
 	@Override
 	public void ExitGame()
 	{
@@ -388,8 +459,6 @@ public class InAppChannel extends InAppBase {
 		}
 		sb.append("key=");
 		sb.append(WX_API_KEY);
-
-
 		String packageSign = MD5.getMessageDigest(sb.toString().getBytes()).toUpperCase();
 		return packageSign;
 	}

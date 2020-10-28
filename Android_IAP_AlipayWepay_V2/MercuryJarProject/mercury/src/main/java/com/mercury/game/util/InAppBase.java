@@ -309,5 +309,14 @@ public class InAppBase{
 	{
 		
 	}
+	public void UpdateOrderSuccess(final String userId, final String orderId)
+	{
+
+	}
+	public void Restore()
+	{
+
+	}
+
 
 }
