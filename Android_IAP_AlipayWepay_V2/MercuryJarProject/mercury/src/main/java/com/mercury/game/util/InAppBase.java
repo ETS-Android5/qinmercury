@@ -313,6 +313,7 @@ public class InAppBase{
 	}
 	public void UpdateOrderSuccess(final String userId, final String orderId)
 	{
+		LogLocal("[MercuryActivity][InAppBase][UpdateOrderSuccess]");
 
 	}
 	public void Restore()

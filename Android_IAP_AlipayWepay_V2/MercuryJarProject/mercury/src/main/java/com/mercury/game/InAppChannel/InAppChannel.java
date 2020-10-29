@@ -99,6 +99,7 @@ public class InAppChannel extends InAppBase {
 	private static String UPDATE_ORDER_SUCCESS_URL = "http://139.155.205.133:10013/update_order_success";
 	public static String global_orderId ="";
 	public static String global_user_id ="";
+	public static String global_production_id ="";
 	public PayReq req;
 	private IWXAPI msgApi;
 	public  Map<String,String> resultunifiedorder;
@@ -175,9 +176,10 @@ public class InAppChannel extends InAppBase {
 									JSONObject order = array.getJSONObject(i);
 									global_user_id = order.getString("user_id");
 									global_orderId = order.getString("order_id");
+									global_production_id = order.getString("production_id");
 									if ((global_user_id!=null && global_orderId!=null)||(global_user_id!="" && global_orderId!="")){
 										Looper.prepare();
-										onPurchaseSuccess(global_orderId);
+										onPurchaseSuccess(global_production_id);
 										Looper.loop();
 										LogLocal("[InAppChannel][restore] update success");
 									}
@@ -193,6 +195,7 @@ public class InAppChannel extends InAppBase {
 		}).start();
 	}
 	public void UpdateOrderSuccess(final String userId, final String orderId){
+		LogLocal("[MercuryActivity][InAppChannel][UpdateOrderSuccess]");
 		OkHttpClient client= new OkHttpClient();
 		RequestBody formBody=new FormBody.Builder().
 				add("user_id",userId).
