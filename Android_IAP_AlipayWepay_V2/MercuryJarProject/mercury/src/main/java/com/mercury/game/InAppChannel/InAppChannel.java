@@ -93,10 +93,10 @@ public class InAppChannel extends InAppBase {
 	public static final String WXShareID="6938589979530b5b1b8220988e7c0180";
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
-	public static final String ALIPAY_NOTIFY_URL = String.format("http://139.155.205.133:10013/%s/%s/client_success_callback",GameName,"alipay");
-	public static final String WX_NOTIFY_URL = String.format("http://139.155.205.133:10013/%s/%s/client_success_callback",GameName,"wxpay");
-	private static String RESTORE_URL = "http://139.155.205.133:10013/restore?user_id=%s";
-	private static String UPDATE_ORDER_SUCCESS_URL = "http://139.155.205.133:10013/update_order_success";
+	public static final String ALIPAY_NOTIFY_URL = String.format("http://gamesupport.singmaan.com:10013/%s/%s/client_success_callback",GameName,"alipay");
+	public static final String WX_NOTIFY_URL = String.format("http://gamesupport.singmaan.com:10013/%s/%s/client_success_callback",GameName,"wxpay");
+	private static String RESTORE_URL = "http://gamesupport.singmaan.com:10013/restore?user_id=%s";
+	private static String UPDATE_ORDER_SUCCESS_URL = "http://gamesupport.singmaan.com:10013/update_order_success";
 	public static String global_orderId ="";
 	public static String global_user_id ="";
 	public static String global_production_id ="";
@@ -172,18 +172,18 @@ public class InAppChannel extends InAppBase {
 							try {
 								JSONObject jsonObject = new JSONObject(s);
 								JSONArray array = jsonObject.getJSONArray("data");
+								Looper.prepare();
 								for (int i = 0; i < array.length(); i++) {
 									JSONObject order = array.getJSONObject(i);
 									global_user_id = order.getString("user_id");
 									global_orderId = order.getString("order_id");
 									global_production_id = order.getString("production_id");
 									if ((global_user_id!=null && global_orderId!=null)||(global_user_id!="" && global_orderId!="")){
-										Looper.prepare();
 										onPurchaseSuccess(global_production_id);
-										Looper.loop();
 										LogLocal("[InAppChannel][restore] update success");
 									}
 								}
+								Looper.loop();
 							} catch (Exception e) {
 								LogLocal("[InAppChannel][restore] update error:"+e.getMessage());
 							}
