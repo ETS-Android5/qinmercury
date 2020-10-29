@@ -10,7 +10,8 @@ import com.mercury.game.InAppDialog.IDCardVerifyDialog;
 import com.mercury.game.MercuryActivity;
 
 
-
+import static com.mercury.game.InAppChannel.InAppChannel.global_orderId;
+import static com.mercury.game.InAppChannel.InAppChannel.global_user_id;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.order_id;
 
@@ -114,6 +115,7 @@ public class InAppBase{
 	public void onPurchaseSuccess(String message)
 	{
 		qc.PurchaseSuccess(message,this);
+		UpdateOrderSuccess(global_user_id,global_orderId);
 	}
 	public void onPurchaseFailed(String strError)
 	{

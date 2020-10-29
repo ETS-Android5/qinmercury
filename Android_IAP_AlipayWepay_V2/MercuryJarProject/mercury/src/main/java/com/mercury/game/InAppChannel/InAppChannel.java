@@ -22,6 +22,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
@@ -96,6 +97,8 @@ public class InAppChannel extends InAppBase {
 	public static final String WX_NOTIFY_URL = String.format("http://139.155.205.133:10013/%s/%s/client_success_callback",GameName,"wxpay");
 	private static String RESTORE_URL = "http://139.155.205.133:10013/restore?user_id=%s";
 	private static String UPDATE_ORDER_SUCCESS_URL = "http://139.155.205.133:10013/update_order_success";
+	public static String global_orderId ="";
+	public static String global_user_id ="";
 	public PayReq req;
 	private IWXAPI msgApi;
 	public  Map<String,String> resultunifiedorder;
@@ -153,6 +156,7 @@ public class InAppChannel extends InAppBase {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				Looper.prepare();
 				OkHttpClient client= new OkHttpClient();
 				Request request = new  Request.Builder().url(url).build();
 				client.newCall(request).enqueue(new Callback() {
@@ -169,24 +173,25 @@ public class InAppChannel extends InAppBase {
 								JSONArray array = jsonObject.getJSONArray("data");
 								for (int i = 0; i < array.length(); i++) {
 									JSONObject order = array.getJSONObject(i);
-									String userId = order.getString("user_id");
-									String orderId = order.getString("order_id");
-									if ((userId!=null && orderId!=null)||(userId!="" && orderId!="")){
-										onPurchaseSuccess(orderId);
-										UpdateOrderSuccess(userId,orderId);
+									global_user_id = order.getString("user_id");
+									global_orderId = order.getString("order_id");
+									if ((global_user_id!=null && global_orderId!=null)||(global_user_id!="" && global_orderId!="")){
+										Looper.prepare();
+										onPurchaseSuccess(global_orderId);
+										Looper.loop();
+										LogLocal("[InAppChannel][restore] update success");
 									}
 								}
 							} catch (Exception e) {
 								LogLocal("[InAppChannel][restore] update error:"+e.getMessage());
 							}
 						}
-						LogLocal("[InAppChannel][restore] update success");
 					}
 				});
+				Looper.loop();
 			}
 		}).start();
 	}
-
 	public void UpdateOrderSuccess(final String userId, final String orderId){
 		OkHttpClient client= new OkHttpClient();
 		RequestBody formBody=new FormBody.Builder().
