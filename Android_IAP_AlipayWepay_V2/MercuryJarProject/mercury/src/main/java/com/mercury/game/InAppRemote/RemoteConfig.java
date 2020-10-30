@@ -31,7 +31,7 @@ public final class RemoteConfig {
     private static String updating_result_json="";
     private static String game_data_result="";
     private static String iap_result_json="";
-    private static String ip_address = "office.singmaan.com";
+    private static String ip_address = "gamesupport.singmaan.com";
     public static void GetAllConfig()
     {
         if (DeviceId.equals("9836ae60d6cc3666"))
