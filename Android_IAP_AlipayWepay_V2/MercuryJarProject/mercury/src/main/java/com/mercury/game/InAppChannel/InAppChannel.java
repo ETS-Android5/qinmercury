@@ -27,7 +27,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
@@ -43,9 +42,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
@@ -94,10 +91,10 @@ public class InAppChannel extends InAppBase {
 	public static final String WXShareID="6938589979530b5b1b8220988e7c0180";
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
-	public static final String ALIPAY_NOTIFY_URL = String.format("http://www.nickywu.com:10014/%s/%s/client_success_callback",GameName,"alipay");
-	public static final String WX_NOTIFY_URL = String.format("http://www.nickywu.com:10014/%s/%s/client_success_callback",GameName,"wxpay");
-	private static String RESTORE_URL = "https://www.nickywu.com:10013/restore?user_id=%s";
-	private static String UPDATE_ORDER_SUCCESS_URL = "https://www.nickywu.com:10013/update_order_success";
+	public static final String ALIPAY_NOTIFY_URL = String.format("http://gamesupport.singmaan.com:10113/%s/%s/client_success_callback",GameName,"alipay");
+	public static final String WX_NOTIFY_URL = String.format("http://gamesupport.singmaan.com:10113/%s/%s/client_success_callback",GameName,"wxpay");
+	private static String RESTORE_URL = "https://gamesupport.singmaan.com:10013/restore?user_id=%s";
+	private static String UPDATE_ORDER_SUCCESS_URL = "https://gamesupport.singmaan.com:10013/update_order_success";
 	public static String global_orderId ="";
 	public static String global_user_id ="";
 	public static String global_production_id ="";
@@ -153,7 +150,7 @@ public class InAppChannel extends InAppBase {
 		});
 
 	}
-	public void Restore(){
+	public void Restore() {
 		final String url = String.format(RESTORE_URL,DeviceId);
 		new Thread(new Runnable() {
 			@Override
@@ -164,7 +161,7 @@ public class InAppChannel extends InAppBase {
 				client.newCall(request).enqueue(new Callback() {
 					@Override
 					public void onFailure(Call call, IOException e) {
-						LogLocal("[InAppChannel][restore] error:"+e.getMessage());
+						LogLocal("[InAppChannel][restore] error 2:"+e.getMessage());
 					}
 					@Override
 					public void onResponse(Call call, Response response) throws IOException {
@@ -173,8 +170,10 @@ public class InAppChannel extends InAppBase {
 							try {
 								JSONObject jsonObject = new JSONObject(s);
 								JSONArray array = jsonObject.getJSONArray("data");
+								int size = array.length();
+								LogLocal("[InAppChannel][restore] data size:"+size);
 								Looper.prepare();
-								for (int i = 0; i < array.length(); i++) {
+								for (int i = 0; i < size; i++) {
 									JSONObject order = array.getJSONObject(i);
 									global_user_id = order.getString("user_id");
 									global_orderId = order.getString("order_id");
