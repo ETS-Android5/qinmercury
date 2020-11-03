@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><manifest android:installLocation="preferExternal" android:versionCode="56324" android:versionName="1.2" package="com.qinbatista.demo" xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="UTF-8"?><manifest android:installLocation="preferExternal" android:versionCode="56324" android:versionName="1.2" package="com.singmaan.stack.nearme.gamecenter" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-feature android:name="android.hardware.type.television" android:required="true"/>
     <application android:icon="@drawable/app_icon" android:label="@string/app_name" android:name="com.qinbatista.mercury.QinApplication" android:networkSecurityConfig="@xml/network_security_config">
         <activity android:configChanges="orientation|screenSize" android:name="com.qinbatista.mercury.MainActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -8,12 +8,17 @@
             </intent-filter>
         </activity>
 <!--sdk-->        <meta-data android:name="channel_name" android:value="demo"/>
-        <meta-data android:name="open_talkingdata" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
-        <meta-data android:name="open_umeng" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
+
         <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <meta-data android:name="debug_mode" android:value="false" /> <!-- 调试开关，发布时候设置false -->
+        <meta-data android:name="is_offline_game" android:value="true" /> <!-- true:单机游戏 false:网游 -->
+        <meta-data android:name="app_key" android:value="c5217trjnrmU6gO5jG8VvUFU0" /> <!--appKey,务必换游戏自己的参数 -->
+        <uses-library android:name="org.apache.http.legacy" android:required="false" /> <!--9.0及以上设备可能需要 -->
+
 <!--end-->    </application>
-<!--sdkxml-->    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<!--sdkxml-->    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="26"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
