@@ -33,7 +33,6 @@ import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MD5;
 import com.mercury.game.util.MercuryConst;
-import com.mercury.game.util.OkHttpClientUtil;
 import com.mercury.game.util.PayMethodCallBack;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -91,8 +90,8 @@ public class InAppChannel extends InAppBase {
 	public static final String WXShareID="6938589979530b5b1b8220988e7c0180";
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
-	public static final String ALIPAY_NOTIFY_URL = String.format("http://gamesupport.singmaan.com:10113/%s/%s/client_success_callback",GameName,"alipay");
-	public static final String WX_NOTIFY_URL = String.format("http://gamesupport.singmaan.com:10113/%s/%s/client_success_callback",GameName,"wxpay");
+	public static final String ALIPAY_NOTIFY_URL = String.format("https://gamesupport.singmaan.com:10013/%s/%s/client_success_callback",GameName,"alipay");
+	public static final String WX_NOTIFY_URL = String.format("https://gamesupport.singmaan.com:10013/%s/%s/client_success_callback",GameName,"wxpay");
 	private static String RESTORE_URL = "https://gamesupport.singmaan.com:10013/restore?user_id=%s";
 	private static String UPDATE_ORDER_SUCCESS_URL = "https://gamesupport.singmaan.com:10013/update_order_success";
 	public static String global_orderId ="";
@@ -156,7 +155,7 @@ public class InAppChannel extends InAppBase {
 			@Override
 			public void run() {
 				Looper.prepare();
-				OkHttpClient client = OkHttpClientUtil.getSSLClient(new OkHttpClient(),MercuryActivity.mContext,"ca.crt");
+				OkHttpClient client = new OkHttpClient();
 				Request request = new  Request.Builder().url(url).build();
 				client.newCall(request).enqueue(new Callback() {
 					@Override
@@ -196,7 +195,7 @@ public class InAppChannel extends InAppBase {
 	}
 	public void UpdateOrderSuccess(final String userId, final String orderId){
 		LogLocal("[MercuryActivity][InAppChannel][UpdateOrderSuccess]");
-		OkHttpClient client = OkHttpClientUtil.getSSLClient(new OkHttpClient(),MercuryActivity.mContext,"ca.crt");
+		OkHttpClient client = new OkHttpClient();
 		RequestBody formBody=new FormBody.Builder().
 				add("user_id",userId).
 				add("order_id",orderId).build();

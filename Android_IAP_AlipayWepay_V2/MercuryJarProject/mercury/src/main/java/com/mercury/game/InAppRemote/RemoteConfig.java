@@ -36,7 +36,7 @@ public final class RemoteConfig {
     {
         if (DeviceId.equals("9836ae60d6cc3666"))
         {
-            ip_address = "219.152.31.119";
+            ip_address = "gamesupport.singmaan.com";
             LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP="+ip_address);
         }
         get_remote_iap();
@@ -58,7 +58,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10001/get_iap?gamename=" + GameName)
+                            .url("https://"+ip_address+":10001/get_iap?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -103,7 +103,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10001/get_update_verify?gamename=" + GameName)
+                            .url("https://"+ip_address+":10001/get_update_verify?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -152,7 +152,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10010/uploadgamedata")
+                            .url("https://"+ip_address+":10010/uploadgamedata")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -205,7 +205,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10010/downloadgamedata")
+                            .url("https://"+ip_address+":10010/downloadgamedata")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();

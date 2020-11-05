@@ -160,7 +160,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10010/uploadgamedata")
+                            .url("https://"+ip_address+":10010/uploadgamedata")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -214,7 +214,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10010/downloadgamedata")
+                            .url("https://"+ip_address+":10010/downloadgamedata")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -277,7 +277,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10011/verify_chinese_id")
+                            .url("https://"+ip_address+":10011/verify_chinese_id")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -338,7 +338,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10012/signeinwithpassword")
+                            .url("https://"+ip_address+":10012/signeinwithpassword")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -398,7 +398,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10012/loginwithpassword")
+                            .url("https://"+ip_address+":10012/loginwithpassword")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -469,7 +469,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10012/updatechineseid")
+                            .url("https://"+ip_address+":10012/updatechineseid")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
