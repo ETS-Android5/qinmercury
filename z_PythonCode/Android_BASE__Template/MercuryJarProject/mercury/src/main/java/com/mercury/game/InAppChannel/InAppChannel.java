@@ -2,6 +2,7 @@ package com.mercury.game.InAppChannel;
 import com.mercury.game.InAppDialog.IDCardVerifyDialog;
 import com.mercury.game.InAppDialog.LoginDialog;
 import com.mercury.game.InAppDialog.PaymentDialog;
+import com.mercury.game.InAppDialog.PrivacyDialog;
 import com.mercury.game.InAppDialog.SigneInDialog;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
@@ -21,6 +22,8 @@ import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MercuryConst;
 import com.mercury.game.util.PayMethodCallBack;
+import com.mercury.game.util.SPUtils;
+import com.mercury.game.util.SpConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +39,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryApplication.channelname;
+import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 //end
@@ -53,7 +57,10 @@ public class InAppChannel extends InAppBase {
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
 		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
-
+		if(!readFileData("privacyagreement").equals("1"))
+		{
+			new PrivacyDialog(mContext);
+		}
 	}
 	public void ApplicationInit(Application appcontext)
 	{
