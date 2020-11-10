@@ -25,9 +25,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.UIUtils;
 
+import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
 
 
@@ -104,6 +106,7 @@ public class PrivacyDialog {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 dialog.dismiss();
                 final LinearLayout linearLayout = new LinearLayout(mContext);
                 linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -163,11 +166,11 @@ public class PrivacyDialog {
 
                 });
 
-                webview.loadUrl("https://www.singmaan.com");
+                webview.loadUrl("https://www.singmaan.com/privacy.html");
                 linearLayout.addView(webview, new FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
                 mContext.addContentView(linearLayout, maskParams);
-                writeFileData("privacyagreement","1");
+
             }
         });
 
@@ -179,6 +182,7 @@ public class PrivacyDialog {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                writeFileData("privacyagreement","privacyagreement");
                 dialog.dismiss();
             }
         });

@@ -445,7 +445,17 @@ public class MercuryConst {
 				{"com.koplagames.nsk2.tour.1.00.1999","Token: 500,  Luxury Chest","128.0","910da6e0-c383-466c-b4a7-ee3676007700"},
 				{"com.koplagames.nsk2.tour.1.00.999","Token: 250,  Grande Chest: 1","68.0","910da6e0-c387-45c3-857f-c94fa06d7f3d"},
 				{"com.koplagames.nsk2.tour.1.01.1999","Chest: Megapack,  Chest: Luxury,  Gems: 3500","128.0","910da6e0-c38a-4a62-bc51-9f5b447b514e"},
-				{"com.koplagames.nsk2.tour.1.01.999","MegaPacks: 2","68.0","910da6e0-c38d-40d1-9bcc-eb3e3e714beb"}
+				{"com.koplagames.nsk2.tour.1.01.999","MegaPacks: 2","68.0","910da6e0-c38d-40d1-9bcc-eb3e3e714beb"},
+
+				{"com1.koplagames.nsk2.tour.0.007.0.10","Gems: 500,  Token: 300","68.0","910da6e0-c371-4588-a870-b088ed64ea2d"},
+				{"com.1koplagames.nsk2.tour.0.007.0.5","Token: 200,  Keys: 5","30.0","910da6e0-c375-4d1c-8f92-0e563eaab396"},
+				{"com.k1oplagames.nsk2.tour.0.01.999","Token: 200,  Item: Weapon012,  Key: 25","68.0","910da6e0-c378-441e-8e42-dfdb9fde0598"},
+				{"com.ko1plagames.nsk2.tour.0.02.499","Token: 100,  Item: Weapon011","30.0","910da6e0-c37b-493e-a728-dabd0b8aaebf"},
+				{"com.kop1lagames.nsk2.tour.0.02.999","Token: 200,  Item: Weapon011,  TournamentChip: 25000","68.0","910da6e0-c380-474f-855a-dcc7a54811f3"},
+				{"com.kopl1agames.nsk2.tour.1.00.1999","Token: 500,  Luxury Chest","128.0","910da6e0-c383-466c-b4a7-ee3676007700"},
+				{"com.kopla1games.nsk2.tour.1.00.999","Token: 250,  Grande Chest: 1","68.0","910da6e0-c387-45c3-857f-c94fa06d7f3d"},
+				{"com.koplag1ames.nsk2.tour.1.01.1999","Chest: Megapack,  Chest: Luxury,  Gems: 3500","128.0","910da6e0-c38a-4a62-bc51-9f5b447b514e"},
+				{"com.koplaga1mes.nsk2.tour.1.01.999","MegaPacks: 2","68.0","910da6e0-c38d-40d1-9bcc-eb3e3e714beb"}
 
 		};
 
@@ -463,11 +473,13 @@ public class MercuryConst {
 					String remote_des = (String) json_result1.get("des");
 					String remote_price = (String) json_result1.get("price");
 					String remote_guid = (String) json_result1.get("guid");
-					ProductionList[index][0] = iap_name;
-					ProductionList[index][1] = remote_des;
-					ProductionList[index][2] = remote_price;
-					ProductionList[index][3] = remote_guid;
-					index++;
+					if(ProductionList.length>index) {
+						ProductionList[index][0] = iap_name;
+						ProductionList[index][1] = remote_des;
+						ProductionList[index][2] = remote_price;
+						ProductionList[index][3] = remote_guid;
+						index++;
+					}
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

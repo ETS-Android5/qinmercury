@@ -36,6 +36,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.util.Function.writeFileData;
 
 
 public class IDCardVerifyDialog {
@@ -163,9 +164,12 @@ public class IDCardVerifyDialog {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String card_id = CardIdUtils.UpperCardId(cardIdEditText.getText().toString());
-                LogLocal("card_id=:" + card_id);
+                final String card_id = CardIdUtils.UpperCardId(cardIdEditText.getText().toString());
+
                 final String name_id = nameEditText.getText().toString();
+                LogLocal("card_id=:" + card_id);
+                LogLocal("name_id=:" + name_id);
+                LogLocal("account_id=:" + account_id);
                 verify_chinese_id(account_id, card_id, name_id);
                 progressBar.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
@@ -176,11 +180,13 @@ public class IDCardVerifyDialog {
                         {
                             Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+                            writeFileData("card_id",card_id);
                         }
                         else if(id_verify_result.equals("-202"))
                         {
                             showLoginFailed("该身份证已经被使用");
                             cardIdEditText.setError("该身份证已经被使用");
+                            writeFileData("card_id",card_id);
                         }
                         else
                         {

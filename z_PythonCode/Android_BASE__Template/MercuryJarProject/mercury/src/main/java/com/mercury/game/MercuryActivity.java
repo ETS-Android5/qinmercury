@@ -92,7 +92,7 @@ public class MercuryActivity  {
 	public static String SortChannelID="";
 	public static String LongChannelID="";
 	private static ImageView img = null;
-	public static String GameName="NonStop2";
+	public static String GameName="ww1";
 	public static String order_id = "";
 	public  static APPBaseInterface mappcall= null;
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)

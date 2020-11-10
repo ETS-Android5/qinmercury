@@ -36,7 +36,7 @@ public final class RemoteConfig {
     public static String login_in_result="";
     public static String chinese_id_update_result="";
     public static String chinese_id="";
-    public static String account_id="";
+    public static String account_id="default";
     private static String ip_address = "gamesupport.singmaan.com";
     public static void GetAllConfig()
     {
@@ -290,6 +290,7 @@ public final class RemoteConfig {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
+                            LogLocal("[RemoteConfig][verify_chinese_id] s="+s);
                             if (s != null) {
                                 JSONObject json = null;
                                 try {
