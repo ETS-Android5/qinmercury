@@ -91,9 +91,12 @@ public class InAppChannel extends InAppBase {
 	private static final int SDK_PAY_FLAG = 1;
 	private static final int SDK_AUTH_FLAG = 2;
 	public static final String ALIPAY_NOTIFY_URL = String.format("https://gamesupport.singmaan.com:10013/%s/%s/client_success_callback",GameName,"alipay");
-	public static final String WX_NOTIFY_URL = String.format("https://gamesupport.singmaan.com:10013/%s/%s/client_success_callback",GameName,"wxpay");
-	private static String RESTORE_URL = "https://gamesupport.singmaan.com:10013/restore?user_id=%s";
-	private static String UPDATE_ORDER_SUCCESS_URL = "https://gamesupport.singmaan.com:10013/update_order_success";
+	public static final String WX_NOTIFY_URL = String.format("https://gamesupporttest.singmaan.com:10013/%s/%s/client_success_callback",GameName,"wxpay");
+	private static String RESTORE_URL = "https://gamesupporttest.singmaan.com:10013/order/undelivered?user_id=%s";
+	private static String UPDATE_ORDER_SUCCESS_URL = "https://gamesupporttest.singmaan.com:10013/order/deliver";
+	private static String GET_REFUNDED_ORDER_URL = "https://gamesupporttest.singmaan.com:10013/order/refunded?user_id=%s";
+	private static String CANCEL_ORDER_URL = "https://gamesupporttest.singmaan.com:10013/order/cancel";
+
 	public static String global_orderId ="";
 	public static String global_user_id ="";
 	public static String global_production_id ="";
@@ -111,6 +114,7 @@ public class InAppChannel extends InAppBase {
 		sb=new StringBuffer();
 		msgApi = WXAPIFactory.createWXAPI(mContext,WX_APP_ID);
 		Restore();
+		GetRefundedOrder();
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -149,6 +153,48 @@ public class InAppChannel extends InAppBase {
 		});
 
 	}
+
+	public void GetRefundedOrder(){
+		final String url = String.format(GET_REFUNDED_ORDER_URL,DeviceId);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpClient client = new OkHttpClient();
+				Request request = new  Request.Builder().url(url).build();
+				client.newCall(request).enqueue(new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+						LogLocal("[InAppChannel][getrefundedorder] error:"+e.getMessage());
+					}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						String s = response.body().string();
+						if (s!=null){
+							try {
+								JSONObject jsonObject = new JSONObject(s);
+								JSONArray array = jsonObject.getJSONArray("data");
+								int size = array.length();
+								LogLocal("[InAppChannel][getrefundedorder] data size:"+size);
+								for (int i = 0; i < size; i++) {
+									JSONObject order = array.getJSONObject(i);
+									String user_id = order.getString("user_id");
+									String orderId = order.getString("order_id");
+									if ((user_id!=null && orderId!=null)||(user_id!="" && orderId!="")){
+										CancelOrder(user_id,orderId);
+										LogLocal("[InAppChannel][getrefundedorder] cancel success");
+									}
+								}
+							} catch (Exception e) {
+								LogLocal("[InAppChannel][getrefundedorder] error:"+e.getMessage());
+							}
+						}
+
+					}
+				});
+			}
+		}).start();
+	}
+
 	public void Restore() {
 		final String url = String.format(RESTORE_URL,DeviceId);
 		new Thread(new Runnable() {
@@ -212,6 +258,30 @@ public class InAppChannel extends InAppBase {
 			}
 		});
 	}
+
+
+	public void CancelOrder(final String userId, final String orderId){
+		LogLocal("[MercuryActivity][InAppChannel][CancelOrder]");
+		OkHttpClient client = new OkHttpClient();
+		RequestBody formBody=new FormBody.Builder().
+				add("user_id",userId).
+				add("order_id",orderId).build();
+		Request request=new  Request.Builder().url(CANCEL_ORDER_URL).post(formBody).build();
+		client.newCall(request).enqueue(new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
+				LogLocal("[InAppChannel][CancelOrderOrder] result error:"+e.getMessage());
+			}
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				String s = response.body().string();
+				LogLocal("[InAppChannel][CancelOrderOrder] result:"+s);
+				onFunctionCallBack("CancelOrder:"+s);
+				
+			}
+		});
+	}
+
 
 	@Override
 	public void ExitGame()

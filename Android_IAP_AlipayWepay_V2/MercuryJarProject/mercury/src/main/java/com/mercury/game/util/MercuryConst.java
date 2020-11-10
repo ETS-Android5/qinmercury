@@ -1,5 +1,6 @@
 package com.mercury.game.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -28,7 +29,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import static com.mercury.game.util.Function.readFileData;
 
@@ -90,8 +93,10 @@ public class MercuryConst {
     	}   	
     }
 	public static String GlobalProductionList[][];
+	@SuppressLint("NewApi")
 	public static String GetProductionList()
 	{
+		LinkedList<String[]> ProductionConfiglist = new LinkedList<>();
 		String ProductionList[][] = {
 				{"com.koplagames.kopla02.test.099","Gem","6.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
 				{"com.koplagames.kopla02.test.1999","Gem","120.0","9141b098-26ea-4827-8c56-fc4d9d12f5c3"},
@@ -109,7 +114,6 @@ public class MercuryConst {
 				{"com.koplagames.cn.86","bundle","86.0","9141b10f-f5ad-43cf-824b-80f1edb2da65"},
 				{"com.koplagames.cn.188","bundle","188.0","9141b124-a680-4265-9129-324b82bcacb8"},
 				{"com.koplagames.cn.256","bundle","256.0","9141b136-bfd8-4c73-bec7-fe958e447c6e"},
-
 				{"com.koplagames.nsk2.carnivalrewardpass.10","CarnivalRewardPass","60.0"},
 				{"com.koplagames.nsk2.carnivalrewardpass.15","CarnivalRewardPass","90.0"},
 				{"com.koplagames.nsk2.carnivalrewardpass.20","CarnivalRewardPass","120.0"},
@@ -444,18 +448,14 @@ public class MercuryConst {
 				JSONObject json_data = json.getJSONObject("data");
 				JSONObject json_result = json_data.getJSONObject("result");
 				Iterator<String> myKeys = json_result.keys();
-				int index = 0;
 				while (myKeys.hasNext()) {
 					String iap_name = myKeys.next();
 					JSONObject json_result1 = json_result.getJSONObject(iap_name);
 					String remote_des = (String) json_result1.get("des");
 					String remote_price = (String) json_result1.get("price");
 					String remote_guid = (String) json_result1.get("guid");
-					ProductionList[index][0] = iap_name;
-					ProductionList[index][1] = remote_des;
-					ProductionList[index][2] = remote_price;
-					ProductionList[index][3] = remote_guid;
-					index++;
+					String[] production = {remote_des,remote_guid,remote_price,};
+					ProductionConfiglist.add(production);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -463,13 +463,25 @@ public class MercuryConst {
 		}
 		GlobalProductionList = ProductionList;
 		ProductionJsonList = new JSONObject();
-		for(int i=0;i<ProductionList.length;i++)
-		{
-			try
+		if(remote_config.equals("")==false) {
+			for (String[] s:
+				 ProductionConfiglist) {
+				try
+				{
+					ProductionJsonList.put(s[0], s[2]+"¥");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}else {
+			for(int i=0;i<ProductionList.length;i++)
 			{
-				ProductionJsonList.put(ProductionList[i][0], ProductionList[i][2]+"¥");
-			} catch (JSONException e) {
-				e.printStackTrace();
+				try
+				{
+					ProductionJsonList.put(ProductionList[i][0], ProductionList[i][2]+"¥");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return ProductionJsonList.toString();

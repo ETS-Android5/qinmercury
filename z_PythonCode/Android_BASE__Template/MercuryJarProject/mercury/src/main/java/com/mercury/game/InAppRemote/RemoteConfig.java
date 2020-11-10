@@ -37,12 +37,12 @@ public final class RemoteConfig {
     public static String chinese_id_update_result="";
     public static String chinese_id="";
     public static String account_id="";
-    private static String ip_address = "office.singmaan.com";
+    private static String ip_address = "gamesupport.singmaan.com";
     public static void GetAllConfig()
     {
         if (DeviceId.equals("9836ae60d6cc3666"))
         {
-            ip_address = "192.168.10.7";
+            ip_address = "gamesupport.singmaan.com";
             LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP="+ip_address);
         }
         get_remote_iap();
@@ -65,7 +65,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10001/get_iap?gamename=" + GameName)
+                            .url("https://"+ip_address+":10001/get_iap?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -111,7 +111,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://"+ip_address+":10001/get_update_verify?gamename=" + GameName)
+                            .url("https://"+ip_address+":10001/get_update_verify?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
