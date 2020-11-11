@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 
 import com.mercury.game.InAppDialog.IDCardVerifyDialog;
@@ -17,6 +18,7 @@ import static com.mercury.game.util.Function.writeFileData;
 
 public class InAppBase{
 	protected Activity mContext;
+	protected Bundle mBundle;
 	protected String mProductId;
 	protected String mProductDescription;
 	protected float mProductPrice;
@@ -49,8 +51,10 @@ public class InAppBase{
 		this.appinterface=appcall;
 		MercuryActivity.LogLocal("[InAppBase][ActivityInit]");
 	}
-	
-
+	public void ActivityBundle(Bundle bundle)
+	{
+		mBundle = bundle;
+	}
 	public void Purchase(final String strProductId)
 	{
 		MercuryConst.PayInfo(strProductId);
@@ -309,6 +313,10 @@ public class InAppBase{
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void onWindowFocusChanged(boolean hasFocus)
+	{
+
 	}
 	public void TencentLoginOutOnly()
 	{

@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
@@ -50,7 +51,7 @@ import com.mercury.game.util.MercuryConst;
 import com.mercury.game.util.PermissionConstants;
 import com.mercury.game.util.PermissionUtils;
 import com.mercury.game.util.PhoneUtils;
-
+import com.yoogame.sdk.Hg5awGameSDK;
 
 
 import java.io.File;
@@ -110,6 +111,10 @@ public class MercuryActivity  {
 		InitChannel(mappcall);//init channel sdk
 		InitAd(mappcall);//init AD sdk
 		GetProductionInfo();//set ProductionInfo
+	}
+	public void ActivityBundle(Bundle bundle)
+	{
+		mInAppChannel.ActivityBundle(bundle);
 	}
 	public String GetProductionInfo()
 	{
@@ -634,8 +639,20 @@ public class MercuryActivity  {
 		if(mInAppChannel != null) { LogLocal("[MercuryActivity]->onNewIntent:mInAppChannel="+mInAppChannel);mInAppChannel.onNewIntent(intent); }
 		if(mInAppAD != null) { LogLocal("[MercuryActivity]->onNewIntent:mInAppAD="+mInAppAD);mInAppAD.onNewIntent(intent); }
 	}
-	
-	
+
+	public void attachBaseContext(Context newBase)
+	{
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity]->onNewIntent:mInAppChannel="+mInAppChannel);mInAppChannel.attachBaseContext(newBase); }
+		if(mInAppAD != null) { LogLocal("[MercuryActivity]->onNewIntent:mInAppAD="+mInAppAD);mInAppAD.attachBaseContext(newBase); }
+
+	}
+
+	public void onWindowFocusChanged(boolean hasFocus)
+	{
+		if(mInAppChannel != null) { LogLocal("[MercuryActivity]->onNewIntent:mInAppChannel="+mInAppChannel);mInAppChannel.onWindowFocusChanged(hasFocus); }
+		if(mInAppAD != null) { LogLocal("[MercuryActivity]->onNewIntent:mInAppAD="+mInAppAD);mInAppAD.onWindowFocusChanged(hasFocus); }
+
+	}
 
 
 }

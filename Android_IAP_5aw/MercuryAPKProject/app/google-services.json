@@ -1,0 +1,72 @@
+{
+  "project_info": {
+    "project_number": "39508967131",
+    "firebase_url": "https://dinosaur-museum-293001.firebaseio.com",
+    "project_id": "dinosaur-museum-293001",
+    "storage_bucket": "dinosaur-museum-293001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39508967131:android:078dd6222d4f7282e116fe",
+        "android_client_info": {
+          "package_name": "com.yoogame.dm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39508967131-i693e0tikneqtql8l21e3gfpnc2k6p5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yoogame.dm",
+            "certificate_hash": "ae16583d96f956628d45d5920ba4672b371f3add"
+          }
+        },
+        {
+          "client_id": "39508967131-u5bv09shskqgd8l2a6v4od82uu7ahfjt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yoogame.dm",
+            "certificate_hash": "6c4f78b3dcc87711e8afaf306ef3eca50d90fb39"
+          }
+        },
+        {
+          "client_id": "39508967131-4pcd2162od17occvln3bdbj6gd3ttjho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yoogame.dm",
+            "certificate_hash": "a37d6345c5719d34453789fb4c9dbe3155de38b8"
+          }
+        },
+        {
+          "client_id": "39508967131-3agfvo31ubcqfrlv3rd7plaj5ekttar3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yoogame.dm",
+            "certificate_hash": "06110f64849f034569de5421752033d86b916003"
+          }
+        },
+        {
+          "client_id": "39508967131-2kvh0kh20n5fjklvqh5qsa1oli80g2nj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9RGrMiMz_awV6nMk5RIiPbn4Ne_Vu1Bw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39508967131-2kvh0kh20n5fjklvqh5qsa1oli80g2nj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

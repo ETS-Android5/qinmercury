@@ -22,10 +22,12 @@ android {
 
 
 dependencies {
+
+    implementation files('src/main/libs/MercurySDK.jar')
     implementation files('src/main/libs/MercurySDK.jar')
     implementation files('src/main/libs/MercurySDK.jar')
     provided fileTree(include: ['*.jar'], dir: 'libs')
-    implementation files('src/main/libs/MercurySDK.jar')
+
     implementation files('src/main/libs/unityclasses.jar')
 }
 

@@ -12,10 +12,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Application;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
@@ -24,6 +26,16 @@ import com.mercury.game.util.MercuryConst;
 import com.mercury.game.util.PayMethodCallBack;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
+import com.yoogame.sdk.Hg5awGameSDK;
+import com.yoogame.sdk.common.SignInResult;
+import com.yoogame.sdk.interfaces.HgIFManager;
+import com.yoogame.sdk.interfaces.InitCallback;
+import com.yoogame.sdk.interfaces.PaymentCallback;
+import com.yoogame.sdk.interfaces.SignInCallback;
+import com.yoogame.sdk.interfaces.SignOutCallback;
+import com.yoogame.sdk.interfaces.SubmitCallback;
+import com.yoogame.sdk.payment.entity.OrderInfo;
+import com.yoogame.sdk.payment.entity.PayResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,24 +68,45 @@ public class InAppChannel extends InAppBase {
 	{		
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
-		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
-		if(readFileData("privacyagreement").equals(""))
-		{
-			new PrivacyDialog(mContext);
-		}
-		if(readFileData("card_id").equals("")) {
-			new IDCardVerifyDialog(mContext, new LoginCallBack() {
-				@Override
-				public void success(String msg) {
-					LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-				}
+		Hg5awGameSDK.getInstance().onCreate(mContext, mBundle);
+		Hg5awGameSDK.getInstance().init(mContext, "", "", new InitCallback() {
+			@Override
+			public void onSuccess() {
+				LogLocal("[InAppChannel][ActivityInit]初始化成功");
+			}
 
-				@Override
-				public void fail(String msg) {
-					LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-				}
-			});
-		}
+			@Override
+			public void onFailure(int code, String msg) {
+				LogLocal("[InAppChannel][ActivityInit]初始化失败");
+			}
+		});
+
+//		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+//		if(readFileData("privacyagreement").equals(""))
+//		{
+//			new PrivacyDialog(mContext);
+//		}
+//		if(readFileData("card_id").equals("")) {
+//			new IDCardVerifyDialog(mContext, new LoginCallBack() {
+//				@Override
+//				public void success(String msg) {
+//					LogLocal("[InAppDialog][SigneInDialog] ID card Success");
+//				}
+//
+//				@Override
+//				public void fail(String msg) {
+//					LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+//				}
+//			});
+//		}
+	}
+	public void autoSignIn() {
+		Hg5awGameSDK. getInstance().autoSignIn(mContext, mSignInCallback);
+	}
+	public void ActivityBundle(Bundle bundle)
+	{
+		super.ActivityBundle(bundle);
+		MercuryActivity.LogLocal("[InAppChannel][ActivityBundle]="+bundle);
 	}
 	public void ApplicationInit(Application appcontext)
 	{
@@ -94,43 +127,72 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc="+MercuryConst.Qindesc);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
-		if(local_age<8 && local_age!=0 )
-		{
-			try {
-				AlertDialog.Builder builder = new Builder(mContext);
-				builder.setMessage("提示");
-				builder.setTitle("未成年人无法充值");
-				builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-//						onPurchaseSuccess(MercuryConst.QinPid);
-					}
-				});
-				builder.create().show();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			//shrinkpartstart
-			new PaymentDialog(mContext, new PayMethodCallBack() {
-				@Override
-				public void Alipay(String msg) {
-					MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
-					//shrinkpartend
-					TestPay();
-					//shrinkpartstart
-				}
+		//        String productID = productIdEditText.getText().toString().trim();               //商品ID
+//        String productName = productIdEditText.getText().toString().trim();               //商品名称
+		String price = MercuryConst.Qinpricefloat+"";               //金额
+		String productID = MercuryConst.QinPid;               //商品ID
+		String productName = MercuryConst.Qindesc;               //商品名称
+		String serverId = "3";                  //游戏区服ID
+		String serverName = "server_03";           //游戏区服名称
+		String roleId = "r307551";                   //角色ID
+		String roleName = "Nicole";               //角色名称
+		String roleLevel = "60";                 //角色等级
+		String currencyType = "USD";             //貨幣類型
+		String notifyURL = "";                   //支付回调
+		String extension = "";                   //附加参数
 
-				@Override
-				public void WechatPay(String msg) {
-					MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
-					TestPay();
-				}
-			});
-			//shrinkpartend
-		}
+		OrderInfo orderInfo = new OrderInfo.Builder()
+				.withPrice(price)
+				.withProductId(productID)
+				.withProductName(productName)
+				.withServerId(serverId)
+				.withServerName(serverName)
+				.withRoleId(roleId)
+				.withRoleName(roleName)
+				.withRoleLevel(roleLevel)
+				.withCurrencyType(currencyType)
+				.withNotifyURL(notifyURL)
+				.withExtension(extension)
+				.build();
+		Hg5awGameSDK.getInstance().pay(mContext, orderInfo, mPaymentCallback);
+
+//		if(local_age<8 && local_age!=0 )
+//		{
+//			try {
+//				AlertDialog.Builder builder = new Builder(mContext);
+//				builder.setMessage("提示");
+//				builder.setTitle("未成年人无法充值");
+//				builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+////						onPurchaseSuccess(MercuryConst.QinPid);
+//					}
+//				});
+//				builder.create().show();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		else
+//		{
+//			//shrinkpartstart
+//			new PaymentDialog(mContext, new PayMethodCallBack() {
+//				@Override
+//				public void Alipay(String msg) {
+//					MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
+//					//shrinkpartend
+//					TestPay();
+//					//shrinkpartstart
+//				}
+//
+//				@Override
+//				public void WechatPay(String msg) {
+//					MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
+//					TestPay();
+//				}
+//			});
+//			//shrinkpartend
+//		}
 
 
 	}
@@ -367,27 +429,93 @@ public class InAppChannel extends InAppBase {
 	public void onPause()
 	{
 		MercuryActivity.LogLocal("["+Channelname+"][onPause]");
+		Hg5awGameSDK.getInstance().onPause(mContext);
 	}
 
 	@Override
 	public void onResume()
 	{
 		MercuryActivity.LogLocal("["+Channelname+"][onResume]");
+		Hg5awGameSDK.getInstance().onResume(mContext);
 	}
 	@Override
 	public void onDestroy()
 	{
 		MercuryActivity.LogLocal("["+Channelname+"][onDestroy]");
+		Hg5awGameSDK.getInstance().onDestroy(mContext);
 	}
 	@Override
 	public void onStop()
 	{
 		MercuryActivity.LogLocal("["+Channelname+"][onStop]");
+		Hg5awGameSDK.getInstance().onStop(mContext);
 	}
 	@Override
 	public void onStart()
 	{
 		MercuryActivity.LogLocal("["+Channelname+"][onStart]");
+		Hg5awGameSDK.getInstance().onStart(mContext);
+		setSdkCallback();
+	}
+	private SignOutCallback mSignOutCallback = new SignOutCallback() {
+		@Override
+		public void onSuccess(int code) {
+			if (code == SignOutCallback.SWITCH_ACCOUNT) {
+				Hg5awGameSDK.getInstance().signIn(mContext, mSignInCallback);
+			}
+			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]登出成功");
+		}
+
+		@Override
+		public void onFailure(int code, String msg) {
+			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]登出失败" + msg);
+		}
+	};
+	private SignInCallback mSignInCallback = new SignInCallback() {
+		@Override
+		public void onSuccess(SignInResult signInResult) {
+			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]登录成功" + signInResult.toString());
+			Toast.makeText(mContext,"登入成功",Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onFailure(int code, String msg) {
+			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]登录失败" + msg);
+			Toast.makeText(mContext,"登录失败",Toast.LENGTH_SHORT).show();
+		}
+	};
+
+	private PaymentCallback mPaymentCallback = new PaymentCallback() {
+		@Override
+		public void onSuccess(PayResult payResult) {
+			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]支付成功#" + payResult.toString());
+		}
+
+		@Override
+		public void onFailure(int code, String msg) {
+			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]支付失败#" + msg);
+		}
+	};
+
+	private SubmitCallback mSubmitCallback = new SubmitCallback() {
+		@Override
+		public void onSuccess() {
+			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]上报成功");
+		}
+		@Override
+		public void onFailure(int code, String msg) {
+			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]上报失败"+msg);
+		}
+	};
+
+	private void setSdkCallback() {
+// 􏱃􏲓􏲔􏱓􏲂􏲃􏱲􏲕􏲖􏲗􏱁􏰊􏲘􏲙app􏲚􏰩􏰭􏰮􏲛􏰪􏲜􏱴
+		HgIFManager.getInstance().setSignInCallback(mSignInCallback);
+		HgIFManager.getInstance().setSignOutCallback(mSignOutCallback);
+		HgIFManager.getInstance().setPaymentCallback(mPaymentCallback);
+		HgIFManager.getInstance().setSubmitCallback(mSubmitCallback);
+//		HgIFManager.getInstance().setRewardedAdCallback(mRewardedAdCallback)
+		;
 	}
 	@Override
 	public void onRestart()
@@ -402,13 +530,25 @@ public class InAppChannel extends InAppBase {
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		MercuryActivity.LogLocal("["+Channelname+"] onActivityResult(int requestCode, int resultCode, Intent data)");
+		Hg5awGameSDK.getInstance().onActivityResult(requestCode, resultCode, data);
 	}
 	@Override
 	public void onNewIntent(Intent intent)
 	{
 		MercuryActivity.LogLocal("["+Channelname+"] onNewIntent(Intent intent) ");
 	}
+	@Override
+	public void attachBaseContext(Context newBase)
+	{
+		Context context = Hg5awGameSDK.getInstance().wrapConfigurationContext(newBase);
+		super.attachBaseContext(context);
+	}
 
+	public void onWindowFocusChanged(boolean hasFocus)
+	{
+		Context context = Hg5awGameSDK.getInstance().wrapConfigurationContext(mContext);
+		super.onWindowFocusChanged(hasFocus);
+	}
 	public void MercurySigneIn() {
 		//shrinkpartstart
 		new IDCardVerifyDialog(mContext, new LoginCallBack() {

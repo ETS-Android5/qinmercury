@@ -12,10 +12,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Application;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
@@ -57,6 +60,7 @@ public class InAppChannel extends InAppBase {
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
 		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+		//shrinkpartstart
 		if(readFileData("privacyagreement").equals(""))
 		{
 			new PrivacyDialog(mContext);
@@ -74,7 +78,15 @@ public class InAppChannel extends InAppBase {
 				}
 			});
 		}
+		//shrinkpartend
 	}
+
+	public void ActivityBundle(Bundle bundle)
+	{
+		super.ActivityBundle(bundle);
+		MercuryActivity.LogLocal("[InAppChannel][ActivityBundle]="+bundle);
+	}
+
 	public void ApplicationInit(Application appcontext)
 	{
 		mAppContext=appcontext;
@@ -408,7 +420,16 @@ public class InAppChannel extends InAppBase {
 	{
 		MercuryActivity.LogLocal("["+Channelname+"] onNewIntent(Intent intent) ");
 	}
-
+	@Override
+	public void attachBaseContext(Context base)
+	{
+		MercuryActivity.LogLocal("["+Channelname+"] attachBaseContext(Context base) ");
+	}
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus)
+	{
+		MercuryActivity.LogLocal("["+Channelname+"] onWindowFocusChanged(Context base) ");
+	}
 	public void MercurySigneIn() {
 		//shrinkpartstart
 		new IDCardVerifyDialog(mContext, new LoginCallBack() {

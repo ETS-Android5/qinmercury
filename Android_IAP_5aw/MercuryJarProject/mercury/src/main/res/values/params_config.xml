@@ -1,0 +1,18 @@
+<resources>
+
+  <string name="facebook_app_id">xxxxxxxxx</string>
+<!-- Appsflyer􏲄􏲅SDK id-->
+<string name="appsflyer_key">xxxxxxxxx</string>
+<!-- Google􏲂􏲃id -->
+<string name="google_client_id">xxxxxxxxx</string>
+<!-- Google􏱰􏱱􏲆􏲇 -->
+<string name="google_pay_public_key">xxxxxxxxx</string>
+<!-- Twitter 􏲂􏲃 􏰶􏰜􏱋􏰱􏰦􏲈􏱋􏱾􏲉􏰺-->
+<string name="twitter_consumer_key">""</string> <string name="twitter_consumer_secret">""</string>
+<!-- 􏲊􏰌􏱂􏰟􏲋􏲌􏰹􏱊􏱙􏱄􏰖􏰜􏰬􏰱􏰦􏰱􏰦􏲈􏱙􏲍􏰜􏰝􏰃􏱙􏱄 --> <!-- 􏲎􏲋􏰠ko -->
+<!-- 􏲏􏲐􏰊􏰆􏰠zh-hans -->
+<!-- 􏲑􏲐􏰊􏰆􏰠zh-hant -->
+<!-- 􏲒􏲋􏰠en -->
+<string name="com_yoogame_sdk_specified_language">xxx</string>
+
+</resources>

@@ -82,6 +82,7 @@ public class GameActivity extends UnityPlayerActivity{
 		};
 		Log.w(tagname,"[step][4]Init MercurySDK");
 		MercurySDK.InitSDK (mContext,appcall);
+		MercurySDK.ActivityBundle(bundle);
 	}
 
 	public static Object getInstance() {
@@ -507,6 +508,22 @@ public class GameActivity extends UnityPlayerActivity{
 		super.onDestroy();
 		Log.d(tagname, "onDestroy()");
 		MercurySDK.onDestroy();
+	}
+
+	@Override
+	protected void attachBaseContext(Context Base) {
+		super.attachBaseContext(Base);
+		Log.d(tagname, "attachBaseContext()");
+		if(MercurySDK!=null) {
+			MercurySDK.attachBaseContext(Base);
+		}
+	}
+
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		Log.d(tagname, "onDestroy()");
+		MercurySDK.onWindowFocusChanged(hasFocus);
 	}
 
 }

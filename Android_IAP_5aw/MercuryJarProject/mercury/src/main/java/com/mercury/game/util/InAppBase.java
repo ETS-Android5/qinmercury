@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 
 import com.mercury.game.InAppDialog.IDCardVerifyDialog;
@@ -25,6 +26,7 @@ public class InAppBase{
 	public static APPBaseInterface appinterface;
 	public static boolean sTestMode = false;
 	public static MercuryConst qc;
+	protected Bundle mBundle;
 	public static String OrderID="";
 	public static String key = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBALnMsImln+S8fxJt" +
 		 			    		"f7NDqQhh8EA318buO6ScnyzNbaBkVmu4oL97ggRrgmI7z1YKYkPNs6ymufqjHDAA" +
@@ -309,6 +311,14 @@ public class InAppBase{
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void ActivityBundle(Bundle bundle)
+	{
+		mBundle = bundle;
+	}
+	public void onWindowFocusChanged(boolean hasFocus) {
+		// TODO Auto-generated method stub
+
 	}
 	public void TencentLoginOutOnly()
 	{
