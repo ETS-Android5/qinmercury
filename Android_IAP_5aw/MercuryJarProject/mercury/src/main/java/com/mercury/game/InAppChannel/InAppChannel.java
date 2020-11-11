@@ -77,7 +77,7 @@ public class InAppChannel extends InAppBase {
 
 			@Override
 			public void onFailure(int code, String msg) {
-				LogLocal("[InAppChannel][ActivityInit]初始化失败");
+				LogLocal("[InAppChannel][ActivityInit]初始化失败:"+msg);
 			}
 		});
 
@@ -247,26 +247,31 @@ public class InAppChannel extends InAppBase {
 			e.printStackTrace();
 		}
 	}
+	public void signIn()
+	{
+		Hg5awGameSDK.getInstance().signIn(mContext, mSignInCallback);
+	}
 	public void SingmaanLogin()
 	{
 		String phone = "";
 		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
+		signIn();
 		//shrinkpartstart
-		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
-			@Override
-			public void success(String phone) {
-				LogLocal("[InAppChannel][SingmaanLogin] Success");
-				DeviceId = phone;
-				//shrinkpartend
-				LoginSuccessCallBack(DeviceId);
-				//shrinkpartstart
-			}
-			@Override
-			public void fail(String msg) {
-				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
-				LoginCancelCallBack(msg);
-			}
-		});
+//		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
+//			@Override
+//			public void success(String phone) {
+//				LogLocal("[InAppChannel][SingmaanLogin] Success");
+//				DeviceId = phone;
+//				//shrinkpartend
+//				LoginSuccessCallBack(DeviceId);
+//				//shrinkpartstart
+//			}
+//			@Override
+//			public void fail(String msg) {
+//				LogLocal("[InAppChannel][SingmaanLogin] Login failed");
+//				LoginCancelCallBack(msg);
+//			}
+//		});
 		//shrinkpartend
 	}
 	public void SingmaanLogout()
@@ -476,12 +481,14 @@ public class InAppChannel extends InAppBase {
 		public void onSuccess(SignInResult signInResult) {
 			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]登录成功" + signInResult.toString());
 			Toast.makeText(mContext,"登入成功",Toast.LENGTH_SHORT).show();
+			LoginSuccessCallBack(signInResult.toString());
 		}
 
 		@Override
 		public void onFailure(int code, String msg) {
 			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]登录失败" + msg);
 			Toast.makeText(mContext,"登录失败",Toast.LENGTH_SHORT).show();
+			LoginCancelCallBack(msg);
 		}
 	};
 

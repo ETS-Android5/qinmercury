@@ -234,7 +234,7 @@ class APKBuildManager():
 			all_the_text = file_object.readlines()
 			for i in all_the_text:
 				f = i.replace(" ","")
-				if(f.find("dependencies")!=-1 and isFindStart==False):
+				if(f.find("dependencies{")!=-1 and isFindStart==False):
 					isFindStart=True
 					JavaCodeGradle.append(i)
 				elif(f.find("}")!=-1 and isFindStart==True):
