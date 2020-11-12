@@ -580,6 +580,9 @@ public class MercuryActivity  {
 	public void Data_Event(String key)
 	{
 		LogLocal("[MercuryActivity] Data_Event()");
+		if(mInAppChannel != null) {
+			mInAppChannel.Data_Event(key);
+		}
 	}
 	public void showMessageDialog()
 	{

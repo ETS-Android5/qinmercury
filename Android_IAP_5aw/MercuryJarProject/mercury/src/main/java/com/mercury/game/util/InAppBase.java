@@ -333,4 +333,7 @@ public class InAppBase{
 	}
 	public void MercuryIDVerify() {
 	}
+
+	public void Data_Event(String key) {
+	}
 }

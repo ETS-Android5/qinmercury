@@ -36,6 +36,7 @@ import com.yoogame.sdk.interfaces.SignOutCallback;
 import com.yoogame.sdk.interfaces.SubmitCallback;
 import com.yoogame.sdk.payment.entity.OrderInfo;
 import com.yoogame.sdk.payment.entity.PayResult;
+import com.yoogame.sdk.payment.entity.RoleInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -570,4 +571,36 @@ public class InAppChannel extends InAppBase {
 		});
 		//shrinkpartend
 	}
+	public void onSubmitUserData(String mroleLevel) {
+		//上报类型
+		String type = RoleInfo.TYPE_LEVEL_UP;
+		//游戏区服ID
+		String serverId = DeviceId;
+		//游戏区服名称
+		String serverName = "S1";
+		//角色ID0
+		String roleId = DeviceId;        //角色名称
+		String roleName = DeviceId;
+		//角色等级
+		String roleLevel = mroleLevel;
+		//充值等级
+		String payLevel = "Lv0";
+		//拓展字段
+		String extension = "extension";
+		RoleInfo roleInfo = new RoleInfo.Builder()
+				.withType(type)
+				.withServerId(serverId)
+				.withServerName(serverName)
+				.withRoleId(roleId)
+				.withRoleName(roleName)
+				.withRoleLevel(roleLevel)
+				.withPayLevel(payLevel)
+				.withExtension(extension)
+				.build();
+		Hg5awGameSDK.getInstance().submitExtraData(mContext, roleInfo, mSubmitCallback);
+	}
+	public void Data_Event(String key) {
+		onSubmitUserData(key);
+	}
+
 }
