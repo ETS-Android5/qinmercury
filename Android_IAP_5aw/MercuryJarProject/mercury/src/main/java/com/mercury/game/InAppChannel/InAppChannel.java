@@ -69,7 +69,7 @@ public class InAppChannel extends InAppBase {
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
 		Hg5awGameSDK.getInstance().onCreate(mContext, mBundle);
-		Hg5awGameSDK.getInstance().init(mContext, "", "", new InitCallback() {
+		Hg5awGameSDK.getInstance().init(mContext, "1000247", "42c84435e5f9247d82f3f4a9161c50c3", new InitCallback() {
 			@Override
 			public void onSuccess() {
 				LogLocal("[InAppChannel][ActivityInit]初始化成功");
