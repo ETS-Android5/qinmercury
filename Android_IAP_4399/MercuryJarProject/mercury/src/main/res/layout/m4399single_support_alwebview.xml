@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <cn.m4399.single.support.component.GradientProgressBar
+        android:id="@+id/m4399single_support_hpb"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@android:color/white" />
+
+    <WebView
+        android:id="@+id/m4399single_support_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/m4399single_support_hpb"
+        android:scrollbars="none" />
+
+    <ImageView
+        android:id="@id/m4399single_id_iv_nav_back"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="54dp"
+        android:src="@drawable/m4399single_support_selector_wap_backward"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@id/m4399single_id_iv_nav_close"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="54dp"
+        android:layout_toEndOf="@id/m4399single_id_iv_nav_back"
+        android:layout_toRightOf="@id/m4399single_id_iv_nav_back"
+        android:src="@drawable/m4399single_support_wap_close"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

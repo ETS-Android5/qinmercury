@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="m4399single_activation_bg_clicked">#e5e5e5</color>
+    <color name="m4399single_activation_dialog_text_green_pressed">#4ca733</color>
+    <color name="m4399single_activation_dialog_text_green">#54ba3d</color>
+    <color name="m4399single_activation_dialog_text_grey">#dddddd</color>
+    <color name="m4399single_activation_dialog_text_black">#333333</color>
+
+    <!--download_dialog-->
+    <color name="m4399single_activation_dialog_download_background">#ffffff</color>
+
+    <!--common_bar-->
+    <color name="m4399single_activation_common_nav_bg">#ff9515</color>
+
+    <!--progress bar-->
+    <color name="m4399single_activation_progress_bg_center">#e3e3e3</color>
+    <color name="m4399single_activation_progress_bg_end">#e6e6e6</color>
+    <color name="m4399single_activation_progress_bg_start">#c8c8c8</color>
+    <color name="m4399single_activation_progress_in_center">#4aea2f</color>
+    <color name="m4399single_activation_progress_in_end">#31ce15</color>
+    <color name="m4399single_activation_progress_in_start">#5fec46</color>
+</resources>

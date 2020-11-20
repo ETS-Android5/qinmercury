@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/m4399_width_dialog_widest"
+    android:layout_height="wrap_content"
+    android:background="@drawable/m4399single_dialog_bg"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    tools:layout_gravity="center">
+
+    <TextView
+        android:id="@id/m4399single_id_tv_dialog_title"
+        style="@style/m4399.Dialog.Title"
+        tools:text="小游戏" />
+
+    <RelativeLayout
+        android:id="@+id/m4399single_initialize_mt_rl_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:padding="18dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/m4399single_close"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/m4399single_initialize_mt_ll_container"
+        android:layout_width="match_parent"
+        android:layout_height="257dp"
+        android:layout_below="@id/m4399single_id_tv_dialog_title"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/m4399_dialog_content_margin_h"
+        android:paddingTop="20dp"
+        android:paddingRight="@dimen/m4399_dialog_content_margin_h">
+
+    </LinearLayout>
+
+</RelativeLayout>

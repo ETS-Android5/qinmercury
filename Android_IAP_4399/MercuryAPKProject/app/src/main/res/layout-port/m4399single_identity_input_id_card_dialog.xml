@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/m4399_width_dialog_standard"
+    android:layout_height="wrap_content"
+    android:background="@drawable/m4399single_dialog_bg"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <include layout="@layout/m4399single_identity_input_id_card_top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25.5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="26dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:ignore="all">
+
+        <TextView
+            android:id="@+id/m4399single_identity_input_dialog_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/m4399single_color_txt_primary"
+            android:textSize="@dimen/m4399single_font_15" />
+
+        <cn.m4399.single.component.widget.ConstraintEditText
+            android:id="@+id/m4399single_identity_input_dialog_edt_name"
+            style="@style/m4399Single.Editor.Id.Input"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@id/m4399single_identity_input_dialog_tv_name" />
+
+        <TextView
+            android:id="@+id/m4399single_identity_input_dialog_tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_below="@id/m4399single_identity_input_dialog_tv_name"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/m4399single_color_txt_primary"
+            android:textSize="@dimen/m4399single_font_15" />
+
+        <cn.m4399.single.component.widget.ConstraintEditText
+            android:id="@+id/m4399single_identity_input_dialog_edt_id"
+            style="@style/m4399Single.Editor.Id.Input"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_below="@id/m4399single_identity_input_dialog_edt_name"
+            android:layout_alignTop="@id/m4399single_identity_input_dialog_tv_id"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@id/m4399single_identity_input_dialog_tv_id"
+            android:digits="0123456789Xx" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/m4399single_identity_input_dialog_tv_foreign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="26dp"
+        android:gravity="center"
+        android:textColor="#54ba3d"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/m4399single_identity_input_dialog_tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="26dp"
+        android:textColor="@color/m4399single_color_grey_cccccc" />
+
+    <include layout="@layout/m4399single_component_couple_actions" />
+
+</LinearLayout>

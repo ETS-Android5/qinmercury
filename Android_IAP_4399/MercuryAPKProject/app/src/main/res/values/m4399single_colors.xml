@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="m4399single_color_txt_primary">#333333</color>
+    <color name="m4399single_color_txt_secondary">#666666</color>
+    <color name="m4399single_color_txt_888888">#888888</color>
+    <color name="m4399single_color_txt_prompt">#999999</color>
+    <color name="m4399single_color_txt_disabled">#dddddd</color>
+    <color name="m4399single_color_line">#e5e5e5</color>
+    <color name="m4399single_color_bg_clicked">#e5e5e5</color>
+    <color name="m4399single_color_content_bg">#f1f1f1</color>
+    <color name="m4399single_color_txt_hint">#bbbbbb</color>
+    <color name="m4399single_color_grey_cccccc">#cccccc</color>
+    <color name="m4399single_color_blue_33bdfc">#33bdfc</color>
+    <color name="m4399single_color_green_54ba3d">#54ba3d</color>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/m4399Single.Theme.AbsPayFragment">
+
+    <include layout="@layout/m4399single_pay_nav_main" />
+
+    <include layout="@layout/m4399single_pay_order_info_se" />
+
+    <include
+        layout="@layout/m4399single_divider_h"
+        android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+        android:paddingRight="@dimen/m4399single_pay_spacing_h" />
+
+    <include layout="@layout/m4399single_pay_grid_handy_money" />
+
+    <include layout="@layout/m4399single_pay_editor_card" />
+
+    <include layout="@layout/m4399single_pay_confirm_btn" />
+
+    <include layout="@layout/m4399single_pay_footer_channel" />
+</LinearLayout>

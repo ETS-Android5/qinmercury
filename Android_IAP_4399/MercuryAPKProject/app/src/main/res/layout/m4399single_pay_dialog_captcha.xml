@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/m4399.Dialog.Container"
+    android:orientation="vertical"
+    tools:layout_gravity="center">
+
+    <TextView
+        style="@style/m4399.Dialog.Title"
+        android:text="@string/m4399single_pay_title_captcha_dialog" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m4399_dialog_content_margin_h"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="@dimen/m4399_dialog_content_margin_h"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/m4399single_pay_edt_captcha_order"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/m4399single_pay_height_view_focused"
+            android:layout_weight="3"
+            android:background="@drawable/m4399single_pay_selector_edit_bg"
+            android:gravity="center"
+            android:hint="@string/m4399single_pay_hint_input_captcha"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textColor="#999999"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/m4399single_pay_iv_captcha_order"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/m4399single_pay_height_view_focused"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_weight="2"
+            android:background="@color/m4399single_color_content_bg"
+            android:gravity="center"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/m4399single_pay_iv_captcha_order_refresh"
+            android:layout_width="@dimen/m4399single_pay_height_view_focused"
+            android:layout_height="@dimen/m4399single_pay_height_view_focused"
+            android:background="@drawable/m4399single_ripple_grey_borderless"
+            android:padding="8dp"
+            android:src="@drawable/m4399single_pay_refresh" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/m4399single_pay_tv_captcha_order_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m4399_dialog_content_margin_h"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="@dimen/m4399_dialog_content_margin_h"
+        android:text="@string/m4399single_pay_error_validate_failed"
+        android:textColor="@color/m4399_color_accent"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
+    <include layout="@layout/m4399single_component_couple_actions" />
+
+</LinearLayout>

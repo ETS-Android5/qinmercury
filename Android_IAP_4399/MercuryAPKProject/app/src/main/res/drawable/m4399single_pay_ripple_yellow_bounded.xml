@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <selector>
+            <item android:state_pressed="true">
+                <shape>
+                    <corners android:radius="4dp" />
+                    <solid android:color="@color/m4399_color_primary_dark" />
+                </shape>
+            </item>
+
+            <item android:drawable="@drawable/m4399single_pay_shape_view_bg_yellow" android:state_enabled="true" />
+
+            <item android:drawable="@drawable/m4399single_pay_shape_view_bg_grey" android:state_enabled="false" />
+        </selector>
+    </item>
+</selector>

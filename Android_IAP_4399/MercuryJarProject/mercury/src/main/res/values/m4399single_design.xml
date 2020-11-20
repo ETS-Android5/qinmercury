@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 通用页面规范-->
+    <!-- 页面水平边距，包括margin 和 padding-->
+    <dimen name="m4399single_nav_bar_height">50dp</dimen>
+    <dimen name="m4399single_fragment_margin_h">20dp</dimen>
+    <dimen name="m4399single_fragment_margin_v">14dp</dimen>
+
+    <!--字体大小-->
+    <dimen name="m4399single_font_20">20sp</dimen>
+    <dimen name="m4399single_font_18">18sp</dimen>
+    <dimen name="m4399single_font_16">16sp</dimen>
+    <dimen name="m4399single_font_15">15sp</dimen>
+    <dimen name="m4399single_font_14">14sp</dimen>
+    <dimen name="m4399single_font_13">13sp</dimen>
+    <dimen name="m4399single_font_12">12sp</dimen>
+    <dimen name="m4399single_font_11">11sp</dimen>
+
+    <style name="m4399" />
+
+    <!--Typography-->
+
+    <!-- H1: 少数标题-->
+    <style name="m4399.Text.H1" parent="m4399">
+        <item name="android:textColor">@color/m4399single_color_txt_primary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- H1: 重要标题、tab-->
+    <style name="m4399.Text.H2" parent="m4399">
+        <item name="android:textColor">@color/m4399single_color_txt_primary</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- H3: 用于一般标题：列表、对话框标题-->
+    <style name="m4399.Text.H3" parent="m4399">
+        <item name="android:textColor">@color/m4399single_color_txt_primary</item>
+        <item name="android:textSize">@dimen/m4399single_font_16</item>
+    </style>
+
+    <!-- Prompt: 用于一般性提示 -->
+    <style name="m4399.Text.Prompt" parent="m4399">
+        <item name="android:textColor">@color/m4399single_color_txt_prompt</item>
+        <item name="android:textSize">@dimen/m4399single_font_14</item>
+    </style>
+
+    <!-- 方向兼容 -->
+    <style name="m4399.Orientation" parent="m4399">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!--Activity主题尽可能透明，具体颜色交由Fragment布局设置-->
+    <style name="m4399.Theme.Activity.Host" parent="android:Theme.Holo.NoActionBar.Fullscreen">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+    <style name="m4399.Anim.Slide" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/m4399single_slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/m4399single_slide_out_right</item>
+    </style>
+
+    <!-- 对话框 -->
+    <style name="m4399.Theme.Dialog.Base" parent="android:Theme.Holo.Dialog">
+        <item name="android:background">@null</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@drawable/m4399single_dialog_bg</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="m4399.Theme.Dialog.Full" parent="m4399.Theme.Dialog.Base">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="m4399.Dialog.Container" parent="m4399">
+        <item name="android:layout_width">@dimen/m4399_width_dialog_standard</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="m4399.Dialog.Title" parent="m4399.Text.H3">
+        <item name="android:id">@id/m4399single_id_tv_dialog_title</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/m4399_dialog_content_margin_h</item>
+        <item name="android:layout_marginRight">@dimen/m4399_dialog_content_margin_h</item>
+        <item name="android:layout_marginTop">22dp</item>
+    </style>
+
+    <style name="m4399.Dialog.Content" parent="m4399">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginLeft">26dp</item>
+        <item name="android:layout_marginRight">26dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <!-- Navigation bar-->
+    <style name="m4399.Style.Navigation" parent="m4399">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/m4399single_nav_bar_height</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <!-- EditText -->
+
+    <integer name="m4399_time_page_anim">250</integer>
+    <!-- ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE -->
+    <integer name="m4399_integer_orientation">0</integer>
+
+
+    <color name="m4399_color_primary">#ff9515</color>
+    <color name="m4399_color_primary_dark">#ff7f17</color>
+    <color name="m4399_color_accent">#ff5b45</color>
+
+    <!--通用弹窗-->
+    <dimen name="m4399_width_dialog_standard">304dp</dimen>
+    <dimen name="m4399_width_dialog_wider">403dp</dimen>
+    <dimen name="m4399_width_dialog_widest">420dp</dimen>
+    <dimen name="m4399_dialog_content_margin_h">24dp</dimen>
+    <dimen name="m4399_ope_dialog_btn_action_height">45dp</dimen>
+    <dimen name="m4399_dialog_line_space">4dp</dimen>
+    <dimen name="m4399_ope_dialog_radius">10dp</dimen>
+    <!-- 通用交互控件，如按钮，输入框 -->
+    <dimen name="m4399_height_view_focused">38dp</dimen>
+
+    <!-- support -->
+    <string name="m4399_network_normal_error">请求异常，请检查网络后重试</string>
+    <string name="m4399_network_auth_failure_error">访问未授权</string>
+    <string name="m4399_network_client_error">客户端错误</string>
+    <string name="m4399_network_no_connection_error">网络异常，请检查网络连接后重试</string>
+    <string name="m4399_network_parse_error">数据解析错误</string>
+    <string name="m4399_network_server_error">服务端错误</string>
+    <string name="m4399_network_timeout_error">请求超时</string>
+</resources>

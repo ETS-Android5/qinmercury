@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/m4399single_id_navigation_bar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/m4399single_pay_height_title"
+    android:background="@drawable/m4399single_pay_fragment_nav_bg"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@id/m4399single_id_tv_nav_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/m4399single_pay_channel_grid_fragment"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/m4399single_font_18"
+        tools:ignore="RelativeOverlap"
+        tools:text="@string/m4399single_pay_channel_grid_fragment" />
+
+    <ImageView
+        android:id="@id/m4399single_id_iv_nav_back"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/m4399single_nav_icon_size"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:background="@drawable/m4399single_ripple_white_borderless"
+        android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+        android:paddingRight="@dimen/m4399single_pay_spacing_h"
+        android:scaleType="fitStart"
+        android:src="@drawable/m4399single_left_arrow_white"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@id/m4399single_id_iv_nav_close"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/m4399single_nav_icon_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:background="@drawable/m4399single_ripple_white_borderless"
+        android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+        android:paddingRight="@dimen/m4399single_pay_spacing_h"
+        android:scaleType="fitEnd"
+        android:src="@drawable/m4399single_close_circle" />
+</RelativeLayout>

@@ -30,7 +30,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
-	versionCode 532
+	versionCode 542
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -55,4 +55,7 @@ implementation files('src/main/libs/MercurySDK.jar')
     //implementation(name: 'aarname', ext: 'aar')
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation files('src/main/libs/4399ActivationSDK-v1.2.0+12.jar')
+    implementation files('src/main/libs/4399SingleSDK-v2.1.0+48.jar')
+    implementation files('src/main/libs/volley-v1.1.1.jar')
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- account.login -->
+    <string name="m4399single_account_back_game">回到\n游戏</string>
+
+    <!-- Recharge -->
+    <!-- recharge.ApiRecharge -->
+    <string name="m4399single_pay_fmt_abort_inquiring">放弃(%02ds)</string>
+
+</resources>

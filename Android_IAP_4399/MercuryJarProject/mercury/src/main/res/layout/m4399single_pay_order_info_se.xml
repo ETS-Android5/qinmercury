@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/m4399single_pay_height_title"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:paddingStart="@dimen/m4399single_pay_spacing_h"
+    android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+    android:paddingEnd="@dimen/m4399single_pay_spacing_h"
+    android:paddingRight="@dimen/m4399single_pay_spacing_h">
+
+    <TextView
+        android:id="@id/m4399single_id_tv_order_assign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/m4399_color_primary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="2dp"
+        tools:text="10" />
+
+    <TextView
+        android:id="@id/m4399single_id_tv_order_assign_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:gravity="center_vertical"
+        android:text="@string/m4399single_pay_unit_yuan"
+        android:textColor="#999999"
+        android:textSize="15sp" />
+
+    <cn.m4399.single.component.widget.MarqueeTextView
+        android:id="@id/m4399single_id_tv_order_commodity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1.0"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="@string/m4399single_pay_prefix_commodity"
+        android:textColor="#999999"
+        android:textSize="15sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@id/m4399single_id_tv_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        tools:text="test001" />
+
+</LinearLayout>

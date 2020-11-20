@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/m4399single_pay_height_view_focused"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="@dimen/m4399single_pay_spacing_h"
+    android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/m4399single_pay_prompt_input_money"
+        android:textColor="#666666"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/m4399single_pay_edt_input_money"
+        style="@style/m4399Single.Pay.Editor"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:hint="@string/m4399single_pay_hint_input_money"
+        android:textCursorDrawable="@null"
+        tools:ignore="Autofill" />
+
+</LinearLayout>

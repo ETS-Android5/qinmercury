@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:paddingStart="@dimen/m4399single_pay_spacing_h"
+    android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+    android:paddingEnd="@dimen/m4399single_pay_spacing_h"
+    android:paddingRight="@dimen/m4399single_pay_spacing_h"
+    android:layout_margin="@dimen/m4399single_spacing_medium_v"
+    android:layout_weight="1"
+    android:background="@android:color/white"
+    android:gravity="top"
+    android:orientation="vertical"
+    tools:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/m4399single_pay_spacing_h"
+            android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+            android:text="@string/m4399single_pay_prefix_assign"
+            android:textColor="@color/m4399single_color_txt_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@id/m4399single_id_tv_order_assign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-3dp"
+            android:textColor="@color/m4399_color_primary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="40" />
+
+        <TextView
+            android:id="@id/m4399single_id_tv_order_assign_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/m4399single_pay_unit_yuan"
+            android:textColor="@color/m4399single_color_txt_secondary"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/m4399single_pay_spacing_h"
+            android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+            android:text="@string/m4399single_pay_prefix_commodity"
+            android:textColor="@color/m4399single_color_txt_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@id/m4399single_id_tv_order_commodity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/m4399single_color_txt_secondary"
+            android:textSize="14sp"
+            tools:text="VIP 礼包一个" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/m4399single_pay_spacing_h"
+            android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+            android:text="@string/m4399single_pay_prefix_account"
+            android:textColor="@color/m4399single_color_txt_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@id/m4399single_id_tv_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/m4399single_color_txt_secondary"
+            android:textSize="14sp"
+            tools:text="zhangsheng" />
+    </LinearLayout>
+</LinearLayout>

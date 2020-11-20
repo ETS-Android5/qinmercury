@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/m4399single_id_btn_pay_confirm"
+    style="?android:attr/buttonStyle"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/m4399single_pay_height_view_focused"
+    android:layout_marginLeft="@dimen/m4399single_pay_spacing_h"
+    android:layout_marginTop="@dimen/m4399single_pay_spacing_v"
+    android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+    android:layout_marginBottom="@dimen/m4399single_pay_spacing_v"
+    android:background="@drawable/m4399single_pay_ripple_yellow_bounded"
+    android:text="@string/m4399single_pay_label_confirm_pay"
+    android:textColor="@android:color/white"
+    android:textSize="16sp" />

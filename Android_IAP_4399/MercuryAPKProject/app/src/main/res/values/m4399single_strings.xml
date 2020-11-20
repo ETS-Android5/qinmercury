@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- internal error -->
+    <string name="m4399single_error_unknown">内部错误，无法处理请求，请关闭页面重试</string>
+    <string name="m4399single_error_url">URL不能为空</string>
+
+    <!-- support.webview -->
+    <string name="m4399single_support_network_disconnect">网络断开连接</string>
+    <string name="m4399single_support_network_timeout">加载网页超时</string>
+    <string name="m4399single_support_network_abnormal">网络异常，请连接后重试</string>
+    <string name="m4399single_support_title_ssl_error">网页SSL证书错误</string>
+    <string name="m4399single_support_ssl_error">当前网页SSL证书异常，是否继续打开？</string>
+    <string name="m4399single_action_goon">继续</string>
+    <string name="m4399single_action_cancel">取消</string>
+    <string name="m4399single_action_close">关闭</string>
+    <string name="m4399single_action_retry">重试</string>
+    <string name="m4399single_action_confirm">确定</string>
+
+    <!-- support -->
+    <array name="m4399single_support_error_web_titles">
+        <item>找不到网页</item>
+        <item>Error 405</item>
+    </array>
+
+    <array name="m4399_support_domain_without_title">
+        <item>a.4399.cn/mobile</item>
+        <item>mcashiermd.95516.com</item>
+    </array>
+
+    <!-- component -->
+    <string name="m4399single_component_loading">加载中…</string>
+    <string name="m4399single_component_network_error">网络异常，点击页面刷新试试</string>
+    <!-- component.HtmlFragment -->
+    <string name="m4399single_component_change_connection">设置网络</string>
+
+    <!-- account.login -->
+    <string name="m4399single_account_login_title">账号登录</string>
+    <string name="m4399single_account_title_switch_account">切换账号</string>
+    <string name="m4399single_account_back_game">回到游戏</string>
+    <string name="m4399single_account_action_login_now">立即登录</string>
+    <string name="m4399single_account_message_need_login">很抱歉，您还未登录，请您登录之后进行游戏</string>
+
+    <!-- account.identity -->
+    <string name="m4399single_identity_link_name">查看详情</string>
+    <string name="m4399single_identity_last_tip">最后一位仅能为数字或X</string>
+    <string name="m4399single_identity_name_error">真实姓名仅能为汉字</string>
+    <string name="m4399single_identity_name_words_tip">最多能输入15个汉字</string>
+    <string name="m4399single_identity_most_tip">最多能输入18位号码</string>
+    <string name="m4399single_identity_tip">前17位只能为数字</string>
+    <string name="m4399single_identity_name_tip">不能输入特殊字符、表情、数字</string>
+    <string name="m4399single_identity_error">您输入的身份证号格式有误</string>
+    <string name="m4399single_identity_bind_id_success">认证成功！</string>
+    <string name="m4399single_identity_msg_copy_success">已复制</string>
+
+    <!-- anti -->
+    <string name="m4399single_anti_aga_wap_title">4399健康系统说明</string>
+
+    <!-- Recharge -->
+    <!-- recharge.ApiRecharge -->
+    <string name="m4399single_pay_error_not_login">未登录不能充值，请先登录或再重试</string>
+    <string name="m4399single_pay_error_recharge_duplicated">无效请求，有未完成的充值流程</string>
+    <string name="m4399single_pay_error_money_error">充值金额只能是(1~50000)之间的整数</string>
+    <string name="m4399single_pay_error_commodity_error">商品名过长，超过了20个中文文字长度</string>
+    <string name="m4399single_pay_requesting_recharge">正在生成充值订单</string>
+    <string name="m4399single_pay_error_not_inited">SDK 没有初始化，请关闭页面重试或重新进入游戏</string>
+    <!--recharge.order.OrderState -->
+    <string name="m4399single_pay_subject_order_success">充值成功</string>
+    <string name="m4399single_pay_misc_order_failed">失败</string>
+    <string name="m4399single_pay_subject_order_failed">充值失败</string>
+    <string name="m4399single_pay_subject_order_processing">订单处理中</string>
+    <string name="m4399single_pay_misc_order_processing">处理中</string>
+    <string name="m4399single_pay_subject_order_cancelled">订单已取消</string>
+    <string name="m4399single_pay_subject_order_aborted">充值异常终止</string>
+    <string name="m4399single_pay_desc_order_success">已通知游戏发放物品，请保持网络畅通</string>
+    <string name="m4399single_pay_desc_order_processing">订单处理中，请保持网络连接畅通</string>
+    <string name="m4399single_pay_desc_order_cancelled">当前充值已经取消</string>
+    <string name="m4399single_pay_desc_order_failed">充值失败，请您重新下单后再支付</string>
+    <string name="m4399single_pay_desc_order_aborted">充值终止，页面或数据错误</string>
+    <string name="m4399single_pay_tips_failed_YiKaTong">若充值失败，请确认检查卡号密码是否输入正确</string>
+    <string name="m4399single_pay_desc_trigger_aga">由于防沉迷政策，您的充值受到限制</string>
+    <!--recharge.order.HistOrderFragment-->
+    <string name="m4399single_pay_title_history_order">未完成订单</string>
+    <string name="m4399single_pay_hint_order_lifetime">小贴士：这里只会显示近期的异常订单记录哦~</string>
+    <string name="m4399single_pay_head_order_time">时间</string>
+    <string name="m4399single_pay_head_order_id">订单号</string>
+    <string name="m4399single_pay_head_order_assign">金额(元)</string>
+    <string name="m4399single_pay_head_order_status">状态</string>
+    <string name="m4399single_pay_hint_history_order_empty">近期无异常订单</string>
+    <string name="m4399single_pay_msg_order_id_pasted">订单号已复制</string>
+    <string name="m4399single_pay_fmt_time_after_today">MM月dd日\nHH:mm</string>
+    <string name="m4399single_pay_fmt_time_today">HH:mm</string>
+    <string name="m4399single_pay_fmt_time_yesterday">昨天HH:mm</string>
+    <!-- recharge.order.OrderStatusFragment -->
+    <string name="m4399single_pay_title_display_order">订单状态</string>
+    <string name="m4399single_pay_prefix_pay_id">订单号&#8195;</string>
+    <string name="m4399single_pay_title_faq">常见问题</string>
+    <string name="m4399single_pay_link_faq"><u>常见问题</u></string>
+    <string name="m439single_pay_hot_line_prefix">客服热线：</string>
+    <string name="m4399single_pay_prefix_channel_info">关于%s</string>
+    <!-- For maintenance dialog -->
+    <string name="m4399single_pay_mt_title">%1s维护中</string>
+    <string name="m4399single_pay_mt_message_default">维护预计于 %s 结束</string>
+    <!--recharge.channel.ChannelListFragment-->
+    <string name="m4399single_pay_channel_grid_fragment">选择支付方式</string>
+    <!--recharge.channel.ChannelFragment-->
+    <string name="m4399single_pay_prompt_input_money">其他金额：</string>
+    <string name="m4399single_pay_hint_input_money">请输入你要充值的金额</string>
+    <string name="m4399single_pay_prefix_assign">支付金额</string>
+    <string name="m4399single_pay_unit_yuan">元</string>
+    <string name="m4399single_pay_prefix_commodity">商品名称</string>
+    <string name="m4399single_pay_prefix_account">充值账号</string>
+    <string name="m4399single_pay_label_next_step">下一步</string>
+    <string name="m4399single_pay_label_confirm_pay">确认支付</string>
+    <!-- recharge.channel CardPayImpl CardFragment -->
+    <string name="m4399single_pay_edt_card_serial">请输入充值卡号</string>
+    <string name="m4399single_pay_edt_card_cipher">请输入充值密码</string>
+    <string name="m4399single_pay_error_empty_serial_cipher">卡号或密码不能为空，请检查输入</string>
+    <string name="m4399single_pay_fmt_error_serial">卡号长度有误，请仔细核对\n(%1$s卡号为%2$d位, 密码%3$d位)</string>
+    <string name="m4399single_pay_fmt_error_cipher">密码长度有误，请仔细核对\n(%1$s卡号为%2$d位, 密码%3$d位)</string>
+    <!-- recharge.channel PayImpl -->
+    <string name="m4399single_pay_ret_no_network">网络请求失败, 请检查网络状况</string>
+    <string name="m4399single_pay_ret_success">充值成功</string>
+    <string name="m4399single_pay_ret_system_abnormal">系统异常</string>
+    <string name="m4399single_pay_ret_error_data">数据格式不正确</string>
+    <string name="m4399single_pay_ret_inquiring_result">支付结果在确认中</string>
+    <string name="m4399single_pay_ret_user_cancelled">取消支付操作</string>
+    <string name="m4399single_pay_ret_failed_web_pay">网页支付失败</string>
+    <string name="m4399single_pay_ret_leave_wap">您已离开支付页面</string>
+    <string name="m4399single_pay_on_recharging">正在充值，请稍候 </string>
+    <!-- recharge.channel 3rd Channel  -->
+    <string name="m4399single_pay_msg_wx_install_tips">您尚未安装微信，请先安装或选择其他支付方式</string>
+    <string name="m4399single_pay_msg_qq_install_tips">您尚未安装手机QQ，请先安装或选择其他支付方式</string>
+    <string name="m4399single_pay_error_launch_qq">启动QQ失败，请确保安装最新qq或用其他方式充值</string>
+    <string name="m4399single_pay_error_launch_wechat">启动微信失败，请确保安装最新微信客户端或用其他方式充值</string>
+    <string name="m4399single_pay_wx_failed_miss_protocol">获取微信支付链接失败，无法启动微信</string>
+
+    <!-- recharge.order.history.OrderHistoryFragment -->
+    <string name="m4399single_pay_label_history_order">未\n完\n成\n订\n单</string>
+    <string name="m4399single_pay_action_refresh">刷新</string>
+    <string name="m4399single_pay_refresh_remain_time">%1d 秒</string>
+    <string name="m4399single_pay_on_refreshing_order">正在刷新订单</string>
+    <string name="m4399single_pay_no_need_refresh">没有订单可刷新！</string>
+    <string name="m4399single_pay_on_refresh_finished">本次更新%1d条订单(刷新时保证请保证网络畅通，刷新后仍有未完成订单，请重新尝试)</string>
+
+    <!-- recharge.order OrderInquiryFragment -->
+    <string name="m4399single_pay_title_inquiring_order">等待充值</string>
+    <string name="m4399single_pty_tool_text_abandon_inquiring">放弃充值</string>
+    <string name="m4399single_pay_fmt_abort_inquiring">放弃充值（%02ds）</string>
+    <string name="m4399single_pay_fmt_account_online">账&#8195;号：%s</string>
+    <string name="m4399single_pay_fmt_order_id">订单号：%1s</string>
+    <string name="m4399single_pay_prefix_warm_tips">温馨提示：</string>
+    <string name="m4399single_pay_progress_text_inquiring_order">正在为您查询充值结果，请勿进行其他操作</string>
+    <string name="m4399single_pay_tips_inquiring_order">充值过程中，请保持网络畅通；完成后可在游戏中查看到账的物品</string>
+    <string name="m4399single_pay_title_alert_abandon_inquiring">确定放弃充值？</string>
+    <string name="m4399single_pay_message_alert_abandon_inquiring">若您已完成充值，建议继续等待，退出将可能导致充值异常</string>
+    <string name="m4399single_pay_action_abandon_inquiring">放弃等待</string>
+    <string name="m4399single_pay_action_continue_inquiring">继续等待</string>
+    <!-- recharge.channel.payImpl UniPayFragment -->
+    <string name="m4399single_pay_title_alert_web_pay">提示</string>
+    <string name="m4399single_pay_message_alert_web_pay">您确定要取消充值操作吗？</string>
+    <string name="m4399single_pay_action_continue_web_pay">继续充值</string>
+    <string name="m4399single_pay_action_cancel_web_pay">取消充值</string>
+    <!-- recharge.order OrderNotification -->
+    <string name="m4399single_pay_ntf_ticker_text_success">您在《%1$s》中充值购买成功，可在游戏内查看详情</string>
+    <string name="m4399single_pay_ntf_ticker_text_failed">您在《%1$s》中充值购买失败，前在游戏内查看详情</string>
+    <string name="m4399single_pay_ntf_content_title_success">充值购买成功</string>
+    <string name="m4399single_pay_ntf_content_title_failed">充值购买失败</string>
+    <string name="m4399single_pay_ntf_content_success_text">您购买“%1$s”成功</string>
+    <string name="m4399single_pay_ntf_content_failed_text">您购买“%1$s”失败</string>
+    <string name="m4399single_pay_ntf_content_and">和</string>
+    <!-- recharge.order Captcha -->
+    <string name="m4399single_pay_title_captcha_dialog">验证请求</string>
+    <string name="m4399single_pay_hint_input_captcha">请输入验证码</string>
+    <string name="m4399single_pay_error_validate_failed">验证码错误，请重新填写</string>
+    <string name="m4399single_pay_error_captcha_no_network">不能通过验证，请检查网络状况</string>
+    <string name="m4399single_pay_error_captcha_refresh_failed">不能刷新验证码，请检查网络状况</string>
+    <string name="m4399single_pay_hot_line_4399">400&#8211;633&#8211;4399</string>
+
+    <!-- For order or input sum checker -->
+    <string name="m4399single_pay_amount_error_formatter">所填金额超出范围 (%1$d - %2$d)，请重新填写</string>
+
+    <!-- For pay result fragment or tips -->
+    <string name="m4399single_pay_card_delay_tips">若未及时到账，请重新尝试充值或联系客服咨询</string>
+
+
+    <!-- gift code validate -->
+    <string name="m4399single_gift_title">礼包兑换</string>
+    <string name="m4399single_gift_sub_title">兑换礼包可获得游戏道具</string>
+    <string name="m4399single_gift_tip_hint">请输入礼包码</string>
+    <string name="m4399single_gift_check">立即兑换</string>
+    <string name="m4399single_gift_message_instructions">还没有礼包码？去4399游戏盒获取礼包码</string>
+    <string name="m4399single_gift_game_box">4399游戏盒</string>
+    <string name="m4399single_gift_success">验证成功，即将到账</string>
+    <string name="m4399single_gift_fail">验证失败</string>
+    <string name="m4399single_gift_code_error">礼包码无效，请输入正确的礼包码</string>
+    <string name="m4399single_gift_processing">正在处理，请稍候 </string>
+
+    <!-- upgrade -->
+    <!-- upgrade.check-->
+    <string name="m4399single_upd_check_error">检查更新失败</string>
+    <string name="m4399single_upd_check_error_manual__disabled">自动更新已开启，不能进行手动更新</string>
+    <string name="m4399single_upd_check_source_error">获取当前安装包信息失败</string>
+    <!-- upgrade.download -->
+    <string name="m4399single_upd_fmt_apk_size">大小：%s</string>
+    <string name="m4399single_upd_fmt_patch_size">大小：%1$s %2$s</string>
+    <string name="m4399single_upd_time">时间：%s</string>
+    <string name="m4399single_upd_title">游戏更新 v%s版</string>
+    <string name="m4399single_upd_now">立即更新</string>
+    <string name="m4399single_upd_label_downloading">下载中</string>
+    <string name="m4399single_upd_msg_downloading">下载中, 请耐心等候</string>
+    <string name="m4399single_upd_action_next_time">下次再说</string>
+    <string name="m4399single_upd_retry_too_many_times">重试次数过多，请检查网络或退出游戏重试</string>
+    <!-- upgrade.merge-->
+    <string name="m4399single_upd_progress_merge">正在合并安装包</string>
+    <string name="m4399single_upd_error_merge_io">合并失败，文件操作异常</string>
+    <string name="m4399single_upd_error_file_access">合并失败，文件不存在</string>
+    <string name="m4399single_upd_error_merge_xdelta3">合并失败，后台合并出错</string>
+    <!-- upgrade.install-->
+    <string name="m4399single_upd_progress_prepare_install">安装准备中</string>
+    <string name="m4399single_upd_install_title">安装新版本 v%s</string>
+    <string name="m4399single_upd_fmt_apk_size_downloaded">大小：%s（下载完成）</string>
+    <string name="m4399single_upd_fmt_downloaded">（下载完成）</string>
+    <string name="m4399single_upd_install_now">立即安装</string>
+    <string name="m4399single_upd_error_launch_apk_installer">安装本地apk失败，打开系统安装页面异常</string>
+    <string name="m4399single_upd_error_no_file">安装失败，没有下载好的文件</string>
+    <string name="m4399single_upd_force_hint">再次点击，退出游戏</string>
+
+    <string name="m4399single_support_download_success">下载成功完成</string>
+    <string name="m4399single_support_download_success_already">已存在下载好的文件</string>
+    <string name="m4399single_support_download_error_head">下载失败，获取文件信息失败</string>
+    <string name="m4399single_support_download_error_io">下载失败，数据读写异常</string>
+    <string name="m4399single_support_download_error_md5">下载完成，文件校验失败</string>
+
+    <!-- support.gameBox -->
+    <string name="m4399single_box_msg_downloading_app">正在下载应用</string>
+    <string name="m4399single_box_dialog_download_now">立即下载</string>
+    <string name="m4399single_box_main_failure_start">启动游戏盒失败，请更新游戏盒版本之后重试</string>
+    <string name="m4399single_box_dialog_warm_tips">温馨提示</string>
+    <string name="m4399single_box_dialog_msg_normal">为了您更好的体验，该操作需在游戏盒内进行，是否进行下载？</string>
+    <string name="m4399single_box_notification_msg_downloading">正在下载，可在通知栏查看进度</string>
+    <string name="m4399single_box_toast_download_dir">下载完成后请到sdcard的Download目录下查找文件</string>
+
+</resources>

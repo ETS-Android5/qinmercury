@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/m4399single_id_tv_negative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/m4399single_ripple_dialog_left_btn"
+    android:gravity="center"
+    android:textColor="@color/m4399single_color_txt_secondary"
+    android:textSize="@dimen/m4399single_font_16"
+    tools:layout_height="@dimen/m4399_ope_dialog_btn_action_height"
+    tools:layout_width="120dp"
+    tools:text="@string/m4399single_action_close" />

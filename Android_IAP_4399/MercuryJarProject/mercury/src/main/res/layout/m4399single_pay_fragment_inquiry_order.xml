@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/m4399Single.Theme.AbsPayFragment"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m4399single_pay_height_title"
+        android:background="@drawable/m4399single_pay_fragment_nav_bg"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/m4399single_pay_inquiry_order_tv_give_up"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+            android:paddingRight="@dimen/m4399single_pay_spacing_h"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/m4399single_font_15"
+            android:alpha="0.7"
+            android:background="@drawable/m4399single_ripple_white_borderless"
+            tools:ignore="RelativeOverlap"
+            tools:text="@string/m4399single_pay_fmt_abort_inquiring" />
+
+        <TextView
+            android:id="@id/m4399single_pay_inquiry_order_tv_give_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/m4399single_pay_title_inquiring_order"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/m4399single_font_18" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables"
+        tools:layout_width="match_parent">
+
+        <ImageView
+            android:id="@id/m4399single_id_iv_progress_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:lineSpacingExtra="8dp"
+            android:text="@string/m4399single_pay_progress_text_inquiring_order"
+            android:textColor="#666666"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/m4399single_pay_footer_bg"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+        android:paddingTop="@dimen/m4399single_pay_spacing_v"
+        android:paddingRight="@dimen/m4399single_pay_spacing_h"
+        android:paddingBottom="@dimen/m4399single_pay_spacing_v">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/m4399single_pay_prefix_warm_tips"
+            android:textColor="#aaaaaa"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/m4399single_pay_tips_inquiring_order"
+            android:textColor="#aaaaaa"
+            android:lineSpacingExtra="2dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/m4399single_pay_inquiry_tv_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#aaaaaa"
+            android:textSize="12sp"
+            tools:text="@string/m4399single_pay_fmt_order_id" />
+
+        <TextView
+            android:id="@+id/m4399single_pay_inquiry_tv_uid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#aaaaaa"
+            android:textSize="12sp"
+            tools:text="@string/m4399single_pay_fmt_account_online" />
+    </LinearLayout>
+</LinearLayout>

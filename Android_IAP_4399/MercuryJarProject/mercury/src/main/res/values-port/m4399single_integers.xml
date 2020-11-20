@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="m4399single_num_channel_icon_column">4</integer>
+    <integer name="m4399single_pay_num_grid_column">4</integer>
+
+</resources>

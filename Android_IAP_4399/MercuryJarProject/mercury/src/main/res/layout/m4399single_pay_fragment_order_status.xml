@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/m4399Single.Theme.AbsPayFragment">
+
+    <include layout="@layout/m4399single_pay_nav_main" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m4399single_id_navigation_bar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <include layout="@layout/m4399single_pay_order_state" />
+
+        <include layout="@layout/m4399single_divider_h" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/m4399single_pay_prefix_assign"
+                android:textColor="@color/m4399single_color_txt_primary"
+                android:layout_marginEnd="@dimen/m4399single_pay_spacing_h"
+                android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@id/m4399single_id_tv_order_assign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/m4399single_color_txt_secondary"
+                android:textSize="14sp"
+                tools:text="20 元" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/m4399single_pay_prefix_commodity"
+                android:textColor="@color/m4399single_color_txt_primary"
+                android:layout_marginEnd="@dimen/m4399single_pay_spacing_h"
+                android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@id/m4399single_id_tv_order_commodity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/m4399single_color_txt_secondary"
+                android:textSize="14sp"
+                tools:text="VIP 礼包一个" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/m4399single_pay_order_status_ll_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/m4399single_pay_prefix_pay_id"
+                android:textColor="@color/m4399single_color_txt_primary"
+                android:layout_marginEnd="@dimen/m4399single_pay_spacing_h"
+                android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/m4399single_pay_order_status_tv_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/m4399single_color_txt_secondary"
+                android:textSize="14sp"
+                tools:text="201912091830007" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/m4399single_pay_order_status_tv_warm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/m4399single_color_txt_hint"
+            android:textSize="13sp"
+            tools:text="@string/m4399single_error_url" />
+    </LinearLayout>
+
+    <include layout="@layout/m4399single_pay_footer_channel" />
+
+</RelativeLayout>

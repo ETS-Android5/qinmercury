@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/m4399_color_primary_dark">
+    <item>
+        <selector>
+            <item
+                android:drawable="@drawable/m4399single_pay_shape_view_bg_yellow"
+                android:state_enabled="true" />
+
+            <item
+                android:drawable="@drawable/m4399single_pay_shape_view_bg_grey"
+                android:state_enabled="false" />
+        </selector>
+    </item>
+</ripple>

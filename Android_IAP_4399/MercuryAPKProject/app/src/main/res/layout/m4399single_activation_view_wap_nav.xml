@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?><!--  个人中心 导航栏 by.zhengxu  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/m4399single_activation_common_nav_bg"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/nav_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp">
+
+        <ImageView
+            android:id="@+id/nav_back_img"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/m4399single_activation_wap_nav_back" />
+    </LinearLayout>
+
+</RelativeLayout>

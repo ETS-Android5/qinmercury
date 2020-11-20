@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TextSeekBar">
+        <attr name="text" format="string" />
+        <attr name="progressColor" format="color" />
+        <attr name="progressFailColor" format="color" />
+        <attr name="indeterminateColor" format="color" />
+        <attr name="thumb" format="reference" />
+        <attr name="thumbStart" format="reference" />
+        <attr name="thumbFail" format="reference" />
+        <attr name="textColor" format="color" />
+        <attr name="indeterminateRadius" format="dimension" />
+    </declare-styleable>
+</resources>

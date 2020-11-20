@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="304dp"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+
+    <ImageView
+        android:id="@+id/m4399single_anti_guest_iv_close"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:padding="18dp"
+        android:src="@drawable/m4399single_close" />
+
+    <LinearLayout
+        android:id="@+id/m4399single_anti_guest_ll_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="26dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:src="@drawable/m4399single_change_account" />
+
+        <TextView
+            android:id="@+id/m4399single_anti_guest_tv_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/m4399single_color_txt_prompt"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <cn.m4399.single.component.widget.SpaceCompactTextView
+        android:id="@+id/m4399single_anti_guest_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m4399single_anti_guest_ll_account"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="26dp"
+        android:lineSpacingExtra="9dp"
+        android:textColor="#333333"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/m4399single_anti_guest_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@id/m4399single_anti_guest_tv_title"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+    <cn.m4399.single.component.widget.ConstraintEditText
+        android:id="@+id/m4399single_anti_guest_edt_name"
+        style="@style/m4399Single.Editor.Id.Input"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/m4399single_anti_guest_tv_title"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="26dp"
+        android:layout_toRightOf="@id/m4399single_anti_guest_tv_name" />
+
+    <TextView
+        android:id="@+id/m4399single_anti_guest_tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@id/m4399single_anti_guest_tv_name"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+    <cn.m4399.single.component.widget.ConstraintEditText
+        android:id="@+id/m4399single_anti_guest_edt_id"
+        style="@style/m4399Single.Editor.Id.Input"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/m4399single_anti_guest_edt_name"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="26dp"
+        android:layout_toRightOf="@id/m4399single_anti_guest_tv_id"
+        android:digits="0123456789Xx" />
+
+    <cn.m4399.single.component.widget.SpaceCompactTextView
+        android:id="@+id/m4399single_anti_guest_tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m4399single_anti_guest_tv_id"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="26dp"
+        android:gravity="left|center"
+        android:lineSpacingExtra="8dp"
+        android:textColor="#bbbbbb"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/m4399single_anti_guest_tv_commit"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/m4399single_anti_guest_tv_tip"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="26dp"
+        android:background="@drawable/m4399single_btn_enable_bg"
+        android:enabled="false"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/m4399single_anti_guest_ll_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m4399single_anti_guest_tv_commit"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="26dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/m4399single_anti_guest_tv_foreign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#54ba3d"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/m4399single_anti_guest_view_line"
+            android:layout_width="1dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#54ba3d" />
+
+        <TextView
+            android:id="@+id/m4399single_anti_guest_tv_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#54ba3d"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <cn.m4399.single.component.widget.SpaceCompactTextView
+        android:id="@+id/m4399single_anti_guest_tv_destroy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m4399single_anti_guest_ll_link"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="26dp"
+        android:gravity="left|center"
+        android:lineSpacingExtra="6dp"
+        android:textColor="#bbbbbb"
+        android:textSize="12sp" />
+
+</RelativeLayout>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/m4399.Dialog.Container"
+    android:layout_width="@dimen/m4399_width_dialog_wider"
+    android:paddingLeft="26dp"
+    tools:ignore="all">
+
+    <TextView
+        android:id="@+id/m4399single_gift_check_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="27.5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingRight="26dp"
+        android:text="@string/m4399single_gift_title"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/m4399single_gift_check_iv_close"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="18dp"
+        android:padding="10dp"
+        android:src="@drawable/m4399single_close" />
+
+    <TextView
+        android:id="@+id/m4399single_gift_check_tv_destroy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m4399single_gift_check_tv_title"
+        android:layout_alignLeft="@id/m4399single_gift_check_tv_title"
+        android:layout_marginTop="20dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingRight="26dp"
+        android:text="@string/m4399single_gift_sub_title"
+        android:textColor="#666666"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/m4399single_gift_check_rl_input"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_below="@id/m4399single_gift_check_tv_destroy"
+        android:layout_alignLeft="@id/m4399single_gift_check_tv_destroy"
+        android:layout_marginTop="12dp"
+        android:paddingRight="26dp">
+
+        <EditText
+            android:id="@+id/m4399single_gift_check_edt_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/m4399single_gift_input_bg"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:ellipsize="end"
+            android:hint="@string/m4399single_gift_tip_hint"
+            android:inputType="text"
+            android:maxLength="26"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/m4399single_gift_check_iv_clear"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="12dp"
+            android:src="@drawable/m4399single_gift_clear_input"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/m4399single_pay_confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m4399_height_view_focused"
+        android:layout_below="@id/m4399single_gift_check_rl_input"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="26dp" />
+
+    <TextView
+        android:id="@+id/m4399single_gift_check_tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m4399single_id_btn_pay_confirm"
+        android:layout_alignLeft="@id/m4399single_id_btn_pay_confirm"
+        android:layout_marginTop="15.5dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="19.5dp"
+        android:text="@string/m4399single_gift_message_instructions"
+        android:textColor="#bbbbbb"
+        android:textSize="14sp" />
+
+</RelativeLayout>

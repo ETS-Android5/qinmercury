@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Banner -->
+    <item name="m4399single_anti_banner_tv_close" type="id" />
+
+    <!-- Dialog spec -->
+    <item name="m4399single_id_tv_dialog_title" type="id" />
+    <item name="m4399single_id_stub_negative_container" type="id" />
+    <item name="m4399single_id_tv_negative" type="id" />
+    <item name="m4399single_id_stub_positive_container" type="id" />
+    <item name="m4399single_id_tv_positive" type="id" />
+    <item name="m4399single_id_stub_vertical_divider" type="id" />
+    <item name="m4399single_id_iv_progress_indicator" type="id" />
+
+    <!--navigation bar-->
+    <item name="m4399single_id_navigation_bar" type="id" />
+    <item name="m4399single_id_tv_nav_title" type="id" />
+    <item name="m4399single_id_iv_nav_back" type="id" />
+    <item name="m4399single_id_tv_nav_container" type="id" />
+    <item name="m4399single_id_tv_tools_primary" type="id" />
+    <item name="m4399single_id_iv_primary" type="id" />
+    <item name="m4399single_id_iv_nav_close" type="id" />
+
+    <!-- webview container, such as dialog and fragment-->
+    <item name="m4399single_id_webview_container" type="id" />
+    <item name="m4399single_id_webview" type="id" />
+    <item name="m4399single_id_stub_network_error" type="id" />
+
+
+    <!-- recharge.channel -->
+    <item name="m4399single_id_tv_order_assign" type="id" />
+    <item name="m4399single_id_tv_order_assign_unit" type="id" />
+    <item name="m4399single_id_tv_order_commodity" type="id" />
+    <item name="m4399single_id_tv_user_id" type="id" />
+    <item name="m4399single_id_tv_hotline" type="id" />
+    <item name="m4399single_id_tv_help_entry" type="id" />
+    <item name="m4399single_id_btn_pay_confirm" type="id" />
+
+    <!-- recharge.order.OrderStatusFragment -->
+    <item name="m4399single_id_iv_order_state" type="id" />
+    <item name="m4399single_id_tv_order_state_subject" type="id" />
+    <item name="m4399single_id_tv_order_state_desc" type="id" />
+</resources>

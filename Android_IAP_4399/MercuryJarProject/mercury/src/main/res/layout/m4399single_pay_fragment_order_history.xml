@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/m4399Single.Theme.AbsPayFragment"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@id/m4399single_id_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m4399single_pay_height_title"
+        android:background="@drawable/m4399single_pay_fragment_nav_bg"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/m4399single_pay_title_history_order"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/m4399single_font_18"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@id/m4399single_id_iv_nav_back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/m4399single_nav_icon_size"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:background="@drawable/m4399single_ripple_white_borderless"
+            android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+            android:paddingRight="@dimen/m4399single_pay_spacing_h"
+            android:scaleType="fitStart"
+            android:src="@drawable/m4399single_left_arrow_white"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/m4399single_pay_order_history_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/m4399single_ripple_white_borderless"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+            android:paddingRight="@dimen/m4399single_pay_spacing_h">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/m4399single_pay_refresh_order_area_bg" />
+
+            <TextView
+                android:id="@+id/m4399single_pay_order_history_tv_refresh"
+                android:layout_width="36sp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/m4399single_pay_action_refresh"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/m4399single_font_15" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/m4399single_pay_order_history_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m4399single_id_navigation_bar"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+        android:paddingRight="@dimen/m4399single_pay_spacing_h"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m4399single_pay_spacing_v"
+            android:layout_marginBottom="@dimen/m4399single_pay_spacing_v"
+            android:text="@string/m4399single_pay_hint_order_lifetime"
+            android:textColor="@color/m4399single_color_txt_prompt"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/m4399single_pay_height_history_order_item"
+            android:background="@color/m4399single_color_bg_clicked"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="1dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/m4399single_pay_height_history_order_item"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="2"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="@string/m4399single_pay_head_order_time"
+                android:textColor="@color/m4399single_color_txt_secondary"
+                android:textSize="@dimen/m4399single_font_12" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/m4399single_pay_height_history_order_item"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="4.7"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="@string/m4399single_pay_head_order_id"
+                android:textColor="@color/m4399single_color_txt_secondary"
+                android:textSize="@dimen/m4399single_font_12" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/m4399single_pay_height_history_order_item"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1.8"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="@string/m4399single_pay_head_order_assign"
+                android:textColor="@color/m4399single_color_txt_secondary"
+                android:textSize="@dimen/m4399single_font_12" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/m4399single_pay_height_history_order_item"
+                android:layout_weight="1.8"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="@string/m4399single_pay_head_order_status"
+                android:textColor="@color/m4399single_color_txt_secondary"
+                android:textSize="@dimen/m4399single_font_12" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/m4399single_pay_order_history_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/m4399single_pay_height_footer"
+            android:layout_weight="1.0"
+            android:background="@color/m4399single_color_bg_clicked"
+            android:divider="@null"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:paddingBottom="1dp"
+            android:scrollbars="none"
+            tools:listitem="@layout/m4399single_pay_item_order_history" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/m4399single_pay_order_history_tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawableTop="@drawable/m4399single_pay_history_order_empty"
+        android:drawablePadding="12dp"
+        android:gravity="center_horizontal"
+        android:text="@string/m4399single_pay_hint_history_order_empty"
+        android:textColor="@color/m4399single_color_txt_prompt"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <include layout="@layout/m4399single_pay_footer_channel" />
+</RelativeLayout>

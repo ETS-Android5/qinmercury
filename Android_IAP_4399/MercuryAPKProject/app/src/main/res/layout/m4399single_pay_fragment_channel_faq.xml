@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/m4399Single.Theme.AbsPayFragment"
+    android:orientation="vertical">
+
+    <include layout="@layout/m4399single_pay_nav_main" />
+
+    <ListView
+        android:id="@+id/m4399single_pay_channel_info_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/m4399single_pay_spacing_v"
+        android:layout_weight="1.0"
+        android:divider="@color/m4399single_color_line"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@null"
+        android:scrollbars="none" />
+
+    <include layout="@layout/m4399single_pay_footer_channel_grid" />
+
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 方向兼容 -->
+    <style name="m4399.Orientation" parent="m4399">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- ActivityInfo.SCREEN_ORIENTATION_PORTRAIT -->
+    <integer name="m4399_integer_orientation">1</integer>
+
+    <dimen name="m4399_width_dialog_standard">280dp</dimen>
+    <dimen name="m4399_width_dialog_wider">304dp</dimen>
+    <dimen name="m4399_width_dialog_widest">304dp</dimen>
+    <dimen name="m4399_dialog_content_margin_h">24dp</dimen>
+    <dimen name="m4399_dialog_line_space">6dp</dimen>
+    <dimen name="m4399_height_view_focused">40dp</dimen>
+</resources>

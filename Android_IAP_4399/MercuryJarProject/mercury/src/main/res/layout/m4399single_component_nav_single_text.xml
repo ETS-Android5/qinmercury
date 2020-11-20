@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/m4399single_id_tv_tools_primary"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/m4399single_ripple_white_borderless"
+    android:gravity="center"
+    android:textColor="@color/m4399single_color_txt_primary"
+    android:textSize="@dimen/m4399single_font_14" />

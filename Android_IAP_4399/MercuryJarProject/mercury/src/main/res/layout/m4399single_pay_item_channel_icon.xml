@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/m4399single_pay_padding_channel_icon"
+    tools:ignore="UseCompoundDrawables">
+
+    <cn.m4399.single.support.network.NetworkImageView
+        android:id="@+id/m4399single_pay_channel_niv"
+        android:layout_width="@dimen/m4399single_pay_size_channel_icon"
+        android:layout_height="@dimen/m4399single_pay_size_channel_icon"
+        android:adjustViewBounds="true"
+        android:padding="6dp"
+        android:scaleType="fitCenter"
+        tools:background="@drawable/m4399single_network_error" />
+
+    <TextView
+        android:id="@+id/m4399single_pay_channel_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/m4399single_color_txt_primary"
+        android:textSize="11sp"
+        tools:ignore="SmallSp"
+        tools:text="支付宝" />
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:showIn="@layout/m4399single_identity_input_id_card_dialog">
+
+    <TextView
+        android:id="@+id/m4399single_identity_input_dialog_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25.5dp"
+        android:layout_marginLeft="25.5dp"
+        android:layout_marginTop="25.5dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="16.5dp"
+        android:textColor="@color/m4399single_color_txt_primary"
+        android:textSize="@dimen/m4399single_font_16" />
+
+    <ScrollView
+        android:id="@+id/m4399single_identity_input_dialog_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m4399single_name_auth_content_h"
+        android:layout_marginLeft="25.5dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/m4399single_account_identity_auth_content_bg"
+        android:fadeScrollbars="false"
+        android:paddingRight="2dp"
+        android:scrollbarSize="4dp"
+        android:scrollbarThumbVertical="@drawable/m4399single_scroll_bar_thumb"
+        android:scrollbarTrackVertical="@drawable/m4399single_scroll_bar_track">
+
+        <cn.m4399.single.component.widget.AlignTextView
+            android:id="@+id/m4399single_identity_input_dialog_atv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
+</merge>

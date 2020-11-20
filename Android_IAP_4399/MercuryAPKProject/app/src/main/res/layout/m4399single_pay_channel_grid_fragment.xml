@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/m4399Single.Theme.AbsPayFragment"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <include layout="@layout/m4399single_pay_nav_main" />
+
+    <include layout="@layout/m4399single_pay_order_info_se" />
+
+    <include layout="@layout/m4399single_divider_h" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0">
+
+        <GridView
+            android:id="@+id/m4399single_pay_grid_channel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/m4399single_pay_spacing_h"
+            android:layout_marginTop="@dimen/m4399single_pay_spacing_v"
+            android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+            android:layout_marginBottom="@dimen/m4399single_pay_spacing_v"
+            android:listSelector="@drawable/m4399single_pay_ripple_white_rounded"
+            android:numColumns="@integer/m4399single_num_channel_icon_column"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/m4399single_pay_tv_order_entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/m4399single_spacing_medium_v"
+            android:background="@drawable/m4399single_pay_record_entry_bg"
+            android:gravity="center"
+            android:paddingLeft="6dp"
+            android:paddingTop="4dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/m4399single_pay_label_history_order"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/m4399single_pay_footer_channel_grid" />
+
+</LinearLayout>

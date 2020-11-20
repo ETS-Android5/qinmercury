@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="150dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="26dp"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:id="@id/m4399single_id_iv_progress_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/m4399_ope_id_tv_progress_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/m4399single_spacing_normal_v"
+        android:singleLine="true"
+        android:textColor="@color/m4399single_color_txt_primary"
+        android:textSize="16sp" />
+</LinearLayout>

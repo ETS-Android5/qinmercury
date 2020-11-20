@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/m4399single_view_progress"
+    android:layout_width="wrap_content"
+    android:layout_height="4dp" />

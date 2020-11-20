@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="24dp"
+    android:paddingBottom="24dp">
+
+    <ImageView
+        android:id="@id/m4399single_id_iv_order_state"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/m4399single_pay_success" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@id/m4399single_id_tv_order_state_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            tools:text="@string/m4399single_pay_subject_order_success"
+            tools:textColor="@color/m4399single_color_green_54ba3d" />
+
+        <TextView
+            android:id="@id/m4399single_id_tv_order_state_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:lineSpacingMultiplier="1"
+            android:textSize="13sp"
+            tools:text="@string/m4399single_pay_desc_order_success"
+            tools:textColor="@color/m4399single_color_green_54ba3d" />
+    </LinearLayout>
+
+</LinearLayout>

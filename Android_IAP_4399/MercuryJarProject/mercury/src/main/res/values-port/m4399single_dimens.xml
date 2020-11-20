@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="m4399single_spacing_small_h">8dp</dimen>
+    <dimen name="m4399single_spacing_normal_v">16dp</dimen>
+
+    <!-- component.confirm.dialog -->
+    <dimen name="m4399single_max_content_height">200dp</dimen>
+
+    <!-- recharge -->
+    <!-- recharge.design -->
+    <dimen name="m4399single_pay_height_fragment">440dp</dimen>
+    <dimen name="m4399single_pay_width_fragment">304dp</dimen>
+    <dimen name="m4399single_pay_height_title">44dp</dimen>
+    <dimen name="m4399single_pay_height_footer">26dp</dimen>
+    <dimen name="m4399single_pay_spacing_h">16dp</dimen>
+    <dimen name="m4399single_pay_spacing_v">12dp</dimen>
+    <dimen name="m4399single_pay_height_view_focused">36dp</dimen>
+    <!-- recharge others -->
+    <dimen name="m4399single_pay_height_history_order_item">42dp</dimen>
+    <dimen name="m4399single_pay_spacing_handy_money_item">8dp</dimen>
+    <dimen name="m4399single_pay_size_channel_icon">62dp</dimen>
+    <dimen name="m4399single_pay_padding_channel_icon">2dp</dimen>
+
+    <dimen name="m4399single_name_auth_content_h">189dp</dimen>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/m4399single_id_navigation_bar"
+    style="@style/m4399.Style.Navigation">
+
+    <TextView
+        android:id="@id/m4399single_id_tv_nav_title"
+        tools:text="@string/m4399single_account_login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:gravity="center"
+        android:textColor="@color/m4399single_color_txt_primary"
+        android:textSize="@dimen/m4399single_font_20"
+        android:layout_centerInParent="true"
+        tools:ignore="RelativeOverlap" />
+
+    <ImageView
+        android:id="@id/m4399single_id_iv_nav_back"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/m4399single_nav_icon_size"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/m4399single_fragment_margin_h"
+        android:layout_marginLeft="@dimen/m4399single_fragment_margin_h"
+        android:background="@drawable/m4399single_ripple_white_borderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/m4399single_left_arrow_black"
+        tools:ignore="ContentDescription" />
+
+    <ViewStub
+        android:id="@id/m4399single_id_tv_nav_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/m4399single_fragment_margin_h"
+        android:layout_marginRight="@dimen/m4399single_fragment_margin_h"
+        android:layout="@layout/m4399single_component_nav_single_text" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/m4399single_color_line" />
+</RelativeLayout>

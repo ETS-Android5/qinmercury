@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/m4399single_pay_height_footer"
+    android:background="@drawable/m4399single_pay_footer_bg"
+    android:gravity="center_vertical"
+    android:paddingStart="@dimen/m4399single_pay_spacing_h"
+    android:paddingLeft="@dimen/m4399single_pay_spacing_h"
+    android:paddingEnd="@dimen/m4399single_pay_spacing_h"
+    android:paddingRight="@dimen/m4399single_pay_spacing_h"
+    tools:layout_gravity="bottom">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:src="@drawable/m4399single_pay_sdk_help"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        style="@style/m4399Single.Pay.Footer.Text"
+        android:textColor="#999999"
+        android:text="@string/m439single_pay_hot_line_prefix" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0">
+
+        <TextView
+            android:id="@id/m4399single_id_tv_hotline"
+            style="@style/m4399Single.Pay.Footer.Text"
+            android:text="@string/m4399single_pay_hot_line_4399"
+            android:layout_gravity="center_vertical"
+            android:textColor="#32beff" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/m4399single_footer_channel_iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/m4399single_pay_sdk_logo"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>

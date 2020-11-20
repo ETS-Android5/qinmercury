@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/m4399single_pay_spacing_h"
+    android:layout_marginRight="@dimen/m4399single_pay_spacing_h"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/m4399single_pay_edt_card_serial"
+        style="@style/m4399Single.Pay.Editor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m4399single_pay_height_view_focused"
+        android:hint="@string/m4399single_pay_edt_card_serial"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:textCursorDrawable="@null" />
+
+    <EditText
+        android:id="@+id/m4399single_pay_edt_card_cipher"
+        style="@style/m4399Single.Pay.Editor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m4399single_pay_height_view_focused"
+        android:layout_marginTop="12dp"
+        android:hint="@string/m4399single_pay_edt_card_cipher"
+        android:imeActionLabel="@string/m4399single_pay_label_confirm_pay"
+        android:importantForAutofill="no"
+        android:textCursorDrawable="@null" />
+
+</LinearLayout>

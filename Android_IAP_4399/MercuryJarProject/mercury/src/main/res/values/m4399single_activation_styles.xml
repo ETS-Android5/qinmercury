@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="m4399single_activation_dialog_opacity" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!--DownloadGBDialog-->
+    <style name="m4399single_activation_animation_full_dialog" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/m4399single_activation_slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/m4399single_activation_slide_out_right</item>
+    </style>
+
+    <style name="m4399single_activation_style_progress">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/m4399single_activation_layer_list_wap_progress</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:maxHeight">10dp</item>
+    </style>
+
+</resources>

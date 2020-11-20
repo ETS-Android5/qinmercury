@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout style="@style/m4399Single.Theme.AbsPayFragment">
+
+    <include layout="@layout/m4399single_pay_nav_main" />
+
+    <include layout="@layout/m4399single_pay_order_info_nse" />
+
+    <include layout="@layout/m4399single_pay_confirm_btn" />
+
+    <include layout="@layout/m4399single_pay_footer_channel" />
+
+</LinearLayout>

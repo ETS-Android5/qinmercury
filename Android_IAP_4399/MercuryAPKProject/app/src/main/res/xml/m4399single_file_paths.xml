@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <cache-path
+        name="cache"
+        path="m4399SDK/" />
+
+    <external-path
+        name="download"
+        path="Download/" />
+
+    <external-files-path
+        name="files"
+        path="m4399SDK/" />
+</paths>

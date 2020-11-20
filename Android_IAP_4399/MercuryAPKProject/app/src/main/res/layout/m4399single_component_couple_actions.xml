@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/m4399_ope_dialog_btn_action_height"
+    android:layout_marginTop="@dimen/m4399single_spacing_normal_v"
+    android:orientation="vertical"
+    tools:showIn="@layout/m4399single_component_confirm_dialog">
+
+    <include layout="@layout/m4399single_divider_h" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ViewStub
+            android:id="@id/m4399single_id_stub_negative_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout="@layout/m4399single_component_couple_negative"
+            tools:visibility="visible" />
+
+        <ViewStub
+            android:id="@id/m4399single_id_stub_vertical_divider"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout="@layout/m4399single_divider_v"
+            tools:ignore="Suspicious0dp"
+            tools:visibility="visible" />
+
+        <ViewStub
+            android:id="@id/m4399single_id_stub_positive_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout="@layout/m4399single_component_couple_positive"
+            tools:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>

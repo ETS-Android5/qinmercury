@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="m4399single_activation_dialog_radius">10dp</dimen>
+    <dimen name="m4399single_activation_dialog_width">403dp</dimen>
+    <dimen name="m4399single_activation_dialog_alert_width">300dp</dimen>
+</resources>
