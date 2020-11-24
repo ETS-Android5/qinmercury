@@ -59,25 +59,25 @@ public class InAppChannel extends InAppBase {
 	{		
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
-		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(mContext, "只限于"+channelname+"测试，请勿泄漏", Toast.LENGTH_SHORT).show();
 		//shrinkpartstart
-		if(readFileData("privacyagreement").equals(""))
-		{
-			new PrivacyDialog(mContext);
-		}
-		if(readFileData("card_id").equals("")) {
-			new IDCardVerifyDialog(mContext, new LoginCallBack() {
-				@Override
-				public void success(String msg) {
-					LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-				}
-
-				@Override
-				public void fail(String msg) {
-					LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-				}
-			});
-		}
+//		if(readFileData("privacyagreement").equals(""))
+//		{
+//			new PrivacyDialog(mContext);
+//		}
+//		if(readFileData("card_id").equals("")) {
+//			new IDCardVerifyDialog(mContext, new LoginCallBack() {
+//				@Override
+//				public void success(String msg) {
+//					LogLocal("[InAppDialog][SigneInDialog] ID card Success");
+//				}
+//
+//				@Override
+//				public void fail(String msg) {
+//					LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+//				}
+//			});
+//		}
 		//shrinkpartend
 	}
 
