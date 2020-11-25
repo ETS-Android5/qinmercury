@@ -121,6 +121,7 @@ public class InAppAD extends InAppBase {
 						// Here you can reward the user according to your in-app settings.
 						MercuryActivity.LogLocal("[InAppAD][ActivityInit]onRewardedVideoAdRewarded scene="+scene);
 						AdShowSuccessCallBack("ActiveRewardVideo");
+						AdTimingRewardedVideo.loadAd();
 					}
 				});
 			}
@@ -259,7 +260,7 @@ public class InAppAD extends InAppBase {
 		}
 		else
 		{
-			AdTimingRewardedVideo.showAd();
+			AdTimingRewardedVideo.loadAd();
 		}
 //		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 //		builder.setMessage("Testing Mode");

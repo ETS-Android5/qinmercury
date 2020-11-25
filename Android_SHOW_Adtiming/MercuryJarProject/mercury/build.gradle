@@ -34,16 +34,90 @@ android {
             dirs 'src/main/libs'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
+allprojects {
+    repositories {
+        maven { url 'https://dl.adtiming.com/android-sdk' }
+
+        // for vungle
+        maven { url 'https://jitpack.io' }
+
+        // for adcolony
+        maven { url 'https://adcolony.bintray.com/AdColony' }
+
+        // for mopub
+        maven { url 'https://s3.amazonaws.com/moat-sdk-builds' }
+
+        // for tapjoy
+        maven { url 'https://tapjoy.bintray.com/maven' }
+
+        // for ironsource
+        maven { url 'https://dl.bintray.com/ironsource-mobile/android-sdk' }
+
+        // for chartboost helium
+        maven { url "https://chartboostmobile.bintray.com/Chartboost" }
+
+        // for Mintegral
+        maven {
+            url "https://dl.bintray.com/mintegral-official/Mintegral_ad_SDK_Android"
+        }
+    }
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'src/main/libs')
-    //implementation(name: 'aarname', ext: 'aar')
     //shrinkpartstart
-    implementation(name: 'AdTimingSDK-6.6.3.1', ext: 'aar')
+
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+        implementation 'com.adtiming:mediation-sdk:6.6.3.1@aar'
+        implementation 'com.adtiming.adapters:admob:3.5.1@aar'
+        implementation 'com.google.android.gms:play-services-ads:19.4.0'
+        implementation 'com.adtiming.adapters:facebook:3.7.1@aar'
+        implementation 'com.facebook.android:audience-network-sdk:6.1.0'
+        implementation 'com.adtiming.adapters:unity:3.6.1@aar'
+        implementation 'com.unity3d.ads:unity-ads:3.5.0'
+        implementation 'com.adtiming.adapters:vungle:3.6.3@aar'
+        implementation 'com.vungle:publisher-sdk-android:6.8.1'
+        implementation 'com.adtiming.adapters:adcolony:3.3.1@aar'
+        implementation 'com.adcolony:sdk:4.2.4'
+        implementation 'com.adtiming.adapters:applovin:3.4.1@aar'
+        implementation 'com.applovin:applovin-sdk:9.14.4'
+        implementation 'com.adtiming.adapters:mopub:3.6.1@aar'
+        implementation ('com.mopub:mopub-sdk:5.14.0@aar') { transitive = true }
+        implementation 'com.adtiming.adapters:tapjoy:3.3.1@aar'
+        implementation 'com.tapjoy:tapjoy-android-sdk:12.7.0@aar'
+        implementation 'com.adtiming.adapters:chartboost:3.4.1@aar'
+        implementation 'com.chartboost:chartboost-sdk:8.1.0'
+        implementation 'com.google.android.gms:play-services-base:17.4.0'
+        implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+        implementation 'com.adtiming.adapters:mintegral:3.3.1@aar'
+        implementation 'com.mintegral.msdk:videojs:14.6.01'
+        implementation 'com.mintegral.msdk:mtgjscommon:14.6.01'
+        implementation 'com.mintegral.msdk:playercommon:14.6.01'
+        implementation 'com.mintegral.msdk:reward:14.6.01'
+        implementation 'com.mintegral.msdk:videocommon:14.6.01'
+        implementation 'com.mintegral.msdk:interstitialvideo:14.6.01'
+        implementation 'com.mintegral.msdk:common:14.6.01'
+        implementation 'com.mintegral.msdk:mtgbanner:14.6.01'
+        implementation 'com.mintegral.msdk:mtgbid:14.6.01'
+        implementation 'com.adtiming.adapters:tiktok:3.2.2@aar'
+        implementation 'com.bytedance.sdk:pangle-sdk:3.1.7.4'
+        implementation "com.google.android.gms:play-services-ads-identifier:17.0.0"
+        implementation 'com.adtiming.adapters:ironsource:3.3.1@aar'
+        implementation 'com.ironsource.sdk:mediationsdk:7.0.3'
+        implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+        implementation 'com.google.android.gms:play-services-basement:17.4.0'
+        implementation 'com.adtiming.adapters:chartboostbid:3.2.1@aar'
+        implementation 'com.chartboost:helium:2.1.0'
+        implementation 'org.greenrobot:eventbus:3.2.0'
+        implementation 'com.google.android.gms:play-services-base:17.4.0'
+        implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
     //shrinkpartend
 }
 
