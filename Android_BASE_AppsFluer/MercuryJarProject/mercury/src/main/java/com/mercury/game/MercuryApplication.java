@@ -111,7 +111,7 @@ public class MercuryApplication extends Application{//UnicomApplicationWrapper {
 				LogLocal( "error onAttributionFailure : " + errorMessage);
 			}
 		};
-		AppsFlyerLib.getInstance().init(AF_DEV_KEY, conversionListener, getApplicationContext());
+		AppsFlyerLib.getInstance().init(AF_DEV_KEY, conversionListener, Acontext);
 		AppsFlyerLib.getInstance().startTracking(Acontext);
 	}
 	public void SignatureVerify(String key)
