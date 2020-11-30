@@ -90,7 +90,7 @@ import com.demo.game.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][5]->purchaseProduct id= uk.fiveaces.nsfcchina.bux_1");
-				MercurySDK.Purchase("uk.fiveaces.nsfcchina.bux_1");
+				MercurySDK.Purchase("com.yoogame.fc.gem1");
 			}
 		});
 		Button exit = (Button) findViewById(R.id.exit);

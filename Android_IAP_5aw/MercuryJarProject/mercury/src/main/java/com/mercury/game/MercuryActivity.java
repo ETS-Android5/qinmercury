@@ -43,6 +43,7 @@ import android.widget.VideoView;
 
 import com.mercury.game.InAppAdvertisement.InAppAD;
 import com.mercury.game.InAppChannel.InAppChannel;
+import com.mercury.game.InAppChannel.SnowflakeIdWorker;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.Function;
 import com.mercury.game.util.InAppBase;
@@ -376,11 +377,13 @@ public class MercuryActivity  {
 
 	public void Purchase(String pidname)
 	{
-		LogLocal("[MercuryActivity][Purchase] " + pidname);
-		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String temp = sf.format(new Date());
-		int random = (int) ((Math.random() + 1) * 100000);
-		order_id = temp + random;
+//		LogLocal("[MercuryActivity][Purchase] " + pidname);
+//		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+//		String temp = sf.format(new Date());
+//		int random = (int) ((Math.random() + 1) * 100000);
+//		order_id = temp + random;
+		SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
+		order_id = ""+idWorker.nextId();
 		mInAppChannel.Purchase(pidname);
 
 	}

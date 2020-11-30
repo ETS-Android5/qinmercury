@@ -11,6 +11,8 @@ import com.mercury.game.InAppDialog.IDCardVerifyDialog;
 import com.mercury.game.MercuryActivity;
 
 
+import org.json.JSONException;
+
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.order_id;
@@ -53,8 +55,7 @@ public class InAppBase{
 	}
 	
 
-	public void Purchase(final String strProductId)
-	{
+	public void Purchase(final String strProductId) throws JSONException {
 		MercuryConst.PayInfo(strProductId);
 		LogLocal("[InAppBase][Purchase] MercuryConst.QinPid="+ MercuryConst.QinPid);
 		LogLocal("[InAppBase][Purchase] MercuryConst.Qindesc="+ MercuryConst.Qindesc);

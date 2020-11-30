@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
 import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
@@ -43,14 +44,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 import static com.mercury.game.InAppDialog.LoginDialog.local_age;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.MercuryActivity.DeviceId;
+import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.order_id;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
@@ -64,13 +76,20 @@ public class InAppChannel extends InAppBase {
 	private String Channelname="InAppChannel";
 
 	private static String pid;
+	private static String RESTORE_URL = "https://gamesupporttest.singmaan.com:10013/order/undelivered?user_id=%s";
+	private static String UPDATE_ORDER_SUCCESS_URL = "https://gamesupporttest.singmaan.com:10013/order/deliver";
+	private static String GET_REFUNDED_ORDER_URL = "https://gamesupporttest.singmaan.com:10013/order/refunded?user_id=%s";
+	private static String CANCEL_ORDER_URL = "https://gamesupporttest.singmaan.com:10013/order/cancel";
+	public static String global_orderId ="";
+	public static String global_user_id ="";
+	public static String global_production_id ="";
 	@Override
 	public void ActivityInit(Activity context, final APPBaseInterface appinterface)
 	{		
 		super.ActivityInit(context, appinterface);
 		MercuryActivity.LogLocal("[InAppChannel][ActivityInit]="+Channelname);
 		Hg5awGameSDK.getInstance().onCreate(mContext, mBundle);
-		Hg5awGameSDK.getInstance().init(mContext, "1000247", "42c84435e5f9247d82f3f4a9161c50c3", new InitCallback() {
+		Hg5awGameSDK.getInstance().init(mContext, "42c84435e5f9247d82f3f4a9161c50c3","1000247",  new InitCallback() {
 			@Override
 			public void onSuccess() {
 				LogLocal("[InAppChannel][ActivityInit]初始化成功");
@@ -120,9 +139,137 @@ public class InAppChannel extends InAppBase {
 		strArray = str.split(symbol); //拆分字符为symbol 可以是 "," ,然后把结果交给数组strArray
 		return strArray;
 	}
+
+
+	public void GetRefundedOrder(){
+		final String url = String.format(GET_REFUNDED_ORDER_URL,DeviceId);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpClient client = new OkHttpClient();
+				Request request = new  Request.Builder().url(url).build();
+				client.newCall(request).enqueue(new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+						LogLocal("[InAppChannel][getrefundedorder] error:"+e.getMessage());
+					}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						String s = response.body().string();
+						if (s!=null){
+							try {
+								JSONObject jsonObject = new JSONObject(s);
+								JSONArray array = jsonObject.getJSONArray("data");
+								int size = array.length();
+								LogLocal("[InAppChannel][getrefundedorder] data size:"+size);
+								for (int i = 0; i < size; i++) {
+									JSONObject order = array.getJSONObject(i);
+									String user_id = order.getString("user_id");
+									String orderId = order.getString("order_id");
+									if ((user_id!=null && orderId!=null)||(user_id!="" && orderId!="")){
+										CancelOrder(user_id,orderId);
+										LogLocal("[InAppChannel][getrefundedorder] cancel success");
+									}
+								}
+							} catch (Exception e) {
+								LogLocal("[InAppChannel][getrefundedorder] error:"+e.getMessage());
+							}
+						}
+
+					}
+				});
+			}
+		}).start();
+	}
+
+	public void Restore() {
+		final String url = String.format(RESTORE_URL,DeviceId);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Looper.prepare();
+				OkHttpClient client = new OkHttpClient();
+				Request request = new  Request.Builder().url(url).build();
+				client.newCall(request).enqueue(new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+						LogLocal("[InAppChannel][restore] error 2:"+e.getMessage());
+					}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						String s = response.body().string();
+						if (s!=null){
+							try {
+								JSONObject jsonObject = new JSONObject(s);
+								JSONArray array = jsonObject.getJSONArray("data");
+								int size = array.length();
+								LogLocal("[InAppChannel][restore] data size:"+size);
+								Looper.prepare();
+								for (int i = 0; i < size; i++) {
+									JSONObject order = array.getJSONObject(i);
+									global_user_id = order.getString("user_id");
+									global_orderId = order.getString("order_id");
+									global_production_id = order.getString("production_id");
+									if ((global_user_id!=null && global_orderId!=null)||(global_user_id!="" && global_orderId!="")){
+										onPurchaseSuccess(global_production_id);
+										LogLocal("[InAppChannel][restore] update success");
+									}
+								}
+								Looper.loop();
+							} catch (Exception e) {
+								LogLocal("[InAppChannel][restore] update error:"+e.getMessage());
+							}
+						}
+					}
+				});
+				Looper.loop();
+			}
+		}).start();
+	}
+	public void UpdateOrderSuccess(final String userId, final String orderId){
+		LogLocal("[MercuryActivity][InAppChannel][UpdateOrderSuccess]");
+		OkHttpClient client = new OkHttpClient();
+		RequestBody formBody=new FormBody.Builder().
+				add("user_id",userId).
+				add("order_id",orderId).build();
+		Request request=new  Request.Builder().url(UPDATE_ORDER_SUCCESS_URL).post(formBody).build();
+		client.newCall(request).enqueue(new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
+				LogLocal("[InAppChannel][updateOrderStatus] result error:"+e.getMessage());
+			}
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				String s = response.body().string();
+				LogLocal("[InAppChannel][updateOrderStatus] result:"+s);
+			}
+		});
+	}
+
+
+	public void CancelOrder(final String userId, final String orderId){
+		LogLocal("[MercuryActivity][InAppChannel][CancelOrder]");
+		OkHttpClient client = new OkHttpClient();
+		RequestBody formBody=new FormBody.Builder().
+				add("user_id",userId).
+				add("order_id",orderId).build();
+		Request request=new  Request.Builder().url(CANCEL_ORDER_URL).post(formBody).build();
+		client.newCall(request).enqueue(new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
+				LogLocal("[InAppChannel][CancelOrderOrder] result error:"+e.getMessage());
+			}
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				String s = response.body().string();
+				LogLocal("[InAppChannel][CancelOrderOrder] result:"+s);
+			}
+		});
+	}
+
+
 	@Override
-	public void Purchase(final String strProductId)
-	{
+	public void Purchase(final String strProductId) {
 		pid = strProductId;
 		MercuryConst.PayInfo(strProductId);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
@@ -130,18 +277,26 @@ public class InAppChannel extends InAppBase {
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat="+MercuryConst.Qinpricefloat);
 		//        String productID = productIdEditText.getText().toString().trim();               //商品ID
 //        String productName = productIdEditText.getText().toString().trim();               //商品名称
-		String price = MercuryConst.Qinpricefloat+"";               //金额
+		String price = MercuryConst.Qinpricefloat+"";              //金额
 		String productID = MercuryConst.QinPid;               //商品ID
-		String productName = MercuryConst.Qindesc;               //商品名称
+		String productName =  MercuryConst.Qindesc;            //商品名称
 		String serverId = "3";                  //游戏区服ID
 		String serverName = "server_03";           //游戏区服名称
 		String roleId = "r307551";                   //角色ID
 		String roleName = "Nicole";               //角色名称
 		String roleLevel = "60";                 //角色等级
 		String currencyType = "USD";             //貨幣類型
-		String notifyURL = "";                   //支付回调
-		String extension = "";                   //附加参数
-
+		String notifyURL = "https://gamesupporttest.singmaan.com:10013/foodtruckchef/5aw/client_success_callback";                   //支付回调
+		order_id = channelname+"_"+GameName+"_"+order_id;
+		JSONObject extensionJson = new JSONObject();
+		try {
+			extensionJson.put("device_id",DeviceId);
+			extensionJson.put("des","");
+			extensionJson.put("order_id",order_id);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		String extension = extensionJson.toString();                   //附加参数
 		OrderInfo orderInfo = new OrderInfo.Builder()
 				.withPrice(price)
 				.withProductId(productID)
@@ -482,7 +637,14 @@ public class InAppChannel extends InAppBase {
 		public void onSuccess(SignInResult signInResult) {
 			MercuryActivity.LogLocal("["+Channelname+"][SignOutCallback]登录成功" + signInResult.toString());
 			Toast.makeText(mContext,"登入成功",Toast.LENGTH_SHORT).show();
-			LoginSuccessCallBack(signInResult.toString());
+			String sid = null;
+			try {
+				JSONObject res = new JSONObject(signInResult.toString());
+				sid = res.getString("sid");
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			LoginSuccessCallBack(sid);
 		}
 
 		@Override

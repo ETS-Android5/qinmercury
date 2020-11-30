@@ -4,9 +4,9 @@
 <!-- Appsflyer􏲄􏲅SDK id-->
 <string name="appsflyer_key">xxxxxxxxx</string>
 <!-- Google􏲂􏲃id -->
-<string name="google_client_id">xxxxxxxxx</string>
+<string name="google_client_id">270530601094-675q8u3bamfkc8td9g4m832unbbqlk7h.apps.googleusercontent.com</string>
 <!-- Google􏱰􏱱􏲆􏲇 -->
-<string name="google_pay_public_key">xxxxxxxxx</string>
+<string name="google_pay_public_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhExB2sOWWj5Swff2xhYhGH2ge5j2MXGGO6pN0DfjGCskWgwLGmPohB/WyavgBrlFVymuhCPufk7L1Z1kq2Lzz6Amx4lcNgq5C3TGfMF3zrCdqPfQWfoBEDH/4PyZWcZbYy/VV85yMiNrgWYoOsxXFJCI5/tYNDb+QBbiZvXY6fl1UwwG3ONGQphneOZXtBeDRKwbLSRllk926rckiObtzBm1nMr2OO/OMVvYJHUXehHoyO2ya53urIB1SNvqCk8x1B9RVS2nfMybjPRgSTuMfbsThn25JBo9fPdUGSLwFlQz0jaxiGtEt0RM5w+6FfcdYB/jxE1PxwzjX2dIvGi/ywIDAQAB</string>
 <!-- Twitter 􏲂􏲃 􏰶􏰜􏱋􏰱􏰦􏲈􏱋􏱾􏲉􏰺-->
 <string name="twitter_consumer_key">""</string> <string name="twitter_consumer_secret">""</string>
 <!-- 􏲊􏰌􏱂􏰟􏲋􏲌􏰹􏱊􏱙􏱄􏰖􏰜􏰬􏰱􏰦􏰱􏰦􏲈􏱙􏲍􏰜􏰝􏰃􏱙􏱄 --> <!-- 􏲎􏲋􏰠ko -->

@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.qinbatista.demo.R;public class MainActivity extends Activity  {
+import com.yoogame.fc.R;public class MainActivity extends Activity  {
 	public static Context context;
 	public MercuryActivity MercurySDK;
 	public static APPBaseInterface appcall=null;
@@ -90,7 +90,7 @@ import com.qinbatista.demo.R;public class MainActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				Log.w("MercuryDemo","[step][5]->purchaseProduct id= uk.fiveaces.nsfcchina.bux_1");
-				MercurySDK.Purchase("uk.fiveaces.nsfcchina.bux_1");
+				MercurySDK.Purchase("com.yoogame.fc.gem1");
 			}
 		});
 		Button exit = (Button) findViewById(R.id.exit);

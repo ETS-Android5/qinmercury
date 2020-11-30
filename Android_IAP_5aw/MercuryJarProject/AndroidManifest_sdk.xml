@@ -17,7 +17,7 @@
         <activity android:configChanges="orientation|screenSize" android:name="com.samsung.android.sdk.iap.lib.activity.CheckPackageActivity" android:theme="@style/Theme.Empty"/>
         <activity android:configChanges="orientation|screenSize" android:name="com.samsung.android.sdk.iap.lib.activity.AccountActivity" android:theme="@style/Theme.Transparent"/>
         <activity android:configChanges="orientation|screenSize" android:name="com.samsung.android.sdk.iap.lib.activity.PaymentActivity" android:theme="@style/Theme.Empty"/>
-        <provider android:authorities="com.qinbatista.demo.provider" android:exported="false" android:grantUriPermissions="true" android:name="com.luck.picture.lib.PictureFileProvider">
+        <provider android:authorities="com.yoogame.fc.provider" android:exported="false" android:grantUriPermissions="true" android:name="com.luck.picture.lib.PictureFileProvider">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
         </provider>
         <activity android:name="com.luck.picture.lib.PicturePreviewActivity"/>
@@ -46,7 +46,7 @@
             </intent-filter>
         </service>
         <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <provider android:authorities="com.qinbatista.demo.firebaseinitprovider" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
+        <provider android:authorities="com.yoogame.fc.firebaseinitprovider" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
         <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementReceiver"/>
         <receiver android:enabled="true" android:exported="true" android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver" android:permission="android.permission.INSTALL_PACKAGES">
             <intent-filter>
@@ -57,8 +57,8 @@
         <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
         <activity android:configChanges="orientation|screenSize" android:excludeFromRecents="true" android:exported="false" android:name="com.twitter.sdk.android.core.identity.OAuthActivity"/>
         <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:name="com.android.billingclient.api.ProxyBillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <provider android:authorities="com.qinbatista.demo.MarketingInitProvider" android:exported="false" android:name="com.facebook.marketing.internal.MarketingInitProvider"/>
-        <provider android:authorities="com.qinbatista.demo.FacebookInitProvider" android:exported="false" android:name="com.facebook.internal.FacebookInitProvider"/>
+        <provider android:authorities="com.yoogame.fc.MarketingInitProvider" android:exported="false" android:name="com.facebook.marketing.internal.MarketingInitProvider"/>
+        <provider android:authorities="com.yoogame.fc.FacebookInitProvider" android:exported="false" android:name="com.facebook.internal.FacebookInitProvider"/>
         <receiver android:exported="false" android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED"/>

@@ -21,6 +21,8 @@
     <uses-feature
         android:name="android.hardware.touchscreen.multitouch.distinct"
         android:required="false" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.INTERNET">
 
     <application
         android:name="com.qinbatista.mercury.QinApplication"
