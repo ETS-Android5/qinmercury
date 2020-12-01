@@ -107,7 +107,7 @@ public class InAppChannel extends InAppBase {
 
 		UserConfig.getPayPermition(DeviceId,GameName,channelname);
 
-		if(isPayPermitted == "-1"){
+		if(isPayPermitted.equals("-1")){
 			LoginCancelCallBack("该用户不允许支付");
 			return;
 		}
