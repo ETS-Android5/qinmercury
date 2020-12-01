@@ -4,6 +4,7 @@ import com.mercury.game.InAppDialog.LoginDialog;
 import com.mercury.game.InAppDialog.PaymentDialog;
 import com.mercury.game.InAppDialog.PrivacyDialog;
 import com.mercury.game.InAppDialog.SigneInDialog;
+import com.mercury.game.InAppRemote.UserConfig;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 
@@ -39,7 +40,9 @@ import java.util.Random;
 
 import static com.mercury.game.InAppDialog.LoginDialog.local_age;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
+import static com.mercury.game.InAppRemote.UserConfig.isPayPermitted;
 import static com.mercury.game.MercuryActivity.DeviceId;
+import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.readFileData;
@@ -101,6 +104,14 @@ public class InAppChannel extends InAppBase {
 	@Override
 	public void Purchase(final String strProductId)
 	{
+
+		UserConfig.getPayPermition(DeviceId,GameName,channelname);
+
+		if(isPayPermitted == "-1"){
+			LoginCancelCallBack("该用户不允许支付");
+			return;
+		}
+
 		pid = strProductId;
 		MercuryConst.PayInfo(strProductId);
 		MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid="+MercuryConst.QinPid);
@@ -201,6 +212,16 @@ public class InAppChannel extends InAppBase {
 	{
 		String phone = "";
 		LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
+		String isLoginPermitted = UserConfig.getLoginPermition(DeviceId,GameName,channelname);
+		if(isLoginPermitted=="-1"){
+			LoginCancelCallBack("该用户不允许登陆");
+			return;
+		}
+		if(isLoginPermitted=="1"){
+			LoginCancelCallBack("该用户需要绑定");
+			return;
+		}
+
 		//shrinkpartstart
 		LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
 			@Override

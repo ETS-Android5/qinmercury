@@ -35,7 +35,7 @@ import static com.mercury.game.MercuryActivity.LogLocal;
 public final class Function {
     private static String result_json;
     private static String iap_result_json;
-
+    private static String ipAddress = "gamesupportcluster.singmaan.com";
     public static void writeFileData(String fileName, String message) {
         //shrinkpartstart
         try {
@@ -168,7 +168,7 @@ public final class Function {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://office.singmaan.com:9989/redeem")
+                            .url("https://"+ipAddress+":10007/redeem")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
