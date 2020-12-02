@@ -66,6 +66,7 @@ public class LoginDialog {
     private static final int invalidAge = -1; // 非法的年龄，用于处理异常。
     public static String local_account = "";
     public static String local_chinese_id = "";
+    public static String isLoginPermitted = "0";
     public LoginDialog(Activity context, String id, LoginCallBack callBack) {
         mContext = context;
         mLoginCallBack = callBack;
@@ -79,8 +80,17 @@ public class LoginDialog {
     }
 
     public void Show() {
+        LogLocal("[InAppDialog][LoginDialog] isLoginPermitted"+ isLoginPermitted);
+        if (isLoginPermitted.equals("-1")) {
+            Toast.makeText(mContext, "该用户不允许登陆", Toast.LENGTH_SHORT).show();
+            mLoginCallBack.fail("该用户不允许登陆");
+            return;
+        }else if(isLoginPermitted.equals("1")){
+            Toast.makeText(mContext, "该用户需要绑定", Toast.LENGTH_SHORT).show();
+            mLoginCallBack.fail("该用户需要绑定");
+            return;
+        }
         String mCardId = SPUtils.getInstance().getString(SpConfig.USER_CARD_ID);
-
         if (!TextUtils.isEmpty(mCardId)) {
             if (mLoginCallBack != null) {
                 mLoginCallBack.success(mCardId);

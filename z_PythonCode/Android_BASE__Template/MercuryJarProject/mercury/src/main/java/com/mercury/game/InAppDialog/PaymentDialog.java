@@ -33,6 +33,7 @@ public class PaymentDialog {
     Activity mContext;
     PayMethodCallBack mLoginCallBack;
     final AlertDialog dialog;
+    public static String isPayPermitted = "1";
 
     public PaymentDialog(Activity context, PayMethodCallBack callBack) {
 
@@ -56,6 +57,11 @@ public class PaymentDialog {
             }
             return;
         }
+        if(isPayPermitted.equals("-1")){
+            Toast.makeText(mContext, "该用户不允许支付", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         dialog.show();
         WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
         lp.gravity = Gravity.CENTER;

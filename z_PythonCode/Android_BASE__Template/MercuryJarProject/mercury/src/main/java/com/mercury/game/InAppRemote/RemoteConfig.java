@@ -28,28 +28,29 @@ import static com.mercury.game.util.Function.writeFileData;
 //shrinkpartend
 
 public final class RemoteConfig {
-    public static String updating_result_json="";
-    public static String game_data_result="";
-    public static String iap_result_json="";
-    public static String id_verify_result="";
-    public static String id_signe_in_result="";
-    public static String login_in_result="";
-    public static String chinese_id_update_result="";
-    public static String chinese_id="";
-    public static String account_id="default";
-    private static String ip_address = "gamesupport.singmaan.com";
-    public static void GetAllConfig()
-    {
-        if (DeviceId.equals("9836ae60d6cc3666"))
-        {
+    public static String updating_result_json = "";
+    public static String game_data_result = "";
+    public static String iap_result_json = "";
+    public static String id_verify_result = "";
+    public static String id_signe_in_result = "";
+    public static String login_in_result = "";
+    public static String chinese_id_update_result = "";
+    public static String chinese_id = "";
+    public static String account_id = "default";
+    private static String ip_address = "gamesupportcluster.singmaan.com";
+
+
+    public static void GetAllConfig() {
+        if (DeviceId.equals("9836ae60d6cc3666")) {
             ip_address = "gamesupport.singmaan.com";
-            LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP="+ip_address);
+            LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP=" + ip_address);
         }
         get_remote_iap();
         get_update_config();
     }
+
     public static String get_remote_iap() {
-        iap_result_json="";
+        iap_result_json = "";
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -65,7 +66,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://"+ip_address+":10001/get_iap?gamename=" + GameName)
+                            .url("https://" + ip_address + ":10001/get_iap?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -73,15 +74,16 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][get_remote_iap] failed="+e.toString());
+                            LogLocal("[RemoteConfig][get_remote_iap] failed=" + e.toString());
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
                             if (s != null) {
                                 writeFileData("get_remote_iap", s);
                                 LogLocal("[RemoteConfig][get_remote_iap] success=" + s);
-                                iap_result_json=s;
+                                iap_result_json = s;
                             }
                         }
                     });
@@ -94,8 +96,9 @@ public final class RemoteConfig {
         //shrinkpartend
         return iap_result_json;
     }
+
     public static String get_update_config() {
-        updating_result_json="";
+        updating_result_json = "";
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -111,7 +114,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://"+ip_address+":10001/get_update_verify?gamename=" + GameName)
+                            .url("https://" + ip_address + ":10001/get_update_verify?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -119,8 +122,9 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][RemoteConfig] failed="+e.toString());
+                            LogLocal("[RemoteConfig][RemoteConfig] failed=" + e.toString());
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
@@ -141,7 +145,7 @@ public final class RemoteConfig {
         return updating_result_json;
     }
 
-    public static String upload_game_data(final String data ) {
+    public static String upload_game_data(final String data) {
         game_data_result = data;
         //shrinkpartstart
         new Thread(new Runnable() {
@@ -160,7 +164,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://"+ip_address+":10010/uploadgamedata")
+                            .url("https://" + ip_address + ":10010/uploadgamedata")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -168,8 +172,9 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][upload_game_data] failed="+e.toString());
+                            LogLocal("[RemoteConfig][upload_game_data] failed=" + e.toString());
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
@@ -179,7 +184,7 @@ public final class RemoteConfig {
                                 LogLocal("[RemoteConfig][upload_game_data] success=" + s);
                                 Looper.prepare();
                                 //shrinkpartend
-                                mInAppBase.onFunctionCallBack("UploadGameData:"+game_data_result);
+                                mInAppBase.onFunctionCallBack("UploadGameData:" + game_data_result);
                                 //shrinkpartstart
                                 Looper.loop();
 
@@ -197,7 +202,7 @@ public final class RemoteConfig {
     }
 
     public static String download_game_data() {
-        game_data_result="";
+        game_data_result = "";
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -214,7 +219,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://"+ip_address+":10010/downloadgamedata")
+                            .url("https://" + ip_address + ":10010/downloadgamedata")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -222,8 +227,9 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][download_game_data] failed="+e.toString());
+                            LogLocal("[RemoteConfig][download_game_data] failed=" + e.toString());
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
@@ -241,7 +247,7 @@ public final class RemoteConfig {
 
                                 Looper.prepare();
                                 //shrinkpartend
-                                mInAppBase.onFunctionCallBack("DownloadGameData:"+game_data_result);
+                                mInAppBase.onFunctionCallBack("DownloadGameData:" + game_data_result);
                                 //shrinkpartstart
                                 Looper.loop();
                             }
@@ -259,7 +265,7 @@ public final class RemoteConfig {
     }
 
     public static String verify_chinese_id(final String account_id, final String my_id, final String my_chinese_name) {
-        id_verify_result="";
+        id_verify_result = "";
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -277,7 +283,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://"+ip_address+":10011/verify_chinese_id")
+                            .url("https://" + ip_address + ":10011/verify_chinese_id")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -285,12 +291,13 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][verify_chinese_id] failed="+e.toString());
+                            LogLocal("[RemoteConfig][verify_chinese_id] failed=" + e.toString());
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
-                            LogLocal("[RemoteConfig][verify_chinese_id] s="+s);
+                            LogLocal("[RemoteConfig][verify_chinese_id] s=" + s);
                             if (s != null) {
                                 JSONObject json = null;
                                 try {
@@ -339,7 +346,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://"+ip_address+":10012/signeinwithpassword")
+                            .url("https://" + ip_address + ":10012/signeinwithpassword")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -347,8 +354,9 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][verify_signe_in] failed="+e.toString());
+                            LogLocal("[RemoteConfig][verify_signe_in] failed=" + e.toString());
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
@@ -399,7 +407,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://"+ip_address+":10012/loginwithpassword")
+                            .url("https://" + ip_address + ":10012/loginwithpassword")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -407,8 +415,9 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][login_in] failed="+e.toString());
+                            LogLocal("[RemoteConfig][login_in] failed=" + e.toString());
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
@@ -419,13 +428,13 @@ public final class RemoteConfig {
                                     login_in_result = (String) json.getString("status");
 
                                     json = (JSONObject) new JSONTokener(s).nextValue();
-                                    String json_result = (String)json.getString("data");
+                                    String json_result = (String) json.getString("data");
 
                                     json = (JSONObject) new JSONTokener(json_result).nextValue();
-                                    String json_result1 = (String)json.getString("result");
+                                    String json_result1 = (String) json.getString("result");
 
                                     json = (JSONObject) new JSONTokener(json_result1).nextValue();
-                                    String json_result2 = (String)json.getString("chineseid");
+                                    String json_result2 = (String) json.getString("chineseid");
 
                                     chinese_id = json_result2;
                                     LogLocal("[RemoteConfig][login_in] chineseid=" + chinese_id);
@@ -470,7 +479,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://"+ip_address+":10012/updatechineseid")
+                            .url("https://" + ip_address + ":10012/updatechineseid")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -478,8 +487,9 @@ public final class RemoteConfig {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][lgoin_in] failed="+e.toString());
+                            LogLocal("[RemoteConfig][lgoin_in] failed=" + e.toString());
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
@@ -523,6 +533,5 @@ public final class RemoteConfig {
         //shrinkpartend
         return chinese_id_update_result;
     }
-
 
 }
