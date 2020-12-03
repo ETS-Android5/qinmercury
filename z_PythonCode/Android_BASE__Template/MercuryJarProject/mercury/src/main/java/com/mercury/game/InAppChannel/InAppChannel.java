@@ -41,11 +41,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+//shrinkpartstart
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
+//shrinkpartend
 import static com.mercury.game.InAppDialog.LoginDialog.local_age;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.MercuryActivity.DeviceId;
@@ -55,12 +55,11 @@ import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
-//end
+
 
 
 public class InAppChannel extends InAppBase {
 
-    //comment
     private String Channelname = "InAppChannel";
 
     private static String pid;
@@ -108,7 +107,7 @@ public class InAppChannel extends InAppBase {
 
     @Override
     public void Purchase(final String strProductId) {
-
+//shrinkpartstart
         UserConfig.getPayPermition(DeviceId, GameName, channelname, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -139,7 +138,7 @@ public class InAppChannel extends InAppBase {
                                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-//						onPurchaseSuccess(MercuryConst.QinPid);
+
                                     }
                                 });
                                 builder.create().show();
@@ -147,7 +146,7 @@ public class InAppChannel extends InAppBase {
                                 e.printStackTrace();
                             }
                         } else {
-                            //shrinkpartstart
+
                             new PaymentDialog(mContext, new PayMethodCallBack() {
                                 @Override
                                 public void Alipay(String msg) {
@@ -163,7 +162,7 @@ public class InAppChannel extends InAppBase {
                                     TestPay();
                                 }
                             });
-                            //shrinkpartend
+
                         }
                         Looper.loop();
                     } catch (JSONException e) {
@@ -172,7 +171,7 @@ public class InAppChannel extends InAppBase {
                 }
             }
         });
-
+//shrinkpartend
 
 
     }
@@ -228,6 +227,7 @@ public class InAppChannel extends InAppBase {
     }
 
     public void SingmaanLogin() {
+        //shrinkpartstart
         String phone = "";
         LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
         UserConfig.getLoginPermition(DeviceId, GameName, channelname,new Callback() {
@@ -251,7 +251,9 @@ public class InAppChannel extends InAppBase {
                             public void success(String phone) {
                                 LogLocal("[InAppChannel][SingmaanLogin] Success");
                                 DeviceId = phone;
+                                //shrinkpartend
                                 LoginSuccessCallBack(DeviceId);
+                                //shrinkpartstart
                             }
                             @Override
                             public void fail(String msg) {
@@ -267,7 +269,6 @@ public class InAppChannel extends InAppBase {
                 }
             }
         });
-        //shrinkpartstart
         //shrinkpartend
     }
 
