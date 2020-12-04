@@ -72,8 +72,40 @@ class SDKAppendManager():
 			"mercury_shape_corner_up.xml",
 			"mercury_shape_corner.xml",
 		]
+		self.__delete_smali_list = [
+			"/smali_classes2/com/ktplay",
+			"/smali_classes4/com/google/android/gms",
+			"/smali_classes2/com/vungle",
+			"/smali_classes2/com/unity3d/ads",
+			"/smali_classes2/com/unity3d/services/ads",
+			"/smali_classes2/com/unity3d/services/banners",
+			"/smali_classes2/com/ironsource",
+			"/smali_classes2/com/iab",
+			"/smali_classes4/com/google/ads",
+			"/smali/com/facebook/ads",
+			"/smali_assets/audience_network/com",
+			"/smali/facebook",
+			"/smali_classes2/com/moat",
+			"/smali/com/facebook",
+			"/smali/retrofit2",
+			"/smali_classes2/com/unity3d/services",
+			"/smali/com/flaregames/sdk/facebookplugin",
+			"/smali/com/appsflyer",
+			"/smali/com/flaregames/sdk/FlareSDK.smali",
+			"/assets/FacebookPlugin.json",
+			"/res/layout/com_facebook_tooltip_bubble.xml",
+			"/res/layout/com_facebook_smart_device_dialog_fragment.xml",
+			"/res/layout/com_facebook_login_fragment.xml",
+			"/res/layout/com_facebook_device_auth_dialog_fragment.xml",
+			"/res/layout/com_facebook_activity_layout.xml",
+			"/assets/audience_network.dex",
+			"/assets/FlareSDK/flaresdk.template.json",
+			"/assets/FlareSDK/flaresdk.json"
+
+		]
+
 		self.__targetSdkVersion = "29"
-		self.__versionName = ""
+		self.__versionName = "2.0.6"
 
 	def __find_zipalign(self):
 		p = subprocess.Popen('find ~/Library/Android/sdk/build-tools -name "zipalign"',shell=True,stdout=subprocess.PIPE)
@@ -134,11 +166,30 @@ class SDKAppendManager():
 		self.__modify_xml()
 		self.__APK_name()
 	def _rebuild_game_apk(self):
-		if os.path.isdir(f"{self.__file_path}/{self.__replace_resouce}"):
+
+		if os.path.isdir(f"{self.__file_path}/{self.__replace_resouce}/assets"):
 			print("[_rebuild_game_apk][copy ReplaceResouce]")
-			self.__copy_files_overwrite(f"{self.__file_path}/{self.__replace_resouce}",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__replace_resouce}/assets",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/assets")
+
+		if os.path.isdir(f"{self.__file_path}/{self.__replace_resouce}/res"):
+			print("[_rebuild_game_apk][copy ReplaceResouce]")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__replace_resouce}/res",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
+
+		if os.path.isdir(f"{self.__file_path}/{self.__replace_resouce}/smali"):
+			print("[_rebuild_game_apk][copy ReplaceResouce]")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__replace_resouce}/smali",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali")
+
+		if os.path.isdir(f"{self.__file_path}/{self.__replace_resouce}/res"):
+			print("[_rebuild_game_apk][copy ReplaceResouce]")
+
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__replace_resouce}/res",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/res")
+		if os.path.isdir(f"{self.__file_path}/{self.__replace_resouce}/{self.__channel_name}"):
+			print("[_rebuild_game_apk][copy ReplaceResouce]")
+			self.__copy_files_overwrite(f"{self.__file_path}/{self.__replace_resouce}/{self.__channel_name}",f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
+
 
 		self.__balance_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
+		self.__delete_target_smali(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
 		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")#complie apk with sdk
 		os.system(f"jar xf  {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")#extract resource from sdk
 		os.system(f"cp {self.__game_apk_path} {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}.apk")#copy orginal apk
@@ -468,10 +519,13 @@ class SDKAppendManager():
 				if os.path.isdir(_Path+"/smali_classes"+str(folder_index))==False:os.mkdir(_Path+"/smali_classes"+str(folder_index))
 				if os.path.isdir(_Path+"/smali_classes"+str(folder_index)+"/com")==False:os.mkdir(_Path+"/smali_classes"+str(folder_index)+"/com")
 				shutil.move(_Path+"/smali/com/"+folder_name, _Path+"/smali_classes"+str(folder_index)+"/com/"+folder_name)
-		name = _Path+"/smali_classes2/com/ktplay"
-		if os.path.isdir(name):shutil.rmtree(name)
-		name = _Path+"/smali/com/google/android/gms"
-		if os.path.isdir(name):shutil.rmtree(name)
+
+	def __delete_target_smali(self, _Path):
+		for folder_name in self.__delete_smali_list:
+			if os.path.isdir(_Path+folder_name):
+				shutil.rmtree(_Path+folder_name)
+			elif os.path.isfile(_Path+folder_name):
+				os.remove(_Path+folder_name)
 
 	def __get_dir_size(self,dir):
 		size = 0
@@ -479,6 +533,7 @@ class SDKAppendManager():
 			dirs
 			size += sum([getsize(join(root, name)) for name in files])
 		return size
+
 	def __delete_signature(self,_path):
 		your_delet_file="META-INF"
 		old_zipfile=_path #旧文件
