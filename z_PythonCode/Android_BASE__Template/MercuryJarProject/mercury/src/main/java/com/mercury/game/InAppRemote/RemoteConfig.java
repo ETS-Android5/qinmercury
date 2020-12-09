@@ -66,7 +66,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://" + ip_address + ":10001/get_iap?gamename=" + GameName)
+                            .url("https://" + ip_address + ":10009/get_iap?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
@@ -114,7 +114,7 @@ public final class RemoteConfig {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("https://" + ip_address + ":10001/get_update_verify?gamename=" + GameName)
+                            .url("https://" + ip_address + ":10009/get_update_verify?gamename=" + GameName)
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
