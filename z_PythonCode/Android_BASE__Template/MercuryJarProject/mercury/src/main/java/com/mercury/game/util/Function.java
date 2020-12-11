@@ -38,33 +38,13 @@ public final class Function {
     private static String ipAddress = "gamesupportcluster.singmaan.com";
     public static void writeFileData(String fileName, String message) {
         //shrinkpartstart
-        try {
-            //E2WApp.LogLocal("[E2WApp]->writeFileData fileName="+fileName+",message="+message+"-"+E2WApp.mContext);
-            FileOutputStream fout = MercuryActivity.mContext.openFileOutput(fileName, MercuryActivity.mContext.MODE_PRIVATE);
-            byte[] bytes = message.getBytes();
-            fout.write(bytes);
-            fout.close();
-            //E2WApp.LogLocal("[E2WApp]->writeFileData Success");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        DataUtil.storageData(MercuryActivity.mContext,fileName,message);
         //shrinkpartend
     }
     public static String readFileData(String fileName) {
-        String res = "";
+        String res="";
         //shrinkpartstart
-        try {
-            //E2WApp.LogLocal("[E2WApp]->readFileData:"+fileName+"-"+E2WApp.mContext);
-            FileInputStream fin = MercuryActivity.mContext.openFileInput(fileName);
-            int length = fin.available();
-            byte[] buffer = new byte[length];
-            fin.read(buffer);
-            res = EncodingUtils.getString(buffer, "UTF-8");
-            fin.close();
-            //E2WApp.LogLocal("[E2WApp]->readFileData Success");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        res = DataUtil.getData(MercuryActivity.mContext,fileName,"");
         //shrinkpartend
         return res;
     }
