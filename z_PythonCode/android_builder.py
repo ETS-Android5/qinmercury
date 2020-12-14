@@ -42,7 +42,7 @@ class SDKAppendManager():
 		self.__apk_name = apk_name
 		self.__zipalign_path = ""
 		self.__lib_folder_list = []
-		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][game_apk_path.rfind("/")+1:]
+		self.__game_apk_name = os.path.splitext(self.__game_apk_path)[0][self.__game_apk_path.rfind("/")+1:]
 		files = os.listdir(os.path.dirname(os.path.realpath(__file__)))
 		for file_name in files:
 			if file_name.find(".keystore")!=-1:
