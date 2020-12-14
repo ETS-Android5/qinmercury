@@ -592,6 +592,19 @@ def clean_project():
 		shutil.rmtree(PythonLocation()+"/y_building")
 		print("[CACHE]deleted "+PythonLocation()+"/y_building")
 
+def Sync_config():
+	List = []
+	for i in os.listdir(PythonLocation()):
+		List.append(i)
+	for folder_name in List:
+		if "Android_" in folder_name:
+			shutil.copy(PythonLocation()+"/local.properties",PythonLocation()+"/"+folder_name+"/MercuryJarProject/local.properties")
+			print("copyed "+PythonLocation()+"/"+folder_name+"/MercuryJarProject")
+			shutil.copy(PythonLocation()+"/local.properties",PythonLocation()+"/"+folder_name+"/MercuryAPKProject_pure/local.properties")
+			print("copyed "+PythonLocation()+"/"+folder_name+"/MercuryAPKProject_pure")
+			shutil.copy(PythonLocation()+"/local.properties",PythonLocation()+"/"+folder_name+"/MercuryAPKProject/local.properties")
+			print("copyed "+PythonLocation()+"/"+folder_name+"/MercuryAPKProject")
+
 def run():
 	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]
 	if os.path.isfile(PythonLocation()+"/z_PythonCode/"+file_path+".py"):
@@ -614,6 +627,7 @@ def run():
 	print("---Choice your channel---")
 	for index, name in enumerate(channel):
 		print(f"[{index}]	{name}	")
+	print(f"[97]	Sync Android local.properties	")
 	print(f"[98]	Build All Project	")
 	print(f"[99]	Clean Project	")
 	print("-------------------------")
@@ -625,6 +639,9 @@ def run():
 		if your_channel=="98":
 			build_all = True
 			break
+		if your_channel=="97":
+			Sync_config()
+			continue
 		if your_channel.isnumeric():
 			if int(your_channel)<= len(channel):
 				break
