@@ -28,20 +28,20 @@
         android:paddingRight="21dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <EditText
-        android:textSize="14sp"
-        android:paddingLeft="10dp"
-        android:id="@+id/singmaan_username"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/singmaan_login_phone"
-        android:gravity="center_vertical"
-        android:hint="请输入身份证号"
-        android:inputType="phone"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        />
+        <EditText
+            android:id="@+id/singmaan_username"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/singmaan_login_phone"
+            android:gravity="center_vertical"
+            android:hint="请输入身份证号"
+            android:paddingLeft="10dp"
+            android:selectAllOnFocus="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" 
+            android:textSize="14sp"/>
     <EditText
         android:layout_marginTop="14dp"
         android:textSize="14sp"
@@ -49,12 +49,12 @@
         android:id="@+id/singmaan_password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginRight="4dp"
+        android:background="@drawable/singmaan_login_code"
         android:gravity="center_vertical"
+        android:hint="请输入姓名"
+        android:layout_marginRight="4dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        android:background="@drawable/singmaan_login_code"
-        android:hint="请输入姓名"
         android:selectAllOnFocus="true" />
     </LinearLayout>
     <TextView
@@ -68,7 +68,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     </FrameLayout>
-
         <FrameLayout
            android:layout_margin="21dp"
             android:layout_marginTop="24dp"
@@ -88,15 +87,6 @@
                 android:textSize="18sp"
                 android:background="@drawable/singmaan_btn_shape"
                 android:text="确定" />
-                <Button
-                    android:id="@+id/singmaan_cancel"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="43dp"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp"
-                    android:background="@drawable/singmaan_btn_shape"
-                    android:text="跳过" />
             </LinearLayout>
             <ProgressBar
                 android:id="@+id/singmaan_loading"
@@ -107,5 +97,4 @@
                 android:visibility="gone"
                 />
         </FrameLayout>
-
 </LinearLayout>

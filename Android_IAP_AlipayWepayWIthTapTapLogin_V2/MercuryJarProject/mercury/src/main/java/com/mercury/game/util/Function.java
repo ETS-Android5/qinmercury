@@ -58,7 +58,7 @@ public final class Function {
             FileInputStream fin = MercuryActivity.mContext.openFileInput(fileName);
             int length = fin.available();
             byte[] buffer = new byte[length];
-            fin.read(buffer);
+                fin.read(buffer);
             res = EncodingUtils.getString(buffer, "UTF-8");
             fin.close();
             //E2WApp.LogLocal("[E2WApp]->readFileData Success");
@@ -168,7 +168,7 @@ public final class Function {
                     //3.创建Request对象
                     Request request = new Request.Builder()
                             .post(requestBody)
-                            .url("http://office.singmaan.com:9989/redeem")
+                            .url("https://gamesupportcluster.singmaan.com:10007/redeem")
                             .build();
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();

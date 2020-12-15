@@ -4,6 +4,7 @@ package com.mercury.game.InAppDialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.text.method.NumberKeyListener;
 import android.view.Gravity;
@@ -19,13 +20,24 @@ import android.widget.Toast;
 //shrinkpartstart
 import androidx.annotation.NonNull;
 //shrinkpartend
+import com.mercury.game.InAppChannel.InAppChannel;
+import com.mercury.game.InAppRemote.RemoteConfig;
+import com.mercury.game.util.Function;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 import com.mercury.game.util.UIUtils;
+import com.taptap.sdk.Profile;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
+import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
+import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.util.Function.writeFileData;
 
 
 public class IDCardVerifyDialog {
@@ -35,7 +47,6 @@ public class IDCardVerifyDialog {
     final AlertDialog dialog;
 
     public IDCardVerifyDialog(Activity context, LoginCallBack callBack) {
-
         mContext = context;
         mLoginCallBack = callBack;
         AlertDialog.Builder builder = new AlertDialog.Builder(context, getResId(mContext,"singmaan_dialog_style","style"));
@@ -90,7 +101,7 @@ public class IDCardVerifyDialog {
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
         final Button  cancelButton = myLayout.findViewById(cancelId);
 
-        cardIdEditText.setKeyListener(new NumberKeyListener() {
+       /* cardIdEditText.setKeyListener(new NumberKeyListener() {
             @NonNull
             @Override
             protected char[] getAcceptedChars() {
@@ -108,7 +119,7 @@ public class IDCardVerifyDialog {
             public int getInputType() {
                 return 3;
             }
-        });
+        });*/
 
 
         progressBar.setVisibility(View.INVISIBLE);
@@ -126,7 +137,58 @@ public class IDCardVerifyDialog {
                 return false;
             }
         });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+
+
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String card_id = CardIdUtils.UpperCardId(cardIdEditText.getText().toString());
+
+                final String name_id = nameEditText.getText().toString();
+                LogLocal("card_id=:" + card_id);
+                LogLocal("name_id=:" + name_id);
+                LogLocal("account_id=:" + account_id);
+
+                verify_chinese_id(account_id, card_id, name_id);
+                progressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        LogLocal("id_verify_result=:" + id_verify_result);
+                        if (id_verify_result.equals("200"))
+                        {
+                            chinese_id = card_id;
+                            InAppChannel.age_difference();
+                            Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
+                            writeFileData("card_id",card_id);
+                            dialog.dismiss();//窗口消失 会导致后面的代码无法执行 如果有其他操作 需要写在dismiss()之前
+                    }
+                        else if(id_verify_result.equals("-202"))
+                        {
+                            showLoginFailed("该身份证已经被使用");
+                            cardIdEditText.setError("该身份证已经被使用");
+                            writeFileData("card_id",card_id);
+                        }
+                        else
+                        {
+                            showLoginFailed("请输入正确的身份证号和名字");
+                            cardIdEditText.setError("请输入正确的身份证号和名字");
+                        }
+                    }
+                },3000); // 延时1秒
+            }
+        });
+
+    }
+
+  /*  public static void age_difference(){
+        LogLocal("[loginButton]验证成功");
+        InAppChannel.set_check_chinese_id(Profile.getCurrentProfile().getOpenid(),chinese_id);//分钟
+        LoginDialog.Instance.age_difference(LoginDialog.play_time);
+    }*/
+        /*cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cancelButton.setVisibility(View.GONE);
@@ -163,7 +225,7 @@ public class IDCardVerifyDialog {
             }
         });
 
-    }
+    }*/
 
 
     private boolean isIDNum(String phone) {

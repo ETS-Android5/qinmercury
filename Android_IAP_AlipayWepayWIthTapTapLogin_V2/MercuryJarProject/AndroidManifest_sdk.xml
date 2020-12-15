@@ -1,8 +1,4 @@
-<!--sdk-->        <activity android:configChanges="orientation|screenSize" android:name="com.qinbatista.mercury.MainActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-            <intent-filter>
-            </intent-filter>
-        </activity>
-        <meta-data android:name="channel_name" android:value="demo"/>
+<!--sdk-->        <meta-data android:name="channel_name" android:value="demo"/>
         <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity"/>
         <activity android:exported="true" android:launchMode="singleTop" android:name="com.singmaan.guanbao.wxapi.WXPayEntryActivity"/>
         <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:exported="false" android:name="com.taptap.sdk.TapTapActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>

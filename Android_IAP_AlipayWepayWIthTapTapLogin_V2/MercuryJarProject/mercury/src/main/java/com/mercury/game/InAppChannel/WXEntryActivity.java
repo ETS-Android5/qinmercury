@@ -20,7 +20,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.entry);
 		api = WXAPIFactory.createWXAPI(this, WXShareID, false);
 		api.registerApp(WXShareID);
 		api.handleIntent(getIntent(), this);

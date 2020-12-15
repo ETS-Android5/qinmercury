@@ -6,11 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 
+import com.mercury.game.InAppChannel.InAppChannel;
 import com.mercury.game.InAppDialog.IDCardVerifyDialog;
+import com.mercury.game.InAppDialog.LoginDialog;
 import com.mercury.game.MercuryActivity;
 
-
-
+import static com.mercury.game.InAppChannel.InAppChannel.global_orderId;
+import static com.mercury.game.InAppChannel.InAppChannel.global_user_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.order_id;
 
@@ -50,13 +54,14 @@ public class InAppBase{
 	}
 	
 
-	public void Purchase(final String strProductId)
+/*	public void Purchase(final String strProductId)
 	{
 		MercuryConst.PayInfo(strProductId);
 		LogLocal("[InAppBase][Purchase] MercuryConst.QinPid="+ MercuryConst.QinPid);
 		LogLocal("[InAppBase][Purchase] MercuryConst.Qindesc="+ MercuryConst.Qindesc);
 		LogLocal("[InAppBase][Purchase] MercuryConst.Qinpricefloat="+ MercuryConst.Qinpricefloat);
-	}
+	}*/
+
 	public void ApplicationInit(Application appcontext)
 	{
 		mAppContext=appcontext;
@@ -110,10 +115,19 @@ public class InAppBase{
 		((Activity) MercuryActivity.mContext).finish();
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
-	
+
+	public void Purchase(final String strProductId)
+	{
+		MercuryConst.PayInfo(strProductId);
+		LogLocal("[InAppBase][Purchase] MercuryConst.QinPid="+ MercuryConst.QinPid);
+		LogLocal("[InAppBase][Purchase] MercuryConst.Qindesc="+ MercuryConst.Qindesc);
+		LogLocal("[InAppBase][Purchase] MercuryConst.Qinpricefloat="+ MercuryConst.Qinpricefloat);
+	}
+
 	public void onPurchaseSuccess(String message)
 	{
 		qc.PurchaseSuccess(message,this);
+		UpdateOrderSuccess(global_user_id,global_orderId);
 	}
 	public void onPurchaseFailed(String strError)
 	{
@@ -309,5 +323,15 @@ public class InAppBase{
 	{
 		
 	}
+	public void UpdateOrderSuccess(final String userId, final String orderId)
+	{
+		LogLocal("[MercuryActivity][InAppBase][UpdateOrderSuccess]");
+
+	}
+	public void Restore()
+	{
+
+	}
+
 
 }
