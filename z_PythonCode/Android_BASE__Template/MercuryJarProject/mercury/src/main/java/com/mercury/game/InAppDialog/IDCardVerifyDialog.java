@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
@@ -29,8 +30,17 @@ import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 import com.mercury.game.util.UIUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
@@ -170,31 +180,59 @@ public class IDCardVerifyDialog {
                 LogLocal("card_id=:" + card_id);
                 LogLocal("name_id=:" + name_id);
                 LogLocal("account_id=:" + account_id);
-                verify_chinese_id(account_id, card_id, name_id);
-                progressBar.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
+                verify_chinese_id(account_id, card_id, name_id, new Callback() {
                     @Override
-                    public void run() {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        if (id_verify_result.equals("200"))
-                        {
-                            Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            writeFileData("card_id",card_id);
-                        }
-                        else if(id_verify_result.equals("-202"))
-                        {
-                            showLoginFailed("该身份证已经被使用");
-                            cardIdEditText.setError("该身份证已经被使用");
-                            writeFileData("card_id",card_id);
-                        }
-                        else
-                        {
-                            showLoginFailed("请输入正确的身份证号和名字");
-                            cardIdEditText.setError("请输入正确的身份证号和名字");
+                    public void onFailure(Call call, IOException e) {
+                        LogLocal("[RemoteConfig][verify_chinese_id] failed=" + e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String s = response.body().string();
+                        LogLocal("[RemoteConfig][verify_chinese_id] s=" + s);
+                        if (s != null) {
+                            JSONObject json = null;
+                            try {
+                                json = (JSONObject) new JSONTokener(s).nextValue();
+                                id_verify_result = (String) json.getString("status");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            LogLocal("[RemoteConfig][verify_chinese_id] data=" + id_verify_result);
+                            LogLocal("[RemoteConfig][verify_chinese_id] remote result=" + s);
+                            mContext.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                            if (id_verify_result.equals("200"))
+                                            {
+                                                Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                                writeFileData("card_id",card_id);
+                                            }
+                                            else if(id_verify_result.equals("-202"))
+                                            {
+                                                showLoginFailed("该身份证已经被使用");
+                                                cardIdEditText.setError("该身份证已经被使用");
+                                                writeFileData("card_id",card_id);
+                                            }
+                                            else
+                                            {
+                                                showLoginFailed("请输入正确的身份证号和名字");
+                                                cardIdEditText.setError("请输入正确的身份证号和名字");
+                                            }
+                                        }
+                                    },1000);
+                                }
+                            });
                         }
                     }
-                },3000); // 延时1秒
+                });
+                // 延时1秒
             }
         });
 

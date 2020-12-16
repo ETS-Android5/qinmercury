@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 
 import android.text.TextUtils;
@@ -38,12 +39,21 @@ import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 import com.mercury.game.util.UIUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
@@ -103,7 +113,7 @@ public class LoginDialog {
         lp.width = UIUtils.dip2px(mContext, 332);//宽高可设置具体大小
         lp.height =WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setAttributes(lp);
-//        dialog.getWindow().setLayout(UIUtils.dip2px(mContext, 332), ViewGroup.LayoutParams.WRAP_CONTENT);
+//      dialog.getWindow().setLayout(UIUtils.dip2px(mContext, 332), ViewGroup.LayoutParams.WRAP_CONTENT);
 
 
     }
@@ -211,50 +221,89 @@ public class LoginDialog {
                 if (user_name.equals("") || password.equals("")) {
                     Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    login_in(user_name, password);
-                    progressBar.setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(new Runnable() {
+                    login_in(user_name, password, new Callback() {
                         @Override
-                        public void run() {
-                            progressBar.setVisibility(View.INVISIBLE);
-                            LogLocal("[RemoteConfig][LoginDialog] id_signe_in_result=" + id_signe_in_result);
-                            if (login_in_result.equals("")) {
-                                Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
-                            } else if (login_in_result.equals("-200")) {
-                                Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
-                            } else if (login_in_result.equals("-201")) {
-                                Toast.makeText(mContext, "账号不存在", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
-                                writeFileData("account",user_name);
-                                if (mLoginCallBack != null) {
-                                    if (chinese_id.equals("")) {
-                                        new IDCardVerifyDialog(mContext, new LoginCallBack() {
-                                            @Override
-                                            public void success(String msg) {
-                                                LogLocal("[InAppDialog][LoginDialog] ID card Success");
-                                                writeFileData("chineseid",chinese_id);
-                                                age_difference();
-                                                mLoginCallBack.success(user_name);
+                        public void onFailure(Call call, IOException e) {
+                            LogLocal("[RemoteConfig][login_in] failed=" + e.toString());
+                        }
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String s = response.body().string();
+                            if (s != null) {
+                                JSONObject json = null;
+                                try {
+                                    json = (JSONObject) new JSONTokener(s).nextValue();
+                                    login_in_result = (String) json.getString("status");
 
-                                            }
-                                            @Override
-                                            public void fail(String msg) {
-                                                LogLocal("[InAppDialog][LoginDialog] ID card failed");
-                                            }
-                                        });
-                                    } else {
-                                        //age verify
-                                        writeFileData("chineseid",chinese_id);
-                                        mLoginCallBack.success(user_name);
-                                        age_difference();
-                                        LogLocal("[InAppDialog][LoginDialog] ID card got");
-                                    }
+                                    json = (JSONObject) new JSONTokener(s).nextValue();
+                                    String json_result = (String) json.getString("data");
+
+                                    json = (JSONObject) new JSONTokener(json_result).nextValue();
+                                    String json_result1 = (String) json.getString("result");
+
+                                    json = (JSONObject) new JSONTokener(json_result1).nextValue();
+                                    String json_result2 = (String) json.getString("chineseid");
+                                    chinese_id = json_result2;
+                                    LogLocal("[RemoteConfig][login_in] chineseid=" + chinese_id);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                                dialog.dismiss();
+                                LogLocal("[RemoteConfig][login_in] data=" + login_in_result);
+                                LogLocal("[RemoteConfig][login_in] remote result=" + s);
+                                mContext.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setVisibility(View.VISIBLE);
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                progressBar.setVisibility(View.INVISIBLE);
+                                                LogLocal("[RemoteConfig][LoginDialog] id_signe_in_result=" + id_signe_in_result);
+                                                if (login_in_result.equals("")) {
+                                                    Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
+                                                } else if (login_in_result.equals("-200")) {
+                                                    Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
+                                                } else if (login_in_result.equals("-201")) {
+                                                    Toast.makeText(mContext, "账号不存在", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+                                                    writeFileData("account",user_name);
+                                                    if (mLoginCallBack != null) {
+                                                        if (chinese_id.equals("")) {
+                                                            new IDCardVerifyDialog(mContext, new LoginCallBack() {
+                                                                @Override
+                                                                public void success(String msg) {
+                                                                    LogLocal("[InAppDialog][LoginDialog] ID card Success");
+                                                                    writeFileData("chineseid",chinese_id);
+                                                                    age_difference();
+                                                                    mLoginCallBack.success(user_name);
+
+                                                                }
+                                                                @Override
+                                                                public void fail(String msg) {
+                                                                    LogLocal("[InAppDialog][LoginDialog] ID card failed");
+                                                                }
+                                                            });
+                                                        } else {
+                                                            //age verify
+                                                            writeFileData("chineseid",chinese_id);
+                                                            mLoginCallBack.success(user_name);
+                                                            age_difference();
+                                                            LogLocal("[InAppDialog][LoginDialog] ID card got");
+                                                        }
+                                                    }
+                                                    dialog.dismiss();
+                                                }
+                                            }
+                                        }, 1000);
+                                    }
+                                });
+
+
                             }
                         }
-                    }, 3000); // 延时1秒
+                    });
+                     // 延时1秒
                 }
             }
         });
@@ -330,7 +379,7 @@ public class LoginDialog {
                         try {
                             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                             builder.setMessage("确认后强制退出");
-                            builder.setTitle("未成年人一天只能体验1小时游戏，请合理安排时间");
+                            builder.setTitle("根据健康系统限制，由于您是未成年玩家，一天只能只能仅能游戏一小时，您今天已经进行游戏1小时，不能继续游戏，请注意休息");
                             builder.setCancelable(false);
                             builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                 @Override
@@ -349,7 +398,7 @@ public class LoginDialog {
                 {
                     writeFileData("time"+chinese_id, Long.toString(current_time));
                     timer_delay.start();
-                    Toast.makeText(mContext, "未成年人一天只能体验1小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "根据健康系统限制，由于您是未成年玩家，未成年人一天只能体验1小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -365,7 +414,7 @@ public class LoginDialog {
             try {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setMessage("确认后强制退出");
-                builder.setTitle("未成年人一天只能体验1小时游戏，请合理安排时间");
+                builder.setTitle("根据健康系统限制，由于您是未成年玩家，一天只能只能仅能游戏一小时，您今天已经进行游戏1小时，不能继续游戏，请注意休息");
                 builder.setCancelable(false);
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
@@ -390,7 +439,7 @@ public class LoginDialog {
             try {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setMessage("确认后强制退出");
-                builder.setTitle("未成年人一天只能体验1小时游戏，请合理安排时间");
+                builder.setTitle("根据健康系统限制，由于您是未成年玩家，一天只能只能仅能游戏一小时，您今天已经进行游戏1小时，不能继续游戏，请注意休息");
                 builder.setCancelable(false);
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
@@ -415,7 +464,7 @@ public class LoginDialog {
             try {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setMessage("确认后强制退出");
-                builder.setTitle("未成年人无法在晚上10点到第二天早上8点进入游戏");
+                builder.setTitle("根据健康系统限制，由于您是未成年玩家，每天22:00 ~ 次日8:00无法登陆游戏，请注意游戏");
                 builder.setCancelable(false);
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override

@@ -264,7 +264,7 @@ public final class RemoteConfig {
         return game_data_result;
     }
 
-    public static String verify_chinese_id(final String account_id, final String my_id, final String my_chinese_name) {
+    public static String verify_chinese_id(final String account_id, final String my_id, final String my_chinese_name, final Callback callback) {
         id_verify_result = "";
         //shrinkpartstart
         new Thread(new Runnable() {
@@ -288,36 +288,7 @@ public final class RemoteConfig {
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
                     //5.异步请求
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][verify_chinese_id] failed=" + e.toString());
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            String s = response.body().string();
-                            LogLocal("[RemoteConfig][verify_chinese_id] s=" + s);
-                            if (s != null) {
-                                JSONObject json = null;
-                                try {
-                                    json = (JSONObject) new JSONTokener(s).nextValue();
-                                    id_verify_result = (String) json.getString("status");
-//                                    id_verify_result = (String) json_result.get("result");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                LogLocal("[RemoteConfig][verify_chinese_id] data=" + id_verify_result);
-                                LogLocal("[RemoteConfig][verify_chinese_id] remote result=" + s);
-
-                                Looper.prepare();
-                                //shrinkpartend
-//                                mInAppBase.onFunctionCallBack("VerifyChineseID:"+id_verify_result);
-                                //shrinkpartstart
-                                Looper.loop();
-                            }
-                        }
-                    });
+                    client.newCall(request).enqueue(callback);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -329,7 +300,7 @@ public final class RemoteConfig {
         return id_verify_result;
     }
 
-    public static String verify_signe_in(final String account, final String password) {
+    public static String verify_signe_in(final String account, final String password, final Callback callback) {
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -351,34 +322,7 @@ public final class RemoteConfig {
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
                     //5.异步请求
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][verify_signe_in] failed=" + e.toString());
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            String s = response.body().string();
-                            if (s != null) {
-                                JSONObject json = null;
-                                try {
-                                    json = (JSONObject) new JSONTokener(s).nextValue();
-                                    id_signe_in_result = (String) json.getString("status");
-//                                    id_verify_result = (String) json_result.get("result");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                LogLocal("[RemoteConfig][verify_signe_in] data=" + id_signe_in_result);
-                                LogLocal("[RemoteConfig][verify_signe_in] remote result=" + s);
-                                Looper.prepare();
-                                //shrinkpartend
-//                                mInAppBase.onFunctionCallBack("VerifyChineseID:"+id_verify_result);
-                                //shrinkpartstart
-                                Looper.loop();
-                            }
-                        }
-                    });
+                    client.newCall(request).enqueue(callback);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -390,7 +334,7 @@ public final class RemoteConfig {
         return id_signe_in_result;
     }
 
-    public static String login_in(final String account, final String password) {
+    public static String login_in(final String account, final String password, final Callback callback) {
         //shrinkpartstart
         new Thread(new Runnable() {
             @Override
@@ -412,45 +356,7 @@ public final class RemoteConfig {
                     //4. 同步请求
                     // Response response = client.newCall(request).execute();
                     //5.异步请求
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            LogLocal("[RemoteConfig][login_in] failed=" + e.toString());
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            String s = response.body().string();
-                            if (s != null) {
-                                JSONObject json = null;
-                                try {
-                                    json = (JSONObject) new JSONTokener(s).nextValue();
-                                    login_in_result = (String) json.getString("status");
-
-                                    json = (JSONObject) new JSONTokener(s).nextValue();
-                                    String json_result = (String) json.getString("data");
-
-                                    json = (JSONObject) new JSONTokener(json_result).nextValue();
-                                    String json_result1 = (String) json.getString("result");
-
-                                    json = (JSONObject) new JSONTokener(json_result1).nextValue();
-                                    String json_result2 = (String) json.getString("chineseid");
-
-                                    chinese_id = json_result2;
-                                    LogLocal("[RemoteConfig][login_in] chineseid=" + chinese_id);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                LogLocal("[RemoteConfig][login_in] data=" + login_in_result);
-                                LogLocal("[RemoteConfig][login_in] remote result=" + s);
-                                Looper.prepare();
-                                //shrinkpartend
-//                                mInAppBase.onFunctionCallBack("VerifyChineseID:"+id_verify_result);
-                                //shrinkpartstart
-                                Looper.loop();
-                            }
-                        }
-                    });
+                    client.newCall(request).enqueue(callback);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {

@@ -132,10 +132,10 @@ public class InAppChannel extends InAppBase {
                         Looper.prepare();
                         if (local_age < 8 && local_age != 0) {
                             try {
-                                AlertDialog.Builder builder = new Builder(mContext);
+                                Builder builder = new Builder(mContext);
                                 builder.setMessage("提示");
                                 builder.setTitle("未成年人无法充值");
-                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton("确定", new OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
@@ -179,7 +179,7 @@ public class InAppChannel extends InAppBase {
     @Override
     public void ExitGame() {
         try {
-            AlertDialog.Builder builder = new Builder(mContext);
+            Builder builder = new Builder(mContext);
             builder.setMessage("Testing Mode");
             builder.setTitle("ExitGame");
             builder.setPositiveButton("Success", new OnClickListener() {
@@ -204,10 +204,10 @@ public class InAppChannel extends InAppBase {
 
     public void TestPay() {
         try {
-            AlertDialog.Builder builder = new Builder(mContext);
+            Builder builder = new Builder(mContext);
             builder.setMessage("Testing Mode");
             builder.setTitle("TestPay");
-            builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Success", new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onPurchaseSuccess(MercuryConst.QinPid);
@@ -331,10 +331,10 @@ public class InAppChannel extends InAppBase {
 
     public void VIPPanel() {
         try {
-            AlertDialog.Builder builder = new Builder(mContext);
+            Builder builder = new Builder(mContext);
             builder.setMessage("Testing Mode");
             builder.setTitle("VIPPanel");
-            builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Success", new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {
@@ -378,10 +378,10 @@ public class InAppChannel extends InAppBase {
 
     public void DailyCheckInPanel() {
         try {
-            AlertDialog.Builder builder = new Builder(mContext);
+            Builder builder = new Builder(mContext);
             builder.setMessage("Testing Mode");
             builder.setTitle("DailyCheckInPanel");
-            builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Success", new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     try {

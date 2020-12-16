@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
@@ -28,8 +29,17 @@ import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 import com.mercury.game.util.UIUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
@@ -159,27 +169,53 @@ public class SigneInDialog {
                 }
                 else
                     {
-                    verify_signe_in(user_name, password);
-                    progressBar.setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(new Runnable() {
+                    verify_signe_in(user_name, password,new Callback() {
                         @Override
-                        public void run() {
-                            progressBar.setVisibility(View.INVISIBLE);
-                            LogLocal("[InAppDialog][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
-                            if (id_signe_in_result.equals("")) {
-                                Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
-                            } else if (id_signe_in_result.equals("-200")) {
-                                Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
+                        public void onFailure(Call call, IOException e) {
+                            LogLocal("[RemoteConfig][verify_signe_in] failed=" + e.toString());
+                        }
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String s = response.body().string();
+                            if (s != null) {
+                                JSONObject json = null;
+                                try {
+                                    json = (JSONObject) new JSONTokener(s).nextValue();
+                                    id_signe_in_result = (String) json.getString("status");
+//                                    id_verify_result = (String) json_result.get("result");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                LogLocal("[RemoteConfig][verify_signe_in] data=" + id_signe_in_result);
+                                LogLocal("[RemoteConfig][verify_signe_in] remote result=" + s);
+                                mContext.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setVisibility(View.VISIBLE);
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                progressBar.setVisibility(View.INVISIBLE);
+                                                LogLocal("[InAppDialog][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
+                                                if (id_signe_in_result.equals("")) {
+                                                    Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
+                                                } else if (id_signe_in_result.equals("-200")) {
+                                                    Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
+                                                    dialog.dismiss();
+                                                }
+                                            }
+                                        }, 3000); // 延时1秒
+                                    }
+                                });
                             }
                         }
-                    }, 3000); // 延时1秒
+                    });
+
                 }
             }
         });
-
     }
 
 
