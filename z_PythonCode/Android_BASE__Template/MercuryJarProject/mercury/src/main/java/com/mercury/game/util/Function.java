@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.text.InputFilter;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mercury.game.MercuryActivity;
 import org.json.JSONException;
@@ -31,6 +32,8 @@ import okhttp3.Response;
 //shrinkpartend
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.mActivity;
+import static com.mercury.game.MercuryActivity.mContext;
 
 public final class Function {
     private static String result_json;
@@ -157,6 +160,11 @@ public final class Function {
                         @Override
                         public void onFailure(Call call, IOException e) {
                             LogLocal("[Function][post_redeem_code] failed e="+e.toString());
+                            Looper.prepare();
+                            if(!NetCheckUtil.checkNet(mContext)){
+                                Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+                            }
+                            Looper.loop();
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {

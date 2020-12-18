@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
@@ -25,6 +26,7 @@ import androidx.annotation.NonNull;
 //shrinkpartend
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
+import com.mercury.game.util.NetCheckUtil;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 import com.mercury.game.util.UIUtils;
@@ -46,6 +48,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_signe_in;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.mActivity;
 
 
 public class SigneInDialog {
@@ -53,7 +56,9 @@ public class SigneInDialog {
     Activity mContext;
     LoginCallBack mLoginCallBack;
     final AlertDialog dialog;
-
+    private Handler mHandler;
+    public static final int MAX_LIMIT_USERNAME_LENGTH = 6;
+    public static final int MAX_LIMIT_PASSWORD_LENGTH = 6;
     public SigneInDialog(Activity context, LoginCallBack callBack) {
 
         mContext = context;
@@ -92,6 +97,53 @@ public class SigneInDialog {
 
     }
 
+    public boolean validateParams(String username,String password,String passwordAgain){
+        if (!password.equals(passwordAgain))
+        {
+            Toast.makeText(mContext, "两次密码不匹配", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (username.equals("") || password.equals("") || passwordAgain.equals(""))
+        {
+            Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(username.length()>MAX_LIMIT_USERNAME_LENGTH){
+            Toast.makeText(mContext, "用户名不能超过允许的最大长度即6位", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(password.length()>MAX_LIMIT_PASSWORD_LENGTH){
+            Toast.makeText(mContext, "密码不能超过允许的最大长度即6位", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    public void onSignIn(final ProgressBar progressBar){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.INVISIBLE);
+                LogLocal("[InAppDialog][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
+                switch (id_signe_in_result) {
+                    case "" :
+                        Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "-200":
+                        Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "-202":
+                        Toast.makeText(mContext, "账户已存在", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                }
+            }
+        }, 3000); // 延时1秒
+    }
+
+    @SuppressLint("HandlerLeak")
     public void initAlertDialog(final AlertDialog dialog) {
         int mainLayout = getResId(mContext, "mercury_dialog_signein", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
@@ -149,30 +201,38 @@ public class SigneInDialog {
             }
         });
 
+        mHandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg) {
+                onSignIn(progressBar);
+            }
+        };
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                final String user_name = cardIdEditText.getText().toString();
+                final String username = cardIdEditText.getText().toString();
                 final String password = nameEditText.getText().toString();
-                final String password_again = passwordagainEditText.getText().toString();
-                account_id = user_name;
-                if (!password.equals(password_again))
-                {
-//                    cardIdEditText.setError("两次密码不匹配");
-                    Toast.makeText(mContext, "两次密码不匹配", Toast.LENGTH_SHORT).show();
-                }
-                else if (user_name.equals("") || password.equals("") || password_again.equals(""))
-                {
-//                    cardIdEditText.setError("输入不能为空");
-                    Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
-                }
-                else
-                    {
-                    verify_signe_in(user_name, password,new Callback() {
+                final String passwordAgain = passwordagainEditText.getText().toString();
+                account_id = username;
+                if(!validateParams(username,password,passwordAgain)){
+                    LogLocal("[InAppDialog][verify_signe_in] isValidateParams:"+false);
+                    return;
+                };
+                LogLocal("[InAppDialog][verify_signe_in] isValidateParams:"+true);
+                progressBar.setVisibility(View.VISIBLE);
+                verify_signe_in(username, password,new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
                             LogLocal("[RemoteConfig][verify_signe_in] failed=" + e.toString());
+                            Looper.prepare();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            if(!NetCheckUtil.checkNet(mContext)){
+                                Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+                            }
+                            Looper.loop();
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
@@ -182,39 +242,20 @@ public class SigneInDialog {
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
                                     id_signe_in_result = (String) json.getString("status");
-//                                    id_verify_result = (String) json_result.get("result");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                                 LogLocal("[RemoteConfig][verify_signe_in] data=" + id_signe_in_result);
                                 LogLocal("[RemoteConfig][verify_signe_in] remote result=" + s);
-                                mContext.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressBar.setVisibility(View.VISIBLE);
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                progressBar.setVisibility(View.INVISIBLE);
-                                                LogLocal("[InAppDialog][SigneInDialog] id_signe_in_result=" + id_signe_in_result);
-                                                if (id_signe_in_result.equals("")) {
-                                                    Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
-                                                } else if (id_signe_in_result.equals("-200")) {
-                                                    Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(mContext, "注册成功", Toast.LENGTH_SHORT).show();
-                                                    dialog.dismiss();
-                                                }
-                                            }
-                                        }, 3000); // 延时1秒
-                                    }
-                                });
+                                Message msg = new Message();
+                                msg.obj = id_signe_in_result;
+                                mHandler.sendMessage(msg);
                             }
                         }
                     });
 
                 }
-            }
+
         });
     }
 

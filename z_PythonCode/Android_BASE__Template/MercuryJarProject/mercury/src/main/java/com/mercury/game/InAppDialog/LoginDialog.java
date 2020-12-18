@@ -2,6 +2,7 @@ package com.mercury.game.InAppDialog;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.content.DialogInterface;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.text.Editable;
 
 import android.text.TextUtils;
@@ -35,6 +37,7 @@ import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MD5Util;
 import com.mercury.game.util.MercuryConst;
+import com.mercury.game.util.NetCheckUtil;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 import com.mercury.game.util.UIUtils;
@@ -61,6 +64,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in_result;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.mActivity;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
 
@@ -77,6 +81,7 @@ public class LoginDialog {
     public static String local_account = "";
     public static String local_chinese_id = "";
     public static String isLoginPermitted = "0";
+    private Handler mHandler;
     public LoginDialog(Activity context, String id, LoginCallBack callBack) {
         mContext = context;
         mLoginCallBack = callBack;
@@ -87,6 +92,63 @@ public class LoginDialog {
         dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);
         initAlertDialog(dialog);
         Show();
+
+    }
+
+    public boolean validateParams(String username,String password){
+        if (username.equals("") || password.equals("")) {
+            Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    public void onLogin(final ProgressBar progressBar,final String username){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.INVISIBLE);
+                switch (login_in_result){
+                    case "":
+                        Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "-200":
+                        Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "-201":
+                        Toast.makeText(mContext, "账号不存在", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+                        writeFileData("account",username);
+                        if (mLoginCallBack != null) {
+                            if (chinese_id.equals("")) {
+                                new IDCardVerifyDialog(mContext, new LoginCallBack() {
+                                    @Override
+                                    public void success(String msg) {
+                                        LogLocal("[InAppDialog][LoginDialog] ID card Success");
+                                        writeFileData("chineseid",chinese_id);
+                                        age_difference();
+                                        mLoginCallBack.success(username);
+
+                                    }
+                                    @Override
+                                    public void fail(String msg) {
+                                        LogLocal("[InAppDialog][LoginDialog] ID card failed");
+                                    }
+                                });
+                            } else {
+                                //age verify
+                                writeFileData("chineseid",chinese_id);
+                                mLoginCallBack.success(username);
+                                age_difference();
+                                LogLocal("[InAppDialog][LoginDialog] ID card got");
+                            }
+                        }
+                        dialog.dismiss();
+                }
+            }
+        }, 1000);
     }
 
     public void Show() {
@@ -120,6 +182,7 @@ public class LoginDialog {
     public int getResId(Context context, String name, String type) {
         return context.getResources().getIdentifier(name, type, context.getPackageName());
     }
+    @SuppressLint("HandlerLeak")
     public void initAlertDialog(final AlertDialog dialog) {
         int mainLayout = getResId(mContext, "mercury_dialog_login", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
@@ -172,15 +235,20 @@ public class LoginDialog {
 //                return 3;
 //            }
 //        });
-
-
         progressBar.setVisibility(View.INVISIBLE);
-
+        mHandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                final String username = (String) msg.obj;
+                LogLocal("[RemoteConfig][LoginDialog] result:" + login_in_result);
+                onLogin(progressBar,username);
+            }
+        };
 
         //设置显示父容器
-
         dialog.setView(myLayout);
-
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -210,21 +278,25 @@ public class LoginDialog {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                local_account = readFileData("account");
-//                local_chinese_id =  readFileData("chineseid");
-//                LogLocal("[InAppChannel][LoginDialog] local_account="+local_account);
-//                LogLocal("[InAppChannel][LoginDialog] local_chinese_id="+local_chinese_id);
-
-                final String user_name = usernameEditText.getText().toString();
+                final String username = usernameEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
-                account_id = user_name;
-                if (user_name.equals("") || password.equals("")) {
-                    Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
-                } else {
-                    login_in(user_name, password, new Callback() {
+                account_id = username;
+                if(!validateParams(username,password)){
+                    LogLocal("[InAppDialog][login_in] isValidateParams:"+false);
+                    return;
+                };
+                LogLocal("[InAppDialog][login_in] isValidateParams:"+true);
+                progressBar.setVisibility(View.VISIBLE);
+                login_in(username, password, new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
                             LogLocal("[RemoteConfig][login_in] failed=" + e.toString());
+                            Looper.prepare();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            if(!NetCheckUtil.checkNet(mContext)){
+                                Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+                            }
+                            Looper.loop();
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
@@ -234,13 +306,10 @@ public class LoginDialog {
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
                                     login_in_result = (String) json.getString("status");
-
                                     json = (JSONObject) new JSONTokener(s).nextValue();
                                     String json_result = (String) json.getString("data");
-
                                     json = (JSONObject) new JSONTokener(json_result).nextValue();
                                     String json_result1 = (String) json.getString("result");
-
                                     json = (JSONObject) new JSONTokener(json_result1).nextValue();
                                     String json_result2 = (String) json.getString("chineseid");
                                     chinese_id = json_result2;
@@ -250,63 +319,18 @@ public class LoginDialog {
                                 }
                                 LogLocal("[RemoteConfig][login_in] data=" + login_in_result);
                                 LogLocal("[RemoteConfig][login_in] remote result=" + s);
-                                mContext.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressBar.setVisibility(View.VISIBLE);
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                progressBar.setVisibility(View.INVISIBLE);
-                                                LogLocal("[RemoteConfig][LoginDialog] id_signe_in_result=" + id_signe_in_result);
-                                                if (login_in_result.equals("")) {
-                                                    Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
-                                                } else if (login_in_result.equals("-200")) {
-                                                    Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
-                                                } else if (login_in_result.equals("-201")) {
-                                                    Toast.makeText(mContext, "账号不存在", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
-                                                    writeFileData("account",user_name);
-                                                    if (mLoginCallBack != null) {
-                                                        if (chinese_id.equals("")) {
-                                                            new IDCardVerifyDialog(mContext, new LoginCallBack() {
-                                                                @Override
-                                                                public void success(String msg) {
-                                                                    LogLocal("[InAppDialog][LoginDialog] ID card Success");
-                                                                    writeFileData("chineseid",chinese_id);
-                                                                    age_difference();
-                                                                    mLoginCallBack.success(user_name);
-
-                                                                }
-                                                                @Override
-                                                                public void fail(String msg) {
-                                                                    LogLocal("[InAppDialog][LoginDialog] ID card failed");
-                                                                }
-                                                            });
-                                                        } else {
-                                                            //age verify
-                                                            writeFileData("chineseid",chinese_id);
-                                                            mLoginCallBack.success(user_name);
-                                                            age_difference();
-                                                            LogLocal("[InAppDialog][LoginDialog] ID card got");
-                                                        }
-                                                    }
-                                                    dialog.dismiss();
-                                                }
-                                            }
-                                        }, 1000);
-                                    }
-                                });
-
-
+                                Message msg = new Message();
+                                msg.obj = username;
+                                mHandler.sendMessage(msg);
                             }
                         }
                     });
                      // 延时1秒
                 }
-            }
         });
+
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -327,6 +351,10 @@ public class LoginDialog {
         });
 
     }
+
+
+
+
     /*
      * 将时间转换为时间戳
      */

@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
@@ -26,6 +27,7 @@ import androidx.annotation.NonNull;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.InAppDialog.CardIdUtils;
 import com.mercury.game.util.LoginCallBack;
+import com.mercury.game.util.NetCheckUtil;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 import com.mercury.game.util.UIUtils;
@@ -43,9 +45,11 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.mActivity;
 import static com.mercury.game.util.Function.writeFileData;
 
 
@@ -54,6 +58,7 @@ public class IDCardVerifyDialog {
     Activity mContext;
     LoginCallBack mLoginCallBack;
     final AlertDialog dialog;
+    private Handler mHandler;
 
     public IDCardVerifyDialog(Activity context, LoginCallBack callBack) {
 
@@ -93,6 +98,15 @@ public class IDCardVerifyDialog {
 
     }
 
+    public boolean validateParams(String card_id,String name_id){
+        if (card_id.equals("") || name_id.equals("")) {
+            Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    @SuppressLint("HandlerLeak")
     public void initAlertDialog(final AlertDialog dialog) {
         int mainLayout = getResId(mContext, "mercury_dialog_verify", "layout");
         View myLayout = mContext.getLayoutInflater().inflate(mainLayout, null);
@@ -147,6 +161,37 @@ public class IDCardVerifyDialog {
                 return false;
             }
         });
+
+        mHandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg) {
+                final String cardId = (String) msg.obj;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        if (id_verify_result.equals("200"))
+                        {
+                            Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            writeFileData("card_id",cardId);
+                        }
+                        else if(id_verify_result.equals("-202"))
+                        {
+                            showLoginFailed("该身份证已经被使用");
+                            cardIdEditText.setError("该身份证已经被使用");
+                            writeFileData("card_id",cardId);
+                        }
+                        else
+                        {
+                            showLoginFailed("请输入正确的身份证号和名字");
+                            cardIdEditText.setError("请输入正确的身份证号和名字");
+                        }
+                    }
+                },1000);
+            }
+        };
 //        cancelButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -174,16 +219,27 @@ public class IDCardVerifyDialog {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String card_id = CardIdUtils.UpperCardId(cardIdEditText.getText().toString());
-
-                final String name_id = nameEditText.getText().toString();
-                LogLocal("card_id=:" + card_id);
-                LogLocal("name_id=:" + name_id);
+                final String cardId = CardIdUtils.UpperCardId(cardIdEditText.getText().toString());
+                final String nameId = nameEditText.getText().toString();
+                if(!validateParams(cardId,nameId)){
+                    LogLocal("[InAppDialog][verify_chinese_id] isValidateParams:"+false);
+                    return;
+                };
+                LogLocal("[InAppDialog][verify_chinese_id] isValidateParams:"+true);
+                LogLocal("card_id=:" + cardId);
+                LogLocal("name_id=:" + nameId);
                 LogLocal("account_id=:" + account_id);
-                verify_chinese_id(account_id, card_id, name_id, new Callback() {
+                progressBar.setVisibility(View.VISIBLE);
+                verify_chinese_id(account_id, cardId, nameId, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         LogLocal("[RemoteConfig][verify_chinese_id] failed=" + e.toString());
+                        Looper.prepare();
+                        progressBar.setVisibility(View.INVISIBLE);
+                        if(!NetCheckUtil.checkNet(mContext)){
+                            Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+                        }
+                        Looper.loop();
                     }
 
                     @Override
@@ -200,35 +256,9 @@ public class IDCardVerifyDialog {
                             }
                             LogLocal("[RemoteConfig][verify_chinese_id] data=" + id_verify_result);
                             LogLocal("[RemoteConfig][verify_chinese_id] remote result=" + s);
-                            mContext.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setVisibility(View.VISIBLE);
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            progressBar.setVisibility(View.INVISIBLE);
-                                            if (id_verify_result.equals("200"))
-                                            {
-                                                Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
-                                                dialog.dismiss();
-                                                writeFileData("card_id",card_id);
-                                            }
-                                            else if(id_verify_result.equals("-202"))
-                                            {
-                                                showLoginFailed("该身份证已经被使用");
-                                                cardIdEditText.setError("该身份证已经被使用");
-                                                writeFileData("card_id",card_id);
-                                            }
-                                            else
-                                            {
-                                                showLoginFailed("请输入正确的身份证号和名字");
-                                                cardIdEditText.setError("请输入正确的身份证号和名字");
-                                            }
-                                        }
-                                    },1000);
-                                }
-                            });
+                            Message msg = new Message();
+                            msg.obj = cardId;
+                            mHandler.sendMessage(msg);
                         }
                     }
                 });

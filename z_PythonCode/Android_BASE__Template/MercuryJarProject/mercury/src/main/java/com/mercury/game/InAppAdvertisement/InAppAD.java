@@ -4,6 +4,7 @@ import com.mercury.game.MercuryApplication;
 import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
+import com.mercury.game.util.NetCheckUtil;
 //comment
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -147,8 +148,12 @@ public class InAppAD extends InAppBase {
 
 	public void onFailureAction(String msg) {
 		Looper.prepare();
-		Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
-		AdShowFailedCallBack("ActiveNative");
+		if(!NetCheckUtil.checkNet(mContext)){
+			Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+		}else {
+			Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
+		}
+		AdShowFailedCallBack(msg);
 		Looper.loop();
 	}
 
@@ -158,6 +163,11 @@ public class InAppAD extends InAppBase {
 		Looper.prepare();
 		if (s != null) {
 			getAdAccessable(s,interfaceName);
+			if (!isAdAccessable) {
+				Toast.makeText(mContext, "无法获取到该游戏的广告权限", Toast.LENGTH_SHORT).show();
+				AdShowFailedCallBack(interfaceName);
+				return;
+			}
 			alertADDialogShow(interfaceName,"Testing Mode",interfaceName);
 		}else {
 			Toast.makeText(mContext, "无法获取到该游戏的广告权限",Toast.LENGTH_SHORT).show();
@@ -198,11 +208,6 @@ public class InAppAD extends InAppBase {
 				isAdAccessable = result.isNull(channelname) ? true : result.getJSONObject(channelname).getBoolean("isAdAccessable");
 			} else {
 				isAdAccessable = data.getBoolean("isAdAccessable");
-			}
-			if (!isAdAccessable) {
-				Toast.makeText(mContext, "无法获取到该游戏的广告权限", Toast.LENGTH_SHORT).show();
-				AdShowFailedCallBack(interfaceName);
-				return;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

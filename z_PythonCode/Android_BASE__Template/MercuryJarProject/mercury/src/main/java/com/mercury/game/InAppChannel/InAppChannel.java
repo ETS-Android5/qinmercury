@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
 import com.mercury.game.util.MercuryConst;
+import com.mercury.game.util.NetCheckUtil;
 import com.mercury.game.util.PayMethodCallBack;
 import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
@@ -70,22 +71,19 @@ public class InAppChannel extends InAppBase {
         MercuryActivity.LogLocal("[InAppChannel][ActivityInit]=" + Channelname);
         Toast.makeText(mContext, "只限于" + channelname + "测试，请勿泄漏", Toast.LENGTH_SHORT).show();
         //shrinkpartstart
-        if (readFileData("privacyagreement").equals("")) {
-            new PrivacyDialog(mContext);
-        }
-        if (readFileData("card_id").equals("")) {
-            new IDCardVerifyDialog(mContext, new LoginCallBack() {
-                @Override
-                public void success(String msg) {
-                    LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-                }
-
-                @Override
-                public void fail(String msg) {
-                    LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-                }
-            });
-        }
+//        if (readFileData("card_id").equals("")) {
+//            new IDCardVerifyDialog(mContext, new LoginCallBack() {
+//                @Override
+//                public void success(String msg) {
+//                    LogLocal("[InAppDialog][SigneInDialog] ID card Success");
+//                }
+//
+//                @Override
+//                public void fail(String msg) {
+//                    LogLocal("[InAppDialog][SigneInDialog] ID card failed");
+//                }
+//            });
+//        }
         //shrinkpartend
     }
 
@@ -107,11 +105,16 @@ public class InAppChannel extends InAppBase {
 
     @Override
     public void Purchase(final String strProductId) {
-//shrinkpartstart
+        //shrinkpartstart
         UserConfig.getPayPermition(DeviceId, GameName, channelname, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 LogLocal("[UserConfig][get_pay_permition] failed=" + e.toString());
+                Looper.prepare();
+                if(!NetCheckUtil.checkNet(mContext)){
+                    Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+                }
+                Looper.loop();
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -233,8 +236,13 @@ public class InAppChannel extends InAppBase {
         UserConfig.getLoginPermition(DeviceId, GameName, channelname,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                LogLocal("[UserConfig][get_login_permition] failed=" + e.toString());
+                Looper.prepare();
+                if(!NetCheckUtil.checkNet(mContext)){
+                    Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+                }
+                Looper.loop();
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String s = response.body().string();
@@ -253,6 +261,9 @@ public class InAppChannel extends InAppBase {
                                 DeviceId = phone;
                                 //shrinkpartend
                                 LoginSuccessCallBack(DeviceId);
+                                if (readFileData("privacyagreement").equals("")) {
+                                    new PrivacyDialog(mContext);
+                                }
                                 //shrinkpartstart
                             }
                             @Override
