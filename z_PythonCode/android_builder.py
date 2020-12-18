@@ -245,6 +245,71 @@ class SDKAppendManager():
 		self.__merge_sdk_resource_smali_execute(f"{self.__sdk_apk_name_only}_{self.__channel_base}")
 		self.__merge_sdk_resource_smali_execute(f"{self.__sdk_apk_name_only}_{self.__channel_IAP}")
 		self.__merge_sdk_resource_smali_execute(f"{self.__sdk_apk_name_only}_{self.__channel_show}")
+		self.__rebuild_resource_id(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}")
+
+
+	def __rebuild_resource_id(self,apk_path):
+		os.chdir(apk_path)
+		rebuild_smali_list = []
+		with open(f"{self.__file_path}/{self.__replace_resouce}/{self.__channel_name}/public.xml",encoding="UTF-8") as file_object:
+			all_the_text = file_object.readlines()
+			count_number = len(all_the_text)
+			for index2, i in enumerate(all_the_text):
+				print("[__rebuild_resource_id]"+str(count_number-index2))
+				if "id=" in i:
+					this_name = i[i.find("name=\"")+len("name=\""):i.find("\" id=")]
+					p = subprocess.Popen('grep -rna \"'+this_name+'\" * ',shell=True,stdout=subprocess.PIPE)
+					out,err = p.communicate()
+					for line in out.splitlines():
+						tem_str = str(line)
+						# smali_name = tem_str[tem_str.find("I =")+len("I ="):]
+						# file_name = tem_str[2:tem_str.find(":")]
+						if "smali/" in tem_str:
+							self.__delete_rebuild_id_list.append(tem_str[tem_str.find("I =")+len("I =")+1:-1])
+							break
+
+		# with open(f"{self.__file_path}/{self.__replace_resouce}/{self.__channel_name}/public.xml",encoding="UTF-8") as file_object:
+		# 	all_the_text = file_object.readlines()
+		# 	for i in all_the_text:
+		# 		this_name = i[i.find(" id=\"")+len(" id=\""):i.find("\" />")]
+		# 		if this_name !="":
+		# 			self.__delete_rebuild_id_list.append(i[i.find(" id=\"")+len(" id=\""):i.find("\" />")])
+
+		print("__delete_rebuild_id_list="+str(self.__delete_rebuild_id_list))
+		for index1 , resource_id in enumerate(self.__delete_rebuild_id_list):
+
+			count_number = len(self.__delete_rebuild_id_list)
+			print("[__rebuild_resource_id]"+str(count_number-index1))
+			smali_name = ""
+			p = subprocess.Popen('grep -rna \"'+resource_id+'\" * ',shell=True,stdout=subprocess.PIPE)
+			out,err = p.communicate()
+			for line in out.splitlines():
+				tem_str = str(line)
+				smali_name = tem_str[tem_str.find("static final ")+len("static final "):tem_str.find("I =")-1]
+				file_name = tem_str[2:tem_str.find(":")]
+				if "smali/" in file_name:
+					rebuild_smali_list.append(tem_str[2:tem_str.find(":")])
+
+			correct_id = ""
+			with open(f"{self.__file_path}/{self.__replace_resouce}/{self.__channel_name}/public.xml",encoding="UTF-8") as file_object:
+				all_the_text = file_object.readlines()
+				for i in all_the_text:
+					if smali_name in i:
+						correct_id = i[i.find("id=\"")+len("id=\""):i.find("\" />")]
+						break
+
+			for index, smali_file_name in enumerate(rebuild_smali_list):
+				with open(apk_path+"/"+smali_file_name,encoding="UTF-8") as file_object:
+					all_the_text = file_object.readlines()
+					new_context = []
+					for i in all_the_text:
+						if resource_id in i:
+							new_context.append(i.replace(resource_id,correct_id))
+						else:
+							new_context.append(i)
+				with open(apk_path+"/"+smali_file_name,mode='w',encoding="utf8") as file_context:
+					# print("[__rebuild_resource_id]"+apk_path+"/"+smali_file_name+"	res_name="+smali_name+"	res_id="+correct_id)
+					file_context.writelines(new_context)
 
 	def __merge_sdk_resource_smali_execute(self,app_releawse_path):
 		#delete apk's smail
@@ -277,10 +342,10 @@ class SDKAppendManager():
 		smali_class_index = 2
 		print(str(os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index))))
 		while os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index)):
-			print("aaa="+str(smali_class_index))
 		# 	if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index))==False:
 		# 		print("don't exit "+app_releawse_path)
-			if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index)): os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))
+			if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))==False:
+				os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index),f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))
 			smali_class_index = smali_class_index+1
 	def __merge_sdk_resource_res(self):
