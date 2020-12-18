@@ -49,6 +49,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_signe_in;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.mActivity;
+import static com.mercury.game.util.UIUtils.isJSONValid;
 
 
 public class SigneInDialog {
@@ -108,12 +109,12 @@ public class SigneInDialog {
             Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(username.length()>MAX_LIMIT_USERNAME_LENGTH){
-            Toast.makeText(mContext, "用户名不能超过允许的最大长度即6位", Toast.LENGTH_SHORT).show();
+        if(username.length()<MAX_LIMIT_USERNAME_LENGTH || username.length()>MAX_LIMIT_USERNAME_LENGTH*2 ){
+            Toast.makeText(mContext, "用户名长度只能在6到12位", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(password.length()>MAX_LIMIT_PASSWORD_LENGTH){
-            Toast.makeText(mContext, "密码不能超过允许的最大长度即6位", Toast.LENGTH_SHORT).show();
+        if(password.length()<MAX_LIMIT_PASSWORD_LENGTH || username.length()>MAX_LIMIT_USERNAME_LENGTH*2){
+            Toast.makeText(mContext, "密码长度只能在6到12位", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -237,7 +238,7 @@ public class SigneInDialog {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
-                            if (s != null) {
+                            if (s != null&&isJSONValid(s)) {
                                 JSONObject json = null;
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
@@ -250,6 +251,10 @@ public class SigneInDialog {
                                 Message msg = new Message();
                                 msg.obj = id_signe_in_result;
                                 mHandler.sendMessage(msg);
+                            }
+                            else
+                            {
+                                LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
                             }
                         }
                     });

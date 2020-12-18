@@ -67,6 +67,7 @@ import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.mActivity;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
+import static com.mercury.game.util.UIUtils.isJSONValid;
 
 
 public class LoginDialog {
@@ -301,7 +302,7 @@ public class LoginDialog {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
-                            if (s != null) {
+                            if (s != null&&isJSONValid(s)) {
                                 JSONObject json = null;
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
@@ -322,6 +323,10 @@ public class LoginDialog {
                                 Message msg = new Message();
                                 msg.obj = username;
                                 mHandler.sendMessage(msg);
+                            }
+                            else
+                            {
+                                LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
                             }
                         }
                     });

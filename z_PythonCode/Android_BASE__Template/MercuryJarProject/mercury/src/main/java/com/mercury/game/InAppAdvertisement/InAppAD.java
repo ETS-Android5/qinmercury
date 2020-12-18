@@ -27,7 +27,9 @@ import okhttp3.Response;
 
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
+import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryApplication.channelname;
+import static com.mercury.game.util.UIUtils.isJSONValid;
 //end
 
 
@@ -198,19 +200,23 @@ public class InAppAD extends InAppBase {
 		builder.create().show();
 	}
 
-	public void getAdAccessable(String s,String interfaceName){
+	public void getAdAccessable(String s,String interfaceName) {
 		JSONObject json = null;
-		try {
-			json = (JSONObject) new JSONTokener(s).nextValue();
-			JSONObject data = json.getJSONObject("data");
-			if (data.isNull("isAdAccessable")) {
-				JSONObject result = data.getJSONObject("result");
-				isAdAccessable = result.isNull(channelname) ? true : result.getJSONObject(channelname).getBoolean("isAdAccessable");
-			} else {
-				isAdAccessable = data.getBoolean("isAdAccessable");
+		if (s != null && isJSONValid(s)) {
+			try {
+				json = (JSONObject) new JSONTokener(s).nextValue();
+				JSONObject data = json.getJSONObject("data");
+				if (data.isNull("isAdAccessable")) {
+					JSONObject result = data.getJSONObject("result");
+					isAdAccessable = result.isNull(channelname) ? true : result.getJSONObject(channelname).getBoolean("isAdAccessable");
+				} else {
+					isAdAccessable = data.getBoolean("isAdAccessable");
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
+		} else {
+			LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
 		}
 	}
 

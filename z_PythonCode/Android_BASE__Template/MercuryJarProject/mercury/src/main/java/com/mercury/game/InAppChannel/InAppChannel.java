@@ -56,7 +56,7 @@ import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
-
+import static com.mercury.game.util.UIUtils.isJSONValid;
 
 
 public class InAppChannel extends InAppBase {
@@ -119,7 +119,7 @@ public class InAppChannel extends InAppBase {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String s = response.body().string();
-                if (s != null) {
+                if (s != null&&isJSONValid(s)) {
                     JSONObject json = null;
                     try {
                         json = (JSONObject) new JSONTokener(s).nextValue();
@@ -171,6 +171,10 @@ public class InAppChannel extends InAppBase {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+                else
+                {
+                    Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -246,14 +250,14 @@ public class InAppChannel extends InAppBase {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String s = response.body().string();
-                if (s != null) {
+                if (s != null&&isJSONValid(s)) {
                     JSONObject json = null;
                     try {
+                        Looper.prepare();
                         json = (JSONObject) new JSONTokener(s).nextValue();
                         LoginDialog.isLoginPermitted = String.valueOf(json.getInt("data"));
                         LogLocal("[UserConfig][get_login_permition] result=" + LoginDialog.isLoginPermitted);
                         LogLocal("[UserConfig][get_login_permition] remote result=" + s);
-                        Looper.prepare();
                         LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
                             @Override
                             public void success(String phone) {
@@ -277,6 +281,10 @@ public class InAppChannel extends InAppBase {
                         e.printStackTrace();
                     }
 
+                }
+                else
+                {
+                    LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
                 }
             }
         });

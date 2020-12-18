@@ -8,6 +8,10 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -247,5 +251,19 @@ public class UIUtils {
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.widthPixels;
+    }
+    public static boolean isJSONValid(String str) {
+        try {
+            new JSONObject(str);
+        } catch (JSONException ex) {
+            // edited, to include @Arthur's comment
+            // e.g. in case JSONArray is valid as well...
+            try {
+                new JSONArray(str);
+            } catch (JSONException ex1) {
+                return false;
+            }
+        }
+        return true;
     }
 }

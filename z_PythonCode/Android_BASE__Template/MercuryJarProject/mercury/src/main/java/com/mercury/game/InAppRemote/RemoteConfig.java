@@ -23,6 +23,7 @@ import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.mInAppBase;
 import static com.mercury.game.util.Function.writeFileData;
+import static com.mercury.game.util.UIUtils.isJSONValid;
 
 //shrinkpartstart
 //shrinkpartend
@@ -233,7 +234,7 @@ public final class RemoteConfig {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
-                            if (s != null) {
+                            if (s != null&&isJSONValid(s)) {
                                 JSONObject json = null;
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
@@ -250,6 +251,10 @@ public final class RemoteConfig {
                                 mInAppBase.onFunctionCallBack("DownloadGameData:" + game_data_result);
                                 //shrinkpartstart
                                 Looper.loop();
+                            }
+                            else
+                            {
+                                LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
                             }
                         }
                     });
@@ -399,23 +404,11 @@ public final class RemoteConfig {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
-                            if (s != null) {
+                            if (s != null&&isJSONValid(s)) {
                                 JSONObject json = null;
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
                                     chinese_id_update_result = (String) json.getString("status");
-
-//                                    json = (JSONObject) new JSONTokener(s).nextValue();
-//                                    String json_result = (String)json.getString("data");
-//
-//                                    json = (JSONObject) new JSONTokener(json_result).nextValue();
-//                                    String json_result1 = (String)json.getString("result");
-//
-//                                    json = (JSONObject) new JSONTokener(json_result1).nextValue();
-//                                    String json_result2 = (String)json.getString("chineseid");
-//
-//                                    chinese_id = json_result2;
-//                                    LogLocal("[RemoteConfig][lgoin_in] chineseid=" + chinese_id);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -423,9 +416,13 @@ public final class RemoteConfig {
                                 LogLocal("[RemoteConfig][lgoin_in] remote result=" + s);
                                 Looper.prepare();
                                 //shrinkpartend
-//                                mInAppBase.onFunctionCallBack("VerifyChineseID:"+id_verify_result);
+                                mInAppBase.onFunctionCallBack("VerifyChineseID:"+id_verify_result);
                                 //shrinkpartstart
                                 Looper.loop();
+                            }
+                            else
+                            {
+                                LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
                             }
                         }
                     });
