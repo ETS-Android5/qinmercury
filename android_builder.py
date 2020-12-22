@@ -14,6 +14,7 @@ import configparser
 import datetime
 import subprocess
 from os.path import join, getsize
+
 def PythonLocation():
 	return os.path.dirname(os.path.realpath(__file__))
 class SDKAppendManager():
@@ -72,37 +73,14 @@ class SDKAppendManager():
 			"mercury_shape_corner_up.xml",
 			"mercury_shape_corner.xml",
 		]
-		self.__delete_smali_list = [
-			"/smali_classes2/com/ktplay",
-			"/smali_classes4/com/google/android/gms",
-			"/smali_classes2/com/vungle",
-			"/smali_classes2/com/unity3d/ads",
-			"/smali_classes2/com/unity3d/services/ads",
-			"/smali_classes2/com/unity3d/services/banners",
-			"/smali_classes2/com/ironsource",
-			"/smali_classes2/com/iab",
-			"/smali_classes4/com/google/ads",
-			"/smali/com/facebook/ads",
-			"/smali_assets/audience_network/com",
-			"/smali/facebook",
-			"/smali_classes2/com/moat",
-			"/smali/com/facebook",
-			"/smali/retrofit2",
-			"/smali_classes2/com/unity3d/services",
-			"/smali/com/flaregames/sdk/facebookplugin",
-			"/smali/com/appsflyer",
-			"/smali/com/flaregames/sdk/FlareSDK.smali",
-			"/assets/FacebookPlugin.json",
-			"/res/layout/com_facebook_tooltip_bubble.xml",
-			"/res/layout/com_facebook_smart_device_dialog_fragment.xml",
-			"/res/layout/com_facebook_login_fragment.xml",
-			"/res/layout/com_facebook_device_auth_dialog_fragment.xml",
-			"/res/layout/com_facebook_activity_layout.xml",
-			"/assets/audience_network.dex",
-			"/assets/FlareSDK/flaresdk.template.json",
-			"/assets/FlareSDK/flaresdk.json"
 
+		self.__rebuild_public_xml_list = [
+			"type=\"layout\"",
 		]
+
+		self.__delete_smali_list = [
+		]
+		self.__delete_rebuild_id_list = []
 
 		self.__targetSdkVersion = "29"
 		self.__versionName = "2.0.6"
@@ -115,19 +93,87 @@ class SDKAppendManager():
 				self.__zipalign_path = line.decode('UTF-8')
 
 	def _merge_package(self):
+
+		self._prepare_SDK_orinigal_file_resource()
 		self._decompile_game_apk()
 		self._decompile_sdk_apk()
 		self._modify_config()
 		self._merge_sdk_resource()
 		self._rebuild_game_apk()
-		os.system("adb install -r "+ self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk"))
+		signed_path = self.__signe_signature(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/dist/{self.__game_apk_name}.apk")
+		self.__rebuild_resource_id(signed_path)
+		os.system("adb install -r "+ signed_path)
 		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}"):
 			try:
 				shutil.rmtree(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
 			except Exception  as identifier:
 				print("delete file failed:"+str(identifier))
 
+	def __rebuild_resource_id(self,apk_path):
+		os.system(f"{self.__apktool} d {apk_path}")
+		folder_name = apk_path[apk_path.rfind("/"):-4]
+		public_id_list = []
+		public_my_name_list = []
+		public_my_id_list = []
+		replaced_list = []
+		with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}/res/values/public.xml",encoding="UTF-8") as file_object:
+			all_the_text = file_object.readlines()
+			for index2, i in enumerate(all_the_text):
+				if "id=" in i:
+					for type_name in self.__rebuild_public_xml_list:
+						if type_name in i:
+							public_my_id_list.append(i[i.find(" id=\"")+len(" id=\""):i.find("\" />")])
+							public_my_name_list.append(i[i.find("name=\"")+len("name=\""):i.find("\" id=")])
+							print("[__rebuild_resource_id]check list:"+i[i.find(" id=\"")+len(" id=\""):i.find("\" />")]+"|"+i[i.find("name=\"")+len("name=\""):i.find("\" id=")])
+
+		os.chdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}/smali")
+		for index_my_name,my_name in enumerate(public_my_name_list):
+			count_number = len(public_my_name_list)
+			print("[__rebuild_resource_id]remaining "+str(count_number-index_my_name))
+			current_public_name= my_name
+			current_public_ID = public_my_id_list[index_my_name]
+			current_smali = ""
+			p = subprocess.Popen('grep -rna \"'+my_name+'\" * ',shell=True,stdout=subprocess.PIPE)
+			out,err = p.communicate()
+			message_list = out.splitlines()
+			for line in message_list:
+				if public_my_id_list[index_my_name] not in str(line):
+					tem_str = str(line)
+					if ".smali:" in tem_str:
+						current_smali = tem_str[2:tem_str.find(":")]
+						with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}/smali/{current_smali}",encoding="UTF-8") as file_object:
+							all_the_text = file_object.readlines()
+							new_context = []
+							for i in all_the_text:
+								if current_public_name in i:
+									if "->" not in i and "=" in i:
+										current_string  = i[:i.find(":I = ")+len(":I = ")]+current_public_ID+"\n"
+										id_length = len(i[i.find(":I = ")+len(":I = "):])
+										print("current_string="+current_string)
+										if id_length==11:
+											replaced_list.append(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}/smali/{current_smali}\n")
+											replaced_list.append(i)
+											replaced_list.append(current_string)
+											new_context.append(current_string)
+								else:
+									new_context.append(i)
+						with open(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}/smali/{current_smali}",mode='w',encoding="utf8") as file_context:
+							print("[__rebuild_resource_id]"+folder_name+"/"+current_smali)
+							file_context.writelines(new_context)
+
+		with open(self.__file_path+"/Y_building/replace.txt",mode='w',encoding="utf8") as file_context:
+			print("[__rebuild_resource_id]"+folder_name+"/"+current_smali)
+			file_context.writelines(replaced_list)
+
+		os.chdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}")
+		os.system(f"{self.__apktool} b {self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}")
+		signed_apk_path = self.__file_path+"/Y_building/"+folder_name+"_smail_rewrite.apk"
+		unsigned_apk_path = f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}/dist/{folder_name}.apk"
+		os.system("jarsigner -verbose -keystore " + self.__keystore +" -storepass singmaan -signedjar " + signed_apk_path + " -digestalg SHA1 -sigalg MD5withRSA " + unsigned_apk_path + " android.keystore")
+		pass
+
 	def _decompile_game_apk(self):
+		os.chdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}")
 		os.system(f"{self.__apktool} d {self.__game_apk_path}")
 
 	def _decompile_sdk_apk(self):
@@ -277,10 +323,10 @@ class SDKAppendManager():
 		smali_class_index = 2
 		print(str(os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index))))
 		while os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index)):
-			print("aaa="+str(smali_class_index))
 		# 	if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index))==False:
 		# 		print("don't exit "+app_releawse_path)
-			if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index)): os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))
+			if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))==False:
+				os.mkdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))
 			self.__copy_files_overwrite(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{app_releawse_path}/smali_classes"+str(smali_class_index),f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/smali_classes"+str(smali_class_index))
 			smali_class_index = smali_class_index+1
 	def __merge_sdk_resource_res(self):
@@ -582,6 +628,187 @@ class SDKAppendManager():
 			List.append(i)
 		return List
 
+	def __copy_folder_overwrite(self, sourceDir, targetDir):
+		if os.path.isdir(sourceDir)==True:
+			self.__copy_files_dont_overwrite(sourceDir,targetDir)
+		else:
+			print("[__copy_folder_overwrite] source file does't exist:"+sourceDir)
+
+	def __copy_folder_dont_overwrite(self, sourceDir, targetDir):
+		if os.path.isdir(sourceDir)==True:
+			self.__copy_files_dont_overwrite(sourceDir,targetDir)
+		else:
+			print("[__copy_folder_overwrite] source file does't exist"+sourceDir)
+
+	def _prepare_SDK_orinigal_file_resource(self):
+		#create each SDK's folder
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name)==True:shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name)
+		self.__copy_folder_dont_overwrite(PythonLocation()+"/"+self.__channel_base+"/SDKResource", PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base)
+		self.__copy_folder_dont_overwrite(PythonLocation()+"/"+self.__channel_IAP+"/SDKResource", PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP)
+		self.__copy_folder_dont_overwrite(PythonLocation()+"/"+self.__channel_show+"/SDKResource", PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show)
+
+		#merge SDK
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/")==True:
+			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/")
+
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/assets")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/jniLibs")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res")
+		#copy assets
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/assets")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/assets")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/assets")
+		#copy lib
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs")
+		#copy jniLibs
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/jniLibs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/jniLibs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/jniLibs",  PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/jniLibs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/jniLibs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/jniLibs")
+
+		#copy base res, xml, gradle
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res")
+		shutil.copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/AndroidManifest.xml", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/AndroidManifest.xml")
+		shutil.copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/build.gradle", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/build.gradle")
+		self.__copy_folder_dont_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res")
+		self.__copy_folder_dont_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res")
+
+		#merge res
+		self.__prepare_SDK_orinigal_file_resource_merge_res(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/res")
+		self.__prepare_SDK_orinigal_file_resource_merge_res(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/res")
+
+		#merge xml
+		self.__prepare_SDK_orinigal_file_resource_merge_xml(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/AndroidManifest.xml",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/AndroidManifest.xml")
+		self.__prepare_SDK_orinigal_file_resource_merge_xml(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/AndroidManifest.xml",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/AndroidManifest.xml")
+
+		#merge gradble
+		self.__prepare_SDK_orinigal_file_resource_merge_gradle(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/build.gradle",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/build.gradle")
+		self.__prepare_SDK_orinigal_file_resource_merge_gradle(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/build.gradle",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/build.gradle")
+
+		#merge lib
+		os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base)
+		os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar")
+
+		os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP)
+		os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/libs/MercurySDK.jar")
+
+		os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show)
+		os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/libs/MercurySDK.jar")
+
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")==True:
+			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/com/mercury/game/InAppChannel",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")
+
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")==True:
+			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/com/mercury/game/InAppAdvertisement",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")
+
+		if os.path.isfile(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar"):
+			os.remove(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar")
+
+		if os.path.isfile(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs/MercurySDK.jar"):
+			os.remove(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs/MercurySDK.jar")
+		# shutil.make_archive("MercurySDK", 'jar', PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com")
+		# p = subprocess.Popen("zip –r "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com", stdout=subprocess.PIPE, shell=True)
+		# p.wait()
+
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com",PythonLocation()+"/y_building/"+self.__channel_name+"/com")
+
+		all_files = self.__all_files_in_folder(PythonLocation()+"/y_building/"+self.__channel_name+"/com")
+		zp=zipfile.ZipFile(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs/MercurySDK.jar",'w', zipfile.ZIP_DEFLATED)
+		for file in all_files:
+			zp.write(file)
+		zp.close()
+
+		# self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com",PythonLocation()+"/y_building/"+self.__channel_name+"/com")
+		shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/com")
+		shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com")
+		shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/com")
+		shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/com")
+
+
+	def __prepare_SDK_orinigal_file_resource_merge_res(self,game_res,sdk_res):
+		game_res_folder = self.__all_files_in_folder(game_res)
+		sdk_res_folder  = self.__all_files_in_folder(sdk_res)
+		for g_res in game_res_folder:
+			for s_res in sdk_res_folder:
+				gameresfile = g_res[g_res.rfind("/")+1:]
+				sdkresfile = s_res[s_res.rfind("/")+1:]
+				gameresfolder = g_res[g_res.rfind("/res")+1:]
+				sdkresfolder =  s_res[s_res.rfind("/res")+1:]
+				if gameresfolder!=sdkresfolder:
+					continue
+				elif sdkresfile == gameresfile and ".xml" in sdkresfile:
+					if gameresfile in self.__dont_merge_list:
+						print(f"skip{gameresfile}")
+						continue
+					else:
+						print(f"[prepare_SDK_orinigal_file_resource_merge_res]merging {g_res}<-{s_res}")
+						xml_manager.merge_xml(g_res,s_res)
+
+	def __prepare_SDK_orinigal_file_resource_merge_xml(self,game_xml_path,sdk_xml_path):
+		with open(sdk_xml_path,encoding="utf8") as file_object:
+			sdk_xml = file_object.readlines()
+
+		with open(game_xml_path,"r",encoding="UTF-8") as file_object:
+			is_sdk_part = False
+			loop_old = False
+			all_the_text = file_object.readlines()
+			new_xml = []
+			for i in all_the_text:
+				if i.find("<!--sdk-->")!=-1:
+					loop_old=True
+					loop = False
+					new_xml.append("<!--sdk-->\r")
+					for sdk_line in sdk_xml:
+						if loop == False:
+							if sdk_line.find("<!--sdk-->")!=-1:loop = True
+						elif loop==True:
+							if sdk_line.find("<!--end-->")!=-1:
+								loop=False
+								break
+							else:
+								new_xml.append(sdk_line)
+					is_sdk_part = True
+				# elif i.find("<!--sdkxml-->")!=-1:
+				# 	loop_old=True
+				# 	loop = False
+				# 	for sdk_line in sdk_xml:
+				# 		if loop == False:
+				# 			if sdk_line.find("<!--sdk-->")!=-1:loop = True
+				# 		elif loop==True:
+				# 			if sdk_line.find("<!--end-->")!=-1:
+				# 				loop=False
+				# 				break
+				# 			else:
+				# 				new_xml.append(sdk_line)
+				# 	is_sdk_part = True
+				# 	new_xml.append(i)
+				else:
+					new_xml.append(i)
+			with open(game_xml_path,mode='w',encoding="utf8") as file_context:
+				file_context.writelines(new_xml)
+
+	def __prepare_SDK_orinigal_file_resource_merge_gradle(self,game_gradle,sdk_gradle):
+		JavaCode=[]
+		with open(sdk_gradle,encoding="utf8") as file_object:
+			isStart = False
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				JavaCode.append(i)
+
+		with open(game_gradle,encoding="utf8") as file_object:
+			isStart = False
+			all_the_text = file_object.readlines()
+			for i in all_the_text:
+				JavaCode.append(i)
+
+		with open(game_gradle,'w',encoding="utf8") as file_object_read:
+			file_object_read.writelines(JavaCode)
+
 def clean_project():
 	if os.path.isdir(PythonLocation()+"/z_PythonCode/cache"):
 		print("[CACHE]deleting "+PythonLocation()+"/z_PythonCode/cache")
@@ -604,6 +831,8 @@ def Sync_config():
 			print("copyed "+PythonLocation()+"/"+folder_name+"/MercuryAPKProject_pure")
 			shutil.copy(PythonLocation()+"/local.properties",PythonLocation()+"/"+folder_name+"/MercuryAPKProject/local.properties")
 			print("copyed "+PythonLocation()+"/"+folder_name+"/MercuryAPKProject")
+
+
 
 def run():
 	file_path =  os.path.splitext(__file__.replace("\\","/"))[0][os.path.splitext(__file__.replace("\\","/"))[0].rfind("/")+1:]

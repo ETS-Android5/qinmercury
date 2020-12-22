@@ -156,6 +156,7 @@ class APKBuildManager():
 		self.__apk_project_clean = PathLib(os.path.dirname(os.path.realpath(__file__))+"/MercuryAPKProject_pure")
 		self.__cache_position = PathLib("/PythonCode/cache/")
 		self.__copyFileCounts = 0
+		self.__apk_project_clean = PathLib(os.path.dirname(os.path.realpath(__file__))+"/MercuryAPKProject_pure")
 		# self.__file_path = os.path.dirname(os.path.realpath(__file__))
 		# self.__sdk_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel
 		# self.__sdk_script_path = os.path.dirname(os.path.realpath(__file__))+"/"+channel+"/merge_building.py"
@@ -217,7 +218,9 @@ class APKBuildManager():
 		if os.path.isdir(str(PathLib(f"{self.__apk_project}/app/src/main/libs")))==False:os.mkdir(str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
 		if os.path.isdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")))==False:os.mkdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")))
 		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")),str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
-		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")),str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
+		if os.path.isdir(str(PathLib(  PythonLocation()+"/SDKResource" )))==False:os.mkdir(str(PathLib(  PythonLocation()+"/SDKResource" )))
+		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")),str(PathLib(  PythonLocation()+"/SDKResource/jniLibs" )))
+		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")),str(PathLib( PythonLocation()+"/SDKResource/libs" )))
 		#merge remote sdk
 		# def AddRemoteJarToGradle(_DemoGradlePath,_buildGradlePath):
 		with open(str(PathLib(f"{self.__jar_project}/mercury/build.gradle")),encoding="utf8") as file_object:
@@ -228,6 +231,10 @@ class APKBuildManager():
 				f = i.replace(" ","")
 				if f.find("implementation")!=-1:
 					JavaCode.append(i)
+
+		with open(str(PathLib(PythonLocation()+"/SDKResource/build.gradle")),'w',encoding="utf8") as file_object_read:
+			file_object_read.writelines(JavaCode)
+
 		isFindStart = False
 		with open(str(PathLib(f"{self.__apk_project}/app/build.gradle")),encoding="utf8") as file_object:
 			JavaCodeGradle=[]
@@ -251,6 +258,10 @@ class APKBuildManager():
 		if os.path.isdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/assets")))==False:os.mkdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/assets")))
 		if os.path.isdir(str(PathLib(f"{self.__apk_project}/app/src/main/libs")))==False:os.mkdir(str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
 		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/assets")),str(PathLib(f"{self.__apk_project}/app/src/main/assets")))
+		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/assets")),str(PathLib(f"{self.__apk_project}/app/src/main/assets")))
+		if os.path.isdir(str(PathLib(  PythonLocation()+"/SDKResource" )))==False:os.mkdir(str(PathLib(  PythonLocation()+"/SDKResource" )))
+		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/assets")),str(PathLib(  PythonLocation()+"/SDKResource/assets" )))
+
 
 	def __merge_res(self):
 		self.__copyFileCounts = 0
@@ -268,7 +279,9 @@ class APKBuildManager():
 					else:
 						print(f"[_decompile_sdk_apk][__merge_sdk_resource][__merge_sdk_resource_xml]merging {g_res}<-{s_res}")
 						merge_xml(s_res,g_res)
-
+		if os.path.isdir(str(PathLib(  PythonLocation()+"/SDKResource" )))==False:os.mkdir(str(PathLib(  PythonLocation()+"/SDKResource" )))
+		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/res")),str(PathLib( PythonLocation()+"/SDKResource/res" )))
+		pass
 	def __merge_xml(self):
 		#get sdk string
 		if os.path.isfile(str(PathLib(f"{self.__jar_project}/mercury/src/main/AndroidManifest.xml"))):
@@ -301,6 +314,10 @@ class APKBuildManager():
 
 		#save string into files
 		with open(str(PathLib(f"{self.__jar_project}/AndroidManifest_sdk.xml")),mode='w',encoding="utf8") as file_context:
+			file_context.writelines(sdk_part)
+
+		#save string into files
+		with open(str(PathLib(PythonLocation()+"/SDKResource/AndroidManifest.xml")),mode='w',encoding="utf8") as file_context:
 			file_context.writelines(sdk_part)
 
 		#merge xml string into APK
@@ -464,6 +481,9 @@ def main():
 		python_name = "python3"
 	os.system(python_name+" ./MercuryJarProject/BuildJAR.py")
 	shutil.move(PythonLocation()+"/MercuryJarProject/MercurySDK.jar", PythonLocation()+"/MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
+
+	shutil.copy(PythonLocation()+"/MercuryAPKProject/app/src/main/libs/MercurySDK.jar", PythonLocation()+"/SDKResource/libs/MercurySDK.jar")
+
 	if os.path.isfile(PathLib(PythonLocation()+"/app-release.apk")):
 		os.remove(PathLib(PythonLocation()+"/app-release.apk"))
 	os.system(python_name+" ./MercuryAPKProject/BuildAPK.py")
