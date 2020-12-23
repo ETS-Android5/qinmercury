@@ -220,6 +220,8 @@ class APKBuildManager():
 		if os.path.isdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")))==False:os.mkdir(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")))
 		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")),str(PathLib(f"{self.__apk_project}/app/src/main/libs")))
 		if os.path.isdir(str(PathLib(  PythonLocation()+"/SDKResource" )))==False:os.mkdir(str(PathLib(  PythonLocation()+"/SDKResource" )))
+		if os.path.isdir(str(PathLib(PythonLocation()+"/SDKResource/jniLibs")))==False:os.mkdir(str(PathLib(PythonLocation()+"/SDKResource/jniLibs")))
+		if os.path.isdir(str(PathLib(PythonLocation()+"/SDKResource/libs")))==False:os.mkdir(str(PathLib(PythonLocation()+"/SDKResource/libs")))
 		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/jniLibs")),str(PathLib(  PythonLocation()+"/SDKResource/jniLibs" )))
 		self._copy_files_overwrite(str(PathLib(f"{self.__jar_project}/mercury/src/main/libs")),str(PathLib( PythonLocation()+"/SDKResource/libs" )))
 		#merge remote sdk
@@ -481,9 +483,8 @@ def main():
 	else:
 		python_name = "python3"
 	os.system(python_name+" ./MercuryJarProject/BuildJAR.py")
+	shutil.copy(PythonLocation()+"/MercuryJarProject/MercurySDK.jar", PythonLocation()+"/SDKResource/libs/MercurySDK.jar")
 	shutil.move(PythonLocation()+"/MercuryJarProject/MercurySDK.jar", PythonLocation()+"/MercuryAPKProject/app/src/main/libs/MercurySDK.jar")
-
-	shutil.copy(PythonLocation()+"/MercuryAPKProject/app/src/main/libs/MercurySDK.jar", PythonLocation()+"/SDKResource/libs/MercurySDK.jar")
 
 	if os.path.isfile(PathLib(PythonLocation()+"/app-release.apk")):
 		os.remove(PathLib(PythonLocation()+"/app-release.apk"))
