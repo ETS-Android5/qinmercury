@@ -201,6 +201,7 @@ class APKBuildManager():
 		self.__change_java_package_name(str(PathLib(f"{self.__apk_project_clean}/app/src/main/java/com/qinbatista/mercury/MainActivity.java")),"com.demo.game")
 
 	def merge_sdk_resource(self):
+		if os.path.isdir(PythonLocation()+"/SDKResource"):shutil.rmtree(PythonLocation()+"/SDKResource")
 		#merge assets
 		self.__merge_assets()
 		#merge lib
