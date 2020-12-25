@@ -75,7 +75,7 @@ class SDKAppendManager():
 		]
 
 		self.__rebuild_public_xml_list = [
-			"type=\"layout\"",
+			# "type=\"layout\"",
 		]
 
 		self.__delete_smali_list = [
