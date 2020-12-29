@@ -41,6 +41,7 @@ import org.json.JSONTokener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 //shrinkpartstart
 import okhttp3.Call;
@@ -509,5 +510,17 @@ public class InAppChannel extends InAppBase {
             }
         });
         //shrinkpartend
+    }
+
+    public void Data_UseItem(int myint, String item) {
+    }
+
+    public void Data_LevelBegin(String key) {
+    }
+
+    public void Data_LevelCompleted(String key) {
+    }
+
+    public void Data_Event(String event, Map<String, Object> map) {
     }
 }

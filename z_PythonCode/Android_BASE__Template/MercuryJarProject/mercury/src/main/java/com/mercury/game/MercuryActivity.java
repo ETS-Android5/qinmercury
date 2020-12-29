@@ -568,18 +568,24 @@ public class MercuryActivity  {
 	{
 		LogLocal("[MercuryActivity] Data_UseItem()");
 		int myint =  Integer.parseInt(quantity);
+		mInAppChannel.Data_UseItem(myint, item);
 	}
 	public void Data_LevelBegin(String key)
 	{
 		LogLocal("[MercuryActivity] Data_LevelBegin()");
+		mInAppChannel.Data_LevelBegin(key);
 	}
 	public void Data_LevelCompleted(String key)
 	{
 		LogLocal("[MercuryActivity] Data_LevelCompleted()");
+		mInAppChannel.Data_LevelCompleted(key);
 	}
 	public void Data_Event(String key)
 	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("key", key);// 在注册环节的每一步完成时，以步骤名作为value传送数据
 		LogLocal("[MercuryActivity] Data_Event()");
+		mInAppChannel.Data_Event("Event",map);
 	}
 	public void showMessageDialog()
 	{
