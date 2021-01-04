@@ -71,21 +71,6 @@ public class InAppChannel extends InAppBase {
         super.ActivityInit(context, appinterface);
         MercuryActivity.LogLocal("[InAppChannel][ActivityInit]=" + Channelname);
         Toast.makeText(mContext, "只限于" + channelname + "测试，请勿泄漏", Toast.LENGTH_SHORT).show();
-        //shrinkpartstart
-//        if (readFileData("card_id").equals("")) {
-//            new IDCardVerifyDialog(mContext, new LoginCallBack() {
-//                @Override
-//                public void success(String msg) {
-//                    LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-//                }
-//
-//                @Override
-//                public void fail(String msg) {
-//                    LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-//                }
-//            });
-//        }
-        //shrinkpartend
     }
 
     public void ActivityBundle(Bundle bundle) {
@@ -107,78 +92,58 @@ public class InAppChannel extends InAppBase {
     @Override
     public void Purchase(final String strProductId) {
         //shrinkpartstart
-        UserConfig.getPayPermition(DeviceId, GameName, channelname, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                LogLocal("[UserConfig][get_pay_permition] failed=" + e.toString());
-                Looper.prepare();
-                if(!NetCheckUtil.checkNet(mContext)){
-                    Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+        if(NetCheckUtil.checkNet(mContext)) {
+            UserConfig.getPayPermition(DeviceId, GameName, channelname, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    LogLocal("[UserConfig][get_pay_permition] failed=" + e.toString());
+                    Looper.prepare();
+                    SingmaanPayMethod();
+                    Looper.loop();
                 }
-                Looper.loop();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String s = response.body().string();
-                if (s != null&&isJSONValid(s)) {
-                    JSONObject json = null;
-                    try {
-                        json = (JSONObject) new JSONTokener(s).nextValue();
-                        String isPayPermitted = String.valueOf((Integer) json.getInt("data"));
-                        PaymentDialog.isPayPermitted = isPayPermitted;
-                        LogLocal("[UserConfig][get_pay_permition] data1=" + isPayPermitted);
-                        LogLocal("[UserConfig][get_pay_permition] data=" + isPayPermitted);
-                        pid = strProductId;
-                        MercuryConst.PayInfo(strProductId);
-                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid=" + MercuryConst.QinPid);
-                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc=" + MercuryConst.Qindesc);
-                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat=" + MercuryConst.Qinpricefloat);
-                        Looper.prepare();
-                        if (local_age < 8 && local_age != 0) {
-                            try {
-                                Builder builder = new Builder(mContext);
-                                builder.setMessage("提示");
-                                builder.setTitle("未成年人无法充值");
-                                builder.setPositiveButton("确定", new OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String s = response.body().string();
+                    if (s != null && isJSONValid(s)) {
+                        JSONObject json = null;
+                        try {
+                            json = (JSONObject) new JSONTokener(s).nextValue();
+                            String isPayPermitted = String.valueOf((Integer) json.getInt("data"));
+                            PaymentDialog.isPayPermitted = isPayPermitted;
+                            pid = strProductId;
+                            MercuryConst.PayInfo(strProductId);
+                            MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid=" + MercuryConst.QinPid);
+                            MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc=" + MercuryConst.Qindesc);
+                            MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat=" + MercuryConst.Qinpricefloat);
+                            Looper.prepare();
+                            if (local_age < 8 && local_age != 0) {
+                                try {
+                                    Builder builder = new Builder(mContext);
+                                    builder.setMessage("提示");
+                                    builder.setTitle("未成年人无法充值");
+                                    builder.setPositiveButton("确定", new OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
 
-                                    }
-                                });
-                                builder.create().show();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                                        }
+                                    });
+                                    builder.create().show();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                SingmaanPayMethod();
                             }
-                        } else {
-
-                            new PaymentDialog(mContext, new PayMethodCallBack() {
-                                @Override
-                                public void Alipay(String msg) {
-                                    MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
-                                    //shrinkpartend
-                                    TestPay();
-                                    //shrinkpartstart
-                                }
-
-                                @Override
-                                public void WechatPay(String msg) {
-                                    MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
-                                    TestPay();
-                                }
-                            });
-
+                            Looper.loop();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        Looper.loop();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    } else {
+                        Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
                     }
                 }
-                else
-                {
-                    Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+            });
+        }
 //shrinkpartend
 
 
@@ -209,7 +174,25 @@ public class InAppChannel extends InAppBase {
             e.printStackTrace();
         }
     }
+    public void SingmaanPayMethod()
+    {
+        new PaymentDialog(mContext, new PayMethodCallBack() {
+            @Override
+            public void Alipay(String msg) {
+                MercuryActivity.LogLocal("[InAppChannel][Purchase] Alipay");
+                //shrinkpartend
+                TestPay();
+                //shrinkpartstart
+            }
 
+            @Override
+            public void WechatPay(String msg) {
+                MercuryActivity.LogLocal("[InAppChannel][Purchase] WechatPay");
+                TestPay();
+            }
+        });
+
+    }
     public void TestPay() {
         try {
             Builder builder = new Builder(mContext);
@@ -238,60 +221,62 @@ public class InAppChannel extends InAppBase {
         //shrinkpartstart
         String phone = "";
         LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
-        UserConfig.getLoginPermition(DeviceId, GameName, channelname,new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Looper.prepare();
-                if(!NetCheckUtil.checkNet(mContext)){
-                    Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+        if(NetCheckUtil.checkNet(mContext))
+        {
+            UserConfig.getLoginPermition(DeviceId, GameName, channelname, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Looper.prepare();
+                    MercuryLogin();
+                    Looper.loop();
                 }
-                Looper.loop();
-            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String s = response.body().string();
-                if (s != null&&isJSONValid(s)) {
-                    JSONObject json = null;
-                    try {
-                        Looper.prepare();
-                        json = (JSONObject) new JSONTokener(s).nextValue();
-                        LoginDialog.isLoginPermitted = String.valueOf(json.getInt("data"));
-                        LogLocal("[UserConfig][get_login_permition] result=" + LoginDialog.isLoginPermitted);
-                        LogLocal("[UserConfig][get_login_permition] remote result=" + s);
-                        LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
-                            @Override
-                            public void success(String phone) {
-                                LogLocal("[InAppChannel][SingmaanLogin] Success");
-                                DeviceId = phone;
-                                //shrinkpartend
-                                LoginSuccessCallBack(DeviceId);
-                                if (readFileData("privacyagreement").equals("")) {
-                                    new PrivacyDialog(mContext);
-                                }
-                                //shrinkpartstart
-                            }
-                            @Override
-                            public void fail(String msg) {
-                                LogLocal("[InAppChannel][SingmaanLogin] Login failed");
-                                LoginCancelCallBack(msg);
-                            }
-                        });
-                        Looper.loop();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String s = response.body().string();
+                    if (s != null && isJSONValid(s)) {
+                        JSONObject json = null;
+                        try {
+                            Looper.prepare();
+                            json = (JSONObject) new JSONTokener(s).nextValue();
+                            LoginDialog.isLoginPermitted = String.valueOf(json.getInt("data"));
+                            LogLocal("[UserConfig][get_login_permition] result=" + LoginDialog.isLoginPermitted);
+                            LogLocal("[UserConfig][get_login_permition] remote result=" + s);
+                            MercuryLogin();
+                            Looper.loop();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
                     }
-
                 }
-                else
-                {
-                    LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
-                }
-            }
-        });
+            });
+        }
         //shrinkpartend
     }
+    public void MercuryLogin()
+    {
+        LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
+            @Override
+            public void success(String phone) {
+                LogLocal("[InAppChannel][SingmaanLogin] Success");
+                DeviceId = phone;
+                //shrinkpartend
+                LoginSuccessCallBack(DeviceId);
+                if (readFileData("privacyagreement").equals("")) {
+                    new PrivacyDialog(mContext);
+                }
+                //shrinkpartstart
+            }
 
+            @Override
+            public void fail(String msg) {
+                LogLocal("[InAppChannel][SingmaanLogin] Login failed");
+                LoginCancelCallBack(msg);
+            }
+        });
+    }
     public void SingmaanLogout() {
         LogLocal("[MercuryActivity][SingmaanLogout]" + DeviceId);
         writeFileData("chineseid", "");

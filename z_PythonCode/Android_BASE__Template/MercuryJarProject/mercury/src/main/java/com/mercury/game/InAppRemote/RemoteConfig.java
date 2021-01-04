@@ -4,6 +4,8 @@ package com.mercury.game.InAppRemote;
 import android.os.Looper;
 import android.util.Log;
 
+import com.mercury.game.InAppDialog.LoginDialog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -38,12 +40,13 @@ public final class RemoteConfig {
     public static String chinese_id_update_result = "";
     public static String chinese_id = "";
     public static String account_id = "default";
-    private static String ip_address = "gamesupportcluster.singmaan.com";
+//    private static String ip_address = "gamesupportcluster.singmaan.com";
+    public static String ip_address = "gamesupporttest.singmaan.com";
 
 
     public static void GetAllConfig() {
         if (DeviceId.equals("9836ae60d6cc3666")) {
-            ip_address = "gamesupport.singmaan.com";
+            ip_address = "gamesupporttest.singmaan.com";
             LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP=" + ip_address);
         }
         get_remote_iap();
@@ -272,6 +275,7 @@ public final class RemoteConfig {
     public static String verify_chinese_id(final String account_id, final String my_id, final String my_chinese_name, final Callback callback) {
         id_verify_result = "";
         //shrinkpartstart
+        LogLocal("[RemoteConfig][verify_chinese_id]" + "https://" + ip_address + ":10011/verify_chinese_id");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -436,5 +440,127 @@ public final class RemoteConfig {
         //shrinkpartend
         return chinese_id_update_result;
     }
+
+    public static void set_login_time(final String account, final String time) {
+        //shrinkpartstart
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                try {
+                    //1.创建OkHttpClient对象
+                    OkHttpClient client = new OkHttpClient();
+                    //2.创建RequestBody对象
+                    String url = "https://"+ip_address+":10012"+"/setlogintime";
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("account", account)
+                            .add("time", time)
+                            .build();
+                    //3.创建Request对象
+                    Request request = new Request.Builder()
+                            .post(requestBody)
+                            .url(url)
+                            .build();
+                    //4. 同步请求
+                    // Response response = client.newCall(request).execute();
+                    //5.异步请求
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            LogLocal("[RemoteConfig][set_login_time] failed="+e.toString());
+                        }
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String s = response.body().string();
+                            if (s != null) {
+                                JSONObject json = null;
+                                try {
+                                    json = (JSONObject) new JSONTokener(s).nextValue();
+                                    LogLocal("[RemoteConfig][set_login_time] json=" + json);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                LogLocal("[RemoteConfig][set_login_time] remote result=" + s);
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                }
+                Looper.loop();
+            }
+        }).start();
+        //shrinkpartend
+    }
+
+    public static void get_login_time(final String account) {
+        if(LoginDialog.Instance.play_time !=""){
+            return;
+        }
+        //shrinkpartstart
+        LogLocal("get_login_time:--------------------------------------------------------------------->11111111111111111");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LogLocal("get_login_time:--------------------------------------------------------------------->222222222222222222222");
+//				Looper.prepare();
+                try {
+                    //1.创建OkHttpClient对象
+                    OkHttpClient client = new OkHttpClient();
+                    //2.创建RequestBody对象
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("account", account)
+                            .build();
+                    String url = "https://"+ip_address+":10012"+"/getlogintime";
+                    //3.创建Request对象
+                    Request request = new Request.Builder()
+                            .post(requestBody)
+                            .url(url)
+                            .build();
+                    //4. 同步请求
+                    // Response response = client.newCall(request).execute();
+                    //5.异步请求
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            LogLocal("[RemoteConfig][get_login_time] failed="+e.toString());
+                        }
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String s = response.body().string();
+                            if (s != null) {
+                                JSONObject json = null;
+                                try {
+                                    json = (JSONObject) new JSONTokener(s).nextValue();
+                                    LogLocal("get -------[RemoteConfig][origin_login_time] remote json=" + json);
+                                    LoginDialog.Instance.play_time = (String) json.getString("data");
+                                    if (LoginDialog.Instance.play_time != null && !LoginDialog.Instance.play_time.equals("")) {
+                                        //do something
+                                    }
+                                    else {
+                                        LoginDialog.Instance.play_time = "0";
+                                    }
+                                    //开始倒计时
+                                    LoginDialog.Instance.age_difference(LoginDialog.Instance.play_time);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                LogLocal("get --------[RemoteConfig][origin_login_time] ----------LoginDialog.Instance.play_time=>" + LoginDialog.Instance.play_time);
+                                LogLocal("get -------[RemoteConfig][origin_login_time] remote result=" + s);
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                }
+//				Looper.loop();
+            }
+        }).start();
+        //shrinkpartend
+    }
+
 
 }
