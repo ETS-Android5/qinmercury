@@ -350,7 +350,7 @@ public class MercuryActivity  {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String temp = sf.format(new Date());
 		int random = (int) ((Math.random() + 1) * 100000);
-		order_id = temp + random;
+		order_id = channelname+"_"+GameName+"_"+temp + random;
 		mInAppChannel.Purchase(pidname);
 
 	}

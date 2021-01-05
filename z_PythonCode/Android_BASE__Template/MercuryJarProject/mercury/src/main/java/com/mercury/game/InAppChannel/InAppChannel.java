@@ -646,7 +646,6 @@ public class InAppChannel extends InAppBase {
             xml.append("</xml>");
             List<NameValuePair> packageParams = new LinkedList<NameValuePair>();
             packageParams.add(new BasicNameValuePair("appid", WX_APP_ID));
-            order_id = channelname+"_"+GameName+"_"+order_id;
             MercuryActivity.LogLocal("[InAppChannel][genProductArgs] order_id = " + order_id);
             packageParams.add(new BasicNameValuePair("attach",MercuryConst.Qindesc+","+DeviceId+","+MercuryConst.QinPid+","+channelname+"_"+GameName+"_"+order_id));
 

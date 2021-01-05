@@ -86,7 +86,7 @@ public class OrderInfoUtil2_0 {
 		MercuryActivity.LogLocal("[InAppChannel][Map]=sdf.format(date)="+sdf.format(date));
 		Map<String, String> keyValues = new HashMap<String, String>();
 		keyValues.put("app_id", app_id);
-		keyValues.put("biz_content", "{\"timeout_express\":\"30m\",\"product_code\":\"QUICK_MSECURITY_PAY\",\"total_amount\":\""+Float.toString(price) +"\",\"subject\":\""+pid+"\",\"body\":\""+des+"\",\"out_trade_no\":\"" + channelname+"_"+GameName+"_"+order_id +  "\"}");
+		keyValues.put("biz_content", "{\"timeout_express\":\"30m\",\"product_code\":\"QUICK_MSECURITY_PAY\",\"total_amount\":\""+Float.toString(price) +"\",\"subject\":\""+pid+"\",\"body\":\""+des+"\",\"out_trade_no\":\"" + order_id +  "\"}");
 		keyValues.put("charset", "utf-8");
 		keyValues.put("method", "alipay.trade.app.pay");
 		keyValues.put("sign_type", rsa2 ? "RSA2" : "RSA");
