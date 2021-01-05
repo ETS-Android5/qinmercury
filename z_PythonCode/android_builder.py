@@ -75,7 +75,7 @@ class SDKAppendManager():
 		]
 
 		self.__rebuild_public_xml_list = [
-			#"type=\"layout\"",
+			"type=\"layout\"",
 		]
 
 		self.__delete_smali_list = [
@@ -698,13 +698,15 @@ class SDKAppendManager():
 		os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show)
 		os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/libs/MercurySDK.jar")
 
-		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")==True:
-			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/com/mercury/game/InAppChannel",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")
+		if self.__channel_IAP!="":
+			if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")==True:
+				shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")
+			self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/com/mercury/game/InAppChannel",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")
 
-		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")==True:
-			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/com/mercury/game/InAppAdvertisement",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")
+		if self.__channel_show!="":
+			if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")==True:
+				shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")
+			self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/com/mercury/game/InAppAdvertisement",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppAdvertisement")
 
 		if os.path.isfile(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar"):
 			os.remove(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar")
