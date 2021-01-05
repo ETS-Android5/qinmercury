@@ -406,7 +406,8 @@ public class LoginDialog {
 
         Play_time = play_time;
         local_age = getAgeByIDNumber(chinese_id);
-        LogLocal("local_age=:" + local_age);
+        LogLocal("[LoginDialog][age_difference] local_age=:" + local_age);
+
         if(play_time == ""){
             RemoteConfig.get_login_time(chinese_id);//分钟
             return;
@@ -416,9 +417,9 @@ public class LoginDialog {
         {
             long current_time = System.currentTimeMillis();
             String local_time =  readFileData("time"+chinese_id);
-            LogLocal("current_time:" + current_time);
-            LogLocal("local_time:" + local_time);
-            LogLocal("play_time:" + play_time);
+            LogLocal("[LoginDialog][age_difference] current_time:" + current_time);
+            LogLocal("[LoginDialog][age_difference] local_time:" + local_time);
+            LogLocal("[LoginDialog][age_difference] play_time:" + play_time);
             Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
 
@@ -433,8 +434,9 @@ public class LoginDialog {
                 if (play_time != "")
                 {
                     remaing_minutes = (90 - Integer.valueOf(play_time));
-                    LogLocal("remaing_minutes:" + remaing_minutes);
-
+                    if(remaing_minutes%60==0) {
+                        LogLocal("[LoginDialog][age_difference] remaing_minutes:" + remaing_minutes);
+                    }
                     if (remaing_minutes > 0)
                     {
                         if(remaing_minutes > 60)

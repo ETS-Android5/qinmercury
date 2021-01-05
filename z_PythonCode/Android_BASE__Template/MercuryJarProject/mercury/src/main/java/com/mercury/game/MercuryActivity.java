@@ -88,14 +88,14 @@ public class MercuryActivity  {
 	public static String isLogOpen="";
 	public static MercuryActivity activityforappbase=null;
 	public static int Platform=-1;
-	public static String DeviceId="123";
 	public static String SavePidName="";
 	public static String SortChannelID="";
 	public static String LongChannelID="";
 	private static ImageView img = null;
-	public static String GameName="ww1";
 	public static String order_id = "";
 	public  static APPBaseInterface mappcall= null;
+	public static String GameName="ww1";
+	public static String DeviceId="123";
 	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
 	{
 		LogLocal("[MercuryActivity][InitSDK]Version 1.0");
@@ -111,6 +111,7 @@ public class MercuryActivity  {
 		InitChannel(mappcall);//init channel sdk
 		InitAd(mappcall);//init AD sdk
 		GetProductionInfo();//set ProductionInfo
+		GetAllConfig();//get all remote config
 	}
 	public void ActivityBundle(Bundle bundle)
 	{
@@ -268,57 +269,28 @@ public class MercuryActivity  {
 	public String UserDeviceID()
 	{
 		//shrinkpartstart
-		DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-		getDeviceId();
-		GetAllConfig();//get all remote config
-		new Handler().postDelayed(new Runnable() {
+		//可以设置的权限PermissionConstants.PHONE，PermissionConstants.GROUP_CALENDAR
+		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
 			@Override
-			public void run() {
-				//调用登录接口
-//				Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重现赋予权限", Toast.LENGTH_LONG).show();
+			public void onGranted(List<String> permissionsGranted) {
+				//用户同意权限
+				writeFileData("UserIMEI","");
+				DeviceId = PhoneUtils.getUnicodeId(mContext);
+				LogLocal("[MercuryActivity][UserDeviceID] permission");
 			}
-		},3000);
-
-//		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
-//			@Override
-//			public void onGranted(List<String> permissionsGranted) {
-//				//用户同意权限
-//				DeviceId = PhoneUtils.getUnicodeId(mContext);
-//				writeFileData("UserIMEI",DeviceId);
-//				getDeviceId(mContext);
-//				GetAllConfig();//get all remote config
-//				new Handler().postDelayed(new Runnable() {
-//					@Override
-//					public void run() {
-//						//调用登录接口
-//						Toast.makeText(mContext, "您已通过权限，账户已与您的手机绑定，请放心游戏", Toast.LENGTH_LONG).show();
-//					}
-//				},3000);
-//			}
-//			@Override
-//			public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
-//				//用户拒绝权限
-//				DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-//				LogLocal("[MercuryActivity][UserDeviceID] User denied");
-//				getDeviceId(mContext);
-//				GetAllConfig();//get all remote config
-//				new Handler().postDelayed(new Runnable() {
-//					@Override
-//					public void run() {
-//						//调用登录接口
-//						Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重现赋予权限", Toast.LENGTH_LONG).show();
-//					}
-//				},3000);
-//			}
-//		}).rationale(new PermissionUtils.OnRationaleListener() {
-//			@Override
-//			public void rationale(ShouldRequest shouldRequest) {
-//				shouldRequest.again(true);
-//			}
-//		}).request();
-
-		//shrinkpartend
-		LogLocal("[MercuryActivity][UserDeviceID] DeviceId="+DeviceId);
+			@Override
+			public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
+				//用户拒绝权限
+				DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+				LogLocal("[MercuryActivity][UserDeviceID] User denied");
+				Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重新赋予权限", Toast.LENGTH_LONG).show();
+			}
+		}).rationale(new PermissionUtils.OnRationaleListener() {
+			@Override
+			public void rationale(ShouldRequest shouldRequest) {
+				shouldRequest.again(true);
+			}
+		}).request();
 		return DeviceId;
 	}
 	public String getDeviceId() {
@@ -356,8 +328,6 @@ public class MercuryActivity  {
 		LogLocal("[MercuryActivity][getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
 	}
-
-
 
 	public void InitChannel(final APPBaseInterface appcall)
 	{
@@ -430,24 +400,23 @@ public class MercuryActivity  {
 	public void UploadGameData(String data)
 	{
 		LogLocal("[MercuryActivity][UploadGameData]");
-		upload_game_data(data);
-
+		mInAppChannel.UploadGameData();
 	}
 
 	public void DownloadGameData()
 	{
 		LogLocal("[MercuryActivity][DownloadGameData]");
-		download_game_data();
+		mInAppChannel.DownloadGameData();
 	}
-
 
 	public void Redeem()
 	{
+		LogLocal("[MercuryActivity][Redeem]");
 		new Handler(mContext.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run()
 			{
-				redeemCode();
+				mInAppChannel.Redeem();
 			}
 		});
 	}
@@ -585,15 +554,12 @@ public class MercuryActivity  {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("key", key);// 在注册环节的每一步完成时，以步骤名作为value传送数据
 		LogLocal("[MercuryActivity] Data_Event()");
-		mInAppChannel.Data_Event("Event",map);
+		mInAppChannel.Data_Event(key);
 	}
 	public void showMessageDialog()
 	{
 		LogLocal("[MercuryActivity]->showMessageDialog:mInAppChannel="+mInAppChannel);
-		if(mInAppChannel != null)
-		{
-			mInAppChannel.showMessageDialog();
-		}
+		mInAppChannel.showMessageDialog();
 	}
 	public void Message(final String news)
 	{

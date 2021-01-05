@@ -40,6 +40,7 @@ import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -50,11 +51,13 @@ import okhttp3.Response;
 //shrinkpartend
 import static com.mercury.game.InAppDialog.LoginDialog.local_age;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.readFileData;
+import static com.mercury.game.util.Function.redeemCode;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.MercuryConst.GlobalProductionList;
 import static com.mercury.game.util.UIUtils.isJSONValid;
@@ -77,13 +80,13 @@ public class InAppChannel extends InAppBase {
     public void ActivityBundle(Bundle bundle) {
         super.ActivityBundle(bundle);
         MercuryActivity.LogLocal("[InAppChannel][ActivityBundle]=" + bundle);
-        //这里写渠道的Bundle有关的的初始化
+        //这里写渠道的Bundle初始化有关的的初始化，ActivityBundle会在ActivityInit之后调用
     }
 
     public void ApplicationInit(Application appcontext) {
         mAppContext = appcontext;
         MercuryActivity.LogLocal("[InAppChannel][ApplicationInit]=" + Channelname);
-        //这里写渠道的Application有关的的初始化
+        //这里写渠道的Application有关的的初始化，这个方法会优先调用
     }
     @Override
     public void Purchase(final String strProductId) {
@@ -92,53 +95,56 @@ public class InAppChannel extends InAppBase {
     }
     public void SingmaanLogin() {
         //渠道登录代码写在这里，下面方法是SDK默认的支付，详情进入SDK内部。默认的登录方法包含了登录和防沉迷
+        LogLocal("[InAppChannel][SingmaanLogin]");
         MercuryLogin();
     }
     public void SingmaanLogout() {
         //渠道登出代码写在这里，下面方法是SDK默认的支付，详情进入SDK内部，默认方法会清理本地缓存，下次会再次提示登录。
-        LogLocal("[MercuryActivity][SingmaanLogout]" + DeviceId);
+        LogLocal("[InAppChannel][SingmaanLogout]" + DeviceId);
         LoginCancelCallBack(DeviceId);
     }
     public void Data_UseItem(int myint, String item) {
         //统计代码，这里是用了XX物品
+        LogLocal("[InAppChannel][Data_UseItem]myint="+myint+",item="+item);
     }
 
     public void Data_LevelBegin(String key) {
         //统计代码，这里是关卡开始
+        LogLocal("[InAppChannel][Data_LevelBegin]"+key);
     }
 
     public void Data_LevelCompleted(String key) {
         //统计代码，这里是关卡结束
+        LogLocal("[InAppChannel][Data_LevelCompleted]"+key);
     }
 
-    public void Data_Event(String event, Map<String, Object> map) {
+    public void Data_Event(String event) {
         //统计代码，这里是事件代码
+        LogLocal("[InAppChannel][Data_LevelCompleted]event="+event);
     }
     @Override
     public void ExitGame() {
         //渠道退出代码写在这里，下面方法是SDK默认的退出，详情进入SDK内部
+        LogLocal("[InAppChannel][ExitGame]");
         MercuryExit();
     }
 
     public void UploadGameData() {
         //云存储的上传游戏数据功能
-        LogLocal("[MercuryActivity][SingmaanLogin]" + DeviceId);
-        onFunctionCallBack("SingmaanUploadGameData");
+        LogLocal("[MercuryActivity][SingmaanLogin]");
+        DownloadGameData();
     }
 
     public void DownloadGameData() {
         //云存储的下载游戏数据功能，上传的数值会原封不动的返回
-        LogLocal("[MercuryActivity][SingmaanLogout]" + DeviceId);
-        onFunctionCallBack("SingmaanDownloadGameData");
+        LogLocal("[MercuryActivity][SingmaanLogout]");
+        download_game_data();
     }
 
     public void Redeem() {
+        LogLocal("[MercuryActivity][Redeem]");
         //兑换码相关的代码，默认会走支付成功，返回相应的计费点ID
-        int max = GlobalProductionList.length;
-        int min = 0;
-        Random random = new Random();
-        int s = random.nextInt(max) % (max - min + 1) + min;
-        onPurchaseSuccess(GlobalProductionList[s][0]);
+        redeemCode();
     }
 
     public void RateGame() {
@@ -565,7 +571,7 @@ public class InAppChannel extends InAppBase {
 
 
     public void MercuryIDVerify() {
-        
+
     }
 
     public void MercurySigneIn() {

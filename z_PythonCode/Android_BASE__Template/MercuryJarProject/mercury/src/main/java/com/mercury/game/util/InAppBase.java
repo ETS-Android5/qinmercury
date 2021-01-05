@@ -11,7 +11,12 @@ import com.mercury.game.InAppDialog.IDCardVerifyDialog;
 import com.mercury.game.MercuryActivity;
 
 
+import static com.mercury.game.InAppRemote.RemoteConfig.GetRefundedOrder;
+import static com.mercury.game.InAppRemote.RemoteConfig.Restore;
+import static com.mercury.game.InAppRemote.RemoteConfig.UpdateOrderSuccess;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.global_orderId;
+import static com.mercury.game.InAppRemote.RemoteConfig.global_user_id;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.order_id;
 import static com.mercury.game.util.Function.readFileData;
@@ -120,6 +125,7 @@ public class InAppBase{
 	public void onPurchaseSuccess(String message)
 	{
 		qc.PurchaseSuccess(message,this);
+		UpdateOrderSuccess(global_user_id,global_orderId);
 	}
 	public void onPurchaseFailed(String strError)
 	{
@@ -127,6 +133,8 @@ public class InAppBase{
 	}
 	public void LoginSuccessCallBack(String strError)
 	{
+		Restore();
+		GetRefundedOrder();
 		qc.LoginSuccessCallBack(strError,this);
 	}
 	public void LoginCancelCallBack(String strError)

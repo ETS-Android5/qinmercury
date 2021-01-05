@@ -389,7 +389,7 @@ public class MercuryConst {
 		inbase.appinterface.onFunctionCallBack(strError);	
 	}
 	public void ProductionIDCallBack(String strError, InAppBase inbase) {
-		MercuryActivity.LogLocal("[MercuryConst] ProductionIDCallBack callback->"+strError+" inbase->"+inbase);
+		MercuryActivity.LogLocal("[MercuryConst] ProductionIDCallBack callback"+" inbase->"+inbase);
 		inbase.appinterface.ProductionIDCallBack(strError);
 	}
 

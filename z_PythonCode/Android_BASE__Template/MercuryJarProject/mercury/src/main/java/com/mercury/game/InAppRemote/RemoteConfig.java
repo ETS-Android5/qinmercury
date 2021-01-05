@@ -5,7 +5,9 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.mercury.game.InAppDialog.LoginDialog;
+import com.mercury.game.util.InAppBase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -24,6 +26,7 @@ import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.mInAppBase;
+import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.UIUtils.isJSONValid;
 
@@ -40,15 +43,16 @@ public final class RemoteConfig {
     public static String chinese_id_update_result = "";
     public static String chinese_id = "";
     public static String account_id = "default";
+    public static String global_orderId ="";
+    public static String global_user_id ="";
+    public static String global_production_id ="";
 //    private static String ip_address = "gamesupportcluster.singmaan.com";
     public static String ip_address = "gamesupporttest.singmaan.com";
-
-
+    private static String RESTORE_URL = String.format("https://"+ip_address+":10013/order/undelivered?user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
+    private static String UPDATE_ORDER_SUCCESS_URL = "https://"+ip_address+":10013/order/deliver";
+    private static String GET_REFUNDED_ORDER_URL = String.format("https://"+ip_address+":10013/order/refunded?user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);;
+    private static String CANCEL_ORDER_URL = "https://"+ip_address+":10013/order/cancel";
     public static void GetAllConfig() {
-        if (DeviceId.equals("9836ae60d6cc3666")) {
-            ip_address = "gamesupporttest.singmaan.com";
-            LogLocal("[RemoteConfig][GetAllConfig] testing mode, IP=" + ip_address);
-        }
         get_remote_iap();
         get_update_config();
     }
@@ -500,11 +504,10 @@ public final class RemoteConfig {
             return;
         }
         //shrinkpartstart
-        LogLocal("get_login_time:--------------------------------------------------------------------->11111111111111111");
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                LogLocal("get_login_time:--------------------------------------------------------------------->222222222222222222222");
 //				Looper.prepare();
                 try {
                     //1.创建OkHttpClient对象
@@ -534,7 +537,7 @@ public final class RemoteConfig {
                                 JSONObject json = null;
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
-                                    LogLocal("get -------[RemoteConfig][origin_login_time] remote json=" + json);
+                                    LogLocal("[RemoteConfig][origin_login_time] remote json=" + json);
                                     LoginDialog.Instance.play_time = (String) json.getString("data");
                                     if (LoginDialog.Instance.play_time != null && !LoginDialog.Instance.play_time.equals("")) {
                                         //do something
@@ -547,8 +550,8 @@ public final class RemoteConfig {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                LogLocal("get --------[RemoteConfig][origin_login_time] ----------LoginDialog.Instance.play_time=>" + LoginDialog.Instance.play_time);
-                                LogLocal("get -------[RemoteConfig][origin_login_time] remote result=" + s);
+                                LogLocal("[RemoteConfig][origin_login_time] LoginDialog.Instance.play_time=>" + LoginDialog.Instance.play_time);
+                                LogLocal("[RemoteConfig][origin_login_time] remote result=" + s);
                             }
                         }
                     });
@@ -561,6 +564,139 @@ public final class RemoteConfig {
         }).start();
         //shrinkpartend
     }
+    public static void Restore() {
+        final String url = String.format(RESTORE_URL,DeviceId,GameName.toLowerCase());
+        LogLocal("[RemoteConfig][Restore] RESTORE_URL="+url);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                OkHttpClient client = new OkHttpClient();
+                Request request = new  Request.Builder().url(url).build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        LogLocal("[RemoteConfig][Restore] error 2:"+e.getMessage());
+                    }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String s = response.body().string();
+                        if (s!=null){
+                            try {
+                                JSONObject jsonObject = new JSONObject(s);
+                                JSONArray array = jsonObject.getJSONArray("data");
+                                int size = array.length();
+                                LogLocal("[RemoteConfig][Restore] data size:"+size+",data="+s);
+                                Looper.prepare();
+                                for (int i = 0; i < size; i++) {
+                                    JSONObject order = array.getJSONObject(i);
+                                    global_user_id = order.getString("user_id");
+                                    global_orderId = order.getString("order_id");
+                                    global_production_id = order.getString("production_id");
+                                    if ((global_user_id!=null && global_orderId!=null)||(global_user_id!="" && global_orderId!="")){
+                                        mInAppBase = new InAppBase();
+                                        mInAppBase.onPurchaseSuccess(global_production_id);
+                                        UpdateOrderSuccess(global_user_id,global_orderId);
+                                        LogLocal("[RemoteConfig][Restore] update success");
+                                    }
+                                }
+                                Looper.loop();
+                            } catch (Exception e) {
+                                LogLocal("[InAppChannel][restore] update error:"+e.getMessage());
+                            }
+                        }
+                    }
+                });
+                Looper.loop();
+            }
+        }).start();
+    }
+    public static void UpdateOrderSuccess(final String userId, final String orderId){
+        LogLocal("[RemoteConfig][UpdateOrderSuccess]UPDATE_ORDER_SUCCESS_URL="+UPDATE_ORDER_SUCCESS_URL);
+        OkHttpClient client = new OkHttpClient();
+        RequestBody formBody=new FormBody.Builder().
+                add("user_id",userId).
+                add("order_id",orderId).
+                add("game_name",GameName.toLowerCase()).
+                add("channel",channelname)
+                .build();
+        Request request=new  Request.Builder().url(UPDATE_ORDER_SUCCESS_URL).post(formBody).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogLocal("[InAppChannel][updateOrderStatus] result error:"+e.getMessage());
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String s = response.body().string();
+                LogLocal("[InAppChannel][updateOrderStatus] result:"+s);
+            }
+        });
+    }
+    public static void GetRefundedOrder(){
+        final String url = String.format(GET_REFUNDED_ORDER_URL,DeviceId,GameName.toLowerCase());
+        LogLocal("[RemoteConfig][GetRefundedOrder] GET_REFUNDED_ORDER_URL:"+url);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new  Request.Builder().url(url).build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        LogLocal("[RemoteConfig][GetRefundedOrder] error:"+e.getMessage());
+                    }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String s = response.body().string();
+                        if (s!=null){
+                            try {
+                                JSONObject jsonObject = new JSONObject(s);
+                                JSONArray array = jsonObject.getJSONArray("data");
+                                int size = array.length();
+                                LogLocal("[RemoteConfig][GetRefundedOrder] data size:"+size+", data="+s);
+                                for (int i = 0; i < size; i++) {
+                                    JSONObject order = array.getJSONObject(i);
+                                    global_user_id = order.getString("user_id");
+                                    global_orderId = order.getString("order_id");
+                                    global_production_id = order.getString("production_id");
+                                    if ((global_user_id!=null && global_orderId!=null)||(global_user_id!="" &&global_production_id!="")){
+                                        CancelOrder(global_user_id,global_orderId);
+                                        mInAppBase = new InAppBase();
+                                        mInAppBase.onPurchaseFailed(global_production_id);
+                                        LogLocal("[RemoteConfig][GetRefundedOrder] cancel success");
+                                    }
+                                }
+                            } catch (Exception e) {
+                                LogLocal("[RemoteConfig][GetRefundedOrder] error:"+e.getMessage());
+                            }
+                        }
 
-
+                    }
+                });
+            }
+        }).start();
+    }
+    public static void CancelOrder(final String userId, final String orderId){
+        LogLocal("[RemoteConfig][CancelOrder]CANCEL_ORDER_URL="+CANCEL_ORDER_URL);
+        OkHttpClient client = new OkHttpClient();
+        RequestBody formBody=new FormBody.Builder().
+                add("user_id",userId).
+                add("order_id",orderId).
+                add("game_name",GameName.toLowerCase()).
+                add("channel",channelname)
+                .build();
+        Request request=new  Request.Builder().url(CANCEL_ORDER_URL).post(formBody).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogLocal("[RemoteConfig][CancelOrder] result error:"+e.getMessage());
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String s = response.body().string();
+                LogLocal("[RemoteConfig][CancelOrder] result:"+s);
+            }
+        });
+    }
 }
