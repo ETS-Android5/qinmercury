@@ -332,7 +332,7 @@ public class MercuryConst {
 		{
 			QinPid = "TestPid";
 			Qindesc= "测试计费点";
-			Qinpricefloat= 1f;
+			Qinpricefloat= 0.01f;
 		}
 	}
 

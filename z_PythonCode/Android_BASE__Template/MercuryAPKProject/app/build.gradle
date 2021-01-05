@@ -30,7 +30,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
-	versionCode 637
+	versionCode 646
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -55,4 +55,6 @@ implementation files('src/main/libs/MercurySDK.jar')
     //implementation(name: 'aarname', ext: 'aar')
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation 'junit:junit:4.12'
 }

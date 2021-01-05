@@ -17,6 +17,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.UpdateOrderSuccess;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.global_orderId;
 import static com.mercury.game.InAppRemote.RemoteConfig.global_user_id;
+import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.order_id;
 import static com.mercury.game.util.Function.readFileData;
@@ -125,7 +126,7 @@ public class InAppBase{
 	public void onPurchaseSuccess(String message)
 	{
 		qc.PurchaseSuccess(message,this);
-		UpdateOrderSuccess(global_user_id,global_orderId);
+		UpdateOrderSuccess(DeviceId,order_id);
 	}
 	public void onPurchaseFailed(String strError)
 	{

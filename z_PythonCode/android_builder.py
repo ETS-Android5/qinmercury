@@ -75,7 +75,7 @@ class SDKAppendManager():
 		]
 
 		self.__rebuild_public_xml_list = [
-			# "type=\"layout\"",
+			#"type=\"layout\"",
 		]
 
 		self.__delete_smali_list = [
@@ -724,10 +724,14 @@ class SDKAppendManager():
 		zp.close()
 
 		# self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com",PythonLocation()+"/y_building/"+self.__channel_name+"/com")
-		shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/com")
-		shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com")
-		shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/com")
-		shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/com")
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/com")==True:
+			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/com")
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com")==True:
+			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com")
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/com")==True:
+			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/com")
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/com")==True:
+			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/com")
 
 
 	def __prepare_SDK_orinigal_file_resource_merge_res(self,game_res,sdk_res):
@@ -750,6 +754,8 @@ class SDKAppendManager():
 						xml_manager.merge_xml(g_res,s_res)
 
 	def __prepare_SDK_orinigal_file_resource_merge_xml(self,game_xml_path,sdk_xml_path):
+		if os.path.isfile(sdk_xml_path)==False:
+			return
 		with open(sdk_xml_path,encoding="utf8") as file_object:
 			sdk_xml = file_object.readlines()
 
@@ -793,6 +799,8 @@ class SDKAppendManager():
 				file_context.writelines(new_xml)
 
 	def __prepare_SDK_orinigal_file_resource_merge_gradle(self,game_gradle,sdk_gradle):
+		if os.path.isfile(sdk_gradle)==False:
+			return
 		JavaCode=[]
 		with open(sdk_gradle,encoding="utf8") as file_object:
 			isStart = False

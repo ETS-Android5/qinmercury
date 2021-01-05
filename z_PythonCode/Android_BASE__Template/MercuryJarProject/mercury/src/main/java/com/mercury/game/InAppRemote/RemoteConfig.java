@@ -620,6 +620,11 @@ public final class RemoteConfig {
                 add("game_name",GameName.toLowerCase()).
                 add("channel",channelname)
                 .build();
+        LogLocal("[RemoteConfig][UpdateOrderSuccess]user_id="+userId);
+        LogLocal("[RemoteConfig][UpdateOrderSuccess]orderId="+orderId);
+        LogLocal("[RemoteConfig][UpdateOrderSuccess]GameName.toLowerCase()="+GameName.toLowerCase());
+        LogLocal("[RemoteConfig][UpdateOrderSuccess]channelname="+channelname);
+
         Request request=new  Request.Builder().url(UPDATE_ORDER_SUCCESS_URL).post(formBody).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
