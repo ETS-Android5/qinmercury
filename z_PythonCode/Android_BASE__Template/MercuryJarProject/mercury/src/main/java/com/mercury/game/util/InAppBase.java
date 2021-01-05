@@ -131,6 +131,8 @@ public class InAppBase{
 	}
 	public void LoginCancelCallBack(String strError)
 	{
+		writeFileData("chineseid", "");
+		writeFileData("account", "");
 		qc.LoginCancelCallBack(strError,this);
 	}
 	public void AdLoadSuccessCallBack(String strError)
