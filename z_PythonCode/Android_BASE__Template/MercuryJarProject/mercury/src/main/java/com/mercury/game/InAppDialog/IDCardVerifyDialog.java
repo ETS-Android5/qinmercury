@@ -45,6 +45,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
+import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
@@ -176,13 +177,12 @@ public class IDCardVerifyDialog {
                         {
                             Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
-                            writeFileData("card_id",cardId);
+                            writeFileData("chinese_id",cardId);
                         }
                         else if(id_verify_result.equals("-202"))
                         {
                             showLoginFailed("该身份证已经被使用");
                             cardIdEditText.setError("该身份证已经被使用");
-                            writeFileData("card_id",cardId);
                         }
                         else
                         {
@@ -227,7 +227,7 @@ public class IDCardVerifyDialog {
                     return;
                 };
                 LogLocal("[InAppDialog][verify_chinese_id] isValidateParams:"+true);
-                LogLocal("card_id=:" + cardId);
+                LogLocal("chinese_id=:" + cardId);
                 LogLocal("name_id=:" + nameId);
                 LogLocal("account_id=:" + account_id);
                 progressBar.setVisibility(View.VISIBLE);
@@ -257,7 +257,6 @@ public class IDCardVerifyDialog {
                             LogLocal("[RemoteConfig][verify_chinese_id] data=" + id_verify_result);
                             LogLocal("[RemoteConfig][verify_chinese_id] remote result=" + s);
                             Message msg = new Message();
-                            msg.obj = cardId;
                             mHandler.sendMessage(msg);
                         }
                         else

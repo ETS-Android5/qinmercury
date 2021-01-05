@@ -86,6 +86,7 @@ public class LoginDialog {
     public static String isLoginPermitted = "0";
     private Handler mHandler;
     public LoginDialog(Activity context, String id, LoginCallBack callBack) {
+
         Instance = LoginDialog.this;
         mContext = context;
         mLoginCallBack = callBack;
@@ -95,8 +96,15 @@ public class LoginDialog {
         Window dialogWindow = dialog.getWindow();
         dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);
         initAlertDialog(dialog);
-        Show();
-
+        local_account = readFileData("account");
+        if (local_account.equals(""))
+        {
+            Show();
+        }
+        else
+        {
+            LoginSuccessDialog(local_account);
+        }
     }
 
     public boolean validateParams(String username,String password){
@@ -123,40 +131,43 @@ public class LoginDialog {
                         Toast.makeText(mContext, "账号不存在", Toast.LENGTH_SHORT).show();
                         break;
                     default:
-                        Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
                         writeFileData("account",username);
-                        if (mLoginCallBack != null) {
-                            if (chinese_id.equals(""))
-                            {
-                                new IDCardVerifyDialog(mContext, new LoginCallBack() {
-                                    @Override
-                                    public void success(String msg) {
-                                        LogLocal("[InAppDialog][LoginDialog] ID card Success");
-                                        writeFileData("chineseid",chinese_id);
-                                        age_difference(play_time);
-                                        mLoginCallBack.success(username);
-                                    }
-                                    @Override
-                                    public void fail(String msg) {
-                                        LogLocal("[InAppDialog][LoginDialog] ID card failed");
-                                    }
-                                });
-                            }
-                            else
-                            {
-                                //age verify
-                                writeFileData("chineseid",chinese_id);
-                                mLoginCallBack.success(username);
-                                age_difference(play_time);
-                                LogLocal("[InAppDialog][LoginDialog] ID card got");
-                            }
-                        }
+                        LoginSuccessDialog(username);
                         dialog.dismiss();
                 }
             }
-        }, 1000);
+        }, 1);
     }
-
+    public void LoginSuccessDialog(final String username)
+    {
+        Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+        LogLocal("[InAppDialog][LoginSuccessDialog] chinese_id="+chinese_id);
+        chinese_id =  readFileData("chinese_id");
+        if (mLoginCallBack != null) {
+            if (chinese_id.equals(""))
+            {
+                new IDCardVerifyDialog(mContext, new LoginCallBack() {
+                    @Override
+                    public void success(String msg) {
+                        LogLocal("[InAppDialog][LoginSuccessDialog] ID card Success");
+                        age_difference(play_time);
+                        mLoginCallBack.success(username);
+                    }
+                    @Override
+                    public void fail(String msg) {
+                        LogLocal("[InAppDialog][LoginSuccessDialog] ID card failed");
+                    }
+                });
+            }
+            else
+            {
+                //age verify
+                mLoginCallBack.success(username);
+                age_difference(play_time);
+                LogLocal("[InAppDialog][LoginSuccessDialog] ID card got");
+            }
+        }
+    }
     public void Show() {
         LogLocal("[InAppDialog][LoginDialog] isLoginPermitted"+ isLoginPermitted);
         if (isLoginPermitted.equals("-1")) {
@@ -287,27 +298,29 @@ public class LoginDialog {
                 final String username = usernameEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
                 account_id = username;
-                if(!validateParams(username,password)){
-                    LogLocal("[InAppDialog][login_in] isValidateParams:"+false);
+                if (!validateParams(username, password)) {
+                    LogLocal("[InAppDialog][login_in] isValidateParams:" + false);
                     return;
-                };
-                LogLocal("[InAppDialog][login_in] isValidateParams:"+true);
+                }
+                ;
+                LogLocal("[InAppDialog][login_in] isValidateParams:" + true);
                 progressBar.setVisibility(View.VISIBLE);
-                login_in(username, password, new Callback() {
+                    login_in(username, password, new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
                             LogLocal("[RemoteConfig][login_in] failed=" + e.toString());
                             Looper.prepare();
                             progressBar.setVisibility(View.INVISIBLE);
-                            if(!NetCheckUtil.checkNet(mContext)){
+                            if (!NetCheckUtil.checkNet(mContext)) {
                                 Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
                             }
                             Looper.loop();
                         }
+
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String s = response.body().string();
-                            if (s != null&&isJSONValid(s)) {
+                            if (s != null && isJSONValid(s)) {
                                 JSONObject json = null;
                                 try {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
@@ -319,24 +332,25 @@ public class LoginDialog {
                                     json = (JSONObject) new JSONTokener(json_result1).nextValue();
                                     String json_result2 = (String) json.getString("chineseid");
                                     chinese_id = json_result2;
-                                    LogLocal("[RemoteConfig][login_in] chineseid=" + chinese_id);
+
                                 } catch (JSONException e) {
+                                    LogLocal("[RemoteConfig][login_in] JSONException e=" + e.toString());
                                     e.printStackTrace();
                                 }
-                                LogLocal("[RemoteConfig][login_in] data=" + login_in_result);
+                                writeFileData("chinese_id",chinese_id);
+                                LogLocal("[RemoteConfig][login_in] chineseid=" + chinese_id+" ,data = " + login_in_result);
                                 LogLocal("[RemoteConfig][login_in] remote result=" + s);
                                 Message msg = new Message();
                                 msg.obj = username;
                                 mHandler.sendMessage(msg);
-                            }
-                            else
-                            {
+                            } else {
                                 LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
                             }
                         }
                     });
-                     // 延时1秒
-                }
+                    // 延时1秒
+
+            }
         });
 
 

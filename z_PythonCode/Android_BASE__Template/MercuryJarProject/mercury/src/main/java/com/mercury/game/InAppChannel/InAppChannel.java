@@ -92,58 +92,98 @@ public class InAppChannel extends InAppBase {
     @Override
     public void Purchase(final String strProductId) {
         //shrinkpartstart
-        if(NetCheckUtil.checkNet(mContext)) {
-            UserConfig.getPayPermition(DeviceId, GameName, channelname, new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    LogLocal("[UserConfig][get_pay_permition] failed=" + e.toString());
-                    Looper.prepare();
-                    SingmaanPayMethod();
-                    Looper.loop();
-                }
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String s = response.body().string();
-                    if (s != null && isJSONValid(s)) {
-                        JSONObject json = null;
-                        try {
-                            json = (JSONObject) new JSONTokener(s).nextValue();
-                            String isPayPermitted = String.valueOf((Integer) json.getInt("data"));
-                            PaymentDialog.isPayPermitted = isPayPermitted;
-                            pid = strProductId;
-                            MercuryConst.PayInfo(strProductId);
-                            MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid=" + MercuryConst.QinPid);
-                            MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc=" + MercuryConst.Qindesc);
-                            MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat=" + MercuryConst.Qinpricefloat);
-                            Looper.prepare();
-                            if (local_age < 8 && local_age != 0) {
-                                try {
-                                    Builder builder = new Builder(mContext);
-                                    builder.setMessage("提示");
-                                    builder.setTitle("未成年人无法充值");
-                                    builder.setPositiveButton("确定", new OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
+        UserConfig.getPayPermition(DeviceId, GameName, channelname, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogLocal("[UserConfig][get_pay_permition] failed=" + e.toString());
+                Looper.prepare();
+                SingmaanPayMethod();
+                Looper.loop();
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String s = response.body().string();
+                if (s != null && isJSONValid(s)) {
+                    JSONObject json = null;
+                    try {
+                        json = (JSONObject) new JSONTokener(s).nextValue();
+                        String isPayPermitted = String.valueOf((Integer) json.getInt("data"));
+                        PaymentDialog.isPayPermitted = isPayPermitted;
+                        pid = strProductId;
+                        MercuryConst.PayInfo(strProductId);
+                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid=" + MercuryConst.QinPid);
+                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc=" + MercuryConst.Qindesc);
+                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat=" + MercuryConst.Qinpricefloat);
+                        Looper.prepare();
+                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.local_age=" + local_age);
+                        if (local_age < 8 && local_age >=0) {
+                            try {
+                                Builder builder = new Builder(mContext);
+                                builder.setMessage("提示");
+                                builder.setTitle("8岁以下未成年人无法充值");
+                                builder.setPositiveButton("确定", new OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
 
-                                        }
-                                    });
-                                    builder.create().show();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            } else {
+                                    }
+                                });
+                                builder.create().show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else if(local_age < 16 && local_age >=8)
+                        {
+                            if(MercuryConst.Qinpricefloat>=50)
+                            {
+                                Builder builder = new Builder(mContext);
+                                builder.setMessage("提示");
+                                builder.setTitle("8周岁以上未满16周岁的用户，单次充值金额不得超过50元人民币");
+                                builder.setPositiveButton("确定", new OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                builder.create().show();
+                            }
+                            else
+                            {
                                 SingmaanPayMethod();
                             }
-                            Looper.loop();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    } else {
-                        Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+                        else if(local_age < 18 && local_age >=16)
+                        {
+                            if(MercuryConst.Qinpricefloat>=100)
+                            {
+                                Builder builder = new Builder(mContext);
+                                builder.setMessage("提示");
+                                builder.setTitle("16周岁以上未满18周岁的用户，单次充值金额不得超过100元人民币");
+                                builder.setPositiveButton("确定", new OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                builder.create().show();
+                            }
+                            else
+                            {
+                                SingmaanPayMethod();
+                            }
+                        }
+                        else {
+                            SingmaanPayMethod();
+                        }
+                        Looper.loop();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+                } else {
+                    Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
                 }
-            });
-        }
+            }
+        });
 //shrinkpartend
 
 
@@ -191,7 +231,6 @@ public class InAppChannel extends InAppBase {
                 TestPay();
             }
         });
-
     }
     public void TestPay() {
         try {
@@ -230,7 +269,6 @@ public class InAppChannel extends InAppBase {
                     MercuryLogin();
                     Looper.loop();
                 }
-
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     String s = response.body().string();
@@ -269,7 +307,6 @@ public class InAppChannel extends InAppBase {
                 }
                 //shrinkpartstart
             }
-
             @Override
             public void fail(String msg) {
                 LogLocal("[InAppChannel][SingmaanLogin] Login failed");

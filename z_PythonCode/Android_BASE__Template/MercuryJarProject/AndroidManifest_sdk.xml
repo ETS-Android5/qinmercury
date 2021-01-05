@@ -2,7 +2,7 @@
             <intent-filter>
             </intent-filter>
         </activity>
-        <meta-data android:name="channel_name" android:value="demo1"/>
+        <meta-data android:name="channel_name" android:value="demo"/>
         <meta-data android:name="open_talkingdata" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
         <meta-data android:name="open_umeng" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
         <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity"/>

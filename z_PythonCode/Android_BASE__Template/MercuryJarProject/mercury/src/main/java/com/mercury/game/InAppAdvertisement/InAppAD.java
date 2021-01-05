@@ -42,6 +42,20 @@ public class InAppAD extends InAppBase {
 	{
 		super.ActivityInit(context, appcall);
 		MercuryActivity.LogLocal("[InAppAD][ActivityInit]="+appShow);
+		ADConfig.isAdAccessable(
+				GameName, new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e)
+					{
+
+					}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException
+					{
+						//这里更新SDK
+					}
+				}
+		);
 	}
 	@Override
 	public void ApplicationInit(Application app)
@@ -92,71 +106,100 @@ public class InAppAD extends InAppBase {
 		super.attachBaseContext(base);
 	}
 	public void ActiveInterstitial() {
-		ADConfig.isAdAccessable(
-				GameName, new Callback() {
-					@Override
-					public void onFailure(Call call, IOException e) {
-						onFailureAction("无法获取到该游戏的广告权限");
-					}
-					@Override
-					public void onResponse(Call call, Response response) throws IOException {
-						onActiveAction(response,"ActiveInterstitial");
-					}
-				});
+		MercuryActivity.LogLocal("["+appShow+"] ActiveInterstitial");
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setMessage("Testing Mode");
+		builder.setTitle("ActiveInterstitial");
+		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowSuccessCallBack("ActiveInterstitial");
+				AdLoadSuccessCallBack("ActiveInterstitial");
+			}
+		});
+		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowFailedCallBack("ActiveInterstitial");
+			}
+		});
+		builder.setCancelable(false);
+		builder.create().show();
 	}
 	public void ActiveBanner() {
-		ADConfig.isAdAccessable(
-				GameName, new Callback() {
-					@Override
-					public void onFailure(Call call, IOException e) {
-						onFailureAction("无法获取到该游戏的广告权限");
-					}
-					@Override
-					public void onResponse(Call call, Response response) throws IOException {
-						onActiveAction(response,"ActiveBanner");
-					}
-				}
-				);
+		MercuryActivity.LogLocal("["+appShow+"] ActiveBanner");
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setMessage("Testing Mode");
+		builder.setTitle("ActiveBanner");
+		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowSuccessCallBack("ActiveBanner");
+				AdLoadSuccessCallBack("ActiveBanner");
+			}
+		});
+		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowFailedCallBack("ActiveBanner");
+			}
+		});
+		builder.setCancelable(false);
+		builder.create().show();
 	}
 	public void ActiveNative() {
-		ADConfig.isAdAccessable(
-				GameName, new Callback() {
-					@Override
-					public void onFailure(Call call, IOException e) {
-						onFailureAction("无法获取到该游戏的广告权限");
-					}
-					@Override
-					public void onResponse(Call call, Response response) throws IOException {
-						onActiveAction(response,"ActiveNative");
-					}
-				}
-		);
+		MercuryActivity.LogLocal("["+appShow+"] ActiveNative");
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setMessage("Testing Mode");
+		builder.setTitle("ActiveNative");
+		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowSuccessCallBack("ActiveNative");
+				AdLoadSuccessCallBack("ActiveNative");
+			}
+		});
+		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowFailedCallBack("ActiveNative");
+			}
+		});
+		builder.setCancelable(false);
+		builder.create().show();
 	}
 	public void ActiveRewardVideo() {
-		ADConfig.isAdAccessable(
-				GameName, new Callback() {
-					@Override
-					public void onFailure(Call call, IOException e) {
-						onFailureAction("ActiveNative");
-					}
-					@Override
-					public void onResponse(Call call, Response response) throws IOException {
-						onActiveAction(response,"ActiveRewardVideo");
-					}
-				}
-		);
+		MercuryActivity.LogLocal("["+appShow+"] ActiveRewardVideo");
+		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+		builder.setMessage("Testing Mode");
+		builder.setTitle("ActiveRewardVideo");
+		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowSuccessCallBack("ActiveRewardVideo");
+				AdLoadSuccessCallBack("ActiveRewardVideo");
+			}
+		});
+		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				AdShowFailedCallBack("ActiveRewardVideo");
+			}
+		});
+		builder.setCancelable(false);
+		builder.create().show();
 	}
 	//end
 
 	public void onFailureAction(String msg) {
-		Looper.prepare();
-		if(!NetCheckUtil.checkNet(mContext)){
-			Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
-		}else {
-			Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
-		}
-		AdShowFailedCallBack(msg);
-		Looper.loop();
+//		Looper.prepare();
+//		if(!NetCheckUtil.checkNet(mContext)){
+//			Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
+//		}else {
+//			Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
+//		}
+//		AdLoadFailedCallBack(msg);
+//		Looper.loop();
 	}
 
 	//接入sdk的时候根据传入的接口名作不同的处理

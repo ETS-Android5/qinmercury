@@ -349,7 +349,6 @@ public class MercuryConst {
 
 	public void PurchaseSuccess(String message, InAppBase inbase) {
 		MercuryActivity.LogLocal("[MercuryConst] onPurchaseSuccess callback message->"+message+" inbase->"+inbase);
-
 		inbase.appinterface.PurchaseSuccessCallBack(message);
 	}
 	public void PurchaseFailed(String strError, InAppBase inbase) {
