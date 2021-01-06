@@ -612,6 +612,11 @@ public final class RemoteConfig {
         }).start();
     }
     public static void UpdateOrderSuccess(final String userId, final String orderId){
+        if(orderId.equals("")||userId.equals(""))
+        {
+            LogLocal("[RemoteConfig][UpdateOrderSuccess]format error");
+            return;
+        }
         LogLocal("[RemoteConfig][UpdateOrderSuccess]UPDATE_ORDER_SUCCESS_URL="+UPDATE_ORDER_SUCCESS_URL);
         OkHttpClient client = new OkHttpClient();
         RequestBody formBody=new FormBody.Builder().
@@ -644,6 +649,7 @@ public final class RemoteConfig {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Looper.prepare();
                 OkHttpClient client = new OkHttpClient();
                 Request request = new  Request.Builder().url(url).build();
                 client.newCall(request).enqueue(new Callback() {
@@ -654,6 +660,7 @@ public final class RemoteConfig {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String s = response.body().string();
+                        Looper.prepare();
                         if (s!=null){
                             try {
                                 JSONObject jsonObject = new JSONObject(s);
@@ -672,13 +679,15 @@ public final class RemoteConfig {
                                         LogLocal("[RemoteConfig][GetRefundedOrder] cancel success");
                                     }
                                 }
+                                Looper.loop();
                             } catch (Exception e) {
-                                LogLocal("[RemoteConfig][GetRefundedOrder] error:"+e.getMessage());
+                                LogLocal("[RemoteConfig][GetRefundedOrder] exception:"+e.getMessage());
                             }
                         }
 
                     }
                 });
+                Looper.loop();
             }
         }).start();
     }

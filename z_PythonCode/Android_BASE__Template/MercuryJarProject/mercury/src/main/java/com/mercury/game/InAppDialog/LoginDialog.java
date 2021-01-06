@@ -64,6 +64,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in_result;
+import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.mActivity;
 import static com.mercury.game.util.Function.readFileData;
@@ -97,6 +98,7 @@ public class LoginDialog {
         dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);
         initAlertDialog(dialog);
         local_account = readFileData("account");
+        DeviceId = local_account;
         if (local_account.equals(""))
         {
             Show();

@@ -270,20 +270,35 @@ public class MercuryActivity  {
 	{
 		//shrinkpartstart
 		//可以设置的权限PermissionConstants.PHONE，PermissionConstants.GROUP_CALENDAR
+
 		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
 			@Override
 			public void onGranted(List<String> permissionsGranted) {
 				//用户同意权限
-				writeFileData("UserIMEI","");
-				DeviceId = PhoneUtils.getUnicodeId(mContext);
-				LogLocal("[MercuryActivity][UserDeviceID] permission");
+				if(readFileData("account").equals(""))
+				{
+					DeviceId = PhoneUtils.getUnicodeId(mContext);
+					LogLocal("[MercuryActivity][UserDeviceID] permission");
+				}
+				else
+				{
+					DeviceId = readFileData("account");
+				}
 			}
 			@Override
 			public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
 				//用户拒绝权限
-				DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-				LogLocal("[MercuryActivity][UserDeviceID] User denied");
-				Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重新赋予权限", Toast.LENGTH_LONG).show();
+
+				if(readFileData("account").equals(""))
+				{
+					DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+					LogLocal("[MercuryActivity][UserDeviceID] User denied");
+					Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重新赋予权限", Toast.LENGTH_LONG).show();
+				}
+				else
+				{
+					DeviceId = readFileData("account");
+				}
 			}
 		}).rationale(new PermissionUtils.OnRationaleListener() {
 			@Override
@@ -294,38 +309,6 @@ public class MercuryActivity  {
 		return DeviceId;
 	}
 	public String getDeviceId() {
-		//shrinkpartstart
-		String strUserID = "";
-		String imei = "";
-		imei = DeviceId;
-//		LogLocal("[MercuryActivity][getDeviceId] -readFileData(\"UserIMEI\") = ["+readFileData("UserIMEI")+"]");
-		if((imei==null&&imei=="")&&(readFileData("UserIMEI")==null&&readFileData("UserIMEI")==""))
-		{
-			imei= ""+java.util.UUID.randomUUID();
-			writeFileData("UserIMEI",imei);
-			strUserID=imei;
-//			LogLocal("[MercuryActivity][getDeviceId] write imei = ["+imei+"]");
-		}
-		else if((imei==null&&imei=="")&&(readFileData("UserIMEI")!=null&&readFileData("UserIMEI")!=""))
-		{
-			imei=readFileData("UserIMEI");
-			strUserID=imei;
-//			LogLocal("[MercuryActivity][getDeviceId] read imei = ["+imei+"]");
-		}
-		else if((imei!=null&&imei!="")&&(readFileData("UserIMEI")==null&&readFileData("UserIMEI")==""))
-		{
-			writeFileData("UserIMEI",imei);
-			strUserID=imei;
-//			LogLocal("[MercuryActivity][getDeviceId] Set imei as local imei = ["+strUserID+"]");
-		}
-		else
-		{
-			strUserID=imei;
-//			LogLocal("[MercuryActivity][getDeviceId] Set imei as phone = ["+imei+"]");
-		}
-		DeviceId= strUserID;//MD5.getMessageDigest(strUserID.getBytes());
-		//shrinkpartend
-		LogLocal("[MercuryActivity][getDeviceId] Get DeviceId = ["+DeviceId+"]");
 		return DeviceId;
 	}
 
