@@ -13,6 +13,7 @@ import com.mercury.game.MercuryActivity;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.GetRefundedOrder;
 import static com.mercury.game.InAppRemote.RemoteConfig.Restore;
+import static com.mercury.game.InAppRemote.RemoteConfig.TotalPayment;
 import static com.mercury.game.InAppRemote.RemoteConfig.UpdateOrderSuccess;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.global_orderId;
@@ -136,6 +137,7 @@ public class InAppBase{
 	{
 		Restore();
 		GetRefundedOrder();
+		TotalPayment();
 		qc.LoginSuccessCallBack(strError,this);
 	}
 	public void LoginCancelCallBack(String strError)

@@ -18,7 +18,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 //shrinkpartend
 import static com.mercury.game.InAppRemote.RemoteConfig.ip_address;
+import static com.mercury.game.MercuryActivity.DeviceId;
+import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryApplication.channelname;
 
 public final class UserConfig {
     public static String isPayPermitted = "1";

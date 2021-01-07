@@ -436,6 +436,23 @@ public class LoginDialog {
                 if (play_time != "")
                 {
                     remaing_minutes = (90 - Integer.valueOf(play_time));
+                    try {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+(90-remaing_minutes)+"分钟。");
+                        builder.setTitle("防沉迷提示");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //        ((Activity) MercuryActivity.mContext).finish();
+                                //        android.os.Process.killProcess(android.os.Process.myPid());
+                            }
+                        });
+                        builder.create().show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     if(remaing_minutes%60==0) {
                         LogLocal("[LoginDialog][age_difference] remaing_minutes:" + remaing_minutes);
                     }
@@ -446,7 +463,7 @@ public class LoginDialog {
                             surTimeFun();//防沉迷30分钟的提示
                         }
                         delayTimeFun();//未成年人只能玩90分钟
-                        Toast.makeText(mContext, "未成年人一天只能体验1.5小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "未成年人一天只能体验1.5小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
 //                        timer_delay_param.start();
                     }
                     else
@@ -478,7 +495,22 @@ public class LoginDialog {
                     delayTimeFun();
                     //    timer_delay.start();
                     surTimeFun();//防沉迷30分钟的提示
-                    Toast.makeText(mContext, "未成年人一天只能体验1.5小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
+                    try {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+(90-remaing_minutes)+"分钟。");
+                        builder.setTitle("防沉迷提示");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //        ((Activity) MercuryActivity.mContext).finish();
+                                //        android.os.Process.killProcess(android.os.Process.myPid());
+                            }
+                        });
+                        builder.create().show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             Looper.loop();
@@ -488,7 +520,7 @@ public class LoginDialog {
         CountDownTimer timer_quit_30 = new CountDownTimer(1000*60*(remaing_minutes - 60), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                LogLocal("30分钟倒计时：" + (millisUntilFinished / 1000));
+//                LogLocal("30分钟倒计时：" + (millisUntilFinished / 1000));
             }
             @Override
             public void onFinish() {
@@ -519,7 +551,7 @@ public class LoginDialog {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                LogLocal("remaing_minutes=(" + (millisUntilFinished / 1000) + ")");
+//                LogLocal("remaing_minutes=(" + (millisUntilFinished / 1000) + ")");
 
                 index++;
                 if(index %60 == 0){

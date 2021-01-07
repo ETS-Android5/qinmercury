@@ -75,6 +75,7 @@ import static com.mercury.game.InAppChannel.Util.httpPost;
 import static com.mercury.game.InAppDialog.LoginDialog.local_age;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
+import static com.mercury.game.InAppRemote.RemoteConfig.global_total_payment;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
@@ -474,13 +475,32 @@ public class InAppChannel extends InAppBase {
                             }
                             else
                             {
-                                AlipayAndWechat();
+                                if(global_total_payment<=200) {
+                                    AlipayAndWechat();
+                                }
+                                else
+                                {
+                                    try {
+                                        Builder builder = new Builder(mContext);
+                                        builder.setMessage("提示");
+                                        builder.setTitle("8周岁以上未满16周岁的用户每月累计充值不能超过200");
+                                        builder.setPositiveButton("确定", new OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        });
+                                        builder.create().show();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
                             }
                         }
                         else if(local_age < 18 && local_age >=16)
                         {
-                            if(MercuryConst.Qinpricefloat>=100)
-                            {
+                            if (MercuryConst.Qinpricefloat >= 100) {
                                 Builder builder = new Builder(mContext);
                                 builder.setMessage("提示");
                                 builder.setTitle("16周岁以上未满18周岁的用户，单次充值金额不得超过100元人民币");
@@ -494,7 +514,23 @@ public class InAppChannel extends InAppBase {
                             }
                             else
                             {
-                                AlipayAndWechat();
+                                if(global_total_payment<=400)
+                                {
+                                    AlipayAndWechat();
+                                }
+                                else
+                                {
+                                    Builder builder = new Builder(mContext);
+                                    builder.setMessage("提示");
+                                    builder.setTitle("16周岁以上未满18周岁的用户，每月累计充值不能超过400");
+                                    builder.setPositiveButton("确定", new OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    });
+                                    builder.create().show();
+                                }
                             }
                         }
                         else {

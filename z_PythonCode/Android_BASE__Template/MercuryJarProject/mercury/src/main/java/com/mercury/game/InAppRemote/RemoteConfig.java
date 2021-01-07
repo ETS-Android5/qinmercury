@@ -46,12 +46,14 @@ public final class RemoteConfig {
     public static String global_orderId ="";
     public static String global_user_id ="";
     public static String global_production_id ="";
+    public static float global_total_payment = 0;
 //    private static String ip_address = "gamesupportcluster.singmaan.com";
     public static String ip_address = "gamesupporttest.singmaan.com";
     private static String RESTORE_URL = String.format("https://"+ip_address+":10013/order/undelivered?user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
     private static String UPDATE_ORDER_SUCCESS_URL = "https://"+ip_address+":10013/order/deliver";
     private static String GET_REFUNDED_ORDER_URL = String.format("https://"+ip_address+":10013/order/refunded?user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);;
     private static String CANCEL_ORDER_URL = "https://"+ip_address+":10013/order/cancel";
+    private static String GET_TOTAL_AMOUNT_URL = String.format("https://"+ip_address+":10013/order/totalpayment?user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);;
     public static void GetAllConfig() {
         get_remote_iap();
         get_update_config();
@@ -712,5 +714,48 @@ public final class RemoteConfig {
                 LogLocal("[RemoteConfig][CancelOrder] result:"+s);
             }
         });
+    }
+    public static void TotalPayment() {
+        final String url = GET_TOTAL_AMOUNT_URL;
+        LogLocal("[RemoteConfig][TotalPayment] GET_TOTAL_AMOUNT_URL="+url);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                OkHttpClient client = new OkHttpClient();
+                Request request = new  Request.Builder().url(url).build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        LogLocal("[RemoteConfig][TotalPayment] error 2:"+e.getMessage());
+                    }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String s = response.body().string();
+                        if (s!=null){
+                            try {
+                                JSONObject jsonObject = new JSONObject(s);
+                                JSONArray array = jsonObject.getJSONArray("data");
+                                int size = array.length();
+                                Looper.prepare();
+                                for (int i = 0; i < size; i++) {
+                                    JSONObject order = array.getJSONObject(i);
+                                    String m_payment = order.getString("SUM(price)");
+                                    if(m_payment!=null && !m_payment.equals("")) {
+                                        global_total_payment = Float.parseFloat(m_payment);
+                                    }
+                                    LogLocal("[RemoteConfig][TotalPayment] global_total_payment:"+global_total_payment);
+                                }
+
+                                Looper.loop();
+                            } catch (Exception e) {
+                                LogLocal("[RemoteConfig][TotalPayment] update error:"+e.getMessage());
+                            }
+                        }
+                    }
+                });
+                Looper.loop();
+            }
+        }).start();
     }
 }
