@@ -735,6 +735,7 @@ public final class RemoteConfig {
                         if (s!=null){
                             try {
                                 JSONObject jsonObject = new JSONObject(s);
+                                LogLocal("[RemoteConfig][TotalPayment] data="+s);
                                 JSONArray array = jsonObject.getJSONArray("data");
                                 int size = array.length();
                                 Looper.prepare();

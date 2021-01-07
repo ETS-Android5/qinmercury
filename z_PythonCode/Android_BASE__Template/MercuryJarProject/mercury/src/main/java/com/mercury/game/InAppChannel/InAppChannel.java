@@ -417,6 +417,11 @@ public class InAppChannel extends InAppBase {
 
     public void MercuryPay(final String strProductId)
     {
+        pid = strProductId;
+        MercuryConst.PayInfo(strProductId);
+        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid=" + MercuryConst.QinPid);
+        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc=" + MercuryConst.Qindesc);
+        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat=" + MercuryConst.Qinpricefloat);
         //shrinkpartstart
         UserConfig.getPayPermition(DeviceId, GameName, channelname, new Callback() {
             @Override
@@ -435,11 +440,6 @@ public class InAppChannel extends InAppBase {
                         json = (JSONObject) new JSONTokener(s).nextValue();
                         String isPayPermitted = String.valueOf((Integer) json.getInt("data"));
                         PaymentDialog.isPayPermitted = isPayPermitted;
-                        pid = strProductId;
-                        MercuryConst.PayInfo(strProductId);
-                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.QinPid=" + MercuryConst.QinPid);
-                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qindesc=" + MercuryConst.Qindesc);
-                        MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.Qinpricefloat=" + MercuryConst.Qinpricefloat);
                         Looper.prepare();
                         MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.local_age=" + local_age);
                         if (local_age < 8 && local_age >=0) {
