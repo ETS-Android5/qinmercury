@@ -67,7 +67,9 @@ class SDKAppendManager():
 			"mercury_dialog_login.xml",
 			"mercury_dialog_pay.xml",
 			"mercury_dialog_signein.xml",
+			"mercury_dialog_privacy.xml",
 			"mercury_dialog_verify.xml",
+			"youloft_dialog_anoncements.xml",
 
 			"mercury_btn_shape.xml",
 			"mercury_shape_corner_up.xml",
@@ -75,7 +77,7 @@ class SDKAppendManager():
 		]
 
 		self.__rebuild_public_xml_list = [
-			"type=\"layout\"",
+			# "type=\"layout\"",
 		]
 
 		self.__delete_smali_list = [
