@@ -30,8 +30,6 @@ import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.UIUtils.isJSONValid;
 
-//shrinkpartstart
-//shrinkpartend
 
 public final class RemoteConfig {
     public static String updating_result_json = "";
@@ -277,10 +275,10 @@ public final class RemoteConfig {
         //shrinkpartend
         return game_data_result;
     }
-
+    //shrinkpartstart
     public static String verify_chinese_id(final String account_id, final String my_id, final String my_chinese_name, final Callback callback) {
         id_verify_result = "";
-        //shrinkpartstart
+
         LogLocal("[RemoteConfig][verify_chinese_id]" + "https://" + ip_address + ":10011/verify_chinese_id");
         new Thread(new Runnable() {
             @Override
@@ -311,12 +309,13 @@ public final class RemoteConfig {
                 Looper.loop();
             }
         }).start();
-        //shrinkpartend
+
         return id_verify_result;
     }
-
+    //shrinkpartend
+    //shrinkpartstart
     public static String verify_signe_in(final String account, final String password, final Callback callback) {
-        //shrinkpartstart
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -345,12 +344,14 @@ public final class RemoteConfig {
                 Looper.loop();
             }
         }).start();
-        //shrinkpartend
+
         return id_signe_in_result;
     }
+    //shrinkpartend
 
+    //shrinkpartstart
     public static String login_in(final String account, final String password, final Callback callback) {
-        //shrinkpartstart
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -379,10 +380,10 @@ public final class RemoteConfig {
                 Looper.loop();
             }
         }).start();
-        //shrinkpartend
+
         return login_in_result;
     }
-
+    //shrinkpartend
     public static String update_chinese_id(final String account, final String chinese_id) {
         //shrinkpartstart
         new Thread(new Runnable() {
@@ -502,15 +503,15 @@ public final class RemoteConfig {
     }
 
     public static void get_login_time(final String account) {
+        //shrinkpartstart
         if(LoginDialog.Instance.play_time !=""){
             return;
         }
-        //shrinkpartstart
+
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-//				Looper.prepare();
                 try {
                     //1.创建OkHttpClient对象
                     OkHttpClient client = new OkHttpClient();
@@ -561,12 +562,12 @@ public final class RemoteConfig {
                     e.printStackTrace();
                 } finally {
                 }
-//				Looper.loop();
             }
         }).start();
         //shrinkpartend
     }
     public static void Restore() {
+        //shrinkpartstart
         final String url = String.format(RESTORE_URL+"user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
         LogLocal("[RemoteConfig][Restore] RESTORE_URL="+url);
         new Thread(new Runnable() {
@@ -612,8 +613,10 @@ public final class RemoteConfig {
                 Looper.loop();
             }
         }).start();
+        //shrinkpartend
     }
     public static void UpdateOrderSuccess(final String userId, final String orderId){
+        //shrinkpartstart
         if(orderId.equals("")||userId.equals(""))
         {
             LogLocal("[RemoteConfig][UpdateOrderSuccess]format error");
@@ -644,8 +647,10 @@ public final class RemoteConfig {
                 LogLocal("[InAppChannel][updateOrderStatus] result:"+s);
             }
         });
+        //shrinkpartend
     }
     public static void GetRefundedOrder(){
+        //shrinkpartstart
         final String url = String.format(GET_REFUNDED_ORDER_URL+"user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
         LogLocal("[RemoteConfig][GetRefundedOrder] GET_REFUNDED_ORDER_URL:"+url);
         new Thread(new Runnable() {
@@ -692,8 +697,10 @@ public final class RemoteConfig {
                 Looper.loop();
             }
         }).start();
+        //shrinkpartend
     }
     public static void CancelOrder(final String userId, final String orderId){
+        //shrinkpartstart
         LogLocal("[RemoteConfig][CancelOrder]CANCEL_ORDER_URL="+CANCEL_ORDER_URL);
         OkHttpClient client = new OkHttpClient();
         RequestBody formBody=new FormBody.Builder().
@@ -714,8 +721,10 @@ public final class RemoteConfig {
                 LogLocal("[RemoteConfig][CancelOrder] result:"+s);
             }
         });
+        //shrinkpartend
     }
     public static void TotalPayment() {
+        //shrinkpartstart
         final String url = String.format(GET_TOTAL_AMOUNT_URL+"user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
         LogLocal("[RemoteConfig][TotalPayment] GET_TOTAL_AMOUNT_URL="+url);
         new Thread(new Runnable() {
@@ -758,5 +767,6 @@ public final class RemoteConfig {
                 Looper.loop();
             }
         }).start();
+        //shrinkpartend
     }
 }

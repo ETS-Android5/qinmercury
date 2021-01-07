@@ -39,16 +39,17 @@ import org.json.JSONTokener;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+//shrinkpartstart
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
+import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
+//shrinkpartend
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
-import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
+
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.mActivity;
 import static com.mercury.game.util.Function.writeFileData;
@@ -125,29 +126,6 @@ public class IDCardVerifyDialog {
         final Button loginButton = myLayout.findViewById(loginId);
         final TextView mgsTextView = myLayout.findViewById(mgsId);
         final ProgressBar progressBar = myLayout.findViewById(loadingId);
-//        final Button  cancelButton = myLayout.findViewById(cancelId);
-
-//        cardIdEditText.setKeyListener(new NumberKeyListener() {
-//            @NonNull
-//            @Override
-//            protected char[] getAcceptedChars() {
-//                char[] c = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-//                        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-//                        'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-//                        'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
-//                        'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-//                        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-//                return c;
-//
-//            }
-//
-//            @Override
-//            public int getInputType() {
-//                return 3;
-//            }
-//        });
-
-
         progressBar.setVisibility(View.INVISIBLE);
         mgsTextView.setVisibility(View.GONE);
 

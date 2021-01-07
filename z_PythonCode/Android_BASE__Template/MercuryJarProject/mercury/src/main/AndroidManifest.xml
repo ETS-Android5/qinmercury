@@ -26,12 +26,6 @@
         <meta-data android:name="open_umeng" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
         <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-
-        <activity
-            android:name="com.singmaan.guanbao.wxapi.WXPayEntryActivity"
-            android:exported="true"
-            android:launchMode="singleTop" />
-
 		<!--end-->
     </application>
 	<!--sdkxml-->

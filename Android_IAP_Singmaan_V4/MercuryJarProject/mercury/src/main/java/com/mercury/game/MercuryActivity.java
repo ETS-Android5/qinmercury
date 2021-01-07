@@ -383,7 +383,7 @@ public class MercuryActivity  {
 	public void UploadGameData(String data)
 	{
 		LogLocal("[MercuryActivity][UploadGameData]");
-		mInAppChannel.UploadGameData();
+		mInAppChannel.UploadGameData(data);
 	}
 
 	public void DownloadGameData()

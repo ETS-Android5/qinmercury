@@ -36,6 +36,7 @@ import static com.mercury.game.util.Function.VerifyGame;
 import static com.mercury.game.util.Function.redeemCode;
 //shrinkpartstart
 import android.support.v4.app.ActivityCompat;
+
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
 //shrinkpartend
@@ -53,7 +54,6 @@ import com.mercury.game.util.PermissionUtils;
 import com.mercury.game.util.PhoneUtils;
 
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -68,8 +68,7 @@ import java.util.Map;
 import static com.mercury.game.util.MercuryConst.GetProductionList;
 
 
-
-public class MercuryActivity  {
+public class MercuryActivity {
 
 	public static Context mContext = null;
 	public static Activity mActivity = null;
@@ -82,27 +81,27 @@ public class MercuryActivity  {
 	public static String ChannelForServer;
 	//private String msg_string;
 	//public static int msg;
-	public static String nikeString;	
+	public static String nikeString;
 	public int platform;
 	public static String packagenameforuse;
-	public static String isLogOpen="";
-	public static MercuryActivity activityforappbase=null;
-	public static int Platform=-1;
-	public static String SavePidName="";
-	public static String SortChannelID="";
-	public static String LongChannelID="";
+	public static String isLogOpen = "";
+	public static MercuryActivity activityforappbase = null;
+	public static int Platform = -1;
+	public static String SavePidName = "";
+	public static String SortChannelID = "";
+	public static String LongChannelID = "";
 	private static ImageView img = null;
 	public static String order_id = "";
-	public  static APPBaseInterface mappcall= null;
-	public static String GameName="ww1";
-	public static String DeviceId="123";
-	public void InitSDK(Context ContextFromUsers,final APPBaseInterface appcall)
-	{
+	public static APPBaseInterface mappcall = null;
+	public static String GameName = "ww1";
+	public static String DeviceId = "123";
+
+	public void InitSDK(Context ContextFromUsers, final APPBaseInterface appcall) {
 		LogLocal("[MercuryActivity][InitSDK]Version 1.0");
 		mappcall = appcall;
-		mContext =  ContextFromUsers;
-		mActivity = (Activity)ContextFromUsers;
-		activityforappbase=this;
+		mContext = ContextFromUsers;
+		mActivity = (Activity) ContextFromUsers;
+		activityforappbase = this;
 		mInAppBase = new InAppBase();
 		UserDeviceID();//get device id as unique id for game
 		ChannelSplash();//display picture which named ChannelSplash.png
@@ -113,18 +112,18 @@ public class MercuryActivity  {
 		GetProductionInfo();//set ProductionInfo
 		GetAllConfig();//get all remote config
 	}
-	public void ActivityBundle(Bundle bundle)
-	{
+
+	public void ActivityBundle(Bundle bundle) {
 		mInAppChannel.ActivityBundle(bundle);
 	}
-	public String GetProductionInfo()
-	{
+
+	public String GetProductionInfo() {
 		String iap_list = GetProductionList();
 		mInAppChannel.ProductionIDCallBack(iap_list);
 		return iap_list;
 	}
-	public void ChannelSplash()
-	{
+
+	public void ChannelSplash() {
 		LogLocal("[MercuryActivity][ChannelSplash] ChannelSplash.png");
 		try {
 			final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -159,8 +158,9 @@ public class MercuryActivity  {
 									public void run() {
 										ViewGroup vg = (ViewGroup) image
 												.getParent();
-												if (vg!=null)
-												{vg.removeView(image);}
+										if (vg != null) {
+											vg.removeView(image);
+										}
 									}
 								});
 							}
@@ -171,7 +171,7 @@ public class MercuryActivity  {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogLocal("[MercuryActivity][ChannelSplash] init e="+e.toString());
+			LogLocal("[MercuryActivity][ChannelSplash] init e=" + e.toString());
 		}
 	}
 
@@ -185,11 +185,13 @@ public class MercuryActivity  {
 			public void surfaceCreated(SurfaceHolder surfaceHolder) {
 				Log.e("SurfaceView", "surfaceCreated");
 			}
+
 			@Override
 			public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
 				mediaPlayer.setDisplay(holder);
 				Log.e("SurfaceView", "surfaceChanged");
 			}
+
 			@Override
 			public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
 				Log.e("SurfaceView", "surfaceDestroyed");
@@ -255,28 +257,35 @@ public class MercuryActivity  {
 		return cacheFile.getAbsolutePath();
 	}
 
- 	public String GetUniqueID(){
- 	    String id="";   
- 	    //获取当前时间戳         
- 	    SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");    
- 	    String temp = sf.format(new Date());    
- 	    //获取6位随机数  
- 	    int random=(int) ((Math.random()+1)*100000);    
- 	    id=temp+random;    
- 	    return id;    
- 	}
+	public String GetUniqueID() {
+		String id = "";
+		//获取当前时间戳
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String temp = sf.format(new Date());
+		//获取6位随机数
+		int random = (int) ((Math.random() + 1) * 100000);
+		id = temp + random;
+		return id;
+	}
 
-	public String UserDeviceID()
-	{
+	public String UserDeviceID() {
 		//shrinkpartstart
 		//可以设置的权限PermissionConstants.PHONE，PermissionConstants.GROUP_CALENDAR
-
 		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
 			@Override
 			public void onGranted(List<String> permissionsGranted) {
 				//用户同意权限
-				if(readFileData("account").equals(""))
-				{
+				if (readFileData("account").equals("")) {
+					if (androidx.core.app.ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+						// TODO: Consider calling
+						//    ActivityCompat#requestPermissions
+						// here to request the missing permissions, and then overriding
+						//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+						//                                          int[] grantResults)
+						// to handle the case where the user grants the permission. See the documentation
+						// for ActivityCompat#requestPermissions for more details.
+						return;
+					}
 					DeviceId = PhoneUtils.getUnicodeId(mContext);
 					LogLocal("[MercuryActivity][UserDeviceID] permission");
 				}
@@ -306,6 +315,7 @@ public class MercuryActivity  {
 				shouldRequest.again(true);
 			}
 		}).request();
+		//shrinkpartend
 		return DeviceId;
 	}
 	public String getDeviceId() {
@@ -383,7 +393,7 @@ public class MercuryActivity  {
 	public void UploadGameData(String data)
 	{
 		LogLocal("[MercuryActivity][UploadGameData]");
-		mInAppChannel.UploadGameData();
+		mInAppChannel.UploadGameData(data);
 	}
 
 	public void DownloadGameData()

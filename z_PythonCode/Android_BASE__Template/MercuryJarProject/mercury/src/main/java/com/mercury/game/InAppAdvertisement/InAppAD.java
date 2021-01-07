@@ -5,7 +5,7 @@ import com.mercury.game.util.APPBaseInterface;
 import com.mercury.game.util.InAppBase;
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.NetCheckUtil;
-//comment
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
@@ -21,20 +21,22 @@ import org.json.JSONTokener;
 
 import java.io.IOException;
 
+//shrinkpartstart
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+//shrinkpartend
 
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.UIUtils.isJSONValid;
-//end
+
 
 
 public class InAppAD extends InAppBase {
-	//comment
+
 	public static String appShow="InAppAD";
 	public static String MyScence = "";
 	public static boolean isAdAccessable = true;
@@ -42,6 +44,7 @@ public class InAppAD extends InAppBase {
 	{
 		super.ActivityInit(context, appcall);
 		MercuryActivity.LogLocal("[InAppAD][ActivityInit]="+appShow);
+		//shrinkpartstart
 		ADConfig.isAdAccessable(
 				GameName, new Callback() {
 					@Override
@@ -56,6 +59,7 @@ public class InAppAD extends InAppBase {
 					}
 				}
 		);
+		//shrinkpartend
 	}
 	@Override
 	public void ApplicationInit(Application app)
@@ -189,60 +193,7 @@ public class InAppAD extends InAppBase {
 		builder.setCancelable(false);
 		builder.create().show();
 	}
-	//end
-
-	public void onFailureAction(String msg) {
-//		Looper.prepare();
-//		if(!NetCheckUtil.checkNet(mContext)){
-//			Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
-//		}else {
-//			Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
-//		}
-//		AdLoadFailedCallBack(msg);
-//		Looper.loop();
-	}
-
-	//接入sdk的时候根据传入的接口名作不同的处理
-	public void onActiveAction(Response response, String interfaceName) throws IOException{
-		String s = response.body().string();
-		Looper.prepare();
-		if (s != null) {
-			getAdAccessable(s,interfaceName);
-			if (!isAdAccessable) {
-				Toast.makeText(mContext, "无法获取到该游戏的广告权限", Toast.LENGTH_SHORT).show();
-				AdShowFailedCallBack(interfaceName);
-				return;
-			}
-			alertADDialogShow(interfaceName,"Testing Mode",interfaceName);
-		}else {
-			Toast.makeText(mContext, "无法获取到该游戏的广告权限",Toast.LENGTH_SHORT).show();
-			AdShowFailedCallBack("ActiveNative");
-		}
-		Looper.loop();
-	}
-
-	public void alertADDialogShow(String title, String mode, final String interfaceName){
-		MercuryActivity.LogLocal("["+appShow+"]" + interfaceName);
-		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-		builder.setMessage(mode);
-		builder.setTitle(title);
-		builder.setPositiveButton("Success", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowSuccessCallBack(interfaceName);
-				AdLoadSuccessCallBack(interfaceName);
-			}
-		});
-		builder.setNeutralButton("Failed", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AdShowFailedCallBack(interfaceName);
-			}
-		});
-		builder.setCancelable(false);
-		builder.create().show();
-	}
-
+	
 	public void getAdAccessable(String s,String interfaceName) {
 		JSONObject json = null;
 		if (s != null && isJSONValid(s)) {

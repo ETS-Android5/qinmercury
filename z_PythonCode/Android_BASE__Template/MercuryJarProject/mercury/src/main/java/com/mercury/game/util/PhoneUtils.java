@@ -1,5 +1,6 @@
 package com.mercury.game.util;
 
+//shrinkpartstart
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -14,7 +15,7 @@ import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-
+//shrinkpartend
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,7 +40,7 @@ import static android.content.Context.ACTIVITY_SERVICE;
  * </pre>
  */
 public final class PhoneUtils {
-
+    //shrinkpartstart
     private PhoneUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
@@ -372,6 +373,7 @@ public final class PhoneUtils {
         Log.d("Utils", "没有获取到MAC");
         return null;
     }
+    //shrinkpartend
 
 }
 

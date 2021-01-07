@@ -76,6 +76,7 @@ import static com.mercury.game.InAppDialog.LoginDialog.local_age;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
 import static com.mercury.game.InAppRemote.RemoteConfig.global_total_payment;
+import static com.mercury.game.InAppRemote.RemoteConfig.upload_game_data;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
@@ -171,10 +172,10 @@ public class InAppChannel extends InAppBase {
         MercuryExit();
     }
 
-    public void UploadGameData() {
+    public void UploadGameData(String data) {
         //云存储的上传游戏数据功能
         LogLocal("[MercuryActivity][SingmaanLogin]");
-        DownloadGameData();
+        upload_game_data(data);
     }
 
     public void DownloadGameData() {

@@ -31,6 +31,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 //shrinkpartstart
 import androidx.annotation.NonNull;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
 //shrinkpartend
 
 import com.mercury.game.InAppRemote.RemoteConfig;
@@ -55,14 +59,12 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
-import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
+
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in_result;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;

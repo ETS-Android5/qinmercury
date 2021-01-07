@@ -45,8 +45,6 @@ import com.mercury.game.util.SPUtils;
 import com.mercury.game.util.SpConfig;
 
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,6 +63,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 //shrinkpartstart
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -73,6 +73,7 @@ import static com.mercury.game.InAppDialog.LoginDialog.local_age;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
 import static com.mercury.game.InAppRemote.RemoteConfig.global_total_payment;
+import static com.mercury.game.InAppRemote.RemoteConfig.upload_game_data;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
@@ -150,10 +151,10 @@ public class InAppChannel extends InAppBase {
         MercuryExit();
     }
 
-    public void UploadGameData() {
+    public void UploadGameData(String data) {
         //云存储的上传游戏数据功能
         LogLocal("[MercuryActivity][SingmaanLogin]");
-        DownloadGameData();
+        upload_game_data(data);
     }
 
     public void DownloadGameData() {
@@ -407,7 +408,9 @@ public class InAppChannel extends InAppBase {
             public void onFailure(Call call, IOException e) {
                 LogLocal("[UserConfig][get_pay_permition] failed=" + e.toString());
                 Looper.prepare();
+                //shrinkpartend
                 AlipayAndWechat();
+                //shrinkpartstart
                 Looper.loop();
             }
             @Override
@@ -528,10 +531,13 @@ public class InAppChannel extends InAppBase {
     }
     public void AlipayAndWechat()
     {
+        //shrinkpartstart
         new PaymentDialog(mContext, new PayMethodCallBack() {
             @Override
             public void Alipay(String msg) {
+                //shrinkpartend
                 TestPay();
+                //shrinkpartstart
             }
 
             @Override
@@ -539,6 +545,7 @@ public class InAppChannel extends InAppBase {
                 TestPay();
             }
         });
+        //shrinkpartend
     }
     public void TestPay() {
         try {
@@ -588,7 +595,9 @@ public class InAppChannel extends InAppBase {
                             LoginDialog.isLoginPermitted = String.valueOf(json.getInt("data"));
                             LogLocal("[UserConfig][get_login_permition] result=" + LoginDialog.isLoginPermitted);
                             LogLocal("[UserConfig][get_login_permition] remote result=" + s);
+                            //shrinkpartend
                             DisplayLoginDialog();
+                            //shrinkpartstart
                             Looper.loop();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -603,6 +612,7 @@ public class InAppChannel extends InAppBase {
     }
     public void DisplayLoginDialog()
     {
+        //shrinkpartstart
         LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
             @Override
             public void success(String phone) {
@@ -610,10 +620,11 @@ public class InAppChannel extends InAppBase {
                 DeviceId = phone;
                 //shrinkpartend
                 LoginSuccessCallBack(DeviceId);
+                //shrinkpartstart
                 if (readFileData("privacyagreement").equals("")) {
                     new PrivacyDialog(mContext);
                 }
-                //shrinkpartstart
+
             }
             @Override
             public void fail(String msg) {
@@ -621,6 +632,7 @@ public class InAppChannel extends InAppBase {
                 LoginCancelCallBack(msg);
             }
         });
+        //shrinkpartend
     }
 
 
