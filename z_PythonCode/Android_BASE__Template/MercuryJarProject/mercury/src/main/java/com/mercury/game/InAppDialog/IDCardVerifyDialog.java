@@ -52,6 +52,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.id_verify_result;
 
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.mActivity;
+import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.UIUtils.isJSONValid;
 
@@ -73,7 +74,14 @@ public class IDCardVerifyDialog {
         Window dialogWindow = dialog.getWindow();
         dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);
         initAlertDialog(dialog);
-        Show();
+        if (readFileData("chinese_id").equals(""))
+        {
+            Show();
+        }
+        else
+        {
+
+        }
     }
 
     public void Show() {
@@ -155,7 +163,6 @@ public class IDCardVerifyDialog {
                         {
                             Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
-                            writeFileData("chinese_id",cardId);
                         }
                         else if(id_verify_result.equals("-202"))
                         {
@@ -168,7 +175,7 @@ public class IDCardVerifyDialog {
                             cardIdEditText.setError("请输入正确的身份证号和名字");
                         }
                     }
-                },1000);
+                },1);
             }
         };
 //        cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -223,7 +230,6 @@ public class IDCardVerifyDialog {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String s = response.body().string();
-                        LogLocal("[RemoteConfig][verify_chinese_id] s=" + s);
                         if (s != null&&isJSONValid(s)) {
                             JSONObject json = null;
                             try {
@@ -232,8 +238,9 @@ public class IDCardVerifyDialog {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            LogLocal("[RemoteConfig][verify_chinese_id] data=" + id_verify_result);
                             LogLocal("[RemoteConfig][verify_chinese_id] remote result=" + s);
+                            LogLocal("[RemoteConfig][verify_chinese_id] remote chinese_id=" + cardId);
+                            writeFileData("chinese_id",cardId);
                             Message msg = new Message();
                             mHandler.sendMessage(msg);
                         }

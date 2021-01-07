@@ -31,6 +31,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 //shrinkpartstart
 import androidx.annotation.NonNull;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
 //shrinkpartend
 
 import com.mercury.game.InAppRemote.RemoteConfig;
@@ -55,14 +59,12 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
-import static com.mercury.game.InAppRemote.RemoteConfig.login_in;
+
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in_result;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
@@ -99,6 +101,7 @@ public class LoginDialog {
         initAlertDialog(dialog);
         local_account = readFileData("account");
         DeviceId = local_account;
+        LogLocal("[LoginDialog][LoginDialog] DeviceId="+DeviceId);
         if (local_account.equals(""))
         {
             Show();
@@ -106,6 +109,7 @@ public class LoginDialog {
         else
         {
             LoginSuccessDialog(local_account);
+
         }
     }
 
@@ -151,6 +155,7 @@ public class LoginDialog {
                 new IDCardVerifyDialog(mContext, new LoginCallBack() {
                     @Override
                     public void success(String msg) {
+                        writeFileData("chinese_id",chinese_id);
                         LogLocal("[InAppDialog][LoginSuccessDialog] ID card Success");
                         age_difference(play_time);
                         mLoginCallBack.success(username);
@@ -340,6 +345,7 @@ public class LoginDialog {
                                     e.printStackTrace();
                                 }
                                 writeFileData("chinese_id",chinese_id);
+                                writeFileData("account",account_id);
                                 LogLocal("[RemoteConfig][login_in] chineseid=" + chinese_id+" ,data = " + login_in_result);
                                 LogLocal("[RemoteConfig][login_in] remote result=" + s);
                                 Message msg = new Message();

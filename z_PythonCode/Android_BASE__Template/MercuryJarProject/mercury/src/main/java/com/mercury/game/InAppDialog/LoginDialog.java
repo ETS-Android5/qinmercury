@@ -101,6 +101,7 @@ public class LoginDialog {
         initAlertDialog(dialog);
         local_account = readFileData("account");
         DeviceId = local_account;
+        LogLocal("[LoginDialog][LoginDialog] DeviceId="+DeviceId);
         if (local_account.equals(""))
         {
             Show();
@@ -108,6 +109,7 @@ public class LoginDialog {
         else
         {
             LoginSuccessDialog(local_account);
+
         }
     }
 
@@ -153,6 +155,7 @@ public class LoginDialog {
                 new IDCardVerifyDialog(mContext, new LoginCallBack() {
                     @Override
                     public void success(String msg) {
+                        writeFileData("chinese_id",chinese_id);
                         LogLocal("[InAppDialog][LoginSuccessDialog] ID card Success");
                         age_difference(play_time);
                         mLoginCallBack.success(username);
@@ -342,6 +345,7 @@ public class LoginDialog {
                                     e.printStackTrace();
                                 }
                                 writeFileData("chinese_id",chinese_id);
+                                writeFileData("account",account_id);
                                 LogLocal("[RemoteConfig][login_in] chineseid=" + chinese_id+" ,data = " + login_in_result);
                                 LogLocal("[RemoteConfig][login_in] remote result=" + s);
                                 Message msg = new Message();
