@@ -916,7 +916,7 @@ public class InAppChannel extends InAppBase {
         LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
             @Override
             public void success(String phone) {
-                LogLocal("[InAppChannel][SingmaanLogin] Success");
+                LogLocal("[InAppChannel][SingmaanLogin] Success phone="+phone);
                 DeviceId = phone;
                 //shrinkpartend
                 LoginSuccessCallBack(DeviceId);
@@ -927,7 +927,7 @@ public class InAppChannel extends InAppBase {
             }
             @Override
             public void fail(String msg) {
-                LogLocal("[InAppChannel][SingmaanLogin] Login failed");
+                LogLocal("[InAppChannel][SingmaanLogin] Login failed="+msg);
                 LoginCancelCallBack(msg);
             }
         });

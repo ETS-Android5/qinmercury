@@ -49,11 +49,11 @@ public final class RemoteConfig {
     public static float global_total_payment = 0;
 //    private static String ip_address = "gamesupportcluster.singmaan.com";
     public static String ip_address = "gamesupporttest.singmaan.com";
-    private static String RESTORE_URL = String.format("https://"+ip_address+":10013/order/undelivered?user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
+    private static String RESTORE_URL = "https://"+ip_address+":10013/order/undelivered?";
     private static String UPDATE_ORDER_SUCCESS_URL = "https://"+ip_address+":10013/order/deliver";
-    private static String GET_REFUNDED_ORDER_URL = String.format("https://"+ip_address+":10013/order/refunded?user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);;
+    private static String GET_REFUNDED_ORDER_URL = "https://"+ip_address+":10013/order/refunded?";
     private static String CANCEL_ORDER_URL = "https://"+ip_address+":10013/order/cancel";
-    private static String GET_TOTAL_AMOUNT_URL = String.format("https://"+ip_address+":10013/order/totalpayment?user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);;
+    private static String GET_TOTAL_AMOUNT_URL = "https://"+ip_address+":10013/order/totalpayment?";
     public static void GetAllConfig() {
         get_remote_iap();
         get_update_config();
@@ -567,7 +567,7 @@ public final class RemoteConfig {
         //shrinkpartend
     }
     public static void Restore() {
-        final String url = String.format(RESTORE_URL,DeviceId,GameName.toLowerCase());
+        final String url = String.format(RESTORE_URL+"user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
         LogLocal("[RemoteConfig][Restore] RESTORE_URL="+url);
         new Thread(new Runnable() {
             @Override
@@ -646,7 +646,7 @@ public final class RemoteConfig {
         });
     }
     public static void GetRefundedOrder(){
-        final String url = String.format(GET_REFUNDED_ORDER_URL,DeviceId,GameName.toLowerCase());
+        final String url = String.format(GET_REFUNDED_ORDER_URL+"user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
         LogLocal("[RemoteConfig][GetRefundedOrder] GET_REFUNDED_ORDER_URL:"+url);
         new Thread(new Runnable() {
             @Override
@@ -716,7 +716,7 @@ public final class RemoteConfig {
         });
     }
     public static void TotalPayment() {
-        final String url = GET_TOTAL_AMOUNT_URL;
+        final String url = String.format(GET_TOTAL_AMOUNT_URL+"user_id=%s&game_name=%s&channel=%s",DeviceId,GameName.toLowerCase(),channelname);
         LogLocal("[RemoteConfig][TotalPayment] GET_TOTAL_AMOUNT_URL="+url);
         new Thread(new Runnable() {
             @Override

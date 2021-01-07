@@ -424,8 +424,7 @@ public class LoginDialog {
             LogLocal("[LoginDialog][age_difference] play_time:" + play_time);
             Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
-
-            LogLocal("hour=:" + hour);
+            LogLocal("[LoginDialog][age_difference]hour=:" + hour);
             Looper.prepare();
             if(hour>=22 || hour<=7)
             {
@@ -557,8 +556,7 @@ public class LoginDialog {
                 if(index %60 == 0){
                     int time = Integer.valueOf(play_time)+(int)(index/60);
                     RemoteConfig.set_login_time(chinese_id, time+"");//分钟
-
-                    LogLocal("----------->set login time-----------play time--------"+time);
+                    LogLocal("[LoginDialog][delayTimeFun] set login time:" + time);
                 }
             }
 
