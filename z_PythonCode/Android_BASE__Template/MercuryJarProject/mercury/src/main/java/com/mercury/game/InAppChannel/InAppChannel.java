@@ -69,6 +69,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 //shrinkpartend
+import static com.mercury.game.InAppDialog.LoginDialog.ChineseIDVerifyDialog;
 import static com.mercury.game.InAppDialog.LoginDialog.local_age;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
@@ -95,7 +96,12 @@ public class InAppChannel extends InAppBase {
     public void ActivityInit(Activity context, final APPBaseInterface appinterface) {
         super.ActivityInit(context, appinterface);
         MercuryActivity.LogLocal("[InAppChannel][ActivityInit]=" + Channelname);
+        //渠道测试标示日志
         Toast.makeText(mContext, "只限于" + channelname + "测试，请勿泄漏", Toast.LENGTH_SHORT).show();
+        //隐私条约
+        if (readFileData("privacyagreement").equals("")) {
+            new PrivacyDialog(mContext);
+        }
         //这里写渠道的Activity的初始化
     }
 
@@ -124,6 +130,11 @@ public class InAppChannel extends InAppBase {
         //渠道登出代码写在这里，下面方法是SDK默认的支付，详情进入SDK内部，默认方法会清理本地缓存，下次会再次提示登录。
         LogLocal("[InAppChannel][SingmaanLogout]" + DeviceId);
         LoginCancelCallBack(DeviceId);
+    }
+    public void MercuryIDVerify() {
+        //shrinkpartstart
+        ChineseIDVerifyDialog();
+        //shrinkpartend
     }
     public void Data_UseItem(int myint, String item) {
         //统计代码，这里是用了XX物品
@@ -574,7 +585,7 @@ public class InAppChannel extends InAppBase {
     public void MercuryLogin() {
         //shrinkpartstart
         String phone = "";
-        LogLocal("[InAppChannel][SingmaanLogin]" + DeviceId);
+        LogLocal("[InAppChannel][SingmaanLogin]DeviceId=" + DeviceId);
         if(NetCheckUtil.checkNet(mContext))
         {
             UserConfig.getLoginPermition(DeviceId, GameName, channelname, new Callback() {
@@ -613,6 +624,7 @@ public class InAppChannel extends InAppBase {
     public void DisplayLoginDialog()
     {
         //shrinkpartstart
+
         LoginDialog loginDialog = new LoginDialog(mContext, MercuryActivity.DeviceId, new LoginCallBack() {
             @Override
             public void success(String phone) {
@@ -620,11 +632,8 @@ public class InAppChannel extends InAppBase {
                 DeviceId = phone;
                 //shrinkpartend
                 LoginSuccessCallBack(DeviceId);
+                ChineseIDVerifyDialog();
                 //shrinkpartstart
-                if (readFileData("privacyagreement").equals("")) {
-                    new PrivacyDialog(mContext);
-                }
-
             }
             @Override
             public void fail(String msg) {
@@ -632,28 +641,15 @@ public class InAppChannel extends InAppBase {
                 LoginCancelCallBack(msg);
             }
         });
+
         //shrinkpartend
     }
 
 
-    public void MercuryIDVerify() {
 
-    }
 
     public void MercurySigneIn() {
-        //shrinkpartstart
-        new IDCardVerifyDialog(mContext, new LoginCallBack() {
-            @Override
-            public void success(String msg) {
-                LogLocal("[InAppDialog][SigneInDialog] ID card Success");
-            }
 
-            @Override
-            public void fail(String msg) {
-                LogLocal("[InAppDialog][SigneInDialog] ID card failed");
-            }
-        });
-        //shrinkpartend
     }
 
 

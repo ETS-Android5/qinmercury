@@ -138,6 +138,7 @@ public class InAppBase{
 		Restore();
 		GetRefundedOrder();
 		TotalPayment();
+		writeFileData("account", strError);
 		qc.LoginSuccessCallBack(strError,this);
 	}
 	public void LoginCancelCallBack(String strError)

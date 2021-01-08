@@ -80,8 +80,8 @@ public class LoginDialog {
     String oldId;
     int time;
     public  static LoginDialog Instance;
-    Activity mContext;
-    LoginCallBack mLoginCallBack;
+    static Activity mContext;
+    static LoginCallBack mLoginCallBack;
     final AlertDialog dialog;
     private static final int invalidAge = -1; // 非法的年龄，用于处理异常。
     public static String local_account = "";
@@ -109,8 +109,7 @@ public class LoginDialog {
         }
         else
         {
-            LoginSuccessDialog(local_account);
-
+            mLoginCallBack.success(readFileData("account"));
         }
     }
 
@@ -139,41 +138,37 @@ public class LoginDialog {
                         break;
                     default:
                         writeFileData("account",username);
-                        LoginSuccessDialog(username);
+                        mLoginCallBack.success(readFileData("account"));
                         dialog.dismiss();
                 }
             }
         }, 1);
     }
-    public void LoginSuccessDialog(final String username)
+    public static void ChineseIDVerifyDialog()
     {
-        Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
-        LogLocal("[InAppDialog][LoginSuccessDialog] chinese_id="+chinese_id);
+        Toast.makeText(MercuryActivity.mContext, "登录成功", Toast.LENGTH_SHORT).show();
+        LogLocal("[InAppDialog][ChineseIDVerifyDialog] chinese_id="+chinese_id);
         chinese_id =  readFileData("chinese_id");
-        if (mLoginCallBack != null) {
-            if (chinese_id.equals(""))
-            {
-                new IDCardVerifyDialog(mContext, new LoginCallBack() {
-                    @Override
-                    public void success(String msg) {
-                        writeFileData("chinese_id",chinese_id);
-                        LogLocal("[InAppDialog][LoginSuccessDialog] ID card Success");
-                        age_difference(play_time);
-                        mLoginCallBack.success(username);
-                    }
-                    @Override
-                    public void fail(String msg) {
-                        LogLocal("[InAppDialog][LoginSuccessDialog] ID card failed");
-                    }
-                });
-            }
-            else
-            {
-                //age verify
-                mLoginCallBack.success(username);
-                age_difference(play_time);
-                LogLocal("[InAppDialog][LoginSuccessDialog] ID card got");
-            }
+        if (chinese_id.equals(""))
+        {
+            new IDCardVerifyDialog((Activity) MercuryActivity.mContext, new LoginCallBack() {
+                @Override
+                public void success(String msg) {
+                    writeFileData("chinese_id",chinese_id);
+                    LogLocal("[InAppDialog][ChineseIDVerifyDialog] ID card Success");
+                    age_difference(play_time);
+                }
+                @Override
+                public void fail(String msg) {
+                    LogLocal("[InAppDialog][ChineseIDVerifyDialog] ID card failed");
+                }
+            });
+        }
+        else
+        {
+            //age verify
+            age_difference(play_time);
+            LogLocal("[InAppDialog][ChineseIDVerifyDialog] ID card got");
         }
     }
     public void Show() {
@@ -378,7 +373,7 @@ public class LoginDialog {
             @Override
             public void onClick(View v) {
                 final String phone = usernameEditText.getText().toString();
-                new SigneInDialog(mContext, new LoginCallBack() {
+                new SigneInDialog((Activity) mContext, new LoginCallBack() {
                     @Override
                     public void success(String msg) {
                         LogLocal("[InAppDialog][LoginDialog] ID card Success");
@@ -416,11 +411,11 @@ public class LoginDialog {
         Date date = new Date(timeMillis);
         return simpleDateFormat.format(date);
     }
-    public int remaing_minutes=0;
+    public static int remaing_minutes=0;
     private int playerAge=0;
-    public String play_time = "";//未成年人已经体验过了多少分钟
+    public static String play_time = "";//未成年人已经体验过了多少分钟
     private String set_login_time_result = "";
-    public void age_difference(String Play_time)
+    public static void age_difference(String Play_time)
     {
 
         Play_time = play_time;
@@ -532,7 +527,7 @@ public class LoginDialog {
             Looper.loop();
         }
     }
-    private void surTimeFun(){
+    private static void surTimeFun(){
         CountDownTimer timer_quit_30 = new CountDownTimer(1000*60*(remaing_minutes - 60), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -561,8 +556,8 @@ public class LoginDialog {
 
         timer_quit_30.start();
     }
-    private int index = 0;
-    private void delayTimeFun() {
+    private static int index = 0;
+    private static void delayTimeFun() {
         CountDownTimer timer_delay_param = new CountDownTimer(1000 * 60 * remaing_minutes, 1000) {
 
             @Override
@@ -651,7 +646,7 @@ public class LoginDialog {
             }
         }
     };
-    private CountDownTimer timer_quit = new CountDownTimer(2, 1000) {
+    private static CountDownTimer timer_quit = new CountDownTimer(2, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             LogLocal("(" + (millisUntilFinished / 1000) + ")");

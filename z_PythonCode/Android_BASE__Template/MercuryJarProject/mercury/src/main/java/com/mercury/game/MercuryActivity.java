@@ -271,43 +271,36 @@ public class MercuryActivity {
 	public String UserDeviceID() {
 		//shrinkpartstart
 		//可以设置的权限PermissionConstants.PHONE，PermissionConstants.GROUP_CALENDAR
-		PermissionUtils.permission(PermissionConstants.PHONE).callback(new PermissionUtils.FullCallback() {
+		if(!readFileData("account").equals(""))
+		{
+			DeviceId =readFileData("account");
+		}
+		PermissionUtils.permission().callback(new PermissionUtils.FullCallback() {
 			@Override
 			public void onGranted(List<String> permissionsGranted) {
 				//用户同意权限
-				if (readFileData("account").equals("")) {
-					if (androidx.core.app.ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-						// TODO: Consider calling
-						//    ActivityCompat#requestPermissions
-						// here to request the missing permissions, and then overriding
-						//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-						//                                          int[] grantResults)
-						// to handle the case where the user grants the permission. See the documentation
-						// for ActivityCompat#requestPermissions for more details.
-						return;
-					}
-					DeviceId = PhoneUtils.getUnicodeId(mContext);
-					LogLocal("[MercuryActivity][UserDeviceID] permission");
-				}
-				else
-				{
-					DeviceId = readFileData("account");
-				}
+//				if (readFileData("account").equals("")) {
+////					DeviceId = PhoneUtils.getUnicodeId(mContext);
+//					LogLocal("[MercuryActivity][UserDeviceID] permission");
+//				}
+//				else
+//				{
+//
+//				}
 			}
 			@Override
 			public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
 				//用户拒绝权限
-
-				if(readFileData("account").equals(""))
-				{
-					DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
-					LogLocal("[MercuryActivity][UserDeviceID] User denied");
-					Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重新赋予权限", Toast.LENGTH_LONG).show();
-				}
-				else
-				{
-					DeviceId = readFileData("account");
-				}
+//				if(readFileData("account").equals(""))
+//				{
+//					DeviceId = Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+//					LogLocal("[MercuryActivity][UserDeviceID] User denied");
+//					Toast.makeText(mContext, "您已拒绝权限，删除应用会导致游戏帐号无法找回，建议重装游戏重新赋予权限", Toast.LENGTH_LONG).show();
+//				}
+//				else
+//				{
+//					DeviceId = readFileData("account");
+//				}
 			}
 		}).rationale(new PermissionUtils.OnRationaleListener() {
 			@Override
@@ -349,7 +342,7 @@ public class MercuryActivity {
 	}
 	public void MercurySigneIn()
 	{
-		LogLocal("[MercuryActivity][DownloadGameData]");
+		LogLocal("[MercuryActivity][MercurySigneIn]");
 		mInAppChannel.MercurySigneIn();
 	}
 	public void RestorePruchase()
