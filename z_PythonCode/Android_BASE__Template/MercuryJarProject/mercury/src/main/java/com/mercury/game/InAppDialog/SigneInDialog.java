@@ -133,7 +133,7 @@ public class SigneInDialog {
                         Toast.makeText(mContext, "服务器繁忙", Toast.LENGTH_SHORT).show();
                         break;
                     case "-200":
-                        Toast.makeText(mContext, "密码错误", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "账号已被注册", Toast.LENGTH_SHORT).show();
                         break;
                     case "-202":
                         Toast.makeText(mContext, "账户已存在", Toast.LENGTH_SHORT).show();
