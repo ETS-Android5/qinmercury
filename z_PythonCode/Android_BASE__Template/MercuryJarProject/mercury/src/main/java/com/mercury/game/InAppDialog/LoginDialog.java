@@ -87,6 +87,7 @@ public class LoginDialog {
     public static String local_account = "";
     public static String local_chinese_id = "";
     public static String isLoginPermitted = "0";
+    public static boolean clicked = false;
     private Handler mHandler;
     public LoginDialog(Activity context, String id, LoginCallBack callBack) {
 
@@ -302,6 +303,14 @@ public class LoginDialog {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(clicked==false)
+                {
+                    clicked=true;
+                }
+                else
+                {
+                    return;
+                }
                 final String username = usernameEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
                 account_id = username;
@@ -309,7 +318,6 @@ public class LoginDialog {
                     LogLocal("[InAppDialog][login_in] isValidateParams:" + false);
                     return;
                 }
-                ;
                 LogLocal("[InAppDialog][login_in] isValidateParams:" + true);
                 progressBar.setVisibility(View.VISIBLE);
                     login_in(username, password, new Callback() {
@@ -321,11 +329,13 @@ public class LoginDialog {
                             if (!NetCheckUtil.checkNet(mContext)) {
                                 Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
                             }
+                            clicked=false;
                             Looper.loop();
                         }
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
+                            clicked=false;
                             String s = response.body().string();
                             if (s != null && isJSONValid(s)) {
                                 JSONObject json = null;
@@ -351,6 +361,7 @@ public class LoginDialog {
                                 Message msg = new Message();
                                 msg.obj = username;
                                 mHandler.sendMessage(msg);
+
                             } else {
                                 LogLocal("[RemoteConfig][verify_signe_in] server returned formate is not a json");
                             }

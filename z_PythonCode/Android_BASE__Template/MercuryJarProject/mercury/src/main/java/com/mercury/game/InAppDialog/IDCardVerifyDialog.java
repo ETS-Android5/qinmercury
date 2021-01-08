@@ -63,7 +63,7 @@ public class IDCardVerifyDialog {
     LoginCallBack mLoginCallBack;
     final AlertDialog dialog;
     private Handler mHandler;
-
+    public static boolean clicked = false;
     public IDCardVerifyDialog(Activity context, LoginCallBack callBack) {
 
         mContext = context;
@@ -222,6 +222,14 @@ public class IDCardVerifyDialog {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(clicked==false)
+                {
+                    clicked=true;
+                }
+                else
+                {
+                    return;
+                }
                 final String cardId = CardIdUtils.UpperCardId(cardIdEditText.getText().toString());
                 final String nameId = nameEditText.getText().toString();
                 if(!validateParams(cardId,nameId)){
@@ -236,6 +244,7 @@ public class IDCardVerifyDialog {
                 verify_chinese_id(account_id, cardId, nameId, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
+                        clicked=false;
                         LogLocal("[RemoteConfig][verify_chinese_id] failed=" + e.toString());
                         Looper.prepare();
                         progressBar.setVisibility(View.INVISIBLE);
@@ -246,6 +255,7 @@ public class IDCardVerifyDialog {
                     }
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
+                        clicked=false;
                         String s = response.body().string();
                         if (s != null&&isJSONValid(s)) {
                             JSONObject json = null;

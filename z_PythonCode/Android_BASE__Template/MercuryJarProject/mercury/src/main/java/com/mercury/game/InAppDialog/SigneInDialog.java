@@ -61,6 +61,7 @@ public class SigneInDialog {
     private Handler mHandler;
     public static final int MAX_LIMIT_USERNAME_LENGTH = 6;
     public static final int MAX_LIMIT_PASSWORD_LENGTH = 6;
+    public static boolean clicked = false;
     public SigneInDialog(Activity context, LoginCallBack callBack) {
 
         mContext = context;
@@ -215,6 +216,14 @@ public class SigneInDialog {
             @Override
             public void onClick(View v)
             {
+                if(clicked==false)
+                {
+                    clicked=true;
+                }
+                else
+                {
+                    return;
+                }
                 final String username = cardIdEditText.getText().toString();
                 final String password = nameEditText.getText().toString();
                 final String passwordAgain = passwordagainEditText.getText().toString();
@@ -230,6 +239,7 @@ public class SigneInDialog {
                         public void onFailure(Call call, IOException e) {
                             LogLocal("[RemoteConfig][verify_signe_in] failed=" + e.toString());
                             Looper.prepare();
+                            clicked=false;
                             progressBar.setVisibility(View.INVISIBLE);
                             if(!NetCheckUtil.checkNet(mContext)){
                                 Toast.makeText(mContext, "网络未连接", Toast.LENGTH_SHORT).show();
@@ -238,6 +248,7 @@ public class SigneInDialog {
                         }
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
+                            clicked=false;
                             String s = response.body().string();
                             if (s != null&&isJSONValid(s)) {
                                 JSONObject json = null;
