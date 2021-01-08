@@ -159,20 +159,37 @@ public class IDCardVerifyDialog {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.INVISIBLE);
+
                         if (id_verify_result.equals("200"))
                         {
                             Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
+                        else if(id_verify_result.equals("-209"))
+                        {
+                            showLoginFailed("身份证号码错误");
+//                            cardIdEditText.setError("身份证号码错误");
+                        }
+                        else if(id_verify_result.equals("-208"))
+                        {
+                            showLoginFailed("身份证名字错误");
+//                            cardIdEditText.setError("身份证名字错误");
+                        }
+                        else if(id_verify_result.equals("-207"))
+                        {
+                            showLoginFailed("身份证未能通过服务器验证");
+//                            cardIdEditText.setError("身份证未能通过服务器验证,请输入正确身份证");
+                        }
                         else if(id_verify_result.equals("-202"))
                         {
                             showLoginFailed("该身份证已经被使用");
-                            cardIdEditText.setError("该身份证已经被使用");
+//                            cardIdEditText.setError("该身份证已经被使用");
                         }
                         else
                         {
-                            showLoginFailed("请输入正确的身份证号和名字");
-                            cardIdEditText.setError("请输入正确的身份证号和名字");
+                            showLoginFailed("未知错误");
+//                            cardIdEditText.setError("未知错误");
+                            dialog.dismiss();
                         }
                     }
                 },1);
