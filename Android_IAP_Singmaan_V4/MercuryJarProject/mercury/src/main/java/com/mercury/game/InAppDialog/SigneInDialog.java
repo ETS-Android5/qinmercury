@@ -22,7 +22,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 //shrinkpartstart
-import androidx.annotation.NonNull;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import static com.mercury.game.InAppRemote.RemoteConfig.verify_signe_in;
 //shrinkpartend
 import com.mercury.game.MercuryActivity;
 import com.mercury.game.util.LoginCallBack;
@@ -39,14 +42,12 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+
 
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
-import static com.mercury.game.InAppRemote.RemoteConfig.verify_signe_in;
+
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.mActivity;
 import static com.mercury.game.util.UIUtils.isJSONValid;
