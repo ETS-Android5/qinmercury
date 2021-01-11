@@ -22,8 +22,7 @@
 
 		<!--sdk-->
         <meta-data android:name="channel_name" android:value="demo"/>
-        <meta-data android:name="open_talkingdata" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
-        <meta-data android:name="open_umeng" android:value="AC063F0630464D24824F5BEEE71CC7DF"/>
+        <meta-data android:name="open_talkingdata" android:value="B7DCA42F4F9D43A4A8DAFA908F8E1F54"/>
         <activity android:name="com.mercury.game.util.PermissionUtils$PermissionActivity" />
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 		<!--end-->
