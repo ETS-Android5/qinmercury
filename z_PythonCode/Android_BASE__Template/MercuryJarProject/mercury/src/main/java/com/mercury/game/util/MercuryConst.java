@@ -288,10 +288,15 @@ public class MercuryConst {
 					String remote_price = (String) json_result1.get("price");
 					String remote_guid = (String) json_result1.get("guid");
 					if(ProductionList.length>index) {
-						ProductionList[index][0] = iap_name;
-						ProductionList[index][1] = remote_des;
-						ProductionList[index][2] = remote_price;
-						ProductionList[index][3] = remote_guid;
+						MercuryActivity.LogLocal("[MercuryConst][PayInfo] ProductionList[index].length="+ProductionList[index].length+" index="+index);
+						if(ProductionList[index].length>0)
+							ProductionList[index][0] = iap_name;
+						if(ProductionList[index].length>1)
+							ProductionList[index][1] = remote_des;
+						if(ProductionList[index].length>2)
+							ProductionList[index][2] = remote_price;
+						if(ProductionList[index].length>3)
+							ProductionList[index][3] = remote_guid;
 						index++;
 					}
 				}
