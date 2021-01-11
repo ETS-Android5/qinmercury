@@ -8,8 +8,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 //shrinkpartend
-import static com.mercury.game.InAppRemote.RemoteConfig.ip_address;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.ip_address;
 
 public class ADConfig {
     private static String adAccessableUrl = "https://"+ip_address+":10009/isadaccessable?game_name=%s";

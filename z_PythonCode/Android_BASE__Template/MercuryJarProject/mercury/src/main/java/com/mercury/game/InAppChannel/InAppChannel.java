@@ -92,6 +92,7 @@ public class InAppChannel extends InAppBase {
     private String Channelname = "InAppChannel";
 
     private static String pid;
+
     @Override
     public void ActivityInit(Activity context, final APPBaseInterface appinterface) {
         super.ActivityInit(context, appinterface);

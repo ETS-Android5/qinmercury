@@ -17,10 +17,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 //shrinkpartend
-import static com.mercury.game.InAppRemote.RemoteConfig.ip_address;
+
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.ip_address;
 import static com.mercury.game.MercuryApplication.channelname;
 
 public final class UserConfig {
@@ -29,7 +30,6 @@ public final class UserConfig {
 
     //shrinkpartstart
     public static String getLoginPermition(final String uniqueId, final String gameName, final String channel,Callback callback) {
-
         try {
             OkHttpClient client = new OkHttpClient();
             RequestBody requestBody = new FormBody.Builder()
@@ -47,7 +47,6 @@ public final class UserConfig {
         } finally {
             LogLocal("[UserConfig][get_login_permition] data=" + LoginDialog.isLoginPermitted);
         }
-
         return LoginDialog.isLoginPermitted;
     }
     //shrinkpartend

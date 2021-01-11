@@ -95,6 +95,7 @@ public class MercuryActivity {
 	public static APPBaseInterface mappcall = null;
 	public static String GameName = "ww1";
 	public static String DeviceId = "123";
+	public static String ip_address = "gamesupportcluster.singmaan.com";
 
 	public void InitSDK(Context ContextFromUsers, final APPBaseInterface appcall) {
 		LogLocal("[MercuryActivity][InitSDK]Version 1.0");
