@@ -46,7 +46,7 @@ public final class RemoteConfig {
     public static String global_production_id ="";
     public static float global_total_payment = 0;
 //    private static String ip_address = "gamesupportcluster.singmaan.com";
-    public static String ip_address = "gamesupporttest.singmaan.com";
+    public static String ip_address = "gamesupportcluster.singmaan.com";
     private static String RESTORE_URL = "https://"+ip_address+":10013/order/undelivered?";
     private static String UPDATE_ORDER_SUCCESS_URL = "https://"+ip_address+":10013/order/deliver";
     private static String GET_REFUNDED_ORDER_URL = "https://"+ip_address+":10013/order/refunded?";

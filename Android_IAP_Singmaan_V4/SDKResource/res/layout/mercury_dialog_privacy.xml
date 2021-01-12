@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="332dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/mercury_shape_corner"
+    android:orientation="vertical">
+        <TextView
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:background="@drawable/mercury_shape_corner_up"
+            android:text="隐私政策"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/mercury_mgs"
+        android:layout_margin="24dp"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        android:text="为了保护您的个人信息和隐私安全，根据《个人信息安全规范》的要求，请您在进入游戏前仔细阅读并同意我们的 用户协议隐私条款。"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                android:layout_marginRight="10dp"
+                android:id="@+id/mercury_login"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="43dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:background="@drawable/mercury_btn_shape"
+                android:text="同意" />
+                <Button
+                    android:id="@+id/mercury_cancel"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="43dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="18sp"
+                    android:background="@drawable/mercury_btn_shape"
+                    android:text="退出" />
+            </LinearLayout>
+
+</LinearLayout>
