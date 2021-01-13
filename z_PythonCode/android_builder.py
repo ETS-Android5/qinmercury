@@ -127,7 +127,8 @@ class SDKAppendManager():
 							public_my_id_list.append(i[i.find(" id=\"")+len(" id=\""):i.find("\" />")])
 							public_my_name_list.append(i[i.find("name=\"")+len("name=\""):i.find("\" id=")])
 							print("[__rebuild_resource_id]check list:"+i[i.find(" id=\"")+len(" id=\""):i.find("\" />")]+"|"+i[i.find("name=\"")+len("name=\""):i.find("\" id=")])
-
+		if len(public_my_name_list)==0:
+			return
 		os.chdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{folder_name}/smali")
 		for index_my_name,my_name in enumerate(public_my_name_list):
 			count_number = len(public_my_name_list)
@@ -650,55 +651,58 @@ class SDKAppendManager():
 		self.__copy_folder_dont_overwrite(PythonLocation()+"/"+self.__channel_show+"/SDKResource", PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show)
 
 		#merge SDK
-		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/")==True:
-			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/")
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/")==True:
+			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/")
 
-		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/")
-		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/assets")
-		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs")
-		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/jniLibs")
-		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/assets")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/libs")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/jniLibs")
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res")
 		#copy assets
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/assets")
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/assets")
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/assets")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/assets")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/assets")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/assets", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/assets")
 		#copy lib
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs")
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs")
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/libs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/libs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/libs", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/libs")
 		#copy jniLibs
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/jniLibs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/jniLibs")
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/jniLibs",  PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/jniLibs")
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/jniLibs", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/jniLibs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/jniLibs", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/jniLibs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/jniLibs",  PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/jniLibs")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/jniLibs", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/jniLibs")
 
 		#copy base res, xml, gradle
-		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res")
-		shutil.copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/AndroidManifest.xml", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/AndroidManifest.xml")
-		shutil.copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/build.gradle", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/build.gradle")
-		self.__copy_folder_dont_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res")
-		self.__copy_folder_dont_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res")
+		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res")
+		shutil.copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/AndroidManifest.xml", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/AndroidManifest.xml")
+		shutil.copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/build.gradle", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/build.gradle")
+		self.__copy_folder_dont_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res")
+		self.__copy_folder_dont_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res")
 
 		#merge res
-		self.__prepare_SDK_orinigal_file_resource_merge_res(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/res")
-		self.__prepare_SDK_orinigal_file_resource_merge_res(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/res",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/res")
+		self.__prepare_SDK_orinigal_file_resource_merge_res(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/res")
+		self.__prepare_SDK_orinigal_file_resource_merge_res(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/res")
 
 		#merge xml
-		self.__prepare_SDK_orinigal_file_resource_merge_xml(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/AndroidManifest.xml",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/AndroidManifest.xml")
-		self.__prepare_SDK_orinigal_file_resource_merge_xml(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/AndroidManifest.xml",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/AndroidManifest.xml")
+		self.__prepare_SDK_orinigal_file_resource_merge_xml(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/AndroidManifest.xml",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/AndroidManifest.xml")
+		self.__prepare_SDK_orinigal_file_resource_merge_xml(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/AndroidManifest.xml",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/AndroidManifest.xml")
 
 		#merge gradble
-		self.__prepare_SDK_orinigal_file_resource_merge_gradle(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/build.gradle",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/build.gradle")
-		self.__prepare_SDK_orinigal_file_resource_merge_gradle(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/build.gradle",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/build.gradle")
+		self.__prepare_SDK_orinigal_file_resource_merge_gradle(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/build.gradle",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/build.gradle")
+		self.__prepare_SDK_orinigal_file_resource_merge_gradle(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/build.gradle",PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/build.gradle")
 
 		#merge lib
-		os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base)
-		os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar")
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base)==True:
+			os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base)
+			os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar")
 
-		os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP)
-		os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/libs/MercurySDK.jar")
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP)==True:
+			os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP)
+			os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/libs/MercurySDK.jar")
 
-		os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show)
-		os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/libs/MercurySDK.jar")
+		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show)==True:
+			os.chdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show)
+			os.system(f"jar xf  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/libs/MercurySDK.jar")
 
 		if self.__channel_IAP!="":
 			if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com/mercury/game/InAppChannel")==True:
@@ -713,8 +717,8 @@ class SDKAppendManager():
 		if os.path.isfile(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar"):
 			os.remove(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar")
 
-		if os.path.isfile(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs/MercurySDK.jar"):
-			os.remove(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs/MercurySDK.jar")
+		if os.path.isfile(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/libs/MercurySDK.jar"):
+			os.remove(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/libs/MercurySDK.jar")
 		# shutil.make_archive("MercurySDK", 'jar', PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com")
 		# p = subprocess.Popen("zip –r "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/libs/MercurySDK.jar  "+PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com", stdout=subprocess.PIPE, shell=True)
 		# p.wait()
@@ -722,7 +726,7 @@ class SDKAppendManager():
 		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/com",PythonLocation()+"/y_building/"+self.__channel_name+"/com")
 
 		all_files = self.__all_files_in_folder(PythonLocation()+"/y_building/"+self.__channel_name+"/com")
-		zp=zipfile.ZipFile(PythonLocation()+"/y_building/"+self.__channel_name+"/GangAoTaiSDK/libs/MercurySDK.jar",'w', zipfile.ZIP_DEFLATED)
+		zp=zipfile.ZipFile(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/libs/MercurySDK.jar",'w', zipfile.ZIP_DEFLATED)
 		for file in all_files:
 			zp.write(file)
 		zp.close()
