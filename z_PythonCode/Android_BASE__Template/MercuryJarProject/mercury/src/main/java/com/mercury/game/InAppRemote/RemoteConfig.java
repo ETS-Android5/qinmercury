@@ -487,7 +487,7 @@ public final class RemoteConfig {
                                     e.printStackTrace();
                                 }
 
-                                LogLocal("[RemoteConfig][set_login_time] remote result=" + s);
+                                LogLocal("[RemoteConfig][set_login_time] remote result=" + s+" time="+time+" account="+account);
                             }
                         }
                     });
@@ -541,14 +541,19 @@ public final class RemoteConfig {
                                     json = (JSONObject) new JSONTokener(s).nextValue();
                                     LogLocal("[RemoteConfig][origin_login_time] remote json=" + json);
                                     LoginDialog.Instance.play_time = (String) json.getString("data");
-                                    if (LoginDialog.Instance.play_time != null && !LoginDialog.Instance.play_time.equals("")) {
+
+                                    if (LoginDialog.Instance.play_time != null && !LoginDialog.Instance.play_time.equals(""))
+                                    {
                                         //do something
+                                        LogLocal("[RemoteConfig][origin_login_time] LoginDialog.Instance.play_time="+LoginDialog.Instance.play_time);
                                     }
-                                    else {
+                                    else
+                                    {
+                                        LogLocal("[RemoteConfig][origin_login_time] LoginDialog.Instance.play_time="+LoginDialog.Instance.play_time);
                                         LoginDialog.Instance.play_time = "0";
                                     }
                                     //开始倒计时
-                                    LoginDialog.Instance.age_difference(LoginDialog.Instance.play_time);
+                                    LoginDialog.Instance.age_difference();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

@@ -155,8 +155,8 @@ public class LoginDialog {
                 @Override
                 public void success(String msg) {
                     writeFileData("chinese_id",chinese_id);
-                    LogLocal("[InAppDialog][ChineseIDVerifyDialog] ID card Success");
-                    age_difference(play_time);
+                    LogLocal("[InAppDialog][ChineseIDVerifyDialog] ID card Success:"+play_time);
+                    RemoteConfig.get_login_time(DeviceId);//分钟
                 }
                 @Override
                 public void fail(String msg) {
@@ -166,9 +166,8 @@ public class LoginDialog {
         }
         else
         {
-            //age verify
-            age_difference(play_time);
-            LogLocal("[InAppDialog][ChineseIDVerifyDialog] ID card got");
+            LogLocal("[InAppDialog][ChineseIDVerifyDialog] ID card got["+play_time+"]");
+            RemoteConfig.get_login_time(DeviceId);//分钟
         }
     }
     public void Show() {
@@ -413,138 +412,35 @@ public class LoginDialog {
     }
     public static int remaing_minutes=0;
     private int playerAge=0;
-    public static String play_time = "";//未成年人已经体验过了多少分钟
+    public static String play_time = "0";//未成年人已经体验过了多少分钟
     private String set_login_time_result = "";
-    public static void age_difference(String Play_time)
+    public static void age_difference()
     {
-
-        Play_time = play_time;
         local_age = getAgeByIDNumber(chinese_id);
         LogLocal("[LoginDialog][age_difference] local_age=:" + local_age);
-
-        if(play_time == ""){
-            RemoteConfig.get_login_time(chinese_id);//分钟
-            return;
-        }
-
+        LogLocal("[LoginDialog][age_difference] play_time=:" + play_time);
         if(local_age<18 &&local_age>=0)
         {
             long current_time = System.currentTimeMillis();
             String local_time =  readFileData("time"+chinese_id);
             LogLocal("[LoginDialog][age_difference] current_time:" + current_time);
             LogLocal("[LoginDialog][age_difference] local_time:" + local_time);
-            LogLocal("[LoginDialog][age_difference] play_time:" + play_time);
             Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
             LogLocal("[LoginDialog][age_difference]hour=:" + hour);
             Looper.prepare();
             if(hour>=22 || hour<=7)
             {
-                timer_quit.start();
-            }
-            else
-            {
-                if (play_time != "")
-                {
-                    remaing_minutes = (90 - Integer.valueOf(play_time));
-                    try {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                        builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+(90-remaing_minutes)+"分钟。");
-                        builder.setTitle("防沉迷提示");
-                        builder.setCancelable(false);
-                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //        ((Activity) MercuryActivity.mContext).finish();
-                                //        android.os.Process.killProcess(android.os.Process.myPid());
-                            }
-                        });
-                        builder.create().show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    if(remaing_minutes%60==0) {
-                        LogLocal("[LoginDialog][age_difference] remaing_minutes:" + remaing_minutes);
-                    }
-                    if (remaing_minutes > 0)
-                    {
-                        if(remaing_minutes > 60)
-                        {
-                            surTimeFun();//防沉迷30分钟的提示
-                        }
-                        delayTimeFun();//未成年人只能玩90分钟
-//                        Toast.makeText(mContext, "未成年人一天只能体验1.5小时，游戏将会准时提示并退出，敬请谅解", Toast.LENGTH_SHORT).show();
-//                        timer_delay_param.start();
-                    }
-                    else
-                    {
-                        try {
-                            RemoteConfig.set_login_time(chinese_id, 90 + "");//保存未成年人玩的时间，只能是90分钟
-                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                            builder.setMessage("确认后强制退出");
-                            builder.setTitle("未成年人一天只能体验1.5小时游戏，请合理安排时间");
-                            builder.setCancelable(false);
-                            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    ((Activity) MercuryActivity.mContext).finish();
-                                    android.os.Process.killProcess(android.os.Process.myPid());
-                                }
-                            });
-                            builder.create().show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                else
-                {
-                    //username_deviceid
-                    writeFileData("time"+chinese_id, Long.toString(current_time));
-                    remaing_minutes = 90;
-                    delayTimeFun();
-                    //    timer_delay.start();
-                    surTimeFun();//防沉迷30分钟的提示
-                    try {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                        builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+(90-remaing_minutes)+"分钟。");
-                        builder.setTitle("防沉迷提示");
-                        builder.setCancelable(false);
-                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //        ((Activity) MercuryActivity.mContext).finish();
-                                //        android.os.Process.killProcess(android.os.Process.myPid());
-                            }
-                        });
-                        builder.create().show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            Looper.loop();
-        }
-    }
-    private static void surTimeFun(){
-        CountDownTimer timer_quit_30 = new CountDownTimer(1000*60*(remaing_minutes - 60), 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-//                LogLocal("30分钟倒计时：" + (millisUntilFinished / 1000));
-            }
-            @Override
-            public void onFinish() {
                 try {
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间30分钟。");
-                    builder.setTitle("防沉迷提示");
+                    builder.setMessage("确认后强制退出");
+                    builder.setTitle("根据健康系统限制，由于您是未成年玩家，每天22:00 ~ 次日8:00无法登陆游戏，请注意游戏");
                     builder.setCancelable(false);
                     builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //        ((Activity) MercuryActivity.mContext).finish();
-                            //        android.os.Process.killProcess(android.os.Process.myPid());
+                            ((Activity) MercuryActivity.mContext).finish();
+                            android.os.Process.killProcess(android.os.Process.myPid());
                         }
                     });
                     builder.create().show();
@@ -552,30 +448,89 @@ public class LoginDialog {
                     e.printStackTrace();
                 }
             }
-        };
+            else
+            {
+                if(play_time=="") {
+                    play_time = "0";
+                }
+                remaing_minutes = (90 - Integer.valueOf(play_time));
+                if(remaing_minutes!=0) {
+                    try {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间" + (90 - remaing_minutes) + "分钟。");
+                        builder.setTitle("防沉迷提示");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-        timer_quit_30.start();
+                            }
+                        });
+                        builder.create().show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                surTimeFun();
+            }
+            Looper.loop();
+        }
     }
     private static int index = 0;
-    private static void delayTimeFun() {
-        CountDownTimer timer_delay_param = new CountDownTimer(1000 * 60 * remaing_minutes, 1000) {
-
+    private static void surTimeFun()
+    {
+        CountDownTimer timer_quit_30 = new CountDownTimer(1000*60*(remaing_minutes - 60), 1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
-//                LogLocal("remaing_minutes=(" + (millisUntilFinished / 1000) + ")");
-
+            public void onTick(long millisUntilFinished)
+            {
                 index++;
                 if(index %60 == 0){
                     int time = Integer.valueOf(play_time)+(int)(index/60);
-                    RemoteConfig.set_login_time(chinese_id, time+"");//分钟
+                    RemoteConfig.set_login_time(DeviceId, time+"");//分钟
                     LogLocal("[LoginDialog][delayTimeFun] set login time:" + time);
                 }
+                if(remaing_minutes==30)
+                {
+                    try {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+remaing_minutes+"分钟。");
+                        builder.setTitle("防沉迷提示");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //        ((Activity) MercuryActivity.mContext).finish();
+                                //        android.os.Process.killProcess(android.os.Process.myPid());
+                            }
+                        });
+                        builder.create().show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(remaing_minutes==60)
+                {
+                    try {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+remaing_minutes+"分钟。");
+                        builder.setTitle("防沉迷提示");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //        ((Activity) MercuryActivity.mContext).finish();
+                                //        android.os.Process.killProcess(android.os.Process.myPid());
+                            }
+                        });
+                        builder.create().show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-
             @Override
             public void onFinish() {
                 try {
-                    RemoteConfig.set_login_time(chinese_id, 90 + "");//保存未成年人玩的时间，只能是90分钟
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                     builder.setMessage("确认后强制退出");
                     builder.setTitle("未成年人一天只能体验1.5小时游戏，请合理安排时间");
@@ -593,84 +548,9 @@ public class LoginDialog {
                 }
             }
         };
-        timer_delay_param.start();
+        timer_quit_30.start();
     }
-    private CountDownTimer timer_delay_param = new CountDownTimer(1000*60*(60-remaing_minutes), 1000) {
 
-        @Override
-        public void onTick(long millisUntilFinished) {
-            LogLocal("remaing_minutes=(" + (millisUntilFinished / 1000) + ")");
-        }
-        @Override
-        public void onFinish() {
-            try {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setMessage("确认后强制退出");
-                builder.setTitle("根据健康系统限制，由于您是未成年玩家，一天只能只能仅能游戏一小时，您今天已经进行游戏1小时，不能继续游戏，请注意休息");
-                builder.setCancelable(false);
-                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ((Activity) MercuryActivity.mContext).finish();
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                    }
-                });
-                builder.create().show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-    private CountDownTimer timer_delay = new CountDownTimer(1000*60*60, 1000) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-            LogLocal("(" + (millisUntilFinished / 1000) + ")");
-        }
-        @Override
-        public void onFinish() {
-            try {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setMessage("确认后强制退出");
-                builder.setTitle("根据健康系统限制，由于您是未成年玩家，一天只能只能仅能游戏一小时，您今天已经进行游戏1小时，不能继续游戏，请注意休息");
-                builder.setCancelable(false);
-                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ((Activity) MercuryActivity.mContext).finish();
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                    }
-                });
-                builder.create().show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-    private static CountDownTimer timer_quit = new CountDownTimer(2, 1000) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-            LogLocal("(" + (millisUntilFinished / 1000) + ")");
-        }
-        @Override
-        public void onFinish() {
-            try {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setMessage("确认后强制退出");
-                builder.setTitle("根据健康系统限制，由于您是未成年玩家，每天22:00 ~ 次日8:00无法登陆游戏，请注意游戏");
-                builder.setCancelable(false);
-                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ((Activity) MercuryActivity.mContext).finish();
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                    }
-                });
-                builder.create().show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
     public static int getAgeByIDNumber(String idNumber) {
         String dateStr;
         if (idNumber.length() == 15) {
