@@ -146,9 +146,8 @@ public class LoginDialog {
     }
     public static void ChineseIDVerifyDialog()
     {
-        Toast.makeText(MercuryActivity.mContext, "登录成功", Toast.LENGTH_SHORT).show();
-        LogLocal("[InAppDialog][ChineseIDVerifyDialog] chinese_id="+chinese_id);
         chinese_id =  readFileData("chinese_id");
+        LogLocal("[InAppDialog][ChineseIDVerifyDialog] chinese_id="+chinese_id);
         if (chinese_id.equals(""))
         {
             new IDCardVerifyDialog((Activity) MercuryActivity.mContext, new LoginCallBack() {
@@ -421,9 +420,7 @@ public class LoginDialog {
         LogLocal("[LoginDialog][age_difference] play_time=:" + play_time);
         if(local_age<18 &&local_age>=0)
         {
-            long current_time = System.currentTimeMillis();
             String local_time =  readFileData("time"+chinese_id);
-            LogLocal("[LoginDialog][age_difference] current_time:" + current_time);
             LogLocal("[LoginDialog][age_difference] local_time:" + local_time);
             Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -450,6 +447,7 @@ public class LoginDialog {
             }
             else
             {
+
                 if(play_time=="") {
                     play_time = "0";
                 }
@@ -479,7 +477,8 @@ public class LoginDialog {
     private static int index = 0;
     private static void surTimeFun()
     {
-        CountDownTimer timer_quit_30 = new CountDownTimer(1000*60*(remaing_minutes - 60), 1000) {
+        LogLocal("[LoginDialog][surTimeFun] remaing_minutes:" + remaing_minutes);
+        CountDownTimer timer_quit_30 = new CountDownTimer(1000*60*(remaing_minutes), 1000) {
             @Override
             public void onTick(long millisUntilFinished)
             {
