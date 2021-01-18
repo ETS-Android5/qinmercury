@@ -503,9 +503,9 @@ public final class RemoteConfig {
 
     public static void get_login_time(final String account) {
         //shrinkpartstart
-        if(LoginDialog.Instance.play_time !=""){
-            return;
-        }
+//        if(LoginDialog.Instance.play_time !="" && LoginDialog.Instance.play_time !="0"){
+//            return;
+//        }
 
 
         new Thread(new Runnable() {
