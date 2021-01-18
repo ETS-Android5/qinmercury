@@ -409,7 +409,7 @@ public class LoginDialog {
         Date date = new Date(timeMillis);
         return simpleDateFormat.format(date);
     }
-    public static int remaing_minutes=0;
+    public static int remaing_minutes=90;
     private int playerAge=0;
     public static String play_time = "0";//未成年人已经体验过了多少分钟
     private String set_login_time_result = "";
@@ -483,8 +483,9 @@ public class LoginDialog {
             public void onTick(long millisUntilFinished)
             {
                 index++;
-                if(index %60 == 0){
-                    int time = Integer.valueOf(play_time)+(int)(index/60);
+                LogLocal("[LoginDialog][delayTimeFun] set login index=" + index);
+                if((index+1)%60 == 0){
+                    int time = Integer.valueOf(play_time)+(int)((index+1)/60);
                     RemoteConfig.set_login_time(DeviceId, time+"");//分钟
                     LogLocal("[LoginDialog][delayTimeFun] set login time:" + time);
                 }

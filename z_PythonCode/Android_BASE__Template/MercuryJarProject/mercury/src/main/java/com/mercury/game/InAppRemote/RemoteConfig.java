@@ -549,7 +549,7 @@ public final class RemoteConfig {
                                     }
                                     else
                                     {
-                                        LogLocal("[RemoteConfig][origin_login_time] LoginDialog.Instance.play_time="+LoginDialog.Instance.play_time);
+                                        LogLocal("[RemoteConfig][origin_login_time] LoginDialog.Instance.play_time=0");
                                         LoginDialog.Instance.play_time = "0";
                                     }
                                     //开始倒计时
