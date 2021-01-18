@@ -483,7 +483,7 @@ public class LoginDialog {
             public void onTick(long millisUntilFinished)
             {
                 index++;
-                LogLocal("[LoginDialog][delayTimeFun] set login index=" + index);
+//                LogLocal("[LoginDialog][delayTimeFun] set login index=" + index);
                 if((index+1)%60 == 0){
                     int time = Integer.valueOf(play_time)+(int)((index+1)/60);
                     RemoteConfig.set_login_time(DeviceId, time+"");//分钟
