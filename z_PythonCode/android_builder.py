@@ -274,6 +274,8 @@ class SDKAppendManager():
 		self.__merge_sdk_resource_lib_execute(f"{self.__sdk_apk_name_only}_{self.__channel_show}")
 
 	def __merge_sdk_resource_lib_execute(self, app_release_path):
+		if os.path.isdir(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/")==False:
+			return
 		self.__lib_folder_list = self.__list_folder(f"{self.__file_path}/{self.__cache_position}/{self.__time_tick}/{self.__game_apk_name}/lib/")
 
 		#copy lib to project
@@ -642,7 +644,9 @@ class SDKAppendManager():
 			self.__copy_files_dont_overwrite(sourceDir,targetDir)
 		else:
 			print("[__copy_folder_overwrite] source file does't exist"+sourceDir)
-
+	def _safe_copy(self, source, destination):
+		if os.path.isfile(source):
+			shutil.copy(source,destination)
 	def _prepare_SDK_orinigal_file_resource(self):
 		#create each SDK's folder
 		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name)==True:shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name)
@@ -653,7 +657,7 @@ class SDKAppendManager():
 		#merge SDK
 		if os.path.isdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/")==True:
 			shutil.rmtree(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/")
-
+		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name)
 		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/")
 		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/assets")
 		os.mkdir(PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/libs")
@@ -674,8 +678,8 @@ class SDKAppendManager():
 
 		#copy base res, xml, gradle
 		self.__copy_folder_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res")
-		shutil.copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/AndroidManifest.xml", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/AndroidManifest.xml")
-		shutil.copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/build.gradle", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/build.gradle")
+		self._safe_copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/AndroidManifest.xml", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/AndroidManifest.xml")
+		self._safe_copy(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_base+"/build.gradle", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/build.gradle")
 		self.__copy_folder_dont_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_IAP+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res")
 		self.__copy_folder_dont_overwrite(PythonLocation()+"/y_building/"+self.__channel_name+"/"+self.__channel_show+"/res", PythonLocation()+"/y_building/"+self.__channel_name+"/MergedSDK/res")
 
