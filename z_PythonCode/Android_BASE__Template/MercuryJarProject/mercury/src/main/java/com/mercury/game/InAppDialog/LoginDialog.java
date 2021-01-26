@@ -475,6 +475,8 @@ public class LoginDialog {
         }
     }
     private static int index = 0;
+    private static boolean is30mins = false;
+    private static boolean is60mins = false;
     private static void surTimeFun()
     {
         LogLocal("[LoginDialog][surTimeFun] remaing_minutes:" + remaing_minutes);
@@ -489,9 +491,9 @@ public class LoginDialog {
                     RemoteConfig.set_login_time(DeviceId, time+"");//分钟
                     LogLocal("[LoginDialog][delayTimeFun] set login time:" + time);
                 }
-                if(remaing_minutes==30)
+                if(remaing_minutes==30 && is30mins==false)
                 {
-                    remaing_minutes=remaing_minutes-1;
+                    is30mins = true;
                     try {
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+remaing_minutes+"分钟。");
@@ -509,9 +511,9 @@ public class LoginDialog {
                         e.printStackTrace();
                     }
                 }
-                if(remaing_minutes==60)
+                if(remaing_minutes==60 && is60mins==false)
                 {
-                    remaing_minutes=remaing_minutes-1;
+                    is60mins = true;
                     try {
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+remaing_minutes+"分钟。");
