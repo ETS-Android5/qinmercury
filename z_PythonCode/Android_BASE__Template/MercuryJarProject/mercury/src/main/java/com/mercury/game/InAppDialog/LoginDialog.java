@@ -491,6 +491,7 @@ public class LoginDialog {
                 }
                 if(remaing_minutes==30)
                 {
+                    remaing_minutes=remaing_minutes-1;
                     try {
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+remaing_minutes+"分钟。");
@@ -510,6 +511,7 @@ public class LoginDialog {
                 }
                 if(remaing_minutes==60)
                 {
+                    remaing_minutes=remaing_minutes-1;
                     try {
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         builder.setMessage("您是未成年人，按照有关规定，您今天只能使用90分钟游戏。目前累计时间"+remaing_minutes+"分钟。");
