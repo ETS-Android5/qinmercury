@@ -93,6 +93,7 @@ public class MercuryActivity {
 	private static ImageView img = null;
 	public static String order_id = "";
 	public static APPBaseInterface mappcall = null;
+	public static String production_id="";
 	public static String GameName = "ww1";
 	public static String DeviceId = "123";
 	public static String ip_address = "gamesupportcluster.singmaan.com";
@@ -338,6 +339,7 @@ public class MercuryActivity {
 		String temp = sf.format(new Date());
 		int random = (int) ((Math.random() + 1) * 100000);
 		order_id = channelname+"_"+GameName+"_"+temp + random;
+		production_id = pidname;
 		mInAppChannel.Purchase(pidname);
 
 	}

@@ -71,6 +71,7 @@ import okhttp3.Response;
 //shrinkpartend
 import static com.mercury.game.InAppDialog.LoginDialog.ChineseIDVerifyDialog;
 import static com.mercury.game.InAppDialog.LoginDialog.local_age;
+import static com.mercury.game.InAppRemote.RemoteConfig.PurchaseSuccessCallbackChannel;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
 import static com.mercury.game.InAppRemote.RemoteConfig.global_total_payment;
@@ -558,6 +559,18 @@ public class InAppChannel extends InAppBase {
             }
         });
         //shrinkpartend
+    }
+    public void ISBNPay()
+    {
+        PurchaseSuccessCallbackChannel();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onPurchaseSuccess(MercuryConst.QinPid);
+                global_total_payment = global_total_payment+MercuryConst.Qinpricefloat;
+                LogLocal("[InAppChannel][AlipayAndWechat]global_total_payment=" + global_total_payment);
+            }
+        }, 3000);
     }
     public void TestPay() {
         try {

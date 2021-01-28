@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.mercury.game.InAppDialog.LoginDialog;
 import com.mercury.game.util.InAppBase;
+import com.mercury.game.util.MercuryConst;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +28,8 @@ import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
 import static com.mercury.game.MercuryActivity.ip_address;
 import static com.mercury.game.MercuryActivity.mInAppBase;
+import static com.mercury.game.MercuryActivity.order_id;
+import static com.mercury.game.MercuryActivity.production_id;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.UIUtils.isJSONValid;
@@ -55,7 +58,58 @@ public final class RemoteConfig {
         get_remote_iap();
         get_update_config();
     }
+    public static String PurchaseSuccessCallbackChannel() {
+        iap_result_json = "";
+        //shrinkpartstart
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //1.创建OkHttpClient对象
+                    OkHttpClient client = new OkHttpClient();
+                    //2.创建RequestBody对象
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("pay_type", "TestChannel")
+                            .add("game_name", GameName)
+                            .add("channel", channelname)
+                            .add("price", String.valueOf(MercuryConst.Qinpricefloat))
+                            .add("order_id", order_id)
+                            .add("des", MercuryConst.Qindesc)
+                            .add("production_id", production_id)
+                            .add("user_id", DeviceId)
+                            .build();
+                    //3.创建Request对象
+                    Request request = new Request.Builder()
+                            .post(requestBody)
+                            .url("https://"+ip_address+":10013/ISBN/TestChannel/client_success_callback_isbn")
+                            .build();
+                    //4. 同步请求
+                    // Response response = client.newCall(request).execute();
+                    //5.异步请求
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            LogLocal("[RemoteConfig][PurchaseSuccessCallbackChannel] failed=" + e.toString());
+                        }
 
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String s = response.body().string();
+                            if (s != null) {
+                                LogLocal("[RemoteConfig][PurchaseSuccessCallbackChannel] success=" + s);
+                                iap_result_json = s;
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                }
+            }
+        }).start();
+        //shrinkpartend
+        return iap_result_json;
+    }
     public static String get_remote_iap() {
         iap_result_json = "";
         //shrinkpartstart

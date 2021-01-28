@@ -17,6 +17,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.TotalPayment;
 import static com.mercury.game.InAppRemote.RemoteConfig.UpdateOrderSuccess;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.global_orderId;
+import static com.mercury.game.InAppRemote.RemoteConfig.global_total_payment;
 import static com.mercury.game.InAppRemote.RemoteConfig.global_user_id;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
@@ -126,6 +127,7 @@ public class InAppBase{
 	
 	public void onPurchaseSuccess(String message)
 	{
+		global_total_payment = global_total_payment+MercuryConst.Qinpricefloat;
 		qc.PurchaseSuccess(message,this);
 		UpdateOrderSuccess(DeviceId,order_id);
 	}
