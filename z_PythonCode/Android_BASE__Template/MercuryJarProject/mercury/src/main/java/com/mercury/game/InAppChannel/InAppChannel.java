@@ -70,7 +70,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 //shrinkpartend
 import static com.mercury.game.InAppDialog.LoginDialog.ChineseIDVerifyDialog;
-import static com.mercury.game.InAppDialog.LoginDialog.local_age;
+
 import static com.mercury.game.InAppRemote.RemoteConfig.PurchaseSuccessCallbackChannel;
 import static com.mercury.game.InAppRemote.RemoteConfig.chinese_id;
 import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
@@ -79,6 +79,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.upload_game_data;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.GameName;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.local_age;
 import static com.mercury.game.MercuryActivity.order_id;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.readFileData;
@@ -437,6 +438,7 @@ public class InAppChannel extends InAppBase {
                         PaymentDialog.isPayPermitted = isPayPermitted;
                         Looper.prepare();
                         MercuryActivity.LogLocal("[InAppChannel][Purchase] MercuryConst.local_age=" + local_age);
+                        int this_total_payment = (int) (global_total_payment+MercuryConst.Qinpricefloat);
                         if (local_age < 8 && local_age >=0) {
                             try {
                                 Builder builder = new Builder(mContext);
@@ -470,7 +472,7 @@ public class InAppChannel extends InAppBase {
                             }
                             else
                             {
-                                if(global_total_payment<=200) {
+                                if(this_total_payment<=200) {
                                     AlipayAndWechat();
                                 }
                                 else
@@ -509,7 +511,7 @@ public class InAppChannel extends InAppBase {
                             }
                             else
                             {
-                                if(global_total_payment<=400)
+                                if(this_total_payment<=400)
                                 {
                                     AlipayAndWechat();
                                 }

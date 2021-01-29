@@ -43,6 +43,8 @@ import java.util.regex.Pattern;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static com.mercury.game.InAppDialog.LoginDialog.getAgeByIDNumber;
 import static com.mercury.game.InAppRemote.RemoteConfig.verify_chinese_id;
 //shrinkpartend
 import static com.mercury.game.InAppRemote.RemoteConfig.account_id;
@@ -55,7 +57,7 @@ import static com.mercury.game.MercuryActivity.mActivity;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
 import static com.mercury.game.util.UIUtils.isJSONValid;
-
+import static com.mercury.game.MercuryActivity.local_age;
 
 public class IDCardVerifyDialog {
     //shrinkpartstart
@@ -265,6 +267,7 @@ public class IDCardVerifyDialog {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            local_age = getAgeByIDNumber(chinese_id);
                             LogLocal("[RemoteConfig][verify_chinese_id] remote result=" + s);
                             LogLocal("[RemoteConfig][verify_chinese_id] remote chinese_id=" + cardId);
                             writeFileData("chinese_id",cardId);

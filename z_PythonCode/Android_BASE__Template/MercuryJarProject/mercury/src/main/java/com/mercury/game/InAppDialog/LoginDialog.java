@@ -68,6 +68,7 @@ import static com.mercury.game.InAppRemote.RemoteConfig.id_signe_in_result;
 import static com.mercury.game.InAppRemote.RemoteConfig.login_in_result;
 import static com.mercury.game.MercuryActivity.DeviceId;
 import static com.mercury.game.MercuryActivity.LogLocal;
+import static com.mercury.game.MercuryActivity.local_age;
 import static com.mercury.game.MercuryActivity.mActivity;
 import static com.mercury.game.util.Function.readFileData;
 import static com.mercury.game.util.Function.writeFileData;
@@ -75,7 +76,7 @@ import static com.mercury.game.util.UIUtils.isJSONValid;
 
 
 public class LoginDialog {
-    public static int local_age = 0;
+
     //shrinkpartstart
     String oldId;
     int time;

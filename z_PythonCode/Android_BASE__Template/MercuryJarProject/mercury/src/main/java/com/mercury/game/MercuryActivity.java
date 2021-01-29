@@ -95,6 +95,7 @@ public class MercuryActivity {
 	public static String order_id = "";
 	public static APPBaseInterface mappcall = null;
 	public static String production_id="";
+	public static int local_age = 0;
 	public static String GameName = "ww1";
 	public static String DeviceId = "123";
 	public static String ip_address = "gamesupportcluster.singmaan.com";
@@ -341,7 +342,6 @@ public class MercuryActivity {
 		int random = (int) ((Math.random() + 1) * 100000);
 		order_id = channelname+"_"+GameName+"_"+temp + random;
 		production_id = pidname;
-		global_total_payment = global_total_payment+MercuryConst.Qinpricefloat;
 		mInAppChannel.Purchase(pidname);
 
 	}
