@@ -127,12 +127,12 @@ public class InAppBase{
 	
 	public void onPurchaseSuccess(String message)
 	{
-		global_total_payment = global_total_payment+MercuryConst.Qinpricefloat;
 		qc.PurchaseSuccess(message,this);
 		UpdateOrderSuccess(DeviceId,order_id);
 	}
 	public void onPurchaseFailed(String strError)
 	{
+		global_total_payment = global_total_payment - MercuryConst.Qinpricefloat;
 		qc.PurchaseFailed(strError,this);
 	}
 	public void LoginSuccessCallBack(String strError)

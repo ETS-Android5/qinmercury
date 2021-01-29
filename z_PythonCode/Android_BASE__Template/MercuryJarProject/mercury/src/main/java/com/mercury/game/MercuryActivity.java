@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import static com.mercury.game.InAppRemote.RemoteConfig.GetAllConfig;
 import static com.mercury.game.InAppRemote.RemoteConfig.download_game_data;
+import static com.mercury.game.InAppRemote.RemoteConfig.global_total_payment;
 import static com.mercury.game.InAppRemote.RemoteConfig.upload_game_data;
 import static com.mercury.game.MercuryApplication.channelname;
 import static com.mercury.game.util.Function.VerifyGame;
@@ -340,6 +341,7 @@ public class MercuryActivity {
 		int random = (int) ((Math.random() + 1) * 100000);
 		order_id = channelname+"_"+GameName+"_"+temp + random;
 		production_id = pidname;
+		global_total_payment = global_total_payment+MercuryConst.Qinpricefloat;
 		mInAppChannel.Purchase(pidname);
 
 	}
