@@ -112,6 +112,7 @@ public class IDCardVerifyDialog {
     }
 
     public boolean validateParams(String card_id,String name_id){
+        clicked=false;
         if (card_id.equals("") || name_id.equals("")) {
             Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
             return false;
@@ -151,7 +152,7 @@ public class IDCardVerifyDialog {
                 return false;
             }
         });
-
+        clicked=false;
         mHandler = new Handler()
         {
             @Override
@@ -165,6 +166,7 @@ public class IDCardVerifyDialog {
                         if (id_verify_result.equals("200"))
                         {
                             Toast.makeText(mContext, "验证成功", Toast.LENGTH_SHORT).show();
+                            writeFileData("chinese_id",cardId);
                             dialog.dismiss();
                         }
                         else if(id_verify_result.equals("-209"))
@@ -270,7 +272,7 @@ public class IDCardVerifyDialog {
                             local_age = getAgeByIDNumber(chinese_id);
                             LogLocal("[RemoteConfig][verify_chinese_id] remote result=" + s);
                             LogLocal("[RemoteConfig][verify_chinese_id] remote chinese_id=" + cardId);
-                            writeFileData("chinese_id",cardId);
+
                             Message msg = new Message();
                             mHandler.sendMessage(msg);
                         }

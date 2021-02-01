@@ -76,7 +76,6 @@ import static com.mercury.game.util.UIUtils.isJSONValid;
 
 
 public class LoginDialog {
-
     //shrinkpartstart
     String oldId;
     int time;
@@ -115,6 +114,7 @@ public class LoginDialog {
     }
 
     public boolean validateParams(String username,String password){
+        clicked=false;
         if (username.equals("") || password.equals("")) {
             Toast.makeText(mContext, "输入不能为空", Toast.LENGTH_SHORT).show();
             return false;
@@ -123,6 +123,7 @@ public class LoginDialog {
     }
 
     public void onLogin(final ProgressBar progressBar,final String username){
+        clicked=false;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
