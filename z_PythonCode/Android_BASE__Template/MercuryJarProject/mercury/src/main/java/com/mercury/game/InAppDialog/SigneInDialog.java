@@ -101,6 +101,7 @@ public class SigneInDialog {
     }
 
     public boolean validateParams(String username,String password,String passwordAgain){
+        clicked=false;
         if (!password.equals(passwordAgain))
         {
             Toast.makeText(mContext, "两次密码不匹配", Toast.LENGTH_SHORT).show();
@@ -123,6 +124,7 @@ public class SigneInDialog {
     }
 
     public void onSignIn(final ProgressBar progressBar){
+        clicked=false;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
